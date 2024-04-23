@@ -23,8 +23,10 @@ class Database
         $this->connection->select_db($database);
 
         $this->connection->set_charset("utf8");
-
-        $this->createTables();
+        if(!$this->tablesExist()) {
+            $this->createTables();
+        }
+        
     }
 
     private function databaseExists($database)
@@ -38,6 +40,7 @@ class Database
     }
     private function tablesExist()
     {
+        //List all tables in array
         $tables = ['users', 'user_meta', 'api_credentials', 'goals'];
         $tableNameList = "'" . implode("', '", $tables) . "'"; // Create a string for the SQL query
         $query = "SELECT COUNT(*) AS count FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE() AND table_name IN ($tableNameList)";
