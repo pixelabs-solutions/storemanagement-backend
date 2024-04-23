@@ -36,6 +36,16 @@ class Database
         $result = $stmt->get_result();
         return $result->num_rows > 0;
     }
+    private function tablesExist()
+    {
+        $tables = ['users', 'user_meta', 'api_credentials', 'goals'];
+        $tableNameList = "'" . implode("', '", $tables) . "'"; // Create a string for the SQL query
+        $query = "SELECT COUNT(*) AS count FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE() AND table_name IN ($tableNameList)";
+        $result = $this->connection->query($query);
+        $row = $result->fetch_assoc();
+
+        return $row['count'] == count($tables);
+    }
 
     public function getConnection()
     {
