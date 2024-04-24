@@ -41,7 +41,7 @@ class Database
     private function tablesExist()
     {
         //List all tables in array
-        $tables = ['users', 'user_meta', 'api_credentials', 'goals'];
+        $tables = ['users', 'user_meta', 'api_credentials', 'goals', 'categories', 'products', 'inventory_settings', 'coupons', 'customers', 'transactions'];
         $tableNameList = "'" . implode("', '", $tables) . "'"; // Create a string for the SQL query
         $query = "SELECT COUNT(*) AS count FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE() AND table_name IN ($tableNameList)";
         $result = $this->connection->query($query);
@@ -68,7 +68,7 @@ class Database
     private function createTables(){
         $createUsersTableQuery = "CREATE TABLE IF NOT EXISTS users
         (
-            id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             username VARCHAR(50) NOT NULL UNIQUE,
             email VARCHAR(50) NOT NULL UNIQUE,
             password VARCHAR(255) NOT NULL,
@@ -80,8 +80,8 @@ class Database
         $createUserMetaTableQuery = "
         CREATE TABLE IF NOT EXISTS user_meta
         (
-            id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            user_id INT(6) NOT NULL,
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            user_id INT NOT NULL,
             meta_key VARCHAR(50) NOT NULL,
             meta_value VARCHAR(50) NOT NULL
         ) ";
@@ -90,8 +90,8 @@ class Database
         $apiCredentialsTable = "
         CREATE TABLE IF NOT EXISTS api_credentials
         (
-            id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            user_id INT(6) NOT NULL,
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            user_id INT NOT NULL,
             consumer_key TEXT NOT NULL,
             consumer_secret TEXT NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -102,7 +102,7 @@ class Database
         $goalTable = "
             CREATE TABLE IF NOT EXISTS goals
             (
-                id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                 new_orders_target INT(20),
                 new_customers_target INT(20),
                 sales_revenue_target INT(20),
@@ -118,8 +118,73 @@ class Database
         ";
         $this->connection->query($goalTable);
 
+        $categoriesTable = "CREATE TABLE IF NOT EXISTS categories
+        (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(55),
+            parent_category_id INT,
+            image VARCHAR(255)
+        )";
+        $this->connection->query($categoriesTable);
+
+        $productsTable = "CREATE TABLE IF NOT EXISTS products
+        (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(255),
+            units_in_stock INT(6),
+            description VARCHAR(255),
+            thumbnail VARCHAR(255),
+            sale_price FLOAT,
+            normal_price FLOAT,
+            photo_gallery TEXT,
+            category_id INT,
+            product_type ENUM('normal', 'variation') NOT NULL DEFAULT 'normal'
+        )";
+        $this->connection->query($productsTable);
 
 
+        $inventorySettingsTable = "CREATE TABLE IF NOT EXISTS inventory_settings
+        (
+            id INT UNSIGNED NOT NULL DEFAULT 1 PRIMARY KEY,
+            is_inventory_management_enabled BOOLEAN,
+            is_out_of_atock_alert_enabled BOOLEAN,
+            is_low_stock_alert_enabled BOOLEAN,
+            email VARCHAR(255),
+            out_of_stock_threshold INT(6),
+            low_stock_threshold INT(6)
+        )";
+        $this->connection->query($inventorySettingsTable);
 
+        $couponsTable = "CREATE TABLE IF NOT EXISTS coupons
+        (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            coupon_code VARCHAR(255) NOT NULL,
+            coupon_type VARCHAR(255),
+            discount_type VARCHAR(255), 
+            discount_amount FLOAT,
+            expiry_date DATE 
+        )";
+        $this->connection->query($couponsTable);
+
+        $customersTable = "CREATE TABLE IF NOT EXISTS customers
+        (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(55) NOT NULL,
+            email VARCHAR(55) NOT NULL
+        )";
+        $this->connection->query($customersTable);
+
+        $transactionsTable = "CREATE TABLE IF NOT EXISTS transactions
+        (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            customer_id INT NOT NULL,
+            product_id INT NOT NULL,
+            status VARCHAR(55),
+            order_date DATE,
+            sum FLOAT,
+            source VARCHAR(55),
+            shipping_address VARCHAR(255)
+        )";
+        $this->connection->query($transactionsTable);
     }
 }
