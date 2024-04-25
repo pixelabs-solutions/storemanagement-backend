@@ -6,7 +6,7 @@ namespace Pixelabs\StoreManagement\Config;
 class Database
 {
     protected $connection;
-
+    
     public function __construct($host, $username, $password, $database)
     {
         $this->connection = new \mysqli($host, $username, $password);
@@ -25,10 +25,10 @@ class Database
         $this->connection->set_charset("utf8");
         if(!$this->tablesExist()) {
             $this->createTables();
-        }
+        }        
         
     }
-
+    
     private function databaseExists($database)
     {
         $query = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = ?";
@@ -77,8 +77,7 @@ class Database
         )";
         $this->connection->query($createUsersTableQuery);
 
-        $createUserMetaTableQuery = "
-        CREATE TABLE IF NOT EXISTS user_meta
+        $createUserMetaTableQuery = "CREATE TABLE IF NOT EXISTS user_meta
         (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             user_id INT NOT NULL,
@@ -87,8 +86,7 @@ class Database
         ) ";
         $this->connection->query($createUserMetaTableQuery);
 
-        $apiCredentialsTable = "
-        CREATE TABLE IF NOT EXISTS api_credentials
+        $apiCredentialsTable = "CREATE TABLE IF NOT EXISTS api_credentials
         (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             user_id INT NOT NULL,
@@ -99,8 +97,7 @@ class Database
         )";
         $this->connection->query($apiCredentialsTable);
 
-        $goalTable = "
-            CREATE TABLE IF NOT EXISTS goals
+        $goalTable = "CREATE TABLE IF NOT EXISTS goals
             (
                 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                 new_orders_target INT(20),
@@ -145,7 +142,7 @@ class Database
 
         $inventorySettingsTable = "CREATE TABLE IF NOT EXISTS inventory_settings
         (
-            id INT UNSIGNED NOT NULL DEFAULT 1 PRIMARY KEY,
+            id TINYINT UNSIGNED NOT NULL DEFAULT 1 PRIMARY KEY,
             is_inventory_management_enabled BOOLEAN,
             is_out_of_atock_alert_enabled BOOLEAN,
             is_low_stock_alert_enabled BOOLEAN,
