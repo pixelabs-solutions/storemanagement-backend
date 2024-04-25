@@ -13,8 +13,8 @@ class ProductController
     private $table_name = 'products';
     public function index()
     {
-        $products = Base::get_all($this->table_name);
-        var_dump($products);
+        $is_deleted = Base::delete_by_id($this->table_name, 1);
+        echo $is_deleted;
         // include_once __DIR__ . '/../Views/product/index.php';
     }
 }

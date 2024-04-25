@@ -44,4 +44,29 @@ class Base
             throw new Exception("Failed to execute the SQL statement: " . $connection->error);
         }                                                                   
     }
+    
+    public static function delete_by_id($table_name, $id){
+        global $connection;
+
+        $table_name = $connection->real_escape_string($table_name);
+
+        $sql = "DELETE FROM `$table_name` WHERE id = ?";
+        $stmt = $connection->prepare($sql);
+        if ($stmt === false) {
+            throw new Exception("Failed to prepare the SQL statement: " . $this->connection->error);
+        }
+
+        $stmt->bind_param("i", $id);
+
+        if (!$stmt->execute()) {
+            $stmt->close();
+            throw new Exception("Execution failed: " . $stmt->error);
+        }
+
+        $affectedRows = $stmt->affected_rows;
+        $stmt->close();
+
+        return $affectedRows > 0;
+    }
+
 }
