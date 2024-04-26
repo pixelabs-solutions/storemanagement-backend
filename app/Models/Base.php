@@ -2,7 +2,6 @@
 
 namespace Pixelabs\StoreManagement\Models;
 
-use Pixelabs\StoreManagement\Config\Database;
 
 class Base
 {

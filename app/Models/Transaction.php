@@ -3,7 +3,7 @@
 namespace Pixelabs\StoreManagement\Models;
 
 
-class Coupon
+class Transaction
 {
 
 }
