@@ -5,44 +5,51 @@ namespace Pixelabs\StoreManagement\Models;
 
 class Authentication
 {
-    public static function register($email, $password)
-    {
-        if (!empty($email) && !empty($password)) {
-            $stmt = $mysqli->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-        
-            $stmt->bind_param("sss", $email, $email, hashPassword($password)); // sss indicates three string parameters
-        
+    public static function register($email, $password) {
+        global $connection; // Reference to the global connection variable
+
+        if (!empty($email) && !empty($password)) 
+        {
+            $stmt = $connection->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+
+            // Prepare the hashed password
+            $hashedPassword = self::hashPassword($password);
+
+            // Bind parameters
+            $stmt->bind_param("sss", $email, $email, $hashedPassword); // Assume the username and email are the same
+
             // Execute statement
-            if ($stmt->execute()) {
-                http_response_code(201);
+            if ($stmt->execute()) 
+            {
+                http_response_code(201); // Created
                 return json_encode(array("message" => "User registered successfully."));
-            } else {
+            } 
+            else 
+            {
                 http_response_code(503); // Service unavailable
                 return json_encode(array("message" => "Unable to register user."));
             }
             $stmt->close();
-        } else {
-            // Not all necessary data was submitted
+        } 
+        else 
+        {
             http_response_code(400); // Bad request
             return json_encode(array("message" => "Unable to register user. Data is incomplete."));
         }
     }
 
-    public static function login($email, $password)
-    {
+    public static function login($email, $password) {
+        global $connection; 
+
         if (!empty($email) && !empty($password)) {
-            // Prepare an SQL statement to avoid SQL injection
-            $stmt = $mysqli->prepare("SELECT id, password FROM users WHERE email = ?");
-        
-            // Bind parameter
+            $stmt = $connection->prepare("SELECT id, password FROM users WHERE email = ?");
+
             $stmt->bind_param("s", $email);
-        
-            // Execute statement
+
             $stmt->execute();
             $result = $stmt->get_result();
-        
+
             if ($result->num_rows == 1) {
-                // Check if password matches
                 $user = $result->fetch_assoc();
                 if (password_verify($password, $user['password'])) {
                     http_response_code(200); // OK
@@ -57,9 +64,11 @@ class Authentication
             }
             $stmt->close();
         } else {
-            // Not all necessary data was submitted
             http_response_code(400); // Bad request
             return json_encode(array("message" => "Login failed. Data is incomplete."));
         }
+    }
+    private static function hashPassword($password) {
+        return password_hash($password, PASSWORD_DEFAULT);
     }
 }
