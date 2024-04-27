@@ -16,5 +16,7 @@
             "email": "shahmirkhanutmanzai@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "guzzlehttp/guzzle": "^7.8"
+    }
 }
