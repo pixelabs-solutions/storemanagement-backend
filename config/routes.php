@@ -14,6 +14,10 @@ use Pixelabs\StoreManagement\Controllers\TransactionController;
 
 // Define routes
 
+//Authentication
+
+$router->post('/authentication', [AuthenticationController::class], 'register');
+
 //Dashboard
 $router->get('/', [DashboardController::class, 'index']);
 
