@@ -19,7 +19,7 @@ $router->get('/', [DashboardController::class, 'index']);
 
 
 //Products
-$router->get('/products', [ProductController::class, 'index']);
+$router->get('/product', [ProductController::class, 'index']);
 
 
 //Coupons
