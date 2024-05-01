@@ -89,7 +89,7 @@ class Database
         $userConfigurationsTable = "CREATE TABLE IF NOT EXISTS user_configurations
         (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            user_id INT NOT NULL,
+            user_id INT NOT NULL UNIQUE,
             consumer_key VARCHAR(255) UNIQUE NOT NULL,
             consumer_secret VARCHAR(255) UNIQUE NOT NULL,
             store_url VARCHAR(255) UNIQUE NOT NULL,
