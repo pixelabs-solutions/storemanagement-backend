@@ -11,12 +11,14 @@ use Pixelabs\StoreManagement\Controllers\GoalsController;
 use Pixelabs\StoreManagement\Controllers\InventoryController;
 use Pixelabs\StoreManagement\Controllers\StatisticsController;
 use Pixelabs\StoreManagement\Controllers\TransactionController;
+use Pixelabs\StoreManagement\Controllers\AuthenticationController;
 
 // Define routes
 
 //Authentication
 
-$router->post('/authentication', [AuthenticationController::class], 'register');
+$router->post('/authentication/register', [AuthenticationController::class, 'register']);
+$router->post('/authentication/login', [AuthenticationController::class, 'login']);
 
 //Dashboard
 $router->get('/', [DashboardController::class, 'index']);
