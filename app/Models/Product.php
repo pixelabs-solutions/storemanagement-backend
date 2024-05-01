@@ -8,14 +8,21 @@ namespace Pixelabs\StoreManagement\Models;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Pixelabs\StoreManagement\Models\Configuration;
 class Product
 {
 
     public static function get_products()
     {
-        $consumer_key = 'ck_0405267ad69fef3a83b4c92209b9297acf47913a'; 
-        $consumer_secret = 'cs_6d1897f6854ac6f6ba3958ecdc254bbc28d13278'; 
-        $store_url = 'https://vast.pk'; 
+        $response = json_decode(Configuration::getConfiguration(), true);
+        if($response['status_code'] != 200)
+        {
+            echo $response["message"];
+        }
+        $data = $response['data'];
+        $consumer_key = $data["consumer_key"];
+        $consumer_secret = $data["consumer_secret"];
+        $store_url = $data["store_url"];
 
         $client = new Client();
         try {
