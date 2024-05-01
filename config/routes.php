@@ -19,6 +19,7 @@ use Pixelabs\StoreManagement\Controllers\AuthenticationController;
 
 $router->post('/authentication/register', [AuthenticationController::class, 'register']);
 $router->post('/authentication/login', [AuthenticationController::class, 'login']);
+$router->get('/authentication/logout', [AuthenticationController::class, 'logout']);
 
 //Dashboard
 $router->get('/', [DashboardController::class, 'index']);

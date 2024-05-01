@@ -30,4 +30,13 @@ class AuthenticationController
         echo $result;
     }
 
+    public function logout()
+    {
+        $result = Authentication::logout();
+        echo $result;
+        
+        // header('Location: /authentication/login');
+        // exit;
+    }
+
 }
