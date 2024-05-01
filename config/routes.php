@@ -3,6 +3,7 @@
 
 $router = $app->getRouter();
 
+
 use Pixelabs\StoreManagement\Controllers\ProductController;
 use Pixelabs\StoreManagement\Controllers\CouponsController;
 use Pixelabs\StoreManagement\Controllers\CustomerController;
@@ -12,6 +13,7 @@ use Pixelabs\StoreManagement\Controllers\InventoryController;
 use Pixelabs\StoreManagement\Controllers\StatisticsController;
 use Pixelabs\StoreManagement\Controllers\TransactionController;
 use Pixelabs\StoreManagement\Controllers\AuthenticationController;
+use Pixelabs\StoreManagement\Controllers\ConfigurationController;
 
 // Define routes
 
@@ -50,4 +52,7 @@ $router->get('/statistics', [StatisticsController::class, 'index']);
 
 //Transactions
 $router->get('/transactions', [TransactionController::class, 'index']);
+
+//User Configurations
+$router->post('/configurations/add', [ConfigurationController::class, 'add']);
 

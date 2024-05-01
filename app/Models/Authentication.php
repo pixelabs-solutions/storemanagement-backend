@@ -6,7 +6,7 @@ namespace Pixelabs\StoreManagement\Models;
 class Authentication
 {
     public static function register($email, $password) {
-        global $connection; // Reference to the global connection variable
+        global $connection; 
 
         if (!empty($email) && !empty($password)) 
         {
@@ -107,6 +107,14 @@ class Authentication
             session_start();
         }
         return isset($_SESSION['user_id']);
+    }
+
+    public static function getUserId()
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        return $_SESSION['user_id'] ?? null;
     }
 
     private static function hashPassword($password) {
