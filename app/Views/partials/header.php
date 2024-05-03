@@ -425,8 +425,8 @@
                               d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
                         </svg>
                      </a>
-                     <div class="nav-item dropdown d-none d-md-flex me-3">
-                        <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1"
+                     <div class="nav-item dropdown d-none d-md-flex me-3  ">
+                        <a href="#" class="nav-link px-0 bg-light rounded-pill" data-bs-toggle="dropdown" tabindex="-1"
                            aria-label="Show notifications">
                            <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -437,7 +437,7 @@
                                  d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
                               <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
                            </svg>
-                           <span class="badge bg-red"></span>
+                           <span class="badge text-red bg-transparent">4</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
                            <div class="card">
@@ -543,6 +543,12 @@
                            </div>
                         </div>
                      </div>
+                     <button id="switchBtn" class="border-0 rounded-circle"> 
+
+                     <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle">
+
+                     </button>
+               
                   </div>
                   <div class="nav-item dropdown">
                      <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle=""
@@ -588,7 +594,7 @@
 
          </div>
       </header>
-      <div class="page-wrapper px-4">
+      <div class="page-wrapper px-4" id="content">
          <script>
             window.addEventListener('load', function () {
                // Get the current URL 
