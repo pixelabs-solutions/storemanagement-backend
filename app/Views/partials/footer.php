@@ -14,7 +14,7 @@
 		<!-- Tabler Core -->
 		<script src="../../../assets/dist/js/tabler.min.js?1684106062" defer></script>
 		<script src="../../../assets/dist/js/demo.min.js?1684106062" defer></script>
-
+<script src="../../../assets/dist/js/translation.js"></script>
 
 
 	<!--old  Libs JS -->

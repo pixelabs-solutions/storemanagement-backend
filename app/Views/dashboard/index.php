@@ -44,17 +44,17 @@ require_once __DIR__ . '/../partials/header.php';
 
             <div class="row g-2 mt-5 mb-5 align-items-center">
                 <!-- Stats header Buttons -->
-                <div class="col-auto btn-list">
-                    <a href="" class="btn btn-pill btn-light tab-pane sms_w_date_active sms_w_date"> 24 Hours</a>
-                    <a href="" class="btn btn-pill btn-light tab-pane sms_w_date"> Last Week </a>
-                    <a href="" class="btn btn-pill btn-light tab-pane sms_w_date"> Last Month </a>
-                    <a href="" class="btn btn-pill btn-light tab-pane sms_w_date"> Last Year </a>
+                <div class="col-auto btn-list ">
+                    <a href="" class="btn btn-pill btn-light tab-pane sms_w_date_active sms_w_date"data-i18n="dashboard.tabs.first_tab"> 24 Hours</a>
+                    <a href="" class="btn btn-pill btn-light tab-pane sms_w_date"data-i18n="dashboard.tabs.second_tab"> Last Week </a>
+                    <a href="" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.third_tab"> Last Month </a>
+                    <a href="" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.fourth_tab"> Last Year </a>
                 </div>
                 <!-- Date Range Button  Start-->
                 <div class="col-auto ms-auto d-print-none d-none d-sm-inline">
                         <a
                         class="card text-center  rounded-4 p-2">
-                        <p class="p-0 mb-0 d-2 ">Filter by dates</p>
+                        <p class="p-0 mb-0 d-2 "data-i18n="dashboard.tabs.filter_btn">Filter by dates</p>
                         <p class="p-0 mb-0">10/02/24-10/03/2024</p>
                         </a>
                 </div>
@@ -62,6 +62,8 @@ require_once __DIR__ . '/../partials/header.php';
             </div>
 
         <!-- Header End -->
+<!--  -->
+
 
         <!-- Card Start -->
 
@@ -71,7 +73,7 @@ require_once __DIR__ . '/../partials/header.php';
                     <div class="card-body">
                         <div class="row g-2">
                             <div class="col-8">
-                               <h3 class="text-muted"> New Products </h3>  
+                               <h3 class="text-muted" data-i18n="dashboard.card_product.card_title"> New Products </h3>  
                             </div>
                             <div class="col-auto ms-auto">
                                 <svg width="40" height="40" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -118,7 +120,7 @@ require_once __DIR__ . '/../partials/header.php';
                     <div class="card-body">
                         <div class="row g-2">
                             <div class="col-8">
-                               <h3 class="text-muted"> New Arivals </h3>  
+                               <h3 class="text-muted"  data-i18n="dashboard.card_arrivals.card_title">> New Arivals </h3>  
                             </div>
                             <div class="col-auto ms-auto">
                                 <svg width="40" height="40" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -165,7 +167,7 @@ require_once __DIR__ . '/../partials/header.php';
                     <div class="card-body">
                         <div class="row g-2">
                             <div class="col-8">
-                               <h3 class="text-muted"> New Customers </h3>  
+                               <h3 class="text-muted"  data-i18n="dashboard.card_customers.card_title">> New Customers </h3>  
                             </div>
                             <div class="col-auto ms-auto">
                                 <svg width="40" height="40" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -212,7 +214,7 @@ require_once __DIR__ . '/../partials/header.php';
                     <div class="card-body">
                         <div class="row g-2">
                             <div class="col-8">
-                               <h3 class="text-muted"> Total Transiction </h3>  
+                               <h3 class="text-muted"  data-i18n="dashboard.card_transaction.card_title">> Total Transiction </h3>  
                             </div>
                             <div class="col-auto ms-auto">
                                 <svg width="40" height="40" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
