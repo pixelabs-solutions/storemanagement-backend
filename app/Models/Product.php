@@ -143,7 +143,7 @@ class Product
 
             var_dump($response);
 
-            var_dump($response->getBody());
+            // var_dump($response->getBody());
             if ($response->getStatusCode() == 201) 
             {
                 return ['success' => 'true', 'status_code' => $response->getStatusCode()];

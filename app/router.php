@@ -21,9 +21,9 @@ class Router
         $this->register('DELETE', $uri, $action);
     }
 
-    public function update($uri, $action)
+    public function put($uri, $action)
     {
-        $this->register('UPDATE', $uri, $action);
+        $this->register('PUT', $uri, $action);
     }
 
     protected function register($method, $uri, $action)

@@ -146,7 +146,7 @@ class Database
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             user_id INT NOT NULL UNIQUE,
             is_inventory_management_enabled BOOLEAN,
-            is_out_of_atock_alert_enabled BOOLEAN,
+            is_out_of_stock_alert_enabled BOOLEAN,
             is_low_stock_alert_enabled BOOLEAN,
             email VARCHAR(255),
             out_of_stock_threshold INT(6),

@@ -49,6 +49,9 @@ $router->get('/goals', [GoalsController::class, 'index']);
 
 //Inventory
 $router->get('/inventory', [InventoryController::class, 'index']);
+$router->post('/inventory/add', [InventoryController::class, 'add']);
+$router->put('/inventory/update', [InventoryController::class, 'update']);
+
 
 
 //Statistics
