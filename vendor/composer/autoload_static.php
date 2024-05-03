@@ -26,6 +26,7 @@ class ComposerStaticInitf2216dac78142ff4195c495e2740b5d5
         array (
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
+            'Pixelabs\\StoreManagement\\Controllers\\' => 37,
             'Pixelabs\\StoreManagement\\Config\\' => 32,
             'Pixelabs\\StoreManagement\\' => 25,
             'PhpOption\\' => 10,
@@ -58,12 +59,16 @@ class ComposerStaticInitf2216dac78142ff4195c495e2740b5d5
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
+        ),
+        'Pixelabs\\StoreManagement\\Controllers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/Controllers',
         ),
         'Pixelabs\\StoreManagement\\Config\\' => 
         array (

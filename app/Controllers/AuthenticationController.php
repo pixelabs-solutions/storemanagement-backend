@@ -7,16 +7,36 @@ class AuthenticationController
 {
     public function register()
     {
-        $email = isset($_POST['email']) ? $_POST['email'] : null;
-        $password = isset($_POST['password']) ? $_POST['password'] : null;
+        $rawData = file_get_contents("php://input");
+        $data = json_decode($rawData, true);
+        
+        $email = isset($data['email']) ? $data['email'] : null;
+        $password = isset($data['password']) ? $data['password'] : null;
         $result = Authentication::register($email, $password);
 
-        $response = json_decode($result, true);
+        echo $result;
+    }
 
-        http_response_code($response['status_code']);
-        header('Content-Type: application/json');
+    public function login()
+    {
+        $rawData = file_get_contents("php://input");
+        $data = json_decode($rawData, true);
+
+        $email = isset($data['email']) ? $data['email'] : null;
+        $password = isset($data['password']) ? $data['password'] : null;
+
+        $result = Authentication::login($email, $password);
 
         echo $result;
+    }
+
+    public function logout()
+    {
+        $result = Authentication::logout();
+        echo $result;
+        
+        // header('Location: /authentication/login');
+        // exit;
     }
 
 }

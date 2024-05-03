@@ -41,7 +41,7 @@ class Database
     private function tablesExist()
     {
         //List all tables in array
-        $tables = ['users', 'user_meta', 'api_credentials', 'goals', 'categories', 'products', 'inventory_settings', 'coupons', 'customers', 'transactions'];
+        $tables = ['users', 'user_meta', 'user_configurations', 'goals', 'categories', 'products', 'inventory_settings', 'coupons', 'customers', 'transactions'];
         $tableNameList = "'" . implode("', '", $tables) . "'"; // Create a string for the SQL query
         $query = "SELECT COUNT(*) AS count FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE() AND table_name IN ($tableNameList)";
         $result = $this->connection->query($query);
@@ -86,16 +86,17 @@ class Database
         ) ";
         $this->connection->query($createUserMetaTableQuery);
 
-        $apiCredentialsTable = "CREATE TABLE IF NOT EXISTS api_credentials
+        $userConfigurationsTable = "CREATE TABLE IF NOT EXISTS user_configurations
         (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            user_id INT NOT NULL,
-            consumer_key TEXT NOT NULL,
-            consumer_secret TEXT NOT NULL,
+            user_id INT NOT NULL UNIQUE,
+            consumer_key VARCHAR(255) UNIQUE NOT NULL,
+            consumer_secret VARCHAR(255) UNIQUE NOT NULL,
+            store_url VARCHAR(255) UNIQUE NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";
-        $this->connection->query($apiCredentialsTable);
+        $this->connection->query($userConfigurationsTable);
 
         $goalTable = "CREATE TABLE IF NOT EXISTS goals
             (

@@ -6,7 +6,7 @@ namespace Pixelabs\StoreManagement\Models;
 class Authentication
 {
     public static function register($email, $password) {
-        global $connection; // Reference to the global connection variable
+        global $connection; 
 
         if (!empty($email) && !empty($password)) 
         {
@@ -21,20 +21,26 @@ class Authentication
             // Execute statement
             if ($stmt->execute()) 
             {
-                http_response_code(201); // Created
-                return json_encode(array("message" => "User registered successfully."));
+                return json_encode(array(
+                    "message" => "User registered successfully.",
+                    "status_code" => 201 // Created
+                ));
             } 
             else 
             {
-                http_response_code(503); // Service unavailable
-                return json_encode(array("message" => "Unable to register user."));
+                return json_encode(array(
+                    "message" => "Unable to register user.",
+                    "status_code" => 503 // Service unavailable
+                ));
             }
             $stmt->close();
         } 
         else 
         {
-            http_response_code(400); // Bad request
-            return json_encode(array("message" => "Unable to register user. Data is incomplete."));
+            return json_encode(array(
+                "message" => "Unable to register user. Data is incomplete.",
+                "status_code" => 400 // Bad request
+            ));
         }
     }
 
@@ -42,6 +48,7 @@ class Authentication
         global $connection; 
 
         if (!empty($email) && !empty($password)) {
+            session_start();
             $stmt = $connection->prepare("SELECT id, password FROM users WHERE email = ?");
 
             $stmt->bind_param("s", $email);
@@ -52,22 +59,64 @@ class Authentication
             if ($result->num_rows == 1) {
                 $user = $result->fetch_assoc();
                 if (password_verify($password, $user['password'])) {
-                    http_response_code(200); // OK
-                    return json_encode(array("message" => "Logged in successfully.", "user_id" => $user['id']));
+                    $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['logged_in'] = true; 
+                    return json_encode(array(
+                        "message" => "Logged in successfully.", 
+                        "status_code" => 200, // OK
+                        "user_id" => $user['id']));
                 } else {
-                    http_response_code(401); // Unauthorized
-                    return json_encode(array("message" => "Login failed. Password does not match."));
+                    return json_encode(array(
+                        "message" => "Login failed. Password does not match.",
+                        "status_code" => 401 // Unauthorized
+                    ));
                 }
             } else {
-                http_response_code(404); // Not found
-                return json_encode(array("message" => "Login failed. User not found."));
+                return json_encode(array(
+                    "message" => "Login failed. User not found.",
+                    "status_code" => 404 // Not found
+                ));
             }
             $stmt->close();
         } else {
-            http_response_code(400); // Bad request
-            return json_encode(array("message" => "Login failed. Data is incomplete."));
+            return json_encode(array(
+                "message" => "Login failed. Data is incomplete.",
+                "status_code" => 400 // Bad request
+            ));
         }
     }
+
+    public static function logout()
+    {
+        if (session_status() === PHP_SESSION_NONE) 
+        {
+            session_start();
+        }
+        $_SESSION = [];
+
+        session_destroy();
+
+        return json_encode(array(
+            "message" => "Logged out successfully.",
+            "status_code" => 200
+        ));
+    }
+
+    public static function isUserLoggedIn() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        return isset($_SESSION['user_id']);
+    }
+
+    public static function getUserId()
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        return $_SESSION['user_id'] ?? null;
+    }
+
     private static function hashPassword($password) {
         return password_hash($password, PASSWORD_DEFAULT);
     }
