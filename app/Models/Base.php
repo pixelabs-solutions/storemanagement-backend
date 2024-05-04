@@ -84,7 +84,7 @@ class Base
         $client = new Client();
         try 
         {
-            $response = $client->request('GET', $store_url . '//wp-json/wc/v3'.$endpoint, [
+            $response = $client->request('GET', $store_url . '//wp-json/wc/v3/'.$endpoint, [
                 'auth' => [$consumer_key, $consumer_secret]
             ]);
         
