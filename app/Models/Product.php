@@ -47,7 +47,6 @@ class Product
         $consumer_key = $data["consumer_key"];
         $consumer_secret = $data["consumer_secret"];
         $store_url = $data["store_url"];
-
         $client = new Client();
         try 
         {
@@ -56,10 +55,10 @@ class Product
             ]);
         
             $product = json_decode($response->getBody(), true);
-            if($product['status'] !== 'publish')
-            {
-                return null;
-            }
+            // if($product['status'] !== 'publish')
+            // {
+            //     return null;
+            // }
             return $product;
         } 
         catch (RequestException $e) 

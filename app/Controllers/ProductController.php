@@ -25,7 +25,7 @@ class ProductController
     {
         $product = Product::get_product_by_id($id);
 
-        echo $product;
+        print_r($product);
     }
 
     public function delete($id)

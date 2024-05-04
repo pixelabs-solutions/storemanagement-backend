@@ -37,6 +37,10 @@ $router->post('/product/add', [ProductController::class, 'add']);
 
 //Coupons
 $router->get('/coupons', [CouponsController::class, 'index']);
+$router->post('/coupons/add', [CouponsController::class, 'add']);
+$router->get('/coupons/{id}', [CouponsController::class, 'get']);
+$router->delete('/coupons/{id}', [CouponsController::class, 'delete']);
+$router->patch('/coupons/{id}', [CouponsController::class, 'update']);
 
 
 //Customers
@@ -50,7 +54,7 @@ $router->get('/goals', [GoalsController::class, 'index']);
 //Inventory
 $router->get('/inventory', [InventoryController::class, 'index']);
 $router->post('/inventory/add', [InventoryController::class, 'add']);
-$router->put('/inventory/update', [InventoryController::class, 'update']);
+$router->patch('/inventory/update', [InventoryController::class, 'update']);
 
 
 
