@@ -14,6 +14,7 @@ use Pixelabs\StoreManagement\Controllers\StatisticsController;
 use Pixelabs\StoreManagement\Controllers\TransactionController;
 use Pixelabs\StoreManagement\Controllers\AuthenticationController;
 use Pixelabs\StoreManagement\Controllers\ConfigurationController;
+use Pixelabs\StoreManagement\Controllers\CategoryController;
 
 // Define routes
 
@@ -65,4 +66,12 @@ $router->get('/transactions', [TransactionController::class, 'index']);
 
 //User Configurations
 $router->post('/configurations/add', [ConfigurationController::class, 'add']);
+
+
+//Categories
+$router->get('/categories', [CategoryController::class, 'index']);
+$router->get('/categories/{id}', [CategoryController::class, 'get']);
+$router->delete('/categories/{id}', [CategoryController::class, 'delete']);
+$router->post('/categories/add', [CategoryController::class, 'add']);
+$router->patch('/categories/{id}', [CategoryController::class, 'update']);
 
