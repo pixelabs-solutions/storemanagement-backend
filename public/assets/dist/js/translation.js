@@ -26,6 +26,7 @@ const translations = {
             },
         "card_product": {
             "card_title": "New Products",
+            "Customer_Location":"Customer Location",
             "card_num": "647",
             "card_percentage": "10%",
             "card_num_label": "Last 7 Days"
@@ -148,7 +149,7 @@ const translations = {
         }
         },
         
-        "customer page":{
+        "customer_page":{
         "customer_search":{
         "search":"Customer search"
         },
@@ -162,11 +163,11 @@ const translations = {
         },
         "customer_tr":{
         "customer_name":"mubashir Malka",
-        "dates_name":"Date of last order",
-        "mails_name":"mail address",
+        "dates_name":"24/07/2024",
+        "mails_name":"elikako.m@gmail.com ",
         "number_name":"Number of orders",
-        "total_name":"Total",
-        "order_name":"Order average"
+        "total_name":" NIS 1,370",
+        "order_name":"685 NIS "
         }
         },
         "transction_page":{
@@ -324,7 +325,8 @@ const translations = {
             "card_four_in_objective":{
             "card_title":"450 page views",
             "card_one_p_left":"450 were accepted",
-            "card_tag_p_right":"0 left"
+            "card_tag_p_right":"0 left",
+            "well_done":"Well done"
             },
             "card_five_in_objective":{
             "card_title":"Advance 15 positions on Google",
@@ -603,6 +605,7 @@ const translations = {
     "filter_btn": "סנן לפי תאריכים "
   },
   "card_product": {
+    "abc":"מיקום_לקוח",
     "card_title": "מוצרים חדשים",
     "card_num": "647",
     "card_percentage": "10%",
@@ -726,7 +729,7 @@ const translations = {
     "expiry_date_tr_in_td": "03/24/2022"
   }
 },
-"customer page": {
+"customer_page": {
   "customer_search": {
     "search": "חיפוש לקוח"
   },
@@ -1103,7 +1106,7 @@ const translations = {
       "mail":"כתובת דוא\"ל: elikako.m@gmail.com",
       "order_status":"שינוי סטטוס ההזמנה",
       "card_adress":{
-        "adress":"כתובת למשלוח",
+        "adress":"כתובת למשלוח",  
         "adress_detail":"קיבוץ גלויות 12, דירה 8, קומה 10, בני ברק"
       },
       "Order_detail":"פרטי הזמנה",
