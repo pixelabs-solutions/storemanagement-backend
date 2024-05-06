@@ -24,7 +24,7 @@ $router->post('/authentication/login', [AuthenticationController::class, 'login'
 $router->get('/authentication/logout', [AuthenticationController::class, 'logout']);
 
 //Dashboard
-$router->get('/', [DashboardController::class, 'index']);
+$router->get('/index', [DashboardController::class, 'index']);
 
 
 //Products

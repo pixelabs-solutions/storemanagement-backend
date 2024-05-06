@@ -111,12 +111,12 @@
         <table class="sms_mu_table sms_customers_m_customer_table">
           <thead>
             <tr class="sms_mu_th">
-              <th class="sms_mu_td">Customer's name </th>
-              <th class="sms_mu_td">Date of last order </th>
-              <th class="sms_mu_td">mail address</th>
-              <th class="sms_mu_td">Number of orders </th>
-              <th class="sms_mu_td">Total</th>
-              <th class="sms_mu_td">Order average</th>
+              <th data-i18n="customer_page.customer_th.customer_name" class="sms_mu_td">Customer's name </th>
+              <th  data-i18n="customer_page.customer_th.dates_name" class="sms_mu_td">Date of last order </th>
+              <th data-i18n="customer_page.customer_th.mails_name"  class="sms_mu_td">mail address</th>
+              <th data-i18n="customer_page.customer_th.number_name"  class="sms_mu_td">Number of orders </th>
+              <th data-i18n="customer_page.customer_th.total_name"  class="sms_mu_td">Total</th>
+              <th data-i18n="customer_page.customer_th.order_name"  class="sms_mu_td">Order average</th>
 
             </tr>
             <tr class="sms_mu_spacing_div"></tr>
@@ -125,74 +125,75 @@
           <tbody>
             <tr class="sms_mu_tr">
 
-              <td class="t_oravg_m">
+              <td class="t_oravg_m" data-i18n="customer_page.customer_tr.customer_name" >
                 mubashir Malka
               </td>
-              <td>24/07/2024 </td>
-              <td>elikako.m@gmail.com </td>
+              <td data-i18n="customer_page.customer_tr.dates_name">24/07/2024 </td>
+              <td data-i18n="customer_page.customer_tr.mails_name">elikako.m@gmail.com </td>
               <td>2</td>
-              <td>
+              <td data-i18n="customer_page.customer_tr.total_name">
                 NIS 1,370
               </td>
-              <td>685 NIS</td>
+              <td data-i18n="customer_page.customer_tr.order_name">685 NIS</td>
             </tr>
             <tr class="sms_mu_spacing_div"></tr>
             <tr class="sms_mu_tr">
 
-              <td class="t_oravg_m">
+              <td class="t_oravg_m" data-i18n="customer_page.customer_tr.customer_name" >
                 mubashir Malka
               </td>
-              <td>24/07/2024 </td>
-              <td>elikako.m@gmail.com </td>
+              <td data-i18n="customer_page.customer_tr.dates_name">24/07/2024 </td>
+              <td data-i18n="customer_page.customer_tr.mails_name">elikako.m@gmail.com </td>
               <td>2</td>
-              <td>
+              <td data-i18n="customer_page.customer_tr.total_name">
                 NIS 1,370
               </td>
-              <td>685 NIS</td>
+              <td data-i18n="customer_page.customer_tr.order_name">685 NIS</td>
             </tr>
             <tr class="sms_mu_spacing_div"></tr>
             <tr class="sms_mu_tr">
 
-              <td class="t_oravg_m">
+              <td class="t_oravg_m" data-i18n="customer_page.customer_tr.customer_name" >
                 mubashir Malka
               </td>
-              <td>24/07/2024 </td>
-              <td>elikako.m@gmail.com </td>
+              <td data-i18n="customer_page.customer_tr.dates_name">24/07/2024 </td>
+              <td data-i18n="customer_page.customer_tr.mails_name">elikako.m@gmail.com </td>
               <td>2</td>
-              <td>
+              <td data-i18n="customer_page.customer_tr.total_name">
                 NIS 1,370
               </td>
-              <td>685 NIS</td>
+              <td data-i18n="customer_page.customer_tr.order_name">685 NIS</td>
             </tr>
             <tr class="sms_mu_spacing_div"></tr>
             <tr class="sms_mu_tr">
 
-              <td class="t_oravg_m">
-                atif Malka
+              <td class="t_oravg_m" data-i18n="customer_page.customer_tr.customer_name" >
+                mubashir Malka
               </td>
-              <td>24/07/2024 </td>
-              <td>elikako.m@gmail.com </td>
+              <td data-i18n="customer_page.customer_tr.dates_name">24/07/2024 </td>
+              <td data-i18n="customer_page.customer_tr.mails_name">elikako.m@gmail.com </td>
               <td>2</td>
-              <td>
+              <td data-i18n="customer_page.customer_tr.total_name">
                 NIS 1,370
               </td>
-              <td>685 NIS</td>
+              <td data-i18n="customer_page.customer_tr.order_name">685 NIS</td>
             </tr>
             <tr class="sms_mu_spacing_div"></tr>
             <tr class="sms_mu_tr">
 
-              <td class="t_oravg_m">
+              <td class="t_oravg_m" data-i18n="customer_page.customer_tr.customer_name" >
                 mubashir Malka
               </td>
-              <td>24/07/2024 </td>
-              <td>elikako.m@gmail.com </td>
+              <td data-i18n="customer_page.customer_tr.dates_name">24/07/2024 </td>
+              <td data-i18n="customer_page.customer_tr.mails_name">elikako.m@gmail.com </td>
               <td>2</td>
-              <td>
+              <td data-i18n="customer_page.customer_tr.total_name">
                 NIS 1,370
               </td>
-              <td>685 NIS</td>
+              <td data-i18n="customer_page.customer_tr.order_name">685 NIS</td>
             </tr>
             <tr class="sms_mu_spacing_div"></tr>
+      
           </tbody>
         </table>
       </div>

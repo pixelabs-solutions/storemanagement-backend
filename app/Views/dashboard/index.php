@@ -46,7 +46,7 @@ require_once __DIR__ . '/../partials/header.php';
                 <!-- Stats header Buttons -->
                 <div class="col-auto btn-list ">
                     <a href="" class="btn btn-pill btn-light tab-pane sms_w_date_active sms_w_date"data-i18n="dashboard.tabs.first_tab"> 24 Hours</a>
-                    <a href="" class="btn btn-pill btn-light tab-pane sms_w_date"data-i18n="dashboard.tabs.second_tab"> Last Week </a>
+                    <a href="" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.second_tab" > Last Week </a>
                     <a href="" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.third_tab"> Last Month </a>
                     <a href="" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.fourth_tab"> Last Year </a>
                 </div>
@@ -286,7 +286,7 @@ require_once __DIR__ . '/../partials/header.php';
                          <!-- Start header -->
                          <div class="row g-2 align-items-center">
                             <div class="col-auto">
-                                <h4 class="text-primary">Customer Location</h4>
+                                <h4 class="text-primary" data-i18n="dashboard.card_product.abc">Customer Location</h4>
                             </div>
                             <div class="col-auto ms-auto">
                                 <div class="mb-3">
@@ -403,7 +403,11 @@ require_once __DIR__ . '/../partials/header.php';
                 <div class="col-lg-3 col-md-3 col-sm-12 mb-2">
                     <div class="card h-100" style="border-radius:20px; background: rgb(48,61,129); background: linear-gradient(270deg, rgba(48,61,129,1) 0%, rgba(46,148,176,1) 53%);">
                         <div class="card-body p-5 mb-4 mt-4">
-                            <h1 class="text-start text-light">Tell us what additional data you would like to have on your desktop</h1>
+                            <h1 class="text-start text-light" 
+
+                            data-i18n="dashboard.img_like_blue_bg_data.text"
+                            
+                            >Tell us what additional data you would like to have on your desktop</h1>
                         </div>
                     </div>
                 </div>
@@ -413,10 +417,11 @@ require_once __DIR__ . '/../partials/header.php';
                             <!-- Stats header -->
                             <div class="row g-2 align-items-center">
                                 <div class="col-5">
-                                    <h4 class="text-primary">For All Products</h4>
+                                    <h4 class="text-primary" data-i18n="dashboard.grid_images_in_last.row_left_data"
+                                    >For All Products</h4>
                                 </div>
                                 <div class="col-7 ms-auto text-end">
-                                    <h4 class="text-muted">The best selling products</h4>
+                                    <h4 class="text-muted" data-i18n="dashboard.grid_images_in_last.row_right_data">The best selling products</h4>
                                 </div>
                             </div>
                             <!-- End Header -->
@@ -444,10 +449,10 @@ require_once __DIR__ . '/../partials/header.php';
                             <!-- Start header -->
                             <div class="row g-2 align-items-center">
                                 <div class="col-auto">
-                                    <h4 class="text-primary">For All Orders</h4>
+                                    <h4 class="text-primary" data-i18n="dashboard.last_table_data.table_data_one_on_left">For All Orders</h4>
                                 </div>
-                                <div class="col-auto ms-auto">
-                                    <h4 class="text-muted">Last Orders</h4>
+                                <div class="col-auto ms-auto" >
+                                    <h4 class="text-muted" data-i18n="dashboard.last_table_data.table_data_one_on_right">Last Orders</h4>
                                 </div>
                             </div>
                             <!-- End Header -->
@@ -456,10 +461,10 @@ require_once __DIR__ . '/../partials/header.php';
                                 <table class="table table-vcenter">
                                     <thead>
                                         <tr>
-                                        <th>order no</th>
-                                        <th>client</th>
-                                        <th>date</th>
-                                        <th colspan="2">sum</th>
+                                        <th data-i18n="dashboard.last_table_tr_first.td_one">order no</th>
+                                        <th data-i18n="dashboard.last_table_tr_first.td_two">client</th>
+                                        <th data-i18n="dashboard.last_table_tr_first.td_three">date</th>
+                                        <th colspan="2" data-i18n="dashboard.last_table_tr_first.td_four">sum</th>
                                         </tr>
                                     </thead>
                                     <tr>

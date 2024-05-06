@@ -37,10 +37,10 @@ cursor: pointer;
         <div class="row g-2 align-items-center">
             <div class="col">
                 <!-- Page pre-title -->
-                <h1 style="color:#4987d8">
+                <h1 style="color:#4987d8" data-i18n="objective.top_section_like_nav.text_hading">
                     Business Goals and Objectives
                 </h1>
-                <p style="margin-top:-10px;">You should set goals, it's challenging and addicting and causes sales to
+                <p style="margin-top:-10px;"  data-i18n="objective.top_section_like_nav.text_hading">You should set goals, it's challenging and addicting and causes sales to
                     increase.</p>
             </div>
             <!-- Page title actions -->
@@ -65,7 +65,7 @@ cursor: pointer;
                                 d="M12 18.574c1.926 1.893 3.821 2.768 5 2.086c1.913 -1.104 1.226 -5.877 -1.536 -10.66c-.375 -.65 -.78 -1.283 -1.212 -1.897" />
                             <path d="M11.5 12.866a1 1 0 1 0 1 -1.732a1 1 0 0 0 -1 1.732z" />
                         </svg>
-                        <b>Goal Setting</b>
+                        <b  data-i18n="objective.top_section_like_nav.button">Goal Setting</b>
                     </a>
                 </div>
             </div>
@@ -150,7 +150,7 @@ cursor: pointer;
     <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
         <div class="card pt-2 pb-2" style=" border-radius:20px;">
             <!-- Ribbon Start -->
-            <div class="sms_m_ribbon  bg-light text-dark" style="display: none;">Well done</div>
+            <div class="sms_m_ribbon  bg-light text-dark" style="display: none;"  data-i18n="objective.card_four_in_objective.well_done">Well done</div>    
             <!-- Ribbon End -->
             <div class="card-body">
                 <div class="text-center">
@@ -159,7 +159,7 @@ cursor: pointer;
                             d="M1.83333 0.443359C0.817361 0.443359 0 1.26072 0 2.27669C0 3.29267 0.817361 4.11003 1.83333 4.11003H5.30903C5.59931 4.11003 5.85139 4.31628 5.9125 4.60655L9.85417 25.3079C10.3507 27.9052 12.6194 29.7767 15.2549 29.7767H37.2778C38.2938 29.7767 39.1111 28.9593 39.1111 27.9434C39.1111 26.9274 38.2938 26.11 37.2778 26.11H15.2549C14.3764 26.11 13.6201 25.4836 13.4521 24.6204L13.0396 22.4434H35.0778C37.5681 22.4434 39.7451 20.7781 40.3868 18.3718L43.5187 6.7378C44.0458 4.79753 42.5792 2.8878 40.5701 2.8878H27.5V10.6871L29.2569 8.93016C29.975 8.21211 31.1361 8.21211 31.8465 8.93016C32.5569 9.64822 32.5646 10.8093 31.8465 11.5197L26.9576 16.4086C26.2396 17.1267 25.0785 17.1267 24.3681 16.4086L19.4792 11.5197C18.7611 10.8017 18.7611 9.64058 19.4792 8.93016C20.1972 8.21975 21.3583 8.21211 22.0687 8.93016L23.8257 10.6871V2.8878H9.1743C8.47917 1.42114 6.99722 0.443359 5.30903 0.443359H1.83333ZM13.4444 39.5545C14.4169 39.5545 15.3495 39.1682 16.0372 38.4805C16.7248 37.7929 17.1111 36.8603 17.1111 35.8878C17.1111 34.9153 16.7248 33.9827 16.0372 33.2951C15.3495 32.6074 14.4169 32.2211 13.4444 32.2211C12.472 32.2211 11.5394 32.6074 10.8517 33.2951C10.1641 33.9827 9.77778 34.9153 9.77778 35.8878C9.77778 36.8603 10.1641 37.7929 10.8517 38.4805C11.5394 39.1682 12.472 39.5545 13.4444 39.5545ZM39.1111 35.8878C39.1111 34.9153 38.7248 33.9827 38.0372 33.2951C37.3495 32.6074 36.4169 32.2211 35.4444 32.2211C34.472 32.2211 33.5394 32.6074 32.8517 33.2951C32.1641 33.9827 31.7778 34.9153 31.7778 35.8878C31.7778 36.8603 32.1641 37.7929 32.8517 38.4805C33.5394 39.1682 34.472 39.5545 35.4444 39.5545C36.4169 39.5545 37.3495 39.1682 38.0372 38.4805C38.7248 37.7929 39.1111 36.8603 39.1111 35.8878Z"
                             fill="#4987D8" />
                     </svg>
-                    <h3 class="mt-3">450 new orders </h3>
+                    <h3 class="mt-3"  data-i18n="objective.top_section_like_nav.text_hading">450 new orders </h3>
                     <div class="row">
                         <div class="col-6">
                             <p class="text-start">250 were accepted</p>

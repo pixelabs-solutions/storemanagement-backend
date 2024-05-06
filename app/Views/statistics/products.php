@@ -7,16 +7,16 @@
                         <!-- Stats header Buttons -->
                         <div class="col-auto btn-list">
                             <a href="#row_1" class="btn btn-pill btn-light tab-pane" class="nav-link"
-                                data-bs-toggle="tab" style="background-color:#A8C3E7;"> Last Week </a>
+                                data-bs-toggle="tab" style="background-color:#A8C3E7;" data-i18n="statististics.tabs_in_select_range.week"> Last Week </a>
                             <a href="#row_2" class="btn btn-pill btn-light tab-pane" class="nav-link"
-                                data-bs-toggle="tab"> Current
+                                data-bs-toggle="tab" data-i18n="statististics.tabs_in_select_range.month"> Current
                                 Month </a>
-                            <a href="" class="btn btn-pill btn-light tab-pane"> Last Year </a>
+                            <a href="" class="btn btn-pill btn-light tab-pane" data-i18n="statististics.tabs_in_select_range.year"> Last Year </a>
                         </div>
                         <!-- Date Range Button -->
                         <div class="col-auto ms-auto">
                             <a href="#" class="btn btn-pill" data-bs-toggle="modal" data-bs-target="#modal-team"
-                                style="background-color:#A8C3E7; border:none;">
+                                style="background-color:#A8C3E7; border:none;" data-i18n="statististics.tabs_in_select_range.button">
                                 Select a Date Range
                             </a>
                         </div>
@@ -31,7 +31,7 @@
                                         <img src="assets/dist/img/cart.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
                                         <h3 class="mt-3">450</h3>
-                                        <strong style="color:#4987D8">Product</strong>
+                                        <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card1_in_product.normal_product">Product</strong>
                                     </div>
                                 </div>
                             </div>
@@ -46,7 +46,7 @@
                                         <img src="assets/dist/img/order.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
                                         <h3 class="mt-3">150</h3>
-                                        <strong style="color:#4987D8">Normal Products</strong>
+                                        <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card2_in_normal_product.normal_product_in_card2">Normal Products</strong>
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                                         <img src="assets/dist/img/productsonsale.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
                                         <h3 class="mt-3">250</h3>
-                                        <strong style="color:#4987D8">Product On Sale</strong>
+                                        <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card3_in_Sale.normal_product">Product On Sale</strong>
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                                         <img src="assets/dist/img/cart.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
                                         <h3 class="mt-3">250</h3>
-                                        <strong style="color:#4987D8">Order</strong>
+                                        <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card4_in_product.normal_product">Order</strong>
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
                                         <img src="assets/dist/img/order.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
                                         <h3 class="mt-3">15</h3>
-                                        <strong style="color:#4987D8">Products on order</strong>
+                                        <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card5_in_product.normal_product">Products on order</strong>
                                     </div>
                                 </div>
                             </div>
@@ -102,15 +102,20 @@
                     <!-- Colors Button Start-->
                     <div class="row g-2 align-items-center">
                         <div class="col-auto ms-auto btn-list mt-5 mb-5">
-                            <div class="text-light p-1" style="background-color:#627e0c; border-radius:5px;"> New
-                                Customer </div>
-                            <div class="text-light p-1" style="background-color:#8b59e4; border-radius:5px;"> Customer
+                            <div class="text-light p-1" style="background-color:#627e0c; border-radius:5px;"
+                                data-i18n="statististics.chart_below_btn.firts_btn.text"> New
+                                Customer</div>
+                            <div class="text-light p-1" style="background-color:#8b59e4; border-radius:5px;"
+                                data-i18n="statististics.chart_below_btn.second_btn.text"> Customer
                             </div>
-                            <div class="text-light p-1" style="background-color:#9215a8; border-radius:5px;"> Product
+                            <div class="text-light p-1" style="background-color:#9215a8; border-radius:5px;"
+                                data-i18n="statististics.chart_below_btn.third_btn.text"> Product
                             </div>
-                            <div class="text-light p-1" style="background-color:#dc2285; border-radius:5px;"> Order
+                            <div class="text-light p-1" style="background-color:#dc2285; border-radius:5px;"
+                                data-i18n="statististics.chart_below_btn.fourth_btn.text"> Order
                             </div>
-                            <div class="text-light p-1" style="background-color:#ac3f4f; border-radius:5px;"> Revenues
+                            <div class="text-light p-1" style="background-color:#ac3f4f; border-radius:5px;"
+                                data-i18n="statististics.chart_below_btn.five_btn.text"> Revenues
                             </div>
                         </div>
                     </div>
@@ -140,8 +145,8 @@
             },
             plotOptions: {
                 bar: {
-                    columnWidth: '20%',
-                    gap: '5%',
+                    columnWidth: '50%',
+                    gap: '3%',
                 }
             },
             dataLabels: {
@@ -152,19 +157,19 @@
             },
             series: [{
                 name: "New Customer",
-                data: [3000, 1000, 2000, 3500, 4000, 3000, 5000]
+                data: [4000, 1000, 3500, 3500, 4000, 3000, 5000]
             }, {
                 name: "Returning Customer",
-                data: [2000, 1300, 900, 500, 2400, 1300, 2200]
+                data: [3000,4300, 1900, 2200, 2400, 4300, 2200]
             }, {
                 name: "Product",
                 data: [3000, 2000, 1600, 1300, 3000, 2500, 2500]
             }, {
                 name: "Order",
-                data: [2000, 1300, 900, 500, 2400, 1300, 2200]
+                data: [2000, 1300, 900, 1500, 2400, 1300, 2200]
             }, {
                 name: "Revenue",
-                data: [2000, 1300, 900, 500, 2400, 1300, 2200]
+                data: [2000, 2500, 500, 3500, 2400, 1300, 2200]
             }],
             tooltip: {
                 theme: 'dark'

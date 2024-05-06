@@ -137,7 +137,7 @@
             <div class="collapse navbar-collapse" id="sidebar-menu">
                <ul class="navbar-nav pt-lg-3 gap-3">
                   <li class="nav-item" id="index">
-                     <a class="nav-link" href="/">
+                     <a class="nav-link" href="/index">
                         <span
                            class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                            <svg width="24" height="24" viewBox="0 0 32 32" fill="none"
@@ -155,7 +155,7 @@
                            </svg>
 
                         </span>
-                        <span class="nav-link-title">
+                        <span class="nav-link-title" data-i18n="header.desktop">
                            Desktop
                         </span>
                      </a>
