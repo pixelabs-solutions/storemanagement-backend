@@ -84,7 +84,7 @@ class Base
         $client = new Client();
         try 
         {
-            $response = $client->request('GET', $store_url . '//wp-json/wc/v3/'.$endpoint, [
+            $response = $client->request('GET', $store_url . '/wp-json/wc/v3/'.$endpoint, [
                 'auth' => [$consumer_key, $consumer_secret]
             ]);
         
@@ -96,7 +96,7 @@ class Base
         }
     }
 
-    public static function wc_add($entity, $payload)
+    public static function wc_add($endpoint, $payload)
     {
         $response = json_decode(Configuration::getConfiguration(), true);
         if($response['status_code'] != 200)
@@ -111,7 +111,7 @@ class Base
         $client = new Client();
         try
         {
-            $response = $client->request('POST', $store_url . '/wp-json/wc/v3/'.$entity, [
+            $response = $client->request('POST', $store_url . '/wp-json/wc/v3/'.$endpoint, [
                 'auth' => [$consumer_key, $consumer_secret],
                 'headers' => [
                     'Content-Type' => 'application/json',
@@ -138,7 +138,7 @@ class Base
         }
     }
 
-    public static function wc_get_by_id($entity, $id)
+    public static function wc_get_by_id($endpoint)
     {
         $response = json_decode(Configuration::getConfiguration(), true);
         if($response['status_code'] != 200)
@@ -153,7 +153,7 @@ class Base
 
         try 
         {
-            $response = $client->request('GET', $store_url . '/wp-json/wc/v3/'.$entity.'/'.$id, [
+            $response = $client->request('GET', $store_url . '/wp-json/wc/v3/'.$endpoint, [
                 'auth' => [$consumer_key, $consumer_secret]
             ]);
         
@@ -170,7 +170,7 @@ class Base
         }
     }
 
-    public static function wc_delete_by_id($entity, $id)
+    public static function wc_delete_by_id($endpoint)
     {
         $response = json_decode(Configuration::getConfiguration(), true);
         if($response['status_code'] != 200)
@@ -185,7 +185,7 @@ class Base
         $client = new Client();
         try 
         {
-            $response = $client->request('DELETE', $store_url . '/wp-json/wc/v3/'.$entity.'/'.$id, [
+            $response = $client->request('DELETE', $store_url . '/wp-json/wc/v3/'.$endpoint, [
                 'auth' => [$consumer_key, $consumer_secret],
                 'query' => ['force' => true]
             ]);
@@ -204,7 +204,7 @@ class Base
         }
     }
 
-    public static function wc_update($entity, $payload, $id)
+    public static function wc_update($endpoint, $payload)
     {
         $response = json_decode(Configuration::getConfiguration(), true);
         if($response['status_code'] != 200)
@@ -219,7 +219,7 @@ class Base
         $client = new Client();
         try
         {
-            $response = $client->request('PATCH', $store_url . '/wp-json/wc/v3/'.$entity.'/'.$id, [
+            $response = $client->request('PATCH', $store_url . '/wp-json/wc/v3/'.$endpoint, [
                 'auth' => [$consumer_key, $consumer_secret],
                 'headers' => [
                     'Content-Type' => 'application/json',

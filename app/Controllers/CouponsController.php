@@ -6,10 +6,10 @@ use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 
 class CouponsController
 {
-    private $table_name = 'coupons';
+    private $endpoint = 'coupons';
     public function index()
     {
-        $coupons = Base::wc_get($this->table_name);
+        $coupons = Base::wc_get($this->endpoint);
         //include_once __DIR__ . '/../Views/coupons/index.php';
         print_r($coupons);
     }
@@ -34,13 +34,13 @@ class CouponsController
             'usage_limit' => $data['usage_limit']
         ]);
 
-        $response = Base::wc_add($this->table_name, $payload);
+        $response = Base::wc_add($this->endpoint, $payload);
         print_r($response);
     }
 
     public function get($id)
     {
-        $coupon = Base::wc_get_by_id($this->table_name, $id);
+        $coupon = Base::wc_get_by_id($this->endpoint."/".$id);
 
         print_r($coupon);
     }
@@ -48,7 +48,7 @@ class CouponsController
 
     public function delete($id)
     {
-        $result = Base::wc_delete_by_id($this->table_name, $id);
+        $result = Base::wc_delete_by_id($this->endpoint."/".$id);
         print_r($result);
     }
 
@@ -69,7 +69,7 @@ class CouponsController
             'date_expires' => $data['date_expires'],
             'usage_limit' => $data['usage_limit']
         ]);
-        $response = Base::wc_update($this->table_name, $payload, $id);
+        $response = Base::wc_update($this->endpoint."/".$id, $payload);
         print_r($response);
     }
 
