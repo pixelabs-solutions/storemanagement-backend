@@ -32,7 +32,7 @@ $router->get('/product', [ProductController::class, 'index']);
 $router->get('product/{id}', [ProductController::class, 'product_by_id']);
 $router->delete('/product/{id}', [ProductController::class, 'delete']);
 $router->post('/product/add', [ProductController::class, 'add']);
-
+$router->patch('/product/{id}', [ProductController::class, 'update']);
 
 
 //Coupons
