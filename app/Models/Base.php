@@ -102,6 +102,7 @@ class Base
         if($response['status_code'] != 200)
         {
             echo $response["message"];
+            return;
         }
         $configurations = $response['data'];
         $consumer_key = $configurations["consumer_key"];

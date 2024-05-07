@@ -104,7 +104,7 @@ class Database
                 new_orders_target INT(20),
                 new_customers_target INT(20),
                 sales_revenue_target INT(20),
-                target_keywords INT(20),
+                target_keywords VARCHAR(255),
                 google_rankings_target INT(20),
                 page_views_target INT(20),
                 avg_order_value_increase_target FLOAT,
