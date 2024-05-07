@@ -38,7 +38,7 @@ class InventoryController
 
     public function update()
     {
-        $result = HttpRequestHelper::validate_request("PATCH");
+        $result = HttpRequestHelper::validate_request("PUT");
         if(!$result["is_data_prepared"])
         {
             echo $result["message"];

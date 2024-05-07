@@ -51,7 +51,7 @@ class CategoryController
 
     public function update($id)
     {
-        $result = HttpRequestHelper::validate_request("PATCH");
+        $result = HttpRequestHelper::validate_request("PUT");
         if(!$result["is_data_prepared"])
         {
             echo $result["message"];
