@@ -26,6 +26,12 @@ class Router
         $this->register('PATCH', $uri, $action);
     }
 
+    public function put($uri, $action)
+    {
+        $this->register('PUT', $uri, $action);
+    }
+
+
     protected function register($method, $uri, $action)
     {
         $uri = $this->convertToRegex($uri);

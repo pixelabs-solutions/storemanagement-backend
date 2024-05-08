@@ -102,6 +102,7 @@ class Base
         if($response['status_code'] != 200)
         {
             echo $response["message"];
+            return;
         }
         $configurations = $response['data'];
         $consumer_key = $configurations["consumer_key"];
@@ -204,7 +205,7 @@ class Base
         }
     }
 
-    public static function wc_update($endpoint, $payload)
+    public static function wc_update($endpoint, $payload, $request_type = null)
     {
         $response = json_decode(Configuration::getConfiguration(), true);
         if($response['status_code'] != 200)
@@ -219,7 +220,7 @@ class Base
         $client = new Client();
         try
         {
-            $response = $client->request('PATCH', $store_url . '/wp-json/wc/v3/'.$endpoint, [
+            $response = $client->request('PUT', $store_url . '/wp-json/wc/v3/'.$endpoint, [
                 'auth' => [$consumer_key, $consumer_secret],
                 'headers' => [
                     'Content-Type' => 'application/json',

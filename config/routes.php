@@ -14,6 +14,7 @@ use Pixelabs\StoreManagement\Controllers\StatisticsController;
 use Pixelabs\StoreManagement\Controllers\TransactionController;
 use Pixelabs\StoreManagement\Controllers\AuthenticationController;
 use Pixelabs\StoreManagement\Controllers\ConfigurationController;
+use Pixelabs\StoreManagement\Controllers\CategoryController;
 
 // Define routes
 
@@ -32,7 +33,7 @@ $router->get('/product', [ProductController::class, 'index']);
 $router->get('product/{id}', [ProductController::class, 'product_by_id']);
 $router->delete('/product/{id}', [ProductController::class, 'delete']);
 $router->post('/product/add', [ProductController::class, 'add']);
-$router->patch('/product/{id}', [ProductController::class, 'update']);
+$router->put('/product/{id}', [ProductController::class, 'update']);
 
 
 //Coupons
@@ -40,7 +41,7 @@ $router->get('/coupons', [CouponsController::class, 'index']);
 $router->post('/coupons/add', [CouponsController::class, 'add']);
 $router->get('/coupons/{id}', [CouponsController::class, 'get']);
 $router->delete('/coupons/{id}', [CouponsController::class, 'delete']);
-$router->patch('/coupons/{id}', [CouponsController::class, 'update']);
+$router->put('/coupons/{id}', [CouponsController::class, 'update']);
 
 
 //Customers
@@ -49,11 +50,12 @@ $router->get('/customers', [CustomerController::class, 'index']);
 
 //Goals
 $router->get('/goals', [GoalsController::class, 'index']);
+$router->post('/goals/add', [GoalsController::class, 'add']);
 
 
 //Inventory
 $router->get('/inventory', [InventoryController::class, 'index']);
-$router->patch('/inventory/update', [InventoryController::class, 'update']);
+$router->put('/inventory/update', [InventoryController::class, 'update']);
 
 
 
@@ -62,7 +64,17 @@ $router->get('/statistics', [StatisticsController::class, 'index']);
 
 //Transactions
 $router->get('/transactions', [TransactionController::class, 'index']);
+$router->get('/transactions/{$id}', [TransactionController::class, 'get_by_id']);
+$router->put('/transactions/update_status/{$id}', [TransactionController::class, 'update_status']);
 
 //User Configurations
 $router->post('/configurations/add', [ConfigurationController::class, 'add']);
+
+
+//Categories
+$router->get('/categories', [CategoryController::class, 'index']);
+$router->get('/categories/{id}', [CategoryController::class, 'get']);
+$router->delete('/categories/{id}', [CategoryController::class, 'delete']);
+$router->post('/categories/add', [CategoryController::class, 'add']);
+$router->put('/categories/{id}', [CategoryController::class, 'update']);
 
