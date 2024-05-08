@@ -77,14 +77,24 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="example-select fs-3 fw-bold" class="form-label fw-bold">Parent category
                                     </label>
-                                    <div class="h-70" style="background-color:#EAEAEA">
-                              <select data-placeholder="Begin typing a name to filter..." multiple
-                                    class="chosen-select col-12 w-100 py-5 bg-white" id="sms_mu_input_bg_select"
-                                    name="test">
-                                    <option>Image</option>
-                                    <option>Color</option>
-                                </select>
-                              </div>
+                                    <div
+                                    style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
+                                    <div class="col-md-12 rounded-4 bg-transparent h-100 ">
+                                        <select id="choices-multiple-remove-button" multiple
+                                            style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
+                                            <option value="NOSQL">Ctg</option>
+                                            <option value="NodeJS">demo</option>
+                                        </select>
+                                        <span
+                                            style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); pointer-events: none;">
+                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M6.00006 7.16667L10.0001 3.16667L8.83339 2L6.00006 4.83333L3.16673 2L2.00006 3.16667L6.00006 7.16667Z"
+                                                    fill="#111" />
+                                            </svg>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                             <!-- Adding terms to the feature -->

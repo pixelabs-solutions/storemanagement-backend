@@ -73,14 +73,24 @@
                             <div class="col-md-6 mb-3">
                                 <label for="example-select fs-3 fw-bold" class="form-label fw-bold">Category
                                 </label>
-                                <div class="h-70 rounded-3 border-0" style="background-color:#EAEAEA">
-                              <select data-placeholder=" " multiple
-                                    class="chosen-select rounded-5 col-12 w-100 py-5 bg-white" id="sms_mu_input_bg_select"
-                                    name="test">
-                                    <option>Image</option>
-                                    <option>Color</option>
-                                </select>
-                              </div>
+                                <div
+                                    style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
+                                    <div class="col-md-12 rounded-4 bg-transparent h-100 ">
+                                        <select id="choices-multiple-remove-button" multiple
+                                            style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
+                                            <option value="NOSQL">Ctg</option>
+                                            <option value="NodeJS">demo</option>
+                                        </select>
+                                        <span
+                                            style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); pointer-events: none;">
+                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M6.00006 7.16667L10.0001 3.16667L8.83339 2L6.00006 4.83333L3.16673 2L2.00006 3.16667L6.00006 7.16667Z"
+                                                    fill="#111" />
+                                            </svg>
+                                        </span>
+                                    </div>
                             </div>
                         </div>
                         <!-- Upload a product image  -->
@@ -131,19 +141,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12 mt-4 ">
-                            <label for="example-select  fw-bold" class="form-label fw-bold">Select an attribute
-                                for product variations</label>
-                                <div class="h-70 col-12" style="background-color:#EAEAEA">
-                              <select data-placeholder="Begin typing a name to filter..." multiple
-                                    class="chosen-select col-12 w-100 py-5 bg-white" id="sms_mu_input_bg_select"
-                                    name="test">
-                                    <option>Image</option>
-                                    <option>Color</option>
-                                </select>
-                              </div>
-                        </div>
-
+                                             </div>
 
                         <!-- Added terms for variations -->
                         <div class="rounded-4">
@@ -199,13 +197,13 @@
         </div>
         <div class="col-md-6">
             <label for="example-text-input" class="form-label fs-3 fw-bold">Term price</label>
-            <input type="text" class="form-control rounded-3 p-3 fw-bold" id="example-text-input"
+            <input type="number" class="form-control rounded-3 p-3 fw-bold" id="example-text-input"
                 style="background-color: #EAEAEA" placeholder="250">
         </div>
 
         <div class="col-md-12 mt-3 ">
             <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Term inventory</label>
-            <input type="text" class="form-control rounded-3 p-3 fw-bold" id="example-text-input"
+            <input type="number" class="form-control rounded-3 p-3 fw-bold" id="example-text-input"
                 style="background-color: #EAEAEA" placeholder="4">
         </div>
     </div>

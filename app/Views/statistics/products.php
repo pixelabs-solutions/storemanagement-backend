@@ -100,8 +100,8 @@
                     </div>
                     <div id="chart-combination-2"></div>
                     <!-- Colors Button Start-->
-                    <div class="row g-2 align-items-center">
-                        <div class="col-auto ms-auto btn-list mt-5 mb-5">
+                    <div class="row g-2 align-items-center ">
+                        <div class="col-auto ms-auto btn-list mt-5 mb-5 sms_mu_for_rtl_row_cards">
                             <div class="text-light p-1" style="background-color:#627e0c; border-radius:5px;"
                                 data-i18n="statististics.chart_below_btn.firts_btn.text"> New
                                 Customer</div>

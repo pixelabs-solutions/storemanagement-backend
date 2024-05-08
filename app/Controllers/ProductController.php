@@ -15,10 +15,10 @@ class ProductController
     public function index()
     {
         // $products = Base::get_all($this->table_name);
-        // include_once __DIR__ . '/../Views/product/index.php';
+        include_once __DIR__ . '/../Views/product/index.php';
 
-        $products = Base::wc_get($this->table_name);
-        print_r($products);
+        // $products = Base::wc_get($this->table_name);
+        // print_r($products);
     }
 
 

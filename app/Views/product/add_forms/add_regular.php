@@ -116,13 +116,14 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Normal
                                         price</label>
-                                    <input type="text" class="form-control rounded-3 p-3 fw-bold"
-                                        id="example-text-input" style="background-color: #EAEAEA" placeholder="">
+                                    <input type="number" class="form-control rounded-3 p-3 fw-bold"
+                                        id="example-text-input" 
+                                         style="background-color: #EAEAEA" placeholder="">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Sale price
                                         (optional)</label>
-                                    <input type="text" class="form-control rounded-3 p-3 fw-bold"
+                                    <input type="number" class="form-control rounded-3 p-3 fw-bold"
                                         id="example-text-input" style="background-color: #EAEAEA" placeholder="">
                                 </div>
                             </div>
@@ -141,7 +142,7 @@
                             <div class="col-md-12 mt-3 ">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Units in
                                     Stock</label>
-                                <input type="text" class="form-control rounded-3 p-3 fw-bold" id="example-text-input"
+                                <input type="number" class="form-control rounded-3 p-3 fw-bold" id="example-text-input"
                                     style="background-color: #EAEAEA" placeholder="150">
                             </div>
                             <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">

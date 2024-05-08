@@ -148,7 +148,6 @@ const translations = {
         "expiry_date_tr_in_td": "03/24/2022"
         }
         },
-        
         "customer_page":{
         "customer_search":{
         "search":"Customer search"

@@ -48,44 +48,54 @@
       white-space: nowrap;
     }
   }
+
   .chosen-container-multi {
-        width: 100% !important;
-        /* padding: 3%; */
-        height: 20% !important;
-        /* background-color: #fff; */
-    }
-tr{
-  padding: 5px 0;
-}
-    .chosen-choices {
-        background-color: none !important;
-        background-image: none !important;
-        background-image: none !important;
-        padding: 14px 15px !important;
-    }
+    width: 100% !important;
+    /* padding: 3%; */
+    height: 20% !important;
+    /* background-color: #fff; */
+  }
 
-    .chosen-container.chosen-with-drop .chosen-drop {
-        margin-top: 10px !important;
-        border: none !important;
-    }
+  tr {
+    padding: 5px 0;
+  }
 
-    .chosen-container.chosen-with-drop .chosen-drop ul li {
-        padding: 10px !important;
-    }
+  .chosen-choices {
+    background-color: none !important;
+    background-image: none !important;
+    background-image: none !important;
+    padding: 14px 15px !important;
+  }
 
-    .chosen-container-multi ul {
-        height: 100% !important;
-        border-radius: 5px;
-    }
-    /* .chosen-container-multi .chosen-choices */
-    .chosen-container-multi .chosen-choices{
-        background-color: transparent !important;
-    }
-    tbody, td, tfoot, th, thead, tr {
-    border-color: inherit !important; 
-     border-style: solid !important; 
-  border-width: 0 !important;
-}
+  .chosen-container.chosen-with-drop .chosen-drop {
+    margin-top: 10px !important;
+    border: none !important;
+  }
+
+  .chosen-container.chosen-with-drop .chosen-drop ul li {
+    padding: 10px !important;
+  }
+
+  .chosen-container-multi ul {
+    height: 100% !important;
+    border-radius: 5px;
+  }
+
+  /* .chosen-container-multi .chosen-choices */
+  .chosen-container-multi .chosen-choices {
+    background-color: transparent !important;
+  }
+
+  tbody,
+  td,
+  tfoot,
+  th,
+  thead,
+  tr {
+    border-color: inherit !important;
+    border-style: solid !important;
+    border-width: 0 !important;
+  }
 </style>
 
 <div class="container-lg">
@@ -100,35 +110,41 @@ tr{
             <div class="col-md-8 rounded-4 sms_order_popup_a">
               <div class="row">
                 <div class="col-md-7 rounded-4 ">
-                  <h1 class="fs-3 fw-bold"  data-i18n="popoups.transction_pop_popuop.order_detail.client_info">Client Information</h1>
+                  <h1 class="fs-3 fw-bold" data-i18n="popoups.transction_pop_popuop.order_detail.client_info">Client
+                    Information</h1>
                   <div class="">
-                    <span class="d-block mb-3 fw-bold "  data-i18n="popoups.transction_pop_popuop.order_detail.Cl_name">Client's name: <span class="fw-normal ">Eliyahu
+                    <span class="d-block mb-3 fw-bold "
+                      data-i18n="popoups.transction_pop_popuop.order_detail.Cl_name">Client's name: <span
+                        class="fw-normal ">Eliyahu
                         Malka</span></span>
-                    <span class="d-block mb-3 fw-bold "  data-i18n="popoups.transction_pop_popuop.order_detail.Pone">Phone number: <span
-                        class="fs-4 fw-normal "  >054-6268012</span></span>
-                    <span class="d-block mb-3 fw-bold " data-i18n="popoups.transction_pop_popuop.order_detail.mail">Email address: <span
+                    <span class="d-block mb-3 fw-bold "
+                      data-i18n="popoups.transction_pop_popuop.order_detail.Pone">Phone number: <span
+                        class="fs-4 fw-normal ">054-6268012</span></span>
+                    <span class="d-block mb-3 fw-bold "
+                      data-i18n="popoups.transction_pop_popuop.order_detail.mail">Email address: <span
                         class="fw-normal ">elikako.m@gmail.com</span></span>
                   </div>
                 </div>
                 <div class="col-md-5 col-sm-12 mt-md-4">
                   <div class="bg-white py-3 px-4 rounded-4 sms_order_popup_a" style="height: 90%;">
-                    <h1 class="fs-3 fw-bold" data-i18n="popoups.transction_pop_popuop.order_detail.card_adress.adress">Shipping Address</h1>
+                    <h1 class="fs-3 fw-bold" data-i18n="popoups.transction_pop_popuop.order_detail.card_adress.adress">
+                      Shipping Address</h1>
                     <div>
-                      <span class="d-block fw-bold"  data-i18n="popoups.transction_pop_popuop.order_detail.card_adress.adress_detail">Kibbutz Galuyot 12, apartment 8, floor 10, Bnei Brak,</span>
+                      <span class="d-block fw-bold"
+                        data-i18n="popoups.transction_pop_popuop.order_detail.card_adress.adress_detail">Kibbutz Galuyot
+                        12, apartment 8, floor 10, Bnei Brak,</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-4 justify-content-center ">
-              <label for="statusSelect" class="form-label fs-3 fw-bold" data-i18n="popoups.transction_pop_popuop.order_detail.order_status">Change order status</label>
-              <div class="h-70" style="background-color:#EAEAEA">
-                <select data-placeholder="Begin typing a name to filter..." multiple
-                  class="chosen-select col-12 w-100 py-5 bg-white" id="sms_mu_input_bg_select" name="test">
-                  <option>Image</option>
-                  <option>Color</option>
-                </select>
-              </div>
+            <div class="col-md-4 justify-content-center mt-3 ">
+              <label for="statusSelect" class="form-label fs-3 fw-bold"
+                data-i18n="popoups.transction_pop_popuop.order_detail.order_status">Change order status</label>
+              <select class="form-select form-select-lg h-80" style="background-color:#f5f5f5;">
+                <option value="HTML">Standard</option>
+                <option value="Jquery">Order</option>
+              </select>
             </div>
           </div>
           <!-- end header -->
@@ -139,17 +155,22 @@ tr{
 
               <div class=" col-12">
                 <div class="d-flex justify-content-between">
-                  <h4 class="mb-3" data-i18n="popoups.transction_pop_popuop.order_detail.Order_detail">Order Details</h4>
+                  <h4 class="mb-3" data-i18n="popoups.transction_pop_popuop.order_detail.Order_detail">Order Details
+                  </h4>
                   <h4 class="mb-3">Order date: 07/24/2024</h4>
                 </div>
                 <div class="table-responsive">
                   <table class="table table-vcenter card-table">
                     <tbody class="d-flex flex-column ts-text">
                       <tr class="t-head rounded-4" style="background-color: rgba(73, 135, 216, 0.44);">
-                        <th class="sms_order_popups_a"  data-i18n="popoups.transction_pop_popuop.order_detail.th.item_name">Item name</th>
-                        <th class="sms_order_popups_a" data-i18n="popoups.transction_pop_popuop.order_detail.th.cst" >Cost</th>
-                        <th class="sms_order_popups_a" data-i18n="popoups.transction_pop_popuop.order_detail.th.amt" > >Amount</th>
-                        <th class="sms_order_popups_a" data-i18n="popoups.transction_pop_popuop.order_detail.th.total" > >Total</th>
+                        <th class="sms_order_popups_a"
+                          data-i18n="popoups.transction_pop_popuop.order_detail.th.item_name">Item name</th>
+                        <th class="sms_order_popups_a" data-i18n="popoups.transction_pop_popuop.order_detail.th.cst">
+                          Cost</th>
+                        <th class="sms_order_popups_a" data-i18n="popoups.transction_pop_popuop.order_detail.th.amt">
+                          >Amount</th>
+                        <th class="sms_order_popups_a" data-i18n="popoups.transction_pop_popuop.order_detail.th.total">
+                          >Total</th>
                       </tr>
                       <!-- More rows can be dynamically added here -->
                       <tr class="mt-2 rounded-4" style="background-color: #EAEAEA">
@@ -185,11 +206,19 @@ tr{
             <div class="col-md-4 rounded-4 bg-white mt-6 sms_order_popup_a">
               <div class="row">
                 <div class="col-md-12">
-                  <h1 class="fs-2 fw-bold text-dark text-start"   data-i18n="popoups.transction_pop_popuop.order_detail.card_order.total_cost" >The total cost of the order</h1>
+                  <h1 class="fs-2 fw-bold text-dark text-start"
+                    data-i18n="popoups.transction_pop_popuop.order_detail.card_order.total_cost">The total cost of the
+                    order</h1>
                   <div>
-                    <span class="d-block mb-3 fw-semibold text-dark" data-i18n="popoups.transction_pop_popuop.order_detail.card_order.total_product">Products: NIS 10,450 </span>
-                    <span class="d-block mb-3 fw-semibold text-dark" data-i18n="popoups.transction_pop_popuop.order_detail.card_order.delivery">Delivery up to 5 business days: NIS 39.9 </span>
-                    <span class="d-block mb-3 fs-2 fw-bold text-dark" data-i18n="popoups.transction_pop_popuop.order_detail.card_order.total">Total: NIS 10,499.9 </span>
+                    <span class="d-block mb-3 fw-semibold text-dark"
+                      data-i18n="popoups.transction_pop_popuop.order_detail.card_order.total_product">Products: NIS
+                      10,450 </span>
+                    <span class="d-block mb-3 fw-semibold text-dark"
+                      data-i18n="popoups.transction_pop_popuop.order_detail.card_order.delivery">Delivery up to 5
+                      business days: NIS 39.9 </span>
+                    <span class="d-block mb-3 fs-2 fw-bold text-dark"
+                      data-i18n="popoups.transction_pop_popuop.order_detail.card_order.total">Total: NIS 10,499.9
+                    </span>
                   </div>
                 </div>
               </div>
@@ -201,7 +230,8 @@ tr{
 
           <div class="mt-4 ">
             <button type="submit" style="background-color: rgba(73, 135, 216, 0.44); width: 100%; max-width: 200px;"
-              class="btn rounded-4 py-3" data-i18n="popoups.transction_pop_popuop.order_detail.last_btn">Save changes</button>
+              class="btn rounded-4 py-3" data-i18n="popoups.transction_pop_popuop.order_detail.last_btn">Save
+              changes</button>
           </div>
 
         </div>

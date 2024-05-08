@@ -10,6 +10,7 @@
     <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
     <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
     <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" /> -->
+
 <style>
     @import url('https://rsms.me/inter/inter.css');
 
@@ -67,32 +68,49 @@
     <div class="container-xl">
         <div class="row justify-content-center">
             <div class="col-12 col-md-12">
-                <div class="">
-
+                <div>
                     <form action="" method="post" class="card-body">
                         <!-- header -->
                         <div class="row gx-3">
                             <div class="col-md-6 mb-3">
-                                <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Product
+                                <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold"
+                                    data-i18n="popoups.future_managment.edit_variation_in_product_managment.product_name_input">Product
                                     Name</label>
                                 <input type="text" class="form-control rounded-3 p-3 fw-bold" id="example-text-input"
                                     style="background-color: #EAEAEA" placeholder="">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="example-select fs-3 fw-bold" class="form-label fw-bold">Category
-                                </label>
-                                <select class="form-select rounded-3 p-3" id="example-select"
-                                    style="background-color: #EAEAEA">
-                                    <option value="1">general</option>
-                                    <option value="2">Color</option>
-                                </select>
+                                <label for="example-select" class="form-label fw-bold"
+                                    data-i18n="popoups.future_managment.edit_variation_in_product_managment.catageory_managment">Category</label>
+                                <div
+                                    style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
+                                    <div class="col-md-12 rounded-4 bg-transparent h-100 ">
+                                        <select id="choices-multiple-remove-button" multiple
+                                            style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
+                                            <option value="NOSQL">Ctg</option>
+                                            <option value="NodeJS">demo</option>
+                                        </select>
+                                        <span
+                                            style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); pointer-events: none;">
+                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M6.00006 7.16667L10.0001 3.16667L8.83339 2L6.00006 4.83333L3.16673 2L2.00006 3.16667L6.00006 7.16667Z"
+                                                    fill="#111" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                         <!-- Upload a product image  -->
 
                         <div class="row gx-3">
                             <div class="col-md-6 mb-4">
-                                <label class="form-label">Upload a product image </label>
+                                <label class="form-label"
+                                    data-i18n="popoups.future_managment.edit_variation_in_product_managment.image_upload">Upload
+                                    a product image </label>
                                 <div class="sms_a_add_product_variations">
                                     <input type="file" id="sms_a_edit_product_variation_single_images" accept="image/*"
                                         onchange="sms_a_edit_product_variation_single()">
@@ -104,12 +122,17 @@
                                                 d="M8.88889 0.555542C6.92778 0.555542 5.33333 2.14999 5.33333 4.1111V16.5555C5.33333 18.5167 6.92778 20.1111 8.88889 20.1111H28.4444C30.4056 20.1111 32 18.5167 32 16.5555V4.1111C32 2.14999 30.4056 0.555542 28.4444 0.555542H8.88889ZM22 6.48332L27.3333 14.4833C27.6056 14.8944 27.6333 15.4167 27.4 15.85C27.1667 16.2833 26.7167 16.5555 26.2222 16.5555H18.2222H15.5556H11.1111C10.6 16.5555 10.1333 16.2611 9.91111 15.8C9.68889 15.3389 9.75 14.7889 10.0722 14.3889L13.6278 9.94443C13.8833 9.62776 14.2611 9.44443 14.6667 9.44443C15.0722 9.44443 15.4556 9.62776 15.7056 9.94443L16.6667 11.1444L19.7778 6.47776C20.0278 6.1111 20.4444 5.88888 20.8889 5.88888C21.3333 5.88888 21.75 6.1111 22 6.48332ZM10.6667 5.88888C10.6667 5.41738 10.854 4.96519 11.1874 4.6318C11.5208 4.2984 11.9729 4.1111 12.4444 4.1111C12.9159 4.1111 13.3681 4.2984 13.7015 4.6318C14.0349 4.96519 14.2222 5.41738 14.2222 5.88888C14.2222 6.36037 14.0349 6.81256 13.7015 7.14595C13.3681 7.47935 12.9159 7.66665 12.4444 7.66665C11.9729 7.66665 11.5208 7.47935 11.1874 7.14595C10.854 6.81256 10.6667 6.36037 10.6667 5.88888ZM2.66667 5.44443C2.66667 4.70554 2.07222 4.1111 1.33333 4.1111C0.594444 4.1111 0 4.70554 0 5.44443V17.8889C0 22.0611 3.38333 25.4444 7.55556 25.4444H25.3333C26.0722 25.4444 26.6667 24.85 26.6667 24.1111C26.6667 23.3722 26.0722 22.7778 25.3333 22.7778H7.55556C4.85556 22.7778 2.66667 20.5889 2.66667 17.8889V5.44443Z"
                                                 fill="black" />
                                         </svg>
-                                        Choose a picture</label>
+                                        <p class="m-0 text-sm p-0"
+                                            data-i18n="popoups.future_managment.edit_variation_in_product_managment.image_upload_text">
+                                            Chosse a picture </p>
+                                    </label>
                                 </div>
                             </div>
                             <!-- Upload a photo gallery -->
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Upload a photo gallery</label>
+                                <label class="form-label"
+                                    data-i18n="popoups.future_managment.edit_variation_in_product_managment.gallery_upload">Upload
+                                    a photo gallery</label>
                                 <div class="sms_a_add_product_variations">
                                     <input type="file" id="sms_a_edit_product_variation_multiple_image" accept="image/*"
                                         onchange="sms_a_edit_product_variation_multiple_images()" multiple>
@@ -121,11 +144,13 @@
                                                 d="M8.88889 0.555542C6.92778 0.555542 5.33333 2.14999 5.33333 4.1111V16.5555C5.33333 18.5167 6.92778 20.1111 8.88889 20.1111H28.4444C30.4056 20.1111 32 18.5167 32 16.5555V4.1111C32 2.14999 30.4056 0.555542 28.4444 0.555542H8.88889ZM22 6.48332L27.3333 14.4833C27.6056 14.8944 27.6333 15.4167 27.4 15.85C27.1667 16.2833 26.7167 16.5555 26.2222 16.5555H18.2222H15.5556H11.1111C10.6 16.5555 10.1333 16.2611 9.91111 15.8C9.68889 15.3389 9.75 14.7889 10.0722 14.3889L13.6278 9.94443C13.8833 9.62776 14.2611 9.44443 14.6667 9.44443C15.0722 9.44443 15.4556 9.62776 15.7056 9.94443L16.6667 11.1444L19.7778 6.47776C20.0278 6.1111 20.4444 5.88888 20.8889 5.88888C21.3333 5.88888 21.75 6.1111 22 6.48332ZM10.6667 5.88888C10.6667 5.41738 10.854 4.96519 11.1874 4.6318C11.5208 4.2984 11.9729 4.1111 12.4444 4.1111C12.9159 4.1111 13.3681 4.2984 13.7015 4.6318C14.0349 4.96519 14.2222 5.41738 14.2222 5.88888C14.2222 6.36037 14.0349 6.81256 13.7015 7.14595C13.3681 7.47935 12.9159 7.66665 12.4444 7.66665C11.9729 7.66665 11.5208 7.47935 11.1874 7.14595C10.854 6.81256 10.6667 6.36037 10.6667 5.88888ZM2.66667 5.44443C2.66667 4.70554 2.07222 4.1111 1.33333 4.1111C0.594444 4.1111 0 4.70554 0 5.44443V17.8889C0 22.0611 3.38333 25.4444 7.55556 25.4444H25.3333C26.0722 25.4444 26.6667 24.85 26.6667 24.1111C26.6667 23.3722 26.0722 22.7778 25.3333 22.7778H7.55556C4.85556 22.7778 2.66667 20.5889 2.66667 17.8889V5.44443Z"
                                                 fill="black" />
                                         </svg>
-                                        Select images</label>
+                                        <p class="m-0 text-sm p-0"
+                                            data-i18n="popoups.future_managment.edit_variation_in_product_managment.image_upload_text">
+                                            Chosse a picture </p>
+                                    </label>
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="col-md-12">
                             <div class=" col-12 mt-5" id="sms_a_edit_product_variation">
@@ -134,13 +159,21 @@
                                         <tbody class="d-flex flex-column ts-text">
                                             <tr class="t-head gap-2 rounded-4 py-2  "
                                                 style="background-color: rgba(73, 135, 216, 0.44);">
-                                                <th class="w-25 sms_edit_product_variations_a">Image/color
+                                                <th class="w-25 sms_edit_product_variations_a"
+                                                    data-i18n="popoups.future_managment.edit_variation_in_product_managment.th_in_variation.th_img">
+                                                    Image/color
                                                 </th>
-                                                <th class="w-25 sms_edit_product_variations_a">the name of
+                                                <th class="w-25 sms_edit_product_variations_a"
+                                                    data-i18n="popoups.future_managment.edit_variation_in_product_managment.th_in_variation.th_term">
+                                                    the name of
                                                     the term</th>
-                                                <th class="w-25 sms_edit_product_variations_a">Horace Price
+                                                <th class="w-25 sms_edit_product_variations_a"
+                                                    data-i18n="popoups.future_managment.edit_variation_in_product_managment.th_in_variation.th_price">
+                                                    Horace Price
                                                 </th>
-                                                <th class="w-25 sms_edit_product_variations_a">Horace
+                                                <th class="w-25 sms_edit_product_variations_a"
+                                                    data-i18n="popoups.future_managment.edit_variation_in_product_managment.th_in_variation.th_inventory">
+                                                    Horace
                                                     inventory</th>
                                                 <th class="w-25 sms_edit_product_variations_a"></th>
                                             </tr>
@@ -238,12 +271,15 @@
                             <!-- To add another term click here + -->
                             <div class="text-center mt-2 p-2  ">
                                 <button type="button" class=" col-12 col-md-12 fs-3 rounded-4 py-3 border-0 fw-bold"
+                                    data-i18n="popoups.future_managment.edit_variation_in_product_managment.btn_addiotainal_term"
                                     style="background: rgba(73, 135, 216, 0.44);">Adding an additional term to +
                                     variations </button>
                             </div>
                             <!-- description -->
                             <div class="mt-4">
-                                <label for="example-text-input  fw-bold mt-2" class="form-label fw-bold">A brief
+                                <label for="example-text-input  fw-bold mt-2" class="form-label fw-bold"
+                                    data-i18n="popoups.future_managment.edit_variation_in_product_managment.text_area_text">A
+                                    brief
                                     description of the product</label>
                                 <div class="form-floating">
                                     <textarea class="form-control" placeholder="Leave a comment here"
@@ -256,11 +292,14 @@
                             <!-- submit button -->
                             <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
                                 <div class="text-center mt-2 col-sm-6 col-md-6">
-                                    <button type="submit" class="btn btn-primary col-12 rounded-4 py-3">To update
+                                    <button type="submit" class="btn btn-primary col-12 rounded-4 py-3"
+                                        data-i18n="popoups.future_managment.edit_variation_in_product_managment.update_product_btn">To
+                                        update
                                         the product →</button>
                                 </div>
                                 <div class="text-center mt-2 col-sm-6 col-md-6">
-                                    <button type="button" class="btn btn-danger col-12 rounded-4 py-3"
+                                    <button type="button" class="btn btn-danger col-12 rounded-4 py-3 "
+                                        data-i18n="popoups.future_managment.edit_variation_in_product_managment.delete_product_btn"
                                         onclick="openModal('sms_edit_product_variation_w_delete_complete_modal')">Deletion
                                         of
                                         the product</button>
@@ -268,13 +307,13 @@
                             </div>
 
                         </div>
-                </div>
 
+                    </form>
+                </div>
+                <!-- </div> -->
             </div>
-            </form>
         </div>
     </div>
-</div>
 </div>
 
 

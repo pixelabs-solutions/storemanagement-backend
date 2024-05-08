@@ -21,8 +21,9 @@
    <link href="assets/dist/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
    <link href="assets/dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
    <link href="assets/dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
-   <link href="assets/dist/css/demo.min.css?1684106062" rel="stylesheet" />
-
+   <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
+   <!-- for select -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
    <!-- old css links  -->
 
    <!-- <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet" />
@@ -38,6 +39,21 @@
 
    <style>
       @import url('https://rsms.me/inter/inter.css');
+
+      .choices__input {
+         display: none !important;
+      }
+
+      .choices {
+         height: 100%;
+      }
+
+      .choices__inner {
+         padding: 11px 30px;
+         background-color: transparent !important;
+         border-radius: 12px;
+         height: 100%;
+      }
 
       :root {
          --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
@@ -113,6 +129,148 @@
          border-left: 4px solid transparent !important;
          color: white !important;
          background-color: #4987D8;
+      }
+
+      .rtl {
+         direction: rtl;
+      }
+
+      .rtl .avatar {
+         margin-left: 10px;
+      }
+
+
+      .rtl aside {
+         right: 0 !important;
+      }
+
+
+      .rtl .navbar-vertical.navbar-expand-lg .navbar-collapse .navbar-nav .nav-link {
+         gap: 10px;
+      }
+
+
+
+     
+
+      /* css for rtl */
+      .rtl .sms_mu_for_rtl {
+         gap: 46% !important;
+      }
+
+      .rtl .sms_mu_for_rtl_row_cards {
+         flex-direction: row-reverse !important;
+         text-align: center !important;
+         align-items: center !important;
+      }
+
+      .rtl td {
+         border-radius: 0px !important;
+      }
+
+      .rtl .sms_mu_margin {
+         gap: 200px !important;
+      }
+
+      @media screen and (max-width:990px) {
+         .rtl .sms_mu_margin {
+            gap: 0px !important;
+         }
+
+      }
+
+      .rtl td:first-child {
+         /* border-left-style: solid; */
+         border-top-right-radius: 20px !important;
+         border-bottom-right-radius: 20px !important;
+      }
+
+      .rtl td:last-child {
+         border-bottom-left-radius: 20px !important;
+         border-top-left-radius: 20px !important;
+      }
+
+      .rtl th:first-child {
+         /* border-left-style: solid; */
+         border-top-right-radius: 20px !important;
+         border-bottom-right-radius: 20px !important;
+         border-bottom-left-radius: 0px !important;
+         border-top-left-radius: 0px !important;
+      }
+
+      .rtl th:last-child {
+         /* border-right-style: solid; */
+         border-bottom-left-radius: 20px !important;
+         border-top-left-radius: 20px !important;
+         border-top-right-radius: 0px !important;
+         border-bottom-right-radius: 0px !important;
+      }
+
+      .rtl .sms_mu_for_rtl {
+         gap: 46% !important;
+      }
+
+      .rtl .sms_mu_for_rtl_row_cards {
+         flex-direction: row-reverse !important;
+         text-align: center !important;
+         align-items: center !important;
+      }
+
+      .rtl .sms_mu_for_rtl_demo {
+         flex-direction: row-reverse;
+      }
+
+      .rtl td {
+         border-radius: 0px !important;
+      }
+
+      .rtl .sms_mu_margin {
+         gap: 200px !important;
+      }
+
+      @media screen and (max-width:990px) {
+         .rtl .sms_mu_margin {
+            gap: 0px !important;
+         }
+
+      }
+
+      .sms_ma_index_to_order_button {
+         background-color: #4987D8 !important;
+         color: white;
+         font-weight: 900;
+         border-radius: 20px;
+         padding: 8px !important;
+         height: 80%;
+      }
+
+      .sms_w_date_active {
+         background-color: #A8C3E7;
+      }
+      .rtl .page-wrapper {
+         margin-left: 0rem !important;
+         margin-right: 15rem !important;
+      }
+
+      .page-wrapper {
+         margin-left: 15rem !important;
+         margin-right: 0 !important;
+      }
+    .rtl header{
+      margin-left: 0 !important;
+    }
+      @media screen and (max-width:990px) {
+
+         .rtl .navbar-expand-lg.navbar-vertical~.navbar,
+         .navbar-expand-lg.navbar-vertical~.page-wrapper {
+            margin-left: 0rem !important;
+            margin-right: 0rem !important;
+         }
+
+         .navbar-expand-lg.navbar-vertical~.navbar,
+         .navbar-expand-lg.navbar-vertical~.page-wrapper {
+            margin-left: 0 !important;
+         }
       }
    </style>
 </head>
@@ -543,12 +701,13 @@
                            </div>
                         </div>
                      </div>
-                     <button id="switchBtn" class="border-0 rounded-circle"> 
+                     <button id="switchBtn" class="border-0 rounded-circle">
 
-                     <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle">
+                        <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px"
+                           width="24px" class="rounded-circle">
 
                      </button>
-               
+
                   </div>
                   <div class="nav-item dropdown">
                      <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle=""
@@ -595,102 +754,122 @@
          </div>
       </header>
       <div class="page-wrapper px-4" id="content">
+
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+         <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
          <script>
-            window.addEventListener('load', function () {
-               // Get the current URL 
-               var currentURL = window.location.href;
-               let domain_name = 'storemanagement-frontend';
+            $(".chosen-select").chosen({
+               no_results_text: "Oops, nothing found!"
+            })
+               < script >
+               window.addEventListener('load', function () {
+                  // Get the current URL 
+                  var currentURL = window.location.href;
+                  let domain_name = 'storemanagement-frontend';
 
-               // Get the pathname from the URL
-               var pathname = new URL(currentURL).pathname;
+                  // Get the pathname from the URL
+                  var pathname = new URL(currentURL).pathname;
 
-               // Remove .php extension from the pathname
-               var currentSlug = pathname.split('/').filter(Boolean).pop().replace('.php', '');
-               // If currentSlug is empty or same as the base URL, set it to a default value, like 'index'
-               if (currentSlug === "" || currentSlug === "/" || currentSlug === domain_name) {
-                  currentSlug = "index";
-               }
+                  // Remove .php extension from the pathname
+                  var currentSlug = pathname.split('/').filter(Boolean).pop().replace('.php', '');
+                  // If currentSlug is empty or same as the base URL, set it to a default value, like 'index'
+                  if (currentSlug === "" || currentSlug === "/" || currentSlug === domain_name) {
+                     currentSlug = "index";
+                  }
 
-               console.log('currentSlug:', currentSlug);
+                  console.log('currentSlug:', currentSlug);
 
-               // Check if the currentSlug exists in the navigation
-               var navItem = document.getElementById(currentSlug);
-               if (navItem) {
-                  // Remove active class from all nav items
-                  document.querySelectorAll('.nav-item').forEach(item => {
-                     item.classList.remove('sms_e_active_item');
-                  });
-                  // Add active class to current slug
-                  navItem.classList.add('sms_e_active_item');
-               }
+                  // Check if the currentSlug exists in the navigation
+                  var navItem = document.getElementById(currentSlug);
+                  if (navItem) {
+                     // Remove active class from all nav items
+                     document.querySelectorAll('.nav-item').forEach(item => {
+                        item.classList.remove('sms_e_active_item');
+                     });
+                     // Add active class to current slug
+                     navItem.classList.add('sms_e_active_item');
+                  }
 
-               // Set the name based on the currentSlug
-               var name = '';
-               switch (currentSlug) {
-                  case 'index':
-                     name = 'Dashboard';
-                     break;
+                  // Set the name based on the currentSlug
+                  var name = '';
+                  switch (currentSlug) {
+                     case 'index':
+                        name = 'Dashboard';
+                        break;
 
-                  case 'product':
-                     name = 'Product Management';
-                     // Add extra class to dropdown-menu for 'product' page
-                     document.getElementById('dropdown-menu').classList.add('show');
-                     document.getElementById('sms_w_dropdown_title').classList.add('sms_e_active_item');
+                     case 'product':
+                        name = 'Product Management';
+                        // Add extra class to dropdown-menu for 'product' page
+                        document.getElementById('dropdown-menu').classList.add('show');
+                        document.getElementById('sms_w_dropdown_title').classList.add('sms_e_active_item');
 
-                     break;
+                        break;
 
-                  case 'inventory':
-                     name = 'Inventory Setting';
-                     // Add extra class to dropdown-menu for 'inventory' page
-                     document.getElementById('dropdown-menu').classList.add('show');
-                     document.getElementById('sms_w_dropdown_title').classList.add('sms_e_active_item');
+                     case 'inventory':
+                        name = 'Inventory Setting';
+                        // Add extra class to dropdown-menu for 'inventory' page
+                        document.getElementById('dropdown-menu').classList.add('show');
+                        document.getElementById('sms_w_dropdown_title').classList.add('sms_e_active_item');
 
-                     break;
+                        break;
 
-                  case 'coupons':
-                     name = 'Coupons And Benefits';
-                     // Add extra class to dropdown-menu for 'coupons' page
-                     document.getElementById('dropdown-menu').classList.add('show');
-                     document.getElementById('sms_w_dropdown_title').classList.add('sms_e_active_item');
+                     case 'coupons':
+                        name = 'Coupons And Benefits';
+                        // Add extra class to dropdown-menu for 'coupons' page
+                        document.getElementById('dropdown-menu').classList.add('show');
+                        document.getElementById('sms_w_dropdown_title').classList.add('sms_e_active_item');
 
-                     break;
+                        break;
 
-                  case 'customers':
-                     name = 'Customer';
-                     break;
+                     case 'customers':
+                        name = 'Customer';
+                        break;
 
-                  case 'transactions':
-                     name = 'Transaction';
-                     break;
+                     case 'transactions':
+                        name = 'Transaction';
+                        break;
 
-                  case 'statistics':
-                     name = 'Statistics';
-                     break;
-
-
-                  case 'goals':
-                     name = 'Objectives';
-                     break;
+                     case 'statistics':
+                        name = 'Statistics';
+                        break;
 
 
-                  case 'optimization':
-                     name = 'Optimization';
-                     break;
+                     case 'goals':
+                        name = 'Objectives';
+                        break;
 
-                  case 'setting':
-                     name = 'Setting';
-                     break;
 
-                  case 'help':
-                     name = 'Help And Support';
-                     break;
-                  // Add more cases as needed
-                  default:
-                     name = 'Unknown'; // Default value if slug doesn't match any case
-               }
+                     case 'optimization':
+                        name = 'Optimization';
+                        break;
 
-               // Set the text of the div with id "sms_header_page_name" to the name
-               document.getElementById('sms_header_page_name').innerText = name;
-            });
+                     case 'setting':
+                        name = 'Setting';
+                        break;
+
+                     case 'help':
+                        name = 'Help And Support';
+                        break;
+                     // Add more cases as needed
+                     default:
+                        name = 'Unknown'; // Default value if slug doesn't match any case
+                  }
+
+                  // Set the text of the div with id "sms_header_page_name" to the name
+                  document.getElementById('sms_header_page_name').innerText = name;
+               });
 
          </script>
+         <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+         <script>
+            $(document).ready(function () {
+
+               var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+                  removeItemButton: true,
+                  maxItemCount: 5,
+                  searchResultLimit: 5,
+                  renderChoiceLimit: 5
+               });
+
+
+            });</script>
