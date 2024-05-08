@@ -1,7 +1,7 @@
 <?php
  require_once __DIR__ . '/../partials/header.php';
 ?>
-<style>
+<!-- <style>
   @media only screen and (max-width:1000px) {
     .sms_mu_table {
       width: 900px !important;
@@ -48,7 +48,29 @@
     background-color: #a8c3e7 !important;
     height: 50px;
   }
+  .rtl td:first-child {
+    /* border-left-style: solid; */
+    border-top-right-radius: 20px !important;
+    border-top-left-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
+  }
+   .rtl rtl td:last-child {
+    /* border-right-style: solid; */
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+  }
 
+   .rtl th:first-child {
+    /* border-left-style: solid; */
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+
+   .rtl th:last-child {
+    /* border-right-style: solid; */
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+  }
   td:first-child {
     /* border-left-style: solid; */
     border-top-left-radius: 20px;
@@ -76,8 +98,83 @@
   .table-spacing {
     border-spacing: 5px;
   }
-</style>
+</style> -->
+<style>
+    @media only screen and (max-width:1000px) {
+    .sms_mu_table {
+      width: 900px !important;
+      border: 0 !important;
+    }
+  }
 
+  .sms_customers_m,
+  .sms_mu_table {
+    background-color: #F2F2F2 !important;
+  }
+
+  /* body {
+            background-color: #f2f2f2;
+        } */
+  .sms_mu_table {
+    border-spacing: 0 10px !important;
+    width: 100%;
+    /* margin: 0 2% !important; */
+  }
+
+  .sms_mu_thead,
+  .sms_mu_tr,
+  .sms_mu_td {
+    text-align: center;
+  }
+
+  .sms_mu_tr {
+    background-color: white !important;
+    height: 70px;
+    border-radius: 20px !important;
+    overflow: hidden;
+    margin: 0 20px;
+    /* border-bottom: 10px solid #F2F2F2 !important; */
+  }
+
+  .sms_mu_spacing_div {
+    height: 10px;
+    background-color: #F2F2F2;
+    width: inherit;
+  }
+
+  .sms_mu_th {
+    background-color: #a8c3e7 !important;
+    height: 50px;
+  }
+  tbody, td, tfoot, th, thead, tr {
+    border-color: inherit;
+    border-style: none !important;
+    border-width: 0;
+}
+  td:first-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+   td:last-child {
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+
+  th:first-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+
+  th:last-child {
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+  
+
+  .table-spacing {
+    border-spacing: 5px;
+  }
+</style>
 <div class="sms_customers_m  p-0 overflow-scroll">
   <div class=" col-12 mt-5">
     <div class="row row-cards justify-content-sm-between gap-sm-3 gap-2 gap-lg-0 bg-white p-3 m-0 rounded-3">

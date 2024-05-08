@@ -154,8 +154,9 @@
         height: 100% !important;
         border-radius: 5px;
     }
+
     /* .chosen-container-multi .chosen-choices */
-    .chosen-container-multi .chosen-choices{
+    .chosen-container-multi .chosen-choices {
         background-color: transparent !important;
     }
 </style>
@@ -178,12 +179,12 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="example-select" class="form-label">Display Type (Color/Image)</label>
-                                <div class="h-70">
-                                <select data-placeholder="Begin typing a name to filter..." multiple
-                                    class="chosen-select col-12 w-100 py-5" name="test">
-                                    <option>Image</option>
-                                    <option>Color</option>
-                                </select>
+                                <div class="h-100">
+                                    <select class="form-select form-select-md h-80 bg-transparent"
+                                        style="    height: 66%;">
+                                        <option value="HTML">Color</option>
+                                        <option value="Jquery">Image</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -243,20 +244,18 @@
                                     <label class="form-check-label fs-2 ">Selection Field</label>
                                     <div class="col-auto ms-auto">
                                         <label class="form-colorinput form-colorinput-light">
-                                            <input name="color-rounded" type="checkbox" value="white"
-                                                class="form-colorinput-input" checked>
+                                            <input type="checkbox" value="white" class="form-colorinput-input"
+                                                name="gender" id="checkbox1" onclick="fun_checkbox1()">
                                             <span class="form-colorinput-color bg-white rounded-circle"></span>
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-auto">
                                     <div class="h-100 bg-white">
-                                    <select data-placeholder="Begin typing a name to filter..." multiple
-                                        class="chosen-select col-12 w-100 py-5 bg-white" id="sms_mu_input_bg_select"
-                                        name="test">
-                                        <option>Image</option>
-                                        <option>Color</option>
-                                    </select>
+                                        <select class="form-select form-select-md h-100 bg-transparent">
+                                            <option value="HTML">Add Feature</option>
+                                            <option value="Jquery">Custom Features</option>
+                                        </select>
                                     </div>
                                     <!-- <div class="color-selection">
                                         <span id="colorDisplay" class="color-display"></span>
@@ -278,8 +277,8 @@
                                     <label class="form-check-label fs-2 ">Radio buttons</label>
                                     <div class="col-auto ms-auto">
                                         <label class="form-colorinput form-colorinput-light">
-                                            <input name="color-rounded" type="checkbox" value="white"
-                                                class="form-colorinput-input" checked>
+                                            <input type="checkbox" value="white" class="form-colorinput-input"
+                                                name="gender" id="checkbox2" onclick="fun_checkbox2()">
                                             <span class="form-colorinput-color bg-white rounded-circle"></span>
                                         </label>
                                     </div>
@@ -294,7 +293,7 @@
                                         </div>
                                         <div class="col-auto">
                                             <label class="form-colorinput form-colorinput-light">
-                                                <input name="color-rounded" class="form-colorinput-input" checked="">
+                                                <input name="color-rounded" class="form-colorinput-input">
                                                 <span
                                                     class="form-colorinput-color rounded-circle text-dark  text-center">L</span>
                                             </label>
@@ -353,7 +352,8 @@
                                     <div class="col-auto ms-auto">
                                         <label class="form-colorinput form-colorinput-light">
                                             <input name="color-rounded" type="checkbox" value="white"
-                                                class="form-colorinput-input" checked>
+                                                class="form-colorinput-input" name="gender" id="checkbox3"
+                                                onclick="fun_checkbox3()">
                                             <span class="form-colorinput-color bg-white rounded-circle"></span>
                                         </label>
                                     </div>
@@ -368,7 +368,8 @@
                                         </div>
                                         <div class="col-auto">
                                             <label class="form-colorinput form-colorinput-light">
-                                                <input name="color-rounded" class="form-colorinput-input" checked="">
+                                                <input name="color-rounded" class="form-colorinput-input" name="gender"
+                                                    onclick="fun_checkbox()">
                                                 <span
                                                     class="form-colorinput-color rounded-2 text-dark  text-center">L</span>
                                             </label>
@@ -397,21 +398,24 @@
                                         </div>
                                         <div class="col-auto">
                                             <label class="form-colorinput form-colorinput-light">
-                                                <input name="color-rounded" class="form-colorinput-input" checked="">
+                                                <input name="color-rounded" class="form-colorinput-input" name="gender"
+                                                    onclick="fun_checkbox()">
                                                 <span class="form-colorinput-color  rounded-2"
                                                     style="background-color: #4987D8"></span>
                                             </label>
                                         </div>
                                         <div class="col-auto">
                                             <label class="form-colorinput">
-                                                <input name="color-rounded" value="blue" class="form-colorinput-input">
+                                                <input name="color-rounded" value="blue" class="form-colorinput-input"
+                                                    name="gender" onclick="fun_checkbox()">
                                                 <span class="form-colorinput-color  rounded-2"
                                                     style="background-color: #A30505"></span>
                                             </label>
                                         </div>
                                         <div class="col-auto">
                                             <label class="form-colorinput">
-                                                <input name="color-rounded" class="form-colorinput-input">
+                                                <input name="color-rounded" class="form-colorinput-input" name="gender"
+                                                    onclick="fun_checkbox()">
                                                 <span class="form-colorinput-color  rounded-2"
                                                     style="background-color: #DC2285"></span>
                                             </label>
@@ -427,7 +431,8 @@
                                     <div class="col-auto ms-auto">
                                         <label class="form-colorinput form-colorinput-light">
                                             <input name="color-rounded" type="checkbox" value="white"
-                                                class="form-colorinput-input" checked>
+                                                class="form-colorinput-input" name="gender" id="checkbox4"
+                                                onclick="fun_checkbox4()">
                                             <span class="form-colorinput-color bg-white rounded-circle"></span>
                                         </label>
                                     </div>
@@ -474,7 +479,8 @@
                                     <div class="col-auto ms-auto">
                                         <label class="form-colorinput form-colorinput-light">
                                             <input name="color-rounded" type="checkbox" value="white"
-                                                class="form-colorinput-input" checked>
+                                                class="form-colorinput-input" name="gender" id="checkbox5"
+                                                onclick="fun_checkbox5()">
                                             <span class="form-colorinput-color bg-white rounded-circle"></span>
                                         </label>
                                     </div>
@@ -537,8 +543,81 @@
     })
 </script> -->
 <script>
-
-
+      function fun_checkbox1(){
+       var checkbox=document.getElementById('checkbox1').checked;
+       var checkbox1=document.getElementById('checkbox2').checked;
+       var checkbox2=document.getElementById('checkbox3').checked;
+       var checkbox4=document.getElementById('checkbox4').checked;
+       var checkbox5=document.getElementById('checkbox5').checked;
+      if(checkbox.checked === true){
+        document.getElementById('checkbox1').checked=false;
+    }else{
+       document.getElementById('checkbox2').checked=false;
+       document.getElementById('checkbox5').checked=false;
+       document.getElementById('checkbox3').checked=false;
+       document.getElementById('checkbox4').checked=false;
+    }
+}
+      function fun_checkbox2(){
+       var checkbox=document.getElementById('checkbox1').checked;
+       var checkbox1=document.getElementById('checkbox2').checked;
+       var checkbox2=document.getElementById('checkbox3').checked;
+       var checkbox4=document.getElementById('checkbox4').checked;
+       var checkbox5=document.getElementById('checkbox5').checked;
+      if(checkbox.checked === true){
+        document.getElementById('checkbox1').checked=false;
+    }else{
+       document.getElementById('checkbox1').checked=false;
+       document.getElementById('checkbox5').checked=false;
+       document.getElementById('checkbox3').checked=false;
+       document.getElementById('checkbox4').checked=false;
+    }
+}
+      function fun_checkbox3(){
+       var checkbox=document.getElementById('checkbox1').checked;
+       var checkbox1=document.getElementById('checkbox2').checked;
+       var checkbox2=document.getElementById('checkbox3').checked;
+       var checkbox4=document.getElementById('checkbox4').checked;
+       var checkbox5=document.getElementById('checkbox5').checked;
+      if(checkbox.checked === true){
+        document.getElementById('checkbox1').checked=false;
+    }else{
+       document.getElementById('checkbox1').checked=false;
+       document.getElementById('checkbox5').checked=false;
+       document.getElementById('checkbox2').checked=false;
+       document.getElementById('checkbox4').checked=false;
+    }
+}
+      function fun_checkbox4(){
+       var checkbox=document.getElementById('checkbox1').checked;
+       var checkbox1=document.getElementById('checkbox2').checked;
+       var checkbox2=document.getElementById('checkbox3').checked;
+       var checkbox4=document.getElementById('checkbox4').checked;
+       var checkbox5=document.getElementById('checkbox5').checked;
+      if(checkbox.checked === true){
+        document.getElementById('checkbox1').checked=false;
+    }else{
+       document.getElementById('checkbox1').checked=false;
+       document.getElementById('checkbox5').checked=false;
+       document.getElementById('checkbox3').checked=false;
+       document.getElementById('checkbox2').checked=false;
+    }
+}
+      function fun_checkbox5(){
+       var checkbox=document.getElementById('checkbox1').checked;
+       var checkbox1=document.getElementById('checkbox2').checked;
+       var checkbox2=document.getElementById('checkbox3').checked;
+       var checkbox4=document.getElementById('checkbox4').checked;
+       var checkbox5=document.getElementById('checkbox5').checked;
+      if(checkbox.checked === true){
+        document.getElementById('checkbox1').checked=false;
+    }else{
+       document.getElementById('checkbox1').checked=false;
+       document.getElementById('checkbox2').checked=false;
+       document.getElementById('checkbox3').checked=false;
+       document.getElementById('checkbox4').checked=false;
+    }
+}
     var inputCount = 0;
 
     // Function to add input fields

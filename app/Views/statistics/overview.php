@@ -84,7 +84,7 @@ require_once __DIR__ . '/../partials/header.php';
                             </a>
                         </div>
                     </div>
-                    <div class="row mt-5 mb-5 d-flex flex-md-row flex-wrap flex-column justify-content-between tab-pane active show"
+                    <div class="row mt-5 mb-5 d-flex flex-md-row flex-wrap flex-column justify-content-between tab-pane active show sms_mu_for_rtl_row_cards"
                         id="row_1">
                         <!-- New Customer Card Start -->
                         <div class="sms_statistics_ma_kpi_card mb-2">
@@ -170,8 +170,8 @@ require_once __DIR__ . '/../partials/header.php';
                     </div>
                     <div id="chart-combination"></div>
                     <!-- Colors Button Start-->
-                    <div class="row g-2 align-items-center">
-                        <div class="col-auto ms-auto btn-list mt-5 mb-5">
+                    <div class="row g-2 align-items-center ">
+                        <div class="col-auto ms-auto btn-list mt-5 mb-5 sms_mu_for_rtl_row_cards">
                             <div class="text-light p-1" style="background-color:#627e0c; border-radius:5px;"
                                 data-i18n="statististics.chart_below_btn.firts_btn.text"> New
                                 Customer</div>
