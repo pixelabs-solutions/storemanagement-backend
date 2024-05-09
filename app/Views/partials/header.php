@@ -32,18 +32,13 @@
    <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
    <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" /> -->
 
-
-
-
-
-
    <style>
       @import url('https://rsms.me/inter/inter.css');
 
       .choices__input {
          display: none !important;
       }
-
+       scrollbar-color: rgba(var(--tblr-scrollbar-color, var(--tblr-body-color-rgb)), .16) none !important;
       .choices {
          height: 100%;
       }
@@ -151,7 +146,7 @@
 
 
 
-     
+
 
       /* css for rtl */
       .rtl .sms_mu_for_rtl {
@@ -247,6 +242,7 @@
       .sms_w_date_active {
          background-color: #A8C3E7;
       }
+
       .rtl .page-wrapper {
          margin-left: 0rem !important;
          margin-right: 15rem !important;
@@ -256,9 +252,11 @@
          margin-left: 15rem !important;
          margin-right: 0 !important;
       }
-    .rtl header{
-      margin-left: 0 !important;
-    }
+
+      .rtl header {
+         margin-left: 0 !important;
+      }
+
       @media screen and (max-width:990px) {
 
          .rtl .navbar-expand-lg.navbar-vertical~.navbar,
@@ -275,7 +273,7 @@
    </style>
 </head>
 
-<body class="">
+<body id="myDiv" class="abc">
    <script src="assets/dist/js/demo-theme.min.js?1684106062"></script>
    <div class="page">
       <!-- Sidebar -->
@@ -704,7 +702,7 @@
                      <button id="switchBtn" class="border-0 rounded-circle">
 
                         <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px"
-                           width="24px" class="rounded-circle">
+                           width="24px" class="rounded-circle" onclick="funChangeDir()">
 
                      </button>
 
@@ -754,7 +752,6 @@
          </div>
       </header>
       <div class="page-wrapper px-4" id="content">
-
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
          <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
          <script>
@@ -822,6 +819,7 @@
 
          </script>
          <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+
          <script>
             $(document).ready(function () {
 
@@ -833,4 +831,23 @@
                });
 
 
-            });</script>
+            });
+
+         </script>
+
+
+         <script>
+            var myElement = document.getElementById("myDiv");
+            var index = 1;
+            function funChangeDir() {
+               index++;
+               if (index % 2 === 0) {
+                  myElement.classList.add("rtl");
+                  console.log(myElement);
+               } else {
+                  myElement.classList.remove("rtl");
+                  console.log(myElement);
+               }
+           
+            }
+         </script>

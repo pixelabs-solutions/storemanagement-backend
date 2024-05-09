@@ -64,6 +64,7 @@ $router->get('/statistics', [StatisticsController::class, 'index']);
 $router->get('/statistics/products', [StatisticsController::class, 'products']);
 $router->get('/statistics/orders', [StatisticsController::class, 'orders']);
 $router->get('/statistics/revenue', [StatisticsController::class, 'revenue']);
+$router->get('/statistics/overview', [StatisticsController::class, 'overview']);
 
 //Transactions
 $router->get('/transactions', [TransactionController::class, 'index']);
