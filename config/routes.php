@@ -62,6 +62,7 @@ $router->put('/inventory/update', [InventoryController::class, 'update']);
 //Statistics
 $router->get('/statistics', [StatisticsController::class, 'index']);
 $router->get('/statistics/products', [StatisticsController::class, 'products']);
+$router->get('/statistics/orders', [StatisticsController::class, 'orders']);
 
 //Transactions
 $router->get('/transactions', [TransactionController::class, 'index']);
