@@ -34,4 +34,16 @@ class StatisticsController
         $orders_stats = Statistics::get_orders_stats($filters);
         print_r($orders_stats);
     }
+
+    public function revenue()
+    {
+        $filters = [
+            'query' => $_GET['query'] ?? null,
+            'date_from' => $_GET['date_from'] ?? null,
+            'date_to' => $_GET['date_to'] ?? null
+        ];
+
+        $revenue_stats = Statistics::get_revenue_stats($filters);
+        print_r($revenue_stats);
+    }
 }

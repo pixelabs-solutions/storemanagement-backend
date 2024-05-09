@@ -196,6 +196,52 @@ class Statistics
             return [];
         }
     }
+
+
+    public static function get_revenue_stats($filters = []) {
+        $response = json_decode(Configuration::getConfiguration(), true);
+        if ($response['status_code'] != 200) {
+            echo $response["message"];
+            return [];
+        }
+    
+        $data = $response['data'];
+        $client = new Client();
+        $dateRange = self::getDateRange($filters);
+    
+        try {
+            $orderParams = ['auth' => [$data["consumer_key"], $data["consumer_secret"]]];
+            if (!empty($dateRange)) {
+                $orderParams['query'] = $dateRange;
+            }
+    
+            $response = $client->request('GET', $data["store_url"] . '/wp-json/wc/v3/orders', $orderParams);
+            $orders = json_decode($response->getBody(), true);
+    
+            $totalOrders = count($orders);
+            $totalRevenue = 0;
+            $totalShipments = 0;
+    
+            foreach ($orders as $order) {
+                $totalRevenue += $order['total']; // Make sure this is the total payment received, including shipping
+                $totalShipments += $order['shipping_total']; // Ensure 'shipping_total' is defined in your order objects
+            }
+    
+            $orderAverage = $totalOrders > 0 ? round($totalRevenue / $totalOrders) : 0;
+            $netIncome = $totalRevenue - $totalShipments;
+    
+            return [
+                'totalRevenue' => $totalRevenue,
+                'orderAverage' => $orderAverage,
+                'totalShipments' => $totalShipments,
+                'netIncome' => $netIncome
+            ];
+        } catch (\Exception $e) {
+            echo 'Error fetching orders: ' . $e->getMessage();
+            return [];
+        }
+    }
+    
     
     
 
@@ -214,7 +260,6 @@ class Statistics
             $end = new \DateTime();
             switch ($filters['query']) {
                 case 'last_week':
-                    echo "LAST WEEK";
                     $start->modify('last monday -7 days');
                     $end->modify('last sunday');
                     break;
