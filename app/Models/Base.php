@@ -247,4 +247,70 @@ class Base
         }
 
     }
+
+    public static function get_number_of_products($store_url, $params) {
+        $client = new Client();
+        $response = $client->request('GET', $store_url . '/wp-json/wc/v3/products', $params);
+        $products = json_decode($response->getBody(), true);
+        return count($products);
+    }
+
+    public static function get_number_of_orders($store_url, $params) {
+        $client = new Client();
+        $response = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', $params);
+        $orders = json_decode($response->getBody(), true);
+        return count($orders);
+    }
+
+    public static function get_total_revenue($store_url, $params) {
+        $client = new Client();
+        $response = $client->request('GET', $store_url.'/wp-json/wc/v3/orders', $params);
+        $orders = json_decode($response->getBody(), true);
+        $totalRevenue = 0;
+        foreach ($orders as $order) {
+            $totalRevenue += $order['total'];
+        }
+        return $totalRevenue;
+    }
+    public static function get_new_customers_count($store_url, $params) {
+        $client = new Client();
+        $response = $client->request('GET', $store_url. '/wp-json/wc/v3/orders', $params);
+        $orders = json_decode($response->getBody(), true);
+        $customerOrdersCount = [];
+
+        foreach ($orders as $order) {
+            $customerId = $order['customer_id'] ?? 'guest_' . ($order['id'] ?? uniqid());
+            if (!isset($customerOrdersCount[$customerId])) {
+                $customerOrdersCount[$customerId] = 0;
+            }
+            $customerOrdersCount[$customerId]++;
+        }
+
+        $newCustomers = array_filter($customerOrdersCount, function($count) {
+            return $count === 1;
+        });
+
+        return count($newCustomers);
+    }
+
+    public static function get_returning_customers_count($store_url, $params) {
+        $client = new Client();
+        $response = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', $params);
+        $orders = json_decode($response->getBody(), true);
+        $customerOrdersCount = [];
+
+        foreach ($orders as $order) {
+            $customerId = $order['customer_id'] ?? 'guest_' . ($order['id'] ?? uniqid());
+            if (!isset($customerOrdersCount[$customerId])) {
+                $customerOrdersCount[$customerId] = 0;
+            }
+            $customerOrdersCount[$customerId]++;
+        }
+
+        $returningCustomers = array_filter($customerOrdersCount, function($count) {
+            return $count > 1;
+        });
+
+        return count($returningCustomers);
+    }
 }
