@@ -67,7 +67,8 @@ class Statistics
     //     }
     // }
 
-    public static function get_products_stats($filter = null) {
+    public static function get_products_stats($filters = []) {
+        //var_dump($filters);
         $response = json_decode(Configuration::getConfiguration(), true);
         if($response['status_code'] != 200) {
             echo $response["message"];
@@ -79,8 +80,8 @@ class Statistics
         $consumer_secret = $data["consumer_secret"];
         $store_url = $data["store_url"];
         $client = new Client();
-        $dateRange = $filter ? self::getDateRange($filter) : [];
-
+        $dateRange = $filters ? self::getDateRange($filters) : [];
+        var_dump($dateRange);
         try {
             // Fetch Products
             $productParams = [
@@ -145,33 +146,43 @@ class Statistics
     }
     
 
-    public static function getDateRange($filter) {
-        $start = new \DateTime();
-        $end = new \DateTime();
-    
-        switch ($filter) {
-            case 'last_week':
-                $start->modify('last monday -7 days');
-                $end->modify('last sunday');
-                break;
-            case 'current_month':
-                $start->modify('first day of this month');
-                $end->modify('last day of this month');
-                break;
-            case 'last_year':
-                $start->modify('first day of January last year');
-                $end->modify('last day of December last year');
-                break;
-            default:
-                $start->modify('monday this week');
-                $end->modify('sunday this week');
-                break;
+    public static function getDateRange($filters) {
+
+        if (isset($filters['date_from']) && $filters['date_from'] !== "" && 
+            isset($filters['date_to']) && $filters['date_to'] !== "") {
+            return [
+                    'after' => (new \DateTime($filters['date_from']))->format('Y-m-d') . 'T00:00:00',
+                    'before' => (new \DateTime($filters['date_to']))->format('Y-m-d') . 'T23:59:59'
+                ];
         }
+        
+        if (isset($filters['query'])) {
+            $start = new \DateTime();
+            $end = new \DateTime();
+            switch ($filters['query']) {
+                case 'last_week':
+                    echo "LAST WEEK";
+                    $start->modify('last monday -7 days');
+                    $end->modify('last sunday');
+                    break;
+                case 'current_month':
+                    $start->modify('first day of this month');
+                    $end->modify('last day of this month');
+                    break;
+                case 'last_year':
+                    $start->modify('first day of January last year');
+                    $end->modify('last day of December last year');
+                    break;
+                default:
+                    return null;  // Return null if the query does not match any predefined filters
+            }
     
-        return [
-            'after' => $start->format('Y-m-d') . 'T00:00:00', 
-            'before' => $end->format('Y-m-d') . 'T23:59:59'
-        ];
+            return [
+                'after' => $start->format('Y-m-d') . 'T00:00:00',
+                'before' => $end->format('Y-m-d') . 'T23:59:59'
+            ];
+        }
+        return null;
     }
     
     
