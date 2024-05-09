@@ -758,106 +758,67 @@
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
          <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
          <script>
-            $(".chosen-select").chosen({
-               no_results_text: "Oops, nothing found!"
-            })
-               < script >
+    $(document).ready(function() {
+        $(".chosen-select").chosen({
+            no_results_text: "Oops, nothing found!"
+        });
+    });
+
+
+   
+               
                window.addEventListener('load', function () {
-                  // Get the current URL 
-                  var currentURL = window.location.href;
-                  let domain_name = 'storemanagement-frontend';
+    const currentURL = window.location.href;
+    const domainName = 'storemanagement-frontend';
 
-                  // Get the pathname from the URL
-                  var pathname = new URL(currentURL).pathname;
+    // Extract the slug from the URL
+    const pathname = new URL(currentURL).pathname;
+    const currentSlug = pathname.split('/').filter(Boolean).pop().replace('.php', '') || 'index';
 
-                  // Remove .php extension from the pathname
-                  var currentSlug = pathname.split('/').filter(Boolean).pop().replace('.php', '');
-                  // If currentSlug is empty or same as the base URL, set it to a default value, like 'index'
-                  if (currentSlug === "" || currentSlug === "/" || currentSlug === domain_name) {
-                     currentSlug = "index";
-                  }
+    // Define page names
+    const pageNames = {
+        'index': 'Dashboard',
+        'product': 'Product Management',
+        'inventory': 'Inventory Setting',
+        'coupons': 'Coupons And Benefits',
+        'customers': 'Customer',
+        'transactions': 'Transaction',
+        'statistics': 'Statistics',
+        'goals': 'Objectives',
+        'optimization': 'Optimization',
+        'setting': 'Setting',
+        'help': 'Help And Support'
+    };
 
-                  console.log('currentSlug:', currentSlug);
+    // Get the name based on the current slug
+    const name = pageNames[currentSlug] || 'Unknown';
 
-                  // Check if the currentSlug exists in the navigation
-                  var navItem = document.getElementById(currentSlug);
-                  if (navItem) {
-                     // Remove active class from all nav items
-                     document.querySelectorAll('.nav-item').forEach(item => {
-                        item.classList.remove('sms_e_active_item');
-                     });
-                     // Add active class to current slug
-                     navItem.classList.add('sms_e_active_item');
-                  }
+    // Update the page name element
+    const headerPageNameElement = document.getElementById('sms_header_page_name');
+    if (headerPageNameElement) {
+        headerPageNameElement.innerText = name;
+    }
 
-                  // Set the name based on the currentSlug
-                  var name = '';
-                  switch (currentSlug) {
-                     case 'index':
-                        name = 'Dashboard';
-                        break;
+    // Handle special cases for dropdown menu
+    const specialCases = ['product', 'inventory', 'coupons'];
+    if (specialCases.includes(currentSlug)) {
+        const dropdownMenu = document.getElementById('dropdown-menu');
+        const dropdownTitle = document.getElementById('sms_w_dropdown_title');
+        if (dropdownMenu && dropdownTitle) {
+            dropdownMenu.classList.add('show');
+            dropdownTitle.classList.add('sms_e_active_item');
+        }
+    }
 
-                     case 'product':
-                        name = 'Product Management';
-                        // Add extra class to dropdown-menu for 'product' page
-                        document.getElementById('dropdown-menu').classList.add('show');
-                        document.getElementById('sms_w_dropdown_title').classList.add('sms_e_active_item');
-
-                        break;
-
-                     case 'inventory':
-                        name = 'Inventory Setting';
-                        // Add extra class to dropdown-menu for 'inventory' page
-                        document.getElementById('dropdown-menu').classList.add('show');
-                        document.getElementById('sms_w_dropdown_title').classList.add('sms_e_active_item');
-
-                        break;
-
-                     case 'coupons':
-                        name = 'Coupons And Benefits';
-                        // Add extra class to dropdown-menu for 'coupons' page
-                        document.getElementById('dropdown-menu').classList.add('show');
-                        document.getElementById('sms_w_dropdown_title').classList.add('sms_e_active_item');
-
-                        break;
-
-                     case 'customers':
-                        name = 'Customer';
-                        break;
-
-                     case 'transactions':
-                        name = 'Transaction';
-                        break;
-
-                     case 'statistics':
-                        name = 'Statistics';
-                        break;
-
-
-                     case 'goals':
-                        name = 'Objectives';
-                        break;
-
-
-                     case 'optimization':
-                        name = 'Optimization';
-                        break;
-
-                     case 'setting':
-                        name = 'Setting';
-                        break;
-
-                     case 'help':
-                        name = 'Help And Support';
-                        break;
-                     // Add more cases as needed
-                     default:
-                        name = 'Unknown'; // Default value if slug doesn't match any case
-                  }
-
-                  // Set the text of the div with id "sms_header_page_name" to the name
-                  document.getElementById('sms_header_page_name').innerText = name;
-               });
+    // Set active class on navigation item
+    const navItem = document.getElementById(currentSlug);
+    if (navItem) {
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.classList.remove('sms_e_active_item');
+        });
+        navItem.classList.add('sms_e_active_item');
+    }
+});
 
          </script>
          <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
