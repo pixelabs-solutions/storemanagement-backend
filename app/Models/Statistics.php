@@ -4,69 +4,10 @@ namespace Pixelabs\StoreManagement\Models;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Pixelabs\StoreManagement\Models\Configuration;
+use Pixelabs\StoreManagement\Models\Base;
 
 class Statistics
 {
-    // public static function get_products_stats() {
-    //     $response = json_decode(Configuration::getConfiguration(), true);
-    //     if($response['status_code'] != 200)
-    //     {
-    //         echo $response["message"];
-    //     }
-    //     $data = $response['data'];
-    //     $consumer_key = $data["consumer_key"];
-    //     $consumer_secret = $data["consumer_secret"];
-    //     $store_url = $data["store_url"];
-
-    //     $client = new Client();
-    //     try {
-    //         $response = $client->request('GET', $store_url . '/wp-json/wc/v3/products', [
-    //             'auth' => [$consumer_key, $consumer_secret]
-    //         ]);
-    
-    //         $products = json_decode($response->getBody(), true);
-    //         $totalProducts = count($products);
-    //         $normalProducts = 0;
-    //         $saleProducts = 0;
-    
-    //         foreach ($products as $product) {
-    //             if (isset($product['type']) && $product['type'] === 'simple') {
-    //                 $normalProducts++;
-    //             }
-    //             if (isset($product['on_sale']) && $product['on_sale'] === true) {
-    //                 $saleProducts++;
-    //             }
-    //         }
-
-    //         $orderResponse = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', [
-    //             'auth' => [$consumer_key, $consumer_secret]
-    //         ]);
-    //         $orders = json_decode($orderResponse->getBody(), true);
-    //         $numberOfOrders = count($orders);
-    //         $distinctProductsOnOrder = [];
-
-    //         foreach ($orders as $order) {
-    //             if (isset($order['line_items']) && is_array($order['line_items'])) {
-    //                 foreach ($order['line_items'] as $item) {
-    //                     $productId = $item['product_id'];
-    //                     $distinctProductsOnOrder[$productId] = true;  
-    //                 }
-    //             }
-    //         }
-    
-    //         return [
-    //             'totalProducts' => $totalProducts,
-    //             'normalProducts' => $normalProducts,
-    //             'saleProducts' => $saleProducts,
-    //             'numberOfOrders' => $numberOfOrders,
-    //             'totalDistinctProductsOnOrder' => count($distinctProductsOnOrder) 
-    //         ];
-    //     } catch (\Exception $e) {
-    //         echo 'Error: ' . $e->getMessage();
-    //         return [];
-    //     }
-    // }
-
     public static function get_products_stats($filters = []) {
         //var_dump($filters);
         $response = json_decode(Configuration::getConfiguration(), true);
@@ -223,8 +164,8 @@ class Statistics
             $totalShipments = 0;
     
             foreach ($orders as $order) {
-                $totalRevenue += $order['total']; // Make sure this is the total payment received, including shipping
-                $totalShipments += $order['shipping_total']; // Ensure 'shipping_total' is defined in your order objects
+                $totalRevenue += $order['total'];
+                $totalShipments += $order['shipping_total']; 
             }
     
             $orderAverage = $totalOrders > 0 ? round($totalRevenue / $totalOrders) : 0;
@@ -243,7 +184,45 @@ class Statistics
     }
     
     
+    public static function get_overview_stats($filters = [])
+    {
+        $response = json_decode(Configuration::getConfiguration(), true);
+        if ($response['status_code'] != 200) {
+            echo $response["message"];
+            return [];
+        }
     
+        $data = $response['data'];
+        $dateRange = self::getDateRange($filters);
+        try
+        {
+            $params = ['auth' => [$data["consumer_key"], $data["consumer_secret"]]];
+            if (!empty($dateRange)) {
+                $params['query'] = $dateRange;
+            }
+
+
+            $total_products = Base::get_number_of_products($data["store_url"], $params);
+            $total_orders = Base::get_number_of_orders($data["store_url"], $params);
+            $total_revenue = Base::get_total_revenue($data["store_url"], $params);
+            $new_customers_count = Base::get_new_customers_count($data["store_url"], $params);
+            $returning_customers_count = Base::get_returning_customers_count($data["store_url"], $params);
+
+            return [
+                'totalProducts' => $total_products,
+                'totalOrders' => $total_orders,
+                'totalRevenue' => $total_revenue,
+                'newCustomers' => $new_customers_count,
+                'returningCustomers' => $returning_customers_count
+            ];
+        }
+        catch (\Exception $e) 
+        {
+            echo 'Error fetching orders: ' . $e->getMessage();
+            return [];
+        }
+    }
+
 
     public static function getDateRange($filters) {
 
@@ -272,7 +251,7 @@ class Statistics
                     $end->modify('last day of December last year');
                     break;
                 default:
-                    return null;  // Return null if the query does not match any predefined filters
+                    return null;
             }
     
             return [
@@ -282,7 +261,4 @@ class Statistics
         }
         return null;
     }
-    
-    
-    
 }

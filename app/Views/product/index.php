@@ -98,9 +98,9 @@
                 <button class="rounded-4 border-0 p-2" data-bs-toggle="modal" data-bs-target="#modal-full-width"
                     style="background-color:#4987D870; " data-i18n="product_managment.nav.new_product_btn">Add a new product +</button>
                 <button class="rounded-4 border-0 p-2" style="background-color:#4987D870;" data-bs-toggle="modal"
-                    data-bs-target="#modal-large" data-i18n="product_managment.nav.category_product_btn">Category management</button>
+                    data-bs-target="#modal-Category-large" data-i18n="product_managment.nav.category_product_btn">Category management</button>
                 <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; " data-bs-toggle="modal"
-                    data-bs-target="#modal-Feature-large" data-i18n="product_managment.nav.future_product_btn">Feature management</button>
+                    data-bs-target="#modal-large" data-i18n="product_managment.nav.future_product_btn">Feature management</button>
 
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 mt-3 mt-lg-0">
@@ -344,7 +344,7 @@
             </div>
             <div class="modal-body">
                 <?php
-                    require_once __DIR__ . '/../category/index.php';
+                    require_once __DIR__ . '/../feature/index.php';
 
                 ?>
             </div>
@@ -352,7 +352,7 @@
         </div>
     </div>
 </div>
-<div class="modal modal-blur fade" id="modal-Feature-large" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal modal-blur fade" id="modal-Category-large" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header border-0 ">
@@ -360,7 +360,8 @@
             </div>
             <div class="modal-body">
                 <?php
-                    require_once __DIR__ . '/../feature/index.php';
+                    require_once __DIR__ . '/../category/index.php';
+
                 ?>
             </div>
 
