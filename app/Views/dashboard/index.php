@@ -43,12 +43,13 @@ require_once __DIR__ . '/../partials/header.php';
         </a>
     </div>
     <!-- Date Range Button  Start-->
-    <div class="col-auto ms-auto d-print-none d-none d-sm-inline">
-        <a class="card text-center  rounded-4 p-2">
-            <p class="p-0 mb-0 d-2 " data-i18n="dashboard.tabs.filter_btn">Filter by dates</p>
-            <p class="p-0 mb-0">10/02/24-10/03/2024</p>
-        </a>
-    </div>
+    <div class="col-auto ms-auto">
+                            <a href="#" class="btn btn-pill" data-bs-toggle="modal" data-bs-target="#modal-team"
+                                style="background-color:#A8C3E7; border:none;"
+                                data-i18n="statististics.tabs_in_select_range.button">
+                                Select a Date Range
+                            </a>
+                        </div>
     <!-- Date Range Button End -->
 </div>
 
@@ -561,7 +562,33 @@ require_once __DIR__ . '/../partials/header.php';
     <!-- Table End -->
 </div>
 <!-- Card End -->
+<div class="modal modal-blur fade" id="modal-team" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Select a Date Range</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3 align-items-end">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <!-- <label class="form-label">From Date</label> -->
+                        <label for="startDate">Start Date</label>
+                        <input id="startDate" class="form-control" type="date" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="startDate">To Date</label>
+                        <input id="startDate" class="form-control" type="date" />
+                    </div>
 
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-pill btn-info" data-bs-dismiss="modal">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     // Initialize the map
     var map = L.map('map').setView([31.0461, 34.8516], 7); // Set center to Israel

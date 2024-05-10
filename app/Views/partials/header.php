@@ -38,16 +38,19 @@
       .choices__input {
          display: none !important;
       }
-       scrollbar-color: rgba(var(--tblr-scrollbar-color, var(--tblr-body-color-rgb)), .16) none !important;
+
       .choices {
-         height: 100%;
+         position: relative;
+         margin-bottom: 0px !important;
+         font-size: 16px;
+         height: 100% !important;
       }
 
       .choices__inner {
          padding: 11px 30px;
          background-color: transparent !important;
          border-radius: 12px;
-         height: 100%;
+         height: 100% !important;
       }
 
       :root {
@@ -270,6 +273,16 @@
             margin-left: 0 !important;
          }
       }
+
+      .rtl .sms_mu_show {
+         left: 0 !important;
+         right: -452px !important;
+      }
+
+      .rtl .dropdown-menu-arrow.dropdown-menu-end:before {
+         right: 28.75rem;
+         left: auto;
+      }
    </style>
 </head>
 
@@ -364,7 +377,7 @@
         </div>
     </div>
 </li> -->
-                  <li class="nav-item  dropdown ">
+                  <li class="nav-item  dropdown m-0">
                      <a class="nav-link dropdown-toggle " id="sms_w_dropdown_title" href="#navbar-layout"
                         data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="true">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -595,7 +608,7 @@
                            </svg>
                            <span class="badge text-red bg-transparent">4</span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
+                        <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card sms_mu_show">
                            <div class="card">
                               <div class="card-header">
                                  <h3 class="card-title">Last updates</h3>
@@ -879,7 +892,7 @@
             var myElement = document.getElementById("myDiv");
             var index = 1;
             function funChangeDir() {
-               index++;
+               index+=1;
                if (index % 2 === 0) {
                   myElement.classList.add("rtl");
                   console.log(myElement);
@@ -887,6 +900,5 @@
                   myElement.classList.remove("rtl");
                   console.log(myElement);
                }
-           
             }
          </script>

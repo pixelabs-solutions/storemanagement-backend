@@ -97,7 +97,7 @@
 
         </div>
      
-          <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; "  onclick="openModal('sms_category_w_add_modal')">Added a new category +</button>
+          <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; "  onclick="openModal('sms_category_w_add_modal')"  data-i18n="popoups.add_new_catageory.catageory_btn">Added a new category +</button>
         
       </div>
     </div>
@@ -190,11 +190,11 @@
         <table class="sms_mu_table" id="sms_category_m_category_table">
           <thead>
             <tr class="sms_mu_th">
-              <th class="sms_mu_td">image</th>
-              <th class="sms_mu_td">The name of the category</th>
-              <th class="sms_mu_td">Parent category</th>
-              <th class="sms_mu_td">Quantity of products</th>
-              <th class="sms_mu_td"></th>
+              <th data-i18n="popoups.add_new_catageory.th_in_catageory.th_img" class="sms_mu_td">image</th>
+              <th class="sms_mu_td"data-i18n="popoups.add_new_catageory.th_in_catageory.th_catageory">The name of the category</th>
+              <th class="sms_mu_td"data-i18n="popoups.add_new_catageory.th_in_catageory.th_parent">Parent category</th>
+              <th class="sms_mu_td"data-i18n="popoups.add_new_catageory.th_in_catageory.th_quantity">Quantity of products</th>
+              <th class="sms_mu_td"data-i18n="popoups.add_new_catageory.th_in_catageory.th_img"></th>
 
               <!-- <th>source</th> -->
 
