@@ -768,67 +768,67 @@
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
          <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
          <script>
-    $(document).ready(function() {
-        $(".chosen-select").chosen({
-            no_results_text: "Oops, nothing found!"
-        });
-    });
+            $(document).ready(function () {
+               $(".chosen-select").chosen({
+                  no_results_text: "Oops, nothing found!"
+               });
+            });
 
 
-   
-               
-               window.addEventListener('load', function () {
-    const currentURL = window.location.href;
-    const domainName = 'storemanagement-frontend';
 
-    // Extract the slug from the URL
-    const pathname = new URL(currentURL).pathname;
-    const currentSlug = pathname.split('/').filter(Boolean).pop().replace('.php', '') || 'index';
 
-    // Define page names
-    const pageNames = {
-        'index': 'Dashboard',
-        'product': 'Product Management',
-        'inventory': 'Inventory Setting',
-        'coupons': 'Coupons And Benefits',
-        'customers': 'Customer',
-        'transactions': 'Transaction',
-        'statistics': 'Statistics',
-        'goals': 'Objectives',
-        'optimization': 'Optimization',
-        'setting': 'Setting',
-        'help': 'Help And Support'
-    };
+            window.addEventListener('load', function () {
+               const currentURL = window.location.href;
+               const domainName = 'storemanagement-frontend';
 
-    // Get the name based on the current slug
-    const name = pageNames[currentSlug] || 'Unknown';
+               // Extract the slug from the URL
+               const pathname = new URL(currentURL).pathname;
+               const currentSlug = pathname.split('/').filter(Boolean).pop().replace('.php', '') || 'index';
 
-    // Update the page name element
-    const headerPageNameElement = document.getElementById('sms_header_page_name');
-    if (headerPageNameElement) {
-        headerPageNameElement.innerText = name;
-    }
+               // Define page names
+               const pageNames = {
+                  'index': 'Dashboard',
+                  'product': 'Product Management',
+                  'inventory': 'Inventory Setting',
+                  'coupons': 'Coupons And Benefits',
+                  'customers': 'Customer',
+                  'transactions': 'Transaction',
+                  'statistics': 'Statistics',
+                  'goals': 'Objectives',
+                  'optimization': 'Optimization',
+                  'setting': 'Setting',
+                  'help': 'Help And Support'
+               };
 
-    // Handle special cases for dropdown menu
-    const specialCases = ['product', 'inventory', 'coupons'];
-    if (specialCases.includes(currentSlug)) {
-        const dropdownMenu = document.getElementById('dropdown-menu');
-        const dropdownTitle = document.getElementById('sms_w_dropdown_title');
-        if (dropdownMenu && dropdownTitle) {
-            dropdownMenu.classList.add('show');
-            dropdownTitle.classList.add('sms_e_active_item');
-        }
-    }
+               // Get the name based on the current slug
+               const name = pageNames[currentSlug] || 'Unknown';
 
-    // Set active class on navigation item
-    const navItem = document.getElementById(currentSlug);
-    if (navItem) {
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.classList.remove('sms_e_active_item');
-        });
-        navItem.classList.add('sms_e_active_item');
-    }
-});
+               // Update the page name element
+               const headerPageNameElement = document.getElementById('sms_header_page_name');
+               if (headerPageNameElement) {
+                  headerPageNameElement.innerText = name;
+               }
+
+               // Handle special cases for dropdown menu
+               const specialCases = ['product', 'inventory', 'coupons'];
+               if (specialCases.includes(currentSlug)) {
+                  const dropdownMenu = document.getElementById('dropdown-menu');
+                  const dropdownTitle = document.getElementById('sms_w_dropdown_title');
+                  if (dropdownMenu && dropdownTitle) {
+                     dropdownMenu.classList.add('show');
+                     dropdownTitle.classList.add('sms_e_active_item');
+                  }
+               }
+
+               // Set active class on navigation item
+               const navItem = document.getElementById(currentSlug);
+               if (navItem) {
+                  document.querySelectorAll('.nav-item').forEach(item => {
+                     item.classList.remove('sms_e_active_item');
+                  });
+                  navItem.classList.add('sms_e_active_item');
+               }
+            });
 
          </script>
          <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
@@ -853,7 +853,7 @@
             var myElement = document.getElementById("myDiv");
             var index = 1;
             function funChangeDir() {
-               index+=1;
+               index += 1;
                if (index % 2 === 0) {
                   myElement.classList.add("rtl");
                   console.log(myElement);
