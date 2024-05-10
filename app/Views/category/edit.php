@@ -10,74 +10,73 @@
     <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
     <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
     <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" /> -->
-    <style>
-        @import url('https://rsms.me/inter/inter.css');
+<style>
+    @import url('https://rsms.me/inter/inter.css');
 
-        :root {
-            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-        }
+    :root {
+        --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+    }
 
-        body {
-            font-feature-settings: "cv03", "cv04", "cv11";
-        }
+    body {
+        font-feature-settings: "cv03", "cv04", "cv11";
+    }
 
-        .rtl {
-            direction: rtl;
-        }
+    .rtl {
+        direction: rtl;
+    }
 
-        .rtl .avatar {
-            margin-left: 10px;
-        }
+    .rtl .avatar {
+        margin-left: 10px;
+    }
 
-        .sms_a_edit_category {
-            position: relative;
-            /* display: inline-block; */
-        }
+    .sms_a_edit_category {
+        position: relative;
+        /* display: inline-block; */
+    }
 
-        .sms_a_edit_category input[type="file"] {
-            position: absolute;
-            left: -9999px;
-        }
+    .sms_a_edit_category input[type="file"] {
+        position: absolute;
+        left: -9999px;
+    }
 
-        .sms_a_edit_category label {
-            /* display: inline-block; */
-            padding: 12px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            background-color: #EAEAEA !important;
-            text-align: center;
-            ;
-        }
+    .sms_a_edit_category label {
+        /* display: inline-block; */
+        padding: 12px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        background-color: #EAEAEA !important;
+        text-align: center;
+        ;
+    }
 
-        .sms_a_edit_category label i {
-            margin-right: 5px;
-        }
-    </style>
+    .sms_a_edit_category label i {
+        margin-right: 5px;
+    }
+</style>
 <!-- </head>
 
 <body> -->
-    <div class="page-body">
-        <div class="container-xl">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-10">
-                    <div class="">
-                      
-                        <form action="" method="post" class="card-body">
-                            <!-- header -->
-                            <div class="row gx-3">
-                                <div class="col-md-6 mb-3">
-                                    <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">The name of
-                                        the
-                                        category</label>
-                                    <input type="text" class="form-control rounded-3 p-3 fw-bold"
-                                        id="example-text-input" style="background-color: #EAEAEA"
-                                        placeholder="key chain">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="example-select fs-3 fw-bold" class="form-label fw-bold">Parent category
-                                    </label>
-                                    <div
+<div class="page-body">
+    <div class="container-xl">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10">
+                <div class="">
+
+                    <form action="" method="post" class="card-body">
+                        <!-- header -->
+                        <div class="row gx-3">
+                            <div class="col-md-6 mb-3">
+                                <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">The name of
+                                    the
+                                    category</label>
+                                <input type="text" class="form-control rounded-3 p-3 fw-bold" id="example-text-input"
+                                    style="background-color: #EAEAEA" placeholder="key chain">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="example-select fs-3 fw-bold" class="form-label fw-bold">Parent category
+                                </label>
+                                <div
                                     style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                     <div class="col-md-12 rounded-4 bg-transparent h-100 ">
                                         <select id="choices-multiple-remove-button" multiple
@@ -159,13 +158,14 @@
                                 </div>
                                 <!-- To update the term click here+ -->
                                 <div class="text-center mt-2 p-2  ">
-                                    <button type="submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3">To update
+                                    <button type="submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3">To
+                                        update
                                         the term click here
                                         +</button>
                                 </div>
 
                             </div>
-                    </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -208,7 +208,7 @@
             label.innerHTML = '<i class="bi bi-image text-black"></i> ' + fileName;
         }
     </script>
-<!-- </body>
+    <!-- </body>
 <script src="./dist/js/tabler.min.js?1684106062" defer></script>
 <script src="./dist/js/demo.min.js?1684106062" defer></script>
 

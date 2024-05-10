@@ -17,17 +17,17 @@
   <div class="card border-0">
   <div class="card-body-rounded ">
     <div class="d-flex flex-column ">
-        <h1 class="text-center">Choose the type of product</h1>
+        <h1 class="text-center" data-i18n="popoups.add_new_type.heading">Choose the type of product</h1>
         <div class="d-flex justify-content-center gap-4 flex-md-row flex-column">
             <span onclick="openModal('sms_product_variation_modal')"  class="card  w-md-25 d-flex justify-content-center align-items-center sms_select_produc_card" style=" background-color:#4987D8; " >
             <div>
-           <h2> A product with variations</h2>
+           <h2  data-i18n="popoups.add_new_type.variation"> A product with variations</h2>
             </div>
             </span>
             <span  onclick="openModal('sms_product_regular_modal')"  class="card  w-md-25  d-flex justify-content-center align-items-center sms_select_produc_card" style=" background-color:#afcaee; " >
         
             <div >
-           <h2> normal product</h2>
+           <h2  data-i18n="popoups.add_new_type.new_product"> normal product</h2>
             </div>
         </span>
          
