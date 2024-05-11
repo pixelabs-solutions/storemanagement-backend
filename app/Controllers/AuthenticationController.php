@@ -5,7 +5,16 @@ use Pixelabs\StoreManagement\Models\Authentication;
 
 class AuthenticationController
 {
+
     public function register()
+    {
+        include_once __DIR__ . '/../Views/authentication/register.php';
+    }
+    public function login()
+    {
+        include_once __DIR__ . '/../Views/authentication/login.php';
+    }
+    public function register_user()
     {
         $rawData = file_get_contents("php://input");
         $data = json_decode($rawData, true);
@@ -17,7 +26,7 @@ class AuthenticationController
         echo $result;
     }
 
-    public function login()
+    public function login_user()
     {
         $rawData = file_get_contents("php://input");
         $data = json_decode($rawData, true);
