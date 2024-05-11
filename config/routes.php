@@ -15,6 +15,7 @@ use Pixelabs\StoreManagement\Controllers\TransactionController;
 use Pixelabs\StoreManagement\Controllers\AuthenticationController;
 use Pixelabs\StoreManagement\Controllers\ConfigurationController;
 use Pixelabs\StoreManagement\Controllers\CategoryController;
+use Pixelabs\StoreManagement\Controllers\AttributesController;
 
 // Define routes
 
@@ -78,4 +79,18 @@ $router->get('/categories/{id}', [CategoryController::class, 'get']);
 $router->delete('/categories/{id}', [CategoryController::class, 'delete']);
 $router->post('/categories/add', [CategoryController::class, 'add']);
 $router->put('/categories/{id}', [CategoryController::class, 'update']);
+
+//Attributes
+$router->get('/attributes', [AttributesController::class, 'index']);
+$router->get('/attributes/{id}', [AttributesController::class, 'get']);
+$router->delete('/attributes/{id}', [AttributesController::class, 'delete']);
+$router->post('/attributes/add', [AttributesController::class, 'add']);
+$router->put('/attributes/{id}', [AttributesController::class, 'update']);
+
+// Attributes Terms
+$router->get('/attributes/{id}/terms', [AttributesController::class, 'term_index']);
+$router->get('/attributes/{id}/terms/{term_id}', [AttributesController::class, 'term_get']);
+$router->delete('/attributes/{id}/terms/{term_id}', [AttributesController::class, 'term_delete']);
+$router->post('/attributes/{id}/terms/add', [AttributesController::class, 'term_add']);
+$router->put('/attributes/{id}/terms/{term_id}', [AttributesController::class, 'term_update']);
 
