@@ -44,7 +44,7 @@ class ProductController
             return;
         }
         $data = $result["data"];
-        $payload = json_encode([
+        $payload = [
             'name' => $data['name'], 
             'type' => $data['type'],
             'description' => $data['description'], 
@@ -58,11 +58,62 @@ class ProductController
             }, $data['image']),
             'regular_price' => $data['regular_price'],
             'sale_price' => $data['sale_price']
-        ]);
+        ];
 
-        $response = Base::wc_add($this->table_name, $payload);
-        print_r($response);
+        if($data['type'] === "variable")
+        {
+            // Construct attributes array
+            $attributes = [];
+            foreach ($data['attributes_names'] as $index => $name) {
+                $attribute = [
+                    'name' => $name,
+                    'options' => $data['attributes_options'][$index],
+                    'variation' => true
+                ];
+                $attributes[] = $attribute;
+            }
+            $payload['attributes'] = $attributes;
+            
+            $variations = $this->generateVariations($data['attributes_options'], $data['attributes_names'], $data['regular_price']);
+            $payload['variations'] = $variations;
 
+            echo json_encode($payload);
+
+           $response = Base::wc_add($this->table_name, json_encode($payload));
+            
+
+            foreach ($variations as $variationData) {
+                Product::createProductVariation($response['data_id'], $variationData);
+            }
+
+        }
+        else
+        {
+            $response = Base::wc_add($this->table_name, json_encode($payload));
+            print_r($response);
+        }
+
+    }
+    
+
+    private function generateVariations($options, $names, $regularPrice, $index = 0, $currentAttributes = [], &$variations = [])
+    {
+        $currentOptions = $options[$index];
+        foreach ($currentOptions as $option) {
+            $currentAttributes[$names[$index]] = $option;
+            if ($index === count($options) - 1) {
+                $variation = [
+                    'regular_price' => $regularPrice,
+                    'attributes' => array_map(function ($name, $option) {
+                        return ['name' => ucfirst($name), 'option' => $option];
+                    }, array_keys($currentAttributes), $currentAttributes)
+                ];
+                $variations[] = $variation;
+            } else {
+                $this->generateVariations($options, $names, $regularPrice, $index + 1, $currentAttributes, $variations);
+            }
+        }
+        return $variations;
     }
 
     public function update($id)
@@ -75,7 +126,7 @@ class ProductController
         }
 
         $data = $result["data"];
-        $payload = json_encode([
+        $payload = [
             'name' => $data['name'], 
             'type' => $data['type'],
             'description' => $data['description'], 
@@ -89,7 +140,7 @@ class ProductController
             }, $data['image']),
             'regular_price' => $data['regular_price'],
             'sale_price' => $data['sale_price']
-        ]);
+        ];
 
         $response = Base::wc_update($this->table_name."/".$id, $payload);
         print_r($response);
