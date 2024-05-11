@@ -35,8 +35,21 @@
    <style>
       @import url('https://rsms.me/inter/inter.css');
 
+      .choices__list--multiple .choices__item {
+         background: #b7adad !important;
+         /* color: black; */
+         border: none !important;
+      }
+
       .choices__input {
-         display: none !important;
+         background-color: transparent;
+      }
+
+      .span_div {
+         /* background-color: transparent; */
+         right: 4% !important;
+         position: absolute;
+         top: 30%;
       }
 
       .choices {
@@ -766,17 +779,13 @@
       </header>
       <div class="page-wrapper px-4" id="content">
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-         <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+         <!-- <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script> -->
          <script>
-            $(document).ready(function () {
-               $(".chosen-select").chosen({
-                  no_results_text: "Oops, nothing found!"
-               });
-            });
-
-
-
-
+            // $(document).ready(function () {
+            //    $(".chosen-select").chosen({
+            //       no_results_text: "Oops, nothing found!"
+            //    });
+            // });
             window.addEventListener('load', function () {
                const currentURL = window.location.href;
                const domainName = 'storemanagement-frontend';
@@ -832,11 +841,21 @@
 
          </script>
          <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
-
          <script>
             $(document).ready(function () {
 
                var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+                  removeItemButton: true,
+                  maxItemCount: 5,
+                  searchResultLimit: 5,
+                  renderChoiceLimit: 5
+               });
+
+
+            });
+            $(document).ready(function () {
+
+               var multipleCancelButton = new Choices('#IOP', {
                   removeItemButton: true,
                   maxItemCount: 5,
                   searchResultLimit: 5,

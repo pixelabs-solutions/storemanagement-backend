@@ -17,10 +17,41 @@
         --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
     }
 
+    .sms_mu_variation_in_combination_input {
+        width: 49% !important;
+        margin: 10px 0.5%;
+        background-color: #eaeaea;
+        border: none;
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .sms_mu_variation_in_combination_input_two {
+        width: 99% !important;
+        margin: 10px 2px;
+        background-color: #eaeaea;
+        border: none;
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .sms_mu_variation_in_combination_input_read {
+        width: 49% !important;
+        margin: 10px 0.5%;
+        background-color: #eaeaea;
+        border: none;
+        padding: 15px;
+        border-radius: 10px;
+    }
+
     body {
         font-feature-settings: "cv03", "cv04", "cv11";
     }
-
+  #sms_mu_configure{
+ display: none;
+ text-align: center;
+ margin: 10px 0;
+  }
     .rtl {
         direction: rtl;
     }
@@ -82,8 +113,7 @@
                                             <option value="NOSQL">Ctg</option>
                                             <option value="NodeJS">demo</option>
                                         </select>
-                                        <span
-                                            style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); pointer-events: none;">
+                                        <span class="span_div">
                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -144,14 +174,33 @@
                             </div>
 
                         </div>
-                        <div class="mt-5"
+                        <label class="form-label fw-bold mt-5"> Select Term Attribute</label>
+                        <!-- <div 
                             style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                             <div class="col-md-12 rounded-4 bg-transparent h-100 ">
-                                <select id="choices-multiple-remove-button" multiple
-                                    style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
-                                    <option value="NOSQL" onclick="fun_add_variation()">Ctg</option>
-                                    <option value="NodeJS" onclick="fun_add_variation()">demo</option>
+                                <select id="IOP" multiple
+                                    style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;"
+                                    onchange="fun_save_changes()">
+                                    <option value="Ctg">Ctg</option>
+                                    <option value="demo">demo</option>
                                 </select>
+
+                                <script>
+                                    function fun_save_changes() {
+                                        var selectedOptions = [];
+                                        var selectElement = document.getElementById('IOP');
+                                        // Loop through all options
+                                        for (var i = 0; i < selectElement.options.length; i++) {
+                                            var option = selectElement.options[i];
+                                            // Check if the option is selected
+                                            if (option.selected) {
+                                                selectedOptions.push(option.value);
+                                            }
+                                        }
+                                        console.log(selectedOptions);
+                                    }
+                                </script>
+
                                 <span
                                     style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); pointer-events: none;">
                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
@@ -162,16 +211,41 @@
                                     </svg>
                                 </span>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- Added terms for variations -->
+                        <div style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
+                            <div class="col-md-12 rounded-4 bg-transparent h-100 ">
+                                <select id="IOP" multiple
+                                    style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;"
+                                    onchange="fun_save_changes()">
+                                    <option value="Size">Size</option>
+                                    <option value="Color">Color</option>
+                                    <option value="Envirment">Color</option>
+                                </select>
+                                <span class="span_div">
+                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M6.00006 7.16667L10.0001 3.16667L8.83339 2L6.00006 4.83333L3.16673 2L2.00006 3.16667L6.00006 7.16667Z"
+                                            fill="#111" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div id="selectedOptionsDiv"></div>
+
                         <div class="rounded-4">
                             <div class="col-12 col-md-12 rounded-2" id="sms_a_add_product_variation">
                                 <!-- add some filed to javascit this is important -->
 
                             </div>
+                            <h2 class="text-center my-3" id="sms_mu_configure" >Configure Variations</h2>
+                            <div id="inputs-container"></div>
+
                             <!-- To add another term click here + -->
                             <div class="text-center mt-4  ">
-                                <button type="button" onclick="sms_a_add_product_variation_inputs()"
+                                <button type="button" onclick="generate_variations()"
                                     class=" col-12 col-md-12 fs-3 rounded-3 py-3 border-0 fw-bold"
                                     style="background: rgba(73, 135, 216, 0.44);">Adding an additional term to +
                                     variations </button>
@@ -191,19 +265,155 @@
     </div>
 </div>
 
+<script>
+    var selectElement = document.getElementById('IOP');
+
+    function fun_save_changes() {
+        let parentDiv = document.getElementById('selectedOptionsDiv');
+        // Remove existing divs
+        parentDiv.innerHTML = '';
+
+        // Loop through all options
+        for (let i = 0; i < selectElement.options.length; i++) {
+            let option = selectElement.options[i];
+            // Check if the option is selected
+            if (option.selected) {
+                // Create a new div for the selected option
+                let newDiv = document.createElement('div');
+                newDiv.classList.add('selected-option');
+
+                // Customize the content of the div
+                newDiv.innerHTML = `  
+                  <label class="form-label fw-bold mt-5"> Select ${option.value} Attribute</label>
+                <div
+                       style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
+                                    <div class="col-md-12 rounded-4 bg-transparent h-100 ">
+                                        <select 
+                                        class='select_box${i}'
+                                        id="choices-multiple-remove-button_set" multiple
+                                            style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
+                                            <option value="NOSQL">Ctg</option>
+                                            <option value="NodeJS">demo</option>
+                                        </select>
+                                        <span
+                                        class="span_div">
+                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M6.00006 7.16667L10.0001 3.16667L8.83339 2L6.00006 4.83333L3.16673 2L2.00006 3.16667L6.00006 7.16667Z"
+                                                    fill="#111" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div> `;
+                parentDiv.appendChild(newDiv);
+
+
+            }
+        }
+
+
+
+        // Initialize Choices for dynamically created select elements
+        var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+            removeItemButton: true,
+            maxItemCount: 5,
+            searchResultLimit: 5,
+            renderChoiceLimit: 5
+        });
+        var multipleCancelButton = new Choices('#choices-multiple-remove-button_set', {
+            removeItemButton: true,
+            maxItemCount: 5,
+            searchResultLimit: 5,
+            renderChoiceLimit: 5
+        });
+    }
+
+    function generate_variations() {
+        const arrays = [];
+        for (let i = 0; i < selectElement.length; i++) {
+            const selectBox = document.querySelector(`.select_box${i}`);
+            if (selectBox) {
+                const values = Array.from(selectBox.options).map(option => option.value);
+                arrays.push(values);
+            }
+        }
+        const combinations = getCombinations(arrays);
+
+        const container = document.getElementById('inputs-container'); // Assuming there's a container for the inputs in your HTML
+
+        // Clear previous inputs
+        container.innerHTML = '';
+
+        // Create inputs for each combination
+        combinations.forEach(combination => {
+            const readOnlyInput = document.createElement('input');
+            readOnlyInput.classList.add('sms_mu_variation_in_combination_input_read');
+            readOnlyInput.type = 'text';
+            readOnlyInput.readOnly = true;
+            readOnlyInput.value = combination.join('-');
+            container.appendChild(readOnlyInput);
+            
+            const numberInput1 = document.createElement('input');
+            numberInput1.text="Variations"
+            numberInput1.classList.add('sms_mu_variation_in_combination_input');
+            numberInput1.type = 'number';
+            container.appendChild(numberInput1);
+
+            const numberInput2 = document.createElement('input');
+            numberInput2.classList.add('sms_mu_variation_in_combination_input_two');
+            numberInput2.type = 'number';
+            container.appendChild(numberInput2);
+
+            container.appendChild(document.createElement('br')); // Add line break
+            container.appendChild(document.createElement('hr')); // Add line break
+            document.getElementById('sms_mu_configure').style.display="flex";
+        });
+    }
+
+
+
+
+    function getCombinations(arrays) {
+        function helper(arrays, index, current) {
+            if (index === arrays.length) {
+                result.push(current);
+                return;
+            }
+            for (let i = 0; i < arrays[index].length; i++) {
+                helper(arrays, index + 1, current.concat(arrays[index][i]));
+            }
+        }
+
+        const result = [];
+        helper(arrays, 0, []);
+        return result;
+    }
+
+    // Example usage:
+    const arrays = [
+        ['a', 'b', 'c'],
+        [1, 2],
+        ['x', 'y']
+    ];
+
+    const combinations = getCombinations(arrays);
+    console.log(combinations);
+
+</script>
 
 <!-- input javascript code  -->
 <script>
     var inputCount = 0;
     var variation_index = 0;
-    function fun_add_variation(){
+    function fun_add_variation() {
         variation_index += 1;
         window.alert('s')
         console.log(variation_index + "as")
     }
+
     // Function to add input fields
     function sms_a_add_product_variation_inputs() {
-        console.log(variation_index + "aaaass");
         inputCount += 0;
         var container = document.getElementById('sms_a_add_product_variation');
         var newInput = document.createElement('div');
@@ -246,9 +456,9 @@
     }
 
     // Add one input field when the page loads
-    document.addEventListener("DOMContentLoaded", function (event) {
-        sms_a_add_product_variation_inputs();
-    });
+    // document.addEventListener("DOMContentLoaded", function (event) {
+    //     sms_a_add_product_variation_inputs();
+    // });
 
 
     function sms_a_add_product_variations() {
