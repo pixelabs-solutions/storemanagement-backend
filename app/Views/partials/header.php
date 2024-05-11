@@ -32,11 +32,6 @@
    <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
    <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" /> -->
 
-
-
-
-
-
    <style>
       @import url('https://rsms.me/inter/inter.css');
 
@@ -45,14 +40,17 @@
       }
 
       .choices {
-         height: 100%;
+         position: relative;
+         margin-bottom: 0px !important;
+         font-size: 16px;
+         height: 100% !important;
       }
 
       .choices__inner {
          padding: 11px 30px;
          background-color: transparent !important;
          border-radius: 12px;
-         height: 100%;
+         height: 100% !important;
       }
 
       :root {
@@ -151,7 +149,7 @@
 
 
 
-     
+
 
       /* css for rtl */
       .rtl .sms_mu_for_rtl {
@@ -247,6 +245,7 @@
       .sms_w_date_active {
          background-color: #A8C3E7;
       }
+
       .rtl .page-wrapper {
          margin-left: 0rem !important;
          margin-right: 15rem !important;
@@ -256,9 +255,11 @@
          margin-left: 15rem !important;
          margin-right: 0 !important;
       }
-    .rtl header{
-      margin-left: 0 !important;
-    }
+
+      .rtl header {
+         margin-left: 0 !important;
+      }
+
       @media screen and (max-width:990px) {
 
          .rtl .navbar-expand-lg.navbar-vertical~.navbar,
@@ -272,10 +273,20 @@
             margin-left: 0 !important;
          }
       }
+
+      .rtl .sms_mu_show {
+         left: 0 !important;
+         right: -452px !important;
+      }
+
+      .rtl .dropdown-menu-arrow.dropdown-menu-end:before {
+         right: 28.75rem;
+         left: auto;
+      }
    </style>
 </head>
 
-<body class="">
+<body id="myDiv" class="abc">
    <script src="assets/dist/js/demo-theme.min.js?1684106062"></script>
    <div class="page">
       <!-- Sidebar -->
@@ -366,7 +377,7 @@
         </div>
     </div>
 </li> -->
-                  <li class="nav-item  dropdown ">
+                  <li class="nav-item  dropdown m-0">
                      <a class="nav-link dropdown-toggle " id="sms_w_dropdown_title" href="#navbar-layout"
                         data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="true">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -597,7 +608,7 @@
                            </svg>
                            <span class="badge text-red bg-transparent">4</span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
+                        <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card sms_mu_show">
                            <div class="card">
                               <div class="card-header">
                                  <h3 class="card-title">Last updates</h3>
@@ -704,7 +715,7 @@
                      <button id="switchBtn" class="border-0 rounded-circle">
 
                         <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px"
-                           width="24px" class="rounded-circle">
+                           width="24px" class="rounded-circle" onclick="funChangeDir()">
 
                      </button>
 
@@ -754,113 +765,74 @@
          </div>
       </header>
       <div class="page-wrapper px-4" id="content">
-
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
          <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
          <script>
-            $(".chosen-select").chosen({
-               no_results_text: "Oops, nothing found!"
-            })
-               < script >
-               window.addEventListener('load', function () {
-                  // Get the current URL 
-                  var currentURL = window.location.href;
-                  let domain_name = 'storemanagement-frontend';
-
-                  // Get the pathname from the URL
-                  var pathname = new URL(currentURL).pathname;
-
-                  // Remove .php extension from the pathname
-                  var currentSlug = pathname.split('/').filter(Boolean).pop().replace('.php', '');
-                  // If currentSlug is empty or same as the base URL, set it to a default value, like 'index'
-                  if (currentSlug === "" || currentSlug === "/" || currentSlug === domain_name) {
-                     currentSlug = "index";
-                  }
-
-                  console.log('currentSlug:', currentSlug);
-
-                  // Check if the currentSlug exists in the navigation
-                  var navItem = document.getElementById(currentSlug);
-                  if (navItem) {
-                     // Remove active class from all nav items
-                     document.querySelectorAll('.nav-item').forEach(item => {
-                        item.classList.remove('sms_e_active_item');
-                     });
-                     // Add active class to current slug
-                     navItem.classList.add('sms_e_active_item');
-                  }
-
-                  // Set the name based on the currentSlug
-                  var name = '';
-                  switch (currentSlug) {
-                     case 'index':
-                        name = 'Dashboard';
-                        break;
-
-                     case 'product':
-                        name = 'Product Management';
-                        // Add extra class to dropdown-menu for 'product' page
-                        document.getElementById('dropdown-menu').classList.add('show');
-                        document.getElementById('sms_w_dropdown_title').classList.add('sms_e_active_item');
-
-                        break;
-
-                     case 'inventory':
-                        name = 'Inventory Setting';
-                        // Add extra class to dropdown-menu for 'inventory' page
-                        document.getElementById('dropdown-menu').classList.add('show');
-                        document.getElementById('sms_w_dropdown_title').classList.add('sms_e_active_item');
-
-                        break;
-
-                     case 'coupons':
-                        name = 'Coupons And Benefits';
-                        // Add extra class to dropdown-menu for 'coupons' page
-                        document.getElementById('dropdown-menu').classList.add('show');
-                        document.getElementById('sms_w_dropdown_title').classList.add('sms_e_active_item');
-
-                        break;
-
-                     case 'customers':
-                        name = 'Customer';
-                        break;
-
-                     case 'transactions':
-                        name = 'Transaction';
-                        break;
-
-                     case 'statistics':
-                        name = 'Statistics';
-                        break;
-
-
-                     case 'goals':
-                        name = 'Objectives';
-                        break;
-
-
-                     case 'optimization':
-                        name = 'Optimization';
-                        break;
-
-                     case 'setting':
-                        name = 'Setting';
-                        break;
-
-                     case 'help':
-                        name = 'Help And Support';
-                        break;
-                     // Add more cases as needed
-                     default:
-                        name = 'Unknown'; // Default value if slug doesn't match any case
-                  }
-
-                  // Set the text of the div with id "sms_header_page_name" to the name
-                  document.getElementById('sms_header_page_name').innerText = name;
+            $(document).ready(function () {
+               $(".chosen-select").chosen({
+                  no_results_text: "Oops, nothing found!"
                });
+            });
+
+
+
+
+            window.addEventListener('load', function () {
+               const currentURL = window.location.href;
+               const domainName = 'storemanagement-frontend';
+
+               // Extract the slug from the URL
+               const pathname = new URL(currentURL).pathname;
+               const currentSlug = pathname.split('/').filter(Boolean).pop().replace('.php', '') || 'index';
+
+               // Define page names
+               const pageNames = {
+                  'index': 'Dashboard',
+                  'product': 'Product Management',
+                  'inventory': 'Inventory Setting',
+                  'coupons': 'Coupons And Benefits',
+                  'customers': 'Customer',
+                  'transactions': 'Transaction',
+                  'statistics': 'Statistics',
+                  'goals': 'Objectives',
+                  'optimization': 'Optimization',
+                  'setting': 'Setting',
+                  'help': 'Help And Support'
+               };
+
+               // Get the name based on the current slug
+               const name = pageNames[currentSlug] || 'Unknown';
+
+               // Update the page name element
+               const headerPageNameElement = document.getElementById('sms_header_page_name');
+               if (headerPageNameElement) {
+                  headerPageNameElement.innerText = name;
+               }
+
+               // Handle special cases for dropdown menu
+               const specialCases = ['product', 'inventory', 'coupons'];
+               if (specialCases.includes(currentSlug)) {
+                  const dropdownMenu = document.getElementById('dropdown-menu');
+                  const dropdownTitle = document.getElementById('sms_w_dropdown_title');
+                  if (dropdownMenu && dropdownTitle) {
+                     dropdownMenu.classList.add('show');
+                     dropdownTitle.classList.add('sms_e_active_item');
+                  }
+               }
+
+               // Set active class on navigation item
+               const navItem = document.getElementById(currentSlug);
+               if (navItem) {
+                  document.querySelectorAll('.nav-item').forEach(item => {
+                     item.classList.remove('sms_e_active_item');
+                  });
+                  navItem.classList.add('sms_e_active_item');
+               }
+            });
 
          </script>
          <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+
          <script>
             $(document).ready(function () {
 
@@ -872,4 +844,22 @@
                });
 
 
-            });</script>
+            });
+
+         </script>
+
+
+         <script>
+            var myElement = document.getElementById("myDiv");
+            var index = 1;
+            function funChangeDir() {
+               index += 1;
+               if (index % 2 === 0) {
+                  myElement.classList.add("rtl");
+                  console.log(myElement);
+               } else {
+                  myElement.classList.remove("rtl");
+                  console.log(myElement);
+               }
+            }
+         </script>
