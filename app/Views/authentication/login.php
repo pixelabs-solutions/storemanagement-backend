@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Sign in - Store Management System</title>
      <!-- CSS files -->
-    <link href="assets/dist/css/tabler.min.css?1695847769" rel="stylesheet"/>
-    <link href="assets/dist/css/tabler-flags.min.css?1695847769" rel="stylesheet"/>
-    <link href="assets/dist/css/tabler-payments.min.css?1695847769" rel="stylesheet"/>
-    <link href="assets/dist/css/tabler-vendors.min.css?1695847769" rel="stylesheet"/>
-    <link href="assets/dist/css/demo.min.css?1695847769" rel="stylesheet"/>
+    <link href="../assets/dist/css/tabler.min.css?1695847769" rel="stylesheet"/>
+    <link href="../assets/dist/css/tabler-flags.min.css?1695847769" rel="stylesheet"/>
+    <link href="../assets/dist/css/tabler-payments.min.css?1695847769" rel="stylesheet"/>
+    <link href="../assets/dist/css/tabler-vendors.min.css?1695847769" rel="stylesheet"/>
+    <link href="../assets/dist/css/demo.min.css?1695847769" rel="stylesheet"/>
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -26,7 +26,7 @@
     <div class="page page-center">
       <div class="container container-tight py-4">
         <div class="text-center mb-2">
-        <img src="./static/logo_image.svg"  alt="Store Management System" >
+        <img src="../assets/static/logo_image.svg"  alt="Store Management System" >
         </div>
         <div class="card card-md" style="border-radius:20px;">
           <div class="card-body">
@@ -34,7 +34,7 @@
             <form action="./" method="get" autocomplete="off" novalidate>
               <div class="mb-3">
                 <label class="form-label">Email address</label>
-                <input type="email" class="form-control" placeholder="your@email.com" autocomplete="off">
+                <input type="email" name="email" class="form-control" placeholder="your@email.com" autocomplete="off">
               </div>
               <div class="mb-2">
                 <label class="form-label">
@@ -67,7 +67,7 @@
               </div>
               <div class="mb-2">
                 <label class="form-check">
-                  <input type="checkbox" class="form-check-input"/>
+                  <input type="checkbox" class="form-check-input" />
                   <span class="form-check-label">Remember me on this device</span>
                 </label>
               </div>
@@ -83,7 +83,7 @@
       </div>
     </div>
     <!-- Libs JS -->
-    <script src="./dist/js/tabler.min.js?1695847769" defer></script>
-    <script src="./dist/js/demo.min.js?1695847769" defer></script>
+    <script src="../asseets/dist/js/tabler.min.js?1695847769" defer></script>
+    <script src="../asseets/dist/js/demo.min.js?1695847769" defer></script>
   </body>
 </html>
