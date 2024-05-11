@@ -158,4 +158,32 @@ class Product
             return null;
         }
     }
+
+    public static function createProductVariation($productId, $variationData)
+    {
+        $response = json_decode(Configuration::getConfiguration(), true);
+        if($response['status_code'] != 200)
+        {
+            echo $response["message"];
+        }
+        $configurations = $response['data'];
+        $consumer_key = $configurations["consumer_key"];
+        $consumer_secret = $configurations["consumer_secret"];
+        $store_url = $configurations["store_url"];
+        $client = new Client();
+
+        $response = $client->request('POST', $store_url . '/wp-json/wc/v3/products/'.$productId.'/variations', [
+            'auth' => [$consumer_key, $consumer_secret],
+            'body' => json_encode($variationData)
+        ]);
+
+        if ($response->getStatusCode() == 201) 
+        {
+            return ['success' => 'true', 'status_code' => $response->getStatusCode()];
+        } 
+        else 
+        {
+            return ['success' => 'false', 'status_code' => $response->getStatusCode()];
+        }
+    }
 }

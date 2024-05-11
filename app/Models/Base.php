@@ -120,12 +120,11 @@ class Base
                 'body' => $payload
             ]);
 
-            // var_dump($response);
 
-            // var_dump($response->getBody());
             if ($response->getStatusCode() == 201) 
             {
-                return ['success' => 'true', 'status_code' => $response->getStatusCode()];
+                $data = json_decode($response->getBody(), true);
+                return ['success' => 'true', 'status_code' => $response->getStatusCode(), 'data_id' => $data['id']];
             } 
             else 
             {
@@ -227,8 +226,6 @@ class Base
                 ],
                 'body' => $payload
             ]);
-
-            var_dump($response);
 
             // var_dump($response->getBody());
             if ($response->getStatusCode() == 200) 
