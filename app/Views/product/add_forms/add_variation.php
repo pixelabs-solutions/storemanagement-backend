@@ -93,7 +93,7 @@
             <div class="col-12 col-md-10">
                 <div class="">
 
-                    <form action="" method="post" class="card-body">
+                    <form action="" id="form" method="" class="card-body">
                         <!-- header -->
                         <div class="row gx-3">
                             <div class="col-md-6 mb-3">
@@ -252,7 +252,8 @@
                         </div>
                         <!-- submit button -->
                         <div class="text-center mt-4 ">
-                            <button type="submit"
+                            <button type="button"
+                            onclick="submit_form()"
                                 class=" btn btn-primary col-12 col-md-12 fs-3 rounded-3 py-3 border-0 fw-bold">To
                                 add the product click here +</button>
                         </div>
@@ -264,7 +265,109 @@
 </div>
 
 <script>
-    var selectElement = document.getElementById('IOP');
+    let selectElement = document.getElementById('IOP');
+    
+    function submit_form(){
+        console.log("hello")
+        // Log all the form values
+        var formData = {
+                'Product Name': document.getElementById('example-text-input').value,
+                'Category': getSelectedValues('choices-multiple-remove-button'),
+                'product image': document.getElementById('single-image-input').value,
+                'photo gallery': document.getElementById('multiple-images-input').value,
+                'description': document.getElementById('floatingTextarea2').value,
+                'Select Term Attribute': getSelectedValues('IOP'),
+                // 'Select options': getSelectedValues('sMS_MU_SET'),
+                // 'Variations 1': document.getElementById('').value,
+                // 'Variations 2': document.getElementById('document.getElementById').value,
+                // 'Variations 3': document.getElementById('document.getElementById').value,
+                // // 'Configure Variations': getSelectedValues(''),
+                // 'outOfStockThreshold': document.getElementById('outOfStockThreshold').value
+            };
+         
+
+            var variationInputs = document.querySelectorAll('.sms_mu_variation_in_combination_input_read');
+            var variationInputsTwo = document.querySelectorAll('.sms_mu_variation_in_combination_input_two');
+            var variationInputsOne = document.querySelectorAll('.sms_mu_variation_in_combination_input');
+             
+            variations = [];
+
+    // Iterate through variation inputs to get their values
+            variationInputs.forEach((input, index) => {
+        var variation = {}
+            variation['Variation ' + (index + 1)] = input.value,
+            variation['Variation Two ' + (index + 1)] = variationInputsTwo[index].value
+            variation['Variation One' + (index + 1)] = variationInputsOne[index].value
+        variations.push(variation);
+    });
+    // Add variations to formData
+    variations.forEach(variation => {
+        Object.assign(formData, variation);
+    });
+    const arrays = [];
+        for (let i = 0; i < selectElement.length; i++) {
+            const selectBox = document.querySelector(`.select_box${i}`);
+            if (selectBox) {
+                const values = Array.from(selectBox.options).map(option => option.value);
+                arrays.push(values);
+            }
+        }
+    var dynamicInputValues = [];
+    for(let i = 0; i < selectElement.length; i++){
+    var selectBox = document.querySelector(`.select_box${i}`);
+    if (selectBox) {
+                const values = Array.from(selectBox.options).map(option => option.value);
+                dynamicInputValues.push(values);
+            }
+            //Posting form data
+            fetch('products/variations', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Form data submitted successfully:', data);
+        // Optionally, you can handle the response data here
+    })
+    .catch(error => {
+        console.error('Error submitting form data:', error);
+    });
+    // selectBoxes.forEach(selectBox => {
+    //     var values = getSelectedValues(selectBox.id);
+    //     dynamicInputValues.push(values);
+    // });
+    }
+    // Add dynamic input values to formData
+    dynamicInputValues.forEach((values, index) => {
+        formData['Dynamic Input Values ' + (index + 1)] = values;
+    });
+    console.log(formData);
+    // You can submit the form programmatically if needed
+    // this.submit();
+        // You can submit the form programmatically if needed
+        // this.submit();
+    }
+
+    function getSelectedValues(selectId) {
+    var selectedOptions = [];
+    let selectElement = document.getElementById(selectId);
+    for (var i = 0; i < selectElement.options.length; i++) {
+        var option = selectElement.options[i];
+        if (option.selected) {
+            selectedOptions.push(option.value);
+        }
+    }
+    return selectedOptions;
+}
+    
     function fun_save_changes() {
     let parentDiv = document.getElementById('selectedOptionsDiv');
     if (selectElement.length < 1) {
@@ -354,6 +457,7 @@
         combinations.forEach(combination => {
             const readOnlyInput = document.createElement('input');
             readOnlyInput.classList.add('sms_mu_variation_in_combination_input_read');
+            // readOnlyInput.id = 'sms_mu_variation_combination_input_read';
             readOnlyInput.type = 'text';
             readOnlyInput.readOnly = true;
             readOnlyInput.value = combination.join('-');
@@ -362,12 +466,14 @@
             const numberInput1 = document.createElement('input');
             numberInput1.text="Variations"
             numberInput1.classList.add('sms_mu_variation_in_combination_input');
+            // numberInput.id = 'sms_mu_variation_combination_input';
             numberInput1.type = 'number';
             container.appendChild(numberInput1);
 
             const numberInput2 = document.createElement('input');
             numberInput2.classList.add('sms_mu_variation_in_combination_input_two');
             numberInput2.type = 'number';
+            // numberInput2.id = 'sms_mu_variation_combination_input_two';
             container.appendChild(numberInput2);
 
             container.appendChild(document.createElement('br')); // Add line break
