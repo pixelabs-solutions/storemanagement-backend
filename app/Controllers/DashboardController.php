@@ -9,10 +9,10 @@ class DashboardController
 {
     public function index()
     {
-        // if(!Authentication::isUserLoggedIn()){
-        //     //Redirect user to login page
-        //     return;
-        // }
+        if(!Authentication::isUserLoggedIn()){
+            //Redirect user to login page
+            header('Location: /authentication/login');
+        }
         $filters = [
             'query' => $_GET['query'] ?? null,
             'date_from' => $_GET['date_from'] ?? null,

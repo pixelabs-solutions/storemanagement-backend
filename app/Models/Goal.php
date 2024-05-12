@@ -11,10 +11,11 @@ class Goal
         $user_id = Authentication::getUserId();
         if($user_id == null)
         {
-            return json_encode([
-                "message" => "User not authenticated.",
-                "status_code" => 401 
-            ]);
+            // return json_encode([
+            //     "message" => "User not authenticated.",
+            //     "status_code" => 401 
+            // ]);
+            header('Location: /authentication/login');
         }
 
         $query = "INSERT INTO goals 

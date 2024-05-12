@@ -124,11 +124,11 @@ class Base
             if ($response->getStatusCode() == 201) 
             {
                 $data = json_decode($response->getBody(), true);
-                return ['success' => 'true', 'status_code' => $response->getStatusCode(), 'data_id' => $data['id']];
+                return json_encode(['message' => 'Data added', 'status_code' => $response->getStatusCode(), 'data_id' => $data['id']]);
             } 
             else 
             {
-                return ['success' => 'false', 'status_code' => $response->getStatusCode()];
+                return json_encode(['message' => 'Could not add data', 'status_code' => $response->getStatusCode()]);
             }
         }
         catch(RequestException $exception)
@@ -157,12 +157,15 @@ class Base
                 'auth' => [$consumer_key, $consumer_secret]
             ]);
         
-            $coupon = json_decode($response->getBody(), true);
-            // if($product['status'] !== 'publish')
-            // {
-            //     return null;
-            // }
-            return $coupon;
+            if($response->getStatusCode() == 200)
+            {
+                $data = json_decode($response->getBody(), true);
+                return json_encode(['message' => 'Fetched successfully', 'status_code' => $response->getStatusCode(), 'data' => $data]);
+            }
+            else
+            {
+                return json_encode(['message' => 'Not found', 'status_code' => $response->getStatusCode()]);
+            }
         } 
         catch (RequestException $e) 
         {
@@ -192,9 +195,13 @@ class Base
 
             if($response->getStatusCode() == 200)
             {
-                return json_decode($response->getBody(), true);
+                $data = json_decode($response->getBody(), true);
+                return json_encode(['message' => 'Deleted', 'status_code' => $response->getStatusCode(), 'data_id' => $data['id']]);
             }
-            return null;
+            else
+            {
+                return json_encode(['message' => 'Could not delete record', 'status_code' => $response->getStatusCode()]);
+            }
         
         } 
         catch (RequestException $e) 
@@ -230,11 +237,11 @@ class Base
             // var_dump($response->getBody());
             if ($response->getStatusCode() == 200) 
             {
-                return ['success' => 'true', 'status_code' => $response->getStatusCode()];
+                return json_encode(['message' => 'Data updated', 'status_code' => $response->getStatusCode()]);
             } 
             else 
             {
-                return ['success' => 'false', 'status_code' => $response->getStatusCode()];
+                return json_encode(['message' => 'Could not update record', 'status_code' => $response->getStatusCode()]);
             }
         }
         catch(RequestException $exception)

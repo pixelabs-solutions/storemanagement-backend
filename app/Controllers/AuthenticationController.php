@@ -35,7 +35,7 @@ class AuthenticationController
 
         $result = Authentication::login($email, $password);
         $response = json_decode($result, true);
-        if($response['status_code'] == 20)
+        if($response['status_code'] == 200)
         {
             header('Location: /index');
         }
