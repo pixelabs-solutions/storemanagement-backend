@@ -30,11 +30,12 @@ class Dashboard
             $new_customers_count = Base::get_new_customers_count($data["store_url"], $params);
             $total_transactions = Base::get_total_revenue($data["store_url"], $params);
 
-            return [
+            $data = [
                 'new_products' => $products,
                 'new_customers' => $new_customers_count,
                 'total_transactions' => $total_transactions
             ];
+            return $data;
         }
         catch (\Exception $e) 
         {
@@ -105,7 +106,6 @@ class Dashboard
                     'percentage_of_customers' => number_format($percentage, 2) . '%'
                 ];
             }
-
             return [
                 'customers_location' => $formattedCities,
                 'latest_orders' => $latestOrders
@@ -166,8 +166,8 @@ class Dashboard
                     ];
                 }
             }
-    
             return $topProducts;
+            
         } 
         catch (\GuzzleHttp\Exception\RequestException $e) {
             return 'Error fetching product data: ' . $e->getMessage();

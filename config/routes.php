@@ -21,8 +21,10 @@ use Pixelabs\StoreManagement\Controllers\AttributesController;
 
 //Authentication
 
-$router->post('/authentication/register', [AuthenticationController::class, 'register']);
-$router->post('/authentication/login', [AuthenticationController::class, 'login']);
+$router->get('/authentication/register', [AuthenticationController::class, 'register']);
+$router->post('/authentication/register', [AuthenticationController::class, 'register_user']);
+$router->get('/authentication/login', [AuthenticationController::class, 'login']);
+$router->post('/authentication/login', [AuthenticationController::class, 'login_user']);
 $router->get('/authentication/logout', [AuthenticationController::class, 'logout']);
 
 //Dashboard

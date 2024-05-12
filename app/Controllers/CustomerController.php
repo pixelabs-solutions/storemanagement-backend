@@ -10,7 +10,7 @@ class CustomerController
     {
         $customers = Customer::get_customers();
 
-        print_r($customers);
+        echo $customers;
         // include_once __DIR__ . '/../Views/customers/index.php';
     }
 }

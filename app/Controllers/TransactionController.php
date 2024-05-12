@@ -11,7 +11,7 @@ class TransactionController
     public function index()
     {
         $transactions = Base::wc_get("orders");
-        var_dump($transactions);
+        echo $transactions;
         //include_once __DIR__ . '/../Views/transaction/index.php';
     }
 
@@ -19,7 +19,7 @@ class TransactionController
     public function get_by_id($id)
     {
         $transaction = Base::wc_get_by_id("orders/{$id}");
-        print_r($transaction);
+        echo $transaction;
     }
 
     public function update_status($id)
@@ -39,6 +39,6 @@ class TransactionController
 
         $result = Base::wc_update("orders/{$id}", $payload);
 
-        print_r($result);
+        echo $result;
     }
 }

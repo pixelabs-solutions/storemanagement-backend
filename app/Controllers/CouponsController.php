@@ -11,7 +11,7 @@ class CouponsController
     {
         $coupons = Base::wc_get($this->endpoint);
         //include_once __DIR__ . '/../Views/coupons/index.php';
-        print_r($coupons);
+        echo $coupons;
     }
 
 
@@ -35,21 +35,21 @@ class CouponsController
         ]);
 
         $response = Base::wc_add($this->endpoint, $payload);
-        print_r($response);
+        echo $response;
     }
 
     public function get($id)
     {
         $coupon = Base::wc_get_by_id($this->endpoint."/".$id);
 
-        print_r($coupon);
+        echo $coupon;
     }
 
 
     public function delete($id)
     {
         $result = Base::wc_delete_by_id($this->endpoint."/".$id);
-        print_r($result);
+        echo $result;
     }
 
     public function update($id)
@@ -70,7 +70,7 @@ class CouponsController
             'usage_limit' => $data['usage_limit']
         ]);
         $response = Base::wc_update($this->endpoint."/".$id, $payload);
-        print_r($response);
+        echo $response;
     }
 
 }

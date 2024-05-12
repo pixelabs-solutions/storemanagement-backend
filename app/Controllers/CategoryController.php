@@ -11,20 +11,20 @@ class CategoryController
     {
         $categories = Base::wc_get($this->endpoint);
         //include_once __DIR__ . '/../Views/coupons/index.php';
-        print_r($categories);
+        echo $categories;
     }
 
     public function get($id)
     {
         $category = Base::wc_get_by_id($this->endpoint."/".$id);
 
-        print_r($category);
+        echo $category;
     }
 
     public function delete($id)
     {
         $result = Base::wc_delete_by_id($this->endpoint."/".$id);
-        print_r($result);
+        echo $result;
     }
 
     public function add()
@@ -46,7 +46,7 @@ class CategoryController
         ]);
 
         $response = Base::wc_add($this->endpoint, $payload);
-        print_r($response);
+        echo $response;
     }
 
     public function update($id)
@@ -67,6 +67,6 @@ class CategoryController
             ]
         ]);
         $response = Base::wc_update($this->endpoint."/".$id, $payload);
-        print_r($response);
+        echo $response;
     }
 }

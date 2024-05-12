@@ -57,10 +57,12 @@ class Configuration
         $user_id = Authentication::getUserId();
         if($user_id == null)
         {
-            return json_encode([
-                "message" => "User not authenticated.",
-                "status_code" => 401 
-            ]);
+            // return json_encode([
+            //     "message" => "User not authenticated.",
+            //     "status_code" => 401 
+            // ]);
+            header('Location: /authentication/login');
+
         }
         // SQL to fetch configuration based on user ID
         $query = "SELECT * FROM user_configurations WHERE user_id = ? LIMIT 1";

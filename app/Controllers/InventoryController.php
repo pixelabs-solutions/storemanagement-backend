@@ -32,7 +32,7 @@ class InventoryController
             }
         }
 
-        print_r($inventory_settings);
+        echo $inventory_settings;
         //include_once __DIR__ . '/../Views/inventory/settings.php';
     }
 
@@ -78,7 +78,7 @@ class InventoryController
         );
         $result = Base::wc_update("settings/products/batch", $payload);
 
-        var_dump($result);
+        echo $result;
     }
 
     // public function update()

@@ -20,7 +20,7 @@ class StatisticsController
             'date_to' => $_GET['date_to'] ?? null
         ];
         $products_stats = Statistics::get_products_stats($filters);
-        print_r($products_stats);
+        echo json_encode($products_stats);
     }
 
     public function orders()
@@ -32,7 +32,7 @@ class StatisticsController
         ];
 
         $orders_stats = Statistics::get_orders_stats($filters);
-        print_r($orders_stats);
+        echo json_encode($orders_stats);
     }
 
     public function revenue()
@@ -44,7 +44,7 @@ class StatisticsController
         ];
 
         $revenue_stats = Statistics::get_revenue_stats($filters);
-        print_r($revenue_stats);
+        echo json_encode($revenue_stats);
     }
 
     public function overview()
@@ -56,6 +56,6 @@ class StatisticsController
         ];
 
         $overview_stats = Statistics::get_overview_stats($filters);
-        print_r($overview_stats);
+        echo json_encode($overview_stats);
     }
 }
