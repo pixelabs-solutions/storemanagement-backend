@@ -16,35 +16,37 @@ class AuthenticationController
     }
     public function register_user()
     {
-        $rawData = file_get_contents("php://input");
-        $data = json_decode($rawData, true);
-        
-        $email = isset($data['email']) ? $data['email'] : null;
-        $password = isset($data['password']) ? $data['password'] : null;
-        $result = Authentication::register($email, $password);
-
-        echo $result;
+        $name = isset($_POST['name']) ? $_POST['name']: null;
+        $email = isset($_POST['email']) ? $_POST['email'] : null;
+        $password = isset($_POST['password']) ? $_POST['password'] : null;
+        $result = Authentication::register($name, $email, $password);
+        $response = json_decode($result, true);
+        if($response['status_code'] == 201)
+        {
+            header('Location: /authentication/login');
+        }
+        echo $response['message'];
     }
 
     public function login_user()
     {
-        $rawData = file_get_contents("php://input");
-        $data = json_decode($rawData, true);
-
-        $email = isset($data['email']) ? $data['email'] : null;
-        $password = isset($data['password']) ? $data['password'] : null;
+        $email = isset($_POST['email']) ? $_POST['email'] : null;
+        $password = isset($_POST['password']) ? $_POST['password'] : null;
 
         $result = Authentication::login($email, $password);
-
-        echo $result;
+        $response = json_decode($result, true);
+        if($response['status_code'] == 20)
+        {
+            header('Location: /index');
+        }
+        echo $response['message'];
     }
 
     public function logout()
     {
         $result = Authentication::logout();
-        echo $result;
         
-        // header('Location: /authentication/login');
+        header('Location: /authentication/login');
         // exit;
     }
 

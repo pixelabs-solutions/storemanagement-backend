@@ -31,7 +31,7 @@
         <div class="card card-md" style="border-radius:20px;">
           <div class="card-body">
             <h2 class="h2 text-center mb-4">Login to your account</h2>
-            <form action="./" method="get" autocomplete="off" novalidate>
+            <form action="/authentication/login" method="POST" autocomplete="off" novalidate>
               <div class="mb-3">
                 <label class="form-label">Email address</label>
                 <input type="email" name="email" class="form-control" placeholder="your@email.com" autocomplete="off">
@@ -45,7 +45,7 @@
                 </label>
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
-                        var passwordInput = document.querySelector('input[name="pass"]');
+                        var passwordInput = document.querySelector('input[name="password"]');
                         var eyeIcon = document.querySelector('.input-group-text .icon');
                         eyeIcon.addEventListener('click', function() {
                         if (passwordInput.type === 'password') {
@@ -57,7 +57,7 @@
                     });
                 </script>
                 <div class="input-group input-group-flat">
-                    <input type="password" autocomplete="off" name="pass" class="form-control" placeholder="Password - at least 6 characters" value=""  tabindex="3">
+                    <input type="password" autocomplete="off" name="password" class="form-control" placeholder="Password - at least 6 characters" value=""  tabindex="3">
                     <span class="input-group-text">
                         <a class="link-secondary text-info" title="Show password" data-bs-toggle="tooltip">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>

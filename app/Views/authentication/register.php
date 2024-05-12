@@ -28,20 +28,20 @@
       <div class="text-center mb-2">
         <img src="../assets/static/logo_image.svg"  alt="Store Management System" >
         </div>
-        <form class="card card-md" style="border-radius:20px;" action="#" method="get" autocomplete="off" novalidate>
+        <form class="card card-md" style="border-radius:20px;" action="/authentication/register" method="post" autocomplete="off" novalidate>
           <div class="card-body">
             <h2 class="card-title text-center mb-4">Create new account</h2>
             <div class="mb-3">
               <label class="form-label">Name</label>
-              <input type="text" class="form-control" placeholder="Enter name">
+              <input name="name" type="text" class="form-control" placeholder="Enter name">
             </div>
             <div class="mb-3">
               <label class="form-label">Email address</label>
-              <input type="email" class="form-control" placeholder="Enter email">
+              <input name="email" type="email" class="form-control" placeholder="Enter email">
             </div>
             <script>
                     document.addEventListener('DOMContentLoaded', function() {
-                        var passwordInput = document.querySelector('input[name="newpass"]');
+                        var passwordInput = document.querySelector('input[name="password"]');
                         var eyeIcon = document.querySelector('.input-group-text .icon');
                         eyeIcon.addEventListener('click', function() {
                         if (passwordInput.type === 'password') {
@@ -55,7 +55,7 @@
             <div class="mb-3">
               <label class="form-label">Password</label>
               <div class="input-group input-group-flat">
-                <input type="password" class="form-control" name="newpass" placeholder="Password"  autocomplete="off">
+                <input type="password" class="form-control" name="password" placeholder="Password"  autocomplete="off">
                 <span class="input-group-text">
                   <a href="#" class="link-secondary text-info" title="Show password" data-bs-toggle="tooltip">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>

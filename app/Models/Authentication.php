@@ -5,20 +5,17 @@ namespace Pixelabs\StoreManagement\Models;
 
 class Authentication
 {
-    public static function register($email, $password) {
+    public static function register($name, $email, $password) {
         global $connection; 
 
         if (!empty($email) && !empty($password)) 
         {
-            $stmt = $connection->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+            $stmt = $connection->prepare("INSERT INTO users (name, username, email, password) VALUES (?, ?, ?, ?)");
 
-            // Prepare the hashed password
             $hashedPassword = self::hashPassword($password);
 
-            // Bind parameters
-            $stmt->bind_param("sss", $email, $email, $hashedPassword); // Assume the username and email are the same
+            $stmt->bind_param("ssss", $name, $email, $email, $hashedPassword);
 
-            // Execute statement
             if ($stmt->execute()) 
             {
                 return json_encode(array(
@@ -39,7 +36,7 @@ class Authentication
         {
             return json_encode(array(
                 "message" => "Unable to register user. Data is incomplete.",
-                "status_code" => 400 // Bad request
+                "status_code" => 400, // Bad request
             ));
         }
     }
