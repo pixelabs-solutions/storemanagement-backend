@@ -54,15 +54,16 @@
                         <!-- <div class="py-3 rounded-top text-center mb-4" style="background-color: #4987D870">
                             <h3 class="card-title text-black fs-2 fw-bold">Editing a regular product</h3>
                         </div> -->
-                        <form action="" method="post" class="card-body">
+                        <form  class="card-body add_regular_product_form">
                             <!-- header -->
                             <div class="row gx-3">
                                 <div class="col-md-6 mb-3">
                                     <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Product
                                         Name</label>
                                     <input type="text" class="form-control rounded-3 p-3 fw-bold"
-                                        id="example-text-input" style="background-color: #EAEAEA"
-                                        placeholder="Blue Gucci bag">
+                                        id="sms_product_name" style="background-color: #EAEAEA"
+                                        placeholder="Blue Gucci bag"
+                                       >
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="example-select fs-3 fw-bold" class="form-label fw-bold">Category
@@ -72,8 +73,8 @@
                             <div class="col-md-12 rounded-4 bg-transparent h-100 ">
                                 <select id="choices-multiple-remove-button" multiple
                                     style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
-                                    <option value="NOSQL" onclick="fun_add_variation()">Bags</option>
-                                    <option value="NodeJS" onclick="fun_add_variation()">List</option>
+                                    <option value="NOSQL" >Bags</option>
+                                    <option value="NodeJS" >List</option>
                                 </select>
                                 <span
                                 class="span_div">
@@ -161,7 +162,7 @@
                             </div>
                             <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
                                 <div class="text-center mt-2 col-sm-6 col-md-6">
-                                    <button type="submit" class="btn btn-primary col-12 rounded-4 py-3">To update
+                                    <button class="btn btn-primary col-12 rounded-4 py-3" id="btn_submit">To update
                                         the product →</button>
                                 </div>
                                 <div class="text-center mt-2 col-sm-6 col-md-6">
@@ -171,6 +172,8 @@
                             </div>
 
                     </div>
+                 <button onclick="fun()">click</button>
+
                     </form>
                 </div>
             </div>
@@ -180,6 +183,20 @@
 
     <!-- input javascript code  -->
     <script>
+function fun(){
+ let productName =   document.getElementById('sms_product_name').value
+ console.log(productName)
+}
+
+        //  var input1= document.getElementById("example-text-input").value;
+        //    console.log(input1);
+        let inp=document.getElementById('example-text-input').value;
+
+        function fun_chg_input1(){
+            let inp=document.getElementById('example-text-input').value;
+               console.log(inp);
+        }
+
         function sms_a_edit_product_variations_image() {
             var input = document.getElementById('single-image-input');
             var fileName = input.files[0].name;
@@ -215,7 +232,7 @@
                 <div class="d-flex justify-content-between col-6 m-auto">
                   <button type="button" class="btn  cancel-btn sms_modal_cancel_btn" data-dismiss="modal"
                     style="background-color:#afcaee">Cancel</button>
-                  <a href="product.php"><button type="submit" class="btn btn-danger">Delete</button></a>
+                  <a href="product.php"><button type="button" class="btn btn-danger">Delete</button></a>
                 </div>
               </div>
             </div>
@@ -257,3 +274,55 @@ function openModal(modalId) {
 }
 
 </script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // This code runs after the DOM is fully loaded
+
+        // Define the function to handle the button click
+        function handleButtonClick() {
+            // Retrieve values from input fields
+            var productName = document.getElementById("example-text-input").value;
+            var category = document.getElementById("choices-multiple-remove-button").value;
+            var normalPrice = document.getElementById("example-text-input").value;
+            var salePrice = document.getElementById("example-text-input").value;
+            var description = document.getElementById("floatingTextarea2").value;
+            var unitsInStock = document.getElementById("example-text-input").value;
+
+            // Construct data object
+            var data = {
+                productName: productName,
+                category: category,
+                normalPrice: normalPrice,
+                salePrice: salePrice,
+                description: description,
+                unitsInStock: unitsInStock
+            };
+
+            // Log data to console
+            console.log(data);
+
+            // Send data via AJAX
+            // Replace '/your-endpoint' with your actual endpoint URL
+            // fetch('/your-endpoint', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(data)
+            // })
+            // .then(response => response.json())
+            // .then(data => {
+            //     console.log(data);
+            // })
+            // .catch(error => {
+            //     console.error('Error:', error);
+            // });
+        }
+
+        // Add event listener to the button with id "abc"
+        document.getElementById("btn_submit").addEventListener("click", handleButtonClick);
+    });
+</script>
+
