@@ -70,7 +70,7 @@
                             <div class="col-md-6 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">The name of the
                                     category</label>
-                                <input type="text" class="form-control rounded-3 p-3 fw-bold" id="example-text-input"
+                                <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_name_ctg"
                                     style="background-color: #EAEAEA" placeholder="key chain">
                             </div>
                             <div class="col-md-6 mb-3">
@@ -79,7 +79,7 @@
                                 <div
                                     style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                     <div class="col-md-12 rounded-4 bg-transparent h-100 ">
-                                        <select id="choices-multiple-remove-button" multiple
+                                        <select  id="sms_mu_parent_ctg"multiple
                                             style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
                                             <option value="NOSQL">Ctg</option>
                                             <option value="NodeJS">demo</option>
@@ -107,9 +107,9 @@
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">
                                             <div class="sms_a_add_new_category">
-                                                <input type="file" id="sms_a_add_categorys_image" accept="image/*"
+                                                <input type="file" id="sms_mu_img_add_ctg" accept="image/*"
                                                     onchange="sms_a_add_new_categorys()">
-                                                <label for="sms_a_add_categorys_image">
+                                                <label for="sms_mu_img_add_ctg">
                                                     <i class="bi bi-image text-black"></i><svg
                                                             width="20" height="20" viewBox="0 0 32 26" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -128,7 +128,7 @@
                             <!-- To update the term click here+ -->
                             <!-- To add another term click here + -->
                             <div class="text-center mt-2 p-2  ">
-                                <button type="submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3">To add the
+                                <button type="button" onclick="function_of_Edit()" class="btn btn-primary col-12 col-md-12 rounded-4 py-3">To add the
                                     category click here +</button>
                             </div>
 
@@ -142,8 +142,24 @@
 
 <!-- input javascript code  -->
 <script>
+ function function_of_Edit() {
+    var selectElement = document.getElementById("sms_mu_parent_ctg");
+    var selectedOptions = selectElement.selectedOptions;
+    var selectedValues = [];
+    for (var i = 0; i < selectedOptions.length; i++) {
+        selectedValues.push(selectedOptions[i].value);
+    }
+    var data_of_add_ctg = {
+        "img": document.getElementById('sms_mu_img_add_ctg').value,
+        "name": document.getElementById('sms_mu_name_ctg').value,
+        "parent": selectedValues 
+    };
+    console.log(data_of_add_ctg);
+}
+
+   
    function sms_a_add_new_categorys() {
-        var input = document.getElementById('sms_a_add_categorys_image');
+        var input = document.getElementById('sms_mu_img_add_ctg');
         console.log(input.files); // Check if files are being captured
         if (input.files.length > 0) {
             var fileName = input.files[0].name;
@@ -152,6 +168,35 @@
             input.nextElementSibling.innerHTML = fileName;
         }
     }
+    function function_submit_ctg() {
+    // Get the select element
+    var selectElement = document.getElementById("sms_mu_select_category");
+
+    // Get the selected options
+    var selectedOptions = selectElement.selectedOptions;
+
+    // Log selected values to the console using a for loop
+    console.log("Selected values:");
+    for (var i = 0; i < selectedOptions.length; i++) {
+        console.log(selectedOptions[i].value);
+    }
+
+    // Prepare form data
+    var form_data = {
+        "name of ctg": document.getElementById("sms_mu_key_category").value,
+        "selected values": [], // Array to store selected values
+        "image value": document.getElementById("sms_img_ctg").value
+    };
+
+    // Add selected values to the form data
+    for (var i = 0; i < selectedOptions.length; i++) {
+        form_data["selected values"].push(selectedOptions[i].value);
+    }
+
+    // Log form data to the console
+    console.log("Form data:", form_data);
+}
+
 </script>
 <!-- </body>
 <script src="./dist/js/tabler.min.js?1684106062" defer></script>

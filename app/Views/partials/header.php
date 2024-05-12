@@ -875,6 +875,39 @@
 
 
             });
+            $(document).ready(function () {
+
+               var multipleCancelButton = new Choices('#category_in_product', {
+                  removeItemButton: true,
+                  maxItemCount: 5,
+                  searchResultLimit: 5,
+                  renderChoiceLimit: 5
+               });
+
+
+            });
+            $(document).ready(function () {
+
+               var multipleCancelButton = new Choices('#sms_mu_select_category', {
+                  removeItemButton: true,
+                  maxItemCount: 5,
+                  searchResultLimit: 5,
+                  renderChoiceLimit: 5
+               });
+
+
+            });
+            $(document).ready(function () {
+
+               var multipleCancelButton = new Choices('#sms_mu_parent_ctg', {
+                  removeItemButton: true,
+                  maxItemCount: 5,
+                  searchResultLimit: 5,
+                  renderChoiceLimit: 5
+               });
+
+
+            });
 
          </script>
 
