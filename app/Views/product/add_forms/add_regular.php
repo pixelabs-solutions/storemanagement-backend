@@ -76,7 +76,7 @@
                                     <option value="NodeJS" onclick="fun_add_variation()">List</option>
                                 </select>
                                 <span
-                                    style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); pointer-events: none;">
+                                class="span_div">
                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd"

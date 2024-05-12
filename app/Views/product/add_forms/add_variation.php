@@ -236,19 +236,17 @@
                         <div id="selectedOptionsDiv"></div>
 
                         <div class="rounded-4">
-                            <div class="col-12 col-md-12 rounded-2" id="sms_a_add_product_variation">
-                                <!-- add some filed to javascit this is important -->
-
-                            </div>
+                          
                             <h2 class="text-center my-3" id="sms_mu_configure" >Configure Variations</h2>
                             <div id="inputs-container"></div>
 
                             <!-- To add another term click here + -->
-                            <div class="text-center mt-4  ">
-                                <button type="button" onclick="generate_variations()"
+                            <div class="text-center mt-4 ">
+                                <button type="button" 
+                                id="SMS_MU_ADD_GENERATE_VARIATIONS"
+                                onclick="generate_variations()"
                                     class=" col-12 col-md-12 fs-3 rounded-3 py-3 border-0 fw-bold"
-                                    style="background: rgba(73, 135, 216, 0.44);">Adding an additional term to +
-                                    variations </button>
+                                    style="background: rgba(73, 135, 216, 0.44); text-align:center !important; padding:0 41%;">Generate Variations </button>
                             </div>
 
                         </div>
@@ -267,30 +265,42 @@
 
 <script>
     var selectElement = document.getElementById('IOP');
-
     function fun_save_changes() {
-        let parentDiv = document.getElementById('selectedOptionsDiv');
-        // Remove existing divs
-        parentDiv.innerHTML = '';
+    let parentDiv = document.getElementById('selectedOptionsDiv');
+    if (selectElement.length < 1) {
+      document.getElementById('SMS_MU_ADD_GENERATE_VARIATIONS').style.display = 'none'
+    
+    }else{
+        document.getElementById('SMS_MU_ADD_GENERATE_VARIATIONS').style.display = 'flex'
+    }
 
-        // Loop through all options
-        for (let i = 0; i < selectElement.options.length; i++) {
-            let option = selectElement.options[i];
-            // Check if the option is selected
-            if (option.selected) {
+    // Remove existing divs
+    parentDiv.innerHTML = '';
+
+    let termOfVariationSelected = false;
+
+    // Loop through all options
+    for (let i = 0; i < selectElement.options.length; i++) {
+        let option = selectElement.options[i];
+        // Check if the option is selected
+        if (option.selected) {
+            if (option.value === 'add_term_variation') {
+                termOfVariationSelected = true;
+                break; // Exit loop immediately if a variation option is selected
+            } else {
                 // Create a new div for the selected option
                 let newDiv = document.createElement('div');
                 newDiv.classList.add('selected-option');
 
                 // Customize the content of the div
                 newDiv.innerHTML = `  
-                  <label class="form-label fw-bold mt-5"> Select ${option.value} Attribute</label>
+                  <label class="form-label fw-bold mt-5"> Select ${option.value}> Attribute</label>
                 <div
                        style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                     <div class="col-md-12 rounded-4 bg-transparent h-100 ">
                                         <select 
                                         class='select_box${i}'
-                                        id="choices-multiple-remove-button_set" multiple
+                                        id="sMS_MU_SET" multiple
                                             style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
                                             <option value="NOSQL">Ctg</option>
                                             <option value="NodeJS">demo</option>
@@ -307,27 +317,22 @@
                                     </div>
                                 </div> `;
                 parentDiv.appendChild(newDiv);
-
-
             }
         }
-
-
-
-        // Initialize Choices for dynamically created select elements
-        var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
-            removeItemButton: true,
-            maxItemCount: 5,
-            searchResultLimit: 5,
-            renderChoiceLimit: 5
-        });
-        var multipleCancelButton = new Choices('#choices-multiple-remove-button_set', {
-            removeItemButton: true,
-            maxItemCount: 5,
-            searchResultLimit: 5,
-            renderChoiceLimit: 5
-        });
     }
+
+    // Check if any option in the term of variation is selected
+    
+
+    // If no option in the term of variation is selected, create divs under the category label
+    
+    var multipleCancelButton = new Choices('#sMS_MU_SET', {
+        removeItemButton: true,
+        maxItemCount: 5,
+        searchResultLimit: 5,
+        renderChoiceLimit: 5
+    });
+}
 
     function generate_variations() {
         const arrays = [];
@@ -413,40 +418,40 @@
     }
 
     // Function to add input fields
-    function sms_a_add_product_variation_inputs() {
-        inputCount += 0;
-        var container = document.getElementById('sms_a_add_product_variation');
-        var newInput = document.createElement('div');
-        newInput.classList.add('col-md-12', 'mb-0', 'p-0');
+//     function sms_a_add_product_variation_inputs() {
+//         inputCount += 0;
+//         var container = document.getElementById('sms_a_add_product_variation');
+//         var newInput = document.createElement('div');
+//         newInput.classList.add('col-md-12', 'mb-0', 'p-0');
 
-        newInput.innerHTML = `
-        <div class="row gx-3">
-            <div class="col-md-12 mt-4 py-3">
-                <label for="example-select fs-2 fw-bold" class="form-label fw-bold py-3 px-3 rounded-3"
-                    style="background: rgba(73, 135, 216, 0.44);" onclick="openModal('sms_add_variation_modal_in_add_product')" >Added terms for variations</label>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="example-select" class="form-label fs-3 fw-bold">The name of the term</label>
-                <select class="form-select rounded-3 p-3" id="example-select" style="background-color: #EAEAEA">
-                    <option value="1">Pink</option>
-                    <option value="2">Color</option>
-                </select>
-            </div>
-            <div class="col-md-6">
-                <label for="example-text-input" class="form-label fs-3 fw-bold">Term price</label>
-                <input type="number" class="form-control rounded-3 p-3 fw-bold" id="example-text-input"
-                    style="background-color: #EAEAEA" placeholder="250">
-            </div>
+//         newInput.innerHTML = `
+//         <div class="row gx-3">
+//             <div class="col-md-12 mt-4 py-3">
+//                 <label for="example-select fs-2 fw-bold" class="form-label fw-bold py-3 px-3 rounded-3"
+//                     style="background: rgba(73, 135, 216, 0.44);" onclick="openModal('sms_add_variation_modal_in_add_product')" >Added terms for variations</label>
+//             </div>
+//             <div class="col-md-6 mb-3">
+//                 <label for="example-select" class="form-label fs-3 fw-bold">The name of the term</label>
+//                 <select class="form-select rounded-3 p-3" id="example-select" style="background-color: #EAEAEA">
+//                     <option value="1">Pink</option>
+//                     <option value="2">Color</option>
+//                 </select>
+//             </div>
+//             <div class="col-md-6">
+//                 <label for="example-text-input" class="form-label fs-3 fw-bold">Term price</label>
+//                 <input type="number" class="form-control rounded-3 p-3 fw-bold" id="example-text-input"
+//                     style="background-color: #EAEAEA" placeholder="250">
+//             </div>
 
-            <div class="col-md-12 mt-3 ">
-                <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Term inventory</label>
-                <input type="number" class="form-control rounded-3 p-3 fw-bold" id="example-text-input"
-                    style="background-color: #EAEAEA" placeholder="4">
-            </div>
-        </div>
-`;
-        container.appendChild(newInput);
-    }
+//             <div class="col-md-12 mt-3 ">
+//                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Term inventory</label>
+//                 <input type="number" class="form-control rounded-3 p-3 fw-bold" id="example-text-input"
+//                     style="background-color: #EAEAEA" placeholder="4">
+//             </div>
+//         </div>
+// `;
+//         container.appendChild(newInput);
+//     }
 
     // Function to display file name
     function showFileName(input) {
@@ -456,9 +461,14 @@
     }
 
     // Add one input field when the page loads
-    // document.addEventListener("DOMContentLoaded", function (event) {
-    //     sms_a_add_product_variation_inputs();
-    // });
+    document.addEventListener("DOMContentLoaded", function (event) {
+        if (selectElement.length < 1) {
+      document.getElementById('SMS_MU_ADD_GENERATE_VARIATIONS').style.display = 'none'
+    
+    }else{
+        document.getElementById('SMS_MU_ADD_GENERATE_VARIATIONS').style.display = 'flex'
+    }
+    });
 
 
     function sms_a_add_product_variations() {
