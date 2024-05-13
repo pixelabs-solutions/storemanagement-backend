@@ -168,22 +168,21 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-12">
                 <div class="">
-
-                    <form action="" method="post" class="card-body">
+                    <form class="card-body">
                         <!-- header -->
                         <div class="row gx-3">
                             <div class="col-md-6 mb-3">
                                 <label for="example-text-input" class="form-label">The attribute name</label>
-                                <input type="text" class="form-control rounded-3 p-3 fw-bold" id="example-text-input"
+                                <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_attribute_name"
                                     placeholder="Pink">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="example-select" class="form-label">Display Type (Color/Image)</label>
+                                <label for="" class="form-label">Display Type (Color/Image)</label>
                                 <div class="h-100">
                                     <select class="form-select form-select-md h-80 bg-transparent"
-                                        style="    height: 66%;">
-                                        <option value="HTML">Color</option>
-                                        <option value="Jquery">Image</option>
+                                        id="sms_attribute_select" style="    height: 66%;">
+                                        <option value="color">Color</option>
+                                        <option value="image">Image</option>
                                     </select>
                                 </div>
                             </div>
@@ -523,12 +522,13 @@
                         </div>
 
                         <div class="text-center mt-2 p-2  ">
-
-                            <button type="submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3">To add the
+                            <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3"
+                                onclick="submit_add_feature_Data()">To add the
                                 feature click here +</button>
                         </div>
+                    </form>
                 </div>
-                </form>
+
             </div>
         </div>
     </div>
@@ -543,81 +543,74 @@
     })
 </script> -->
 <script>
-      function fun_checkbox1(){
-       var checkbox=document.getElementById('checkbox1').checked;
-       var checkbox1=document.getElementById('checkbox2').checked;
-       var checkbox2=document.getElementById('checkbox3').checked;
-       var checkbox4=document.getElementById('checkbox4').checked;
-       var checkbox5=document.getElementById('checkbox5').checked;
-      if(checkbox.checked === true){
-        document.getElementById('checkbox1').checked=false;
-    }else{
-       document.getElementById('checkbox2').checked=false;
-       document.getElementById('checkbox5').checked=false;
-       document.getElementById('checkbox3').checked=false;
-       document.getElementById('checkbox4').checked=false;
-    }
+
+function submit_add_feature_Data() {
+    const attributeName = document.getElementById('sms_attribute_name').value;
+    const selectValue = document.getElementById('sms_attribute_select').value;
+
+    console.log("Attribute Name:", attributeName);
+    console.log("Display Type:", selectValue);
+
+    // Create FormData object to store form data
+    let formData = new FormData();
+
+    // Append attribute name and select value to FormData object
+    formData.append('attributeName', attributeName);
+    formData.append('selectValue', selectValue);
+
+    // For each swatch preview section
+    document.querySelectorAll('.sms_a_swatches_preview').forEach((swatch) => {
+        const checkbox = swatch.querySelector('.form-colorinput-input');
+
+        if (checkbox.checked) {
+            const title = swatch.querySelector('.form-check-label').textContent.trim();
+            const options = [{
+                name: checkbox.name,
+                checked: checkbox.checked
+            }];
+
+            console.log("Title:", title);
+            console.log("Options:", options);
+
+            // Append title and options to FormData object
+            formData.append('title', title);
+            formData.append('options', JSON.stringify(options));
+        }
+    });
+
+    let dynamicTermNames = document.querySelectorAll('[id^="sms_name_of_attribute"]');
+    let dynamicTermImages = document.querySelectorAll('[id^="sms_image_input"]');
+
+    // Append dynamically added input values to FormData object
+    dynamicTermNames.forEach((input, index) => {
+        formData.append('dynamicTermNames[]', input.value);
+        console.log("Dynamic Term Name " + (index + 1) + ":", input.value);
+    });
+
+    dynamicTermImages.forEach((input, index) => {
+        formData.append('dynamicTermImages[]', input.files[0]);
+        console.log("Dynamic Term Image " + (index + 1) + ":", input.files[0]);
+    });
+
+    // Send FormData object with fetch API
+    fetch('your_backend_endpoint', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Data submitted successfully');
+        } else {
+            console.error('Error submitting data:', response.statusText);
+        }
+    })
+    .catch(error => {
+        console.error('Network error occurred:', error);
+    });
 }
-      function fun_checkbox2(){
-       var checkbox=document.getElementById('checkbox1').checked;
-       var checkbox1=document.getElementById('checkbox2').checked;
-       var checkbox2=document.getElementById('checkbox3').checked;
-       var checkbox4=document.getElementById('checkbox4').checked;
-       var checkbox5=document.getElementById('checkbox5').checked;
-      if(checkbox.checked === true){
-        document.getElementById('checkbox1').checked=false;
-    }else{
-       document.getElementById('checkbox1').checked=false;
-       document.getElementById('checkbox5').checked=false;
-       document.getElementById('checkbox3').checked=false;
-       document.getElementById('checkbox4').checked=false;
-    }
-}
-      function fun_checkbox3(){
-       var checkbox=document.getElementById('checkbox1').checked;
-       var checkbox1=document.getElementById('checkbox2').checked;
-       var checkbox2=document.getElementById('checkbox3').checked;
-       var checkbox4=document.getElementById('checkbox4').checked;
-       var checkbox5=document.getElementById('checkbox5').checked;
-      if(checkbox.checked === true){
-        document.getElementById('checkbox1').checked=false;
-    }else{
-       document.getElementById('checkbox1').checked=false;
-       document.getElementById('checkbox5').checked=false;
-       document.getElementById('checkbox2').checked=false;
-       document.getElementById('checkbox4').checked=false;
-    }
-}
-      function fun_checkbox4(){
-       var checkbox=document.getElementById('checkbox1').checked;
-       var checkbox1=document.getElementById('checkbox2').checked;
-       var checkbox2=document.getElementById('checkbox3').checked;
-       var checkbox4=document.getElementById('checkbox4').checked;
-       var checkbox5=document.getElementById('checkbox5').checked;
-      if(checkbox.checked === true){
-        document.getElementById('checkbox1').checked=false;
-    }else{
-       document.getElementById('checkbox1').checked=false;
-       document.getElementById('checkbox5').checked=false;
-       document.getElementById('checkbox3').checked=false;
-       document.getElementById('checkbox2').checked=false;
-    }
-}
-      function fun_checkbox5(){
-       var checkbox=document.getElementById('checkbox1').checked;
-       var checkbox1=document.getElementById('checkbox2').checked;
-       var checkbox2=document.getElementById('checkbox3').checked;
-       var checkbox4=document.getElementById('checkbox4').checked;
-       var checkbox5=document.getElementById('checkbox5').checked;
-      if(checkbox.checked === true){
-        document.getElementById('checkbox1').checked=false;
-    }else{
-       document.getElementById('checkbox1').checked=false;
-       document.getElementById('checkbox2').checked=false;
-       document.getElementById('checkbox3').checked=false;
-       document.getElementById('checkbox4').checked=false;
-    }
-}
+
+
+
     var inputCount = 0;
 
     // Function to add input fields
@@ -625,13 +618,13 @@
         inputCount++;
         var container = document.getElementById('sms_a_add_feature');
         var newInput = document.createElement('div');
-        var uniqueId = 'image-input-' + inputCount; // Generate unique ID
+        var uniqueId = 'sms_image_input' + inputCount; // Generate unique ID
         newInput.classList.add('col-md-12', 'mb-3', 'p-2');
         newInput.innerHTML = `
     <div class='gx-3'>
         <label for="${uniqueId}" class="form-label">The name of the term</label>
         <div> 
-            <input type="text" class="form-control text-dark rounded-3 p-3 fw-bold"  placeholder="Pink">
+            <input type="text" class="form-control text-dark rounded-3 p-3 fw-bold" id="sms_name_of_attribute"  placeholder="Pink">
         </div>
         <div>
             <label class="form-label mt-4">Selecting an image to display the term</label>
@@ -645,12 +638,6 @@
                     Selecting an image
                 </label>
             </div>
-        </div>
-
-        <!-- Color Input -->
-        <div class="mt-4 p-2 col-12 rounded-3 d-flex align-items-center justify-content-between bg-white" style="display: none;" id="colorInputContainer">
-            <label class="form-label">Color change</label>
-            <input type="color" class="form-control p-0 form-control-color" id="color-input-${inputCount}" value="#F51975" title="Choose your color">
         </div>
     </div>
     `;
@@ -695,6 +682,83 @@
         // }
     }
 
+
+
+    function fun_checkbox1() {
+        var checkbox = document.getElementById('checkbox1').checked;
+        var checkbox1 = document.getElementById('checkbox2').checked;
+        var checkbox2 = document.getElementById('checkbox3').checked;
+        var checkbox4 = document.getElementById('checkbox4').checked;
+        var checkbox5 = document.getElementById('checkbox5').checked;
+        if (checkbox.checked === true) {
+            document.getElementById('checkbox1').checked = false;
+        } else {
+            document.getElementById('checkbox2').checked = false;
+            document.getElementById('checkbox5').checked = false;
+            document.getElementById('checkbox3').checked = false;
+            document.getElementById('checkbox4').checked = false;
+        }
+    }
+    function fun_checkbox2() {
+        var checkbox = document.getElementById('checkbox1').checked;
+        var checkbox1 = document.getElementById('checkbox2').checked;
+        var checkbox2 = document.getElementById('checkbox3').checked;
+        var checkbox4 = document.getElementById('checkbox4').checked;
+        var checkbox5 = document.getElementById('checkbox5').checked;
+        if (checkbox.checked === true) {
+            document.getElementById('checkbox1').checked = false;
+        } else {
+            document.getElementById('checkbox1').checked = false;
+            document.getElementById('checkbox5').checked = false;
+            document.getElementById('checkbox3').checked = false;
+            document.getElementById('checkbox4').checked = false;
+        }
+    }
+    function fun_checkbox3() {
+        var checkbox = document.getElementById('checkbox1').checked;
+        var checkbox1 = document.getElementById('checkbox2').checked;
+        var checkbox2 = document.getElementById('checkbox3').checked;
+        var checkbox4 = document.getElementById('checkbox4').checked;
+        var checkbox5 = document.getElementById('checkbox5').checked;
+        if (checkbox.checked === true) {
+            document.getElementById('checkbox1').checked = false;
+        } else {
+            document.getElementById('checkbox1').checked = false;
+            document.getElementById('checkbox5').checked = false;
+            document.getElementById('checkbox2').checked = false;
+            document.getElementById('checkbox4').checked = false;
+        }
+    }
+    function fun_checkbox4() {
+        var checkbox = document.getElementById('checkbox1').checked;
+        var checkbox1 = document.getElementById('checkbox2').checked;
+        var checkbox2 = document.getElementById('checkbox3').checked;
+        var checkbox4 = document.getElementById('checkbox4').checked;
+        var checkbox5 = document.getElementById('checkbox5').checked;
+        if (checkbox.checked === true) {
+            document.getElementById('checkbox1').checked = false;
+        } else {
+            document.getElementById('checkbox1').checked = false;
+            document.getElementById('checkbox5').checked = false;
+            document.getElementById('checkbox3').checked = false;
+            document.getElementById('checkbox2').checked = false;
+        }
+    }
+    function fun_checkbox5() {
+        var checkbox = document.getElementById('checkbox1').checked;
+        var checkbox1 = document.getElementById('checkbox2').checked;
+        var checkbox2 = document.getElementById('checkbox3').checked;
+        var checkbox4 = document.getElementById('checkbox4').checked;
+        var checkbox5 = document.getElementById('checkbox5').checked;
+        if (checkbox.checked === true) {
+            document.getElementById('checkbox1').checked = false;
+        } else {
+            document.getElementById('checkbox1').checked = false;
+            document.getElementById('checkbox2').checked = false;
+            document.getElementById('checkbox3').checked = false;
+            document.getElementById('checkbox4').checked = false;
+        }
+    }
 </script>
 
 </div>
