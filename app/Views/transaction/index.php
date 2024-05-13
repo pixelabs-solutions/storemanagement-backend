@@ -1,15 +1,17 @@
 <?php
 require_once __DIR__ . '/../partials/header.php';
-var_dump($transactions);
-$jsonData = json_encode($transactions);
+// var_dump($transactions);
+$jsonData = json_encode($transactions, JSON_UNESCAPED_UNICODE);
 
+echo $jsonData;
 ?>
 
 <script>
 
 
-  const transactions = JSON.parse('<?php echo $jsonData; ?>');
-console.log(transactions);
+  const jsonData = <?php echo $jsonData; ?>; // Access encoded data
+  const transactions = JSON.parse(jsonData);
+  console.log(transactions);
 
 </script>
 
@@ -206,7 +208,8 @@ console.log(transactions);
 
                 <td><?php echo $utmSource; ?></td>
                 <td>
-                  <span id="view_order_details" data-transaction-id="<?php echo $item['id']; ?>" data-bs-toggle="modal" data-bs-target="#edit-modal-full-width">
+                  <span class="view_order_details" data-transaction-id="<?php echo $item['id']; ?>" data-bs-toggle="modal"
+                    data-bs-target="#edit-modal-full-width">
 
 
                     <svg width="24" height="24" viewBox="0 0 32 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -273,6 +276,26 @@ console.log(transactions);
   </div>
 </div>
 <script>
+
+
+  const viewOrderDetailsButtons = document.querySelectorAll('.view_order_details');
+
+  viewOrderDetailsButtons.forEach(button => {
+    button.addEventListener('click', handleOrderDetailsClick);
+  });
+
+  function handleOrderDetailsClick(event) {
+    const clickedButton = event.currentTarget; // Get the clicked element
+    const transactionId = clickedButton.dataset.transactionId; // Access data attribute
+
+    // Use the transactionId value as needed
+    console.log("Transaction ID:", transactionId);
+    // You can perform actions like opening a modal or making an AJAX request
+  }
+
+
+
+
   // Function to set the color of status dynamically
   function setStatusColor() {
     // Get all elements with class 'status'
