@@ -168,7 +168,7 @@ class Dashboard
                     ];
                 } else {
                     $topProducts[] = [
-                        'product_name' => $productDetails['name'],
+                        'product_name' => $productDetails['name']??"",
                         'image_url' => 'No image available'
                     ];
                 }

@@ -1,7 +1,10 @@
 <?php
 require_once __DIR__ . '/../partials/header.php';
 
-echo $customers;
+$customers = $data['data'];
+
+// var_dump($customers);
+
 //  echo $transactions;
 
 
@@ -234,20 +237,20 @@ echo $customers;
           </thead>
           <tbody>
             <?php
-            foreach ($customers["data"] as $item) {
+            foreach ($customers as $item) {
               ?>
               <tr class="sms_mu_tr">
 
-                <td class="t_oravg_m" data-i18n="customer_page.customer_tr.customer_name">
+                <td class="t_oravg_m" >
                    <?php echo $item['customer_name']; ?>
                 </td>
-                <td data-i18n="customer_page.customer_tr.dates_name"><?php echo $item['date_of_last_order']; ?> </td>
-                <td data-i18n="customer_page.customer_tr.mails_name"><?php echo $item['email']; ?></td>
+                <td><?php echo $item['date_of_last_order']; ?> </td>
+                <td><?php echo $item['email']; ?></td>
                 <td><?php echo $item['number_of_orders']; ?></td>
-                <td data-i18n="customer_page.customer_tr.total_name">
+                <td>
                   NIS <?php echo $item['total_amount']; ?>
                 </td>
-                <td data-i18n="customer_page.customer_tr.order_name"><?php echo $item['average_order_cost']; ?> NIS</td>
+                <td><?php echo $item['average_order_cost']; ?> NIS</td>
               </tr>
               
               <tr class="sms_mu_spacing_div"></tr>
