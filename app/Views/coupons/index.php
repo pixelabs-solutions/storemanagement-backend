@@ -132,6 +132,7 @@ require_once __DIR__ . '/../partials/header.php';
             </thead>
             <tbody>
               <?php
+              if($coupons !== null) {
               foreach ($coupons as $item) {
 
                 $expiry_date_string = $item['date_expires'];
@@ -176,7 +177,7 @@ require_once __DIR__ . '/../partials/header.php';
                 <tr class="sms_mu_spacing_div"></tr>
 
                 <?php
-              }
+              }}
               ?>
             </tbody>
           </table>
