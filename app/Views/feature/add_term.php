@@ -252,58 +252,56 @@
         // });
 
         function submit_add_term() {
-            // Get the values of the existing inputs
-            let termName = document.getElementById('sms_term_name').value;
-            let featureSelect = document.getElementById('sms_feature_select').value;
-            let colorInput = document.getElementById('sms_term_color').value;
-            let imageFile = document.getElementById('sms_term_image').files[0];
+    // Get the values of the existing inputs
+    let name = document.getElementById('sms_term_name').value.trim();
+    let type = document.getElementById('sms_feature_select').value.trim();
+    let colorInput = document.getElementById('sms_term_color').value.trim();
+    let imageFile = document.getElementById('sms_term_image').files[0];
 
-            // Create FormData object to store form data
-            let formData = new FormData();
+    // Create JSON object to store form data
+    let jsonData = {
+        name: name,
+        type: type,
+        colorInput: colorInput,
+        dynamicTerms: []  // Prepare an array to store dynamic term data
+    };
 
-            // Append existing input values to FormData object
-            formData.append('termName', termName);
-            formData.append('featureSelect', featureSelect);
-            formData.append('colorInput', colorInput);
-            formData.append('imageFile', imageFile);
+    // Get the values of dynamically added inputs
+    let dynamicnames = document.querySelectorAll('[id^="sms_term_names"]');
+    let dynamicTermColors = document.querySelectorAll('[id^="sms_term_colors"]');
+    let dynamicTermImages = document.querySelectorAll('[id^="sms_term_image-"]');
 
-            // Get the values of dynamically added inputs
-            let dynamicTermNames = document.querySelectorAll('[id^="sms_term_names"]');
-            let dynamicTermColors = document.querySelectorAll('[id^="sms_term_colors"]');
-            let dynamicTermImages = document.querySelectorAll('[id^="sms_term_image-"]');
-
-            // Append dynamically added input values to FormData object
-            dynamicTermNames.forEach((input, index) => {
-                formData.append('dynamicTermNames[]', input.value);
-            });
-
-            dynamicTermColors.forEach((input, index) => {
-                formData.append('dynamicTermColors[]', input.value);
-            });
-
-            dynamicTermImages.forEach((input, index) => {
-                formData.append('dynamicTermImages[]', input.files[0]);
-            });
-
-            // Send FormData object with fetch API
-            fetch('your_backend_endpoint', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Data submitted successfully');
-                        // Handle any success response from the server
-                    } else {
-                        console.error('Error submitting data:', response.statusText);
-                        // Handle any error response from the server
-                    }
-                })
-                .catch(error => {
-                    console.error('Network error occurred:', error);
-                    // Handle network errors
-                });
+    // Loop through dynamic data and populate jsonData.dynamicTerms
+    dynamicnames.forEach((input, index) => {
+        let name = input.value.trim();
+        if (name !== '') {
+            let color = dynamicTermColors[index].value.trim(); // Assuming corresponding color exists
+            jsonData.dynamicTerms.push({ name: name, color: color });
         }
+    });
+
+    // Send JSON data with fetch API
+    fetch('http://storemanagement.test/attributes/{id}/terms/add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jsonData)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Data submitted successfully');
+            // Handle any success response from the server
+        } else {
+            console.error('Error submitting data:', response.statusText);
+            // Handle any error response from the server
+        }
+    })
+    .catch(error => {
+        console.error('Network error occurred:', error);
+        // Handle network errors
+    });
+}
 
 
     </script>

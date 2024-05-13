@@ -545,18 +545,19 @@
 <script>
 
 function submit_add_feature_Data() {
-    const attributeName = document.getElementById('sms_attribute_name').value;
-    const selectValue = document.getElementById('sms_attribute_select').value;
+    const name = document.getElementById('sms_attribute_name').value;
+    const type = document.getElementById('sms_attribute_select').value;
 
-    console.log("Attribute Name:", attributeName);
-    console.log("Display Type:", selectValue);
+    console.log("Attribute Name:", name);
+    console.log("Display Type:", type);
 
-    // Create FormData object to store form data
-    let formData = new FormData();
-
-    // Append attribute name and select value to FormData object
-    formData.append('attributeName', attributeName);
-    formData.append('selectValue', selectValue);
+    let jsonData = {
+        name: name,
+        type: type,
+        swatches: [],
+        dynamicTermNames: [],
+        dynamicTermImages: []
+    };
 
     // For each swatch preview section
     document.querySelectorAll('.sms_a_swatches_preview').forEach((swatch) => {
@@ -572,30 +573,31 @@ function submit_add_feature_Data() {
             console.log("Title:", title);
             console.log("Options:", options);
 
-            // Append title and options to FormData object
-            formData.append('title', title);
-            formData.append('options', JSON.stringify(options));
+            jsonData.swatches.push({ title: title, options: options });
         }
     });
 
     let dynamicTermNames = document.querySelectorAll('[id^="sms_name_of_attribute"]');
     let dynamicTermImages = document.querySelectorAll('[id^="sms_image_input"]');
 
-    // Append dynamically added input values to FormData object
+    // Collect dynamically added input values
     dynamicTermNames.forEach((input, index) => {
-        formData.append('dynamicTermNames[]', input.value);
+        jsonData.dynamicTermNames.push(input.value);
         console.log("Dynamic Term Name " + (index + 1) + ":", input.value);
     });
 
     dynamicTermImages.forEach((input, index) => {
-        formData.append('dynamicTermImages[]', input.files[0]);
+        jsonData.dynamicTermImages.push(input.files[0]);
         console.log("Dynamic Term Image " + (index + 1) + ":", input.files[0]);
     });
 
-    // Send FormData object with fetch API
-    fetch('your_backend_endpoint', {
+    // Send JSON data with fetch API
+    fetch('http://storemanagement.test/attributes/add', {
         method: 'POST',
-        body: formData
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jsonData)
     })
     .then(response => {
         if (response.ok) {
@@ -608,6 +610,7 @@ function submit_add_feature_Data() {
         console.error('Network error occurred:', error);
     });
 }
+
 
 
 
