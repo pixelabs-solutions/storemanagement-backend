@@ -79,7 +79,7 @@
                                 <div
                                     style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                     <div class="col-md-12 rounded-4 bg-transparent h-100 ">
-                                        <select  id="sms_mu_parent_ctg"multiple
+                                        <select  id="sms_mu_parent_ctg" class="form-select form-select-md"
                                             style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
                                             <option value="NOSQL">Ctg</option>
                                             <option value="NodeJS">demo</option>
@@ -142,28 +142,55 @@
 
 <!-- input javascript code  -->
 <script>
- function function_of_Edit() {
-    var selectElement = document.getElementById("sms_mu_parent_ctg");
-    var selectedOptions = selectElement.selectedOptions;
-    var selectedValues = [];
-    for (var i = 0; i < selectedOptions.length; i++) {
-        selectedValues.push(selectedOptions[i].value);
-    }
-    var data_of_add_ctg = {
-        "img": document.getElementById('sms_mu_img_add_ctg').value,
+function function_of_Edit() {
+    var selectElement = document.getElementById("sms_mu_parent_ctg").value;
+    // var selectedOptions = selectElement.selectedOptions;
+    let image=document.getElementById('sms_mu_img_add_ctg').value;
+    // var selectedValues = [];
+    // for (var i = 0; i < selectedOptions.length; i++) {
+    //     selectedValues.push(selectedOptions[i].value);
+    // }
+    let images=[
+       image
+    ]
+    var data = {
         "name": document.getElementById('sms_mu_name_ctg').value,
-        "parent": selectedValues 
+        "parent": selectElement,
+        "image": images,
     };
-    console.log(data_of_add_ctg);
+    console.log(data)
+    fetch('/categories/add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // Add any additional headers if needed
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Data sent successfully:', data);
+        // You can add any further actions here upon successful sending of data
+    })
+    .catch(error => {
+        console.error('Error sending data:', error);
+        // Handle error
+    });
 }
+
 
    
    function sms_a_add_new_categorys() {
         var input = document.getElementById('sms_mu_img_add_ctg');
-        console.log(input.files); // Check if files are being captured
+        // console.log(input.files); // Check if files are being captured
         if (input.files.length > 0) {
             var fileName = input.files[0].name;
-            console.log(fileName); // Check the file name
+            // console.log(fileName); // Check the file name
             // Update input label or any other relevant element with the file name
             input.nextElementSibling.innerHTML = fileName;
         }

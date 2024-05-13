@@ -51,12 +51,12 @@ $woocommerce_notify_no_stock_ischecked = ($woocommerce_notify_no_stock_value ===
     <form action="" id="form">
 
     <div class="mt-5 p-2">
-        <h2>General inventory settings</h2>
+        <h2 data-i18n="inventtory_setting.main_heading.h1">General inventory settings</h2>
         <div class="row mt-5">
             <div class="rounded-3 d-flex  py-3 justify-content-between align-items-center col-sm-4"
                 style="background-color: #EAEAEA">
                 <div>
-                    <p class="fs-3 p-0 m-0 align-items-center fw-bold">Enabling inventory management</p>
+                    <p class="fs-3 p-0 m-0 align-items-center fw-bold" data-i18n="inventtory_setting.first_row_with_check_box.managment">Enabling inventory management</p>
                 </div>
                 <div class="form-check form-switch m-0">
                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
@@ -66,7 +66,7 @@ $woocommerce_notify_no_stock_ischecked = ($woocommerce_notify_no_stock_value ===
         <div class="row mt-5">
             <div class="col-md-6 d-flex gap-2 py-3 rounded-3 justify-content-between  mt-4"
                 style="background-color: #EAEAEA">
-                <p class="fs-3 m-0 p-0 fw-semibold">Activating an alert when stock is low</p>
+                <p class="fs-3 m-0 p-0 fw-semibold" data-i18n="inventtory_setting.second_row_with_check_box.stock_alert_low">Activating an alert when stock is low</p>
                 <div class="form-check form-switch m-0">
                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" <?php echo $woocommerce_notify_low_stock_value_ischecked; ?>>
                 </div>
@@ -74,7 +74,7 @@ $woocommerce_notify_no_stock_ischecked = ($woocommerce_notify_no_stock_value ===
             <div class="col-md-6">
                 <div class="d-flex gap-2 py-3 px-2 rounded-3 justify-content-between  mt-4"
                     style="background-color: #EAEAEA">
-                    <p class="fs-3 m-0 p-0  fw-semibold">Activate out of stock alert</p>
+                    <p class="fs-3 m-0 p-0  fw-semibold" data-i18n="inventtory_setting.third_row_with_check_box.stock_alert_out">Activate out of stock alert</p>
                     <div class="form-check form-switch m-0">
                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault3"  <?php echo $woocommerce_notify_no_stock_ischecked; ?>>
                     </div>
@@ -82,7 +82,7 @@ $woocommerce_notify_no_stock_ischecked = ($woocommerce_notify_no_stock_value ===
             </div>
         </div>
         <div class="row mt-5">
-            <h2>Email address to receive notifications..</h2>
+            <h2 data-i18n="inventtory_setting.fourth_row_with_check_box.email_label">Email address to receive notifications..</h2>
             <div class="row">
                 <input class="col-lg-12 border-0 rounded-3 py-3 m-0 p-3 form-control" style="background-color: #EAEAEA"
                     type="text" id="emailAddress" placeholder="Email Adress">
@@ -90,12 +90,12 @@ $woocommerce_notify_no_stock_ischecked = ($woocommerce_notify_no_stock_value ===
         </div>
         <div class="row mt-5 gap-0">
             <div class="col-md-6">
-                <h2>Threshold quantity for low stock</h2>
+                <h2 data-i18n="inventtory_setting.fourth_row_with_check_box.data">Threshold quantity for low stock</h2>
                 <input class="border-0 rounded-2 py-3 m-0 p-3 form-control" style="background-color: #EAEAEA"
                    type="number" id="lowStockThreshold" placeholder="10">
             </div>
             <div class="col-md-6">
-                <h2 class="">Threshold quantity out of stock</h2>
+                <h2 data-i18n="inventtory_setting.fourth_row_with_check_box.data">Threshold quantity out of stocsssk</h2>
                 <input class="border-0 rounded-2 py-3 m-0 p-3 form-control" style="background-color: #EAEAEA"
                     type="number" id="outOfStockThreshold" placeholder="10">
             </div>
@@ -105,7 +105,7 @@ $woocommerce_notify_no_stock_ischecked = ($woocommerce_notify_no_stock_value ===
             onclick="submitForm()" 
                 class="rounded-3 rounded-4 d-flex gap-2 border-0  justify-content-center align-items-center last w-auto"
                 style="background: rgba(73, 135, 216, 0.44);">
-                <p class="fs-2 py-3 m-0 align-items-center fw-bold">Updating and saving inventory settings →</p>
+                <p class="fs-2 py-3 m-0 align-items-center fw-bold" data-i18n="inventtory_setting.sixth_row_with_check_box.update_btn">Updating and saving inventory settings →</p>
                 </div>
 
         </div>

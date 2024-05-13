@@ -118,11 +118,19 @@ const translations = {
         "third_row_with_check_box":{
             "stock_alert_out": "Activate out of stock alert"
         },
+     
         "fourth_row_with_check_box":{
-            "email_label": "Email address to receive notifications.. "
+            "email_label": "Email address to receive notifications..",
+            "data": "Email address to receive notifications",
+
+          "quantity": "Threshold quantity out of stock"
+
+        },
+        "extra_fourth_row_with_check_box": {
+          "last_div_ip": "Threshold quantity out of stock"
         },
         "fifth_row_with_check_box":{
-            "email_placeholder": "Email Adress"
+            "email_placeholder_P": "Threshold quantity for low stocks"
         },
         "sixth_row_with_check_box":{
             "update_btn": "Updating and saving inventory settings →"
@@ -698,10 +706,16 @@ const translations = {
     "stock_alert_out": "הפעלת התראת אזל מלאי"
   },
   "fourth_row_with_check_box": {
-    "email_label": "כתובת אימייל לקבלת התראות.. "
+    "email_label": "כתובת אימייל לקבלת התראות.. ",
+    "data": "כתובת אימייל לקבלת התראות ",
+
+    "quantity": "כמות אחזקה שאינה במלאי "
+  },
+  "extra_fourth_row_with_check_box": {
+    "last_div_ip": "כמות אחזקה שאינה במלאי "
   },
   "fifth_row_with_check_box": {
-    "email_placeholder": "כתובת אימייל"
+    "email_placeholder_P": "כמות אחזקה נמוכה להפעלת הערך המינימלי"
   },
   "sixth_row_with_check_box": {
     "update_btn": "עדכון ושמירת הגדרות המלאי →"
