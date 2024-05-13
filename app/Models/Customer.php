@@ -76,6 +76,6 @@ class Customer
             echo "Error fetching customers: " . $e->getMessage() . "\n";
             return [];
         }
-        return json_encode(['message' => 'Data added', 'status_code' => 200, 'data' => $customerData]);
+        return json_encode(['message' => 'fetch', 'status_code' => 200, 'data' => $customerData]);
     }
 }
