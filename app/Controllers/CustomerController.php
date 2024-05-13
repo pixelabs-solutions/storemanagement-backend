@@ -8,7 +8,7 @@ class CustomerController
     private $table_name = 'customers';
     public function index()
     {
-        $customers = Customer::get_customers();
+        $data = Customer::get_customers();
 
         // echo $customers;
         include_once __DIR__ . '/../Views/customers/index.php';
