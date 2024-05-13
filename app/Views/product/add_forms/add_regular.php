@@ -197,48 +197,115 @@
             console.error("An error occurred while updating the file names:", error);
         }
     }
-
     function handleImageUpload(inputId, targetId) {
-        var input = document.getElementById(inputId);
-        var targetElement = document.getElementById(targetId);
-        input.addEventListener('change', function() {
-            updateFileNames(input, targetElement);
-        });
-    }
+    var input = document.getElementById(inputId);
+    var targetElement = document.getElementById(targetId);
+    input.addEventListener('change', function() {
+        updateFileNames(input, targetElement);
+    });
+}
 
-    // Call the functions for each file input
-    handleImageUpload('sms_mu_img', 'sms_mu_img_label');
-    handleImageUpload('sms_mu_photo', 'sms_mu_photo_label');
-    function fun() {
+// Call the functions for each file input
+handleImageUpload('sms_mu_img', 'sms_mu_img_label');
+handleImageUpload('sms_mu_photo', 'sms_mu_photo_label');
+
+function fun() {
     let productName = document.getElementById('sms_product_name').value;
-    let photo_value = document.getElementById('sms_mu_photo').value;
-    let img_value = document.getElementById('sms_mu_img').value;
-    let NormalInp = document.getElementById('sms_mu_Normal').value;
+    let photoValue = document.getElementById('sms_mu_photo').value;
+    let imgValue = document.getElementById('sms_mu_img').value;
+    let normalInp = document.getElementById('sms_mu_Normal').value;
     let saleInp = document.getElementById('sms_mu_sale').value;
     let textareaInp = document.getElementById('sms_mu_textarea').value;
     let unitInp = document.getElementById('sms_mu_unit').value;
-    let category_select = document.getElementById('category_in_product').value;
-    let selected_categories = [];
+    let categorySelect = document.getElementById('category_in_product');
+    let selectedCategories = [];
     
-    for (let i = 0; i < category_select.options.length; i++) {
-        if (category_select.options[i].selected) {
-            selected_categories.push(category_select.options[i].value);
+    for (let i = 0; i < categorySelect.length; i++) {
+        if (categorySelect.options[i].selected) {
+            selectedCategories.push(categorySelect.options[i].value);
         }
     }
-
-    let Array_of_data = {
-        'productName': productName,
-        'selected_categories': selected_categories,
-        'Photos': photo_value,
-        'img_value': img_value,
-        'NormalInp': NormalInp,
-        'saleInp': saleInp,
-        'textareaInp': textareaInp,
-        'unitInp': unitInp,
+  let image=[
+    photoValue,imgValue
+  ]
+    let data = {
+        'name': productName,
+        'category': selectedCategories,
+        'image': image,
+        'type':'simple',
+        // 'imgValue': imgValue,
+        'regular_price': normalInp,
+        'sale_price': saleInp,
+        'description': textareaInp,
+        'stock_quantity': unitInp,
     };
 
-    console.log(Array_of_data);
+    console.log(data);
+
+    fetch('/product/add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Data sent:', data);
+        // You can handle the response data here if needed
+    })
+    .catch(error => {
+        console.error('There was a problem with your fetch operation:', error);
+    });
 }
+
+
+//     function handleImageUpload(inputId, targetId) {
+//         var input = document.getElementById(inputId);
+//         var targetElement = document.getElementById(targetId);
+//         input.addEventListener('change', function() {
+//             updateFileNames(input, targetElement);
+//         });
+//     }
+
+//     // Call the functions for each file input
+//     handleImageUpload('sms_mu_img', 'sms_mu_img_label');
+//     handleImageUpload('sms_mu_photo', 'sms_mu_photo_label');
+//     function fun() {
+//     let productName = document.getElementById('sms_product_name').value;
+//     let photo_value = document.getElementById('sms_mu_photo').value;
+//     let img_value = document.getElementById('sms_mu_img').value;
+//     let NormalInp = document.getElementById('sms_mu_Normal').value;
+//     let saleInp = document.getElementById('sms_mu_sale').value;
+//     let textareaInp = document.getElementById('sms_mu_textarea').value;
+//     let unitInp = document.getElementById('sms_mu_unit').value;
+//     let category_select = document.getElementById('category_in_product').value;
+//     let selected_categories = [];
+    
+//     for (let i = 0; i < category_select.options.length; i++) {
+//         if (category_select.options[i].selected) {
+//             selected_categories.push(category_select.options[i].value);
+//         }
+//     }
+
+//     let Array_of_data = {
+//         'productName': productName,
+//         'selected_categories': selected_categories,
+//         'Photos': photo_value,
+//         'img_value': img_value,
+//         'NormalInp': NormalInp,
+//         'saleInp': saleInp,
+//         'textareaInp': textareaInp,
+//         'unitInp': unitInp,
+//     };
+
+//     console.log(Array_of_data);
+// }
 
 
 // function sms_mu_img_selection() {

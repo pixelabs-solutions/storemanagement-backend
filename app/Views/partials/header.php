@@ -897,17 +897,17 @@
 
 
             });
-            $(document).ready(function () {
+            // $(document).ready(function () {
 
-               var multipleCancelButton = new Choices('#sms_mu_parent_ctg', {
-                  removeItemButton: true,
-                  maxItemCount: 5,
-                  searchResultLimit: 5,
-                  renderChoiceLimit: 5
-               });
+            //    var multipleCancelButton = new Choices('#sms_mu_parent_ctg', {
+            //       removeItemButton: true,
+            //       maxItemCount: 5,
+            //       searchResultLimit: 5,
+            //       renderChoiceLimit: 5
+            //    });
 
 
-            });
+            // });
 
          </script>
 

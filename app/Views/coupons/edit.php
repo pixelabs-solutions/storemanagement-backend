@@ -191,7 +191,7 @@ function sms_meh_coupon_edit_data() {
 // });
 // }
 
-
+}
 </script> 
                         </div>
                         <div class="text-center mt-5  ">
