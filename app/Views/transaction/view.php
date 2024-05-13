@@ -242,6 +242,31 @@
 </div>
 </div>
 
+
+<script>
+
+  const clickedSpan = document.querySelector('#view_order_details'); // Assuming the span triggers the modal
+
+  clickedSpan.addEventListener('click', () => {
+    const clickedSpanId = clickedSpan.dataset.transactionId; // Use data-transaction-id attribute
+
+    // Initialize a variable to hold the order data
+    var selectedOrder = null;
+
+    // Iterate through the orders array to find the order with the matching ID
+    for (var i = 0; i < transaction.length; i++) {
+      if (transaction[i].id === clickedSpanId) {
+        selectedOrder = transaction[i];
+        break; // Exit the loop once the matching order is found
+      }
+    }
+
+    // Now selectedOrder contains the data of the order with the matching ID
+    console.log(selectedOrder);
+  });
+</script>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
 <script>

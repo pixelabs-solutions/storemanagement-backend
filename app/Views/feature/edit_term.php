@@ -71,13 +71,13 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="example-text-input fs-2 fw-bold" class="form-label">the name of the
                                         term</label>
-                                    <input type="text" class="form-control rounded-3 p-3" id="example-text-input"
+                                    <input type="text" class="form-control rounded-3 p-3" id="e_name_term"
                                         style="background-color: #EAEAEA" placeholder="Pink">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="example-select fs-3 fw-bold" class="form-label">associated feature
                                     </label>
-                                    <select class="form-select rounded-3 p-3" id="example-select"
+                                    <select class="form-select rounded-3 p-3"  id="sms_mu_select_name_term"
                                         style="background-color: #EAEAEA">
                                         <option value="1">Product colors</option>
                                         <option value="2">Color</option>
@@ -123,27 +123,38 @@
                                                 <label class="form-label"></label>
                                                 <label class="form-label">Color change</label>
                                                 <input type="color" class="form-control p-0 form-control-color"
-                                                    id="example-text-input-${inputCount}" value="#206bc4"
+                                                  id="sms_mu_color_name_term"value="#206bc4"
                                                     title="Choose your color">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- To update the term click here+ -->
-                                <div class="text-center mt-2 p-2  ">
-                                    <button type="submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3">To update
-                                        the term click here
-                                        +</button>
-                                </div>
+                                
 
                             </div>
                     </div>
                     </form>
+                    <div class="text-center mt-2 p-2  ">
+                                    <button type="submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="fun_etid_term()">To update
+                                        the term click here
+                                        +</button>
+                                </div>
                 </div>
             </div>
         </div>
     </div>
-
+<script>
+    function fun_etid_term(){
+        let data_form_exsist={
+       'nameOfTerm':document.getElementById('e_name_term').value,
+       'select_value':document.getElementById('sms_mu_select_name_term').value,
+       'Color_value':document.getElementById('sms_mu_color_name_term').value,
+    }
+    console.log(data_form_exsist)
+    }
+  
+</script>
     <!-- input javascript code  -->
     <!-- <script>
         var inputCount = 0;

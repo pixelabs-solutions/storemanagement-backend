@@ -71,7 +71,7 @@
                                     <div class="-5"
                             style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                             <div class="col-md-12 rounded-4 bg-transparent h-100 ">
-                                <select id="choices-multiple-remove-button" multiple
+                                <select  id="category_in_product" multiple
                                     style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
                                     <option value="NOSQL" >Bags</option>
                                     <option value="NodeJS" >List</option>
@@ -92,54 +92,54 @@
                             <!-- Upload a product image  -->
 
                             <div class="row gx-3">
-                                <div class="col-md-6 mb-4">
-                                    <label class="form-label">Upload a product image </label>
-                                    <div class="sms_a_custom_file_input">
-                                        <input type="file" id="single-image-input" accept="image/*"
-                                            style="background-color:#FFFFFF;" onchange="sms_a_edit_product_variations_image()">
-                                        <label for="single-image-input"><i class="bi bi-image text-black"></i>
-                                            <svg width="20" height="20" viewBox="0 0 32 26" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M8.88889 0.555542C6.92778 0.555542 5.33333 2.14999 5.33333 4.1111V16.5555C5.33333 18.5167 6.92778 20.1111 8.88889 20.1111H28.4444C30.4056 20.1111 32 18.5167 32 16.5555V4.1111C32 2.14999 30.4056 0.555542 28.4444 0.555542H8.88889ZM22 6.48332L27.3333 14.4833C27.6056 14.8944 27.6333 15.4167 27.4 15.85C27.1667 16.2833 26.7167 16.5555 26.2222 16.5555H18.2222H15.5556H11.1111C10.6 16.5555 10.1333 16.2611 9.91111 15.8C9.68889 15.3389 9.75 14.7889 10.0722 14.3889L13.6278 9.94443C13.8833 9.62776 14.2611 9.44443 14.6667 9.44443C15.0722 9.44443 15.4556 9.62776 15.7056 9.94443L16.6667 11.1444L19.7778 6.47776C20.0278 6.1111 20.4444 5.88888 20.8889 5.88888C21.3333 5.88888 21.75 6.1111 22 6.48332ZM10.6667 5.88888C10.6667 5.41738 10.854 4.96519 11.1874 4.6318C11.5208 4.2984 11.9729 4.1111 12.4444 4.1111C12.9159 4.1111 13.3681 4.2984 13.7015 4.6318C14.0349 4.96519 14.2222 5.41738 14.2222 5.88888C14.2222 6.36037 14.0349 6.81256 13.7015 7.14595C13.3681 7.47935 12.9159 7.66665 12.4444 7.66665C11.9729 7.66665 11.5208 7.47935 11.1874 7.14595C10.854 6.81256 10.6667 6.36037 10.6667 5.88888ZM2.66667 5.44443C2.66667 4.70554 2.07222 4.1111 1.33333 4.1111C0.594444 4.1111 0 4.70554 0 5.44443V17.8889C0 22.0611 3.38333 25.4444 7.55556 25.4444H25.3333C26.0722 25.4444 26.6667 24.85 26.6667 24.1111C26.6667 23.3722 26.0722 22.7778 25.3333 22.7778H7.55556C4.85556 22.7778 2.66667 20.5889 2.66667 17.8889V5.44443Z"
-                                                    fill="black" />
-                                            </svg>
-                                            Choose a picture</label>
-                                    </div>
-                                </div>
-                                <!-- Upload a photo gallery -->
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Upload a photo gallery</label>
-                                    <div class="sms_a_custom_file_input">
-                                        <input type="file" id="multiple-images-input" accept="image/*"
-                                            style="background-color:#FFFFFF;"
-                                            onchange="sms_a_edit_product_variations_images()" multiple>
-                                        <label for="multiple-images-input"><i class="bi bi-image text-black"></i>
-                                            <svg width="20" height="20" viewBox="0 0 32 26" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M8.88889 0.555542C6.92778 0.555542 5.33333 2.14999 5.33333 4.1111V16.5555C5.33333 18.5167 6.92778 20.1111 8.88889 20.1111H28.4444C30.4056 20.1111 32 18.5167 32 16.5555V4.1111C32 2.14999 30.4056 0.555542 28.4444 0.555542H8.88889ZM22 6.48332L27.3333 14.4833C27.6056 14.8944 27.6333 15.4167 27.4 15.85C27.1667 16.2833 26.7167 16.5555 26.2222 16.5555H18.2222H15.5556H11.1111C10.6 16.5555 10.1333 16.2611 9.91111 15.8C9.68889 15.3389 9.75 14.7889 10.0722 14.3889L13.6278 9.94443C13.8833 9.62776 14.2611 9.44443 14.6667 9.44443C15.0722 9.44443 15.4556 9.62776 15.7056 9.94443L16.6667 11.1444L19.7778 6.47776C20.0278 6.1111 20.4444 5.88888 20.8889 5.88888C21.3333 5.88888 21.75 6.1111 22 6.48332ZM10.6667 5.88888C10.6667 5.41738 10.854 4.96519 11.1874 4.6318C11.5208 4.2984 11.9729 4.1111 12.4444 4.1111C12.9159 4.1111 13.3681 4.2984 13.7015 4.6318C14.0349 4.96519 14.2222 5.41738 14.2222 5.88888C14.2222 6.36037 14.0349 6.81256 13.7015 7.14595C13.3681 7.47935 12.9159 7.66665 12.4444 7.66665C11.9729 7.66665 11.5208 7.47935 11.1874 7.14595C10.854 6.81256 10.6667 6.36037 10.6667 5.88888ZM2.66667 5.44443C2.66667 4.70554 2.07222 4.1111 1.33333 4.1111C0.594444 4.1111 0 4.70554 0 5.44443V17.8889C0 22.0611 3.38333 25.4444 7.55556 25.4444H25.3333C26.0722 25.4444 26.6667 24.85 26.6667 24.1111C26.6667 23.3722 26.0722 22.7778 25.3333 22.7778H7.55556C4.85556 22.7778 2.66667 20.5889 2.66667 17.8889V5.44443Z"
-                                                    fill="black" />
-                                            </svg>
-                                            Select images</label>
-                                    </div>
-                                </div>
-
-                            </div>
+    <div class="col-md-6 mb-4">
+        <label class="form-label">Upload a product image</label>
+        <div class="sms_a_custom_file_input">
+            <input type="file" id="sms_mu_img" accept="image/*" style="background-color:#FFFFFF;">
+            <label for="sms_mu_img" id="sms_mu_img_label">
+                <i class="bi bi-image text-black">
+                <svg width="20" height="20" viewBox="0 0 32 26" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M8.88889 0.555542C6.92778 0.555542 5.33333 2.14999 5.33333 4.1111V16.5555C5.33333 18.5167 6.92778 20.1111 8.88889 20.1111H28.4444C30.4056 20.1111 32 18.5167 32 16.5555V4.1111C32 2.14999 30.4056 0.555542 28.4444 0.555542H8.88889ZM22 6.48332L27.3333 14.4833C27.6056 14.8944 27.6333 15.4167 27.4 15.85C27.1667 16.2833 26.7167 16.5555 26.2222 16.5555H18.2222H15.5556H11.1111C10.6 16.5555 10.1333 16.2611 9.91111 15.8C9.68889 15.3389 9.75 14.7889 10.0722 14.3889L13.6278 9.94443C13.8833 9.62776 14.2611 9.44443 14.6667 9.44443C15.0722 9.44443 15.4556 9.62776 15.7056 9.94443L16.6667 11.1444L19.7778 6.47776C20.0278 6.1111 20.4444 5.88888 20.8889 5.88888C21.3333 5.88888 21.75 6.1111 22 6.48332ZM10.6667 5.88888C10.6667 5.41738 10.854 4.96519 11.1874 4.6318C11.5208 4.2984 11.9729 4.1111 12.4444 4.1111C12.9159 4.1111 13.3681 4.2984 13.7015 4.6318C14.0349 4.96519 14.2222 5.41738 14.2222 5.88888C14.2222 6.36037 14.0349 6.81256 13.7015 7.14595C13.3681 7.47935 12.9159 7.66665 12.4444 7.66665C11.9729 7.66665 11.5208 7.47935 11.1874 7.14595C10.854 6.81256 10.6667 6.36037 10.6667 5.88888ZM2.66667 5.44443C2.66667 4.70554 2.07222 4.1111 1.33333 4.1111C0.594444 4.1111 0 4.70554 0 5.44443V17.8889C0 22.0611 3.38333 25.4444 7.55556 25.4444H25.3333C26.0722 25.4444 26.6667 24.85 26.6667 24.1111C26.6667 23.3722 26.0722 22.7778 25.3333 22.7778H7.55556C4.85556 22.7778 2.66667 20.5889 2.66667 17.8889V5.44443Z"
+                                                            fill="black" />
+                                                    </svg>
+                </i> Choose a picture
+            </label>
+        </div>
+    </div>
+    <!-- Upload a photo gallery -->
+    <div class="col-md-6 mb-3">
+        <label class="form-label">Upload a photo gallery</label>
+        <div class="sms_a_custom_file_input">
+            <input type="file" id="sms_mu_photo" accept="image/*" style="background-color:#FFFFFF;" multiple>
+            <label for="sms_mu_photo" id="sms_mu_photo_label">
+                <i class="bi bi-image text-black">
+                <svg width="20" height="20" viewBox="0 0 32 26" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M8.88889 0.555542C6.92778 0.555542 5.33333 2.14999 5.33333 4.1111V16.5555C5.33333 18.5167 6.92778 20.1111 8.88889 20.1111H28.4444C30.4056 20.1111 32 18.5167 32 16.5555V4.1111C32 2.14999 30.4056 0.555542 28.4444 0.555542H8.88889ZM22 6.48332L27.3333 14.4833C27.6056 14.8944 27.6333 15.4167 27.4 15.85C27.1667 16.2833 26.7167 16.5555 26.2222 16.5555H18.2222H15.5556H11.1111C10.6 16.5555 10.1333 16.2611 9.91111 15.8C9.68889 15.3389 9.75 14.7889 10.0722 14.3889L13.6278 9.94443C13.8833 9.62776 14.2611 9.44443 14.6667 9.44443C15.0722 9.44443 15.4556 9.62776 15.7056 9.94443L16.6667 11.1444L19.7778 6.47776C20.0278 6.1111 20.4444 5.88888 20.8889 5.88888C21.3333 5.88888 21.75 6.1111 22 6.48332ZM10.6667 5.88888C10.6667 5.41738 10.854 4.96519 11.1874 4.6318C11.5208 4.2984 11.9729 4.1111 12.4444 4.1111C12.9159 4.1111 13.3681 4.2984 13.7015 4.6318C14.0349 4.96519 14.2222 5.41738 14.2222 5.88888C14.2222 6.36037 14.0349 6.81256 13.7015 7.14595C13.3681 7.47935 12.9159 7.66665 12.4444 7.66665C11.9729 7.66665 11.5208 7.47935 11.1874 7.14595C10.854 6.81256 10.6667 6.36037 10.6667 5.88888ZM2.66667 5.44443C2.66667 4.70554 2.07222 4.1111 1.33333 4.1111C0.594444 4.1111 0 4.70554 0 5.44443V17.8889C0 22.0611 3.38333 25.4444 7.55556 25.4444H25.3333C26.0722 25.4444 26.6667 24.85 26.6667 24.1111C26.6667 23.3722 26.0722 22.7778 25.3333 22.7778H7.55556C4.85556 22.7778 2.66667 20.5889 2.66667 17.8889V5.44443Z"
+                                                            fill="black" />
+                                                    </svg>
+                </i> Select images
+            </label>
+        </div>
+    </div>
+</div>
                             <!-- normal and sale price  -->
                             <div class="row gx-3">
                                 <div class="col-md-6 mb-3">
                                     <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Normal
                                         price</label>
                                     <input type="number" class="form-control rounded-3 p-3 fw-bold"
-                                        id="example-text-input" 
+                                        id="sms_mu_Normal" 
                                          style="background-color: #EAEAEA" placeholder="">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Sale price
                                         (optional)</label>
                                     <input type="number" class="form-control rounded-3 p-3 fw-bold"
-                                        id="example-text-input" style="background-color: #EAEAEA" placeholder="">
+                                    id="sms_mu_sale" style="background-color: #EAEAEA" placeholder="">
                                 </div>
                             </div>
                             <!-- description -->
@@ -148,7 +148,7 @@
                                     description of the product</label>
                                 <div class="form-floating">
                                     <textarea class="form-control" placeholder="Leave a comment here"
-                                        id="floatingTextarea2"
+                                    id="sms_mu_textarea" 
                                         style="height: 100px; background-color: #EAEAEA"></textarea>
 
                                 </div>
@@ -157,24 +157,26 @@
                             <div class="col-md-12 mt-3 ">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Units in
                                     Stock</label>
-                                <input type="number" class="form-control rounded-3 p-3 fw-bold" id="example-text-input"
+                                <input type="number" class="form-control rounded-3 p-3 fw-bold"  id="sms_mu_unit" 
                                     style="background-color: #EAEAEA" placeholder="150">
                             </div>
                             <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
-                                <div class="text-center mt-2 col-sm-6 col-md-6">
-                                    <button class="btn btn-primary col-12 rounded-4 py-3" id="btn_submit">To update
+                                <!-- <div class="text-center mt-2 col-sm-6 col-md-6">
+                                    <button class="btn btn-primary col-12 rounded-4 py-3" onclick="fun()">To update
                                         the product →</button>
-                                </div>
-                                <div class="text-center mt-2 col-sm-6 col-md-6">
+                                </div> -->
+                                <!-- <div class="text-center mt-2 col-sm-6 col-md-6">
                                     <button type="button" class="btn btn-danger col-12 rounded-4 py-3"  onclick="openModal('sms_edit_product_regular_w_delete_complete_modal')">Deletion of
                                         the product</button>
-                                </div>
+                                </div> -->
                             </div>
 
                     </div>
-                 <button onclick="fun()">click</button>
+              
 
-                    </form>
+                    </form> 
+                    <button class="btn btn-primary col-12 rounded-4 py-3" onclick="fun()">To update
+                                        the product →</button>
                 </div>
             </div>
         </div>
@@ -183,36 +185,87 @@
 
     <!-- input javascript code  -->
     <script>
-function fun(){
- let productName =   document.getElementById('sms_product_name').value
- console.log(productName)
-}
-
-        //  var input1= document.getElementById("example-text-input").value;
-        //    console.log(input1);
-        let inp=document.getElementById('example-text-input').value;
-
-        function fun_chg_input1(){
-            let inp=document.getElementById('example-text-input').value;
-               console.log(inp);
-        }
-
-        function sms_a_edit_product_variations_image() {
-            var input = document.getElementById('single-image-input');
-            var fileName = input.files[0].name;
-            // Update input label or any other relevant element with the file name
-            input.nextElementSibling.innerHTML = fileName;
-        }
-
-        function sms_a_edit_product_variations_images() {
-            var input = document.getElementById('multiple-images-input');
+        function updateFileNames(input, targetElement) {
+        try {
             var fileNames = "";
             for (var i = 0; i < input.files.length; i++) {
                 fileNames += input.files[i].name + "<br>";
             }
-            // Update input label or any other relevant element with the file names
-            input.nextElementSibling.innerHTML = fileNames;
+            // Update target element with the file names
+            targetElement.innerHTML = fileNames;
+        } catch (error) {
+            console.error("An error occurred while updating the file names:", error);
         }
+    }
+
+    function handleImageUpload(inputId, targetId) {
+        var input = document.getElementById(inputId);
+        var targetElement = document.getElementById(targetId);
+        input.addEventListener('change', function() {
+            updateFileNames(input, targetElement);
+        });
+    }
+
+    // Call the functions for each file input
+    handleImageUpload('sms_mu_img', 'sms_mu_img_label');
+    handleImageUpload('sms_mu_photo', 'sms_mu_photo_label');
+    function fun() {
+    let productName = document.getElementById('sms_product_name').value;
+    let photo_value = document.getElementById('sms_mu_photo').value;
+    let img_value = document.getElementById('sms_mu_img').value;
+    let NormalInp = document.getElementById('sms_mu_Normal').value;
+    let saleInp = document.getElementById('sms_mu_sale').value;
+    let textareaInp = document.getElementById('sms_mu_textarea').value;
+    let unitInp = document.getElementById('sms_mu_unit').value;
+    let category_select = document.getElementById('category_in_product').value;
+    let selected_categories = [];
+    
+    for (let i = 0; i < category_select.options.length; i++) {
+        if (category_select.options[i].selected) {
+            selected_categories.push(category_select.options[i].value);
+        }
+    }
+
+    let Array_of_data = {
+        'productName': productName,
+        'selected_categories': selected_categories,
+        'Photos': photo_value,
+        'img_value': img_value,
+        'NormalInp': NormalInp,
+        'saleInp': saleInp,
+        'textareaInp': textareaInp,
+        'unitInp': unitInp,
+    };
+
+    console.log(Array_of_data);
+}
+
+
+// function sms_mu_img_selection() {
+//     try {
+//         var input = document.getElementById('sms_mu_img');
+//         var fileName = input.files[0].name;
+//         // Update input label or any other relevant element with the file name
+//         input.nextElementSibling.innerHTML = fileName;
+//     } catch (error) {
+//         console.error("An error occurred while updating the file name:", error);
+//     }
+// }
+
+// function sms_mu_photo_selection() {
+//     try {
+//         var input = document.getElementById('sms_mu_photo');
+//         var fileNames = "";
+//         for (var i = 0; i < input.files.length; i++) {
+//             fileNames += input.files[i].name + "<br>";
+//         }
+//         // Update input label or any other relevant element with the file names
+//         input.nextElementSibling.innerHTML = fileNames;
+//     } catch (error) {
+//         console.error("An error occurred while updating the file names:", error);
+//     }
+// }
+
     </script>
 <!-- </body>
 <script src="./dist/js/tabler.min.js?1684106062" defer></script>
@@ -276,7 +329,7 @@ function openModal(modalId) {
 </script>
 
 
-<script>
+<!-- <script>
     document.addEventListener('DOMContentLoaded', function() {
         // This code runs after the DOM is fully loaded
 
@@ -291,17 +344,17 @@ function openModal(modalId) {
             var unitsInStock = document.getElementById("example-text-input").value;
 
             // Construct data object
-            var data = {
-                productName: productName,
-                category: category,
-                normalPrice: normalPrice,
-                salePrice: salePrice,
-                description: description,
-                unitsInStock: unitsInStock
-            };
+            // var data = {
+            //     productName: productName,
+            //     category: category,
+            //     normalPrice: normalPrice,
+            //     salePrice: salePrice,
+            //     description: description,
+            //     unitsInStock: unitsInStock
+            // };
 
             // Log data to console
-            console.log(data);
+            // console.log(data);
 
             // Send data via AJAX
             // Replace '/your-endpoint' with your actual endpoint URL
@@ -322,7 +375,7 @@ function openModal(modalId) {
         }
 
         // Add event listener to the button with id "abc"
-        document.getElementById("btn_submit").addEventListener("click", handleButtonClick);
+        // document.getElementById("btn_submit").addEventListener("click", handleButtonClick);
     });
-</script>
+</script> -->
 
