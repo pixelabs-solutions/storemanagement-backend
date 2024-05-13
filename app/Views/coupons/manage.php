@@ -55,20 +55,13 @@
                                 <div
                                     style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                     <div class="col-md-12 rounded-4 bg-transparent h-100 ">
-                                        <select  id="sms_mu_parent_ctg"multiple
+                                        <select  id="sms_w_parent_ctg"
+                                        class="form-select form-select-md"
                                             style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
-                                            <option value="NOSQL">Ctg</option>
-                                            <option value="NodeJS">demo</option>
+                                            <option value="percent">percentage</option>
+                                            <option value="amount">amount</option>
                                         </select>
-                                        <span
-                                        class="span_div">
-                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M6.00006 7.16667L10.0001 3.16667L8.83339 2L6.00006 4.83333L3.16673 2L2.00006 3.16667L6.00006 7.16667Z"
-                                                    fill="#111" />
-                                            </svg>
-                                        </span>
+                                      
                                     </div>
                             </div>
                             </div>
@@ -118,7 +111,7 @@
 function sms_meh_couponmanage_data() {
     var Coupon_manage_Data = {
         'code': document.getElementById('sms_The_coupon_code').value,
-        'discount_type': document.getElementById('sms_mu_input_bg_select').value,
+        'discount_type': document.getElementById('sms_w_parent_ctg').value,
         'amount': document.getElementById('sms_amount_of_the_discount').value,
         'date_expires': document.getElementById('sms_Coupon_expiration').value,
         'usage_limit': document.getElementById('sms_Usage_limit').value,
