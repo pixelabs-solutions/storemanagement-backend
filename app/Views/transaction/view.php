@@ -245,25 +245,41 @@
 
 <script>
 
-  const clickedSpan = document.querySelector('#view_order_details'); // Assuming the span triggers the modal
+  // const clickedSpan = document.querySelector('#view_order_details'); // Assuming the span triggers the modal
 
-  clickedSpan.addEventListener('click', () => {
-    const clickedSpanId = clickedSpan.dataset.transactionId; // Use data-transaction-id attribute
+  // clickedSpan.addEventListener('click', () => {
+  //   const clickedSpanId = clickedSpan.dataset.transactionId; // Use data-transaction-id attribute
 
-    // Initialize a variable to hold the order data
-    var selectedOrder = null;
+  //   // Initialize a variable to hold the order data
+  //   var selectedOrder = null;
 
-    // Iterate through the orders array to find the order with the matching ID
-    for (var i = 0; i < transaction.length; i++) {
-      if (transaction[i].id === clickedSpanId) {
-        selectedOrder = transaction[i];
-        break; // Exit the loop once the matching order is found
-      }
-    }
+  //   // Iterate through the orders array to find the order with the matching ID
+  //   for (var i = 0; i < transaction.length; i++) {
+  //     if (transaction[i].id === clickedSpanId) {
+  //       selectedOrder = transaction[i];
+  //       break; // Exit the loop once the matching order is found
+  //     }
+  //   }
 
-    // Now selectedOrder contains the data of the order with the matching ID
-    console.log(selectedOrder);
-  });
+  //   // Now selectedOrder contains the data of the order with the matching ID
+  //   console.log(selectedOrder);
+  // });
+
+
+  // const viewOrderDetailsButton = document.querySelector('.view_order_details');
+
+  // viewOrderDetailsButton.addEventListener('click', handleOrderDetailsClick);
+
+  // function handleOrderDetailsClick(event) {
+  //   const clickedButton = event.currentTarget; // Get the clicked element
+  //   const transactionId = clickedButton.dataset.transactionId; // Access data attribute
+
+  //   // Use the transactionId value as needed
+  //   console.log("Transaction ID:", transactionId);
+  //   // You can perform actions like opening a modal or making an AJAX request
+  // }
+
+
 </script>
 
 

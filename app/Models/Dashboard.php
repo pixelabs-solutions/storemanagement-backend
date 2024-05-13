@@ -65,30 +65,34 @@ class Dashboard
             ]);
     
             $orders = json_decode($response->getBody(), true);
-            foreach ($orders as $order) {
-                $city = $order['shipping']['city'] ?? '';
-                $city = trim($city);
-                if (empty($city)) {
-                    $city = 'Unknown City';
-                }
-                if (!isset($cities[$city])) {
-                    $cities[$city] = ['customer_ids' => []];
-                }
-                if (!array_key_exists($order['customer_id'], $cities[$city]['customer_ids'])) {
-                    $cities[$city]['customer_ids'][$order['customer_id']] = true;
-                    $total_customers++;
-                }
-
-                $latestOrders[] = [
-                    'order_id' => $order['id'],
-                    'sum' => $order['total'],
-                    'date' => $order['date_created'],
-                    'client' => $order['billing']['first_name'] . ' ' . $order['billing']['last_name']
-                ];
-                if (count($latestOrders) > 3) {
-                    array_shift($latestOrders);
+            if($orders !== null)
+            {
+                foreach ($orders as $order) {
+                    $city = $order['shipping']['city'] ?? '';
+                    $city = trim($city);
+                    if (empty($city)) {
+                        $city = 'Unknown City';
+                    }
+                    if (!isset($cities[$city])) {
+                        $cities[$city] = ['customer_ids' => []];
+                    }
+                    if (!array_key_exists($order['customer_id'], $cities[$city]['customer_ids'])) {
+                        $cities[$city]['customer_ids'][$order['customer_id']] = true;
+                        $total_customers++;
+                    }
+    
+                    $latestOrders[] = [
+                        'order_id' => $order['id'],
+                        'sum' => $order['total'],
+                        'date' => $order['date_created'],
+                        'client' => $order['billing']['first_name'] . ' ' . $order['billing']['last_name']
+                    ];
+                    if (count($latestOrders) > 3) {
+                        array_shift($latestOrders);
+                    }
                 }
             }
+            
             $cityData = [];
             foreach ($cities as $city => $data) {
                 $customer_count = count($data['customer_ids']);
@@ -134,16 +138,19 @@ class Dashboard
                 'auth' => [$data["consumer_key"], $data["consumer_secret"]]
             ]);
             $orders = json_decode($response->getBody(), true);
-    
-            foreach ($orders as $order) {
-                foreach ($order['line_items'] as $item) {
-                    $productId = $item['product_id'];
-                    if (!isset($productSales[$productId])) {
-                        $productSales[$productId] = 0;
+            if($orders !== null) 
+            {
+                foreach ($orders as $order) {
+                    foreach ($order['line_items'] as $item) {
+                        $productId = $item['product_id'];
+                        if (!isset($productSales[$productId])) {
+                            $productSales[$productId] = 0;
+                        }
+                        $productSales[$productId] += $item['total'];
                     }
-                    $productSales[$productId] += $item['total'];
                 }
-            }
+            } 
+            
     
             arsort($productSales);  
             $topProductIds = array_slice(array_keys($productSales), 0, 3);
@@ -161,7 +168,7 @@ class Dashboard
                     ];
                 } else {
                     $topProducts[] = [
-                        'product_name' => $productDetails['name'],
+                        'product_name' => $productDetails['name']??"",
                         'image_url' => 'No image available'
                     ];
                 }
