@@ -1,38 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>adding a term form</title>
-    <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" />
-    
-    <style>
-        @import url('https://rsms.me/inter/inter.css');
-
-        :root {
-            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-        }
-
-        body {
-            font-feature-settings: "cv03", "cv04", "cv11";
-        }
-
-        .rtl {
-            direction: rtl;
-        }
-
-        .rtl .avatar {
-            margin-left: 10px;
-        }
-    </style>
-</head>
-
-<body> -->
 <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
     <style>
         .chosen-container-multi {
@@ -143,7 +109,7 @@
 
 
 function sms_meh_couponmanage_data() {
-    var CouponmanageData = {
+    var Coupon_manage_Data = {
         'code': document.getElementById('sms_The_coupon_code').value,
         'discount_type': document.getElementById('sms_w_parent_ctg').value,
         'amount': document.getElementById('sms_amount_of_the_discount').value,
@@ -151,14 +117,14 @@ function sms_meh_couponmanage_data() {
         'usage_limit': document.getElementById('sms_Usage_limit').value,
         
     };
-    console.log(CouponmanageData);
-    fetch('/coupons/add', {
+
+    fetch('/coupons/add',{
         method: 'POST',
-        body: JSON.stringify(CouponmanageData),
+        body: JSON.stringify(Coupon_manage_Data),
         headers: {
             'Content-Type': 'application/json'
         }
-    })
+    } )
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -176,15 +142,3 @@ function sms_meh_couponmanage_data() {
 
 
 </script> 
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-         <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
-         <script>
-            $(".chosen-select").chosen({
-               no_results_text: "Oops, nothing found!"
-            }) -->
-
-<!-- //  </body>
-// <script src="./dist/js/tabler.min.js?1684106062" defer></script> -->
-<!-- // <script src="./dist/js/demo.min.js?1684106062" defer></script>
-
-// </html> -->

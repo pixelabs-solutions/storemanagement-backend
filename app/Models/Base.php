@@ -256,7 +256,7 @@ class Base
         $client = new Client();
         $response = $client->request('GET', $store_url . '/wp-json/wc/v3/products', $params);
         $products = json_decode($response->getBody(), true);
-        return count($products);
+        return ($products !== null) ? count($products) : 0;
     }
 
     public static function get_number_of_orders($store_url, $params) {
@@ -270,6 +270,7 @@ class Base
         $client = new Client();
         $response = $client->request('GET', $store_url.'/wp-json/wc/v3/orders', $params);
         $orders = json_decode($response->getBody(), true);
+        if($orders === null) return 0;
         $totalRevenue = 0;
         foreach ($orders as $order) {
             $totalRevenue += $order['total'];
@@ -281,7 +282,7 @@ class Base
         $response = $client->request('GET', $store_url. '/wp-json/wc/v3/orders', $params);
         $orders = json_decode($response->getBody(), true);
         $customerOrdersCount = [];
-
+        if($orders === null) return 0;
         foreach ($orders as $order) {
             $customerId = $order['customer_id'] ?? 'guest_' . ($order['id'] ?? uniqid());
             if (!isset($customerOrdersCount[$customerId])) {
