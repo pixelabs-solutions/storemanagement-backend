@@ -65,8 +65,8 @@
                 </div>
                 <div class="row mt-5 ">
                     <div class="col-lg-4">
-                        <label for="" class="fs-3 fw-bold">Target page views</label>
-                        <input class="sms_objective_add_form_input" type="text" id='sms_Target_page_views'>
+                        <label for="" class="fs-3 fw-bold">Target keywords </label>
+                        <input class="sms_objective_add_form_input" type="text" id='sms_Target_page_target'>
                     </div>
                     <div class="col-lg-4">
                         <label for="" class="fs-3 fw-bold">Target progress in Google locations</label>
@@ -108,21 +108,21 @@
 
 function sms_meh_update_goal_data() {
 //    let sales_revenue': document.getElementById('sms_target_sales_revenue').value;
-    var goalData = {
-        'sales_revenue': document.getElementById('sms_target_sales_revenue').value,
-        'recruitment_of_new_customers': document.getElementById('sms_Target_recruitment_of_new_customers').value,
-        'Destination_of_new_orders': document.getElementById('sms_Destination_of_new_orders').value,
-        'page_view': document.getElementById('sms_Target_page_views').value,
-        'progress_in_Google_locations': document.getElementById('sms_Target_progress_in_Google_locations').value,
-        'page_views': document.getElementById('sms_Target_page_views').value,
-        'new_products': document.getElementById('sms_Target_new_products').value,
-        'to_increase_the_average_number_of_items_per_order': document.getElementById('sms_Target_to_increase_the_average_number_of_items_per_order').value,
-        'Goal_of_raising_the_average_income_from_the_order': document.getElementById('sms_Goal_of_raising_the_average_income_from_the_order').value,
+    var data = {
+        'sales_revenue_target': document.getElementById('sms_target_sales_revenue').value,
+        'new_customers_target': document.getElementById('sms_Target_recruitment_of_new_customers').value,
+        'new_orders_target': document.getElementById('sms_Destination_of_new_orders').value,
+        'target_keywords': document.getElementById('sms_Target_page_target').value,
+        'google_rankings_target': document.getElementById('sms_Target_progress_in_Google_locations').value,
+        'page_views_target': document.getElementById('sms_Target_page_views').value,
+        'new_products_target': document.getElementById('sms_Target_new_products').value,
+        'avg_order_items_increase_target': document.getElementById('sms_Target_to_increase_the_average_number_of_items_per_order').value,
+        'avg_order_value_increase_target': document.getElementById('sms_Goal_of_raising_the_average_income_from_the_order').value,
     };
-    console.log(goalData);
+    console.log(data);
     fetch('/goals/add', {
         method: 'POST',
-        body: JSON.stringify(goalData),
+        body:JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
         }

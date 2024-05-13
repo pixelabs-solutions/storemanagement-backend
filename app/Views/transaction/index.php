@@ -1,17 +1,25 @@
 <?php
-require_once __DIR__ . '/../partials/header.php';
-// var_dump($transactions);
-$jsonData = json_encode($transactions, JSON_UNESCAPED_UNICODE);
 
-echo $jsonData;
+require_once __DIR__ . '/../partials/header.php';
+
+// var_dump($transactions);
+// $jsontransactionData = json_encode($transactions, JSON_UNESCAPED_UNICODE);
+
+// echo $jsontransactionData;
 ?>
+
+<!-- <input type="hidden" id="transactionData" value="<?php echo $jsontransactionData; ?>"> -->
 
 <script>
 
 
-  const jsonData = <?php echo $jsonData; ?>; // Access encoded data
-  const transactions = JSON.parse(jsonData);
-  console.log(transactions);
+
+  // const transactionsdata = document.getElementById('transactionData');
+
+  // const jsontransactionData = transactionsdata.value;
+  // const transactionsArray = JSON.parse(jsontransactionData);
+  // console.log(transactionsArray); // Output: "apple"
+
 
 </script>
 
@@ -278,6 +286,7 @@ echo $jsonData;
 <script>
 
 
+
   const viewOrderDetailsButtons = document.querySelectorAll('.view_order_details');
 
   viewOrderDetailsButtons.forEach(button => {
@@ -292,7 +301,6 @@ echo $jsonData;
     console.log("Transaction ID:", transactionId);
     // You can perform actions like opening a modal or making an AJAX request
   }
-
 
 
 

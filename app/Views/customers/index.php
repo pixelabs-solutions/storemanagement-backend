@@ -1,5 +1,13 @@
 <?php
- require_once __DIR__ . '/../partials/header.php';
+require_once __DIR__ . '/../partials/header.php';
+
+$customers = $data['data'];
+
+// var_dump($customers);
+
+//  echo $transactions;
+
+
 ?>
 <!-- <style>
   @media only screen and (max-width:1000px) {
@@ -100,7 +108,7 @@
   }
 </style> -->
 <style>
-    @media only screen and (max-width:1000px) {
+  @media only screen and (max-width:1000px) {
     .sms_mu_table {
       width: 900px !important;
       border: 0 !important;
@@ -146,16 +154,24 @@
     background-color: #a8c3e7 !important;
     height: 50px;
   }
-  tbody, td, tfoot, th, thead, tr {
+
+  tbody,
+  td,
+  tfoot,
+  th,
+  thead,
+  tr {
     border-color: inherit;
     border-style: none !important;
     border-width: 0;
-}
+  }
+
   td:first-child {
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
   }
-   td:last-child {
+
+  td:last-child {
     border-bottom-right-radius: 20px;
     border-top-right-radius: 20px;
   }
@@ -169,7 +185,7 @@
     border-bottom-right-radius: 20px;
     border-top-right-radius: 20px;
   }
-  
+
 
   .table-spacing {
     border-spacing: 5px;
@@ -209,88 +225,38 @@
           <thead>
             <tr class="sms_mu_th">
               <th data-i18n="customer_page.customer_th.customer_name" class="sms_mu_td">Customer's name </th>
-              <th  data-i18n="customer_page.customer_th.dates_name" class="sms_mu_td">Date of last order </th>
-              <th data-i18n="customer_page.customer_th.mails_name"  class="sms_mu_td">mail address</th>
-              <th data-i18n="customer_page.customer_th.number_name"  class="sms_mu_td">Number of orders </th>
-              <th data-i18n="customer_page.customer_th.total_name"  class="sms_mu_td">Total</th>
-              <th data-i18n="customer_page.customer_th.order_name"  class="sms_mu_td">Order average</th>
+              <th data-i18n="customer_page.customer_th.dates_name" class="sms_mu_td">Date of last order </th>
+              <th data-i18n="customer_page.customer_th.mails_name" class="sms_mu_td">mail address</th>
+              <th data-i18n="customer_page.customer_th.number_name" class="sms_mu_td">Number of orders </th>
+              <th data-i18n="customer_page.customer_th.total_name" class="sms_mu_td">Total</th>
+              <th data-i18n="customer_page.customer_th.order_name" class="sms_mu_td">Order average</th>
 
             </tr>
             <tr class="sms_mu_spacing_div"></tr>
 
           </thead>
           <tbody>
-            <tr class="sms_mu_tr">
+            <?php
+            foreach ($customers as $item) {
+              ?>
+              <tr class="sms_mu_tr">
 
-              <td class="t_oravg_m" data-i18n="customer_page.customer_tr.customer_name" >
-                mubashir Malka
-              </td>
-              <td data-i18n="customer_page.customer_tr.dates_name">24/07/2024 </td>
-              <td data-i18n="customer_page.customer_tr.mails_name">elikako.m@gmail.com </td>
-              <td>2</td>
-              <td data-i18n="customer_page.customer_tr.total_name">
-                NIS 1,370
-              </td>
-              <td data-i18n="customer_page.customer_tr.order_name">685 NIS</td>
-            </tr>
-            <tr class="sms_mu_spacing_div"></tr>
-            <tr class="sms_mu_tr">
-
-              <td class="t_oravg_m" data-i18n="customer_page.customer_tr.customer_name" >
-                mubashir Malka
-              </td>
-              <td data-i18n="customer_page.customer_tr.dates_name">24/07/2024 </td>
-              <td data-i18n="customer_page.customer_tr.mails_name">elikako.m@gmail.com </td>
-              <td>2</td>
-              <td data-i18n="customer_page.customer_tr.total_name">
-                NIS 1,370
-              </td>
-              <td data-i18n="customer_page.customer_tr.order_name">685 NIS</td>
-            </tr>
-            <tr class="sms_mu_spacing_div"></tr>
-            <tr class="sms_mu_tr">
-
-              <td class="t_oravg_m" data-i18n="customer_page.customer_tr.customer_name" >
-                mubashir Malka
-              </td>
-              <td data-i18n="customer_page.customer_tr.dates_name">24/07/2024 </td>
-              <td data-i18n="customer_page.customer_tr.mails_name">elikako.m@gmail.com </td>
-              <td>2</td>
-              <td data-i18n="customer_page.customer_tr.total_name">
-                NIS 1,370
-              </td>
-              <td data-i18n="customer_page.customer_tr.order_name">685 NIS</td>
-            </tr>
-            <tr class="sms_mu_spacing_div"></tr>
-            <tr class="sms_mu_tr">
-
-              <td class="t_oravg_m" data-i18n="customer_page.customer_tr.customer_name" >
-                mubashir Malka
-              </td>
-              <td data-i18n="customer_page.customer_tr.dates_name">24/07/2024 </td>
-              <td data-i18n="customer_page.customer_tr.mails_name">elikako.m@gmail.com </td>
-              <td>2</td>
-              <td data-i18n="customer_page.customer_tr.total_name">
-                NIS 1,370
-              </td>
-              <td data-i18n="customer_page.customer_tr.order_name">685 NIS</td>
-            </tr>
-            <tr class="sms_mu_spacing_div"></tr>
-            <tr class="sms_mu_tr">
-
-              <td class="t_oravg_m" data-i18n="customer_page.customer_tr.customer_name" >
-                mubashir Malka
-              </td>
-              <td data-i18n="customer_page.customer_tr.dates_name">24/07/2024 </td>
-              <td data-i18n="customer_page.customer_tr.mails_name">elikako.m@gmail.com </td>
-              <td>2</td>
-              <td data-i18n="customer_page.customer_tr.total_name">
-                NIS 1,370
-              </td>
-              <td data-i18n="customer_page.customer_tr.order_name">685 NIS</td>
-            </tr>
-            <tr class="sms_mu_spacing_div"></tr>
-      
+                <td class="t_oravg_m" >
+                   <?php echo $item['customer_name']; ?>
+                </td>
+                <td><?php echo $item['date_of_last_order']; ?> </td>
+                <td><?php echo $item['email']; ?></td>
+                <td><?php echo $item['number_of_orders']; ?></td>
+                <td>
+                  NIS <?php echo $item['total_amount']; ?>
+                </td>
+                <td><?php echo $item['average_order_cost']; ?> NIS</td>
+              </tr>
+              
+              <tr class="sms_mu_spacing_div"></tr>
+              <?php
+            }
+            ?>
           </tbody>
         </table>
       </div>
@@ -330,5 +296,5 @@
 
 
 <?php
- require_once __DIR__ . '/../partials/footer.php';
+require_once __DIR__ . '/../partials/footer.php';
 ?>
