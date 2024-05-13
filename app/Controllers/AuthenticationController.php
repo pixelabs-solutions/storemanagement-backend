@@ -30,6 +30,8 @@ class AuthenticationController
 
     public function login_user()
     {
+        // $rawData = file_get_contents("php://input");
+        // $data = json_decode($rawData, true);
         $email = isset($_POST['email']) ? $_POST['email'] : null;
         $password = isset($_POST['password']) ? $_POST['password'] : null;
 
