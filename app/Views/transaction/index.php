@@ -1,7 +1,18 @@
 <?php
- require_once __DIR__ . '/../partials/header.php';
+require_once __DIR__ . '/../partials/header.php';
+var_dump($transactions);
+$jsonData = json_encode($transactions);
 
 ?>
+
+<script>
+
+
+  const transactions = JSON.parse('<?php echo $jsonData; ?>');
+console.log(transactions);
+
+</script>
+
 <style>
   @media only screen and (max-width:1000px) {
     .sms_mu_table {
@@ -28,16 +39,18 @@
     padding: 15px;
 
   }
+
   .sms_mu_table {
     border-spacing: 0 50px !important;
     width: 100%;
     /* margin: 0 2% !important; */
   }
+
   .sms_m_form_select {
     border: none;
     border-radius: 0.8rem;
     background-color: #F0F0F0;
-    min-width:250px !important;
+    min-width: 250px !important;
   }
 
   .sms_mu_thead,
@@ -60,9 +73,11 @@
     background-color: #F2F2F2;
     width: inherit;
   }
-  svg{
+
+  svg {
     cursor: pointer;
   }
+
   .sms_mu_th {
     background-color: #a8c3e7 !important;
     height: 50px;
@@ -145,7 +160,7 @@
           <table class="sms_mu_table" id='sms_transaction_w_transaction_table'>
             <tr class="sms_mu_th">
               <th></th>
-              <th class="sms_mu_td"  data-i18n="transction_page.transaction_th.order_no">order no</th>
+              <th class="sms_mu_td" data-i18n="transction_page.transaction_th.order_no">order no</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.customer_name">Customer's Name</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.status">Status</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.order_date">Order Date </th>
@@ -154,57 +169,85 @@
               <th></th>
             </tr>
             <tr class="sms_mu_spacing_div"></tr>
-            <tr class="sms_mu_tr">
-              <td>
-                <span class="form-check-label"></span>
-                <input class="form-check-input mx-2" type="checkbox">
-                </label>
-              </td>
-              <td>#1152</td>
-              <td>mubashir Malka </td>
-              <td><span class="sms_transaction_w_status"> completed </span></td>
-              <td>24/07/2024</td>
-              <!-- <td>#1152</td> -->
-              <td>NIS 1,370 </td>
-              <td>Google Organic </td>
-              <td>
-                <span data-bs-toggle="modal" data-bs-target="#edit-modal-full-width">
 
-        
-                <svg width="24" height="24" viewBox="0 0 32 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M15.9996 0.555664C11.5107 0.555664 7.91625 2.60011 5.29959 5.03344C2.69959 7.44455 0.960699 10.3334 0.138477 12.3168C-0.0448568 12.7557 -0.0448568 13.2446 0.138477 13.6834C0.960699 15.6668 2.69959 18.5557 5.29959 20.9668C7.91625 23.4001 11.5107 25.4446 15.9996 25.4446C20.4885 25.4446 24.0829 23.4001 26.6996 20.9668C29.2996 18.5501 31.0385 15.6668 31.8663 13.6834C32.0496 13.2446 32.0496 12.7557 31.8663 12.3168C31.0385 10.3334 29.2996 7.44455 26.6996 5.03344C24.0829 2.60011 20.4885 0.555664 15.9996 0.555664ZM7.99959 13.0001C7.99959 10.8784 8.84244 8.84354 10.3427 7.34325C11.843 5.84296 13.8779 5.00011 15.9996 5.00011C18.1213 5.00011 20.1562 5.84296 21.6564 7.34325C23.1567 8.84354 23.9996 10.8784 23.9996 13.0001C23.9996 15.1218 23.1567 17.1567 21.6564 18.657C20.1562 20.1573 18.1213 21.0001 15.9996 21.0001C13.8779 21.0001 11.843 20.1573 10.3427 18.657C8.84244 17.1567 7.99959 15.1218 7.99959 13.0001ZM15.9996 9.44455C15.9996 11.4057 14.4051 13.0001 12.444 13.0001C12.0496 13.0001 11.6718 12.9334 11.3163 12.8168C11.0107 12.7168 10.6551 12.9057 10.6663 13.2279C10.6829 13.6112 10.7385 13.9946 10.844 14.3779C11.6051 17.2223 14.5329 18.9112 17.3774 18.1501C20.2218 17.389 21.9107 14.4612 21.1496 11.6168C20.5329 9.31122 18.494 7.76122 16.2274 7.66678C15.9051 7.65566 15.7163 8.00566 15.8163 8.31677C15.9329 8.67233 15.9996 9.05011 15.9996 9.44455Z"
-                    fill="black" />
-                </svg>
-                </span>
-              </td>
-            </tr>
+            <?php
+            foreach ($transactions as $item) {
+
+              foreach ($item['meta_data'] as $metaItem) {
+                if ($metaItem['key'] === '_wc_order_attribution_utm_source') {
+                  $utmSource = $metaItem['value'];
+                  break; // Exit the loop after finding the first match
+                }
+              }
+
+
+              $date_created_date_string = $item['date_created'];
+              $date_created_timestamp = strtotime($date_created_date_string);
+              $date_created_formatted_date = date("Y-m-d", $date_created_timestamp);
+
+              ?>
+
+              <tr class="sms_mu_tr">
+                <td>
+                  <span class="form-check-label"></span>
+                  <input class="form-check-input mx-2" type="checkbox">
+                  </label>
+                </td>
+                <td><?php echo "#" . $item['id']; ?> </td>
+
+                <td><?php echo $item['billing']['first_name'] . " " . $item['billing']['last_name']; ?></td>
+
+                <td><span class="sms_transaction_w_status"> <?php echo $item['status']; ?> </span></td>
+
+                <td><?php echo $date_created_formatted_date; ?></td>
+                <td><?php echo "NIS " . $item['total']; ?> </td>
+
+                <!-- <td>#1152</td> -->
+
+                <td><?php echo $utmSource; ?></td>
+                <td>
+                  <span id="view_order_details" data-transaction-id="<?php echo $item['id']; ?>" data-bs-toggle="modal" data-bs-target="#edit-modal-full-width">
+
+
+                    <svg width="24" height="24" viewBox="0 0 32 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M15.9996 0.555664C11.5107 0.555664 7.91625 2.60011 5.29959 5.03344C2.69959 7.44455 0.960699 10.3334 0.138477 12.3168C-0.0448568 12.7557 -0.0448568 13.2446 0.138477 13.6834C0.960699 15.6668 2.69959 18.5557 5.29959 20.9668C7.91625 23.4001 11.5107 25.4446 15.9996 25.4446C20.4885 25.4446 24.0829 23.4001 26.6996 20.9668C29.2996 18.5501 31.0385 15.6668 31.8663 13.6834C32.0496 13.2446 32.0496 12.7557 31.8663 12.3168C31.0385 10.3334 29.2996 7.44455 26.6996 5.03344C24.0829 2.60011 20.4885 0.555664 15.9996 0.555664ZM7.99959 13.0001C7.99959 10.8784 8.84244 8.84354 10.3427 7.34325C11.843 5.84296 13.8779 5.00011 15.9996 5.00011C18.1213 5.00011 20.1562 5.84296 21.6564 7.34325C23.1567 8.84354 23.9996 10.8784 23.9996 13.0001C23.9996 15.1218 23.1567 17.1567 21.6564 18.657C20.1562 20.1573 18.1213 21.0001 15.9996 21.0001C13.8779 21.0001 11.843 20.1573 10.3427 18.657C8.84244 17.1567 7.99959 15.1218 7.99959 13.0001ZM15.9996 9.44455C15.9996 11.4057 14.4051 13.0001 12.444 13.0001C12.0496 13.0001 11.6718 12.9334 11.3163 12.8168C11.0107 12.7168 10.6551 12.9057 10.6663 13.2279C10.6829 13.6112 10.7385 13.9946 10.844 14.3779C11.6051 17.2223 14.5329 18.9112 17.3774 18.1501C20.2218 17.389 21.9107 14.4612 21.1496 11.6168C20.5329 9.31122 18.494 7.76122 16.2274 7.66678C15.9051 7.65566 15.7163 8.00566 15.8163 8.31677C15.9329 8.67233 15.9996 9.05011 15.9996 9.44455Z"
+                        fill="black" />
+                    </svg>
+                  </span>
+                </td>
+              </tr>
+              <tr class="sms_mu_spacing_div"></tr>
+              <!-- <tr class="sms_mu_tr">
+                <td>
+                  <span class="form-check-label"></span>
+                  <input class="form-check-input mx-2" type="checkbox">
+                  </label>
+                </td>
+                <td>#1152</td>
+                <td>atif Malka </td>
+                <td><span class="sms_transaction_w_status"> afw </span></td>
+                <td>24/07/2024</td>
+               <td>#1152</td> 
+                <td>NIS 1,370 </td>
+                <td>Google Organic </td>
+                <td>
+                  <span data-bs-toggle="modal" data-bs-target="#edit-modal-full-width">
+                    <svg width="24" height="24" viewBox="0 0 32 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M15.9996 0.555664C11.5107 0.555664 7.91625 2.60011 5.29959 5.03344C2.69959 7.44455 0.960699 10.3334 0.138477 12.3168C-0.0448568 12.7557 -0.0448568 13.2446 0.138477 13.6834C0.960699 15.6668 2.69959 18.5557 5.29959 20.9668C7.91625 23.4001 11.5107 25.4446 15.9996 25.4446C20.4885 25.4446 24.0829 23.4001 26.6996 20.9668C29.2996 18.5501 31.0385 15.6668 31.8663 13.6834C32.0496 13.2446 32.0496 12.7557 31.8663 12.3168C31.0385 10.3334 29.2996 7.44455 26.6996 5.03344C24.0829 2.60011 20.4885 0.555664 15.9996 0.555664ZM7.99959 13.0001C7.99959 10.8784 8.84244 8.84354 10.3427 7.34325C11.843 5.84296 13.8779 5.00011 15.9996 5.00011C18.1213 5.00011 20.1562 5.84296 21.6564 7.34325C23.1567 8.84354 23.9996 10.8784 23.9996 13.0001C23.9996 15.1218 23.1567 17.1567 21.6564 18.657C20.1562 20.1573 18.1213 21.0001 15.9996 21.0001C13.8779 21.0001 11.843 20.1573 10.3427 18.657C8.84244 17.1567 7.99959 15.1218 7.99959 13.0001ZM15.9996 9.44455C15.9996 11.4057 14.4051 13.0001 12.444 13.0001C12.0496 13.0001 11.6718 12.9334 11.3163 12.8168C11.0107 12.7168 10.6551 12.9057 10.6663 13.2279C10.6829 13.6112 10.7385 13.9946 10.844 14.3779C11.6051 17.2223 14.5329 18.9112 17.3774 18.1501C20.2218 17.389 21.9107 14.4612 21.1496 11.6168C20.5329 9.31122 18.494 7.76122 16.2274 7.66678C15.9051 7.65566 15.7163 8.00566 15.8163 8.31677C15.9329 8.67233 15.9996 9.05011 15.9996 9.44455Z"
+                        fill="black" />
+                    </svg>
+                  </span>
+                </td>
+              </tr> -->
+
+              <?php
+
+            }
+            ?>
             <tr class="sms_mu_spacing_div"></tr>
-            <tr class="sms_mu_tr">
-              <td>
-                <span class="form-check-label"></span>
-                <input class="form-check-input mx-2" type="checkbox">
-                </label>
-              </td>
-              <td>#1152</td>
-              <td>atif Malka </td>
-              <td><span class="sms_transaction_w_status"> cancelled </span></td>
-              <td>24/07/2024</td>
-              <!-- <td>#1152</td> -->
-              <td>NIS 1,370 </td>
-              <td>Google Organic </td>
-              <td>
-                <span data-bs-toggle="modal" data-bs-target="#edit-modal-full-width">
-                <svg width="24" height="24" viewBox="0 0 32 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M15.9996 0.555664C11.5107 0.555664 7.91625 2.60011 5.29959 5.03344C2.69959 7.44455 0.960699 10.3334 0.138477 12.3168C-0.0448568 12.7557 -0.0448568 13.2446 0.138477 13.6834C0.960699 15.6668 2.69959 18.5557 5.29959 20.9668C7.91625 23.4001 11.5107 25.4446 15.9996 25.4446C20.4885 25.4446 24.0829 23.4001 26.6996 20.9668C29.2996 18.5501 31.0385 15.6668 31.8663 13.6834C32.0496 13.2446 32.0496 12.7557 31.8663 12.3168C31.0385 10.3334 29.2996 7.44455 26.6996 5.03344C24.0829 2.60011 20.4885 0.555664 15.9996 0.555664ZM7.99959 13.0001C7.99959 10.8784 8.84244 8.84354 10.3427 7.34325C11.843 5.84296 13.8779 5.00011 15.9996 5.00011C18.1213 5.00011 20.1562 5.84296 21.6564 7.34325C23.1567 8.84354 23.9996 10.8784 23.9996 13.0001C23.9996 15.1218 23.1567 17.1567 21.6564 18.657C20.1562 20.1573 18.1213 21.0001 15.9996 21.0001C13.8779 21.0001 11.843 20.1573 10.3427 18.657C8.84244 17.1567 7.99959 15.1218 7.99959 13.0001ZM15.9996 9.44455C15.9996 11.4057 14.4051 13.0001 12.444 13.0001C12.0496 13.0001 11.6718 12.9334 11.3163 12.8168C11.0107 12.7168 10.6551 12.9057 10.6663 13.2279C10.6829 13.6112 10.7385 13.9946 10.844 14.3779C11.6051 17.2223 14.5329 18.9112 17.3774 18.1501C20.2218 17.389 21.9107 14.4612 21.1496 11.6168C20.5329 9.31122 18.494 7.76122 16.2274 7.66678C15.9051 7.65566 15.7163 8.00566 15.8163 8.31677C15.9329 8.67233 15.9996 9.05011 15.9996 9.44455Z"
-                    fill="black" />
-                </svg>
-                </span>
-              </td>
-            </tr>
-            <tr class="sms_mu_spacing_div"></tr>
-            
+
           </table>
         </div>
       </div>
@@ -215,9 +258,9 @@
   <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header" style="background-color: #4987D870">
-      <div class="py-1 rounded-top text-center" >
-            <h3 class="card-title text-black fs-2 fw-bold m-0">Order details #1152</h3>
-          </div>
+        <div class="py-1 rounded-top text-center">
+          <h3 class="card-title text-black fs-2 fw-bold m-0">Order details #1152</h3>
+        </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -311,44 +354,44 @@
 </script>
 
 <script>
-		document.addEventListener("DOMContentLoaded", function () {
-			var dropdowns = document.querySelectorAll('.dropdown-tom-select-style');
-			dropdowns.forEach(function (el) {
-				var withInput = el.classList.contains('with-input');
-				if (window.TomSelect) {
-					new TomSelect(el, {
-						copyClassesToDropdown: false,
-						dropdownParent: 'body',
-            controlInput: withInput ? '<input>' : false,
-						render: {
-							item: function (data, escape) {
-								if (data.customProperties) {
-									return '<div><span class="dropdown-item-indicator">' + data.customProperties + '</span>' + escape(data.text) + '</div>';
-								}
-								return '<div>' + escape(data.text) + '</div>';
-							},
-							option: function (data, escape) {
-								if (data.customProperties) {
-									return '<div><span class="dropdown-item-indicator">' + data.customProperties + '</span>' + escape(data.text) + '</div>';
-								}
-								return '<div>' + escape(data.text) + '</div>';
-							},
-						},
-					});
-					if (!withInput) {
-                    el.style.width = '100%'; // Set width to 100% for dropdowns without the 'with-input' class
-                    el.style.maxWidth = '100%'; // Set max-width to 100% for dropdowns without the 'with-input' class
-                }
-					el.classList.add('dropdown-tom-select-style');
-				}
-			});
-		});
-	</script>
-	<!-- Libs JS -->
-    <script src="./dist/libs/nouislider/dist/nouislider.min.js?1695847769" defer></script>
-		<script src="./dist/libs/litepicker/dist/litepicker.js?1695847769" defer></script>
-		<script src="./dist/libs/tom-select/dist/js/tom-select.base.min.js?1695847769" defer></script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var dropdowns = document.querySelectorAll('.dropdown-tom-select-style');
+    dropdowns.forEach(function (el) {
+      var withInput = el.classList.contains('with-input');
+      if (window.TomSelect) {
+        new TomSelect(el, {
+          copyClassesToDropdown: false,
+          dropdownParent: 'body',
+          controlInput: withInput ? '<input>' : false,
+          render: {
+            item: function (data, escape) {
+              if (data.customProperties) {
+                return '<div><span class="dropdown-item-indicator">' + data.customProperties + '</span>' + escape(data.text) + '</div>';
+              }
+              return '<div>' + escape(data.text) + '</div>';
+            },
+            option: function (data, escape) {
+              if (data.customProperties) {
+                return '<div><span class="dropdown-item-indicator">' + data.customProperties + '</span>' + escape(data.text) + '</div>';
+              }
+              return '<div>' + escape(data.text) + '</div>';
+            },
+          },
+        });
+        if (!withInput) {
+          el.style.width = '100%'; // Set width to 100% for dropdowns without the 'with-input' class
+          el.style.maxWidth = '100%'; // Set max-width to 100% for dropdowns without the 'with-input' class
+        }
+        el.classList.add('dropdown-tom-select-style');
+      }
+    });
+  });
+</script>
+<!-- Libs JS -->
+<script src="./dist/libs/nouislider/dist/nouislider.min.js?1695847769" defer></script>
+<script src="./dist/libs/litepicker/dist/litepicker.js?1695847769" defer></script>
+<script src="./dist/libs/tom-select/dist/js/tom-select.base.min.js?1695847769" defer></script>
 <?php
- require_once __DIR__ . '/../partials/footer.php';
+require_once __DIR__ . '/../partials/footer.php';
 
 ?>

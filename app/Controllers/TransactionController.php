@@ -11,8 +11,7 @@ class TransactionController
     public function index()
     {
         $transactions = Base::wc_get("orders");
-        echo $transactions;
-        //include_once __DIR__ . '/../Views/transaction/index.php';
+        include_once __DIR__ . '/../Views/transaction/index.php';
     }
 
 
