@@ -10,8 +10,8 @@ class CouponsController
     public function index()
     {
         $coupons = Base::wc_get($this->endpoint);
-        //include_once __DIR__ . '/../Views/coupons/index.php';
-        echo $coupons;
+        include_once __DIR__ . '/../Views/coupons/index.php';
+        // echo $coupons;
     }
 
 

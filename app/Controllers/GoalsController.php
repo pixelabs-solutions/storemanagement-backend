@@ -12,8 +12,8 @@ class GoalsController
     public function index()
     {
         $data = Base::get_all("goals");
-        print_r($data);
-        // include_once __DIR__ . '/../Views/goals/index.php';
+        // print_r($data);
+        include_once __DIR__ . '/../Views/goals/index.php';
     }
 
     public function add()
