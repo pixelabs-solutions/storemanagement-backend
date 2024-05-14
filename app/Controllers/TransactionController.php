@@ -12,6 +12,7 @@ class TransactionController
     public function index()
     {
         $transactions = Base::wc_get("orders");
+        var_dump($transactions);
         include_once __DIR__ . '/../Views/transaction/index.php';
     }
 
@@ -45,7 +46,7 @@ class TransactionController
 
     public function update_bulk_status()
     {
-        $result = HttpRequestHelper::validate_request("PUT");
+        $result = HttpRequestHelper::validate_request("POST");
         if(!$result["is_data_prepared"])
         {
             echo $result["message"];
@@ -55,12 +56,11 @@ class TransactionController
         $data = $result["data"];
         $batchPayload = [];
 
-        foreach ($data['update'] as $updateData) {
-            $orderId = $updateData['id'];
+        foreach ($data['id'] as $orderId) {
             $updatePayload = [
                 'update' => [
                     'id' => $orderId,
-                    'status' => $updateData['status']
+                    'status' => $data['status']
                 ]
             ];
 
@@ -68,6 +68,6 @@ class TransactionController
         }
 
         $payload = json_encode($batchPayload);
-        Transaction::update_bulk_status($payload);
+        return Transaction::update_bulk_status($payload);
     }
 }
