@@ -1,7 +1,10 @@
 <?php
 // include ('../app/Views/partials/header.php');
 require_once __DIR__ . '/../partials/header.php';
+
+var_dump($dashboard_data);
 ?>
+
 <!-- Leaflet CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
@@ -63,7 +66,7 @@ require_once __DIR__ . '/../partials/header.php';
         <div class="col-lg-3 col-md-3 col-sm-12">
             <div class="card pt-2 h-100 " style="border-radius:20px;">
                 <div class="card-body">
-                    <div class="row g-2  sms_mu_for_rtl_row_cards"">
+                    <div class="row g-2  sms_mu_for_rtl_row_cards">
                     <div class=" col-8 ">
                         <h3 class=" text-muted" data-i18n="dashboard.card_product.card_title"> New Products </h3>
                     </div>
@@ -103,7 +106,7 @@ require_once __DIR__ . '/../partials/header.php';
                 </div>
                 <div class="row g-2 mt-2">
                     <div class="col-6">
-                        <h3> 647 </h3>
+                        <h3> <?php echo $dashboard_data["statistics"]["new_products"]; ?> </h3>
                     </div>
                     <div class="col-auto ms-auto">
                         <span style="color:#40A826"> 10 % </span>
@@ -219,7 +222,7 @@ require_once __DIR__ . '/../partials/header.php';
                 </div>
                 <div class="row g-2 mt-2">
                     <div class="col-6">
-                        <h3> 127 </h3>
+                        <h3> <?php echo $dashboard_data["statistics"]["new_customers"]; ?> </h3>
                     </div>
                     <div class="col-auto ms-auto">
                         <span style="color:#B50E0E"> 10 % </span>
@@ -278,7 +281,7 @@ require_once __DIR__ . '/../partials/header.php';
                 </div>
                 <div class="row g-2 mt-2">
                     <div class="col-6">
-                        <h3> 12,500 NIS</h3>
+                        <h3> <?php echo $dashboard_data["statistics"]["total_transactions"]; ?></h3>
                     </div>
                     <div class="col-auto ms-auto">
                         <span style="color:#40A826"> 10 % </span>
@@ -330,12 +333,13 @@ require_once __DIR__ . '/../partials/header.php';
                     <div class="col-auto ms-auto ">
                         <div class="mb-3">
                             <select type="text" class="form-select dropdown-tom-select-style with-input"
-                                placeholder="Filter by city" multiple>
-                                <option value="Beit_Shemesh">Beit Shemesh</option>
-                                <option value="Jerusalem">Jerusalem</option>
-                                <option value="Bnei_Brak">Bnei Brak</option>
-                                <option value="Hod_Hasharon">Hod Hasharon</option>
-                                <option value="Afula">Afula</option>
+                                placeholder="Filter by city" name="city" multiple>
+
+                                    <?php foreach ($dashboard_data["customers_location"] as $statist): ?>
+                                        <?php $city_value = $statist['city']; ?>
+                                        <option value="<?php echo $city_value; ?>"><?php  echo $city_value; ?></option>
+                                    <?php endforeach; ?>
+
                             </select>
                         </div>
                     </div>
@@ -352,90 +356,30 @@ require_once __DIR__ . '/../partials/header.php';
                     <!-- Filter City Data Start  -->
                     <div class="col-lg-4 col-md-3 col-sm-12">
                         <!-- City name with progress bar start -->
-                        <div class="row g-2">
-                            <div class="col-lg-8 col-md-8 col-sm-8">
-                                <p class="text-end">Beit Shemesh</p>
-                                <div class="progress mb-2" style="height:15px; border-radius:10px; margin-top:-10px;">
-                                    <div class="progress-bar" style="width: 25%; border-radius:10px;" role="progressbar"
-                                        aria-valuenow="38" aria-valuemin="0" aria-valuemax="100"
-                                        aria-label="38% Complete">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                <br>
-                                <h3>25%</h3>
-                            </div>
-                        </div>
+
+                        <?php foreach ($dashboard_data["customers_location"] as $statist): ?>
+                                        <?php $city_name = $statist['city']; ?>
+                                        <?php $city_value = $statist['percentage_of_customers']; ?>
+
+                                            <div class="row g-2">
+                                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                                    <p class="text-end"><?php  echo $city_name; ?></p>
+                                                    <div class="progress mb-2" style="height:15px; border-radius:10px; margin-top:-10px;">
+                                                        <div class="progress-bar" style="width: <?php echo $city_value; ?>; border-radius:10px;" role="progressbar"
+                                                            aria-valuenow="<?php echo $city_value; ?>" aria-valuemin="0" aria-valuemax="100"
+                                                            aria-label="<?php echo $city_value; ?>% Complete">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                                    <br>
+                                                    <h4><?php  echo $city_value; ?></h4>
+                                                </div>
+                                            </div>
+                                    <?php endforeach; ?>
+                     
                         <!-- City name with progress bar end -->
-                        <!-- City name with progress bar start -->
-                        <div class="row g-2">
-                            <div class="col-lg-8 col-md-8 col-sm-8">
-                                <p class="text-end">Jerusalem</p>
-                                <div class="progress mb-2" style="height:15px; border-radius:10px; margin-top:-10px;">
-                                    <div class="progress-bar" style="width: 50%; border-radius:10px;" role="progressbar"
-                                        aria-valuenow="38" aria-valuemin="0" aria-valuemax="100"
-                                        aria-label="38% Complete">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                <br>
-                                <h3>50%</h3>
-                            </div>
-                        </div>
-                        <!-- City name with progress bar end -->
-                        <!-- City name with progress bar start -->
-                        <div class="row g-2">
-                            <div class="col-lg-8 col-md-8 col-sm-8">
-                                <p class="text-end">Bnei Brak</p>
-                                <div class="progress mb-2" style="height:15px; border-radius:10px; margin-top:-10px;">
-                                    <div class="progress-bar" style="width: 15%; border-radius:10px;" role="progressbar"
-                                        aria-valuenow="38" aria-valuemin="0" aria-valuemax="100"
-                                        aria-label="38% Complete">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                <br>
-                                <h3>15%</h3>
-                            </div>
-                        </div>
-                        <!-- City name with progress bar end -->
-                        <!-- City name with progress bar start -->
-                        <div class="row g-2">
-                            <div class="col-lg-8 col-md-8 col-sm-8">
-                                <p class="text-end">Hod Hasharon</p>
-                                <div class="progress mb-2" style="height:15px; border-radius:10px; margin-top:-10px;">
-                                    <div class="progress-bar" style="width: 18%; border-radius:10px;" role="progressbar"
-                                        aria-valuenow="38" aria-valuemin="0" aria-valuemax="100"
-                                        aria-label="38% Complete">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                <br>
-                                <h3>18%</h3>
-                            </div>
-                        </div>
-                        <!-- City name with progress bar end -->
-                        <!-- City name with progress bar start -->
-                        <div class="row g-2">
-                            <div class="col-lg-8 col-md-8 col-sm-8">
-                                <p class="text-end">Afula</p>
-                                <div class="progress mb-2" style="height:15px; border-radius:10px; margin-top:-10px;">
-                                    <div class="progress-bar" style="width: 3%; border-radius:10px;" role="progressbar"
-                                        aria-valuenow="38" aria-valuemin="0" aria-valuemax="100"
-                                        aria-label="38% Complete">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                <br>
-                                <h3>3%</h3>
-                            </div>
-                        </div>
-                        <!-- City name with progress bar end -->
+                      
                     </div>
                     <!-- Filter City Data End -->
 
@@ -477,15 +421,24 @@ require_once __DIR__ . '/../partials/header.php';
 
                 <!-- Images Start -->
                 <div class="row g-2 align-items-center sms_mu_for_rtl_row_cards">
-                    <div class="col-4">
-                        <img src="../../../assets/dist/img/payments/Rectangle 30.png">
-                    </div>
-                    <div class="col-4">
-                        <img src="../../../assets/dist/img/payments/Rectangle 31.png">
-                    </div>
-                    <div class="col-4">
-                        <img src="../../../assets/dist/img/payments/Rectangle 32.png">
-                    </div>
+                    <?php 
+                        $top_products = array_reverse($dashboard_data["top_products"]); // Reverse the array to get the latest orders first
+
+                        $count = 0; // Counter variable
+
+                        foreach ($top_products as $statist):
+                            $product_name = $statist['product_name'];
+                            $image_url = $statist['image_url'];
+                        ?>
+                        <div class="col-4">
+                            <img src="<?php echo $image_url; ?>">
+                            <p class="text-center"><?php echo $product_name; ?></p>
+                        </div>
+                        <?php 
+                            $count++; // Increment counter
+                            if ($count >= 3) break; // Break out of the loop when counter reaches 3
+                        endforeach; 
+                    ?>
                 </div>
                 <!-- End Images -->
             </div>
@@ -518,40 +471,30 @@ require_once __DIR__ . '/../partials/header.php';
                                 <th colspan="2" data-i18n="dashboard.last_table_tr_first.td_four">sum</th>
                             </tr>
                         </thead>
-                        <tr>
-                            <td class="text-muted">24452#</td>
+                                <?php 
+                                    $latest_orders = array_reverse($dashboard_data["latest_orders"]); // Reverse the array to get the latest orders first
 
-                            <td class="text-muted">Simcha</td>
-                            <td class="text-muted">12/06/23</td>
-                            <td>
-                                NIS
-                                <a href="#" class="ms-1" aria-label="Open website">
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted">72.65%</td>
-                            <td class="text-muted">2,865</td>
-                            <td class="text-muted">3,256</td>
-                            <td>
-                                <span class="sms_ma_index_to_order_button text-nowrap btn-sm btn">
-                                    to order
+                                    $count = 0; // Counter variable
 
-                                </span>
-                                <a href="#" class="ms-1" aria-label="Open website">
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted">24452# </td>
-                            <td class="text-muted">Cohen</td>
-                            <td class="text-muted">12/06/23</td>
-                            <td>
-                                149,50
-                            </td>
+                                    foreach ($latest_orders as $statist):
+                                        $order_id = $statist['order_id'];
+                                        $order_sum = $statist['sum'];
+                                        $order_date = $statist['date'];
+                                        $order_client = $statist['client'];
+                                    ?>
 
-                        </tr>
+                                        <tr>
+                                            <td class="text-muted"><?php echo $order_id; ?></td>
+                                            <td class="text-muted"><?php echo $order_client; ?></td>
+                                            <td class="text-muted"><?php echo $order_date; ?></td>
+                                            <td><?php echo $order_sum; ?></td>
+                                        </tr>
 
+                                    <?php 
+                                        $count++; // Increment counter
+                                        if ($count >= 3) break; // Break out of the loop when counter reaches 3
+                                    endforeach; 
+                                    ?>
                     </table>
                     <!-- <button class="sms_ma_index_to_order_button">click</button> -->
                 </div>
