@@ -1,6 +1,7 @@
+
 <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
-<style>
-    .chosen-container-multi {
+    <style>
+        .chosen-container-multi {
         width: 100% !important;
         /* padding: 3%; */
         height: 20% !important;
@@ -27,12 +28,11 @@
         height: 100% !important;
         border-radius: 5px;
     }
-
     /* .chosen-container-multi .chosen-choices */
-    .chosen-container-multi .chosen-choices {
+    .chosen-container-multi .chosen-choices{
         background-color: transparent !important;
     }
-</style>
+    </style>
 <div class="page-body">
     <div class="container-xl">
         <div class="row justify-content-center">
@@ -55,14 +55,15 @@
                                 <div
                                     style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                     <div class="col-md-12 rounded-4 bg-transparent h-100 ">
-                                        <select id="sms_w_parent_ctg" class="form-select form-select-md"
+                                        <select  id="sms_w_parent_ctg"
+                                        class="form-select form-select-md"
                                             style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
                                             <option value="percent">percentage</option>
                                             <option value="amount">amount</option>
                                         </select>
-
+                                      
                                     </div>
-                                </div>
+                            </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">The amount
@@ -78,7 +79,7 @@
                                     date</label>
                                 <div class="input-group">
                                     <input type="date" class="form-control rounded-3 p-3 fw-bold"
-                                        style="background-color: #EAEAEA" id="sms_Coupon_expiration">
+                                         style="background-color: #EAEAEA" id="sms_Coupon_expiration">
                                 </div>
                             </div>
 
@@ -93,14 +94,13 @@
 
                         </div>
 
-
+                     
                 </div>
                 </form>
                 <div class="text-center mt-5  ">
-                    <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3"
-                        onclick="sms_meh_couponmanage_data()">
-                        To add the category click here +</button>
-                </div>
+                            <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="sms_meh_couponmanage_data()">
+                            To add the category click here +</button>
+                        </div>
             </div>
         </div>
     </div>
@@ -108,39 +108,37 @@
 <script>
 
 
-    function sms_meh_couponmanage_data() {
-        var Coupon_manage_Data = {
-            'code': document.getElementById('sms_The_coupon_code').value,
-            'discount_type': document.getElementById('sms_w_parent_ctg').value,
-            'amount': document.getElementById('sms_amount_of_the_discount').value,
-            'date_expires': document.getElementById('sms_Coupon_expiration').value,
-            'usage_limit': document.getElementById('sms_Usage_limit').value,
+function sms_meh_couponmanage_data() {
+    var Coupon_manage_Data = {
+        'code': document.getElementById('sms_The_coupon_code').value,
+        'discount_type': document.getElementById('sms_w_parent_ctg').value,
+        'amount': document.getElementById('sms_amount_of_the_discount').value,
+        'date_expires': document.getElementById('sms_Coupon_expiration').value,
+        'usage_limit': document.getElementById('sms_Usage_limit').value,
+        
+    };
 
-        };
-
-        fetch('/coupons/add', {
-            method: 'POST',
-            body: JSON.stringify(Coupon_manage_Data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Form data submitted successfully:', data);
-                // Optionally, you can handle the response data here
-                window.location.reload();
-
-            })
-            .catch(error => {
-                console.error('Error submitting form data:', error);
-            });
-    }
+    fetch('/coupons/add',{
+        method: 'POST',
+        body: JSON.stringify(Coupon_manage_Data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    } )
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Form data submitted successfully:', data);
+        // Optionally, you can handle the response data here
+    })
+    .catch(error => {
+        console.error('Error submitting form data:', error);
+});
+}
 
 
-</script>
+</script> 

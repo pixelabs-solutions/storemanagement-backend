@@ -291,7 +291,7 @@
     .then(response => {
         if (response.ok) {
             console.log('Data submitted successfully');
-            // Handle any success response from the server
+            window.location.reload();
         } else {
             console.error('Error submitting data:', response.statusText);
             // Handle any error response from the server
