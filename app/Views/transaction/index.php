@@ -152,10 +152,10 @@ require_once __DIR__ . '/../partials/header.php';
         <div class="d-flex">
           <label for="statusSelect" class="form-label"></label>
           <select class="sms_m_form_select form-select dropdown-tom-select-style" id="sms_m_form_select">
-            <option value="Group status change">Group status change</option>
+            <option value="Group status change" disabled selected>Group status change</option>
             <option value="completed">Completed</option>
             <option value="cancelled">Cancelled</option>
-            <option value="inTreatment">In Treatment</option>
+            <option value="pending">In Treatment</option>
           </select>
         </div>
         <!-- <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -434,17 +434,19 @@ require_once __DIR__ . '/../partials/header.php';
         // Gather IDs of selected rows
         $('input[type="checkbox"]:checked').each(function() {
             var id = $(this).closest('tr').find('#transaction_id').text();
+            // Remove '#' from the id
+            id = id.replace('#', '');
             selectedIds.push(id);
         });
 console.log(selectedIds);
         // Make AJAX request
         $.ajax({
-            url: `/transactions/update_status/${selectedIds}`, 
+            url: `/transactions/update_bulk_status`, 
             method: 'POST',
             data: {
-                ids: selectedIds,
+                id: selectedIds,
                 status: selectedStatus
-            },
+            }, 
             success: function(response) {
                 // Handle success response
                 console.log(response);
