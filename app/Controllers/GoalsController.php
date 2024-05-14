@@ -31,4 +31,21 @@ class GoalsController
         $result = Goal::add($data);
         echo $result;
     }
+
+    public function put()
+    {
+        $result = HttpRequestHelper::validate_request("PUT");
+        if(!$result["is_data_prepared"])
+        {
+            echo $result["message"];
+            return;
+        }
+        
+        $data = $result["data"];
+
+
+        $result = Goal::update($data);
+        echo $result;
+    }
+
 }

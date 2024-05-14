@@ -61,7 +61,7 @@
                                         <div>
                                             <select style="background-color:#EAEAEA" id="discount_type"
                                                 class="form-control p-3">
-                                                <option value="amount">Amount</option>
+                                                <option value="fixed_cart">Amount</option>
                                                 <option value="percent">Percentage</option>
                                             </select>
                                         </div>
@@ -126,7 +126,7 @@
 
         };
         let editCouponElement = document.getElementById('edit_coupon');
-let editCouponId = editCouponElement.getAttribute('coupon_id');
+        let editCouponId = editCouponElement.getAttribute('coupon_id');
         console.log(editCouponId);
         fetch(`/coupons/${editCouponId}`, {
             method: 'PUT',
@@ -190,7 +190,7 @@ let editCouponId = editCouponElement.getAttribute('coupon_id');
             if (rowData[1].toLowerCase().includes("percent")) {
                 discountTypeSelect.value = "percent";
             } else {
-                discountTypeSelect.value = "amount";
+                discountTypeSelect.value = "fixed_cart";
             }
 
             // You can use the rowData object for further processing
