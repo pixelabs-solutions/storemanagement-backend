@@ -2,6 +2,7 @@
 
 namespace Pixelabs\StoreManagement\Models;
 use Pixelabs\StoreManagement\Models\Configuration;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 
@@ -36,7 +37,7 @@ class Transaction
             if ($response->getStatusCode() == 200) 
             {
                 $data = json_decode($response->getBody(), true);
-                return json_encode(['message' => 'Bulk Statuses have been updated.', 'status_code' => $response->getStatusCode(), 'data_id' => $data['id']]);
+                return json_encode(['message' => 'Bulk Statuses have been updated.', 'status_code' => $response->getStatusCode()]);
             } 
             else 
             {
