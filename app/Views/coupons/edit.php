@@ -105,51 +105,6 @@
                     </form>
                 </div>
 
-<<<<<<< HEAD
-
-function sms_meh_coupon_edit_data() {
-    var CouponeditData = {
-        'coupon_edit_The_coupon_code': document.getElementById('sms_The_edit_coupon_code').value,
-        'coupon_edit_Discount_type': document.getElementById('sms_edit_Discount_type').value,
-        'edit_amount_of_the_discount': document.getElementById('sms_edit_amount_of_the_discount').value,
-        'edit_Coupon_expiration': document.getElementById('sms_edit_Coupon_expiration').value,
-        'edit_Usage_limit': document.getElementById('sms_edit_Usage_limit').value,
-        
-    };
-    console.log(CouponeditData);
-//     fetch('URL', {
-//         method: 'POST',
-//         body: JSON.stringify(CouponeditData),
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     })
-//     .then(response => {
-//         if (!response.ok) {
-//             throw new Error('Network response was not ok');
-//         }
-//         return response.json();
-//     })
-//     .then(data => {
-//         console.log('Form data submitted successfully:', data);
-//         // Optionally, you can handle the response data here
-//     })
-//     .catch(error => {
-//         console.error('Error submitting form data:', error);
-// });
-// }
-
-}
-</script> 
-                        </div>
-                        <div class="text-center mt-5  ">
-                            <button type="submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3">To update the
-                                coupon click here ←</button>
-                        </div>
-                </div>
-                </form>
-=======
->>>>>>> 73afef2365082d3d9edfe6c8acbdfb1fb85e77c8
             </div>
         </div>
     </div>
