@@ -102,6 +102,7 @@ class Database
         $goalTable = "CREATE TABLE IF NOT EXISTS goals
             (
                 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                user_id INT(20),
                 new_orders_target INT(20),
                 new_customers_target INT(20),
                 sales_revenue_target INT(20),

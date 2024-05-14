@@ -94,7 +94,7 @@
                                         <div>
                                             <select style="background-color:#EAEAEA" id="discount_type"
                                                 class="form-control p-3">
-                                                <option value="amount">Amount</option>
+                                                <option value="fixed_cart">Amount</option>
                                                 <option value="percent">Percentage</option>
                                             </select>
                                         </div>
@@ -254,7 +254,7 @@
             if (rowData[1].toLowerCase().includes("percent")) {
                 discountTypeSelect.value = "percent";
             } else {
-                discountTypeSelect.value = "amount";
+                discountTypeSelect.value = "fixed_cart";
             }
 
             // You can use the rowData object for further processing

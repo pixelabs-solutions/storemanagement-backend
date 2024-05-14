@@ -30,7 +30,7 @@ class DashboardController
             'top_products' => $top_products
         ];
         
-        print_r(json_encode($dashboard_data));
-        // include_once __DIR__ . '/../Views/dashboard/index.php';
+        // print_r(json_encode($dashboard_data));
+        include_once __DIR__ . '/../Views/dashboard/index.php';
     }
 }
