@@ -305,28 +305,30 @@
                 }
             });
 
-            // Send JSON data with fetch API
-            fetch('http://storemanagement.test/attributes/{id}/terms/add', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(jsonData)
-                })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Data submitted successfully');
-                        // Handle any success response from the server
-                    } else {
-                        console.error('Error submitting data:', response.statusText);
-                        // Handle any error response from the server
-                    }
-                })
-                .catch(error => {
-                    console.error('Network error occurred:', error);
-                    // Handle network errors
-                });
+    // Send JSON data with fetch API
+    fetch('http://storemanagement.test/attributes/{id}/terms/add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jsonData)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Data submitted successfully');
+            window.location.reload();
+        } else {
+            console.error('Error submitting data:', response.statusText);
+            // Handle any error response from the server
         }
+    })
+    .catch(error => {
+        console.error('Network error occurred:', error);
+        // Handle network errors
+    });
+}
+
+
     </script>
     <!-- </body>
 <script src="./dist/js/tabler.min.js?1684106062" defer></script>
