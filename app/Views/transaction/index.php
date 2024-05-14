@@ -151,7 +151,7 @@ var_dump($transactions);
          Group status change</button> -->
         <div class="d-flex">
           <label for="statusSelect" class="form-label"></label>
-          <select class="sms_m_form_select form-select dropdown-tom-select-style">
+          <select class="sms_m_form_select form-select dropdown-tom-select-style" id="sms_m_form_select">
             <option value="Group status change">Group status change</option>
             <option value="completed">Completed</option>
             <option value="cancelled">Cancelled</option>
@@ -200,10 +200,10 @@ var_dump($transactions);
               <tr class="sms_mu_tr">
                 <td>
                   <span class="form-check-label"></span>
-                  <input class="form-check-input mx-2" type="checkbox">
+                  <input class="form-check-input mx-2" type="checkbox" value="<?php  $item['id']; ?> ">
                   </label>
                 </td>
-                <td><?php echo "#" . $item['id']; ?> </td>
+                <td id="transaction_id"><?php echo "#" . $item['id']; ?> </td>
 
                 <td><?php echo $item['billing']['first_name'] . " " . $item['billing']['last_name']; ?></td>
 
@@ -417,6 +417,45 @@ var_dump($transactions);
       }
     });
   });
+</script>
+<script>
+  $(document).ready(function() {
+    // Event listener for checkbox changes
+    $('input[type="checkbox"]').change(function() {
+        // Handle checkbox change event here
+        // You can track which rows are selected and perform actions accordingly
+    });
+
+    // Event listener for select changes
+    $('#sms_m_form_select').change(function() {
+        var selectedStatus = $(this).val();
+        var selectedIds = [];
+
+        // Gather IDs of selected rows
+        $('input[type="checkbox"]:checked').each(function() {
+            var id = $(this).closest('tr').find('#transaction_id').text();
+            selectedIds.push(id);
+        });
+console.log(selectedIds);
+        // Make AJAX request
+        $.ajax({
+            url: `/transactions/update_status/${selectedIds}`, 
+            method: 'POST',
+            data: {
+                ids: selectedIds,
+                status: selectedStatus
+            },
+            success: function(response) {
+                // Handle success response
+                console.log(response);
+            },
+            error: function(xhr, status, error) {
+                // Handle error response
+                console.error(error);
+            }
+        });
+    });
+});
 </script>
 <!-- Libs JS -->
 <script src="./dist/libs/nouislider/dist/nouislider.min.js?1695847769" defer></script>
