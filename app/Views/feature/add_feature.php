@@ -159,6 +159,37 @@
     .chosen-container-multi .chosen-choices {
         background-color: transparent !important;
     }
+    .sms_manage_feature_pop {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+        z-index: 9999;
+        text-align: center;
+    }
+
+    .sms_manage_feature_pop svg {
+        fill: green;
+        width: 64px;
+        height: 64px;
+        margin-bottom: 20px;
+    }
+
+    .sms_manage_feature_pop h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .sms_manage_feature_pop .text-muted {
+        color: #6c757d;
+        font-size: 1rem;
+    }
 </style>
 <!-- </head>
 
@@ -527,6 +558,32 @@
                                 feature click here +</button>
                         </div>
                     </form>
+                    <div class="modal-body text-center py-4 sms_manage_feature_pop " id="sms_feature_success-message" style="display: none;">
+                    <!-- SVG icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                        <path d="M9 12l2 2l4 -4"></path>
+                    </svg>
+                    <h3>Success</h3>
+                    <div class="text-muted">Your coupon data has been submitted successfully.</div>
+                </div>
+                <div class="modal-body text-center py-4 sms_manage_feature_pop " id="sms_feature_error-message" style="display: none;">
+                    <!-- SVG icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                    </svg>
+                    <h3>Error</h3>
+                    <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
+                </div>
                 </div>
 
             </div>
@@ -592,22 +649,30 @@ function submit_add_feature_Data() {
     });
 
     // Send JSON data with fetch API
-    fetch('http://storemanagement.test/attributes/add', {
+    fetch('/attributes/add', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
+            // Add any additional headers if required, such as authorization token
         },
         body: JSON.stringify(jsonData)
     })
     .then(response => {
         if (response.ok) {
-            console.log('Data submitted successfully');
+            // Form submission succeeded, display success message
+            document.getElementById('sms_feature_success-message').style.display = 'block';
+            document.getElementById('sms_feature_error-message').style.display = 'none'; 
+            window.location.reload();
         } else {
-            console.error('Error submitting data:', response.statusText);
+            // Form submission failed, display error message
+            document.getElementById('sms_feature_error-message').style.display = 'block';
+            document.getElementById('sms_feature_success-message').style.display = 'none'; // Hide success message if it was displayed before
         }
     })
     .catch(error => {
-        console.error('Network error occurred:', error);
+        // Network error occurred, display error message
+        document.getElementById('sms_feature_error-message').style.display = 'block';
+        console.error('Error submitting form data:', error);
     });
 }
 

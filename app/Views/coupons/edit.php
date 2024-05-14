@@ -32,6 +32,39 @@
 </head>
 
 <body> -->
+<style>
+    .sms_a_edit_pop {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+        z-index: 9999;
+        text-align: center;
+    }
+
+    .sms_a_edit_pop svg {
+        fill: green;
+        width: 64px;
+        height: 64px;
+        margin-bottom: 20px;
+    }
+
+    .sms_a_edit_pop h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .sms_a_edit_pop .text-muted {
+        color: #6c757d;
+        font-size: 1rem;
+    }
+</style>
 <div class="page-body">
     <div class="container-xl">
         <div class="row justify-content-center">
@@ -103,6 +136,33 @@
                                 </div>
                         </div>
                     </form>
+                    <div class="modal-body text-center py-4 sms_a_edit_pop" id="sms_edit_success-message" style="display: none;">
+                        <!-- SVG icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24"
+                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                            <path d="M9 12l2 2l4 -4"></path>
+                        </svg>
+                        <h3>Success</h3>
+                        <div class="text-muted">Your coupon data has been updated successfully.</div>
+                    </div>
+                    <div class="modal-body text-center py-4 sms_a_edit_pop" id="sms_edit_error-message" style="display: none;">
+                        <!-- SVG icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24"
+                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                        </svg>
+                        <h3>Error</h3>
+                        <div class="text-muted">An error occurred while updating coupon data. Please try again later.
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -126,7 +186,7 @@
 
         };
         let editCouponElement = document.getElementById('edit_coupon');
-let editCouponId = editCouponElement.getAttribute('coupon_id');
+        let editCouponId = editCouponElement.getAttribute('coupon_id');
         console.log(editCouponId);
         fetch(`/coupons/${editCouponId}`, {
             method: 'PUT',
@@ -136,16 +196,20 @@ let editCouponId = editCouponElement.getAttribute('coupon_id');
             }
         })
             .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                if (response.status === 200) {
+                    // Form submission succeeded, display success message
+                    document.getElementById('sms_edit_success-message').style.display = 'block';
+                    document.getElementById('sms_edit_error-message').style.display = 'none';
+                    window.location.reload();
+                } else {
+                    // Form submission failed, display error message
+                    document.getElementById('sms_edit_error-message').style.display = 'block';
+                    document.getElementById('sms_edit_success-message').style.display = 'none'; // Hide success message if it was displayed before
                 }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Form data submitted successfully:', data);
-                // Optionally, you can handle the response data here
             })
             .catch(error => {
+                // Network error occurred, display error message
+                document.getElementById('sms_edit_error-message').style.display = 'block';
                 console.error('Error submitting form data:', error);
             });
     }
