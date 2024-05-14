@@ -64,7 +64,7 @@ $router->put('/inventory/update', [InventoryController::class, 'update']);
 
 
 //Statistics
-$router->get('/statistics', [StatisticsController::class, 'index']);
+$router->get('/statistics', [StatisticsController::class, 'overview']);
 $router->get('/statistics/products', [StatisticsController::class, 'products']);
 $router->get('/statistics/orders', [StatisticsController::class, 'orders']);
 $router->get('/statistics/revenue', [StatisticsController::class, 'revenue']);
@@ -74,6 +74,7 @@ $router->get('/statistics/overview', [StatisticsController::class, 'overview']);
 $router->get('/transactions', [TransactionController::class, 'index']);
 $router->get('/transactions/{$id}', [TransactionController::class, 'get_by_id']);
 $router->put('/transactions/update_status/{$id}', [TransactionController::class, 'update_status']);
+$router->post('/transactions/update_bulk_status', [TransactionController::class, 'update_bulk_status']);
 
 //User Configurations
 $router->post('/configurations/add', [ConfigurationController::class, 'add']);

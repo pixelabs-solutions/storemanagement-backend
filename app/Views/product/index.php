@@ -213,8 +213,7 @@
                             <img class="sms_product_img" src="/assets/dist/img/products/bag.png" alt="">
 
                             </td>
-                            <td class=""><span style="font-weight:bold">Product name:</span> green
-                                Gucci bag
+                            <td class=""><span style="font-weight:bold">Product name:</span> regular product
                             </td>
                             <td><span style="font-weight:bold">Category:</span> bags,
                                 brands,
@@ -227,7 +226,7 @@
                                 </span>250
                             </td>
                             <td>
-                                <span data-bs-toggle="modal" data-bs-target="#edit-modal-full-width">
+                                <span data-bs-toggle="modal" data-bs-target="#edit-regular-modal-full-width">
 
 
                                     <svg width="20" height="20" viewBox="0 0 32 32" fill="none"
@@ -327,7 +326,7 @@
             </div>
             <div class="modal-body">
                 <?php
-                include ('edit_regular_product.php');
+                include ('edit_regular.php');
                 ?>
             </div>
 

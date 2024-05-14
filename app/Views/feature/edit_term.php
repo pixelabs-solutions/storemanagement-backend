@@ -10,94 +10,92 @@
     <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
     <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
     <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" /> -->
-    <style>
-        @import url('https://rsms.me/inter/inter.css');
+<style>
+    @import url('https://rsms.me/inter/inter.css');
 
-        :root {
-            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-        }
+    :root {
+        --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+    }
 
-        body {
-            font-feature-settings: "cv03", "cv04", "cv11";
-        }
+    body {
+        font-feature-settings: "cv03", "cv04", "cv11";
+    }
 
-        .rtl {
-            direction: rtl;
-        }
+    .rtl {
+        direction: rtl;
+    }
 
-        .rtl .avatar {
-            margin-left: 10px;
-        }
+    .rtl .avatar {
+        margin-left: 10px;
+    }
 
-        .sms_a_custom_file_input {
-            position: relative;
-            /* display: inline-block; */
-        }
+    .sms_a_custom_file_input {
+        position: relative;
+        /* display: inline-block; */
+    }
 
-        .sms_a_custom_file_input input[type="file"] {
-            position: absolute;
-            left: -9999px;
-        }
+    .sms_a_custom_file_input input[type="file"] {
+        position: absolute;
+        left: -9999px;
+    }
 
-        .sms_a_custom_file_input label {
-            /* display: inline-block; */
-            padding: 12px 16px;
-            border: 1px solid #ced4da;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            background-color: #EAEAEA;
-            text-align: center;
-            ;
-        }
+    .sms_a_custom_file_input label {
+        /* display: inline-block; */
+        padding: 12px 16px;
+        border: 1px solid #ced4da;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        background-color: #EAEAEA;
+        text-align: center;
+        ;
+    }
 
-        .sms_a_custom_file_input label i {
-            margin-right: 5px;
-        }
-    </style>
+    .sms_a_custom_file_input label i {
+        margin-right: 5px;
+    }
+</style>
 <!-- </head>
 
 <body> -->
-    <div class="page-body">
-        <div class="container-xl">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-10">
-                    <div class="">
-                    
-                        <!-- form start -->
-                        <form action="" method="post" class="card-body">
-                            <!-- header -->
-                            <div class="row gx-3">
-                                <div class="col-md-6 mb-3">
-                                    <label for="example-text-input fs-2 fw-bold" class="form-label">the name of the
-                                        term</label>
-                                    <input type="text" class="form-control rounded-3 p-3" id="e_name_term"
-                                        style="background-color: #EAEAEA" placeholder="Pink">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="example-select fs-3 fw-bold" class="form-label">associated feature
-                                    </label>
-                                    <select class="form-select rounded-3 p-3"  id="sms_mu_select_name_term"
-                                        style="background-color: #EAEAEA">
-                                        <option value="1">Product colors</option>
-                                        <option value="2">Color</option>
-                                    </select>
-                                </div>
+<div class="page-body">
+    <div class="container-xl">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10">
+                <div class="">
+
+                    <!-- form start -->
+                    <form action="" method="post" class="card-body">
+                        <!-- header -->
+                        <div class="row gx-3">  
+                            <div class="col-md-6 mb-3">
+                                <label for="example-text-input fs-2 fw-bold" class="form-label">the name of the
+                                    term</label>
+                                <input type="text" class="form-control rounded-3 p-3" id="e_name_term" style="background-color: #EAEAEA" placeholder="Pink">
                             </div>
-                            <!-- Adding terms to the feature -->
-                            <div class="rounded-4">
-                                <div class="col-12 col-md-12" id="sms_a_edit_term_dynamic-input-container">
-                                    <div class=" rounded">
-                                        <h3 class="card-title text-black fs-4 fw-bold">Color change </h3>
-                                    </div>
-                                    <!-- <div class="p-2">
-                                        <div class="col-md-12 mb-3">
-                                            <label for="example-text-input" class="form-label">The name of the
-                                                term</label>
-                                            <input type="text" class="form-control text-dark " id="example-text-input"
-                                                placeholder="Pink">
-                                        </div>
-                                        <div class="col-md-12 mb-3">
+                            <div class="col-md-6 mb-3">
+                                <label for="example-select fs-3 fw-bold" class="form-label">associated feature
+                                </label>
+                                <select class="form-select rounded-3 p-3" id="sms_mu_select_name_term" style="background-color: #EAEAEA">
+                                    <option value="1">Product colors</option>
+                                    <option value="2">Color</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Adding terms to the feature -->
+                        <!-- <div class="rounded-4">
+                            <div class="col-12 col-md-12" id="sms_a_edit_term_dynamic-input-container">
+                                <div class=" rounded">
+                                    <h3 class="card-title text-black fs-4 fw-bold">Color change </h3>
+                                </div>
+                                <div class="p-2">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="example-text-input" class="form-label">The name of the
+                                            term</label>
+                                        <input type="color" class="form-control text-dark w-50 " id="-text-input" placeholder="Pink">
+
+                                    </div> -->
+                                    <!-- <div class="col-md-12 mb-3">
                                             <label class="form-label">
                                                 <label class="form-label">Selecting an image to display the term</label>
                                                 <div class="sms_a_custom_file_input">
@@ -113,10 +111,10 @@
                                                         Selecting an image </label>
                                                 </div>
                                             </label>
-                                        </div>
+                                        </div> -->
 
-                                    </div> -->
-                                    <div class='gx-3'>
+                                <!-- </div> -->
+                                <!-- <div class='gx-3'>
                                         <div class="">
                                             <div class="mb-3 p-2 col-12 rounded-3 d-flex align-items-center justify-content-between "
                                                 style="background-color: #EAEAEA">
@@ -127,36 +125,57 @@
                                                     title="Choose your color">
                                             </div>
                                         </div>
+                                    </div> -->
+                               
+                            <!-- </div> -->
+                            <!-- To update the term click here+ -->
+
+
+                        <!-- </div> -->
+                <!-- </div> -->
+                <div class='gx-3' id="colorPickerDiv__edit">
+                                    <div class="">
+                                        <div class="mb-3 p-2 col-12 rounded-3 d-flex align-items-center justify-content-between " style="background-color: #EAEAEA">
+                                            <label class="form-label"></label>
+                                            <label class="form-label">Color change</label>
+                                            <input type="color" class="form-control p-0 form-control-color" id="sms_mu_color_name_term__edit" value="#206bc4" title="Choose your color">
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- To update the term click here+ -->
-                                
-
-                            </div>
-                    </div>
-                    </form>
-                    <div class="text-center mt-2 p-2  ">
-                                    <button type="submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="fun_etid_term()">To update
-                                        the term click here
-                                        +</button>
-                                </div>
+                </form>
+                <div class="text-center mt-2 p-2  ">
+                    <button type="submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="fun_etid_term()">To update
+                        the term click here
+                        +</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 <script>
-    function fun_etid_term(){
-        let data_form_exsist={
-       'nameOfTerm':document.getElementById('e_name_term').value,
-       'select_value':document.getElementById('sms_mu_select_name_term').value,
-       'Color_value':document.getElementById('sms_mu_color_name_term').value,
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the color input element
+        var colorInput = document.getElementById("sms_mu_color_name_term__edit");
+        // Get the div to trigger color selection
+        var colorPickerDiv = document.getElementById("colorPickerDiv__edit");
+
+        // Function to open color selection when the div is clicked
+        colorPickerDiv.addEventListener("click", function() {
+            colorInput.click();
+        });
+    });
+
+    function fun_etid_term() {
+        let data_form_exsist = {
+            'nameOfTerm': document.getElementById('e_name_term').value,
+            'select_value': document.getElementById('sms_mu_select_name_term').value,
+            'Color_value': document.getElementById('sms_mu_color_name_term__edit').value,
+        }
+        console.log(data_form_exsist)
     }
-    console.log(data_form_exsist)
-    }
-  
 </script>
-    <!-- input javascript code  -->
-    <!-- <script>
+<!-- input javascript code  -->
+<!-- <script>
         var inputCount = 0;
 
         // Function to add input fields

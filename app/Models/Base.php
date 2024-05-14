@@ -87,7 +87,7 @@ class Base
             $response = $client->request('GET', $store_url . '/wp-json/wc/v3/'.$endpoint, [
                 'auth' => [$consumer_key, $consumer_secret]
             ]);
-        
+            
             return json_decode($response->getBody(), true);
         } 
         catch (RequestException $e) 

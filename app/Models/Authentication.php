@@ -58,17 +58,20 @@ class Authentication
                 if (password_verify($password, $user['password'])) {
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['logged_in'] = true; 
+                    http_response_code(200);
                     return json_encode(array(
                         "message" => "Logged in successfully.", 
                         "status_code" => 200, // OK
                         "user_id" => $user['id']));
                 } else {
+                    http_response_code(401);
                     return json_encode(array(
                         "message" => "Login failed. Password does not match.",
                         "status_code" => 401 // Unauthorized
                     ));
                 }
             } else {
+                http_response_code(404);
                 return json_encode(array(
                     "message" => "Login failed. User not found.",
                     "status_code" => 404 // Not found
@@ -76,6 +79,7 @@ class Authentication
             }
             $stmt->close();
         } else {
+            http_response_code(400);
             return json_encode(array(
                 "message" => "Login failed. Data is incomplete.",
                 "status_code" => 400 // Bad request
