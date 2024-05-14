@@ -46,7 +46,7 @@ class TransactionController
 
     public function update_bulk_status()
     {
-        $result = HttpRequestHelper::validate_request("POST");
+        // $result = HttpRequestHelper::validate_request("POST");
         if(!$result["is_data_prepared"])
         {
             echo $result["message"];
@@ -54,20 +54,20 @@ class TransactionController
         }
 
         $data = $result["data"];
-        $batchPayload = [];
 
-        foreach ($data['id'] as $orderId) {
-            $updatePayload = [
-                'update' => [
-                    'id' => $orderId,
-                    'status' => $data['status']
-                ]
+        $updateArray = [];
+
+        foreach ($data['id'] as $id) {
+            $updateArray[] = [
+                'id' => $id,
+                'status' => $data['status']
             ];
-
-            $batchPayload[] = $updatePayload;
         }
 
-        $payload = json_encode($batchPayload);
+        $updateData = ['update' => $updateArray];
+        
+
+        $payload = json_encode($updateData);
         return Transaction::update_bulk_status($payload);
     }
 }
