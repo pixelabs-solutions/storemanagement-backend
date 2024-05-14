@@ -56,6 +56,7 @@ class StatisticsController
         ];
 
         $overview_stats = Statistics::get_overview_stats($filters);
-        echo json_encode($overview_stats);
+        //echo json_encode($overview_stats);
+        include_once __DIR__ . '/../Views/statistics/overview.php';
     }
 }
