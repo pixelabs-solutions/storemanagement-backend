@@ -3,6 +3,7 @@
 namespace Pixelabs\StoreManagement\Controllers;
 
 use Pixelabs\StoreManagement\Models\Base;
+use Pixelabs\StoreManagement\Models\Transaction;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 
 
@@ -39,5 +40,34 @@ class TransactionController
         $result = Base::wc_update("orders/{$id}", $payload);
 
         echo $result;
+    }
+
+
+    public function update_bulk_status()
+    {
+        $result = HttpRequestHelper::validate_request("PUT");
+        if(!$result["is_data_prepared"])
+        {
+            echo $result["message"];
+            return;
+        }
+
+        $data = $result["data"];
+        $batchPayload = [];
+
+        foreach ($data['update'] as $updateData) {
+            $orderId = $updateData['id'];
+            $updatePayload = [
+                'update' => [
+                    'id' => $orderId,
+                    'status' => $updateData['status']
+                ]
+            ];
+
+            $batchPayload[] = $updatePayload;
+        }
+
+        $payload = json_encode($batchPayload);
+        Transaction::update_bulk_status($payload);
     }
 }

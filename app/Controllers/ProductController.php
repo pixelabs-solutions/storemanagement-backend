@@ -114,6 +114,36 @@ class ProductController
         return $variations;
     }
 
+    // public function update($id)
+    // {
+    //     $result = HttpRequestHelper::validate_request("PUT");
+    //     if(!$result["is_data_prepared"])
+    //     {
+    //         echo $result["message"];
+    //         return;
+    //     }
+
+    //     $data = $result["data"];
+    //     $payload = [
+    //         'name' => $data['name'], 
+    //         'type' => $data['type'],
+    //         'description' => $data['description'], 
+    //         'manage_stock' => true,
+    //         'stock_quantity' => $data['stock_quantity'], 
+    //         'category' => array_map(function($category_id) {
+    //             return ['id' => $category_id]; 
+    //         }, $data['category']),
+    //         'image' => array_map(function($image_url) {
+    //             return ['src' => $image_url]; 
+    //         }, $data['image']),
+    //         'regular_price' => $data['regular_price'],
+    //         'sale_price' => $data['sale_price']
+    //     ];
+
+    //     $response = Base::wc_update($this->table_name."/".$id, $payload);
+    //     print_r($response);
+    // }
+
     public function update($id)
     {
         $result = HttpRequestHelper::validate_request("PUT");
@@ -140,8 +170,36 @@ class ProductController
             'sale_price' => $data['sale_price']
         ];
 
-        $response = Base::wc_update($this->table_name."/".$id, $payload);
+        if($data['type'] === "variable")
+        {
+            // Construct attributes array
+            $attributes = [];
+            foreach ($data['attributes_names'] as $index => $name) {
+                $attribute = [
+                    'name' => $name,
+                    'options' => $data['attributes_options'][$index],
+                    'variation' => true
+                ];
+                $attributes[] = $attribute;
+            }
+            $payload['attributes'] = $attributes;
+            
+            $variations = $this->generateVariations($data['attributes_options'], $data['attributes_names'], $data['regular_price']);
+            $payload['variations'] = $variations;
+
+            $response = Base::wc_update($this->table_name."/".$id, $payload);
+
+            foreach ($variations as $variationData) {
+                Product::createProductVariation($id, $variationData); // Update variations
+            }
+        }
+        else
+        {
+            $response = Base::wc_update($this->table_name."/".$id, $payload);
+        }
+
         print_r($response);
     }
+
 
 }
