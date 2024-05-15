@@ -83,8 +83,46 @@ require_once __DIR__ . '/../partials/header.php';
   .table-spacing {
     border-spacing: 5px;
   }
+
+  #sms_delete_notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 20px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    display: none;
+  }
+
+  #sms_delete_notification.show {
+    display: block;
+    animation: slideIn 0.5s forwards, fadeOut 2s 1s forwards;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
 </style>
 <div class="sms_coupons_m  p-0">
+  <div id="sms_delete_notification"></div>
+
   <div class=" col-12 mt-5">
     <div class="row row-cards justify-content-sm-between gap-sm-3 gap-2 gap-lg-0 bg-white p-3 m-0 rounded-3">
       <div class=" col-lg-12 m-0 d-flex flex-column flex-sm-row justify-content-between ">
@@ -132,54 +170,55 @@ require_once __DIR__ . '/../partials/header.php';
             </thead>
             <tbody>
               <?php
-              if($coupons !== null) {
-              foreach ($coupons as $item) {
+              if ($coupons !== null) {
+                foreach ($coupons as $item) {
 
-                $expiry_date_string = $item['date_expires'];
-                $expiry_date_timestamp = strtotime($expiry_date_string);
-                $expiry_formatted_date = date("Y-m-d", $expiry_date_timestamp);
+                  $expiry_date_string = $item['date_expires'];
+                  $expiry_date_timestamp = strtotime($expiry_date_string);
+                  $expiry_formatted_date = date("Y-m-d", $expiry_date_timestamp);
 
-                ?>
+                  ?>
 
-                <tr class="sms_mu_tr">
-                  <td class="t_oravg_m">
-                    <?php echo $item['code']; ?>
-                  </td>
-                  <td> <?php echo $item['discount_type']; ?></td>
+                  <tr class="sms_mu_tr">
+                    <td class="t_oravg_m">
+                      <?php echo $item['code']; ?>
+                    </td>
+                    <td> <?php echo $item['discount_type']; ?></td>
 
-                  <td><?php echo $item['amount']; ?></td>
+                    <td><?php echo $item['amount']; ?></td>
 
-                  <td><?php echo $item['usage_count'] . "/" . $item['usage_limit']; ?></td>
+                    <td><?php echo $item['usage_count'] . "/" . $item['usage_limit']; ?></td>
 
-                  <td><?php echo $expiry_formatted_date; ?></td>
+                    <td><?php echo $expiry_formatted_date; ?></td>
 
-                  <!-- <td>#1152</td> -->
-                  <td>
-                    <div class="d-flex justify-content-center gap-4 w-auto">
+                    <!-- <td>#1152</td> -->
+                    <td>
+                      <div class="d-flex justify-content-center gap-4 w-auto">
 
 
-                      <span class="" onclick="sms_coupons_delete()" id="delete_coupon" data-bs-toggle="modal"
-                        data-bs-target="#modal-danger" coupon_id="<?php echo $item['id']; ?>">
-                        <svg width="24" height="24" viewBox="0 0 28 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M8.45 1.10625C8.7875 0.425 9.48125 0 10.2375 0H17.7625C18.5188 0 19.2125 0.425 19.55 1.10625L20 2H26C27.1063 2 28 2.89375 28 4C28 5.10625 27.1063 6 26 6H2C0.89375 6 0 5.10625 0 4C0 2.89375 0.89375 2 2 2H8L8.45 1.10625ZM2 8H26V28C26 30.2062 24.2062 32 22 32H6C3.79375 32 2 30.2062 2 28V8ZM8 12C7.45 12 7 12.45 7 13V27C7 27.55 7.45 28 8 28C8.55 28 9 27.55 9 27V13C9 12.45 8.55 12 8 12ZM14 12C13.45 12 13 12.45 13 13V27C13 27.55 13.45 28 14 28C14.55 28 15 27.55 15 27V13C15 12.45 14.55 12 14 12ZM20 12C19.45 12 19 12.45 19 13V27C19 27.55 19.45 28 20 28C20.55 28 21 27.55 21 27V13C21 12.45 20.55 12 20 12Z"
-                            fill="#A30505" />
-                        </svg>
-                      </span>
-                      <span data-bs-toggle="modal" class="get-row-data-edit-coupon" id="edit_coupon"
-                        data-bs-target="#edit-modal-full-width" coupon_id="<?php echo $item['id']; ?>">
-                        <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z"
-                            fill="#4987D8" />
-                        </svg>
-                      </span>
-                    </div>
-                </tr>
-                <tr class="sms_mu_spacing_div"></tr>
+                        <span class="" onclick="sms_coupons_delete()" id="delete_coupon" data-bs-toggle="modal"
+                          data-bs-target="#modal-danger" coupon_id="<?php echo $item['id']; ?>">
+                          <svg width="24" height="24" viewBox="0 0 28 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M8.45 1.10625C8.7875 0.425 9.48125 0 10.2375 0H17.7625C18.5188 0 19.2125 0.425 19.55 1.10625L20 2H26C27.1063 2 28 2.89375 28 4C28 5.10625 27.1063 6 26 6H2C0.89375 6 0 5.10625 0 4C0 2.89375 0.89375 2 2 2H8L8.45 1.10625ZM2 8H26V28C26 30.2062 24.2062 32 22 32H6C3.79375 32 2 30.2062 2 28V8ZM8 12C7.45 12 7 12.45 7 13V27C7 27.55 7.45 28 8 28C8.55 28 9 27.55 9 27V13C9 12.45 8.55 12 8 12ZM14 12C13.45 12 13 12.45 13 13V27C13 27.55 13.45 28 14 28C14.55 28 15 27.55 15 27V13C15 12.45 14.55 12 14 12ZM20 12C19.45 12 19 12.45 19 13V27C19 27.55 19.45 28 20 28C20.55 28 21 27.55 21 27V13C21 12.45 20.55 12 20 12Z"
+                              fill="#A30505" />
+                          </svg>
+                        </span>
+                        <span data-bs-toggle="modal" class="get-row-data-edit-coupon" id="edit_coupon"
+                          data-bs-target="#edit-modal-full-width" coupon_id="<?php echo $item['id']; ?>">
+                          <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z"
+                              fill="#4987D8" />
+                          </svg>
+                        </span>
+                      </div>
+                  </tr>
+                  <tr class="sms_mu_spacing_div"></tr>
 
-                <?php
-              }}
+                  <?php
+                }
+              }
               ?>
             </tbody>
           </table>
@@ -290,15 +329,25 @@ require_once __DIR__ . '/../partials/header.php';
     })
       .then(response => {
         if (response.ok) {
-          console.log("Coupon deleted successfully");
-          window.location.reload()
+          show_sms_delete_Notification("Coupon deleted successfully");
+          window.location.reload(); // Reload the page after successful deletion
         } else {
-          console.error("Failed to delete coupon");
+          show_sms_delete_Notification("Failed to delete coupon", true);
         }
       })
       .catch(error => {
-        console.error("Error occurred:", error);
+        show_sms_delete_Notification("Error occurred: " + error, true);
       });
+
+    function show_sms_delete_Notification(message, isError = false) {
+      const sms_delete_notification = document.getElementById("sms_delete_notification");
+      sms_delete_notification.textContent = message;
+      sms_delete_notification.className = isError ? "error show" : "show";
+
+      // setTimeout(() => {
+      //   sms_delete_notification.classList.remove("show");
+      // }, 5000);
+    }
   }
 
 </script>

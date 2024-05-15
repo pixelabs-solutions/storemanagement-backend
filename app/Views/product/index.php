@@ -78,18 +78,7 @@
         height: 60px;
     }
 
-    /* ::-webkit-scrollbar{
-        width: 15   px;
-    } */
-    /* ::-webkit-scrollbar-track{
-            background: #DEDEDE !important;
-            width: 2px !important;
-        }
-        ::-webkit-scrollbar-thumb{
-            background: #4987D8 !important;
-            border-radius: 10px !important;
-            width: 2px !important;
-        } */
+  
 </style>
 <div class="sms_products_m  p-0 ">
     <div class=" col-12 mt-5">

@@ -1,20 +1,6 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Feature</title>
-    <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" /> -->
-<!-- <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" /> -->
 <style>
-    /* #sms_mu_input_bg_select .chosen-choices {
-        background-color: white !important;
-    } */
+
     @import url('https://rsms.me/inter/inter.css');
 
     :root {
@@ -95,7 +81,6 @@
         border: none;
         outline: none;
         font-size: 1rem;
-        /* Bootstrap default font size */
         color: #212529;
         width: 100%;
 
@@ -103,15 +88,10 @@
 
     .sms_a_add_feaeture_inputs_css option {
         background-color: #fff;
-        /* Bootstrap default background color */
         color: #212529;
-        /* Bootstrap default text color */
+
     }
 
-    /* #colorInputContainer {
-        display: none !important;
-    }
-     */
 
     @media screen and (max-width: 767px) {
         .sms_a_swatches_preview {
@@ -195,7 +175,7 @@
 <!-- </head>
 
 <body> -->
-<div class="page-body">
+
     <div class="container-xl">
         <div class="row justify-content-center">
             <div class="col-12 col-md-12">
@@ -599,16 +579,9 @@
             </div>
         </div>
     </div>
-</div>
 
-<!-- input javascript code  -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script> -->
-<!-- <script>
-    $(".chosen-select").chosen({
-        no_results_text: "Oops, nothing found!"
-    })
-</script> -->
+
+
 <script>
 
     function submit_add_feature_Data() {
@@ -752,20 +725,6 @@
         colorDisplay.style.backgroundColor = colorValue;
     });
 
-    function toggleInputs() {
-        // var displayType = document.getElementById('displayTypeSelect').value;
-        // var imageInputContainer = document.getElementById('imageInputContainer');
-        // var colorInputContainer = document.getElementById('colorInputContainer');
-
-        // if (displayType === 'image') {
-        //     imageInputContainer.style.display = 'block';
-        //     colorInputContainer.style.display = 'none';
-        // } else if (displayType === 'color') {
-        //     imageInputContainer.style.display = 'none';
-        //     colorInputContainer.style.display = 'block';
-        // }
-    }
-
 
 
     function fun_checkbox1() {
@@ -847,8 +806,3 @@
 
 </div>
 
-<!-- </body>
-<script src="./dist/js/tabler.min.js?1684106062" defer></script>
-<script src="./dist/js/demo.min.js?1684106062" defer></script>
-
-</html> -->
