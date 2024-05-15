@@ -11,7 +11,7 @@
                                     <div class="col-md-6 mb-3">
                                         <label for="example-text-input fs-2 fw-bold" class="form-label">Name of the
                                             Variation</label>
-                                        <input type="text" readonly  class="form-control rounded-3 p-3" id="sms_mu_name_variation" style="background-color: #EAEAEA" placeholder="Pink">
+                                        <input type="text" read class="form-control rounded-3 p-3" id="sms_mu_name_variation" style="background-color: #EAEAEA" placeholder="Pink">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="example-select fs-3 fw-bold" class="form-label">Variation Price

@@ -159,6 +159,38 @@
     .chosen-container-multi .chosen-choices {
         background-color: transparent !important;
     }
+
+    .sms_manage_feature_pop {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+        z-index: 9999;
+        text-align: center;
+    }
+
+    .sms_manage_feature_pop svg {
+        fill: green;
+        width: 64px;
+        height: 64px;
+        margin-bottom: 20px;
+    }
+
+    .sms_manage_feature_pop h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .sms_manage_feature_pop .text-muted {
+        color: #6c757d;
+        font-size: 1rem;
+    }
 </style>
 <!-- </head>
 
@@ -527,6 +559,41 @@
                                 feature click here +</button>
                         </div>
                     </form>
+                    <div class="modal-body text-center py-4 sms_manage_feature_pop " id="sms_feature_success_message"
+                        style="display: none;">
+                        <!-- Close icon -->
+
+                        <button type="button" class="btn-close" aria-label="Close"
+                            onclick="sms_add_featrue_close_success_message()"></button>
+                        <!-- SVG icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24"
+                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                            <path d="M9 12l2 2l4 -4"></path>
+                        </svg>
+                        <h3>Success</h3>
+                        <div class="text-muted">Your coupon data has been submitted successfully.</div>
+                    </div>
+                    <div class="modal-body text-center py-4 sms_manage_feature_pop " id="sms_feature_error_message"
+                        style="display: none;">
+                        <!-- Close icon -->
+                        <button type="button" class="btn-close" aria-label="Close"
+                            onclick="sms_add_feature_close_error_message()"></button>
+                        <!-- SVG icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24"
+                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                        </svg>
+                        <h3>Error</h3>
+                        <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
+                    </div>
                 </div>
 
             </div>
@@ -544,74 +611,88 @@
 </script> -->
 <script>
 
-function submit_add_feature_Data() {
-    const name = document.getElementById('sms_attribute_name').value;
-    const type = document.getElementById('sms_attribute_select').value;
+    function submit_add_feature_Data() {
+        const name = document.getElementById('sms_attribute_name').value;
+        const type = document.getElementById('sms_attribute_select').value;
 
-    console.log("Attribute Name:", name);
-    console.log("Display Type:", type);
+        console.log("Attribute Name:", name);
+        console.log("Display Type:", type);
 
-    let jsonData = {
-        name: name,
-        type: type,
-        swatches: [],
-        dynamicTermNames: [],
-        dynamicTermImages: []
-    };
+        let jsonData = {
+            name: name,
+            type: type,
+            swatches: [],
+            dynamicTermNames: [],
+            dynamicTermImages: []
+        };
 
-    // For each swatch preview section
-    document.querySelectorAll('.sms_a_swatches_preview').forEach((swatch) => {
-        const checkbox = swatch.querySelector('.form-colorinput-input');
+        // For each swatch preview section
+        document.querySelectorAll('.sms_a_swatches_preview').forEach((swatch) => {
+            const checkbox = swatch.querySelector('.form-colorinput-input');
 
-        if (checkbox.checked) {
-            const title = swatch.querySelector('.form-check-label').textContent.trim();
-            const options = [{
-                name: checkbox.name,
-                checked: checkbox.checked
-            }];
+            if (checkbox.checked) {
+                const title = swatch.querySelector('.form-check-label').textContent.trim();
+                const options = [{
+                    name: checkbox.name,
+                    checked: checkbox.checked
+                }];
 
-            console.log("Title:", title);
-            console.log("Options:", options);
+                console.log("Title:", title);
+                console.log("Options:", options);
 
-            jsonData.swatches.push({ title: title, options: options });
+                jsonData.swatches.push({ title: title, options: options });
+            }
+        });
+
+        let dynamicTermNames = document.querySelectorAll('[id^="sms_name_of_attribute"]');
+        let dynamicTermImages = document.querySelectorAll('[id^="sms_image_input"]');
+
+        // Collect dynamically added input values
+        dynamicTermNames.forEach((input, index) => {
+            jsonData.dynamicTermNames.push(input.value);
+            console.log("Dynamic Term Name " + (index + 1) + ":", input.value);
+        });
+
+        dynamicTermImages.forEach((input, index) => {
+            jsonData.dynamicTermImages.push(input.files[0]);
+            console.log("Dynamic Term Image " + (index + 1) + ":", input.files[0]);
+        });
+
+        // Send JSON data with fetch API
+        fetch('/attributes/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                // Add any additional headers if required, such as authorization token
+            },
+            body: JSON.stringify(jsonData)
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Form submission succeeded, display success message
+                    document.getElementById('sms_feature_success_message').style.display = 'block';
+                    document.getElementById('sms_feature_error_message').style.display = 'none';
+                    window.location.reload();
+                } else {
+                    // Form submission failed, display error message
+                    document.getElementById('sms_feature_error_message').style.display = 'block';
+                    document.getElementById('sms_feature_success_message').style.display = 'none'; // Hide success message if it was displayed before
+                }
+            })
+            .catch(error => {
+                // Network error occurred, display error message
+                document.getElementById('sms_feature_error_message').style.display = 'block';
+                console.error('Error submitting form data:', error);
+            });
+    }
+
+    function sms_add_featrue_close_success_message() {
+            document.getElementById('sms_feature_success_message').style.display = 'none';
         }
-    });
 
-    let dynamicTermNames = document.querySelectorAll('[id^="sms_name_of_attribute"]');
-    let dynamicTermImages = document.querySelectorAll('[id^="sms_image_input"]');
-
-    // Collect dynamically added input values
-    dynamicTermNames.forEach((input, index) => {
-        jsonData.dynamicTermNames.push(input.value);
-        console.log("Dynamic Term Name " + (index + 1) + ":", input.value);
-    });
-
-    dynamicTermImages.forEach((input, index) => {
-        jsonData.dynamicTermImages.push(input.files[0]);
-        console.log("Dynamic Term Image " + (index + 1) + ":", input.files[0]);
-    });
-
-    // Send JSON data with fetch API
-    fetch('http://storemanagement.test/attributes/add', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(jsonData)
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('Data submitted successfully');
-        } else {
-            console.error('Error submitting data:', response.statusText);
+        function sms_add_feature_close_error_message() {
+            document.getElementById('sms_feature_error_message').style.display = 'none';
         }
-    })
-    .catch(error => {
-        console.error('Network error occurred:', error);
-    });
-}
-
-
 
 
     var inputCount = 0;

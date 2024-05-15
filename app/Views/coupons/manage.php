@@ -1,7 +1,6 @@
-
 <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
-    <style>
-        .chosen-container-multi {
+<style>
+    .chosen-container-multi {
         width: 100% !important;
         /* padding: 3%; */
         height: 20% !important;
@@ -28,11 +27,44 @@
         height: 100% !important;
         border-radius: 5px;
     }
+
     /* .chosen-container-multi .chosen-choices */
-    .chosen-container-multi .chosen-choices{
+    .chosen-container-multi .chosen-choices {
         background-color: transparent !important;
     }
-    </style>
+
+    .sms_manage_pop {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+        z-index: 9999;
+        text-align: center;
+    }
+
+    .sms_manage_pop svg {
+        fill: green;
+        width: 64px;
+        height: 64px;
+        margin-bottom: 20px;
+    }
+
+    .sms_manage_pop h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .sms_manage_pop .text-muted {
+        color: #6c757d;
+        font-size: 1rem;
+    }
+</style>
 <div class="page-body">
     <div class="container-xl">
         <div class="row justify-content-center">
@@ -45,7 +77,7 @@
                             <div class="col-md-4 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">The coupon
                                     code</label>
-                                <input type="number" class="form-control rounded-3 p-3 fw-bold"
+                                <input type="text" class="form-control rounded-3 p-3 fw-bold"
                                     style="background-color: #EAEAEA" placeholder="" id='sms_The_coupon_code'>
                             </div>
                             <div class="col-md-4 mb-3">
@@ -55,20 +87,19 @@
                                 <div
                                     style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                     <div class="col-md-12 rounded-4 bg-transparent h-100 ">
-                                        <select  id="sms_w_parent_ctg"
-                                        class="form-select form-select-md"
+                                        <select id="sms_w_parent_ctg" class="form-select form-select-md"
                                             style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
                                             <option value="percent">percentage</option>
                                             <option value="amount">amount</option>
                                         </select>
-                                      
+
                                     </div>
-                            </div>
+                                </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">The amount
                                     of the discount </label>
-                                <input type="number" class="form-control rounded-3 p-3 fw-bold"
+                                <input type="text" class="form-control rounded-3 p-3 fw-bold"
                                     style="background-color: #EAEAEA" placeholder="" id="sms_amount_of_the_discount">
                             </div>
                         </div>
@@ -79,7 +110,7 @@
                                     date</label>
                                 <div class="input-group">
                                     <input type="date" class="form-control rounded-3 p-3 fw-bold"
-                                         style="background-color: #EAEAEA" id="sms_Coupon_expiration">
+                                        style="background-color: #EAEAEA" id="sms_Coupon_expiration">
                                 </div>
                             </div>
 
@@ -88,19 +119,46 @@
                             <div class="col-md-6 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Usage limit
                                     (leave blank without limit) </label>
-                                <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_Usage_limit"
+                                <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_Usage_limit"
                                     style="background-color: #EAEAEA" placeholder="key chain">
                             </div>
 
                         </div>
 
-                     
                 </div>
                 </form>
+                <div class="modal-body text-center py-4 sms_manage_pop" id="success-message" style="display: none;">
+                    <!-- SVG icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                        <path d="M9 12l2 2l4 -4"></path>
+                    </svg>
+                    <h3>Success</h3>
+                    <div class="text-muted">Your coupon data has been submitted successfully.</div>
+                </div>
+                <div class="modal-body text-center py-4 sms_manage_pop" id="error-message" style="display: none;">
+                    <!-- SVG icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                    </svg>
+                    <h3>Error</h3>
+                    <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
+                </div>
+
                 <div class="text-center mt-5  ">
-                            <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="sms_meh_couponmanage_data()">
-                            To add the category click here +</button>
-                        </div>
+                    <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3"
+                        onclick="sms_meh_couponmanage_data()">
+                        To add the category click here +</button>
+                </div>
             </div>
         </div>
     </div>
@@ -115,30 +173,34 @@ function sms_meh_couponmanage_data() {
         'amount': document.getElementById('sms_amount_of_the_discount').value,
         'date_expires': document.getElementById('sms_Coupon_expiration').value,
         'usage_limit': document.getElementById('sms_Usage_limit').value,
-        
     };
 
-    fetch('/coupons/add',{
+    fetch('/coupons/add', {
         method: 'POST',
         body: JSON.stringify(Coupon_manage_Data),
         headers: {
             'Content-Type': 'application/json'
         }
-    } )
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
     })
-    .then(data => {
-        console.log('Form data submitted successfully:', data);
-        // Optionally, you can handle the response data here
+    .then(response => {
+        console.log(response);
+        if (response.status === 201) {
+            // Form submission succeeded, display success message
+            document.getElementById('success-message').style.display = 'block';
+            document.getElementById('error-message').style.display = 'none'; 
+            window.location.reload();
+        } else {
+            // Form submission failed, display error message
+            document.getElementById('error-message').style.display = 'block';
+            document.getElementById('success-message').style.display = 'none'; // Hide success message if it was displayed before
+        }
     })
     .catch(error => {
-        console.error('Error submitting form data:', error);
-});
+        // Network error occurred, display error message
+        document.getElementById('error-message').style.display = 'block';
+        console.error('Error submitting form data:', error);
+    });
 }
 
 
-</script> 
+</script>
