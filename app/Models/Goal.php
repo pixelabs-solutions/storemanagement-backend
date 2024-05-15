@@ -195,9 +195,6 @@ class Goal
         $params['before'] = $end->format('Y-m-d') . 'T23:59:59';
 
         $previous_month_average_orders = Base::calculate_average_items($data["store_url"], $params);
-        echo "Parameters for last month: ".json_encode($params);
-        echo "Current month: ".$current_month_average_orders;
-        echo " Previous month: ".$previous_month_average_orders;
 
         $goals_data = [
             "orders" => [
