@@ -195,7 +195,7 @@
 <!-- </head>
 
 <body> -->
-<div class="page-body">
+
     <div class="container-xl">
         <div class="row justify-content-center">
             <div class="col-12 col-md-12">
@@ -599,7 +599,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 <!-- input javascript code  -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
