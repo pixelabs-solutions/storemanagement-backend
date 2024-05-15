@@ -206,7 +206,11 @@
               
 
                     </form> 
-                    <div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_add_regular_success-message" style="display: none;">
+                    <div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_add_regular_success_message" style="display: none;">
+                  <!-- Close icon -->
+
+                  <button type="button" class="btn-close" aria-label="Close"
+                            onclick="sms_add_regular_close_success_message()"></button>
                     <!-- SVG icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24"
                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -218,8 +222,11 @@
                     <h3>Success</h3>
                     <div class="text-muted">Your add regular data has been submitted successfully.</div>
                 </div>
-                <div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_add_regular_error-message" style="display: none;">
-                    <!-- SVG icon -->
+                <div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_add_regular_error_message" style="display: none;">
+                  <!-- Close icon -->
+                  <button type="button" class="btn-close" aria-label="Close"
+                            onclick="sms_add_regular_close_error_message()"></button>   
+                <!-- SVG icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24"
                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -309,18 +316,18 @@ function fun() {
     .then(response => {
         if (response.status === 201) {
                         // Form submission succeeded, display success message
-                        document.getElementById('sms_add_regular_success-message').style.display = 'block';
-                        document.getElementById('sms_add_regular_error-message').style.display = 'none';
+                        document.getElementById('sms_add_regular_success_message').style.display = 'block';
+                        document.getElementById('sms_add_regular_error_message').style.display = 'none';
                         window.location.reload();
                     } else {
                         // Form submission failed, display error message
-                        document.getElementById('sms_add_regular_error-message').style.display = 'block';
-                        document.getElementById('sms_add_regular_success-message').style.display = 'none'; // Hide success message if it was displayed before
+                        document.getElementById('sms_add_regular_error_message').style.display = 'block';
+                        document.getElementById('sms_add_regular_success_message').style.display = 'none'; // Hide success message if it was displayed before
                     }
                 })
                 .catch(error => {
                     // Network error occurred, display error message
-                    document.getElementById('sms_add_regular_error-message').style.display = 'block';
+                    document.getElementById('sms_add_regular_error_message').style.display = 'block';
                     console.error('Error submitting form data:', error);
                 });
         }
@@ -455,6 +462,13 @@ function openModal(modalId) {
   }
 }
 
+function sms_add_regular_close_success_message() {
+            document.getElementById('sms_add_regular_success_message').style.display = 'none';
+        }
+
+        function sms_add_regular_close_error_message() {
+            document.getElementById('sms_add_regular_error_message').style.display = 'none';
+        }
 </script>
 
 

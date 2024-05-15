@@ -219,6 +219,11 @@
                     </form>
                     <div class="modal-body text-center py-4 sms_term_pop" id="sms_term_success-message"
                         style="display: none;">
+                        <!-- Close icon -->
+
+                        <button type="button" class="btn-close" aria-label="Close"
+                            onclick="sms_term_close_success_message()"></button>
+
                         <!-- SVG icon -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24"
                             height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -232,6 +237,9 @@
                     </div>
                     <div class="modal-body text-center py-4 sms_term_pop" id="sms_term_error-message"
                         style="display: none;">
+                        <!-- Close icon -->
+                        <button type="button" class="btn-close" aria-label="Close"
+                            onclick="sms_term_close_error_message()"></button>
                         <!-- SVG icon -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24"
                             height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -250,7 +258,7 @@
         </div>
     </div>
 
-    
+
     <!-- input javascript code  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script> -->
@@ -267,7 +275,7 @@
             inputCount += 1;
             var container = document.getElementById('sms_a_add_new_term');
             var newInput = document.createElement('div');
-            var uniqueId = 'sms_term_image-' + inputCount; // Generate unique ID
+            var uniqueId = 'sms_term_image' + inputCount; // Generate unique ID
             newInput.classList.add('col-md-12', 'mb-3', 'p-0');
             newInput.innerHTML = `
         <div class="gx-3">
@@ -317,7 +325,6 @@
             let name = document.getElementById('sms_term_name').value.trim();
             let type = document.getElementById('sms_feature_select').value.trim();
             let colorInput = document.getElementById('sms_term_color').value.trim();
-            let imageFile = document.getElementById('sms_term_image').files[0];
 
             // Create JSON object to store form data
             let jsonData = {
@@ -330,24 +337,28 @@
             // Get the values of dynamically added inputs
             let dynamicnames = document.querySelectorAll('[id^="sms_term_names"]');
             let dynamicTermColors = document.querySelectorAll('[id^="sms_term_colors"]');
-            let dynamicTermImages = document.querySelectorAll('[id^="sms_term_image-"]');
+            let dynamicTermImages = document.querySelectorAll('[id^="sms_term_image"]');
 
             // Loop through dynamic data and populate jsonData.dynamicTerms
             dynamicnames.forEach((input, index) => {
                 let name = input.value.trim();
                 if (name !== '') {
                     let color = dynamicTermColors[index].value.trim(); // Assuming corresponding color exists
-                    jsonData.dynamicTerms.push({ name: name, color: color });
+                    let imageSrc = dynamicTermImages[index].getAttribute('src'); // Get the image source URL
+                    jsonData.dynamicTerms.push({ name: name, color: color, image: imageSrc });
                 }
             });
 
+            // Convert JSON data to string
+            let jsonString = JSON.stringify(jsonData);
+
             // Send JSON data with fetch API
-            fetch('http://storemanagement.test/attributes/{id}/terms/add', {
+            fetch('/attributes/{id}/terms/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(jsonData)
+                body: jsonString
             })
                 .then(response => {
                     if (response.status === 201) {
@@ -369,6 +380,13 @@
         }
 
 
+        function sms_term_close_success_message() {
+            document.getElementById('sms_term_success-message').style.display = 'none';
+        }
+
+        function sms_term_close_error_message() {
+            document.getElementById('sms_term_error-message').style.display = 'none';
+        }
     </script>
 
 
