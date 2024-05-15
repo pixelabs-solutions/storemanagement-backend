@@ -54,7 +54,7 @@ class Base
         $sql = "DELETE FROM `$table_name` WHERE id = ?";
         $stmt = $connection->prepare($sql);
         if ($stmt === false) {
-            throw new Exception("Failed to prepare the SQL statement: " . $this->connection->error);
+            throw new Exception("Failed to prepare the SQL statement: " . $connection->error);
         }
 
         $stmt->bind_param("i", $id);
@@ -123,11 +123,13 @@ class Base
 
             if ($response->getStatusCode() == 201) 
             {
+                http_response_code($response->getStatusCode());
                 $data = json_decode($response->getBody(), true);
                 return json_encode(['message' => 'Data added', 'status_code' => $response->getStatusCode(), 'data_id' => $data['id']]);
             } 
             else 
             {
+                http_response_code($response->getStatusCode());
                 return json_encode(['message' => 'Could not add data', 'status_code' => $response->getStatusCode()]);
             }
         }
@@ -159,11 +161,13 @@ class Base
         
             if($response->getStatusCode() == 200)
             {
+                http_response_code($response->getStatusCode());
                 $data = json_decode($response->getBody(), true);
                 return json_encode(['message' => 'Fetched successfully', 'status_code' => $response->getStatusCode(), 'data' => $data]);
             }
             else
             {
+                http_response_code($response->getStatusCode());
                 return json_encode(['message' => 'Not found', 'status_code' => $response->getStatusCode()]);
             }
         } 
@@ -195,11 +199,13 @@ class Base
 
             if($response->getStatusCode() == 200)
             {
+                http_response_code($response->getStatusCode());
                 $data = json_decode($response->getBody(), true);
                 return json_encode(['message' => 'Deleted', 'status_code' => $response->getStatusCode(), 'data_id' => $data['id']]);
             }
             else
             {
+                http_response_code($response->getStatusCode());
                 return json_encode(['message' => 'Could not delete record', 'status_code' => $response->getStatusCode()]);
             }
         
@@ -237,10 +243,12 @@ class Base
             // var_dump($response->getBody());
             if ($response->getStatusCode() == 200) 
             {
+                http_response_code($response->getStatusCode());
                 return json_encode(['message' => 'Data updated', 'status_code' => $response->getStatusCode()]);
             } 
             else 
             {
+                http_response_code($response->getStatusCode());
                 return json_encode(['message' => 'Could not update record', 'status_code' => $response->getStatusCode()]);
             }
         }

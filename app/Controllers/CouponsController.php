@@ -34,7 +34,7 @@ class CouponsController
         ]);
 
         $response = Base::wc_add($this->endpoint, $payload);
-        echo $response;
+        return $response;
     }
 
     public function get($id)

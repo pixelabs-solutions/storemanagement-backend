@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../partials/header.php';
 
-// var_dump($transactions);
+var_dump($transactions);
 // $jsontransactionData = json_encode($transactions, JSON_UNESCAPED_UNICODE);
 
 // echo $jsontransactionData;
