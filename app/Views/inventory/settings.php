@@ -8,25 +8,15 @@ require_once __DIR__ . '/../partials/header.php';
 foreach ($inventory_settings as $item) {
     if ($item['id'] === 'woocommerce_manage_stock') {
         $woocommerce_manage_stock_value = $item['value'];
-    }
-
-    else if($item['id'] === 'woocommerce_notify_low_stock'){
+    } else if ($item['id'] === 'woocommerce_notify_low_stock') {
         $woocommerce_notify_low_stock_value = $item['value'];
-    }
-
-    else if($item['id'] === 'woocommerce_notify_no_stock'){
+    } else if ($item['id'] === 'woocommerce_notify_no_stock') {
         $woocommerce_notify_no_stock_value = $item['value'];
-    }
-
-    else if($item['id'] === 'woocommerce_stock_email_recipient'){
+    } else if ($item['id'] === 'woocommerce_stock_email_recipient') {
         $woocommerce_stock_email_recipient_value = $item['value'];
-    }
-
-    else if($item['id'] === 'woocommerce_notify_low_stock_amount'){
+    } else if ($item['id'] === 'woocommerce_notify_low_stock_amount') {
         $woocommerce_notify_low_stock_amount_value = $item['value'];
-    }
-
-    else if($item['id'] === 'woocommerce_notify_no_stock_amount'){
+    } else if ($item['id'] === 'woocommerce_notify_no_stock_amount') {
         $woocommerce_notify_no_stock_amount_value = $item['value'];
     }
 }
@@ -38,107 +28,173 @@ $woocommerce_notify_no_stock_ischecked = ($woocommerce_notify_no_stock_value ===
 ?>
 
 <style>
-    .form-switch .form-check-input{
+    .form-switch .form-check-input {
         background-size: 26px;
         height: 26px !important;
         width: 45px !important;
     }
-    .form-check-input{
+
+    .form-check-input {
         cursor: pointer !important;
+    }
+
+    .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        background: green !important;;
+        color: #fff;
+        display: none;
+        z-index: 9999;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        font-size: 14px;
+        /* Adding shadow for depth */
+    }
+
+    .notification.error {
+        background-color: #c0392b;
+        /* Red color for error */
     }
 </style>
 <div class=" bg-white position-relative mt-5 p-3">
+    <div id="notification" class="notification"></div>
     <form action="" id="form">
 
-    <div class="mt-5 p-2">
-        <h2 data-i18n="inventtory_setting.main_heading.h1">General inventory settings</h2>
-        <div class="row mt-5">
-            <div class="rounded-3 d-flex  py-3 justify-content-between align-items-center col-sm-4"
-                style="background-color: #EAEAEA">
-                <div>
-                    <p class="fs-3 p-0 m-0 align-items-center fw-bold" data-i18n="inventtory_setting.first_row_with_check_box.managment">Enabling inventory management</p>
-                </div>
-                <div class="form-check form-switch m-0">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                </div>
-            </div>
-        </div>
-        <div class="row mt-5">
-            <div class="col-md-6 d-flex gap-2 py-3 rounded-3 justify-content-between  mt-4"
-                style="background-color: #EAEAEA">
-                <p class="fs-3 m-0 p-0 fw-semibold" data-i18n="inventtory_setting.second_row_with_check_box.stock_alert_low">Activating an alert when stock is low</p>
-                <div class="form-check form-switch m-0">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" <?php echo $woocommerce_notify_low_stock_value_ischecked; ?>>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="d-flex gap-2 py-3 px-2 rounded-3 justify-content-between  mt-4"
+        <div class="mt-5 p-2">
+            <h2 data-i18n="inventtory_setting.main_heading.h1">General inventory settings</h2>
+            <div class="row mt-5">
+                <div class="rounded-3 d-flex  py-3 justify-content-between align-items-center col-sm-4"
                     style="background-color: #EAEAEA">
-                    <p class="fs-3 m-0 p-0  fw-semibold" data-i18n="inventtory_setting.third_row_with_check_box.stock_alert_out">Activate out of stock alert</p>
+                    <div>
+                        <p class="fs-3 p-0 m-0 align-items-center fw-bold"
+                            data-i18n="inventtory_setting.first_row_with_check_box.managment">Enabling inventory
+                            management</p>
+                    </div>
                     <div class="form-check form-switch m-0">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault3"  <?php echo $woocommerce_notify_no_stock_ischecked; ?>>
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-5">
-            <h2 data-i18n="inventtory_setting.fourth_row_with_check_box.email_label">Email address to receive notifications..</h2>
-            <div class="row">
-                <input class="col-lg-12 border-0 rounded-3 py-3 m-0 p-3 form-control" style="background-color: #EAEAEA"
-                    type="text" id="emailAddress" placeholder="Email Adress">
+            <div class="row mt-5">
+                <div class="col-md-6 d-flex gap-2 py-3 rounded-3 justify-content-between  mt-4"
+                    style="background-color: #EAEAEA">
+                    <p class="fs-3 m-0 p-0 fw-semibold"
+                        data-i18n="inventtory_setting.second_row_with_check_box.stock_alert_low">Activating an alert
+                        when stock is low</p>
+                    <div class="form-check form-switch m-0">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" <?php echo $woocommerce_notify_low_stock_value_ischecked; ?>>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex gap-2 py-3 px-2 rounded-3 justify-content-between  mt-4"
+                        style="background-color: #EAEAEA">
+                        <p class="fs-3 m-0 p-0  fw-semibold"
+                            data-i18n="inventtory_setting.third_row_with_check_box.stock_alert_out">Activate out of
+                            stock alert</p>
+                        <div class="form-check form-switch m-0">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault3" <?php echo $woocommerce_notify_no_stock_ischecked; ?>>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row mt-5 gap-0">
-            <div class="col-md-6">
-                <h2 data-i18n="inventtory_setting.fourth_row_with_check_box.data">Threshold quantity for low stock</h2>
-                <input class="border-0 rounded-2 py-3 m-0 p-3 form-control" style="background-color: #EAEAEA"
-                   type="number" id="lowStockThreshold" placeholder="10">
+            <div class="row mt-5">
+                <h2 data-i18n="inventtory_setting.fourth_row_with_check_box.email_label">Email address to receive
+                    notifications..</h2>
+                <div class="row">
+                    <input class="col-lg-12 border-0 rounded-3 py-3 m-0 p-3 form-control"
+                        style="background-color: #EAEAEA" type="text" id="emailAddress" placeholder="Email Adress">
+                </div>
             </div>
-            <div class="col-md-6">
-                <h2 data-i18n="inventtory_setting.fourth_row_with_check_box.data">Threshold quantity out of stocsssk</h2>
-                <input class="border-0 rounded-2 py-3 m-0 p-3 form-control" style="background-color: #EAEAEA"
-                    type="number" id="outOfStockThreshold" placeholder="10">
+            <div class="row mt-5 gap-0">
+                <div class="col-md-6">
+                    <h2 data-i18n="inventtory_setting.fourth_row_with_check_box.data">Threshold quantity for low stock
+                    </h2>
+                    <input class="border-0 rounded-2 py-3 m-0 p-3 form-control" style="background-color: #EAEAEA"
+                        type="number" id="lowStockThreshold" placeholder="10">
+                </div>
+                <div class="col-md-6">
+                    <h2 data-i18n="inventtory_setting.fourth_row_with_check_box.data">Threshold quantity out of stocsssk
+                    </h2>
+                    <input class="border-0 rounded-2 py-3 m-0 p-3 form-control" style="background-color: #EAEAEA"
+                        type="number" id="outOfStockThreshold" placeholder="10">
+                </div>
             </div>
-        </div>
-        <div class="row mt-5 justify-content-end ">
-            <div type="button"
-            onclick="submitForm()" 
-                class="rounded-3 rounded-4 d-flex gap-2 border-0  justify-content-center align-items-center last w-auto"
-                style="background: rgba(73, 135, 216, 0.44);">
-                <p class="fs-2 py-3 m-0 align-items-center fw-bold" data-i18n="inventtory_setting.sixth_row_with_check_box.update_btn">Updating and saving inventory settings →</p>
+            <div class="row mt-5 justify-content-end ">
+                <div type="button" onclick="sms_inventory_submit_Form()"
+                    class="rounded-3 rounded-4 d-flex gap-2 border-0  justify-content-center align-items-center last w-auto"
+                    style="background: rgba(73, 135, 216, 0.44);">
+                    <p class="fs-2 py-3 m-0 align-items-center fw-bold"
+                        data-i18n="inventtory_setting.sixth_row_with_check_box.update_btn">Updating and saving inventory
+                        settings →</p>
                 </div>
 
+            </div>
         </div>
-    </div>
     </form>
-
 </div>
 
 
 <script>
+   
+   function showNotification(message, isError = false) {
+    var notificationElement = document.getElementById("notification");
+    notificationElement.textContent = message;
 
-    function submitForm(){
-        var formData = {
-            'enableInventoryManagement': document.getElementById('flexSwitchCheckDefault').checked,
-            'lowStockAlert': document.getElementById('flexSwitchCheckDefault2').checked,
-            'outOfStockAlert': document.getElementById('flexSwitchCheckDefault3').checked,
-            'emailAddress': document.getElementById('emailAddress').value,
-            'lowStockThreshold': document.getElementById('lowStockThreshold').value,
-            'outOfStockThreshold': document.getElementById('outOfStockThreshold').value
-        };
-
-        // Log form data to console
-        console.log(formData);
-
+    if (isError) {
+        notificationElement.classList.add("error");
+    } else {
+        notificationElement.classList.remove("error");
     }
-  
 
+    notificationElement.style.display = "block";
+    setTimeout(function () {
+        notificationElement.style.display = "none";
+    }, 3000); // Hide notification after 3 seconds
+}
 
+function sms_inventory_submit_Form() {
+    var formData = {
+        'enableInventoryManagement': document.getElementById('flexSwitchCheckDefault').checked,
+        'lowStockAlert': document.getElementById('flexSwitchCheckDefault2').checked,
+        'outOfStockAlert': document.getElementById('flexSwitchCheckDefault3').checked,
+        'emailAddress': document.getElementById('emailAddress').value,
+        'lowStockThreshold': document.getElementById('lowStockThreshold').value,
+        'outOfStockThreshold': document.getElementById('outOfStockThreshold').value
+    };
 
+    // Log form data to console
+    console.log(formData);
+
+    // Make fetch request
+    fetch('/inventory/update', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (response.ok) {
+            // Form submission succeeded, display success message
+            showNotification("Inventory Setting  Submitted successfully");
+            window.location.reload();
+        } else {
+            // Form submission failed, display error message
+            showNotification("Inventory Setting  submission failed", true);
+        }
+    })
+    .catch(error => {
+        // Network error occurred, display error message
+        showNotification("Error submitting form data: " + error, true);
+        console.error('Error submitting form data:', error);
+    });
+}
 </script>
 
 
 <?php
-                    require_once __DIR__ . '/../partials/footer.php';
+require_once __DIR__ . '/../partials/footer.php';
 
 ?>
