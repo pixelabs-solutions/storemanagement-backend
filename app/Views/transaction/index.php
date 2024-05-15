@@ -152,10 +152,10 @@ var_dump($transactions);
         <div class="d-flex">
           <label for="statusSelect" class="form-label"></label>
           <select class="sms_m_form_select form-select dropdown-tom-select-style" id="sms_m_form_select">
-            <option value="Group status change">Group status change</option>
+            <option value="Group status change" disabled selected>Group status change</option>
             <option value="completed">Completed</option>
             <option value="cancelled">Cancelled</option>
-            <option value="inTreatment">In Treatment</option>
+            <option value="pending">In Treatment</option>
           </select>
         </div>
         <!-- <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -434,29 +434,45 @@ var_dump($transactions);
         // Gather IDs of selected rows
         $('input[type="checkbox"]:checked').each(function() {
             var id = $(this).closest('tr').find('#transaction_id').text();
+            // Remove '#' from the id
+            id = id.replace('#', '');
             selectedIds.push(id);
         });
-console.log(selectedIds);
-        // Make AJAX request
-        $.ajax({
-            url: `/transactions/update_status/${selectedIds}`, 
+
+        console.log(selectedIds);
+
+        // Prepare data for POST request
+        var data = {
+            id: selectedIds,
+            status: selectedStatus
+        };
+
+        // Make fetch request
+        fetch('/transactions/update_bulk_status', {
             method: 'POST',
-            data: {
-                ids: selectedIds,
-                status: selectedStatus
+            headers: {
+                'Content-Type': 'application/json'
             },
-            success: function(response) {
-                // Handle success response
-                console.log(response);
-            },
-            error: function(xhr, status, error) {
-                // Handle error response
-                console.error(error);
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
+            return response.text();
+        })
+        .then(response => {
+            // Handle success response
+            console.log(response);
+        })
+        .catch(error => {
+            // Handle error
+            console.error('There was a problem with the fetch operation:', error);
         });
     });
 });
 </script>
+
 <!-- Libs JS -->
 <script src="./dist/libs/nouislider/dist/nouislider.min.js?1695847769" defer></script>
 <script src="./dist/libs/litepicker/dist/litepicker.js?1695847769" defer></script>
