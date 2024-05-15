@@ -1,16 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>adding a term form</title>
-    <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" /> -->
-<!-- <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" /> -->
 <style>
     @import url('https://rsms.me/inter/inter.css');
 
@@ -388,10 +375,3 @@
             document.getElementById('sms_term_error-message').style.display = 'none';
         }
     </script>
-
-
-    <!-- </body>
-<script src="./dist/js/tabler.min.js?1684106062" defer></script>
-<script src="./dist/js/demo.min.js?1684106062" defer></script>
-
-</html> -->

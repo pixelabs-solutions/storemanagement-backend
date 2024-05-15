@@ -38,27 +38,22 @@
         ;
     }
 
-<<<<<<< HEAD
+    .sms_a_custom_file_input label {
+        /* display: inline-block; */
+        padding: 17px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        background-color: #EAEAEA;
+        text-align: center;
+        ;
+    }
+
     .sms_a_custom_file_input label i {
         margin-right: 5px;
     }
-</style>
-=======
-        .sms_a_custom_file_input label {
-            /* display: inline-block; */
-            padding: 17px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            background-color: #EAEAEA;
-            text-align: center;
-            ;
-        }
 
-        .sms_a_custom_file_input label i {
-            margin-right: 5px;
-        }
-        .sms_a_add_regular_pop {
+    .sms_a_add_regular_pop {
         position: fixed;
         top: 50%;
         left: 50%;
@@ -89,12 +84,11 @@
         color: #6c757d;
         font-size: 1rem;
     }
-    </style>
->>>>>>> 55bdca2e2905c1924b9646c3d40d429300dd2031
+</style>
 <!-- </head>
 
 <body> -->
-<div class="page-body">
+
     <div class="container-xl">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10">
@@ -108,20 +102,26 @@
                             <div class="col-md-6 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Product
                                     Name</label>
-                                <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_product_name" style="background-color: #EAEAEA" placeholder="Blue Gucci bag">
+                                <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_product_name"
+                                    style="background-color: #EAEAEA" placeholder="Blue Gucci bag">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="example-select fs-3 fw-bold" class="form-label fw-bold">Category
                                 </label>
-                                <div class="-5" style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
+                                <div class="-5"
+                                    style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                     <div class="col-md-12 rounded-4 bg-transparent h-100 ">
-                                        <select id="category_in_product" multiple style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
+                                        <select id="category_in_product" multiple
+                                            style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
                                             <option value="NOSQL">Bags</option>
                                             <option value="NodeJS">List</option>
                                         </select>
                                         <span class="span_div">
-                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.00006 7.16667L10.0001 3.16667L8.83339 2L6.00006 4.83333L3.16673 2L2.00006 3.16667L6.00006 7.16667Z" fill="#111" />
+                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M6.00006 7.16667L10.0001 3.16667L8.83339 2L6.00006 4.83333L3.16673 2L2.00006 3.16667L6.00006 7.16667Z"
+                                                    fill="#111" />
                                             </svg>
                                         </span>
                                     </div>
@@ -134,11 +134,15 @@
                             <div class="col-md-6 mb-4">
                                 <label class="form-label">Upload a product image</label>
                                 <div class="sms_a_custom_file_input">
-                                    <input type="file" id="sms_mu_img" accept="image/*" style="background-color:#FFFFFF;">
+                                    <input type="file" id="sms_mu_img" accept="image/*"
+                                        style="background-color:#FFFFFF;">
                                     <label for="sms_mu_img" id="sms_mu_img_label">
                                         <i class="bi bi-image text-black">
-                                            <svg width="20" height="20" viewBox="0 0 32 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8.88889 0.555542C6.92778 0.555542 5.33333 2.14999 5.33333 4.1111V16.5555C5.33333 18.5167 6.92778 20.1111 8.88889 20.1111H28.4444C30.4056 20.1111 32 18.5167 32 16.5555V4.1111C32 2.14999 30.4056 0.555542 28.4444 0.555542H8.88889ZM22 6.48332L27.3333 14.4833C27.6056 14.8944 27.6333 15.4167 27.4 15.85C27.1667 16.2833 26.7167 16.5555 26.2222 16.5555H18.2222H15.5556H11.1111C10.6 16.5555 10.1333 16.2611 9.91111 15.8C9.68889 15.3389 9.75 14.7889 10.0722 14.3889L13.6278 9.94443C13.8833 9.62776 14.2611 9.44443 14.6667 9.44443C15.0722 9.44443 15.4556 9.62776 15.7056 9.94443L16.6667 11.1444L19.7778 6.47776C20.0278 6.1111 20.4444 5.88888 20.8889 5.88888C21.3333 5.88888 21.75 6.1111 22 6.48332ZM10.6667 5.88888C10.6667 5.41738 10.854 4.96519 11.1874 4.6318C11.5208 4.2984 11.9729 4.1111 12.4444 4.1111C12.9159 4.1111 13.3681 4.2984 13.7015 4.6318C14.0349 4.96519 14.2222 5.41738 14.2222 5.88888C14.2222 6.36037 14.0349 6.81256 13.7015 7.14595C13.3681 7.47935 12.9159 7.66665 12.4444 7.66665C11.9729 7.66665 11.5208 7.47935 11.1874 7.14595C10.854 6.81256 10.6667 6.36037 10.6667 5.88888ZM2.66667 5.44443C2.66667 4.70554 2.07222 4.1111 1.33333 4.1111C0.594444 4.1111 0 4.70554 0 5.44443V17.8889C0 22.0611 3.38333 25.4444 7.55556 25.4444H25.3333C26.0722 25.4444 26.6667 24.85 26.6667 24.1111C26.6667 23.3722 26.0722 22.7778 25.3333 22.7778H7.55556C4.85556 22.7778 2.66667 20.5889 2.66667 17.8889V5.44443Z" fill="black" />
+                                            <svg width="20" height="20" viewBox="0 0 32 26" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M8.88889 0.555542C6.92778 0.555542 5.33333 2.14999 5.33333 4.1111V16.5555C5.33333 18.5167 6.92778 20.1111 8.88889 20.1111H28.4444C30.4056 20.1111 32 18.5167 32 16.5555V4.1111C32 2.14999 30.4056 0.555542 28.4444 0.555542H8.88889ZM22 6.48332L27.3333 14.4833C27.6056 14.8944 27.6333 15.4167 27.4 15.85C27.1667 16.2833 26.7167 16.5555 26.2222 16.5555H18.2222H15.5556H11.1111C10.6 16.5555 10.1333 16.2611 9.91111 15.8C9.68889 15.3389 9.75 14.7889 10.0722 14.3889L13.6278 9.94443C13.8833 9.62776 14.2611 9.44443 14.6667 9.44443C15.0722 9.44443 15.4556 9.62776 15.7056 9.94443L16.6667 11.1444L19.7778 6.47776C20.0278 6.1111 20.4444 5.88888 20.8889 5.88888C21.3333 5.88888 21.75 6.1111 22 6.48332ZM10.6667 5.88888C10.6667 5.41738 10.854 4.96519 11.1874 4.6318C11.5208 4.2984 11.9729 4.1111 12.4444 4.1111C12.9159 4.1111 13.3681 4.2984 13.7015 4.6318C14.0349 4.96519 14.2222 5.41738 14.2222 5.88888C14.2222 6.36037 14.0349 6.81256 13.7015 7.14595C13.3681 7.47935 12.9159 7.66665 12.4444 7.66665C11.9729 7.66665 11.5208 7.47935 11.1874 7.14595C10.854 6.81256 10.6667 6.36037 10.6667 5.88888ZM2.66667 5.44443C2.66667 4.70554 2.07222 4.1111 1.33333 4.1111C0.594444 4.1111 0 4.70554 0 5.44443V17.8889C0 22.0611 3.38333 25.4444 7.55556 25.4444H25.3333C26.0722 25.4444 26.6667 24.85 26.6667 24.1111C26.6667 23.3722 26.0722 22.7778 25.3333 22.7778H7.55556C4.85556 22.7778 2.66667 20.5889 2.66667 17.8889V5.44443Z"
+                                                    fill="black" />
                                             </svg>
                                         </i> Choose a picture
                                     </label>
@@ -148,11 +152,15 @@
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Upload a photo gallery</label>
                                 <div class="sms_a_custom_file_input">
-                                    <input type="file" id="sms_mu_photo" accept="image/*" style="background-color:#FFFFFF;" multiple>
+                                    <input type="file" id="sms_mu_photo" accept="image/*"
+                                        style="background-color:#FFFFFF;" multiple>
                                     <label for="sms_mu_photo" id="sms_mu_photo_label">
                                         <i class="bi bi-image text-black">
-                                            <svg width="20" height="20" viewBox="0 0 32 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8.88889 0.555542C6.92778 0.555542 5.33333 2.14999 5.33333 4.1111V16.5555C5.33333 18.5167 6.92778 20.1111 8.88889 20.1111H28.4444C30.4056 20.1111 32 18.5167 32 16.5555V4.1111C32 2.14999 30.4056 0.555542 28.4444 0.555542H8.88889ZM22 6.48332L27.3333 14.4833C27.6056 14.8944 27.6333 15.4167 27.4 15.85C27.1667 16.2833 26.7167 16.5555 26.2222 16.5555H18.2222H15.5556H11.1111C10.6 16.5555 10.1333 16.2611 9.91111 15.8C9.68889 15.3389 9.75 14.7889 10.0722 14.3889L13.6278 9.94443C13.8833 9.62776 14.2611 9.44443 14.6667 9.44443C15.0722 9.44443 15.4556 9.62776 15.7056 9.94443L16.6667 11.1444L19.7778 6.47776C20.0278 6.1111 20.4444 5.88888 20.8889 5.88888C21.3333 5.88888 21.75 6.1111 22 6.48332ZM10.6667 5.88888C10.6667 5.41738 10.854 4.96519 11.1874 4.6318C11.5208 4.2984 11.9729 4.1111 12.4444 4.1111C12.9159 4.1111 13.3681 4.2984 13.7015 4.6318C14.0349 4.96519 14.2222 5.41738 14.2222 5.88888C14.2222 6.36037 14.0349 6.81256 13.7015 7.14595C13.3681 7.47935 12.9159 7.66665 12.4444 7.66665C11.9729 7.66665 11.5208 7.47935 11.1874 7.14595C10.854 6.81256 10.6667 6.36037 10.6667 5.88888ZM2.66667 5.44443C2.66667 4.70554 2.07222 4.1111 1.33333 4.1111C0.594444 4.1111 0 4.70554 0 5.44443V17.8889C0 22.0611 3.38333 25.4444 7.55556 25.4444H25.3333C26.0722 25.4444 26.6667 24.85 26.6667 24.1111C26.6667 23.3722 26.0722 22.7778 25.3333 22.7778H7.55556C4.85556 22.7778 2.66667 20.5889 2.66667 17.8889V5.44443Z" fill="black" />
+                                            <svg width="20" height="20" viewBox="0 0 32 26" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M8.88889 0.555542C6.92778 0.555542 5.33333 2.14999 5.33333 4.1111V16.5555C5.33333 18.5167 6.92778 20.1111 8.88889 20.1111H28.4444C30.4056 20.1111 32 18.5167 32 16.5555V4.1111C32 2.14999 30.4056 0.555542 28.4444 0.555542H8.88889ZM22 6.48332L27.3333 14.4833C27.6056 14.8944 27.6333 15.4167 27.4 15.85C27.1667 16.2833 26.7167 16.5555 26.2222 16.5555H18.2222H15.5556H11.1111C10.6 16.5555 10.1333 16.2611 9.91111 15.8C9.68889 15.3389 9.75 14.7889 10.0722 14.3889L13.6278 9.94443C13.8833 9.62776 14.2611 9.44443 14.6667 9.44443C15.0722 9.44443 15.4556 9.62776 15.7056 9.94443L16.6667 11.1444L19.7778 6.47776C20.0278 6.1111 20.4444 5.88888 20.8889 5.88888C21.3333 5.88888 21.75 6.1111 22 6.48332ZM10.6667 5.88888C10.6667 5.41738 10.854 4.96519 11.1874 4.6318C11.5208 4.2984 11.9729 4.1111 12.4444 4.1111C12.9159 4.1111 13.3681 4.2984 13.7015 4.6318C14.0349 4.96519 14.2222 5.41738 14.2222 5.88888C14.2222 6.36037 14.0349 6.81256 13.7015 7.14595C13.3681 7.47935 12.9159 7.66665 12.4444 7.66665C11.9729 7.66665 11.5208 7.47935 11.1874 7.14595C10.854 6.81256 10.6667 6.36037 10.6667 5.88888ZM2.66667 5.44443C2.66667 4.70554 2.07222 4.1111 1.33333 4.1111C0.594444 4.1111 0 4.70554 0 5.44443V17.8889C0 22.0611 3.38333 25.4444 7.55556 25.4444H25.3333C26.0722 25.4444 26.6667 24.85 26.6667 24.1111C26.6667 23.3722 26.0722 22.7778 25.3333 22.7778H7.55556C4.85556 22.7778 2.66667 20.5889 2.66667 17.8889V5.44443Z"
+                                                    fill="black" />
                                             </svg>
                                         </i> Select images
                                     </label>
@@ -164,12 +172,14 @@
                             <div class="col-md-6 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Normal
                                     price</label>
-                                <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_Normal" style="background-color: #EAEAEA" placeholder="">
+                                <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_Normal"
+                                    style="background-color: #EAEAEA" placeholder="">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Sale price
                                     (optional)</label>
-                                <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_sale" style="background-color: #EAEAEA" placeholder="">
+                                <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_sale"
+                                    style="background-color: #EAEAEA" placeholder="">
                             </div>
                         </div>
                         <!-- description -->
@@ -177,7 +187,8 @@
                             <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">A brief
                                 description of the product</label>
                             <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="sms_mu_textarea" style="height: 100px; background-color: #EAEAEA"></textarea>
+                                <textarea class="form-control" placeholder="Leave a comment here" id="sms_mu_textarea"
+                                    style="height: 100px; background-color: #EAEAEA"></textarea>
 
                             </div>
                         </div>
@@ -185,7 +196,8 @@
                         <div class="col-md-12 mt-3 ">
                             <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Units in
                                 Stock</label>
-                            <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_unit" style="background-color: #EAEAEA" placeholder="150">
+                            <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_unit"
+                                style="background-color: #EAEAEA" placeholder="150">
                         </div>
                         <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
                             <!-- <div class="text-center mt-2 col-sm-6 col-md-6">
@@ -198,17 +210,16 @@
                                 </div> -->
                         </div>
 
-<<<<<<< HEAD
-=======
-                    </div>
-              
+          
 
-                    </form> 
-                    <div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_add_regular_success_message" style="display: none;">
-                  <!-- Close icon -->
 
-                  <button type="button" class="btn-close" aria-label="Close"
-                            onclick="sms_add_regular_close_success_message()"></button>
+                </form>
+                <div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_add_regular_success_message"
+                    style="display: none;">
+                    <!-- Close icon -->
+
+                    <button type="button" class="btn-close" aria-label="Close"
+                        onclick="sms_add_regular_close_success_message()"></button>
                     <!-- SVG icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24"
                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -220,11 +231,12 @@
                     <h3>Success</h3>
                     <div class="text-muted">Your add regular data has been submitted successfully.</div>
                 </div>
-                <div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_add_regular_error_message" style="display: none;">
-                  <!-- Close icon -->
-                  <button type="button" class="btn-close" aria-label="Close"
-                            onclick="sms_add_regular_close_error_message()"></button>   
-                <!-- SVG icon -->
+                <div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_add_regular_error_message"
+                    style="display: none;">
+                    <!-- Close icon -->
+                    <button type="button" class="btn-close" aria-label="Close"
+                        onclick="sms_add_regular_close_error_message()"></button>
+                    <!-- SVG icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24"
                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -237,19 +249,17 @@
                     <h3>Error</h3>
                     <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
                 </div>
-                    <button class="btn btn-primary col-12 rounded-4 py-3" onclick="fun()">To update
-                                        the product →</button>
->>>>>>> 55bdca2e2905c1924b9646c3d40d429300dd2031
-                </div>
 
-
-                </form>
-                <button class="btn btn-primary col-12 rounded-4 py-3" onclick="fun()">To update
-                    the product →</button>
             </div>
+
+
+         
+            <button class="btn btn-primary col-12 rounded-4 py-3" onclick="fun()">To update
+                the product →</button>
         </div>
     </div>
 </div>
+
 
 
 <!-- input javascript code  -->
@@ -270,7 +280,7 @@
     function handleImageUpload(inputId, targetId) {
         var input = document.getElementById(inputId);
         var targetElement = document.getElementById(targetId);
-        input.addEventListener('change', function() {
+        input.addEventListener('change', function () {
             updateFileNames(input, targetElement);
         });
     }
@@ -279,7 +289,7 @@
     handleImageUpload('sms_mu_img', 'sms_mu_img_label');
     handleImageUpload('sms_mu_photo', 'sms_mu_photo_label');
 
-<<<<<<< HEAD
+
     function fun() {
         let productName = document.getElementById('sms_product_name').value;
         let photoValue = document.getElementById('sms_mu_photo').value;
@@ -313,133 +323,39 @@
 
         console.log(data);
 
+
         fetch('/product/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
             .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                if (response.status === 201) {
+                    // Form submission succeeded, display success message
+                    document.getElementById('sms_add_regular_success_message').style.display = 'block';
+                    document.getElementById('sms_add_regular_error_message').style.display = 'none';
+                    window.location.reload();
+                } else {
+                    // Form submission failed, display error message
+                    document.getElementById('sms_add_regular_error_message').style.display = 'block';
+                    document.getElementById('sms_add_regular_success_message').style.display = 'none'; // Hide success message if it was displayed before
                 }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Data sent:', data);
-                // You can handle the response data here if needed
             })
             .catch(error => {
-                console.error('There was a problem with your fetch operation:', error);
+                // Network error occurred, display error message
+                document.getElementById('sms_add_regular_error_message').style.display = 'block';
+                console.error('Error submitting form data:', error);
             });
     }
-=======
-    fetch('/product/add', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    })
-    .then(response => {
-        if (response.status === 201) {
-                        // Form submission succeeded, display success message
-                        document.getElementById('sms_add_regular_success_message').style.display = 'block';
-                        document.getElementById('sms_add_regular_error_message').style.display = 'none';
-                        window.location.reload();
-                    } else {
-                        // Form submission failed, display error message
-                        document.getElementById('sms_add_regular_error_message').style.display = 'block';
-                        document.getElementById('sms_add_regular_success_message').style.display = 'none'; // Hide success message if it was displayed before
-                    }
-                })
-                .catch(error => {
-                    // Network error occurred, display error message
-                    document.getElementById('sms_add_regular_error_message').style.display = 'block';
-                    console.error('Error submitting form data:', error);
-                });
-        }
-
->>>>>>> 55bdca2e2905c1924b9646c3d40d429300dd2031
 
 
-    //     function handleImageUpload(inputId, targetId) {
-    //         var input = document.getElementById(inputId);
-    //         var targetElement = document.getElementById(targetId);
-    //         input.addEventListener('change', function() {
-    //             updateFileNames(input, targetElement);
-    //         });
-    //     }
 
-    //     // Call the functions for each file input
-    //     handleImageUpload('sms_mu_img', 'sms_mu_img_label');
-    //     handleImageUpload('sms_mu_photo', 'sms_mu_photo_label');
-    //     function fun() {
-    //     let productName = document.getElementById('sms_product_name').value;
-    //     let photo_value = document.getElementById('sms_mu_photo').value;
-    //     let img_value = document.getElementById('sms_mu_img').value;
-    //     let NormalInp = document.getElementById('sms_mu_Normal').value;
-    //     let saleInp = document.getElementById('sms_mu_sale').value;
-    //     let textareaInp = document.getElementById('sms_mu_textarea').value;
-    //     let unitInp = document.getElementById('sms_mu_unit').value;
-    //     let category_select = document.getElementById('category_in_product').value;
-    //     let selected_categories = [];
-
-    //     for (let i = 0; i < category_select.options.length; i++) {
-    //         if (category_select.options[i].selected) {
-    //             selected_categories.push(category_select.options[i].value);
-    //         }
-    //     }
-
-    //     let Array_of_data = {
-    //         'productName': productName,
-    //         'selected_categories': selected_categories,
-    //         'Photos': photo_value,
-    //         'img_value': img_value,
-    //         'NormalInp': NormalInp,
-    //         'saleInp': saleInp,
-    //         'textareaInp': textareaInp,
-    //         'unitInp': unitInp,
-    //     };
-
-    //     console.log(Array_of_data);
-    // }
-
-
-    // function sms_mu_img_selection() {
-    //     try {
-    //         var input = document.getElementById('sms_mu_img');
-    //         var fileName = input.files[0].name;
-    //         // Update input label or any other relevant element with the file name
-    //         input.nextElementSibling.innerHTML = fileName;
-    //     } catch (error) {
-    //         console.error("An error occurred while updating the file name:", error);
-    //     }
-    // }
-
-    // function sms_mu_photo_selection() {
-    //     try {
-    //         var input = document.getElementById('sms_mu_photo');
-    //         var fileNames = "";
-    //         for (var i = 0; i < input.files.length; i++) {
-    //             fileNames += input.files[i].name + "<br>";
-    //         }
-    //         // Update input label or any other relevant element with the file names
-    //         input.nextElementSibling.innerHTML = fileNames;
-    //     } catch (error) {
-    //         console.error("An error occurred while updating the file names:", error);
-    //     }
-    // }
 </script>
-<!-- </body>
-<script src="./dist/js/tabler.min.js?1684106062" defer></script>
-<script src="./dist/js/demo.min.js?1684106062" defer></script>
 
-</html> -->
-
-<!--delete complete product  modal  -->
-<div class="modal modal-blur fade" id="sms_edit_product_regular_w_delete_complete_modal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+<div class="modal modal-blur fade" id="sms_edit_product_regular_w_delete_complete_modal" tabindex="-1" role="dialog"
+    aria-labelledby="confirmModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
         <div class="modal-content p-3 ">
 
@@ -447,7 +363,8 @@
                 <p>Are you sure you want to delete the complete product?</p>
             </div>
             <div class="d-flex justify-content-between col-6 m-auto">
-                <button type="button" class="btn  cancel-btn sms_modal_cancel_btn" data-dismiss="modal" style="background-color:#afcaee">Cancel</button>
+                <button type="button" class="btn  cancel-btn sms_modal_cancel_btn" data-dismiss="modal"
+                    style="background-color:#afcaee">Cancel</button>
                 <a href="product.php"><button type="button" class="btn btn-danger">Delete</button></a>
             </div>
         </div>
@@ -472,7 +389,7 @@
         cancelButton.addEventListener('click', closeModal);
 
         // Hide the modal when outside the modal is clicked
-        modal.addEventListener('click', function(e) {
+        modal.addEventListener('click', function (e) {
             if (e.target === modal) {
                 closeModal();
             }
@@ -487,77 +404,22 @@
             modal.setAttribute('aria-hidden', 'true');
         }
     }
-<<<<<<< HEAD
-=======
-  });
 
-  // Function to close the modal
-  function closeModal() {
-    console.log("Modal closed")
-    modal.style.display = 'none';
-    modal.classList.remove('show');
-    modal.setAttribute('aria-modal', 'false');
-    modal.setAttribute('aria-hidden', 'true');
-  }
-}
 
-function sms_add_regular_close_success_message() {
-            document.getElementById('sms_add_regular_success_message').style.display = 'none';
-        }
+    // Function to close the modal
+    function closeModal() {
+        console.log("Modal closed")
+        modal.style.display = 'none';
+        modal.classList.remove('show');
+        modal.setAttribute('aria-modal', 'false');
+        modal.setAttribute('aria-hidden', 'true');
+    }
 
-        function sms_add_regular_close_error_message() {
-            document.getElementById('sms_add_regular_error_message').style.display = 'none';
-        }
->>>>>>> 55bdca2e2905c1924b9646c3d40d429300dd2031
+    function sms_add_regular_close_success_message() {
+        document.getElementById('sms_add_regular_success_message').style.display = 'none';
+    }
+
+    function sms_add_regular_close_error_message() {
+        document.getElementById('sms_add_regular_error_message').style.display = 'none';
+    }
 </script>
-
-
-<!-- <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // This code runs after the DOM is fully loaded
-
-        // Define the function to handle the button click
-        function handleButtonClick() {
-            // Retrieve values from input fields
-            var productName = document.getElementById("example-text-input").value;
-            var category = document.getElementById("choices-multiple-remove-button").value;
-            var normalPrice = document.getElementById("example-text-input").value;
-            var salePrice = document.getElementById("example-text-input").value;
-            var description = document.getElementById("floatingTextarea2").value;
-            var unitsInStock = document.getElementById("example-text-input").value;
-
-            // Construct data object
-            // var data = {
-            //     productName: productName,
-            //     category: category,
-            //     normalPrice: normalPrice,
-            //     salePrice: salePrice,
-            //     description: description,
-            //     unitsInStock: unitsInStock
-            // };
-
-            // Log data to console
-            // console.log(data);
-
-            // Send data via AJAX
-            // Replace '/your-endpoint' with your actual endpoint URL
-            // fetch('/your-endpoint', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify(data)
-            // })
-            // .then(response => response.json())
-            // .then(data => {
-            //     console.log(data);
-            // })
-            // .catch(error => {
-            //     console.error('Error:', error);
-            // });
-        }
-
-        // Add event listener to the button with id "abc"
-        // document.getElementById("btn_submit").addEventListener("click", handleButtonClick);
-    });
-</script> -->

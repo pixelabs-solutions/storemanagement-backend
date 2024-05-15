@@ -1,15 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>adding a term form</title>
-    <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" /> -->
 <style>
     @import url('https://rsms.me/inter/inter.css');
 
@@ -195,38 +184,3 @@
             label.innerHTML = '<i class="bi bi-image text-black"></i> ' + fileName;
         }
     </script>
-    <!-- input javascript code  -->
-    <!-- <script>
-        var inputCount = 0;
-
-        // Function to add input fields
-        function sms_a_add_input() {
-            inputCount++;
-            var container = document.getElementById('dynamic-input-container');
-            var newInput = document.createElement('div');
-            newInput.classList.add('col-md-12', 'mb-3', 'p-2');
-            newInput.innerHTML = `
-            <div class = 'gx-3'>
-                <div class = ""> 
-                <div class="mb-3 p-2 col-12 rounded-3 d-flex align-items-center justify-content-between " style="background-color: #EAEAEA">
-                <label class="form-label"></label>
-              <label class="form-label">Color change</label>
-               <input type="color" class="form-control p-0 form-control-color" id="example-text-input-${inputCount}" value="#206bc4" title="Choose your color">
-        </div>
-                </div>
-            </div>
-        `;
-            container.appendChild(newInput);
-        }
-
-        // Add one input field when the page loads
-        window.onload = function () {
-            sms_a_add_input();
-        };
-    </script> -->
-
-    <!-- </body>
-<script src="./dist/js/tabler.min.js?1684106062" defer></script>
-<script src="./dist/js/demo.min.js?1684106062" defer></script>
-
-</html> -->

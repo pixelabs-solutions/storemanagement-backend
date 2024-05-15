@@ -221,26 +221,18 @@
 
                             <!-- To add another term click here + -->
                             <div class="text-center mt-4 ">
-<<<<<<< HEAD
-                                <button type="button" id="SMS_MU_ADD_GENERATE_VARIATIONS" onclick="generate_variations()" class=" col-12 col-md-12 fs-3 rounded-3 py-3 border-0 fw-bold" style="background: rgba(73, 135, 216, 0.44); text-align:center !important; padding:0 41%;">Generate Variations </button>
-=======
                                 <button type="button" id="SMS_MU_ADD_GENERATE_VARIATIONS"
                                     onclick="generate_variations()"
                                     class=" col-12 col-md-12 fs-3 rounded-3 py-3 border-0 fw-bold"
                                     style="background: rgba(73, 135, 216, 0.44); text-align:center !important; padding:0 41%;">Generate
                                     Variations </button>
->>>>>>> 55bdca2e2905c1924b9646c3d40d429300dd2031
                             </div>
 
                         </div>
                         <!-- submit button -->
                         <div class="text-center mt-4 ">
-<<<<<<< HEAD
-                            <button type="button" onclick="submit_form()" class=" btn btn-primary col-12 col-md-12 fs-3 rounded-3 py-3 border-0 fw-bold">To
-=======
                             <button type="button" onclick="sms_add_variations_submit()"
                                 class=" btn btn-primary col-12 col-md-12 fs-3 rounded-3 py-3 border-0 fw-bold">To
->>>>>>> 55bdca2e2905c1924b9646c3d40d429300dd2031
                                 add the product click here +</button>
                         </div>
                 </div>
@@ -288,11 +280,7 @@
 <script>
     let selectElement = document.getElementById('IOP');
 
-<<<<<<< HEAD
-    function submit_form() {
-=======
     function sms_add_variations_submit() {
->>>>>>> 55bdca2e2905c1924b9646c3d40d429300dd2031
         console.log("hello")
         // Log all the form values
         var formData = {
@@ -345,33 +333,6 @@
                 dynamicInputValues.push(values);
             }
             //Posting form data
-<<<<<<< HEAD
-            fetch('products/variations', {
-                    method: 'POST',
-                    body: JSON.stringify(formData),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Form data submitted successfully:', data);
-                    // Optionally, you can handle the response data here
-                })
-                .catch(error => {
-                    console.error('Error submitting form data:', error);
-                });
-            // selectBoxes.forEach(selectBox => {
-            //     var values = getSelectedValues(selectBox.id);
-            //     dynamicInputValues.push(values);
-            // });
-        }
-=======
             fetch('product/variations', {
                 method: 'POST',
                 body: JSON.stringify(formData),
@@ -402,19 +363,11 @@
         //     var values = getSelectedValues(selectBox.id);
         //     dynamicInputValues.push(values);
         // });
->>>>>>> 55bdca2e2905c1924b9646c3d40d429300dd2031
         // Add dynamic input values to formData
         dynamicInputValues.forEach((values, index) => {
             formData['Dynamic Input Values ' + (index + 1)] = values;
         });
         console.log(formData);
-<<<<<<< HEAD
-        // You can submit the form programmatically if needed
-        // this.submit();
-        // You can submit the form programmatically if needed
-        // this.submit();
-    }
-=======
     }
 
     // You can submit the form programmatically if needed
@@ -424,7 +377,6 @@
 
 
 
->>>>>>> 55bdca2e2905c1924b9646c3d40d429300dd2031
 
     function getSelectedValues(selectId) {
         var selectedOptions = [];
@@ -438,11 +390,8 @@
         return selectedOptions;
     }
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 55bdca2e2905c1924b9646c3d40d429300dd2031
     function fun_save_changes() {
         let parentDiv = document.getElementById('selectedOptionsDiv');
         if (selectElement.length < 1) {
@@ -540,10 +489,7 @@
 
             const numberInput1 = document.createElement('input');
             numberInput1.text = "Variations"
-<<<<<<< HEAD
             numberInput1.placeholder = "Variations Price"
-=======
->>>>>>> 55bdca2e2905c1924b9646c3d40d429300dd2031
             numberInput1.classList.add('sms_mu_variation_in_combination_input');
             // numberInput.id = 'sms_mu_variation_combination_input';
             numberInput1.type = 'number';

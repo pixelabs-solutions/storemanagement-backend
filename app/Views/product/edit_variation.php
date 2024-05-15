@@ -1,15 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>adding a term form</title>
-    <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" /> -->
 
 <style>
     @import url('https://rsms.me/inter/inter.css');
@@ -398,29 +387,6 @@
         input.nextElementSibling.innerHTML = fileNames;
     }
 </script>
-<!-- <script>
-    function sms_a_edit_product_variations_images() {
-        var input = document.getElementById('sms_A_edit_product_variation_single_iamge');
-        var fileName = input.files[0].name;
-        // Update input label or any other relevant element with the file name
-        input.nextElementSibling.innerHTML = fileName;
-    }
-
-    function sms_a_edit_product_variations_image() {
-        var input = document.getElementById('sms_A_edit_product_variation_multiple_image');
-        var fileNames = "";
-        for (var i = 0; i < input.files.length; i++) {
-            fileNames += input.files[i].name + "<br>";
-        }
-        // Update input label or any other relevant element with the file names
-        input.nextElementSibling.innerHTML = fileNames;
-    }
-</script> -->
-<!-- </body>
-<script src="./dist/js/tabler.min.js?1684106062" defer></script>
-<script src="./dist/js/demo.min.js?1684106062" defer></script>
-
-</html> -->
 
 
 <!--delete modal  -->
