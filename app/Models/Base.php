@@ -326,4 +326,24 @@ class Base
 
         return count($returningCustomers);
     }
+
+    public static function calculate_average_items($store_url, $params)
+    {
+        $client = new Client();
+        $response = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', $params);
+        if ($response->getStatusCode() == 200) {
+            $orders = json_decode($response->getBody(), true);
+            $totalItems = 0;
+            $totalOrders = count($orders);
+            if($totalOrders === 0) return 0;
+            foreach ($orders as $order) {
+                foreach ($order['line_items'] as $line_item) {
+                    $totalItems += $line_item['quantity'];
+                }
+            }
+            $averageItemsPerOrder = $totalItems / $totalOrders;
+            return $averageItemsPerOrder;
+        }
+        return 0;
+    }
 }
