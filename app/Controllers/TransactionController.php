@@ -46,7 +46,7 @@ class TransactionController
 
     public function update_bulk_status()
     {
-        // $result = HttpRequestHelper::validate_request("POST");
+        $result = HttpRequestHelper::validate_request("POST");
         if(!$result["is_data_prepared"])
         {
             echo $result["message"];

@@ -438,27 +438,41 @@ require_once __DIR__ . '/../partials/header.php';
             id = id.replace('#', '');
             selectedIds.push(id);
         });
-console.log(selectedIds);
-        // Make AJAX request
-        $.ajax({
-            url: `/transactions/update_bulk_status`, 
+
+        console.log(selectedIds);
+
+        // Prepare data for POST request
+        var data = {
+            id: selectedIds,
+            status: selectedStatus
+        };
+
+        // Make fetch request
+        fetch('/transactions/update_bulk_status', {
             method: 'POST',
-            data: {
-                id: selectedIds,
-                status: selectedStatus
-            }, 
-            success: function(response) {
-                // Handle success response
-                console.log(response);
+            headers: {
+                'Content-Type': 'application/json'
             },
-            error: function(xhr, status, error) {
-                // Handle error response
-                console.error(error);
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
+            return response.text();
+        })
+        .then(response => {
+            // Handle success response
+            console.log(response);
+        })
+        .catch(error => {
+            // Handle error
+            console.error('There was a problem with the fetch operation:', error);
         });
     });
 });
 </script>
+
 <!-- Libs JS -->
 <script src="./dist/libs/nouislider/dist/nouislider.min.js?1695847769" defer></script>
 <script src="./dist/libs/litepicker/dist/litepicker.js?1695847769" defer></script>
