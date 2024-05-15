@@ -50,7 +50,6 @@ $router->put('/coupons/{id}', [CouponsController::class, 'update']);
 //Customers
 $router->get('/customers', [CustomerController::class, 'index']);
 
-
 //Goals
 $router->get('/goals', [GoalsController::class, 'index']);
 $router->post('/goals/add', [GoalsController::class, 'add']);
