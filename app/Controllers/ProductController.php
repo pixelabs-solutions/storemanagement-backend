@@ -18,7 +18,6 @@ class ProductController
         $categories = Base::wc_get('products/categories');
         $currency = Base::wc_get('data/currencies/current');
         include_once __DIR__ . '/../Views/product/index.php';
-
     }
 
 
