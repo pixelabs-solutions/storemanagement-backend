@@ -15,6 +15,8 @@ class ProductController
     public function index()
     {
         $products = Base::wc_get($this->table_name);
+        $categories = Base::wc_get('products/categories');
+        $currency = Base::wc_get('data/currencies/current');
         include_once __DIR__ . '/../Views/product/index.php';
     }
 
