@@ -16,7 +16,6 @@ class ProductController
     {
         $products = Base::wc_get($this->table_name);
         include_once __DIR__ . '/../Views/product/index.php';
-
     }
 
 
