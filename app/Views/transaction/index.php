@@ -120,8 +120,31 @@ var_dump($transactions);
   .table-spacing {
     border-spacing: 5px;
   }
+
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    /* Gradient background */
+    color: #fff;
+    display: none;
+    z-index: 9999;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Adding shadow for depth */
+  }
+
+  .notification.error {
+    background-color: #c0392b;
+    /* Red color for error */
+  }
 </style>
 <div class="sms_transaction_w  p-0">
+  <div id="notification" class="notification"></div>
+
   <div class=" col-12 mt-5">
     <div class="row row-cards justify-content-sm-between gap-sm-3 gap-2 gap-lg-0 bg-white p-3 m-0 rounded-3">
       <div class="col-sm-5 col-lg-12 m-0 d-flex flex-column flex-sm-row justify-content-between ">
@@ -200,7 +223,7 @@ var_dump($transactions);
               <tr class="sms_mu_tr">
                 <td>
                   <span class="form-check-label"></span>
-                  <input class="form-check-input mx-2" type="checkbox" value="<?php  $item['id']; ?> ">
+                  <input class="form-check-input mx-2" type="checkbox" value="<?php $item['id']; ?> ">
                   </label>
                 </td>
                 <td id="transaction_id"><?php echo "#" . $item['id']; ?> </td>
@@ -286,24 +309,35 @@ var_dump($transactions);
 <script>
 
 
+const viewOrderDetailsButtons = document.querySelectorAll('.view_order_details');
 
-  const viewOrderDetailsButtons = document.querySelectorAll('.view_order_details');
-
-  viewOrderDetailsButtons.forEach(button => {
+viewOrderDetailsButtons.forEach(button => {
     button.addEventListener('click', handleOrderDetailsClick);
-  });
+});
 
-  function handleOrderDetailsClick(event) {
+function handleOrderDetailsClick(event) {
     const clickedButton = event.currentTarget; // Get the clicked element
     const transactionId = clickedButton.dataset.transactionId; // Access data attribute
 
-    // Use the transactionId value as needed
-    console.log("Transaction ID:", transactionId);
-    // You can perform actions like opening a modal or making an AJAX request
-  }
-
-
-
+    // Make an AJAX request to fetch data for the transaction ID
+    fetch(`/transactions/${transactionId}`)
+        .then(response => {
+            if (response.ok) {
+                return response.json(); // Parse response body as JSON
+            } else {
+                throw new Error('Failed to fetch order details');
+            }
+        })
+        .then(data => {
+            // Handle the retrieved data
+            console.log("Order Details:", data);
+            // You can now use the data to populate a modal or display it in some way
+        })
+        .catch(error => {
+            // Handle errors
+            console.error('Error fetching order details:', error);
+        });
+}
   // Function to set the color of status dynamically
   function setStatusColor() {
     // Get all elements with class 'status'
@@ -419,58 +453,71 @@ var_dump($transactions);
   });
 </script>
 <script>
-  $(document).ready(function() {
+  function showNotification(message, isError = false) {
+    var notificationElement = document.getElementById("notification");
+    notificationElement.textContent = message;
+
+    if (isError) {
+      notificationElement.classList.add("error");
+    } else {
+      notificationElement.classList.remove("error");
+    }
+
+    notificationElement.style.display = "block";
+    setTimeout(function () {
+      notificationElement.style.display = "none";
+    }, 3000); // Hide notification after 3 seconds
+  }
+  $(document).ready(function () {
     // Event listener for checkbox changes
-    $('input[type="checkbox"]').change(function() {
-        // Handle checkbox change event here
-        // You can track which rows are selected and perform actions accordingly
+    $('input[type="checkbox"]').change(function () {
+      // Handle checkbox change event here
+      // You can track which rows are selected and perform actions accordingly
     });
 
     // Event listener for select changes
-    $('#sms_m_form_select').change(function() {
-        var selectedStatus = $(this).val();
-        var selectedIds = [];
+    $('#sms_m_form_select').change(function () {
+      var selectedStatus = $(this).val();
+      var selectedIds = [];
 
-        // Gather IDs of selected rows
-        $('input[type="checkbox"]:checked').each(function() {
-            var id = $(this).closest('tr').find('#transaction_id').text();
-            // Remove '#' from the id
-            id = id.replace('#', '');
-            selectedIds.push(id);
-        });
+      // Gather IDs of selected rows
+      $('input[type="checkbox"]:checked').each(function () {
+        var id = $(this).closest('tr').find('#transaction_id').text();
+        // Remove '#' from the id
+        id = id.replace('#', '');
+        selectedIds.push(id);
+      });
 
-        console.log(selectedIds);
+      console.log(selectedIds);
 
-        // Prepare data for POST request
-        var data = {
-            id: selectedIds,
-            status: selectedStatus
-        };
+      // Prepare data for POST request
+      var data = {
+        id: selectedIds,
+        status: selectedStatus
+      };
 
-        // Make fetch request
-        fetch('/transactions/update_bulk_status', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
+      // Make fetch request
+      fetch('/transactions/update_bulk_status', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.text();
-        })
-        .then(response => {
-            // Handle success response
-            console.log(response);
+          if (response.status === 200) {
+            showNotification("Bulk status updated successfully");
+            window.location.reload(); // Reload the page after successful update
+          } else {
+            showNotification("Failed to update bulk status", true);
+          }
         })
         .catch(error => {
-            // Handle error
-            console.error('There was a problem with the fetch operation:', error);
+          // Handle error
+          showNotification("Error occurred: " + error, true);
         });
     });
-});
+  });
 </script>
 
 <!-- Libs JS -->

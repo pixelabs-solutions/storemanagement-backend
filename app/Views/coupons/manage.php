@@ -99,7 +99,7 @@
                             <div class="col-md-4 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">The amount
                                     of the discount </label>
-                                <input type="text" class="form-control rounded-3 p-3 fw-bold"
+                                <input type="number" class="form-control rounded-3 p-3 fw-bold"
                                     style="background-color: #EAEAEA" placeholder="" id="sms_amount_of_the_discount">
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                             <div class="col-md-6 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Usage limit
                                     (leave blank without limit) </label>
-                                <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_Usage_limit"
+                                <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_Usage_limit"
                                     style="background-color: #EAEAEA" placeholder="key chain">
                             </div>
 
@@ -127,8 +127,12 @@
 
                 </div>
                 </form>
-                <div class="modal-body text-center py-4 sms_manage_pop" id="success-message" style="display: none;">
-                    <!-- SVG icon -->
+                <div class="modal-body text-center py-4 sms_manage_pop" id="sms_add_coupons_success-message" style="display: none;">
+                <!-- Close icon -->
+
+                <button type="button" class="btn-close" aria-label="Close"
+                            onclick="sms_add_coupons_close_success_message()"></button>   
+                <!-- SVG icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24"
                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -139,8 +143,11 @@
                     <h3>Success</h3>
                     <div class="text-muted">Your coupon data has been submitted successfully.</div>
                 </div>
-                <div class="modal-body text-center py-4 sms_manage_pop" id="error-message" style="display: none;">
-                    <!-- SVG icon -->
+                <div class="modal-body text-center py-4 sms_manage_pop" id="sms_add_coupons_error-message" style="display: none;">
+                 <!-- Close icon -->
+                 <button type="button" class="btn-close" aria-label="Close"
+                            onclick="sms_add_coupous_close_error_message()"></button>    
+                <!-- SVG icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24"
                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -186,21 +193,27 @@ function sms_meh_couponmanage_data() {
         console.log(response);
         if (response.status === 201) {
             // Form submission succeeded, display success message
-            document.getElementById('success-message').style.display = 'block';
-            document.getElementById('error-message').style.display = 'none'; 
+            document.getElementById('sms_add_coupons_success-message').style.display = 'block';
+            document.getElementById('sms_add_coupons_error-message').style.display = 'none'; 
             window.location.reload();
         } else {
             // Form submission failed, display error message
-            document.getElementById('error-message').style.display = 'block';
-            document.getElementById('success-message').style.display = 'none'; // Hide success message if it was displayed before
+            document.getElementById('sms_add_coupons_error-message').style.display = 'block';
+            document.getElementById('sms_add_coupons_success-message').style.display = 'none'; // Hide success message if it was displayed before
         }
     })
     .catch(error => {
         // Network error occurred, display error message
-        document.getElementById('error-message').style.display = 'block';
+        document.getElementById('sms_add_coupons_error-message').style.display = 'block';
         console.error('Error submitting form data:', error);
     });
 }
+function sms_add_coupons_close_success_message() {
+            document.getElementById('sms_add_coupons_success-message').style.display = 'none';
+        }
 
+        function sms_add_coupous_close_error_message() {
+            document.getElementById('sms_add_coupons_error-message').style.display = 'none';
+        }
 
 </script>
