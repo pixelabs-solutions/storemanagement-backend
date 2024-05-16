@@ -28,9 +28,27 @@ class ProductController
             }
             $products = $filteredProducts;
         }
+
+        if(isset($_GET['inventory_from']) && $_GET['inventory_from'] !== "" &&
+            isset($_GET['inventory_to']) && $_GET['inventory_to'] !== "")
+            {
+                $inventory_from = intval($_GET['inventory_from']);
+                $inventory_to = intval($_GET['inventory_to']);
+                $filteredProducts = [];
+                foreach ($products as $product) {
+                    if(isset($product['stock_quantity']) && is_numeric($product['stock_quantity'])) {
+                        $stock_quantity = intval($product['stock_quantity']);
+                        if ($stock_quantity >= $inventory_from && $stock_quantity <= $inventory_to) {
+                            $filteredProducts[] = $product;
+                        }
+                    }
+                }
+                $products = $filteredProducts;
+            }
         $categories = Base::wc_get('products/categories');
         $currency = Base::wc_get('data/currencies/current');
         $number_of_products = Product::get_products_count();
+        // var_dump($products);
         include_once __DIR__ . '/../Views/product/index.php';
     }
 
