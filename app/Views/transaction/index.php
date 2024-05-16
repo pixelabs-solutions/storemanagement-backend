@@ -309,24 +309,35 @@ var_dump($transactions);
 <script>
 
 
+const viewOrderDetailsButtons = document.querySelectorAll('.view_order_details');
 
-  const viewOrderDetailsButtons = document.querySelectorAll('.view_order_details');
-
-  viewOrderDetailsButtons.forEach(button => {
+viewOrderDetailsButtons.forEach(button => {
     button.addEventListener('click', handleOrderDetailsClick);
-  });
+});
 
-  function handleOrderDetailsClick(event) {
+function handleOrderDetailsClick(event) {
     const clickedButton = event.currentTarget; // Get the clicked element
     const transactionId = clickedButton.dataset.transactionId; // Access data attribute
 
-    // Use the transactionId value as needed
-    console.log("Transaction ID:", transactionId);
-    // You can perform actions like opening a modal or making an AJAX request
-  }
-
-
-
+    // Make an AJAX request to fetch data for the transaction ID
+    fetch(`/transactions/${transactionId}`)
+        .then(response => {
+            if (response.ok) {
+                return response.json(); // Parse response body as JSON
+            } else {
+                throw new Error('Failed to fetch order details');
+            }
+        })
+        .then(data => {
+            // Handle the retrieved data
+            console.log("Order Details:", data);
+            // You can now use the data to populate a modal or display it in some way
+        })
+        .catch(error => {
+            // Handle errors
+            console.error('Error fetching order details:', error);
+        });
+}
   // Function to set the color of status dynamically
   function setStatusColor() {
     // Get all elements with class 'status'
@@ -453,8 +464,8 @@ var_dump($transactions);
     }
 
     notificationElement.style.display = "block";
-    setTimeout(function() {
-        notificationElement.style.display = "none";
+    setTimeout(function () {
+      notificationElement.style.display = "none";
     }, 3000); // Hide notification after 3 seconds
   }
   $(document).ready(function () {
