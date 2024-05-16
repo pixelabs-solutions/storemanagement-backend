@@ -68,8 +68,7 @@
                                 <div class="-5" style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                     <div class="col-md-12 rounded-4 bg-transparent h-100 ">
                                         <select id="category_in_popoupop" multiple style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
-                                            <option value="NOSQL">Bags</option>
-                                            <option value="NodeJS">List</option>
+                                          
                                         </select>
                                         <span class="span_div">
                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -260,6 +259,7 @@
         modal.addEventListener('show.bs.modal', function(event) {
             var button = event.relatedTarget; // Button that triggered the modal
             var productJson = button.getAttribute('data-bs-productJson'); // Product data passed from the button
+            var parentCategoriesData = button.getAttribute('data-bs-categoriesJson'); // Product data passed from the button
 
             try {
                 // Convert the JSON string to JavaScript object
@@ -274,6 +274,36 @@
             } catch (error) {
                 console.error('Error parsing JSON:', error);
             }
+
+            var parentCategories_json = JSON.parse(parentCategoriesData);
+            var selectElement = document.getElementById('category_in_popoupop');
+            selectElement.innerHTML = '';
+            var productcategorys = productData.categories;
+            parentCategories_json.forEach(function(category) {
+                    var option = document.createElement('option');
+                    option.value = category.id; // Assuming category.id contains the ID
+                    option.text = category.name; // Assuming category.text contains the text
+                    productcategorys.forEach(function(productcategory) {
+                    if(productcategory['id'] == category.id)
+                    {
+                        option.selected = true;
+                        console.log("SADSAD");
+                    }
+                });
+                    selectElement.appendChild(option);
+                });
+
+                $(document).ready(function() {
+
+var multipleCancelButton = new Choices('#category_in_popoupop', {
+   removeItemButton: true,
+   maxItemCount: 5,
+   searchResultLimit: 5,
+   renderChoiceLimit: 5
+});
+
+
+});
         });
     });
 </script>
@@ -310,5 +340,5 @@
             modal.setAttribute('aria-modal', 'false');
             modal.setAttribute('aria-hidden', 'true');
         }
-    }
+    }  
 </script>
