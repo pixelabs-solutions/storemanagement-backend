@@ -778,17 +778,7 @@
 
 
             });
-            $(document).ready(function() {
-
-               var multipleCancelButton = new Choices('#category_in_popoupop', {
-                  removeItemButton: true,
-                  maxItemCount: 5,
-                  searchResultLimit: 5,
-                  renderChoiceLimit: 5
-               });
-
-
-            });
+          
             $(document).ready(function() {
 
                var multipleCancelButton = new Choices('#IOP', {
