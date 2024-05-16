@@ -137,7 +137,7 @@
               <label for="statusSelect" class="form-label fs-3 fw-bold"
                 data-i18n="popoups.transction_pop_popuop.order_detail.order_status">Change order status</label>
               <select class="form-select form-select-lg h-80" id="order_status" style="background-color:#f5f5f5;">
-                <option value="complete">Complete</option>
+                <option value="completed">Complete</option>
                 <option value="pending">In Treatment</option>
                 <option value="cancelled">Cancelled</option>
 

@@ -1,7 +1,7 @@
 <?php
 
 namespace Pixelabs\StoreManagement\Models;
-use Pixelabs\Storemanagement\Models\Authentication;
+use Pixelabs\StoreManagement\Models\Authentication;
 
 class Goal
 {
@@ -33,7 +33,7 @@ class Goal
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $connection->prepare($query);
         if ($stmt === false) {
-            die('MySQL prepare error: ' . $conconnection->error);
+            die('MySQL prepare error: ' . $connection->error);
         }
 
         $new_orders_target = $data['new_orders_target'];
@@ -142,6 +142,7 @@ class Goal
     public static function get_goals_target(){
         global $connection;
         $user_id = Authentication::getUserId();
+        
         $sql = "SELECT * FROM `goals` WHERE user_id = ?";
         $stmt = $connection->prepare($sql);
 

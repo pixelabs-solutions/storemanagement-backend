@@ -28,7 +28,7 @@ class GoalsController
 
 
         $result = Goal::add($data);
-        echo $result;
+        // echo $result;
     }
 
     public function put()
