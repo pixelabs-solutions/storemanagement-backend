@@ -15,8 +15,22 @@ class ProductController
     public function index()
     {
         $products = Base::wc_get($this->table_name);
+        if(isset($_GET['category']) && $_GET['category'] !== "")
+        {
+            $category = $_GET['category'];
+            $filteredProducts = [];
+            foreach ($products as $product) {
+                $categories = $product['categories'];
+                $categorySlugs = array_column($categories, 'id');
+                if (in_array($category, $categorySlugs)) {
+                    $filteredProducts[] = $product;
+                }
+            }
+            $products = $filteredProducts;
+        }
         $categories = Base::wc_get('products/categories');
         $currency = Base::wc_get('data/currencies/current');
+        $number_of_products = Product::get_products_count();
         include_once __DIR__ . '/../Views/product/index.php';
     }
 
