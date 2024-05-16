@@ -255,6 +255,31 @@
 
 
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modal = document.getElementById('edit-regular-modal-full-width');
+        modal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget; // Button that triggered the modal
+            var productJson = button.getAttribute('data-bs-productJson'); // Product data passed from the button
+
+            try {
+                // Convert the JSON string to JavaScript object
+                var productData = JSON.parse(productJson);
+
+                // Access the modal content element
+                document.getElementById('sms_mu_Ip_one').value = productData.name;;
+                document.getElementById('sms_mu_Ip_four').value = productData.regular_price;;
+                document.getElementById('sms_mu_Ip_five').value = productData.sale_price;;
+                document.getElementById('sms_mu_Ip_seven').value = productData.stock_quantity;;
+                document.getElementById('sms_mu_Ip_six').value  =  productData.description.replace(/<[^>]*>/g, '');
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+            }
+        });
+    });
+</script>
+
+
+<script>
     // Function to open the modal
     function openModal(modalId) {
         // Select the modal using the provided ID
