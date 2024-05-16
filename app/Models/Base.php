@@ -327,23 +327,26 @@ class Base
         return count($returningCustomers);
     }
 
-    public static function calculate_average_items($store_url, $params)
+    public static function calculate_raise_in_orders($store_url, $params)
     {
         $client = new Client();
         $response = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', $params);
         if ($response->getStatusCode() == 200) {
             $orders = json_decode($response->getBody(), true);
             $totalItems = 0;
+            $totalPrice = 0;
             $totalOrders = count($orders);
-            if($totalOrders === 0) return 0;
+            if($totalOrders === 0) return ['average_items' => 0, 'average_price' => 0];
             foreach ($orders as $order) {
                 foreach ($order['line_items'] as $line_item) {
                     $totalItems += $line_item['quantity'];
                 }
+                $totalPrice += $order['total'];
             }
             $averageItemsPerOrder = $totalItems / $totalOrders;
-            return $averageItemsPerOrder;
+            $averageOrderPrice = $totalPrice / $totalOrders;
+            return ['average_items' => $averageItemsPerOrder, 'average_price' => $averageOrderPrice];
         }
-        return 0;
+        return ['average_items' => 0, 'average_price' => 0];
     }
 }

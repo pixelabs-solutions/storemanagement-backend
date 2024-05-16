@@ -11,8 +11,7 @@ class GoalsController
 {
     public function index()
     {
-        $data = Base::get_all("goals");
-        // print_r($data);
+        $goals_data = Goal::get_goals();
         include_once __DIR__ . '/../Views/goals/index.php';
     }
 
@@ -47,13 +46,4 @@ class GoalsController
         $result = Goal::update($data);
         echo $result;
     }
-
-    public function all()
-    {
-        
-        $totalRevenue = Goal::get_goals();
-        print_r($totalRevenue);
-        
-    }
-
 }

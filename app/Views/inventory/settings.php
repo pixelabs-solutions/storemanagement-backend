@@ -122,17 +122,18 @@ $woocommerce_notify_no_stock_ischecked = ($woocommerce_notify_no_stock_value ===
                 </div>
             </div>
             <div class="row mt-5 justify-content-end ">
-                <div type="button" onclick="sms_inventory_submit_Form()"
+             
+
+            </div>
+        </div>
+    </form>
+    <div type="button" onclick="sms_inventory_submit_Form()"
                     class="rounded-3 rounded-4 d-flex gap-2 border-0  justify-content-center align-items-center last w-auto"
                     style="background: rgba(73, 135, 216, 0.44);">
                     <p class="fs-2 py-3 m-0 align-items-center fw-bold"
                         >Updating and saving inventory
                         settings →</p>
                 </div>
-
-            </div>
-        </div>
-    </form>
 </div>
 
 
@@ -156,12 +157,12 @@ $woocommerce_notify_no_stock_ischecked = ($woocommerce_notify_no_stock_value ===
 
 function sms_inventory_submit_Form() {
     var formData = {
-        'enableInventoryManagement': document.getElementById('flexSwitchCheckDefault').checked,
-        'lowStockAlert': document.getElementById('flexSwitchCheckDefault2').checked,
-        'outOfStockAlert': document.getElementById('flexSwitchCheckDefault3').checked,
-        'emailAddress': document.getElementById('emailAddress').value,
-        'lowStockThreshold': document.getElementById('lowStockThreshold').value,
-        'outOfStockThreshold': document.getElementById('outOfStockThreshold').value
+        'woocommerce_manage_stock': document.getElementById('flexSwitchCheckDefault').checked,
+        'woocommerce_notify_low_stock': document.getElementById('flexSwitchCheckDefault2').checked,
+        'woocommerce_notify_no_stock': document.getElementById('flexSwitchCheckDefault3').checked,
+        'woocommerce_stock_email_recipient': document.getElementById('emailAddress').value,
+        'woocommerce_notify_low_stock_amount': document.getElementById('lowStockThreshold').value,
+        'woocommerce_notify_no_stock_amount': document.getElementById('outOfStockThreshold').value
     };
 
     // Log form data to console
@@ -179,7 +180,7 @@ function sms_inventory_submit_Form() {
         if (response.ok) {
             // Form submission succeeded, display success message
             showNotification("Inventory Setting  Submitted successfully");
-            window.location.reload();
+            // window.location.reload();
         } else {
             // Form submission failed, display error message
             showNotification("Inventory Setting  submission failed", true);

@@ -155,7 +155,8 @@ class Goal
             $data = $result->fetch_assoc();
             $stmt->close();
             return $data;
-        } else {
+        }
+        else {
             $stmt->close();
             throw new Exception("Failed to execute the SQL statement: " . $connection->error);
         }                                                                   
@@ -180,13 +181,12 @@ class Goal
             'before' => $end->format('Y-m-d') . 'T23:59:59'
         ];
 
-        echo "Parameters for current month: ".json_encode($params);
         $goals = self::get_goals_target();
         $totalRevenue = Base::get_total_revenue($data["store_url"], $params);
         $new_customers = Base::get_new_customers_count($data["store_url"], $params);
         $orders = Base::get_number_of_orders($data["store_url"], $params);
         $products = Base::get_number_of_products($data["store_url"], $params);
-        $current_month_average_orders = Base::calculate_average_items($data["store_url"], $params);
+        $current_month_raise_in_orders = Base::calculate_raise_in_orders($data["store_url"], $params);
 
         //Modify date parameter for last month
         $start->modify('first day of last month');
@@ -194,8 +194,15 @@ class Goal
         $params['after'] = $start->format('Y-m-d') . 'T00:00:00';
         $params['before'] = $end->format('Y-m-d') . 'T23:59:59';
 
-        $previous_month_average_orders = Base::calculate_average_items($data["store_url"], $params);
+        $previous_month_raise_in_average_orders = Base::calculate_raise_in_orders($data["store_url"], $params);
 
+        $current_month_average_items = $current_month_raise_in_orders['average_items'];
+        $previous_month_average_items = $previous_month_raise_in_average_orders['average_items'];
+        $current_month_average_price = $current_month_raise_in_orders['average_price'];
+        $previous_month_average_price = $previous_month_raise_in_average_orders['average_price'];
+
+        $raise_in_average_items = (($current_month_average_items - $previous_month_average_items)/$previous_month_average_items)*100;
+        $raise_in_average_price = (($current_month_average_price - $previous_month_average_price)/$previous_month_average_price)*100;
         $goals_data = [
             "orders" => [
                 "target" => $goals['sales_revenue_target'],
@@ -223,10 +230,12 @@ class Goal
                 "target" => $goals['page_views_target']
             ],
             "avg_order_value_increase" => [
-                "target" => $goals['avg_order_value_increase_target']
+                "target" => $goals['avg_order_value_increase_target'],
+                "rasie_in_average_price" => $raise_in_average_price
             ],
             "avg_order_items_increase" => [
-                "target" => $goals['avg_order_items_increase_target']
+                "target" => $goals['avg_order_items_increase_target'],
+                "rasie_in_average_items" => $raise_in_average_items
             ]
         ];
 

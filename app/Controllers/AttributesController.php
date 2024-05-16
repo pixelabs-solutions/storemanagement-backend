@@ -12,7 +12,7 @@ class AttributesController
     public function index()
     {
         $attributes = Base::wc_get($this->endpoint);
-        //include_once __DIR__ . '/../Views/coupons/index.php';
+        include_once __DIR__ . '/../Views/product/index.php';
         echo $attributes;
     }
 

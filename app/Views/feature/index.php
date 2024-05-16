@@ -1,4 +1,7 @@
+<?php
+        var_dump($attributes);
 
+?>
 <style>
   @media only screen and (max-width:1000px) {
     .sms_mu_table {

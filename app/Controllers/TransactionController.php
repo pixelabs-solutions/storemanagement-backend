@@ -12,7 +12,7 @@ class TransactionController
     public function index()
     {
         $transactions = Base::wc_get("orders");
-        var_dump($transactions);
+        // var_dump($transactions);
         include_once __DIR__ . '/../Views/transaction/index.php';
     }
 
