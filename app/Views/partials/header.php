@@ -41,6 +41,13 @@
          border: none !important;
       }
 
+      .choices[data-type*=select-multiple] .choices__inner,
+      .choices[data-type*=text] .choices__inner {
+         cursor: text;
+         overflow: auto;
+         height: 100%;
+      }
+
       .choices__input {
          background-color: transparent;
       }
@@ -330,14 +337,13 @@
                                  </clipPath>
                               </defs>
                            </svg>
-
                         </span>
                         <span class="nav-link-title" data-i18n="header.desktop">
                            Desktop
                         </span>
                      </a>
                   </li>
-                     <!-- <li class="nav-item" id="sms_e_products"('sms_e_products')">
+                  <!-- <li class="nav-item" id="sms_e_products"('sms_e_products')">
                                  <a class="nav-link" href="./products.php" >
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -356,7 +362,7 @@
                                     </span>
                                  </a>
                           </li> -->
-                                 <!-- 
+                  <!-- 
                                              <li class="nav-item dropdown">
                                                    <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="false">
                                                       <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -778,7 +784,7 @@
 
 
             });
-          
+
             $(document).ready(function() {
 
                var multipleCancelButton = new Choices('#IOP', {

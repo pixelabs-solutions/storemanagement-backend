@@ -10,6 +10,10 @@
                 cursor: pointer;
             }
 
+            /* td{
+            width: 0 !important;
+            height: 0 !important;
+           } */
             .sms_mu_spacing_diver {
                 height: 20px;
                 background-color: white !important;
@@ -33,8 +37,11 @@
                     border: 0 !important;
                 }
 
-                .sms_product_img img {
-                    width: 85% !important;
+               .sms_mu_tr_product .sms_mu_product_img{
+                    /* width:  !important;
+                    height: 61px; */
+                    max-width:70px !important;
+                    margin: 2px;
                 }
 
                 .sms_mu_tr_product {
@@ -62,6 +69,9 @@
 
             }
 
+            /* .sms_mu_table_product{
+
+                    } */
             @media only screen and (max-width:1000px) {
                 .sms_mu_btns_filter {
                     display: block !important;
@@ -145,42 +155,37 @@
                         <div class="sms_mu_main_bg_white position-relative  ">
 
                             <table class="sms_mu_table_product rounded-4" id='sms_products_m_products_table'>
-                            <?php 
+                                <?php
                                 $i = 0;
                                 foreach ($categories as $category) {
                                     $parentCategories_array[$i]['id'] = $category['id'];
                                     $parentCategories_array[$i]['name'] = $category['name'];
-                                    if($category['parent'] != 0)
-                                    {
-                                    $parentCategories_array[$i]['parent'] = $category['parent'];
-                                    }
-                                    else{
-                                    $parentCategories_array[$i]['parent'] = "-";
+                                    if ($category['parent'] != 0) {
+                                        $parentCategories_array[$i]['parent'] = $category['parent'];
+                                    } else {
+                                        $parentCategories_array[$i]['parent'] = "-";
                                     }
                                     if (isset($category['image']['src'])) {
                                         $parentCategories_array[$i]['src'] = $category['image']['src'];
-                                      } else {
+                                    } else {
                                         $parentCategories_array[$i]['src'] = "https://placehold.co/400x400?text=No%20Image%20Found";
-                                      }
-                                    
+                                    }
+
                                     $parentCategories_json = json_encode($parentCategories_array);
                                     $i++;
-                                }?>
-                            <?php foreach ($products as $product) {
+                                } ?>
+                                <?php foreach ($products as $product) {
                                     $product_json = json_encode($product);
                                     if ($product['type'] == 'simple') {
-                                        if(isset($product['images'][0]['src']))
-                                        {
-                                           $prodimage = $product['images'][0]['src'];
-                                        }
-                                        else
-                                        {
+                                        if (isset($product['images'][0]['src'])) {
+                                            $prodimage = $product['images'][0]['src'];
+                                        } else {
                                             $prodimage = "https://placehold.co/400x400?text=No%20Image%20Found";
                                         }
-                                        ?>
+                                ?>
                                         <tr class="sms_mu_tr_product">
                                             <td>
-                                                <img class="sms_product_img" height="100px" width="100px" src="<?php echo $prodimage; ?>" alt="">
+                                                <img class="sms_mu_product_img" src="<?php echo $prodimage; ?>" alt="">
                                             </td>
                                             <td class=""><span style="font-weight:bold">Product name:</span> <?php echo $product['name']; ?></td>
                                             <td><span style="font-weight:bold">Category:</span>

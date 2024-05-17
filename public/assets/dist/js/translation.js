@@ -2,7 +2,7 @@
 const translations = {
     "en":   {
         "header":{
-        "desktop":"desktop",
+        "desktop":"adesktop",
         "product":"product",
         "product_managment":"Product Managment",
         "Inventory_setting":"Inventory Settings",

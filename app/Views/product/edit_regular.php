@@ -9,7 +9,7 @@
     body {
         font-feature-settings: "cv03", "cv04", "cv11";
     }
-
+    
     .rtl {
         direction: rtl;
     }
@@ -67,8 +67,7 @@
                                 </label>
                                 <div class="-5" style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                     <div class="col-md-12 rounded-4 bg-transparent h-100 ">
-                                        <select id="category_in_popoupop" multiple style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
-                                          
+                                        <select id="category_in_popoupop" multiple style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">       
                                         </select>
                                         <span class="span_div">
                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -255,6 +254,8 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        let count = 0;
+
         var modal = document.getElementById('edit-regular-modal-full-width');
         modal.addEventListener('show.bs.modal', function(event) {
             var button = event.relatedTarget; // Button that triggered the modal
@@ -292,18 +293,18 @@
                 });
                     selectElement.appendChild(option);
                 });
+if(count <1){
+   
 
-                $(document).ready(function() {
-
-var multipleCancelButton = new Choices('#category_in_popoupop', {
+let multipleCancelButton = new Choices('#category_in_popoupop', {
    removeItemButton: true,
    maxItemCount: 5,
    searchResultLimit: 5,
    renderChoiceLimit: 5
 });
-
-
-});
+count ++;
+}
+              
         });
     });
 </script>
