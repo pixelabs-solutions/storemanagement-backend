@@ -136,8 +136,8 @@
             <div class="col-md-4 justify-content-center mt-3 ">
               <label for="statusSelect" class="form-label fs-3 fw-bold"
                 data-i18n="popoups.transction_pop_popuop.order_detail.order_status">Change order status</label>
-              <select class="form-select form-select-lg h-80" id="order_status" style="background-color:#f5f5f5;">
-                <option value="complete">Complete</option>
+              <select class="form-select form-select-lg h-80" id="order_status_view" style="background-color:#f5f5f5;">
+                <option value="completed">Complete</option>
                 <option value="pending">In Treatment</option>
                 <option value="cancelled">Cancelled</option>
 
@@ -220,7 +220,8 @@
           <!-- save button -->
 
           <div class="mt-4 ">
-            <button type="submit" style="background-color: rgba(73, 135, 216, 0.44); width: 100%; max-width: 200px;"
+            <button type="button" style="background-color: rgba(73, 135, 216, 0.44); width: 100%; max-width: 200px;"
+            id="set_order_detail"
               class="btn rounded-4 py-3" data-i18n="popoups.transction_pop_popuop.order_detail.last_btn">Save
               changes</button>
           </div>
@@ -321,39 +322,70 @@
       order_status_select.value = "pending";
     }
   }
-  // const clickedSpan = document.querySelector('#view_order_details'); // Assuming the span triggers the modal
-
-  // clickedSpan.addEventListener('click', () => {
-  //   const clickedSpanId = clickedSpan.dataset.transactionId; // Use data-transaction-id attribute
-
-  //   // Initialize a variable to hold the order data
-  //   var selectedOrder = null;
-
-  //   // Iterate through the orders array to find the order with the matching ID
-  //   for (var i = 0; i < transaction.length; i++) {
-  //     if (transaction[i].id === clickedSpanId) {
-  //       selectedOrder = transaction[i];
-  //       break; // Exit the loop once the matching order is found
-  //     }
-  //   }
-
-  //   // Now selectedOrder contains the data of the order with the matching ID
-  //   console.log(selectedOrder);
-  // });
 
 
-  // const viewOrderDetailsButton = document.querySelector('.view_order_details');
+</script>
+<script>
+  function showNotification(message, isError = false) {
+    var notificationElement = document.getElementById("notification");
+    notificationElement.textContent = message;
 
-  // viewOrderDetailsButton.addEventListener('click', handleOrderDetailsClick);
+    if (isError) {
+      notificationElement.classList.add("error");
+    } else {
+      notificationElement.classList.remove("error");
+    }
 
-  // function handleOrderDetailsClick(event) {
-  //   const clickedButton = event.currentTarget; // Get the clicked element
-  //   const transactionId = clickedButton.dataset.transactionId; // Access data attribute
+    notificationElement.style.display = "block";
+    setTimeout(function () {
+      notificationElement.style.display = "none";
+    }, 3000); // Hide notification after 3 seconds
+  }
+  $(document).ready(function () {
+    // Event listener for checkbox changes
+    $('input[type="checkbox"]').change(function () {
+      // Handle checkbox change event here
+      // You can track which rows are selected and perform actions accordingly
+    });
 
-  //   // Use the transactionId value as needed
-  //   console.log("Transaction ID:", transactionId);
-  //   // You can perform actions like opening a modal or making an AJAX request
-  // }
+    // Event listener for select changes
+    $('#set_order_detail').click(function () {
+
+   let id = document.getElementById("order_id").innerHTML ;
+   let selectedStatus = document.getElementById("order_status_view").value;
+
+
+      console.log(id);
+
+      // Prepare data for POST request
+      var data = {
+        id: id,
+        status: selectedStatus
+      };
+
+      // Make fetch request
+      fetch(`/transactions/update_status/${id}`, {
+        method: 'PUT',  
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => {
+          if (response.status === 200) {
+            showNotification("Bulk status updated successfully");
+            window.location.reload(); // Reload the page after successful update
+          } else {
+            showNotification("Failed to update bulk status", true);
+          }
+        })
+        .catch(error => {
+          // Handle error
+          showNotification("Error occurred: " + error, true);
+        });
+    });
+  });
+
 
 
 </script>
