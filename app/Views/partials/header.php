@@ -1,12 +1,5 @@
 <!doctype html>
-<!--
-* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
-* @version 1.0.0-beta19
-* @link https://tabler.io
-* Copyright 2018-2023 The Tabler Authors
-* Copyright 2018-2023 codecalm.net Paweł Kuna
-* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
--->
+
 
 
 <html lang="en">
@@ -307,6 +300,7 @@
 </head>
 
 <body id="myDiv" class="abc">
+   
    <script src="assets/dist/js/demo-theme.min.js?1684106062"></script>
    <div class="page">
       <!-- Sidebar -->
@@ -343,6 +337,7 @@
                         </span>
                      </a>
                   </li>
+<<<<<<< HEAD
                   <!-- <li class="nav-item" id="sms_e_products"('sms_e_products')">
                                  <a class="nav-link" href="./products.php" >
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -390,6 +385,9 @@
                                        </div>
                                     </div>
                   </li> -->
+=======
+                    
+>>>>>>> ea31c83adc34bb170e377871ab48b6fa9d4e7eca
                   <li class="nav-item  dropdown m-0">
                      <a class="nav-link dropdown-toggle " id="sms_w_dropdown_title" href="#navbar-layout" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="true">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -859,3 +857,5 @@
                }
             }
          </script>
+
+         
