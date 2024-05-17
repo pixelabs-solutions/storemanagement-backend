@@ -85,7 +85,10 @@ class Base
         try 
         {
             $response = $client->request('GET', $store_url . '/wp-json/wc/v3/'.$endpoint, [
-                'auth' => [$consumer_key, $consumer_secret]
+                'auth' => [$consumer_key, $consumer_secret],
+                'query' => [
+                    'per_page' => 100
+                ]
             ]);
             
             return json_decode($response->getBody(), true);

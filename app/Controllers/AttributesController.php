@@ -13,7 +13,6 @@ class AttributesController
     {
         $attributes = Base::wc_get($this->endpoint);
         include_once __DIR__ . '/../Views/product/index.php';
-        echo $attributes;
     }
 
     public function get($id)

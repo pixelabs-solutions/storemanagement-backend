@@ -78,9 +78,9 @@
 
 <?php
 if (
-    isset($data[0]['sales_revenue_target']) || isset($data[0]['new_customers_target']) || isset($data[0]['new_orders_target'])
-    || isset($data[0]['target_keywords']) || isset($data[0]['google_rankings_target']) || isset($data[0]['page_views_target']) ||
-    isset($data[0]['new_products_target']) || isset($data[0]['avg_order_items_increase_target']) || isset($data[0]['avg_order_value_increase_target'])
+    isset($goals_data["orders"]['target']) || isset($goals_data["new_customers"]['target']) || isset($goals_data["new_orders"]['target'])
+    || isset($goals_data["keywords"]['target']) || isset($goals_data["google_rankings"]['target']) || isset($goals_data["page_views"]['target']) ||
+    isset($goals_data["new_products"]['target']) || isset($goals_data["avg_order_items_increase"]['target']) || isset($goals_data["avg_order_value_increase"]['target'])
 ) {
     $goals_update_or_delete = 'update';
 } else {
@@ -97,55 +97,55 @@ if (
             <div class="row  mt-5">
                 <div class="col-lg-4 d-block">
                     <label class="fs-3 fw-bold">Target sales revenue</label>
-                    <input class="sms_objective_add_form_input" value="<?php echo $data[0]['sales_revenue_target']; ?>"
+                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["orders"]['target']; ?>"
                         type="number" id='sms_target_sales_revenue'>
                 </div>
                 <div class="col-lg-4">
                     <label for="" class="fs-3 fw-bold">Target recruitment of new customers</label>
-                    <input class="sms_objective_add_form_input" value="<?php echo $data[0]['new_customers_target']; ?>"
+                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["new_customers"]['target']; ?>"
                         type="number" id='sms_Target_recruitment_of_new_customers'>
                 </div>
                 <div class="col-lg-4">
                     <label for=" " class="fs-3 fw-bold">Destination of new orders</label>
-                    <input class="sms_objective_add_form_input" value="<?php echo $data[0]['new_orders_target']; ?>"
+                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["new_orders"]['target']; ?>"
                         type="number" id='sms_Destination_of_new_orders'>
                 </div>
             </div>
             <div class="row mt-5 ">
                 <div class="col-lg-4">
                     <label for="" class="fs-3 fw-bold">Target keywords </label>
-                    <input class="sms_objective_add_form_input" value="<?php echo $data[0]['target_keywords']; ?>"
+                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["keywords"]['target']; ?>"
                         type="number" id='sms_Target_page_target'>
                 </div>
                 <div class="col-lg-4">
                     <label for="" class="fs-3 fw-bold">Target progress in Google locations</label>
                     <input class="sms_objective_add_form_input"
-                        value="<?php echo $data[0]['google_rankings_target']; ?>" type="number"
+                        value="<?php echo $goals_data["google_rankings"]['target']; ?>" type="number"
                         id='sms_Target_progress_in_Google_locations'>
                 </div>
                 <div class="col-lg-4">
                     <label for="" class="fs-3 fw-bold">Target page views</label>
-                    <input class="sms_objective_add_form_input" value="<?php echo $data[0]['page_views_target']; ?>"
+                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["page_views"]['target']; ?>"
                         type="number" id='sms_Target_page_views'>
                 </div>
             </div>
             <div class="row  mt-5 align-items-end">
                 <div class="col-lg-4">
                     <label for="" class="fs-3 fw-bold">Target new products</label>
-                    <input class="sms_objective_add_form_input" value="<?php echo $data[0]['new_products_target']; ?>"
+                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["new_products"]['target']; ?>"
                         type="number" id='sms_Target_new_products'>
                 </div>
                 <div class="col-lg-4">
                     <label for="" class="fs-4 fw-bold">Target to increase the average number of items per order
                         (%)</label>
                     <input class="sms_objective_add_form_input"
-                        value="<?php echo $data[0]['avg_order_items_increase_target']; ?>" type="number"
+                        value="<?php echo $goals_data["avg_order_items_increase"]['target']; ?>" type="number"
                         id='sms_Target_to_increase_the_average_number_of_items_per_order'>
                 </div>
                 <div class="col-lg-4">
                     <label for="" class="fs-3 fw-bold">Goal of raising the average income from the order</label>
                     <input class="sms_objective_add_form_input"
-                        value="<?php echo $data[0]['avg_order_value_increase_target']; ?>" type="number"
+                        value="<?php echo $goals_data["avg_order_value_increase"]['target']; ?>" type="number"
                         id='sms_Goal_of_raising_the_average_income_from_the_order'>
                 </div>
             </div>
@@ -215,6 +215,10 @@ if (
         let update_goals = document.getElementById('goals_update_or_delete').value;
         let URL = update_goals === 'add' ? '/goals/add' : '/goals/update';
         let requestMethod = update_goals === 'add' ? 'POST' : 'PUT';
+        console.log(URL);
+
+        console.log(requestMethod);
+
         fetch(URL, {
             method: requestMethod,
             body: JSON.stringify(data),
