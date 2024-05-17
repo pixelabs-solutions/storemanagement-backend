@@ -158,7 +158,7 @@
                             </div>
 
                         </div>
-                        <label class="form-label fw-bold mt-5"> Select Term Attribute</label>
+                        <label class="form-  fw-bold mt-5"> Select Term Attribute</label>
                         <!-- <div 
                             style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                             <div class="col-md-12 rounded-4 bg-transparent h-100 ">

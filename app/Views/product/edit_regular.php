@@ -36,7 +36,6 @@
         width: 100%;
         background-color: #EAEAEA;
         text-align: center;
-        ;
     }
 
     .sms_a_custom_file_input label i {
