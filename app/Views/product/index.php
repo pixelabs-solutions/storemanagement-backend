@@ -1,418 +1,587 @@
-        <?php
-        require_once __DIR__ . '/../partials/header.php';
+<?php
+require_once __DIR__ . '/../partials/header.php';
 
-        ?>
-        <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
-        <style>
-            @import url("https://rsms.me/inter/inter.css");
+?>
+<link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
+<style>
+    @import url("https://rsms.me/inter/inter.css");
 
-            svg {
-                cursor: pointer;
-            }
+    svg {
+        cursor: pointer;
+    }
 
-            .sms_mu_spacing_diver {
-                height: 20px;
-                background-color: white !important;
-                width: inherit;
-            }
+    .sms_mu_spacing_diver {
+        height: 20px;
+        background-color: white !important;
+        width: inherit;
+    }
 
-            .sms_product_img img {
-                width: 50%;
-                padding-left: 10px;
-            }
+    .sms_product_img img {
+        width: 50%;
+        padding-left: 10px;
+    }
 
-            .sms_mu_table_product {
-                width: 100%;
-                background-color: white;
-                /* padding: 20px; */
-            }
+    .sms_mu_table_product {
+        width: 100%;
+        background-color: white;
+        /* padding: 20px; */
+    }
 
-            @media only screen and (max-width:1270px) {
-                .sms_mu_table_product {
-                    width: 960px !important;
-                    border: 0 !important;
-                }
+    @media only screen and (max-width:1270px) {
+        .sms_mu_table_product {
+            width: 960px !important;
+            border: 0 !important;
+        }
 
-                .sms_product_img img {
-                    width: 85% !important;
-                }
+        .sms_product_img img {
+            width: 85% !important;
+        }
 
-                .sms_mu_tr_product {
-                    padding-right: 20px !important;
-                }
+        .sms_mu_tr_product {
+            padding-right: 20px !important;
+        }
 
-                .sms_mu_btns_filter {
-                    display: block !important;
-                    /* flex-direction: coloumn !important; */
-                    float: left !important;
-                    padding: 16px 13px !important;
-                    /* position: fixed; */
-                    /* top: 0; */
-                }
+        .sms_mu_btns_filter {
+            display: block !important;
+            /* flex-direction: coloumn !important; */
+            float: left !important;
+            padding: 16px 13px !important;
+            /* position: fixed; */
+            /* top: 0; */
+        }
 
-                .sms_mu_main_bg_white {
-                    /* width: 900px !important; */
-                    overflow: scroll;
-                    padding: 0
-                }
+        .sms_mu_main_bg_white {
+            /* width: 900px !important; */
+            overflow: scroll;
+            padding: 0
+        }
 
-                button p {
-                    width: 50% !important;
-                }
+        button p {
+            width: 50% !important;
+        }
 
-            }
+    }
 
-            @media only screen and (max-width:1000px) {
-                .sms_mu_btns_filter {
-                    display: block !important;
-                    /* flex-direction: coloumn !important; */
-                    float: left !important;
-                    padding: 16px 13px !important;
-                    /* position: fixed; */
-                    /* top: 0; */
-                }
-            }
+    @media only screen and (max-width:1000px) {
+        .sms_mu_btns_filter {
+            display: block !important;
+            /* flex-direction: coloumn !important; */
+            float: left !important;
+            padding: 16px 13px !important;
+            /* position: fixed; */
+            /* top: 0; */
+        }
+    }
 
-            .sms_mu_tr_product {
-                background-color: #F2F2F2;
-                height: 60px;
-            }
-        </style>
-        <div class="sms_products_m  p-0 ">
-            <div class=" col-12 mt-5">
-                <div class="row col-12 d-flex justify-content-between bg-white p-3 m-0 rounded-3">
-                    <div class="col-sm-12 d-flex flex-column  flex-md-row gap-2 col-lg-8 m-0 ">
-                        <button class="rounded-4 border-0 p-2" data-bs-toggle="modal" data-bs-target="#modal-full-width" style="background-color:#4987D870; " data-i18n="product_managment.nav.new_product_btn">Add a new product +</button>
-                        <button class="rounded-4 border-0 p-2" style="background-color:#4987D870;" data-bs-toggle="modal" data-bs-target="#modal-Category-large" data-i18n="product_managment.nav.category_product_btn">Category management</button>
-                        <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; " data-bs-toggle="modal" data-bs-target="#modal-large" data-i18n="product_managment.nav.future_product_btn">Feature management</button>
+    .sms_mu_tr_product {
+        background-color: #F2F2F2;
+        height: 60px;
+    }
 
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 mt-3 mt-lg-0">
-                        <button class="rounded-4 border-0 d-flex  px-3 gap-2 align-items-center justify-content-end  w-md-auto p-2 " style="background-color:#4987D8; color: white; float:left;">
-                            <svg width="23" height="23" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M43.0833 4.58336H25.6667V1.83336C25.6666 1.69558 25.6354 1.55959 25.5756 1.4355C25.5157 1.31141 25.4286 1.20242 25.3208 1.11662C25.213 1.03083 25.0872 0.970445 24.9528 0.939958C24.8185 0.909471 24.6789 0.909666 24.5447 0.94053L0.711333 6.44053C0.509269 6.48697 0.328917 6.60054 0.199723 6.7627C0.0705279 6.92486 0.000122157 7.12603 0 7.33336L0 38.5C8.32958e-05 38.7189 0.0785044 38.9306 0.221079 39.0967C0.363654 39.2628 0.560968 39.3724 0.777333 39.4057L24.6107 43.0724C24.7413 43.0928 24.8748 43.0846 25.002 43.0485C25.1292 43.0123 25.247 42.949 25.3474 42.8629C25.4478 42.7768 25.5283 42.67 25.5834 42.5498C25.6385 42.4296 25.6669 42.2989 25.6667 42.1667V39.4167H43.0833C43.3265 39.4167 43.5596 39.3201 43.7315 39.1482C43.9034 38.9763 44 38.7431 44 38.5V5.50003C44 5.25691 43.9034 5.02376 43.7315 4.85185C43.5596 4.67994 43.3265 4.58336 43.0833 4.58336ZM25.6667 17.4167H31.1667V21.0834H25.6667V17.4167ZM7.47267 28.8475L11.4492 22.4859C11.5408 22.3404 11.5895 22.172 11.5895 22C11.5895 21.8281 11.5408 21.6597 11.4492 21.5142L7.4745 15.1525C7.40471 15.0506 7.35625 14.9356 7.33204 14.8144C7.30782 14.6933 7.30834 14.5685 7.33358 14.4475C7.35882 14.3266 7.40824 14.212 7.47889 14.1106C7.54953 14.0092 7.63994 13.9232 7.74468 13.8577C7.84941 13.7921 7.96632 13.7484 8.08837 13.7292C8.21042 13.71 8.33509 13.7157 8.4549 13.7459C8.5747 13.776 8.68717 13.8301 8.78554 13.9049C8.88391 13.9797 8.96616 14.0735 9.02733 14.1809L12.056 19.0264C12.3915 19.5617 13.2752 19.5617 13.6107 19.0264L16.6393 14.1809C16.7028 14.0784 16.7859 13.9896 16.8838 13.9194C16.9818 13.8492 17.0926 13.799 17.21 13.7717C17.3273 13.7445 17.4489 13.7407 17.5678 13.7605C17.6866 13.7804 17.8004 13.8236 17.9025 13.8875C18.0047 13.9512 18.0934 14.0344 18.1635 14.1323C18.2336 14.2302 18.2837 14.341 18.3109 14.4583C18.3381 14.5756 18.342 14.6972 18.3223 14.816C18.3025 14.9348 18.2596 15.0485 18.1958 15.1507L14.2193 21.5124C14.1277 21.6578 14.079 21.8263 14.079 21.9982C14.079 22.1701 14.1277 22.3386 14.2193 22.484L18.194 28.8457C18.2578 28.9478 18.3009 29.0614 18.3208 29.1802C18.3406 29.2989 18.3369 29.4204 18.3099 29.5377C18.2828 29.6549 18.2329 29.7658 18.163 29.8638C18.0931 29.9618 18.0046 30.0451 17.9025 30.1089C17.6945 30.2314 17.4474 30.2693 17.2123 30.2147C16.9771 30.1601 16.772 30.0172 16.6393 29.8155L13.6107 24.97C13.5275 24.8391 13.4125 24.7314 13.2766 24.6568C13.1406 24.5822 12.9879 24.5431 12.8328 24.5433C12.6777 24.5435 12.5252 24.5829 12.3894 24.6578C12.2536 24.7327 12.1389 24.8408 12.056 24.9719L9.02733 29.8174C8.89435 30.0187 8.68923 30.1613 8.45423 30.2159C8.21923 30.2704 7.97225 30.2328 7.76417 30.1107C7.66209 30.0469 7.57357 29.9636 7.50368 29.8656C7.43378 29.7676 7.38387 29.6568 7.35681 29.5395C7.32974 29.4222 7.32604 29.3007 7.34592 29.182C7.3658 29.0633 7.40887 28.9496 7.47267 28.8475ZM25.6667 22.9167H31.1667V26.5834H25.6667V22.9167ZM33 22.9167H42.1667V26.5834H33V22.9167ZM33 21.0834V17.4167H42.1667V21.0834H33ZM33 15.5834V11.9167H42.1667V15.5834H33ZM31.1667 15.5834H25.6667V11.9167H31.1667V15.5834ZM25.6667 28.4167H31.1667V32.0834H25.6667V28.4167ZM33 28.4167H42.1667V32.0834H33V28.4167ZM42.1667 10.0834H33V6.4167H42.1667V10.0834ZM31.1667 6.4167V10.0834H25.6667V6.4167H31.1667ZM25.6667 33.9167H31.1667V37.5834H25.6667V33.9167ZM33 37.5834V33.9167H42.1667V37.5834H33Z" fill="#ffffff" />
+    /* Button styles */
+    .filter-button {
+        background-color: #4987D870;
+        padding: 10px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        cursor: pointer;
+    }
+
+    /* Popup styles */
+    .popup {
+        display: none;
+        top: 265px;
+        position: absolute;
+        z-index: 10;
+        width: 300px;
+        background-color: rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .popup-content {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        border: none;
+        position: relative;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .close {
+        color: #aaa;
+        font-size: 24px;
+        font-weight: bold;
+        position: absolute;
+        top: 1px;
+        right: 9px;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #ff0000;
+        text-decoration: none;
+    }
+
+    .popup-content h2 {
+        margin-top: 0;
+        font-size: 22px;
+        color: #333;
+    }
+
+    .popup-content p {
+        font-size: 16px;
+        color: #666;
+    }
+</style>
+<div class="sms_products_m  p-0 ">
+    <div class=" col-12 mt-5">
+        <div class="row col-12 d-flex justify-content-between bg-white p-3 m-0 rounded-3">
+            <div class="col-sm-12 d-flex flex-column  flex-md-row gap-2 col-lg-8 m-0 ">
+                <button class="rounded-4 border-0 p-2" data-bs-toggle="modal" data-bs-target="#modal-full-width"
+                    style="background-color:#4987D870; " data-i18n="product_managment.nav.new_product_btn">Add a new
+                    product +</button>
+                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870;" data-bs-toggle="modal"
+                    data-bs-target="#modal-Category-large"
+                    data-i18n="product_managment.nav.category_product_btn">Category management</button>
+                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; " data-bs-toggle="modal"
+                    data-bs-target="#modal-large" data-i18n="product_managment.nav.future_product_btn">Feature
+                    management</button>
+
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mt-3 mt-lg-0">
+                <button
+                    class="rounded-4 border-0 d-flex  px-3 gap-2 align-items-center justify-content-end  w-md-auto p-2 "
+                    style="background-color:#4987D8; color: white; float:left;">
+                    <svg width="23" height="23" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M43.0833 4.58336H25.6667V1.83336C25.6666 1.69558 25.6354 1.55959 25.5756 1.4355C25.5157 1.31141 25.4286 1.20242 25.3208 1.11662C25.213 1.03083 25.0872 0.970445 24.9528 0.939958C24.8185 0.909471 24.6789 0.909666 24.5447 0.94053L0.711333 6.44053C0.509269 6.48697 0.328917 6.60054 0.199723 6.7627C0.0705279 6.92486 0.000122157 7.12603 0 7.33336L0 38.5C8.32958e-05 38.7189 0.0785044 38.9306 0.221079 39.0967C0.363654 39.2628 0.560968 39.3724 0.777333 39.4057L24.6107 43.0724C24.7413 43.0928 24.8748 43.0846 25.002 43.0485C25.1292 43.0123 25.247 42.949 25.3474 42.8629C25.4478 42.7768 25.5283 42.67 25.5834 42.5498C25.6385 42.4296 25.6669 42.2989 25.6667 42.1667V39.4167H43.0833C43.3265 39.4167 43.5596 39.3201 43.7315 39.1482C43.9034 38.9763 44 38.7431 44 38.5V5.50003C44 5.25691 43.9034 5.02376 43.7315 4.85185C43.5596 4.67994 43.3265 4.58336 43.0833 4.58336ZM25.6667 17.4167H31.1667V21.0834H25.6667V17.4167ZM7.47267 28.8475L11.4492 22.4859C11.5408 22.3404 11.5895 22.172 11.5895 22C11.5895 21.8281 11.5408 21.6597 11.4492 21.5142L7.4745 15.1525C7.40471 15.0506 7.35625 14.9356 7.33204 14.8144C7.30782 14.6933 7.30834 14.5685 7.33358 14.4475C7.35882 14.3266 7.40824 14.212 7.47889 14.1106C7.54953 14.0092 7.63994 13.9232 7.74468 13.8577C7.84941 13.7921 7.96632 13.7484 8.08837 13.7292C8.21042 13.71 8.33509 13.7157 8.4549 13.7459C8.5747 13.776 8.68717 13.8301 8.78554 13.9049C8.88391 13.9797 8.96616 14.0735 9.02733 14.1809L12.056 19.0264C12.3915 19.5617 13.2752 19.5617 13.6107 19.0264L16.6393 14.1809C16.7028 14.0784 16.7859 13.9896 16.8838 13.9194C16.9818 13.8492 17.0926 13.799 17.21 13.7717C17.3273 13.7445 17.4489 13.7407 17.5678 13.7605C17.6866 13.7804 17.8004 13.8236 17.9025 13.8875C18.0047 13.9512 18.0934 14.0344 18.1635 14.1323C18.2336 14.2302 18.2837 14.341 18.3109 14.4583C18.3381 14.5756 18.342 14.6972 18.3223 14.816C18.3025 14.9348 18.2596 15.0485 18.1958 15.1507L14.2193 21.5124C14.1277 21.6578 14.079 21.8263 14.079 21.9982C14.079 22.1701 14.1277 22.3386 14.2193 22.484L18.194 28.8457C18.2578 28.9478 18.3009 29.0614 18.3208 29.1802C18.3406 29.2989 18.3369 29.4204 18.3099 29.5377C18.2828 29.6549 18.2329 29.7658 18.163 29.8638C18.0931 29.9618 18.0046 30.0451 17.9025 30.1089C17.6945 30.2314 17.4474 30.2693 17.2123 30.2147C16.9771 30.1601 16.772 30.0172 16.6393 29.8155L13.6107 24.97C13.5275 24.8391 13.4125 24.7314 13.2766 24.6568C13.1406 24.5822 12.9879 24.5431 12.8328 24.5433C12.6777 24.5435 12.5252 24.5829 12.3894 24.6578C12.2536 24.7327 12.1389 24.8408 12.056 24.9719L9.02733 29.8174C8.89435 30.0187 8.68923 30.1613 8.45423 30.2159C8.21923 30.2704 7.97225 30.2328 7.76417 30.1107C7.66209 30.0469 7.57357 29.9636 7.50368 29.8656C7.43378 29.7676 7.38387 29.6568 7.35681 29.5395C7.32974 29.4222 7.32604 29.3007 7.34592 29.182C7.3658 29.0633 7.40887 28.9496 7.47267 28.8475ZM25.6667 22.9167H31.1667V26.5834H25.6667V22.9167ZM33 22.9167H42.1667V26.5834H33V22.9167ZM33 21.0834V17.4167H42.1667V21.0834H33ZM33 15.5834V11.9167H42.1667V15.5834H33ZM31.1667 15.5834H25.6667V11.9167H31.1667V15.5834ZM25.6667 28.4167H31.1667V32.0834H25.6667V28.4167ZM33 28.4167H42.1667V32.0834H33V28.4167ZM42.1667 10.0834H33V6.4167H42.1667V10.0834ZM31.1667 6.4167V10.0834H25.6667V6.4167H31.1667ZM25.6667 33.9167H31.1667V37.5834H25.6667V33.9167ZM33 37.5834V33.9167H42.1667V37.5834H33Z"
+                            fill="#ffffff" />
+                    </svg>
+                    <h5 class="m-0" data-i18n="product_managment.nav.excel_product_btn">Import/export from Excel</h5>
+                </button>
+            </div>
+        </div>
+        <div class="d-flex flex-column overflow-auto">
+            <div class="sms_mu_btns_filter px-5 d-flex w-100 align-items-baseline bg-white mt-5 rounded-top-4 fixed">
+                <form id="sms_products_m_search_form" action="./" method="get" autocomplete="off" novalidate>
+                    <div class="input-icon border-bottom border-black">
+                        <span class="input-icon-addon">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/search -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                                <path d="M21 21l-6 -6" />
                             </svg>
-                            <h5 class="m-0" data-i18n="product_managment.nav.excel_product_btn">Import/export from Excel</h5>
-                        </button>
+                        </span>
+                        <input type="text" id="sms_products_m_search_input" value="" class="form-control border-0 "
+                            placeholder="Product search" aria-label="Search in website">
                     </div>
-                </div>
-                <div class="d-flex flex-column overflow-auto">
-                    <div class="sms_mu_btns_filter px-5 d-flex w-100 align-items-baseline bg-white mt-5 rounded-top-4 fixed">
-                        <form id="sms_products_m_search_form" action="./" method="get" autocomplete="off" novalidate>
-                            <div class="input-icon border-bottom border-black">
-                                <span class="input-icon-addon">
-                                    <!-- Download SVG icon from http://tabler-icons.io/i/search -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-                                        <path d="M21 21l-6 -6" />
-                                    </svg>
-                                </span>
-                                <input type="text" id="sms_products_m_search_input" value="" class="form-control border-0 " placeholder="Product search" aria-label="Search in website">
-                            </div>
-                        </form>
-                        <div class="d-flex flex-row gap-3 mt-5 text-center w-100 justify-content-end">
-                            <button class="rounded-4 py-2  border-0 align-items-center text- justify-content-center  d-flex gap-1" style="background-color:#4987D870; ">
-                                <svg width="23" height="23" class="p-0 m-0" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_272_365)">
-                                        <path d="M0.743423 3.93125C1.15592 3.05625 2.03092 2.5 2.99967 2.5H29.9997C30.9684 2.5 31.8434 3.05625 32.2559 3.93125C32.6684 4.80625 32.5434 5.8375 31.9309 6.5875L20.4997 20.5562V28.5C20.4997 29.2563 20.0747 29.95 19.3934 30.2875C18.7122 30.625 17.9059 30.5562 17.2997 30.1L13.2997 27.1C12.7934 26.725 12.4997 26.1313 12.4997 25.5V20.5562L1.06217 6.58125C0.455923 5.8375 0.324673 4.8 0.743423 3.93125Z" fill="black" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_272_365">
-                                            <rect width="32" height="32" fill="white" transform="translate(0.5 0.5)" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                                <p class="m-0 " data-i18n="product_managment.product_search.filter_inventory_btn">Filter by inventory</p>
-                            </button>
-                            <button class="rounded-4 py-2  border-0  align-items-center text-center justify-content-center  d-flex gap-1" style="background-color:#4987D870; ">
-                                <svg width="23" height="23" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_272_365)">
-                                        <path d="M0.743423 3.93125C1.15592 3.05625 2.03092 2.5 2.99967 2.5H29.9997C30.9684 2.5 31.8434 3.05625 32.2559 3.93125C32.6684 4.80625 32.5434 5.8375 31.9309 6.5875L20.4997 20.5562V28.5C20.4997 29.2563 20.0747 29.95 19.3934 30.2875C18.7122 30.625 17.9059 30.5562 17.2997 30.1L13.2997 27.1C12.7934 26.725 12.4997 26.1313 12.4997 25.5V20.5562L1.06217 6.58125C0.455923 5.8375 0.324673 4.8 0.743423 3.93125Z" fill="black" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_272_365">
-                                            <rect width="32" height="32" fill="white" transform="translate(0.5 0.5)" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                                <p class="m-0 p-0 " data-i18n="product_managment.product_search.filter_catageary_btn">Filter by category</p>
-                            </button>
-                            <!-- </div> -->
+                </form>
+                <div class="d-flex flex-row gap-3 mt-5 text-center w-100 justify-content-end">
+                    <button onclick="togglePopup()"
+                        class="rounded-4 py-2 border-0 align-items-center text-justify-content-center d-flex gap-1 filter-button">
+                        <svg width="23" height="23" class="p-0 m-0" viewBox="0 0 33 33" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_272_365)">
+                                <path
+                                    d="M0.743423 3.93125C1.15592 3.05625 2.03092 2.5 2.99967 2.5H29.9997C30.9684 2.5 31.8434 3.05625 32.2559 3.93125C32.6684 4.80625 32.5434 5.8375 31.9309 6.5875L20.4997 20.5562V28.5C20.4997 29.2563 20.0747 29.95 19.3934 30.2875C18.7122 30.625 17.9059 30.5562 17.2997 30.1L13.2997 27.1C12.7934 26.725 12.4997 26.1313 12.4997 25.5V20.5562L1.06217 6.58125C0.455923 5.8375 0.324673 4.8 0.743423 3.93125Z"
+                                    fill="black" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_272_365">
+                                    <rect width="32" height="32" fill="white" transform="translate(0.5 0.5)" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        <p class="m-0" data-i18n="product_managment.product_search.filter_inventory_btn">Filter by
+                            inventory</p>
+                    </button>
+
+                    <!-- The Popup -->
+                    <div id="popup" class="popup">
+                        <div class="popup-content">
+                            <span class="close">&times;</span>
+                            <input type="number" class="form-control mt-2" placeholder="Input 1">
+                            <input type="number" class="form-control mt-2" placeholder="Input 2">
                         </div>
                     </div>
-                    <div class="card-x bg-white py-5 sms_mu_main_bg_white rounded-bottom-4 px-2">
-                        <div class="sms_mu_main_bg_white position-relative  ">
 
-                            <table class="sms_mu_table_product rounded-4" id='sms_products_m_products_table'>
-                            <?php 
-                                $i = 0;
-                                foreach ($categories as $category) {
-                                    $parentCategories_array[$i]['id'] = $category['id'];
-                                    $parentCategories_array[$i]['name'] = $category['name'];
-                                    if($category['parent'] != 0)
-                                    {
-                                    $parentCategories_array[$i]['parent'] = $category['parent'];
-                                    }
-                                    else{
-                                    $parentCategories_array[$i]['parent'] = "-";
-                                    }
-                                    if (isset($category['image']['src'])) {
-                                        $parentCategories_array[$i]['src'] = $category['image']['src'];
-                                      } else {
-                                        $parentCategories_array[$i]['src'] = "https://placehold.co/400x400?text=No%20Image%20Found";
-                                      }
-                                    
-                                    $parentCategories_json = json_encode($parentCategories_array);
-                                    $i++;
-                                }?>
-                            <?php foreach ($products as $product) {
-                                    $product_json = json_encode($product);
-                                    if ($product['type'] == 'simple') {
-                                        if(isset($product['images'][0]['src']))
-                                        {
-                                           $prodimage = $product['images'][0]['src'];
-                                        }
-                                        else
-                                        {
-                                            $prodimage = "https://placehold.co/400x400?text=No%20Image%20Found";
+                    <button onclick="togglePopups()"
+                        class="rounded-4 py-2  border-0  align-items-center text-center justify-content-center  d-flex gap-1 filter-button"
+                        style="background-color:#4987D870; ">
+                        <svg width="23" height="23" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_272_365)">
+                                <path
+                                    d="M0.743423 3.93125C1.15592 3.05625 2.03092 2.5 2.99967 2.5H29.9997C30.9684 2.5 31.8434 3.05625 32.2559 3.93125C32.6684 4.80625 32.5434 5.8375 31.9309 6.5875L20.4997 20.5562V28.5C20.4997 29.2563 20.0747 29.95 19.3934 30.2875C18.7122 30.625 17.9059 30.5562 17.2997 30.1L13.2997 27.1C12.7934 26.725 12.4997 26.1313 12.4997 25.5V20.5562L1.06217 6.58125C0.455923 5.8375 0.324673 4.8 0.743423 3.93125Z"
+                                    fill="black" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_272_365">
+                                    <rect width="32" height="32" fill="white" transform="translate(0.5 0.5)" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        <p class="m-0 p-0 " data-i18n="product_managment.product_search.filter_catageary_btn">Filter by
+                            category</p>
+                    </button>
+                    <!-- The Popup -->
+                    <div id="popups" class="popup">
+                        <div class="popup-content">
+                            <span class="close">&times;</span>
+                            <input type="number" class="form-control mt-2" placeholder="Input 1">
+                            <input type="number" class="form-control mt-2" placeholder="Input 2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-x bg-white py-5 sms_mu_main_bg_white rounded-bottom-4 px-2">
+                <div class="sms_mu_main_bg_white position-relative  ">
+
+                    <table class="sms_mu_table_product rounded-4" id='sms_products_m_products_table'>
+                        <?php
+                        $i = 0;
+                        foreach ($categories as $category) {
+                            $parentCategories_array[$i]['id'] = $category['id'];
+                            $parentCategories_array[$i]['name'] = $category['name'];
+                            if ($category['parent'] != 0) {
+                                $parentCategories_array[$i]['parent'] = $category['parent'];
+                            } else {
+                                $parentCategories_array[$i]['parent'] = "-";
+                            }
+                            if (isset($category['image']['src'])) {
+                                $parentCategories_array[$i]['src'] = $category['image']['src'];
+                            } else {
+                                $parentCategories_array[$i]['src'] = "https://placehold.co/400x400?text=No%20Image%20Found";
+                            }
+
+                            $parentCategories_json = json_encode($parentCategories_array);
+                            $i++;
+                        } ?>
+                        <?php foreach ($products as $product) {
+                            $product_json = json_encode($product);
+                            if ($product['type'] == 'simple') {
+                                if (isset($product['images'][0]['src'])) {
+                                    $prodimage = $product['images'][0]['src'];
+                                } else {
+                                    $prodimage = "https://placehold.co/400x400?text=No%20Image%20Found";
+                                }
+                                ?>
+                                <tr class="sms_mu_tr_product">
+                                    <td>
+                                        <img class="sms_product_img" height="100px" width="100px"
+                                            src="<?php echo $prodimage; ?>" alt="">
+                                    </td>
+                                    <td class=""><span style="font-weight:bold">Product name:</span>
+                                        <?php echo $product['name']; ?></td>
+                                    <td><span style="font-weight:bold">Category:</span>
+                                        <?php
+                                        $count = count($product['categories']);
+                                        $const = 0;
+                                        foreach ($product['categories'] as $key => $category) {
+                                            echo $category['name'];
+                                            // Check if it's not the last element and there are more than 1 elements
+                                            if ($const < $count - 1 && $count > 1) {
+                                                echo ', ';
+                                            }
+                                            $const++;
                                         }
                                         ?>
-                                        <tr class="sms_mu_tr_product">
-                                            <td>
-                                                <img class="sms_product_img" height="100px" width="100px" src="<?php echo $prodimage; ?>" alt="">
-                                            </td>
-                                            <td class=""><span style="font-weight:bold">Product name:</span> <?php echo $product['name']; ?></td>
-                                            <td><span style="font-weight:bold">Category:</span>
-                                                <?php
-                                                $count = count($product['categories']);
-                                                $const = 0;
-                                                foreach ($product['categories'] as $key => $category) {
-                                                    echo $category['name'];
-                                                    // Check if it's not the last element and there are more than 1 elements
-                                                    if ($const < $count - 1 && $count > 1) {
-                                                        echo ', ';
-                                                    }
-                                                    $const++;
-                                                }
-                                                ?>
 
-                                            </td>
-                                            <td><span style="font-weight:bold">Price:</span> <?php echo $product['price']; ?> <?php echo $currency['symbol']; ?>
-                                            </td>
-                                            <td><span style="font-weight:bold">Stock:</span> <?php echo $product['stock_quantity']; ?>
-                                            </td>
-                                            <td><span style="font-weight:bold">Number of views:
-                                                </span>250
-                                            </td>
-                                            <td>
-                                                <span data-bs-toggle="modal" data-bs-target="#edit-regular-modal-full-width" data-bs-productJson="<?php echo htmlspecialchars($product_json); ?>" data-bs-categoriesJson="<?php echo htmlspecialchars($parentCategories_json); ?>">
-                                                    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z" fill="black" />
-                                                    </svg>
-                                                </span>
+                                    </td>
+                                    <td><span style="font-weight:bold">Price:</span> <?php echo $product['price']; ?>
+                                        <?php echo $currency['symbol']; ?>
+                                    </td>
+                                    <td><span style="font-weight:bold">Stock:</span> <?php echo $product['stock_quantity']; ?>
+                                    </td>
+                                    <td><span style="font-weight:bold">Number of views:
+                                        </span>250
+                                    </td>
+                                    <td>
+                                        <span data-bs-toggle="modal" data-bs-target="#edit-regular-modal-full-width"
+                                            data-bs-productJson="<?php echo htmlspecialchars($product_json); ?>"
+                                            data-bs-categoriesJson="<?php echo htmlspecialchars($parentCategories_json); ?>">
+                                            <svg width="20" height="20" viewBox="0 0 32 32" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z"
+                                                    fill="black" />
+                                            </svg>
+                                        </span>
 
-                                            </td>
-                                        </tr>
-                                        <tr class="sms_mu_spacing_diver"></tr>
-                                    <?php }
-                                    if ($product['type'] == 'variable') { ?>
-                                        <tr class="sms_mu_tr_product">
-                                            <td>
-                                                <img class="sms_product_img" src="/assets/dist/img/products/bag.png" alt="">
+                                    </td>
+                                </tr>
+                                <tr class="sms_mu_spacing_diver"></tr>
+                            <?php }
+                            if ($product['type'] == 'variable') { ?>
+                                <tr class="sms_mu_tr_product">
+                                    <td>
+                                        <img class="sms_product_img" src="/assets/dist/img/products/bag.png" alt="">
 
-                                            </td>
-                                            <td class=""><span style="font-weight:bold">Product name:</span> <?php echo $product['name']; ?></td>
-                                            <td><span style="font-weight:bold">Category:</span> <?php
-                                                                                                $count = count($product['categories']);
-                                                                                                $const = 0;
-                                                                                                foreach ($product['categories'] as $key => $category) {
-                                                                                                    echo $category['name'];
-                                                                                                    // Check if it's not the last element and there are more than 1 elements
-                                                                                                    if ($const < $count - 1 && $count > 1) {
-                                                                                                        echo ', ';
-                                                                                                    }
-                                                                                                    $const++;
-                                                                                                }
-                                                                                                ?>
-                                            </td>
-                                            <td><span style="font-weight:bold">Price:</span> <?php echo $product['price']; ?> <?php echo $currency['symbol']; ?>
-                                            </td>
-                                            <td><span style="font-weight:bold">Stock:</span> <?php echo $product['stock_quantity']; ?>
-                                            </td>
-                                            <td><span style="font-weight:bold">Number of views:
-                                                </span>250
-                                            </td>
-                                            <td>
-                                                <span data-bs-toggle="modal" data-bs-target="#edit-modal-full-width">
+                                    </td>
+                                    <td class=""><span style="font-weight:bold">Product name:</span>
+                                        <?php echo $product['name']; ?></td>
+                                    <td><span style="font-weight:bold">Category:</span> <?php
+                                    $count = count($product['categories']);
+                                    $const = 0;
+                                    foreach ($product['categories'] as $key => $category) {
+                                        echo $category['name'];
+                                        // Check if it's not the last element and there are more than 1 elements
+                                        if ($const < $count - 1 && $count > 1) {
+                                            echo ', ';
+                                        }
+                                        $const++;
+                                    }
+                                    ?>
+                                    </td>
+                                    <td><span style="font-weight:bold">Price:</span> <?php echo $product['price']; ?>
+                                        <?php echo $currency['symbol']; ?>
+                                    </td>
+                                    <td><span style="font-weight:bold">Stock:</span> <?php echo $product['stock_quantity']; ?>
+                                    </td>
+                                    <td><span style="font-weight:bold">Number of views:
+                                        </span>250
+                                    </td>
+                                    <td>
+                                        <span data-bs-toggle="modal" data-bs-target="#edit-modal-full-width">
 
-                                                    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z" fill="black" />
-                                                    </svg>
-                                                </span>
+                                            <svg width="20" height="20" viewBox="0 0 32 32" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z"
+                                                    fill="black" />
+                                            </svg>
+                                        </span>
 
-                                            </td>
-                                        </tr>
-                                        <tr class="sms_mu_spacing_diver"></tr>
-                                <?php }
-                                } ?>
-                            </table>
-                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="sms_mu_spacing_diver"></tr>
+                            <?php }
+                        } ?>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row g-2">
+            <p class="col-auto ms-auto mt-5 mb-5 me-5"><span class="fw-bold fs-2">Total products on the site:
+                </span><span class="fs-2"> 450</span></p>
+        </div>
+        <div class="modal modal-blur fade m-0" id="modal-full-width" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </div>
-                <div class="row g-2">
-                    <p class="col-auto ms-auto mt-5 mb-5 me-5"><span class="fw-bold fs-2">Total products on the site:
-                        </span><span class="fs-2"> 450</span></p>
-                </div>
-                <div class="modal modal-blur fade m-0" id="modal-full-width" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <?php
-                                include('add.php');
-                                ?>
-                            </div>
-
-                        </div>
+                    <div class="modal-body">
+                        <?php
+                        include ('add.php');
+                        ?>
                     </div>
-                </div>
-                <div class="modal modal-blur fade m-0" id="edit-modal-full-width" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
-                                <div class="py-3 rounded-top text-center col-10">
-                                    <h3 class="card-title text-black fs-2 m-0 fw-bold" data-i18n="popoups.future_managment.edit_variation_in_product_managment.heading">Editing a product with variations</h3>
-                                </div>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <?php
-                                include('edit_variation.php');
-                                ?>
-                            </div>
 
+                </div>
+            </div>
+        </div>
+        <div class="modal modal-blur fade m-0" id="edit-modal-full-width" tabindex="-1" role="dialog"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
+                        <div class="py-3 rounded-top text-center col-10">
+                            <h3 class="card-title text-black fs-2 m-0 fw-bold"
+                                data-i18n="popoups.future_managment.edit_variation_in_product_managment.heading">Editing
+                                a product with variations</h3>
                         </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </div>
-                <!-- edit priduct regular  -->
-                <div class="modal modal-blur fade m-0" id="edit-regular-modal-full-width" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
-                                <div class="py-3 rounded-top text-center col-10">
-                                    <h3 class="card-title text-black fs-2 m-0 fw-bold">Editing a regular product</h3>
-                                </div>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <?php
-                                include('edit_regular.php');
-                                ?>
-                            </div>
+                    <div class="modal-body">
+                        <?php
+                        include ('edit_variation.php');
+                        ?>
+                    </div>
 
+                </div>
+            </div>
+        </div>
+        <!-- edit priduct regular  -->
+        <div class="modal modal-blur fade m-0" id="edit-regular-modal-full-width" tabindex="-1" role="dialog"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
+                        <div class="py-3 rounded-top text-center col-10">
+                            <h3 class="card-title text-black fs-2 m-0 fw-bold">Editing a regular product</h3>
                         </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </div>
-
-                <!-- ...  -->
-                <div class="modal modal-blur fade" id="modal-large" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-                        <div class="modal-content ">
-                            <div class="modal-header border-0 ">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <?php
-                                require_once __DIR__ . '/../feature/index.php';
-
-                                ?>
-                            </div>
-
-                        </div>
+                    <div class="modal-body">
+                        <?php
+                        include ('edit_regular.php');
+                        ?>
                     </div>
+
                 </div>
-                <div class="modal modal-blur fade" id="modal-Category-large" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header border-0 ">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <?php
-                                require_once __DIR__ . '/../category/index.php';
+            </div>
+        </div>
 
-                                ?>
-                            </div>
-
-                        </div>
+        <!-- ...  -->
+        <div class="modal modal-blur fade" id="modal-large" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                <div class="modal-content ">
+                    <div class="modal-header border-0 ">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <div class="modal-body">
+                        <?php
+                        require_once __DIR__ . '/../feature/index.php';
+
+                        ?>
+                    </div>
+
                 </div>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
-                <script>
-                    $(".chosen-select").chosen({
-                        no_results_text: "Oops, nothing found!"
-                    })
-                </script>
-                <script>
-                    function setStatusColor() {
-                        // Get all elements with class 'status'
-                        let statuses = document.querySelectorAll('.sms_transaction_w_status');
+            </div>
+        </div>
+        <div class="modal modal-blur fade" id="modal-Category-large" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0 ">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <?php
+                        require_once __DIR__ . '/../category/index.php';
 
-                        // Loop through each status element
-                        statuses.forEach(function(status) {
-                            // Get the text content of the status
-                            let statusText = status.textContent.trim().toLowerCase();
+                        ?>
+                    </div>
 
-                            // Set the color based on the status
-                            if (statusText === 'cancelled') {
-                                status.classList.add('sms_transaction_w_cancelled');
-                            } else if (statusText === 'completed') {
-                                status.classList.add('sms_transaction_w_approved');
-                            }
-                        });
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+        <script>
+            $(".chosen-select").chosen({
+                no_results_text: "Oops, nothing found!"
+            })
+        </script>
+        <script>
+            function togglePopup() {
+                var popup = document.getElementById("popup");
+                var btn = document.querySelector(".filter-button");
+                var span = document.getElementsByClassName("close")[0];
+
+                btn.onclick = function (event) {
+                    popup.style.display = "block";
+                    var rect = btn.getBoundingClientRect();
+                    var popupTop = rect.top + window.scrollY + rect.height;
+                    var popupLeft = rect.left + window.scrollX;
+                    popup.style.top = `${popupTop}px`;
+                    popup.style.left = `${popupLeft}px`;
+                }
+
+                span.onclick = function () {
+                    popup.style.display = "none";
+                }
+
+                window.onclick = function (event) {
+                    if (event.target == popup) {
+                        popup.style.display = "none";
                     }
+                }
+            }
 
-                    // Call the function to set status colors
-                    setStatusColor();
+            function togglePopups() {
+                var popup = document.getElementById("popups");
+                if (popup.style.display === "none" || popup.style.display === "") {
+                    popup.style.display = "block";
+                } else {
+                    popup.style.display = "none";
+                }
+
+                // Get the close button inside the popup
+                var closeButton = popup.querySelector(".close");
+
+                // Add click event listener to the close button
+                closeButton.addEventListener("click", function () {
+                    popup.style.display = "none";
+                });
+            }
+
+
+            function setStatusColor() {
+                // Get all elements with class 'status'
+                let statuses = document.querySelectorAll('.sms_transaction_w_status');
+
+                // Loop through each status element
+                statuses.forEach(function (status) {
+                    // Get the text content of the status
+                    let statusText = status.textContent.trim().toLowerCase();
+
+                    // Set the color based on the status
+                    if (statusText === 'cancelled') {
+                        status.classList.add('sms_transaction_w_cancelled');
+                    } else if (statusText === 'completed') {
+                        status.classList.add('sms_transaction_w_approved');
+                    }
+                });
+            }
+
+            // Call the function to set status colors
+            setStatusColor();
 
 
 
-                    // Call the function to add checkboxes after each row container
-                    document.addEventListener('DOMContentLoaded', function() {
-                        const searchForm = document.getElementById('sms_products_m_search_form');
-                        const searchInput = document.getElementById('sms_products_m_search_input');
-                        const productsTable = document.getElementById('sms_products_m_products_table');
+            // Call the function to add checkboxes after each row container
+            document.addEventListener('DOMContentLoaded', function () {
+                const searchForm = document.getElementById('sms_products_m_search_form');
+                const searchInput = document.getElementById('sms_products_m_search_input');
+                const productsTable = document.getElementById('sms_products_m_products_table');
 
-                        searchForm.addEventListener('submit', function(event) {
-                            event.preventDefault(); // Prevent form submission
-                            filterCustomers();
-                        });
+                searchForm.addEventListener('submit', function (event) {
+                    event.preventDefault(); // Prevent form submission
+                    filterCustomers();
+                });
 
-                        searchInput.addEventListener('input', function() {
-                            filterCustomers();
-                        });
+                searchInput.addEventListener('input', function () {
+                    filterCustomers();
+                });
 
-                        function filterCustomers() {
-                            const searchValue = searchInput.value.toLowerCase();
-                            const rows = productsTable.querySelectorAll('tbody tr:not(.sms_m_table_head)'); // Exclude the table header row
+                function filterCustomers() {
+                    const searchValue = searchInput.value.toLowerCase();
+                    const rows = productsTable.querySelectorAll('tbody tr:not(.sms_m_table_head)'); // Exclude the table header row
 
-                            rows.forEach(row => {
-                                let rowTextContent = row.textContent.toLowerCase();
-                                if (rowTextContent.includes(searchValue)) {
-                                    row.style.display = ''; // Show the row
-                                } else {
-                                    row.style.display = 'none'; // Hide the row
-                                }
-                            });
+                    rows.forEach(row => {
+                        let rowTextContent = row.textContent.toLowerCase();
+                        if (rowTextContent.includes(searchValue)) {
+                            row.style.display = ''; // Show the row
+                        } else {
+                            row.style.display = 'none'; // Hide the row
                         }
                     });
-                </script>
+                }
+            });
+        </script>
 
-                <?php
-                require_once __DIR__ . '/../partials/footer.php';
+        <?php
+        require_once __DIR__ . '/../partials/footer.php';
 
-                ?>
+        ?>
