@@ -196,7 +196,7 @@ require_once __DIR__ . '/../partials/header.php';
                       <div class="d-flex justify-content-center gap-4 w-auto">
 
 
-                        <span class="" onclick="sms_coupons_delete()" id="delete_coupon" data-bs-toggle="modal"
+                        <span class=""  id="delete_coupon" data-bs-toggle="modal"
                           data-bs-target="#modal-danger" coupon_id="<?php echo $item['id']; ?>">
                           <svg width="24" height="24" viewBox="0 0 28 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -280,7 +280,7 @@ require_once __DIR__ . '/../partials/header.php';
       <div class="d-flex justify-content-between col-6 m-auto">
         <button type="button" class="btn  cancel-btn" data-dismiss="modal"
           style="background-color:#afcaee">Cancel</button>
-        <button onclick="sms_coupons_delete()" type="button" class="btn btn-danger">Delete</button>
+        <button  type="button" class="btn btn-danger">Delete</button>
       </div>
     </div>
   </div>
@@ -305,7 +305,7 @@ require_once __DIR__ . '/../partials/header.php';
             <div class="col"><a href="#" class="btn w-100" data-bs-dismiss="modal" style="background-color:#afcaee;">
                 Cancel
               </a></div>
-            <div onclick="sms_coupons_delete()" class="col"><a href="#" class="btn btn-danger w-100"
+            <div onclick="deleteCoupon('<?php echo $item['id']; ?>')" class="col"><a href="#" class="btn btn-danger w-100"
                 data-bs-dismiss="modal">
                 Delete
               </a></div>
@@ -317,10 +317,8 @@ require_once __DIR__ . '/../partials/header.php';
 </div>
 
 <script>
-  function sms_coupons_delete() {
-    var couponId = document.getElementById("delete_coupon").getAttribute("coupon_id");
-
-    fetch("http://storemanagement.test/coupons/" + couponId, {
+  function deleteCoupon(couponId) {
+    fetch("/coupons/" + couponId, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"
@@ -343,12 +341,9 @@ require_once __DIR__ . '/../partials/header.php';
       const sms_delete_notification = document.getElementById("sms_delete_notification");
       sms_delete_notification.textContent = message;
       sms_delete_notification.className = isError ? "error show" : "show";
-
-      // setTimeout(() => {
-      //   sms_delete_notification.classList.remove("show");
-      // }, 5000);
     }
   }
+
 
 </script>
 

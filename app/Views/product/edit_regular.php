@@ -1,15 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>adding a term form</title>
-    <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" /> -->
 <style>
     @import url('https://rsms.me/inter/inter.css');
 
@@ -168,62 +157,7 @@
 
 <!-- input javascript code  -->
 <script>
-    //    function fun_Np() {
-
-    //     let Name = document.getElementById('sms_mu_Ip_one').value;
-    //     let CtgValue = document.getElementById('category_in_popoupop');
-    //     let ImgValue = document.getElementById('sms_mu_Ip_two').value;
-    //     let ImgVlueTwo = document.getElementById('sms_mu_Ip_three').value;
-    //     let NormalPrice = document.getElementById('sms_mu_Ip_four').value;
-    //     let SalePrice = document.getElementById('sms_mu_Ip_five').value;
-    //     let textareaInp = document.getElementById('sms_mu_Ip_six').value;
-    //     let unitInp = document.getElementById('sms_mu_Ip_seven').value;
-    //     // let categorySelect = document.getElementById('sms_mu_Ip_one');
-    //     let selectedCategories = [];
-    //     // console.log(data);
-
-    //     for (let i = 0; i < CtgValue.options.length; i++) {
-    //         if (CtgValue.options[i].selected) {
-    //             selectedCategories.push(CtgValue.options[i].value);
-    //         }
-    //     }
-    //         let image = [
-    //             ImgValue, ImgVlueTwo
-    //         ]
-    //         let data = {
-    //         'name': Name,
-    //         'category': selectedCategories,
-    //         'image': image,
-    //         'type':'simple',
-    //         // 'imgValue': imgValue,
-    //         'regular_price': NormalPrice,
-    //         'sale_price': SalePrice,
-    //         'description': textareaInp,
-    //         'stock_quantity': unitInp,
-    //          };
-    //         console.log(data);
-
-    //         fetch('/product/{id}', {
-    //                 method: 'POST',
-    //                 headers: {
-    //                     'Content-Type': 'application/json',
-    //                 },
-    //                 body: JSON.stringify(data),
-    //             })
-    //             .then(response => {
-    //                 if (!response.ok) {
-    //                     throw new Error('Network response was not ok');
-    //                 }
-    //                 return response.json();
-    //             })
-    //             .then(data => {
-    //                 console.log('Data sent:', data);
-    //                 // You can handle the response data here if needed
-    //             })
-    //             .catch(error => {
-    //                 console.error('There was a problem with your fetch operation:', error);
-    //             });
-    //     }
+   
 
     function fun_Np() {
         let Name = document.getElementById('sms_mu_Ip_one').value;
@@ -318,6 +252,31 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modal = document.getElementById('edit-regular-modal-full-width');
+        modal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget; // Button that triggered the modal
+            var productJson = button.getAttribute('data-bs-productJson'); // Product data passed from the button
+
+            try {
+                // Convert the JSON string to JavaScript object
+                var productData = JSON.parse(productJson);
+
+                // Access the modal content element
+                document.getElementById('sms_mu_Ip_one').value = productData.name;;
+                document.getElementById('sms_mu_Ip_four').value = productData.regular_price;;
+                document.getElementById('sms_mu_Ip_five').value = productData.sale_price;;
+                document.getElementById('sms_mu_Ip_seven').value = productData.stock_quantity;;
+                document.getElementById('sms_mu_Ip_six').value  =  productData.description.replace(/<[^>]*>/g, '');
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+            }
+        });
+    });
+</script>
 
 
 <script>

@@ -1,7 +1,7 @@
 <?php
 
 namespace Pixelabs\StoreManagement\Models;
-
+use Pixelabs\Storemanagement\Models\Authentication;
 
 class Goal
 {
@@ -138,4 +138,98 @@ class Goal
         }
         $stmt->close();
     }
+
+    public static function get_goals_target(){
+        global $connection;
+        $user_id = Authentication::getUserId();
+        $sql = "SELECT * FROM `goals` WHERE user_id = ?";
+        $stmt = $connection->prepare($sql);
+
+        if ($stmt === false) {
+            throw new Exception("Failed to prepare the SQL statement: " . $connection->error);
+        }
+        $stmt->bind_param("i", $user_id);
+
+        if ($stmt->execute()) {
+            $result = $stmt->get_result();
+            $data = $result->fetch_assoc();
+            $stmt->close();
+            return $data;
+        } else {
+            $stmt->close();
+            throw new Exception("Failed to execute the SQL statement: " . $connection->error);
+        }                                                                   
+    }
+
+    public static function get_goals()
+    {
+        $response = json_decode(Configuration::getConfiguration(), true);
+        if ($response['status_code'] != 200) {
+            echo $response["message"];
+            return [];
+        }
+        $data = $response['data'];
+
+        $start = new \DateTime();
+        $end = new \DateTime();
+        $start->modify('first day of this month');
+        $end->modify('last day of this month');
+        $params = [
+            'auth' => [$data["consumer_key"], $data["consumer_secret"]],
+            'after' => $start->format('Y-m-d') . 'T00:00:00',
+            'before' => $end->format('Y-m-d') . 'T23:59:59'
+        ];
+
+        echo "Parameters for current month: ".json_encode($params);
+        $goals = self::get_goals_target();
+        $totalRevenue = Base::get_total_revenue($data["store_url"], $params);
+        $new_customers = Base::get_new_customers_count($data["store_url"], $params);
+        $orders = Base::get_number_of_orders($data["store_url"], $params);
+        $products = Base::get_number_of_products($data["store_url"], $params);
+        $current_month_average_orders = Base::calculate_average_items($data["store_url"], $params);
+
+        //Modify date parameter for last month
+        $start->modify('first day of last month');
+        $end->modify('last day of last month');
+        $params['after'] = $start->format('Y-m-d') . 'T00:00:00';
+        $params['before'] = $end->format('Y-m-d') . 'T23:59:59';
+
+        $previous_month_average_orders = Base::calculate_average_items($data["store_url"], $params);
+
+        $goals_data = [
+            "orders" => [
+                "target" => $goals['sales_revenue_target'],
+                "sales" => $totalRevenue
+            ],
+            "new_customers" => [
+                "target" => $goals['new_customers_target'],
+                "customers_count" => $new_customers
+            ],
+            "new_orders" => [
+                "target" => $goals['new_orders_target'],
+                "orders_count" => $orders
+            ],
+            "new_products" => [
+                "target" => $goals['new_products_target'],
+                "products_count" => $products
+            ],
+            "keywords" => [
+                "target" => $goals['target_keywords']
+            ],
+            "google_rankings" => [
+                "target" => $goals['google_rankings_target']
+            ],
+            "page_views" => [
+                "target" => $goals['page_views_target']
+            ],
+            "avg_order_value_increase" => [
+                "target" => $goals['avg_order_value_increase_target']
+            ],
+            "avg_order_items_increase" => [
+                "target" => $goals['avg_order_items_increase_target']
+            ]
+        ];
+
+        return $goals_data;
+    } 
 }

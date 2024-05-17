@@ -42,6 +42,38 @@
         background: #4987D870;
         height: 50px !important;
     }
+
+    .sms_goal_popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+        z-index: 9999;
+        text-align: center;
+    }
+
+    .sms_goal_popup svg {
+        fill: green;
+        width: 64px;
+        height: 64px;
+        margin-bottom: 20px;
+    }
+
+    .sms_goal_popup h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .sms_goal_popup .text-muted {
+        color: #6c757d;
+        font-size: 1rem;
+    }
 </style>
 
 <?php
@@ -120,6 +152,39 @@ if (
             <input type="hidden" value="<?php echo $goals_update_or_delete; ?>" id="goals_update_or_delete">
 
         </form>
+        <div class="modal-body text-center py-4 sms_goal_popup" id="sms_goal_success_message" style="display: none;">
+            <!-- Close icon -->
+
+            <button type="button" class="btn-close" aria-label="Close"
+                            onclick="sms_goal_close_success_message()"></button>
+        <!-- SVG icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24"
+                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+            </svg>
+            <h3>Success</h3>
+            <div class="text-muted">Your goals and objectives data has been submitted successfully.</div>
+        </div>
+        <div class="modal-body text-center py-4 sms_goal_popup" id="sms_goal_error_message" style="display: none;">
+             <!-- Close icon -->
+             <button type="button" class="btn-close" aria-label="Close"
+                            onclick="sms_goal_close_error_message()"></button>
+        <!-- SVG icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24"
+                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="12" y1="5" x2="12.01" y2="19"></line>
+            </svg>
+            <h3>Error</h3>
+            <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
+        </div>
         <div class="row mt-2 justify-content-end">
             <input type="button" value="update" onclick="sms_meh_update_goal_data()"
                 class="p-2 px-4 sms_mu_file125_popoup_last_btn w-auto h-5 d-flex align-items-center rounded-3 border-0   mt-5  text-center">
@@ -148,8 +213,8 @@ if (
         };
         console.log(data);
         let update_goals = document.getElementById('goals_update_or_delete').value;
-            let URL = update_goals === 'add' ? '/goals/add' : '/goals/update';
-            let requestMethod = update_goals === 'add' ? 'POST' : 'PUT';
+        let URL = update_goals === 'add' ? '/goals/add' : '/goals/update';
+        let requestMethod = update_goals === 'add' ? 'POST' : 'PUT';
         fetch(URL, {
             method: requestMethod,
             body: JSON.stringify(data),
@@ -158,21 +223,31 @@ if (
             }
         })
             .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                if (response.status === 200) {
+                    // Form submission succeeded, display success message
+                    document.getElementById('sms_goal_success_message').style.display = 'block';
+                    document.getElementById('sms_goal_error_message').style.display = 'none';
+                    window.location.reload();
+                } else {
+                    // Form submission failed, display error message
+                    document.getElementById('sms_goal_error_message').style.display = 'block';
+                    document.getElementById('sms_goal_success_message').style.display = 'none'; // Hide success message if it was displayed before
                 }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Form data submitted successfully:', data);
-                // Optionally, you can handle the response data here
             })
             .catch(error => {
+                // Network error occurred, display error message
+                document.getElementById('sms_goal_error_message').style.display = 'block';
                 console.error('Error submitting form data:', error);
             });
     }
 
+    function sms_goal_close_success_message() {
+            document.getElementById('sms_goal_success_message').style.display = 'none';
+        }
 
+        function sms_goal_close_error_message() {
+            document.getElementById('sms_goal_error_message').style.display = 'none';
+        }
 </script>
 
 

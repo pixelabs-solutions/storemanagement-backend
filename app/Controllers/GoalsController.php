@@ -48,4 +48,12 @@ class GoalsController
         echo $result;
     }
 
+    public function all()
+    {
+        
+        $totalRevenue = Goal::get_goals();
+        print_r($totalRevenue);
+        
+    }
+
 }
