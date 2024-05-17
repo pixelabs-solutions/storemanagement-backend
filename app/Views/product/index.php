@@ -26,7 +26,15 @@
                 background-color: white;
                 /* padding: 20px; */
             }
+            .sms_mu_table_product td{
+                width: 500px;
+                text-align: left !important;
+            }
+.sms_mu_table_product td:first-child img {
+    max-width: 50px !important;
+    max-height: 50px !important;
 
+}
             @media only screen and (max-width:1270px) {
                 .sms_mu_table_product {
                     width: 960px !important;
@@ -79,7 +87,7 @@
             }
         </style>
         <div class="sms_products_m  p-0 ">
-            <div class=" col-12 mt-5">
+            <!-- <div class=" col-12 mt-5"> -->
                 <div class="row col-12 d-flex justify-content-between bg-white p-3 m-0 rounded-3">
                     <div class="col-sm-12 d-flex flex-column  flex-md-row gap-2 col-lg-8 m-0 ">
                         <button class="rounded-4 border-0 p-2" data-bs-toggle="modal" data-bs-target="#modal-full-width" style="background-color:#4987D870; " data-i18n="product_managment.nav.new_product_btn">Add a new product +</button>
@@ -180,7 +188,7 @@
                                         ?>
                                         <tr class="sms_mu_tr_product">
                                             <td>
-                                                <img class="sms_product_img" height="100px" width="100px" src="<?php echo $prodimage; ?>" alt="">
+                                                <img class="sms_product_img" src="<?php echo $prodimage; ?>" alt="">
                                             </td>
                                             <td class=""><span style="font-weight:bold">Product name:</span> <?php echo $product['name']; ?></td>
                                             <td><span style="font-weight:bold">Category:</span>
@@ -272,7 +280,7 @@
                             </div>
                             <div class="modal-body">
                                 <?php
-                                include('add.php');
+                            include('add.php');
                                 ?>
                             </div>
 
@@ -290,7 +298,7 @@
                             </div>
                             <div class="modal-body">
                                 <?php
-                                include('edit_variation.php');
+                    include('edit_variation.php');
                                 ?>
                             </div>
 
@@ -309,7 +317,7 @@
                             </div>
                             <div class="modal-body">
                                 <?php
-                                include('edit_regular.php');
+                                 include('edit_regular.php');
                                 ?>
                             </div>
 
@@ -326,7 +334,7 @@
                             </div>
                             <div class="modal-body">
                                 <?php
-                                require_once __DIR__ . '/../feature/index.php';
+                              require_once __DIR__ . '/../feature/index.php';
 
                                 ?>
                             </div>
@@ -342,13 +350,14 @@
                             </div>
                             <div class="modal-body">
                                 <?php
-                                require_once __DIR__ . '/../category/index.php';
+                           require_once __DIR__ . '/../category/index.php';
 
                                 ?>
                             </div>
 
                         </div>
                     </div>
+                </div>
                 </div>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
                 <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
