@@ -113,7 +113,7 @@
         </div> -->
         <table class="sms_mu_table" id="sms_category_m_category_table">
           <thead>
-           
+
             <tr class="sms_mu_th">
               <th data-i18n="popoups.add_new_catageory.th_in_catageory.th_img" class="sms_mu_td">image</th>
               <th class="sms_mu_td" data-i18n="popoups.add_new_catageory.th_in_catageory.th_catageory">The name of the category</th>
@@ -128,70 +128,76 @@
 
           </thead>
           <tbody>
-            
-          <?php 
-          $i = 0;
-          foreach ($categories as $category) {
-             $parentCategories_array[$i]['id'] = $category['id'];
-             $parentCategories_array[$i]['name'] = $category['name'];
-             if($category['parent'] != 0)
-             {
-              $parentCategories_array[$i]['parent'] = $category['parent'];
-             }
-             else{
-              $parentCategories_array[$i]['parent'] = "-";
-             }
-             
-             $parentCategories_array[$i]['src'] = $category['image']['src'];
-            $parentCategories_json = json_encode($parentCategories_array);
-            $i++;
-          }?>
-          <?php foreach ($categories as $category) {
-             $cat_array['name'] = $category['name'];
-             $cat_array['src'] = $category['image']['src'];
-            $category_json = json_encode($cat_array);
 
-            foreach ($parentCategories_array as $parentCategory) {
-              if ($parentCategory['id'] == $category['parent'] && $parentCategory['id'] != 0) {
-                 $parentCategoryName = $parentCategory['name'];
+            <?php
+            $i = 0;
+            foreach ($categories as $category) {
+              $parentCategories_array[$i]['id'] = $category['id'];
+              $parentCategories_array[$i]['name'] = $category['name'];
+              if ($category['parent'] != 0) {
+                $parentCategories_array[$i]['parent'] = $category['parent'];
+              } else {
+                $parentCategories_array[$i]['parent'] = "-";
+              }
+
+              if (isset($category['image']['src'])) {
+                $parentCategories_array[$i]['src'] = $category['image']['src'];
+              } else {
+                $parentCategories_array[$i]['src'] = "https://placehold.co/400x400?text=No%20Image%20Found";
+              }
+
+              $parentCategories_json = json_encode($parentCategories_array);
+              $i++;
+            } ?>
+            <?php foreach ($categories as $category) {
+              $cat_array['name'] = $category['name'];
+              if (isset($category['image']['src'])) {
+                $cat_array['src'] = $category['image']['src'];
+              } else {
+                $cat_array['src'] = "https://placehold.co/400x400?text=No%20Image%20Found";
+              }
+              $category_json = json_encode($cat_array);
+
+              foreach ($parentCategories_array as $parentCategory) {
+                if ($parentCategory['id'] == $category['parent'] && $parentCategory['id'] != 0) {
+                  $parentCategoryName = $parentCategory['name'];
                   break; // Exit the loop once the parent category is found
+                } else {
+                  $parentCategoryName = '-';
+                }
               }
-              else{
-                $parentCategoryName = '-';
-              }
-          }
             ?>
-            <tr class="sms_mu_tr">
-              <td class="t_oravg_m">
-                <img src="<?php echo $category['image']['src']; ?>" alt="" height="30px" width="30px">
-              </td>
-              <td><?php echo $category['name']; ?></td>
-              <td><?php echo $parentCategoryName; ?></td>
-              <td><?php echo $category['count']; ?></td>
-              <!-- <td>#1152</td> -->
-              <td>
-                <div class="d-flex justify-content-center gap-2 w-auto">
+              <tr class="sms_mu_tr">
+                <td class="t_oravg_m">
+                  <img src="<?php echo $category['image']['src']; ?>" alt="" height="30px" width="30px">
+                </td>
+                <td><?php echo $category['name']; ?></td>
+                <td><?php echo $parentCategoryName; ?></td>
+                <td><?php echo $category['count']; ?></td>
+                <!-- <td>#1152</td> -->
+                <td>
+                  <div class="d-flex justify-content-center gap-2 w-auto">
 
-                  <!-- <a href="editing_category.php"> -->
-                  <span onclick="openModal('sms_category_w_edit_modal', '<?php echo htmlspecialchars($category_json); ?>','<?php echo htmlspecialchars($parentCategories_json); ?>')">
+                    <!-- <a href="editing_category.php"> -->
+                    <span onclick="openModal('sms_category_w_edit_modal', '<?php echo htmlspecialchars($category_json); ?>','<?php echo htmlspecialchars($parentCategories_json); ?>')">
 
-                    <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z" fill="#4987D8" />
-                    </svg>
-                  </span>
-                  <!-- </a> -->
-                  <span onclick="openModal('sms_category_w_delete_modal')">
+                      <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z" fill="#4987D8" />
+                      </svg>
+                    </span>
+                    <!-- </a> -->
+                    <span onclick="openModal('sms_category_w_delete_modal')">
 
 
-                    <svg width="24" height="24" viewBox="0 0 28 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M8.45 1.10625C8.7875 0.425 9.48125 0 10.2375 0H17.7625C18.5188 0 19.2125 0.425 19.55 1.10625L20 2H26C27.1063 2 28 2.89375 28 4C28 5.10625 27.1063 6 26 6H2C0.89375 6 0 5.10625 0 4C0 2.89375 0.89375 2 2 2H8L8.45 1.10625ZM2 8H26V28C26 30.2062 24.2062 32 22 32H6C3.79375 32 2 30.2062 2 28V8ZM8 12C7.45 12 7 12.45 7 13V27C7 27.55 7.45 28 8 28C8.55 28 9 27.55 9 27V13C9 12.45 8.55 12 8 12ZM14 12C13.45 12 13 12.45 13 13V27C13 27.55 13.45 28 14 28C14.55 28 15 27.55 15 27V13C15 12.45 14.55 12 14 12ZM20 12C19.45 12 19 12.45 19 13V27C19 27.55 19.45 28 20 28C20.55 28 21 27.55 21 27V13C21 12.45 20.55 12 20 12Z" fill="#A30505" />
-                    </svg>
-                  </span>
-                </div>
+                      <svg width="24" height="24" viewBox="0 0 28 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.45 1.10625C8.7875 0.425 9.48125 0 10.2375 0H17.7625C18.5188 0 19.2125 0.425 19.55 1.10625L20 2H26C27.1063 2 28 2.89375 28 4C28 5.10625 27.1063 6 26 6H2C0.89375 6 0 5.10625 0 4C0 2.89375 0.89375 2 2 2H8L8.45 1.10625ZM2 8H26V28C26 30.2062 24.2062 32 22 32H6C3.79375 32 2 30.2062 2 28V8ZM8 12C7.45 12 7 12.45 7 13V27C7 27.55 7.45 28 8 28C8.55 28 9 27.55 9 27V13C9 12.45 8.55 12 8 12ZM14 12C13.45 12 13 12.45 13 13V27C13 27.55 13.45 28 14 28C14.55 28 15 27.55 15 27V13C15 12.45 14.55 12 14 12ZM20 12C19.45 12 19 12.45 19 13V27C19 27.55 19.45 28 20 28C20.55 28 21 27.55 21 27V13C21 12.45 20.55 12 20 12Z" fill="#A30505" />
+                      </svg>
+                    </span>
+                  </div>
 
-              </td>
-            </tr>
-            <tr class="sms_mu_spacing_div"></tr>
+                </td>
+              </tr>
+              <tr class="sms_mu_spacing_div"></tr>
             <?php } ?>
           </tbody>
         </table>
@@ -260,26 +266,25 @@
 
 <script>
   // Function to open the modal
-  function openModal(modalId , categoryData, parentCategoriesData) {
+  function openModal(modalId, categoryData, parentCategoriesData) {
     // Select the modal using the provided ID
     var modal = document.getElementById(modalId);
 
-    if(modalId == "sms_category_w_edit_modal")
-    {                                   
+    if (modalId == "sms_category_w_edit_modal") {
       var category_json = JSON.parse(categoryData);
       var parentCategories_json = JSON.parse(parentCategoriesData);
-      
+
       document.getElementById('sms_mu_key_category').value = category_json.name;
       var selectElement = document.getElementById('sms_mu_select_category_pop');
       selectElement.innerHTML = '';
       console.log(selectElement);
       parentCategories_json.forEach(function(category) {
-            var option = document.createElement('option');
-            option.value = category.id; // Assuming category.id contains the ID
-            option.text = category.name; // Assuming category.text contains the text
-            selectElement.appendChild(option);
-        });
-      
+        var option = document.createElement('option');
+        option.value = category.id; // Assuming category.id contains the ID
+        option.text = category.name; // Assuming category.text contains the text
+        selectElement.appendChild(option);
+      });
+
     }
 
     // Show the modal
