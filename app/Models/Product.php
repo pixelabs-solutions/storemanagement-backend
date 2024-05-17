@@ -186,4 +186,17 @@ class Product
             return ['success' => 'false', 'status_code' => $response->getStatusCode()];
         }
     }
+
+
+    public static function get_products_count()
+    {
+        $response = json_decode(Configuration::getConfiguration(), true);
+        if($response['status_code'] != 200)
+        {
+            echo $response["message"];
+        }
+        $configurations = $response['data'];
+        $params = ['auth' => [$configurations["consumer_key"], $configurations["consumer_secret"]]];
+        return Base::get_number_of_products($configurations["store_url"], $params);
+    }
 }

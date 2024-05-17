@@ -2,13 +2,12 @@
 
 require_once __DIR__ . '/../partials/header.php';
 
-var_dump($transactions);
+// var_dump($transactions);
 // $jsontransactionData = json_encode($transactions, JSON_UNESCAPED_UNICODE);
 
 // echo $jsontransactionData;
 ?>
 
-<!-- <input type="hidden" id="transactionData" value="<?php echo $jsontransactionData; ?>"> -->
 
 <script>
 
@@ -293,7 +292,7 @@ var_dump($transactions);
     <div class="modal-content">
       <div class="modal-header" style="background-color: #4987D870">
         <div class="py-1 rounded-top text-center">
-          <h3 class="card-title text-black fs-2 fw-bold m-0">Order details #1152</h3>
+          <h3 class="card-title text-black fs-2 fw-bold m-0">Order details #<span id="order_id"></span></h3>
         </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -330,7 +329,7 @@ function handleOrderDetailsClick(event) {
         })
         .then(data => {
             // Handle the retrieved data
-            console.log("Order Details:", data);
+            showtransactionData(data);
             // You can now use the data to populate a modal or display it in some way
         })
         .catch(error => {

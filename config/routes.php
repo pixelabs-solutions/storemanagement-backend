@@ -54,7 +54,6 @@ $router->get('/customers', [CustomerController::class, 'index']);
 $router->get('/goals', [GoalsController::class, 'index']);
 $router->post('/goals/add', [GoalsController::class, 'add']);
 $router->put('/goals/update', [GoalsController::class, 'put']);
-$router->get('/goals/all', [GoalsController::class, 'all']);
 
 
 //Inventory

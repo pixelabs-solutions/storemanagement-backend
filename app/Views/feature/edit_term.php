@@ -66,8 +66,10 @@
                                         <label for="example-select fs-3 fw-bold" class="form-label">associated feature
                                         </label>
                                         <select class="form-select rounded-3 p-3" id="sms_mu_select_name_term" style="background-color: #EAEAEA">
-                                            <option value="1">Product colors</option>
-                                            <option value="2">Color</option>
+                                        <?php foreach($attributes  as $attribute)
+                                        { ?>
+                                        <option id="<?php echo $attribute['id']; ?>"><?php echo $attribute['name']; ?></option>
+                                        <?php } ?>
                                         </select>
                                     </div>
                                 </div>

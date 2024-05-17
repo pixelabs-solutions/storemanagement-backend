@@ -66,9 +66,8 @@
                                 </label>
                                 <div style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                     <div class="col-md-12 rounded-4 bg-transparent h-100 ">
-                                        <select id="sms_mu_select_category" multiple style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
-                                            <option value="NOSQL">Ctg</option>
-                                            <option value="NodeJS">demo</option>
+                                        <select id="sms_mu_select_category_pop" class="form-select" style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
+                                            
                                         </select>
                                         <span class="span_div">
                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
