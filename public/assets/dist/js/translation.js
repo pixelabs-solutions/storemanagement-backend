@@ -1229,6 +1229,7 @@ const languageIcon = document.getElementById("languageIcon");
       myElement.classList.remove("rtl");
     }
   updateContent(currentLanguage);
+  setPageName();
 }
 
 // Initial content update

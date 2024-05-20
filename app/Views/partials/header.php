@@ -348,7 +348,7 @@
                               </defs>
                            </svg>
                         </span>
-                        <span class="nav-link-title" data-i18n="header.desktop">
+                        <span class="nav-link-title" data-i18n="header.desktop" >
                            Desktop
                         </span>
                      </a>
@@ -677,7 +677,11 @@
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
          <!-- <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script> -->
          <script>
-    window.addEventListener('load', function() {
+   window.addEventListener('load', function() {
+    setPageName();
+});
+
+function setPageName() {
     const currentURL = window.location.href;
     const domainName = 'storemanagement-frontend';
 
@@ -732,7 +736,8 @@
         });
         navItem.classList.add('sms_e_active_item');
     }
-});
+}
+
 
          </script>
          <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
