@@ -309,6 +309,9 @@
          right: 28.75rem;
          left: auto;
       }
+      .rtl .sms_mu_header{
+         margin-right: 17%;
+      }
    </style>
 </head>
 
@@ -497,7 +500,7 @@
          </div>
       </aside>
       <!-- Navbar -->
-      <header class="navbar navbar-expand-md d-none d-lg-flex d-print-none" style="background-color: #F2F2F2;">
+      <header class="navbar navbar-expand-md d-none d-lg-flex d-print-none sms_mu_header" style="background-color: #F2F2F2;">
          <div class="d-flex flex-row w-100 justify-content-between align-items-center px-3">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
