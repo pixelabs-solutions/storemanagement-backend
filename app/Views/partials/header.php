@@ -350,10 +350,7 @@
                         </span>
                      </a>
                   </li>
-<<<<<<< HEAD
-=======
                     
->>>>>>> ca146723be3c6546c9559a80a029f335acf4cd2d
                   <li class="nav-item  dropdown m-0">
                      <a class="nav-link dropdown-toggle " id="sms_w_dropdown_title" href="#navbar-layout" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="true">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -627,7 +624,7 @@
                            </div>
                         </div>
                      </div>
-                     <button id="switchBtn" class="border-0 rounded-circle">
+                     <button id="switchBtn" class="border-0 rounded-circle" onclick="switchLanguage()">
 
                         <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle" >
 
@@ -677,63 +674,63 @@
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
          <!-- <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script> -->
          <script>
-            // $(document).ready(function () {
-            //    $(".chosen-select").chosen({
-            //       no_results_text: "Oops, nothing found!"
-            //    });
-            // });
-            window.addEventListener('load', function() {
-               const currentURL = window.location.href;
-               const domainName = 'storemanagement-frontend';
+    window.addEventListener('load', function() {
+    const currentURL = window.location.href;
+    const domainName = 'storemanagement-frontend';
 
-               // Extract the slug from the URL
-               const pathname = new URL(currentURL).pathname;
-               const currentSlug = pathname.split('/').filter(Boolean).pop().replace('.php', '') || 'index';
+    // Extract the slug from the URL
+    const pathname = new URL(currentURL).pathname;
+    const currentSlug = pathname.split('/').filter(Boolean).pop().replace('.php', '') || 'index';
 
-               // Define page names
-               const pageNames = {
-                  'index': 'Dashboard',
-                  'product': 'Product Management',
-                  'inventory': 'Inventory Setting',
-                  'coupons': 'Coupons And Benefits',
-                  'customers': 'Customer',
-                  'transactions': 'Transaction',
-                  'statistics': 'Statistics',
-                  'goals': 'Objectives',
-                  'optimization': 'Optimization',
-                  'setting': 'Setting',
-                  'help': 'Help And Support'
-               };
+    // Define page names for English and Hebrew
+    const pageNames = {
+        'index': { en: 'Dashboard', he: 'לוח מחוונים' },
+        'product': { en: 'Product Management', he: 'ניהול מוצרים' },
+        'inventory': { en: 'Inventory Setting', he: 'הגדרת מלאי' },
+        'coupons': { en: 'Coupons And Benefits', he: 'קופונים והטבות' },
+        'customers': { en: 'Customer', he: 'לקוח' },
+        'transactions': { en: 'Transaction', he: 'עסקאות' },
+        'statistics': { en: 'Statistics', he: 'סטטיסטיקות' },
+        'goals': { en: 'Objectives', he: 'יעדים' },
+        'optimization': { en: 'Optimization', he: 'אופטימיזציה' },
+        'setting': { en: 'Setting', he: 'הגדרות' },
+        'help': { en: 'Help And Support', he: 'עזרה ותמיכה' }
+    };
 
-               // Get the name based on the current slug
-               const name = pageNames[currentSlug] || 'Unknown';
+    // Determine if the page is in RTL mode
+    const bodyElement = document.getElementById('myDiv');
+    const isRtl = bodyElement && bodyElement.classList.contains('rtl');
 
-               // Update the page name element
-               const headerPageNameElement = document.getElementById('sms_header_page_name');
-               if (headerPageNameElement) {
-                  headerPageNameElement.innerText = name;
-               }
+    // Get the name based on the current slug and language
+    const name = pageNames[currentSlug] ? (isRtl ? pageNames[currentSlug].he : pageNames[currentSlug].en) : 'Unknown';
 
-               // Handle special cases for dropdown menu
-               const specialCases = ['product', 'inventory', 'coupons'];
-               if (specialCases.includes(currentSlug)) {
-                  const dropdownMenu = document.getElementById('dropdown-menu');
-                  const dropdownTitle = document.getElementById('sms_w_dropdown_title');
-                  if (dropdownMenu && dropdownTitle) {
-                     dropdownMenu.classList.add('show');
-                     dropdownTitle.classList.add('sms_e_active_item');
-                  }
-               }
+    // Update the page name element
+    const headerPageNameElement = document.getElementById('sms_header_page_name');
+    if (headerPageNameElement) {
+        headerPageNameElement.innerText = name;
+    }
 
-               // Set active class on navigation item
-               const navItem = document.getElementById(currentSlug);
-               if (navItem) {
-                  document.querySelectorAll('.nav-item').forEach(item => {
-                     item.classList.remove('sms_e_active_item');
-                  });
-                  navItem.classList.add('sms_e_active_item');
-               }
-            });
+    // Handle special cases for dropdown menu
+    const specialCases = ['product', 'inventory', 'coupons'];
+    if (specialCases.includes(currentSlug)) {
+        const dropdownMenu = document.getElementById('dropdown-menu');
+        const dropdownTitle = document.getElementById('sms_w_dropdown_title');
+        if (dropdownMenu && dropdownTitle) {
+            dropdownMenu.classList.add('show');
+            dropdownTitle.classList.add('sms_e_active_item');
+        }
+    }
+
+    // Set active class on navigation item
+    const navItem = document.getElementById(currentSlug);
+    if (navItem) {
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.classList.remove('sms_e_active_item');
+        });
+        navItem.classList.add('sms_e_active_item');
+    }
+});
+
          </script>
          <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
          <script>
