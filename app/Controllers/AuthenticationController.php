@@ -26,13 +26,19 @@ class AuthenticationController
 
     public function login_user()
     {
-        // $rawData = file_get_contents("php://input");
-        // $data = json_decode($rawData, true);
         $email = isset($_POST['email']) ? $_POST['email'] : null;
         $password = isset($_POST['password']) ? $_POST['password'] : null;
-
-        $response = Authentication::login($email, $password);
-        return $response;
+        if(isset($_GET['is_rest']) && $_GET['is_rest'] === "true")
+        {
+            $response = Authentication::loginWithJWT($email, $password);
+            echo $response;
+        }
+        else
+        {
+            $response = Authentication::login($email, $password);
+            return $response;
+        }
+        
     }
 
     public function logout()

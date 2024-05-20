@@ -9,6 +9,10 @@ class DashboardController
 {
     public function index()
     {
+        if(isset($_GET['is_rest']) && $_GET['is_rest'] === "true")
+        {
+            
+        }
         if(!Authentication::isUserLoggedIn()){
             //Redirect user to login page
             header('Location: /authentication/login');
