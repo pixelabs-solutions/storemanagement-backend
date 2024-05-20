@@ -136,8 +136,11 @@
                                 <div class="sms_mu_bg_div rounded-2">
                                     <select class="form-select form-select-md h-100 bg-transparent"
                                         id="sms_feature_select">
-                                        <option value="HTML">Add Feature</option>
-                                        <option value="Jquery">Custom Features</option>
+                                        <?php foreach($attributes  as $attribute)
+                                        { ?>
+                                        <option id="<?php echo $attribute['id']; ?>"><?php echo $attribute['name']; ?></option>
+                                        <?php } ?>
+                                        
                                     </select>
 
                                     <!-- <select data-placeholder="Begin typing a name to filter..." multiple

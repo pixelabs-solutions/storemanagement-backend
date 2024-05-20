@@ -46,7 +46,9 @@ class ProductController
                 $products = $filteredProducts;
             }
         $categories = Base::wc_get('products/categories');
+        $attributes = Base::wc_get( 'products/attributes');
         $currency = Base::wc_get('data/currencies/current');
+        
         $number_of_products = Product::get_products_count();
         // var_dump($products);
         include_once __DIR__ . '/../Views/product/index.php';
