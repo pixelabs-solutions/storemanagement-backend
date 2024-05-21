@@ -192,6 +192,32 @@
 
         // Log form data to the console
         console.log("Form data:", form_data);
+        fetch('/categories/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Add any additional headers if needed
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.status === 201) {
+                    // Form submission succeeded, display success message
+                    document.getElementById('sms_add_category_success_message').style.display = 'block';
+                    document.getElementById('sms_add_category_error_message').style.display = 'none';
+                    window.location.reload();
+                } else {
+                    // Form submission failed, display error message
+                    document.getElementById('sms_add_category_error_message').style.display = 'block';
+                    document.getElementById('sms_add_category_success_message').style.display = 'none'; // Hide success message if it was displayed before
+                }
+            })
+            .catch(error => {
+                // Network error occurred, display error message
+                document.getElementById('sms_add_category_error_message').style.display = 'block';
+                console.error('Error submitting form data:', error);
+            });
+
     }
 
 
@@ -200,4 +226,6 @@
         var fileName = input.files[0].name;
         label.innerHTML = '<i class="bi bi-image text-black"></i> ' + fileName;
     }
+
+
 </script>

@@ -17,7 +17,7 @@
         --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
     }
   .abc .sms_mu_term_eng{
-      display: block;
+      display: block !important;
   }
   .abc .sms_mu_term_heb{
       display: none ;
