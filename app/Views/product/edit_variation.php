@@ -87,7 +87,7 @@
                         <!-- header -->
                         <div class="row gx-3">
                             <div class="col-md-6 mb-3">
-                                <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.edit_variation_in_product_managment.product_name_input">Product
+                                <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" >Product
                                     Name</label>
                                 <input type="text" class="form-control rounded-3 p-3 fw-bold" id="example-text-input" style="background-color: #EAEAEA" placeholder="">
                             </div>

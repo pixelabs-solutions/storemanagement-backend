@@ -1,12 +1,5 @@
 <!doctype html>
-<!--
-* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
-* @version 1.0.0-beta19
-* @link https://tabler.io
-* Copyright 2018-2023 The Tabler Authors
-* Copyright 2018-2023 codecalm.net Paweł Kuna
-* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
--->
+
 
 
 <html lang="en">
@@ -41,15 +34,20 @@
          border: none !important;
       }
 
-      .choices__input {
-         background-color: transparent;
+      .choices[data-type*=select-multiple] .choices__inner,
+      .choices[data-type*=text] .choices__inner {
+         cursor: text;
+         overflow: auto;
+         height: 100%;
       }
+
 
       .span_div {
          /* background-color: transparent; */
          right: 4% !important;
          position: absolute;
          top: 30%;
+         display: none;
       }
 
       .choices {
@@ -83,7 +81,9 @@
          margin-left: 10px;
       }
 
-
+      .choices__input {
+         background-color: transparent !important;
+      }
 
       .nav-item {
          border-left: 4px solid transparent;
@@ -160,10 +160,6 @@
          gap: 10px;
       }
 
-
-
-
-
       /* css for rtl */
       .rtl .sms_mu_for_rtl {
          gap: 46% !important;
@@ -194,6 +190,7 @@
          /* border-left-style: solid; */
          border-top-right-radius: 20px !important;
          border-bottom-right-radius: 20px !important;
+         text-align: center;
       }
 
       .rtl td:last-child {
@@ -215,6 +212,22 @@
          border-top-left-radius: 20px !important;
          border-top-right-radius: 0px !important;
          border-bottom-right-radius: 0px !important;
+      }
+
+      .sms_mu_table_product td:first-child {
+         text-align: center !important;
+      }
+
+      .sms_mu_table_product td:last-child {
+         text-align: center !important;
+      }
+
+      .sms_mu_table_product th:first-child {
+         text-align: center !important;
+      }
+
+      .sms_mu_table_product th:last-child {
+         text-align: center !important;
       }
 
       .rtl .sms_mu_for_rtl {
@@ -296,10 +309,83 @@
          right: 28.75rem;
          left: auto;
       }
+
+      .rtl .sms_mu_header {
+         margin-right: 17%;
+      }
+
+      .abc #sms_mu_desktop_heb,
+      .abc #sms_mu_desktop_heb1,
+      .abc #sms_mu_desktop_heb2,
+      .abc #sms_mu_desktop_heb3,
+      .abc #sms_mu_desktop_heb4,
+      .abc #sms_mu_desktop_heb5,
+      .abc #sms_mu_desktop_heb6,
+      .abc #sms_mu_desktop_heb_set,
+      .abc #sms_mu_desktop_heb_sp,
+      .abc #sms_mu_desktop_heb_btn,
+      .abc #product-heb,
+      .abc #inventory-heb,
+      .abc #coupons-heb,
+      .abc #support{
+         display: none !important;
+      }
+
+      .abc #sms_mu_desktop_eng,
+      .abc #sms_mu_desktop_eng1,
+      .abc #sms_mu_desktop_eng2,
+      .abc #sms_mu_desktop_eng3,
+      .abc #sms_mu_desktop_eng4,
+      .abc #sms_mu_desktop_eng5,
+      .abc #sms_mu_desktop_eng6,
+      .abc #sms_mu_desktop_eng_set,
+      .abc #sms_mu_desktop_eng_sp,
+      .abc #sms_mu_desktop_eng_btn,
+      .abc #product,
+      .abc #inventory,
+      .abc #coupons,
+      .abc #support {
+         display: block !important;
+      }
+
+      .rtl #sms_mu_desktop_heb,
+      .rtl #sms_mu_desktop_heb1,
+      .rtl #sms_mu_desktop_heb2,
+      .rtl #sms_mu_desktop_heb3,
+      .rtl #sms_mu_desktop_heb4,
+      .rtl #sms_mu_desktop_heb5,
+      .rtl #sms_mu_desktop_heb6,
+      .rtl #sms_mu_desktop_heb_set,
+      .rtl #sms_mu_desktop_heb_sp,
+      .rtl #sms_mu_desktop_heb_btn,
+      .rtl #product-heb,
+      .rtl #inventory-heb,
+      .rtl #coupons-heb,
+      .rtl #support{
+         display: block !important;
+      }
+
+      .rtl #sms_mu_desktop_eng,
+      .rtl #sms_mu_desktop_eng1,
+      .rtl #sms_mu_desktop_eng2,
+      .rtl #sms_mu_desktop_eng3,
+      .rtl #sms_mu_desktop_eng4,
+      .rtl #sms_mu_desktop_eng5,
+      .rtl #sms_mu_desktop_eng6,
+      .rtl #sms_mu_desktop_eng_set,
+      .rtl #sms_mu_desktop_eng_sp,
+      .rtl #sms_mu_desktop_eng_btn,
+      .rtl #product,
+      .rtl #inventory,
+      .rtl #coupons,
+      .rtl #support{
+         display: none !important;
+      }
    </style>
 </head>
 
 <body id="myDiv" class="abc">
+
    <script src="assets/dist/js/demo-theme.min.js?1684106062"></script>
    <div class="page">
       <!-- Sidebar -->
@@ -330,60 +416,16 @@
                                  </clipPath>
                               </defs>
                            </svg>
-
                         </span>
-                        <span class="nav-link-title" data-i18n="header.desktop">
+                        <span class="nav-link-title" id="sms_mu_desktop_eng">
                            Desktop
+                        </span>
+                        <span class="nav-link-title" id="sms_mu_desktop_heb">
+                           שולחן עבודה
                         </span>
                      </a>
                   </li>
-                     <!-- <li class="nav-item" id="sms_e_products"('sms_e_products')">
-                                 <a class="nav-link" href="./products.php" >
-                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                    <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_272_244)">
-                                    <path d="M0 3.1111C0 2.37222 0.594444 1.77777 1.33333 1.77777H3.86111C5.08333 1.77777 6.16667 2.48888 6.67222 3.55555H29.5056C30.9667 3.55555 32.0333 4.94444 31.65 6.35555L29.3722 14.8167C28.9 16.5611 27.3167 17.7778 25.5111 17.7778H9.48333L9.78333 19.3611C9.90556 19.9889 10.4556 20.4444 11.0944 20.4444H27.1111C27.85 20.4444 28.4444 21.0389 28.4444 21.7778C28.4444 22.5167 27.85 23.1111 27.1111 23.1111H11.0944C9.17222 23.1111 7.52222 21.7444 7.16667 19.8611L4.3 4.80555C4.26111 4.59444 4.07778 4.44444 3.86111 4.44444H1.33333C0.594444 4.44444 0 3.84999 0 3.1111ZM7.11111 27.5555C7.11111 27.2054 7.18009 26.8586 7.3141 26.5351C7.44811 26.2115 7.64454 25.9176 7.89216 25.6699C8.13978 25.4223 8.43375 25.2259 8.75729 25.0919C9.08082 24.9579 9.42759 24.8889 9.77778 24.8889C10.128 24.8889 10.4747 24.9579 10.7983 25.0919C11.1218 25.2259 11.4158 25.4223 11.6634 25.6699C11.911 25.9176 12.1074 26.2115 12.2415 26.5351C12.3755 26.8586 12.4444 27.2054 12.4444 27.5555C12.4444 27.9057 12.3755 28.2525 12.2415 28.576C12.1074 28.8996 11.911 29.1935 11.6634 29.4412C11.4158 29.6888 11.1218 29.8852 10.7983 30.0192C10.4747 30.1532 10.128 30.2222 9.77778 30.2222C9.42759 30.2222 9.08082 30.1532 8.75729 30.0192C8.43375 29.8852 8.13978 29.6888 7.89216 29.4412C7.64454 29.1935 7.44811 28.8996 7.3141 28.576C7.18009 28.2525 7.11111 27.9057 7.11111 27.5555ZM25.7778 24.8889C26.485 24.8889 27.1633 25.1698 27.6634 25.6699C28.1635 26.17 28.4444 26.8483 28.4444 27.5555C28.4444 28.2628 28.1635 28.9411 27.6634 29.4412C27.1633 29.9413 26.485 30.2222 25.7778 30.2222C25.0705 30.2222 24.3923 29.9413 23.8922 29.4412C23.3921 28.9411 23.1111 28.2628 23.1111 27.5555C23.1111 26.8483 23.3921 26.17 23.8922 25.6699C24.3923 25.1698 25.0705 24.8889 25.7778 24.8889Z" fill="#4987D8"/>
-                                    </g>
-                                    <defs>
-                                    <clipPath id="clip0_272_244">
-                                    <rect width="32" height="32" fill="white"/>
-                                    </clipPath>
-                                    </defs>
-                                    </svg>
-                                    </span>
-                                    <span class="nav-link-title">
-                                    Product
-                                    </span>
-                                 </a>
-                          </li> -->
-                                 <!-- 
-                                             <li class="nav-item dropdown">
-                                                   <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="false">
-                                                      <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                                      
-                                                            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <g clip-path="url(#clip0_272_244)">
-                                                <path d="M0 3.1111C0 2.37222 0.594444 1.77777 1.33333 1.77777H3.86111C5.08333 1.77777 6.16667 2.48888 6.67222 3.55555H29.5056C30.9667 3.55555 32.0333 4.94444 31.65 6.35555L29.3722 14.8167C28.9 16.5611 27.3167 17.7778 25.5111 17.7778H9.48333L9.78333 19.3611C9.90556 19.9889 10.4556 20.4444 11.0944 20.4444H27.1111C27.85 20.4444 28.4444 21.0389 28.4444 21.7778C28.4444 22.5167 27.85 23.1111 27.1111 23.1111H11.0944C9.17222 23.1111 7.52222 21.7444 7.16667 19.8611L4.3 4.80555C4.26111 4.59444 4.07778 4.44444 3.86111 4.44444H1.33333C0.594444 4.44444 0 3.84999 0 3.1111ZM7.11111 27.5555C7.11111 27.2054 7.18009 26.8586 7.3141 26.5351C7.44811 26.2115 7.64454 25.9176 7.89216 25.6699C8.13978 25.4223 8.43375 25.2259 8.75729 25.0919C9.08082 24.9579 9.42759 24.8889 9.77778 24.8889C10.128 24.8889 10.4747 24.9579 10.7983 25.0919C11.1218 25.2259 11.4158 25.4223 11.6634 25.6699C11.911 25.9176 12.1074 26.2115 12.2415 26.5351C12.3755 26.8586 12.4444 27.2054 12.4444 27.5555C12.4444 27.9057 12.3755 28.2525 12.2415 28.576C12.1074 28.8996 11.911 29.1935 11.6634 29.4412C11.4158 29.6888 11.1218 29.8852 10.7983 30.0192C10.4747 30.1532 10.128 30.2222 9.77778 30.2222C9.42759 30.2222 9.08082 30.1532 8.75729 30.0192C8.43375 29.8852 8.13978 29.6888 7.89216 29.4412C7.64454 29.1935 7.44811 28.8996 7.3141 28.576C7.18009 28.2525 7.11111 27.9057 7.11111 27.5555ZM25.7778 24.8889C26.485 24.8889 27.1633 25.1698 27.6634 25.6699C28.1635 26.17 28.4444 26.8483 28.4444 27.5555C28.4444 28.2628 28.1635 28.9411 27.6634 29.4412C27.1633 29.9413 26.485 30.2222 25.7778 30.2222C25.0705 30.2222 24.3923 29.9413 23.8922 29.4412C23.3921 28.9411 23.1111 28.2628 23.1111 27.5555C23.1111 26.8483 23.3921 26.17 23.8922 25.6699C24.3923 25.1698 25.0705 24.8889 25.7778 24.8889Z" fill="#4987D8"/>
-                                                </g>
-                                                <defs>
-                                                <clipPath id="clip0_272_244">
-                                                <rect width="32" height="32" fill="white"/>
-                                                </clipPath>
-                                                </defs>
-                                 </svg>
-                                       </span>
-                                       <span class="nav-link-title">Product</span>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                       <div class="dropdown-menu-columns">
-                                             <div class="dropdown-menu-column">
-                                                <a href="./products.php" class="dropdown-item" id="products">Product Management</a>
-                                                <a href="inventory.php" class="dropdown-item" id="inventory">Inventory settings </a>
-                                                <a href="coupons.php" class="dropdown-item" id="coupons">Coupons and benefits</a>
-                                             </div>
-                                       </div>
-                                    </div>
-                  </li> -->
+
                   <li class="nav-item  dropdown m-0">
                      <a class="nav-link dropdown-toggle " id="sms_w_dropdown_title" href="#navbar-layout" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="true">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -399,17 +441,23 @@
                               </defs>
                            </svg>
                         </span>
-                        <span class="nav-link-title">
+                        <span class="nav-link-title" id="sms_mu_desktop_eng1">
                            Product
+                        </span>
+                        <span class="nav-link-title" id="sms_mu_desktop_heb1">
+                           מוצר
                         </span>
                      </a>
                      <div class="dropdown-menu  " id="dropdown-menu">
                         <div class="dropdown-menu-columns">
                            <div class="dropdown-menu-column">
                               <a href="/product" class="dropdown-item " id="product">Product Management</a>
+                              <a href="/product" class="dropdown-item " id="product-heb">ניהול מוצר</a>
                               <a href="/inventory" class="dropdown-item" id="inventory">Inventory
                                  settings </a>
+                              <a href="/inventory" class="dropdown-item" id="inventory-heb">הגדרות מלאי</a>
                               <a href="/coupons" class="dropdown-item" id="coupons">Coupons and benefits</a>
+                              <a href="/coupons" class="dropdown-item" id="coupons-heb">קופונים והטבות</a>
                            </div>
                         </div>
                      </div>
@@ -423,8 +471,11 @@
                            </svg>
 
                         </span>
-                        <span class="nav-link-title">
+                        <span class="nav-link-title" id="sms_mu_desktop_eng2">
                            Customer
+                        </span>
+                        <span class="nav-link-title" id="sms_mu_desktop_heb2">
+                           צרכן
                         </span>
                      </a>
                   </li>
@@ -436,8 +487,11 @@
                            </svg>
 
                         </span>
-                        <span class="nav-link-title">
-                           Transaction
+                        <span class="nav-link-title" id="sms_mu_desktop_eng3">
+                           Transcaction
+                        </span>
+                        <span class="nav-link-title" id="sms_mu_desktop_heb3">
+                           עִסקָה
                         </span>
                      </a>
                   </li>
@@ -449,8 +503,11 @@
                            </svg>
 
                         </span>
-                        <span class="nav-link-title">
-                           Statistics
+                        <span class="nav-link-title" id="sms_mu_desktop_eng4">
+                           Statictis
+                        </span>
+                        <span class="nav-link-title" id="sms_mu_desktop_heb4">
+                           סטָטִיסטִיקָה
                         </span>
                      </a>
                   </li>
@@ -461,8 +518,11 @@
                               <path d="M0 7.255C0 3.25 3.25 0 7.255 0C9.18 0 11.025 0.765 12.385 2.125L16 5.735L19.61 2.125C20.975 0.765 22.82 0 24.745 0C28.75 0 32 3.25 32 7.255V8.74C32 12.75 28.75 16 24.745 16C22.82 16 20.975 15.235 19.615 13.875L16 10.265L12.39 13.875C11.025 15.235 9.18 16 7.255 16C3.25 16 0 12.75 0 8.745V7.255ZM13.735 8L10.125 4.39C9.365 3.63 8.33 3.2 7.255 3.2C5.015 3.2 3.2 5.015 3.2 7.255V8.74C3.2 10.98 5.015 12.795 7.255 12.795C8.33 12.795 9.365 12.37 10.125 11.605L13.735 8ZM18.26 8L21.87 11.61C22.63 12.37 23.665 12.8 24.74 12.8C26.98 12.8 28.795 10.985 28.795 8.745V7.255C28.795 5.015 26.98 3.2 24.74 3.2C23.665 3.2 22.63 3.625 21.87 4.39L18.265 8H18.26Z" fill="#4987D8" />
                            </svg>
                         </span>
-                        <span class="nav-link-title">
+                        <span class="nav-link-title" id="sms_mu_desktop_eng5">
                            Objectives
+                        </span>
+                        <span class="nav-link-title" id="sms_mu_desktop_heb5">
+                           יעדים
                         </span>
                      </a>
                   </li>
@@ -474,8 +534,11 @@
                            </svg>
                         </span>
 
-                        <span class="nav-link-title">
+                        <span class="nav-link-title" id="sms_mu_desktop_eng6">
                            Optimization
+                        </span>
+                        <span class="nav-link-title" id="sms_mu_desktop_heb6">
+                           אופטימיזציה
                         </span>
                      </a>
 
@@ -483,7 +546,7 @@
                   </li>
                   <span style="display: block; height: 2px; background-color: rgba(73, 135, 216, 0.4); width:90%; margin:auto"></span>
 
-                  <h4 class="m-0 px-3">Support</h4>
+                  <h4 class="m-0 px-3" id="support">Support</h4>
                   <li class="nav-item" id="setting">
                      <a class="nav-link" href="./setting.php">
                         <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -492,9 +555,11 @@
                            </svg>
 
                         </span>
-
-                        <span class="nav-link-title">
+                        <span class="nav-link-title" id="sms_mu_desktop_eng_set">
                            Setting
+                        </span>
+                        <span class="nav-link-title" id="sms_mu_desktop_heb_set">
+                           הגדרה
                         </span>
                      </a>
                   </li>
@@ -509,8 +574,11 @@
 
                         </span>
 
-                        <span class="nav-link-title">
+                        <span class="nav-link-title" id="sms_mu_desktop_eng_sp">
                            Help and support
+                        </span>
+                        <span class="nav-link-title" id="sms_mu_desktop_heb_sp">
+                           עזרה ותמיכה
                         </span>
                      </a>
                   </li>
@@ -530,14 +598,16 @@
          </div>
       </aside>
       <!-- Navbar -->
-      <header class="navbar navbar-expand-md d-none d-lg-flex d-print-none" style="background-color: #F2F2F2;">
+      <header class="navbar navbar-expand-md d-none d-lg-flex d-print-none sms_mu_header" style="background-color: #F2F2F2;">
          <div class="d-flex flex-row w-100 justify-content-between align-items-center px-3">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="sms_header_page_name" id="sms_header_page_name"></div>
             <div class="d-flex gap-4">
-               <button class="rounded-pill border-0" style="background-color:#4987D870; ">Login to the mailing system
+               <button class="rounded-pill border-0" style="background-color:#4987D870; " id="sms_mu_desktop_eng_btn">Login to the mailing system
+                  →</button>
+               <button class="rounded-pill border-0" style="background-color:#4987D870; " id="sms_mu_desktop_heb_btn">כניסה למערכת הדיוור
                   →</button>
 
                <div class="navbar-nav flex-row order-md-last">
@@ -657,9 +727,9 @@
                            </div>
                         </div>
                      </div>
-                     <button id="switchBtn" class="border-0 rounded-circle">
+                     <button id="switchBtn" class="border-0 rounded-circle" onclick="switchLanguage()">
 
-                        <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle" onclick="funChangeDir()">
+                        <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle">
 
                      </button>
 
@@ -707,12 +777,11 @@
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
          <!-- <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script> -->
          <script>
-            // $(document).ready(function () {
-            //    $(".chosen-select").chosen({
-            //       no_results_text: "Oops, nothing found!"
-            //    });
-            // });
             window.addEventListener('load', function() {
+               setPageName();
+            });
+
+            function setPageName() {
                const currentURL = window.location.href;
                const domainName = 'storemanagement-frontend';
 
@@ -720,23 +789,61 @@
                const pathname = new URL(currentURL).pathname;
                const currentSlug = pathname.split('/').filter(Boolean).pop().replace('.php', '') || 'index';
 
-               // Define page names
+               // Define page names for English and Hebrew
                const pageNames = {
-                  'index': 'Dashboard',
-                  'product': 'Product Management',
-                  'inventory': 'Inventory Setting',
-                  'coupons': 'Coupons And Benefits',
-                  'customers': 'Customer',
-                  'transactions': 'Transaction',
-                  'statistics': 'Statistics',
-                  'goals': 'Objectives',
-                  'optimization': 'Optimization',
-                  'setting': 'Setting',
-                  'help': 'Help And Support'
+                  'index': {
+                     en: 'Dashboard',
+                     he: 'לוח מחוונים'
+                  },
+                  'product': {
+                     en: 'Product Management',
+                     he: 'ניהול מוצרים'
+                  },
+                  'inventory': {
+                     en: 'Inventory Setting',
+                     he: 'הגדרת מלאי'
+                  },
+                  'coupons': {
+                     en: 'Coupons And Benefits',
+                     he: 'קופונים והטבות'
+                  },
+                  'customers': {
+                     en: 'Customer',
+                     he: 'לקוח'
+                  },
+                  'transactions': {
+                     en: 'Transaction',
+                     he: 'עסקאות'
+                  },
+                  'statistics': {
+                     en: 'Statistics',
+                     he: 'סטטיסטיקות'
+                  },
+                  'goals': {
+                     en: 'Objectives',
+                     he: 'יעדים'
+                  },
+                  'optimization': {
+                     en: 'Optimization',
+                     he: 'אופטימיזציה'
+                  },
+                  'setting': {
+                     en: 'Setting',
+                     he: 'הגדרות'
+                  },
+                  'help': {
+                     en: 'Help And Support',
+                     he: 'עזרה ותמיכה'
+                  }
                };
 
-               // Get the name based on the current slug
-               const name = pageNames[currentSlug] || 'Unknown';
+               // Determine if the page is in RTL mode
+               const bodyElement = document.getElementById('myDiv');
+               const isRtl = bodyElement && bodyElement.classList.contains('rtl');
+               console.log(isRtl.value)
+
+               // Get the name based on the current slug and language
+               const name = pageNames[currentSlug] ? (isRtl ? pageNames[currentSlug].he : pageNames[currentSlug].en) : 'Unknown';
 
                // Update the page name element
                const headerPageNameElement = document.getElementById('sms_header_page_name');
@@ -763,7 +870,7 @@
                   });
                   navItem.classList.add('sms_e_active_item');
                }
-            });
+            }
          </script>
          <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
          <script>
@@ -778,7 +885,7 @@
 
 
             });
-          
+
             $(document).ready(function() {
 
                var multipleCancelButton = new Choices('#IOP', {
@@ -835,21 +942,4 @@
 
 
             // });
-         </script>
-
-
-         <script>
-            var myElement = document.getElementById("myDiv");
-            var index = 1;
-
-            function funChangeDir() {
-               index += 1;
-               if (index % 2 === 0) {
-                  myElement.classList.add("rtl");
-                  console.log(myElement);
-               } else {
-                  myElement.classList.remove("rtl");
-                  console.log(myElement);
-               }
-            }
          </script>

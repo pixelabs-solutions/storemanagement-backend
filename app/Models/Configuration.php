@@ -51,7 +51,7 @@ class Configuration
         }
     }
 
-    public static function getConfiguration()
+    public static function getConfiguration($fromApp = null)
     {
         global $connection;
         $user_id = Authentication::getUserId();

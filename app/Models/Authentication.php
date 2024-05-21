@@ -1,7 +1,8 @@
 <?php
 
 namespace Pixelabs\StoreManagement\Models;
-
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 class Authentication
 {
@@ -121,4 +122,89 @@ class Authentication
     private static function hashPassword($password) {
         return password_hash($password, PASSWORD_DEFAULT);
     }
+
+    //JWT Authentication
+    function loginWithJWT($email, $password) {
+        global $connection;
+    
+        if (!empty($email) && !empty($password)) {
+            $stmt = $connection->prepare("SELECT id, password FROM users WHERE email = ?");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
+    
+            if ($result->num_rows == 1) {
+                $user = $result->fetch_assoc();
+                if (password_verify($password, $user['password'])) {
+                    $userId = $user['id'];
+                    $secretKey = "irrULnPSFnSrV1Y65cdV";
+                    $issuedAt = time();
+                    $expirationTime = $issuedAt + 3600;  // jwt valid for 1 hour
+                    $payload = array(
+                        'user_id' => $userId,
+                        'iat' => $issuedAt,
+                        'exp' => $expirationTime
+                    );
+    
+                    $jwt = JWT::encode($payload, $secretKey, 'HS256');
+    
+                    http_response_code(200);
+                    return json_encode(array(
+                        "message" => "Logged in successfully.",
+                        "token" => $jwt,
+                        "status_code" => 200
+                    ));
+                } else {
+                    http_response_code(401);
+                    return json_encode(array(
+                        "message" => "Login failed. Password does not match.",
+                        "status_code" => 401
+                    ));
+                }
+            } else {
+                http_response_code(404);
+                return json_encode(array(
+                    "message" => "Login failed. User not found.",
+                    "status_code" => 404
+                ));
+            }
+            $stmt->close();
+        } else {
+            http_response_code(400);
+            return json_encode(array(
+                "message" => "Login failed. Data is incomplete.",
+                "status_code" => 400
+            ));
+        }
+    }
+
+
+    function verifyJWT($token) {
+        $secretKey = "irrULnPSFnSrV1Y65cdV";
+        try {
+            $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
+            return $decoded;
+        } catch (Exception $e) {
+            http_response_code(401);
+            echo json_encode(array(
+                "message" => "Access denied. Invalid token.",
+                "status_code" => 401
+            ));
+            exit();
+        }
+    }
+
+    function isUserLoggedInApp() {
+        $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+        list($jwt) = sscanf($authHeader, 'Bearer %s');
+    
+        if ($jwt) {
+            $decoded = self::verifyJWT($jwt);
+            if ($decoded && isset($decoded->user_id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -3,13 +3,22 @@
         'name' => 'pixelabs/store-management',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '5550ef95c060c8206c7b17f35e27ac1ee3902386',
+        'reference' => 'e0564f5c618f83a36706ad478c04f8f45f8ce8e5',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
+        'firebase/php-jwt' => array(
+            'pretty_version' => 'v6.4.0',
+            'version' => '6.4.0.0',
+            'reference' => '4dd1e007f22a927ac77da5a3fbb067b42d3bc224',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../firebase/php-jwt',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'graham-campbell/result-type' => array(
             'pretty_version' => 'v1.1.2',
             'version' => '1.1.2.0',
@@ -58,7 +67,7 @@
         'pixelabs/store-management' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '5550ef95c060c8206c7b17f35e27ac1ee3902386',
+            'reference' => 'e0564f5c618f83a36706ad478c04f8f45f8ce8e5',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
