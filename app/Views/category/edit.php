@@ -192,7 +192,7 @@
 
         // Log form data to the console
         console.log("Form data:", form_data);
-        fetch('/categories/add', {
+         fetch('/categories/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

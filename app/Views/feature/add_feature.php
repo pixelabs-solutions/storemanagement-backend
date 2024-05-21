@@ -679,12 +679,12 @@
         newInput.classList.add('col-md-12', 'mb-3', 'p-2');
         newInput.innerHTML = `
     <div class='gx-3'>
-        <label for="${uniqueId}" class="form-label" data-i18n="popoups.future_managment.add_new_feature.name_of_term">The name of the term</label>
+        <label for="${uniqueId}" class="form-label">The name of the term</label>
         <div> 
             <input type="text" class="form-control text-dark rounded-3 p-3 fw-bold" id="sms_name_of_attribute"  placeholder="Pink">
         </div>
         <div>
-            <label class="form-label mt-4"  data-i18n="popoups.add_new_term.d_term">Selecting an image to display the term</label>
+            <label class="form-label mt-4" >Selecting an image to display the term</label>
             <div class="sms_a_custom_file_input" id="imageInputContainer">
                 <input type="file" id="${uniqueId}" accept="image/*" onchange="showFileName(this)">
                 <label for="${uniqueId}">
