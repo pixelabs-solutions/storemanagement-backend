@@ -384,6 +384,7 @@ const translations = {
         name_of_term: "The name of the term",
         term_price: "Term price",
         saleprice: "Sale Price",
+        select_term: "Select Term Attribute",
         unit: "unit in stock",
         term_inventory: "Term inventory",
         adding_btn_variation: "Adding an additional term to + variations",
@@ -438,7 +439,7 @@ const translations = {
           heading: "Added a new feature",
           heading_for_edit: "",
           color_select_atr: "The attribute name",
-          "d-type": "Display Type (Color/Image)",
+          d_type: "Display Type (Color/Image)",
           hero_heading: "Adding terms to the feature",
           name_of_term: "The name of the term",
           select_img_uplode: "Selecting an image",
@@ -476,7 +477,7 @@ const translations = {
           feature: "associated feature",
           error_alert: "Choosing a color for the display of the term",
           name_of_term_pink: "The name of the term",
-          "d-term": "Selecting an image to display the term",
+          d_term: "Selecting an image to display the term",
           select_img_uplode: "Selecting an image",
           select_color: "Color change",
           term_end_btn: "To add another term click here +",
@@ -969,6 +970,7 @@ const translations = {
         gallery_upload: "העלאת גלריית תמונות",
         gallery_upload_text: "בחירת תמונות",
         saleprice: "מחיר מבצע",
+        select_term:"בחר מאפיין מונח",
         unit: "יחידות במלאי",
         text_area_text: "תיאור קצר של המוצר",
         select_area_text: "בחירת מאפיין לשינויים במוצר",
@@ -1028,7 +1030,7 @@ const translations = {
           heading: "הוספת מאפיין חדש",
           heading_for_edit: "",
           color_select_atr: "שם המאפיין",
-          "d-type": "סוג התצוגה (תמונה/צבע)",
+          d_type: "סוג התצוגה (תמונה/צבע)",
           hero_heading: "הוספת מונחים למאפיין",
           name_of_term: "שם המונח",
           select_img_uplode: "בחירת תמונה",
@@ -1066,7 +1068,7 @@ const translations = {
           feature: "מאפיין משויך",
           error_alert: "בחירת צבע לתצוגת המונח",
           name_of_term_pink: "שם המונח",
-          "d-term": "בחירת תמונה לתצוגת המונח",
+          d_term: "בחירת תמונה לתצוגת המונח",
           select_img_uplode: "בחירת תמונה",
           select_color: "שינוי צבע",
           term_end_btn: "להוספת מונח נוסף לחצו כאן +",
@@ -1191,7 +1193,6 @@ function updateContent(language) {
   //   .getElementById("switchBtn")
   //   .addEventListener("click", switchLanguage);
 
-  
   const content = document.getElementById("content");
   const elementsToUpdate = content.querySelectorAll("[data-i18n]");
 
@@ -1213,8 +1214,8 @@ function updateContent(language) {
 function switchLanguage() {
   currentLanguage = currentLanguage === "en" ? "he" : "en";
   // document.getElementById("switchBtn").innerHTML=currentLanguage;
-console.log(currentLanguage)
-const languageIcon = document.getElementById("languageIcon");
+  console.log(currentLanguage);
+  const languageIcon = document.getElementById("languageIcon");
   if (currentLanguage === "he") {
     languageIcon.src = "/assets/dist/img/uk.png"; // Set English flag image source
     languageIcon.alt = "English Flag"; // Set alt text
@@ -1223,15 +1224,14 @@ const languageIcon = document.getElementById("languageIcon");
     languageIcon.alt = "Hebrew Flag"; // Set alt text
   }
   let myElement = document.getElementById("myDiv");
-    if (currentLanguage === "he") {
-      myElement.classList.add("rtl"); 
-    } else {
-      myElement.classList.remove("rtl");
-    }
+  if (currentLanguage === "he") {
+    myElement.classList.add("rtl");
+  } else {
+    myElement.classList.remove("rtl");
+  }
   updateContent(currentLanguage);
   setPageName();
 }
-
 // Initial content update
 updateContent(currentLanguage);
 

@@ -105,11 +105,11 @@
         <div class="d-flex gap-2">
           <!-- <a href="add_feature.php"> -->
           <button class="rounded-4 border-0 p-2 " onclick="openModal('sms_category_w_add_term_modal')"
-            style="background-color:#4987D870; ">Added new feature +</button>
+            style="background-color:#4987D870;" data-i18n="popoups.future_managment.feature_btn">Added new feature +</button>
           <!-- </a> -->
           <!-- <a href="add_new_term.php"> -->
           <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; "
-            onclick="openModal('sms_category_w_add_feature_modal')">Adding a new term +</button>
+            onclick="openModal('sms_category_w_add_feature_modal')" data-i18n="popoups.future_managment.term_btn">Adding a new term +</button>
           <!-- </a> -->
         </div>
 
@@ -122,12 +122,12 @@
           <table class="sms_mu_table" id="sms_feature_m_feature_table">
             <thead>
               <tr class="sms_mu_th sms_w_table_head_feature">
-                <th class="sms_mu_td">action</th>
-                <th class="sms_mu_td">display type</th>
-                <th class=".sms_mu_th">product</th>
-                <th class="sms_mu_td">associated feature</th>
-                <th class="sms_mu_td">the name of the term </th>
-                <th class="sms_mu_td">Image/color</th>
+                <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_action">action</th>
+                <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_product">display type</th>
+                <th class=".sms_mu_th" data-i18n="popoups.future_managment.th_in_feture.th_product">product</th>
+                <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_in_feture">associated feature</th>
+                <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_name_term">the name of the term </th>
+                <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_color">Image/color</th>
 
               </tr>
               <tr class="sms_mu_spacing_div"></tr>

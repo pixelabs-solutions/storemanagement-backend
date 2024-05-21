@@ -80,8 +80,11 @@
       .rtl .avatar {
          margin-left: 10px;
       }
+
       .choices__input {
-         background-color:transparent  !important;}
+         background-color: transparent !important;
+      }
+
       .nav-item {
          border-left: 4px solid transparent;
          border-radius: 20px;
@@ -157,10 +160,6 @@
          gap: 10px;
       }
 
-
-
-
-
       /* css for rtl */
       .rtl .sms_mu_for_rtl {
          gap: 46% !important;
@@ -214,20 +213,21 @@
          border-top-right-radius: 0px !important;
          border-bottom-right-radius: 0px !important;
       }
-     .sms_mu_table_product  td:first-child {
+
+      .sms_mu_table_product td:first-child {
          text-align: center !important;
       }
 
-     .sms_mu_table_product td:last-child {
-      text-align: center !important;
-      }
-
-     .sms_mu_table_product  th:first-child {
+      .sms_mu_table_product td:last-child {
          text-align: center !important;
       }
 
-      .sms_mu_table_product  th:last-child {
-        text-align: center !important;
+      .sms_mu_table_product th:first-child {
+         text-align: center !important;
+      }
+
+      .sms_mu_table_product th:last-child {
+         text-align: center !important;
       }
 
       .rtl .sms_mu_for_rtl {
@@ -309,8 +309,77 @@
          right: 28.75rem;
          left: auto;
       }
-      .rtl .sms_mu_header{
+
+      .rtl .sms_mu_header {
          margin-right: 17%;
+      }
+
+      .abc #sms_mu_desktop_heb,
+      .abc #sms_mu_desktop_heb1,
+      .abc #sms_mu_desktop_heb2,
+      .abc #sms_mu_desktop_heb3,
+      .abc #sms_mu_desktop_heb4,
+      .abc #sms_mu_desktop_heb5,
+      .abc #sms_mu_desktop_heb6,
+      .abc #sms_mu_desktop_heb_set,
+      .abc #sms_mu_desktop_heb_sp,
+      .abc #sms_mu_desktop_heb_btn,
+      .abc #product-heb,
+      .abc #inventory-heb,
+      .abc #coupons-heb,
+      .abc #support{
+         display: none !important;
+      }
+
+      .abc #sms_mu_desktop_eng,
+      .abc #sms_mu_desktop_eng1,
+      .abc #sms_mu_desktop_eng2,
+      .abc #sms_mu_desktop_eng3,
+      .abc #sms_mu_desktop_eng4,
+      .abc #sms_mu_desktop_eng5,
+      .abc #sms_mu_desktop_eng6,
+      .abc #sms_mu_desktop_eng_set,
+      .abc #sms_mu_desktop_eng_sp,
+      .abc #sms_mu_desktop_eng_btn,
+      .abc #product,
+      .abc #inventory,
+      .abc #coupons,
+      .abc #support {
+         display: block !important;
+      }
+
+      .rtl #sms_mu_desktop_heb,
+      .rtl #sms_mu_desktop_heb1,
+      .rtl #sms_mu_desktop_heb2,
+      .rtl #sms_mu_desktop_heb3,
+      .rtl #sms_mu_desktop_heb4,
+      .rtl #sms_mu_desktop_heb5,
+      .rtl #sms_mu_desktop_heb6,
+      .rtl #sms_mu_desktop_heb_set,
+      .rtl #sms_mu_desktop_heb_sp,
+      .rtl #sms_mu_desktop_heb_btn,
+      .rtl #product-heb,
+      .rtl #inventory-heb,
+      .rtl #coupons-heb,
+      .rtl #support{
+         display: block !important;
+      }
+
+      .rtl #sms_mu_desktop_eng,
+      .rtl #sms_mu_desktop_eng1,
+      .rtl #sms_mu_desktop_eng2,
+      .rtl #sms_mu_desktop_eng3,
+      .rtl #sms_mu_desktop_eng4,
+      .rtl #sms_mu_desktop_eng5,
+      .rtl #sms_mu_desktop_eng6,
+      .rtl #sms_mu_desktop_eng_set,
+      .rtl #sms_mu_desktop_eng_sp,
+      .rtl #sms_mu_desktop_eng_btn,
+      .rtl #product,
+      .rtl #inventory,
+      .rtl #coupons,
+      .rtl #support{
+         display: none !important;
       }
    </style>
 </head>
@@ -348,12 +417,15 @@
                               </defs>
                            </svg>
                         </span>
-                        <span class="nav-link-title" data-i18n="header.desktop" >
+                        <span class="nav-link-title" id="sms_mu_desktop_eng">
                            Desktop
+                        </span>
+                        <span class="nav-link-title" id="sms_mu_desktop_heb">
+                           שולחן עבודה
                         </span>
                      </a>
                   </li>
-                    
+
                   <li class="nav-item  dropdown m-0">
                      <a class="nav-link dropdown-toggle " id="sms_w_dropdown_title" href="#navbar-layout" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="true">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -369,17 +441,23 @@
                               </defs>
                            </svg>
                         </span>
-                        <span class="nav-link-title">
+                        <span class="nav-link-title" id="sms_mu_desktop_eng1">
                            Product
+                        </span>
+                        <span class="nav-link-title" id="sms_mu_desktop_heb1">
+                           מוצר
                         </span>
                      </a>
                      <div class="dropdown-menu  " id="dropdown-menu">
                         <div class="dropdown-menu-columns">
                            <div class="dropdown-menu-column">
                               <a href="/product" class="dropdown-item " id="product">Product Management</a>
+                              <a href="/product" class="dropdown-item " id="product-heb">ניהול מוצר</a>
                               <a href="/inventory" class="dropdown-item" id="inventory">Inventory
                                  settings </a>
+                              <a href="/inventory" class="dropdown-item" id="inventory-heb">הגדרות מלאי</a>
                               <a href="/coupons" class="dropdown-item" id="coupons">Coupons and benefits</a>
+                              <a href="/coupons" class="dropdown-item" id="coupons-heb">קופונים והטבות</a>
                            </div>
                         </div>
                      </div>
@@ -393,8 +471,11 @@
                            </svg>
 
                         </span>
-                        <span class="nav-link-title">
+                        <span class="nav-link-title" id="sms_mu_desktop_eng2">
                            Customer
+                        </span>
+                        <span class="nav-link-title" id="sms_mu_desktop_heb2">
+                           צרכן
                         </span>
                      </a>
                   </li>
@@ -406,8 +487,11 @@
                            </svg>
 
                         </span>
-                        <span class="nav-link-title">
-                           Transaction
+                        <span class="nav-link-title" id="sms_mu_desktop_eng3">
+                           Transcaction
+                        </span>
+                        <span class="nav-link-title" id="sms_mu_desktop_heb3">
+                           עִסקָה
                         </span>
                      </a>
                   </li>
@@ -419,8 +503,11 @@
                            </svg>
 
                         </span>
-                        <span class="nav-link-title">
-                           Statistics
+                        <span class="nav-link-title" id="sms_mu_desktop_eng4">
+                           Statictis
+                        </span>
+                        <span class="nav-link-title" id="sms_mu_desktop_heb4">
+                           סטָטִיסטִיקָה
                         </span>
                      </a>
                   </li>
@@ -431,8 +518,11 @@
                               <path d="M0 7.255C0 3.25 3.25 0 7.255 0C9.18 0 11.025 0.765 12.385 2.125L16 5.735L19.61 2.125C20.975 0.765 22.82 0 24.745 0C28.75 0 32 3.25 32 7.255V8.74C32 12.75 28.75 16 24.745 16C22.82 16 20.975 15.235 19.615 13.875L16 10.265L12.39 13.875C11.025 15.235 9.18 16 7.255 16C3.25 16 0 12.75 0 8.745V7.255ZM13.735 8L10.125 4.39C9.365 3.63 8.33 3.2 7.255 3.2C5.015 3.2 3.2 5.015 3.2 7.255V8.74C3.2 10.98 5.015 12.795 7.255 12.795C8.33 12.795 9.365 12.37 10.125 11.605L13.735 8ZM18.26 8L21.87 11.61C22.63 12.37 23.665 12.8 24.74 12.8C26.98 12.8 28.795 10.985 28.795 8.745V7.255C28.795 5.015 26.98 3.2 24.74 3.2C23.665 3.2 22.63 3.625 21.87 4.39L18.265 8H18.26Z" fill="#4987D8" />
                            </svg>
                         </span>
-                        <span class="nav-link-title">
+                        <span class="nav-link-title" id="sms_mu_desktop_eng5">
                            Objectives
+                        </span>
+                        <span class="nav-link-title" id="sms_mu_desktop_heb5">
+                           יעדים
                         </span>
                      </a>
                   </li>
@@ -444,8 +534,11 @@
                            </svg>
                         </span>
 
-                        <span class="nav-link-title">
+                        <span class="nav-link-title" id="sms_mu_desktop_eng6">
                            Optimization
+                        </span>
+                        <span class="nav-link-title" id="sms_mu_desktop_heb6">
+                           אופטימיזציה
                         </span>
                      </a>
 
@@ -453,7 +546,7 @@
                   </li>
                   <span style="display: block; height: 2px; background-color: rgba(73, 135, 216, 0.4); width:90%; margin:auto"></span>
 
-                  <h4 class="m-0 px-3">Support</h4>
+                  <h4 class="m-0 px-3" id="support">Support</h4>
                   <li class="nav-item" id="setting">
                      <a class="nav-link" href="./setting.php">
                         <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -462,9 +555,11 @@
                            </svg>
 
                         </span>
-
-                        <span class="nav-link-title">
+                        <span class="nav-link-title" id="sms_mu_desktop_eng_set">
                            Setting
+                        </span>
+                        <span class="nav-link-title" id="sms_mu_desktop_heb_set">
+                           הגדרה
                         </span>
                      </a>
                   </li>
@@ -479,8 +574,11 @@
 
                         </span>
 
-                        <span class="nav-link-title">
+                        <span class="nav-link-title" id="sms_mu_desktop_eng_sp">
                            Help and support
+                        </span>
+                        <span class="nav-link-title" id="sms_mu_desktop_heb_sp">
+                           עזרה ותמיכה
                         </span>
                      </a>
                   </li>
@@ -507,7 +605,9 @@
             </button>
             <div class="sms_header_page_name" id="sms_header_page_name"></div>
             <div class="d-flex gap-4">
-               <button class="rounded-pill border-0" style="background-color:#4987D870; ">Login to the mailing system
+               <button class="rounded-pill border-0" style="background-color:#4987D870; " id="sms_mu_desktop_eng_btn">Login to the mailing system
+                  →</button>
+               <button class="rounded-pill border-0" style="background-color:#4987D870; " id="sms_mu_desktop_heb_btn">כניסה למערכת הדיוור
                   →</button>
 
                <div class="navbar-nav flex-row order-md-last">
@@ -629,7 +729,7 @@
                      </div>
                      <button id="switchBtn" class="border-0 rounded-circle" onclick="switchLanguage()">
 
-                        <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle" >
+                        <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle">
 
                      </button>
 
@@ -677,68 +777,100 @@
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
          <!-- <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script> -->
          <script>
-   window.addEventListener('load', function() {
-    setPageName();
-});
+            window.addEventListener('load', function() {
+               setPageName();
+            });
 
-function setPageName() {
-    const currentURL = window.location.href;
-    const domainName = 'storemanagement-frontend';
+            function setPageName() {
+               const currentURL = window.location.href;
+               const domainName = 'storemanagement-frontend';
 
-    // Extract the slug from the URL
-    const pathname = new URL(currentURL).pathname;
-    const currentSlug = pathname.split('/').filter(Boolean).pop().replace('.php', '') || 'index';
+               // Extract the slug from the URL
+               const pathname = new URL(currentURL).pathname;
+               const currentSlug = pathname.split('/').filter(Boolean).pop().replace('.php', '') || 'index';
 
-    // Define page names for English and Hebrew
-    const pageNames = {
-        'index': { en: 'Dashboard', he: 'לוח מחוונים' },
-        'product': { en: 'Product Management', he: 'ניהול מוצרים' },
-        'inventory': { en: 'Inventory Setting', he: 'הגדרת מלאי' },
-        'coupons': { en: 'Coupons And Benefits', he: 'קופונים והטבות' },
-        'customers': { en: 'Customer', he: 'לקוח' },
-        'transactions': { en: 'Transaction', he: 'עסקאות' },
-        'statistics': { en: 'Statistics', he: 'סטטיסטיקות' },
-        'goals': { en: 'Objectives', he: 'יעדים' },
-        'optimization': { en: 'Optimization', he: 'אופטימיזציה' },
-        'setting': { en: 'Setting', he: 'הגדרות' },
-        'help': { en: 'Help And Support', he: 'עזרה ותמיכה' }
-    };
+               // Define page names for English and Hebrew
+               const pageNames = {
+                  'index': {
+                     en: 'Dashboard',
+                     he: 'לוח מחוונים'
+                  },
+                  'product': {
+                     en: 'Product Management',
+                     he: 'ניהול מוצרים'
+                  },
+                  'inventory': {
+                     en: 'Inventory Setting',
+                     he: 'הגדרת מלאי'
+                  },
+                  'coupons': {
+                     en: 'Coupons And Benefits',
+                     he: 'קופונים והטבות'
+                  },
+                  'customers': {
+                     en: 'Customer',
+                     he: 'לקוח'
+                  },
+                  'transactions': {
+                     en: 'Transaction',
+                     he: 'עסקאות'
+                  },
+                  'statistics': {
+                     en: 'Statistics',
+                     he: 'סטטיסטיקות'
+                  },
+                  'goals': {
+                     en: 'Objectives',
+                     he: 'יעדים'
+                  },
+                  'optimization': {
+                     en: 'Optimization',
+                     he: 'אופטימיזציה'
+                  },
+                  'setting': {
+                     en: 'Setting',
+                     he: 'הגדרות'
+                  },
+                  'help': {
+                     en: 'Help And Support',
+                     he: 'עזרה ותמיכה'
+                  }
+               };
 
-    // Determine if the page is in RTL mode
-    const bodyElement = document.getElementById('myDiv');
-    const isRtl = bodyElement && bodyElement.classList.contains('rtl');
+               // Determine if the page is in RTL mode
+               const bodyElement = document.getElementById('myDiv');
+               const isRtl = bodyElement && bodyElement.classList.contains('rtl');
+               console.log(isRtl.value)
 
-    // Get the name based on the current slug and language
-    const name = pageNames[currentSlug] ? (isRtl ? pageNames[currentSlug].he : pageNames[currentSlug].en) : 'Unknown';
+               // Get the name based on the current slug and language
+               const name = pageNames[currentSlug] ? (isRtl ? pageNames[currentSlug].he : pageNames[currentSlug].en) : 'Unknown';
 
-    // Update the page name element
-    const headerPageNameElement = document.getElementById('sms_header_page_name');
-    if (headerPageNameElement) {
-        headerPageNameElement.innerText = name;
-    }
+               // Update the page name element
+               const headerPageNameElement = document.getElementById('sms_header_page_name');
+               if (headerPageNameElement) {
+                  headerPageNameElement.innerText = name;
+               }
 
-    // Handle special cases for dropdown menu
-    const specialCases = ['product', 'inventory', 'coupons'];
-    if (specialCases.includes(currentSlug)) {
-        const dropdownMenu = document.getElementById('dropdown-menu');
-        const dropdownTitle = document.getElementById('sms_w_dropdown_title');
-        if (dropdownMenu && dropdownTitle) {
-            dropdownMenu.classList.add('show');
-            dropdownTitle.classList.add('sms_e_active_item');
-        }
-    }
+               // Handle special cases for dropdown menu
+               const specialCases = ['product', 'inventory', 'coupons'];
+               if (specialCases.includes(currentSlug)) {
+                  const dropdownMenu = document.getElementById('dropdown-menu');
+                  const dropdownTitle = document.getElementById('sms_w_dropdown_title');
+                  if (dropdownMenu && dropdownTitle) {
+                     dropdownMenu.classList.add('show');
+                     dropdownTitle.classList.add('sms_e_active_item');
+                  }
+               }
 
-    // Set active class on navigation item
-    const navItem = document.getElementById(currentSlug);
-    if (navItem) {
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.classList.remove('sms_e_active_item');
-        });
-        navItem.classList.add('sms_e_active_item');
-    }
-}
-
-
+               // Set active class on navigation item
+               const navItem = document.getElementById(currentSlug);
+               if (navItem) {
+                  document.querySelectorAll('.nav-item').forEach(item => {
+                     item.classList.remove('sms_e_active_item');
+                  });
+                  navItem.classList.add('sms_e_active_item');
+               }
+            }
          </script>
          <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
          <script>
@@ -811,6 +943,3 @@ function setPageName() {
 
             // });
          </script>
-
-
-   

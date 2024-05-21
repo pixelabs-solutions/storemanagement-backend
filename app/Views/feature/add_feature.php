@@ -184,12 +184,12 @@
                         <!-- header -->
                         <div class="row gx-3">
                             <div class="col-md-6 mb-3">
-                                <label for="example-text-input" class="form-label">The attribute name</label>
+                                <label for="example-text-input" class="form-label"  data-i18n="popoups.future_managment.add_new_feature.color_select_atr">The attribute name</label>
                                 <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_attribute_name"
                                     placeholder="Pink">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="" class="form-label">Display Type (Color/Image)</label>
+                                <label for="" class="form-label"  data-i18n="popoups.future_managment.add_new_feature.d_type">Display Type (Color/Image)</label>
                                 <div class="h-100">
                                     <select class="form-select form-select-md h-80 bg-transparent"
                                         id="sms_attribute_select" style="    height: 66%;">
@@ -203,7 +203,7 @@
                         <div class="rounded-4 mt-4" style="background-color: #EAEAEA">
                             <div class="col-12 col-md-12 rounded-2" id="sms_a_add_feature">
                                 <div class="py-3 rounded">
-                                    <h3 class="card-title text-black fs-2 fw-bold p-2" style="font-size: 35px;">
+                                    <h3 class="card-title text-black fs-2 fw-bold p-2" style="font-size: 35px;"  data-i18n="popoups.future_managment.add_new_feature.hero_heading">
                                         Adding terms to the feature</h3>
                                 </div>
                                 <!-- <div class="p-2">
@@ -237,14 +237,14 @@
                             <!-- To add another term click here + -->
                             <div class="text-center mt-4 p-3 ">
                                 <button type="button" onclick="sms_a_add_features()"
-                                    class="btn btn-primary col-12 col-md-12 rounded-4 py-3">To add
+                                    class="btn btn-primary col-12 col-md-12 rounded-4 py-3" data-i18n="popoups.future_managment.add_new_feature.term_end_btn">To add
                                     another term click here +</button>
                             </div>
 
                         </div>
 
                         <div class="py-3 rounded">
-                            <h3 class="card-title text-black fs-2 fw-bold p-2" style="font-size: 35px;">Adding terms
+                            <h3 class="card-title text-black fs-2 fw-bold p-2" style="font-size: 35px;"  data-i18n="popoups.future_managment.add_new_feature.hero_heading">Adding terms
                                 to the feature</h3>
                         </div>
 
@@ -252,7 +252,7 @@
                             <div class="sms_a_swatches_preview rounded-4 mt-2 "
                                 style="background-color: #EAEAEA; padding: 20px;">
                                 <div class="d-flex align-items-center mb-3">
-                                    <label class="form-check-label fs-2 ">Selection Field</label>
+                                    <label class="form-check-label fs-2 " data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.card_selection.h1">Selection Field</label>
                                     <div class="col-auto ms-auto">
                                         <label class="form-colorinput form-colorinput-light">
                                             <input type="checkbox" value="white" class="form-colorinput-input"
@@ -285,7 +285,7 @@
                             <div class="sms_a_swatches_preview rounded-4 mt-2 "
                                 style="background-color: #EAEAEA; padding: 20px;">
                                 <div class="d-flex align-items-center mb-3">
-                                    <label class="form-check-label fs-2 ">Radio buttons</label>
+                                    <label class="form-check-label fs-2 "  data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.card_Radio_buttons.h1">Radio buttons</label>
                                     <div class="col-auto ms-auto">
                                         <label class="form-colorinput form-colorinput-light">
                                             <input type="checkbox" value="white" class="form-colorinput-input"
@@ -359,7 +359,7 @@
                             <div class="sms_a_swatches_preview rounded-4 mt-2 "
                                 style="background-color: #EAEAEA; padding: 20px;">
                                 <div class="d-flex align-items-center mb-3">
-                                    <label class="form-check-label fs-2 ">Rounded edges</label>
+                                    <label class="form-check-label fs-2 "  data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.card_Radio_buttons.h1">Rounded edges</label>
                                     <div class="col-auto ms-auto">
                                         <label class="form-colorinput form-colorinput-light">
                                             <input name="color-rounded" type="checkbox" value="white"
@@ -438,7 +438,7 @@
                             <div class="sms_a_swatches_preview rounded-4 mt-2 "
                                 style="background-color: #EAEAEA; padding: 20px;">
                                 <div class="d-flex align-items-center mb-3">
-                                    <label class="form-check-label fs-2 ">Rounded edges</label>
+                                    <label class="form-check-label fs-2 "  data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.card_Radio_buttons.h1">Rounded edges</label>
                                     <div class="col-auto ms-auto">
                                         <label class="form-colorinput form-colorinput-light">
                                             <input name="color-rounded" type="checkbox" value="white"
@@ -486,7 +486,7 @@
                             <div class="sms_a_swatches_preview rounded-4 mt-2 "
                                 style="background-color: #EAEAEA; padding: 20px;">
                                 <div class="d-flex align-items-center mb-3">
-                                    <label class="form-check-label fs-2 ">Radio buttons</label>
+                                    <label class="form-check-label fs-2 "  data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.card_Radio_buttons.h1">Radio buttons</label>
                                     <div class="col-auto ms-auto">
                                         <label class="form-colorinput form-colorinput-light">
                                             <input name="color-rounded" type="checkbox" value="white"
@@ -535,7 +535,7 @@
 
                         <div class="text-center mt-2 p-2  ">
                             <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3"
-                                onclick="submit_add_feature_Data()">To add the
+                                onclick="submit_add_feature_Data()" data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.last_btn_feature">To add the
                                 feature click here +</button>
                         </div>
                     </form>
@@ -679,12 +679,12 @@
         newInput.classList.add('col-md-12', 'mb-3', 'p-2');
         newInput.innerHTML = `
     <div class='gx-3'>
-        <label for="${uniqueId}" class="form-label">The name of the term</label>
+        <label for="${uniqueId}" class="form-label" data-i18n="popoups.future_managment.add_new_feature.name_of_term">The name of the term</label>
         <div> 
             <input type="text" class="form-control text-dark rounded-3 p-3 fw-bold" id="sms_name_of_attribute"  placeholder="Pink">
         </div>
         <div>
-            <label class="form-label mt-4">Selecting an image to display the term</label>
+            <label class="form-label mt-4"  data-i18n="popoups.add_new_term.d_term">Selecting an image to display the term</label>
             <div class="sms_a_custom_file_input" id="imageInputContainer">
                 <input type="file" id="${uniqueId}" accept="image/*" onchange="showFileName(this)">
                 <label for="${uniqueId}">
@@ -692,7 +692,7 @@
                     <svg width="20" height="20" viewBox="0 0 32 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8.88889 0.555542C6.92778 0.555542 5.33333 2.14999 5.33333 4.1111V16.5555C5.33333 18.5167 6.92778 20.1111 8.88889 20.1111H28.4444C30.4056 20.1111 32 18.5167 32 16.5555V4.1111C32 2.14999 30.4056 0.555542 28.4444 0.555542H8.88889ZM22 6.48332L27.3333 14.4833C27.6056 14.8944 27.6333 15.4167 27.4 15.85C27.1667 16.2833 26.7167 16.5555 26.2222 16.5555H18.2222H15.5556H11.1111C10.6 16.5555 10.1333 16.2611 9.91111 15.8C9.68889 15.3389 9.75 14.7889 10.0722 14.3889L13.6278 9.94443C13.8833 9.62776 14.2611 9.44443 14.6667 9.44443C15.0722 9.44443 15.4556 9.62776 15.7056 9.94443L16.6667 11.1444L19.7778 6.47776C20.0278 6.1111 20.4444 5.88888 20.8889 5.88888C21.3333 5.88888 21.75 6.1111 22 6.48332ZM10.6667 5.88888C10.6667 5.41738 10.854 4.96519 11.1874 4.6318C11.5208 4.2984 11.9729 4.1111 12.4444 4.1111C12.9159 4.1111 13.3681 4.2984 13.7015 4.6318C14.0349 4.96519 14.2222 5.41738 14.2222 5.88888C14.2222 6.36037 14.0349 6.81256 13.7015 7.14595C13.3681 7.47935 12.9159 7.66665 12.4444 7.66665C11.9729 7.66665 11.5208 7.47935 11.1874 7.14595C10.854 6.81256 10.6667 6.36037 10.6667 5.88888ZM2.66667 5.44443C2.66667 4.70554 2.07222 4.1111 1.33333 4.1111C0.594444 4.1111 0 4.70554 0 5.44443V17.8889C0 22.0611 3.38333 25.4444 7.55556 25.4444H25.3333C26.0722 25.4444 26.6667 24.85 26.6667 24.1111C26.6667 23.3722 26.0722 22.7778 25.3333 22.7778H7.55556C4.85556 22.7778 2.66667 20.5889 2.66667 17.8889V5.44443Z" fill="black" />
                     </svg>
-                    Selecting an image
+                   <p >Selecting an image</p>
                 </label>
             </div>
         </div>
