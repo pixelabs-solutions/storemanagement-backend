@@ -36,13 +36,13 @@ require_once __DIR__ . '/../partials/header.php';
 <div class="row g-2 mt-5 mb-5 align-items-center sms_mu_for_rtl">
     <!-- Stats header Buttons -->
     <div class="col-auto btn-list">
-        <a href="" class="btn btn-pill btn-light tab-pane sms_w_date_active sms_w_date"
+        <a href="?query=24_hours" class="btn btn-pill btn-light tab-pane sms_w_date_active sms_w_date"
             data-i18n="dashboard.tabs.first_tab"> 24 Hours</a>
-        <a href="" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.second_tab"> Last Week
+        <a href="?query=last_week" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.second_tab"> Last Week
         </a>
-        <a href="" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.third_tab"> Last Month
+        <a href="?query=current_month" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.third_tab"> Last Month
         </a>
-        <a href="" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.fourth_tab"> Last Year
+        <a href="?query=last_year" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.fourth_tab"> Last Year
         </a>
     </div>
     <!-- Date Range Button  Start-->
@@ -564,27 +564,27 @@ require_once __DIR__ . '/../partials/header.php';
 </script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Get all buttons within the div with class 'col-auto btn-list'
-        var buttons = document.querySelectorAll('.sms_w_date');
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     // Get all buttons within the div with class 'col-auto btn-list'
+    //     var buttons = document.querySelectorAll('.sms_w_date');
 
-        // Loop through each button
-        buttons.forEach(function (button) {
-            // Attach onclick event handler
-            button.addEventListener('click', function (event) {
-                // Prevent default action of the anchor tag
-                event.preventDefault();
+    //     // Loop through each button
+    //     buttons.forEach(function (button) {
+    //         // Attach onclick event handler
+    //         button.addEventListener('click', function (event) {
+    //             // Prevent default action of the anchor tag
+    //             event.preventDefault();
 
-                // Remove active class from all buttons
-                buttons.forEach(function (btn) {
-                    btn.classList.remove('sms_w_date_active');
-                });
+    //             // Remove active class from all buttons
+    //             buttons.forEach(function (btn) {
+    //                 btn.classList.remove('sms_w_date_active');
+    //             });
 
-                // Add active class to the clicked button
-                this.classList.add('sms_w_date_active');
-            });
-        });
-    });
+    //             // Add active class to the clicked button
+    //             this.classList.add('sms_w_date_active');
+    //         });
+    //     });
+    // });
 
 </script>
 
