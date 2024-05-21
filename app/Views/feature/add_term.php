@@ -173,7 +173,7 @@
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label">
-                                                <label class="form-label"  data-i18n="popoups.future_managment.add_new_term.d-term">Selecting an image to display the term</label>
+                                                <label class="form-label"  data-i18n="popoups.future_managment.add_new_term.d_term">Selecting an image to display the term</label>
                                                 <div class="sms_a_add_term_input">
                                                     <input type="file" id="sms_term_image" accept="image/*"
                                                         style="background-color:#FFFFFF;"
