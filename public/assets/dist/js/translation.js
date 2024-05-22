@@ -25,7 +25,7 @@ const translations = {
       },
       card_product: {
         card_title: "New Products",
-        Customer_Location: "Customer Location",
+        customer_location: "Customer Location",
         card_num: "647",
         card_percentage: "10%",
         card_num_label: "Last 7 Days",
@@ -97,14 +97,13 @@ const translations = {
         filter_catageary_btn: "Filter by category",
       },
       row: {
-        product_name: "Product name: green Gucci bag",
-        category: "Category: bags, brands,",
-        Price: "Price: 250 NIS",
+        product_name: "Product name:",
+        category: "Category: bags",
+        Price: "Price:",
         Stock: "Stock: 150",
-        Number_of_view: "Number of views: 250",
+        Number_of_view: "Number of views:",
       },
     },
-
     inventtory_setting: {
       main_heading: {
         h1: "General inventory settings",
@@ -122,7 +121,6 @@ const translations = {
       fourth_row_with_check_box: {
         email_label: "Email address to receive notifications..",
         data: "Email address to receive notifications",
-
         quantity: "Threshold quantity out of stock",
       },
       extra_fourth_row_with_check_box: {
@@ -135,7 +133,7 @@ const translations = {
         update_btn: "Updating and saving inventory settings →",
       },
     },
-    "cupons and benifit": {
+    cupons_and_benifit: {
       search_bar: {
         coupon_search_placeholder: "Coupon search",
         add_new_coupon_btn: "Added a new coupon +",
@@ -618,7 +616,7 @@ const translations = {
         filter_btn: "סנן לפי תאריכים ",
       },
       card_product: {
-        abc: "מיקום_לקוח",
+        customer_location:"מיקום_לקוח",
         card_title: "מוצרים חדשים",
         card_num: "647",
         card_percentage: "10%",
@@ -727,7 +725,7 @@ const translations = {
         update_btn: "עדכון ושמירת הגדרות המלאי →",
       },
     },
-    "cupons and benifit": {
+    cupons_and_benifit: {
       search_bar: {
         coupon_search_placeholder: "חיפוש קופון",
         add_new_coupon_btn: "הוספת קופון חדש +",

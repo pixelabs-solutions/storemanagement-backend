@@ -170,8 +170,8 @@
                             </div>
 
                         </div>
-                        <label class="fw-bold mt-5 sms_mu_term_eng"> Select Term Attribute</label>
-                        <label class="fw-bold mt-5  sms_mu_term_heb" >בחר מאפיין מונח</label>
+                        <label class="fw-bold mt-5 Sms_mu_for_Eng"> Select Term Attribute</label>
+                        <label class="fw-bold mt-5  Sms_mu_for_hebrew" >בחר מאפיין מונח</label>
                         <!-- <div 
                             style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                             <div class="col-md-12 rounded-4 bg-transparent h-100 ">

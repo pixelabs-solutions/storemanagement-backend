@@ -132,22 +132,19 @@ require_once __DIR__ . '/../partials/header.php';
               <div class="input-icon border-bottom border-black">
                 <span class="input-icon-addon">
                   <!-- Download SVG icon from http://tabler-icons.io/i/search -->
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
                     <path d="M21 21l-6 -6" />
                   </svg>
                 </span>
-                <input type="text" id="sms_coupons_m_search_input" value="" class="form-control border-0 "
-                  placeholder="Coupon search" aria-label="Search in website">
+                <input type="text" id="sms_coupons_m_search_input" value="" class="form-control border-0 " placeholder="Coupon search" aria-label="Search in website">
               </div>
             </form>
           </div>
 
         </div>
-        <div class="d-flex"><button class="rounded-4 border-0 p-2 sms_m_transaction_new_category"
-            style="background-color:#4987D870; " data-bs-toggle="modal" data-bs-target="#add-modal-full-width">
+        <div class="d-flex"><button class="rounded-4 border-0 p-2 sms_m_transaction_new_category" style="background-color:#4987D870; " data-bs-toggle="modal" data-bs-target="#add-modal-full-width" data-i18n="cupons_and_benifit.search_bar.add_new_coupon_btn">
             Added a new coupon +</button>
         </div>
       </div>
@@ -158,12 +155,12 @@ require_once __DIR__ . '/../partials/header.php';
           <table class="sms_mu_table " id='sms_coupon_m_coupon_table'>
             <thead>
               <tr class="sms_mu_th">
-                <th class="sms_mu_td">Coupon Code</th>
-                <th class="sms_mu_td">coupon type</th>
-                <th class="sms_mu_td">Discount amount</th>
-                <th class="sms_mu_td">Use/restriction</th>
-                <th class="sms_mu_td">Expiry Date</th>
-                <th class="sms_mu_td">action</th>
+                <th class="sms_mu_td" data-i18n="cupons_and_benifit.coupons_th.Coupon_Code_in_th">Coupon Code</th>
+                <th class="sms_mu_td" data-i18n="cupons_and_benifit.coupons_th.coupon_type_in_th">coupon type</th>
+                <th class="sms_mu_td" data-i18n="cupons_and_benifit.coupons_th.Discount_amount_in_th">Discount amount</th>
+                <th class="sms_mu_td" data-i18n="cupons_and_benifit.coupons_th.Use_restriction_in_th">Use/restriction</th>
+                <th class="sms_mu_td" data-i18n="cupons_and_benifit.coupons_th.Expiry_Date_in_th">Expiry Date</th>
+                <th class="sms_mu_td" data-i18n="cupons_and_benifit.coupons_th.action_in_th">action</th>
               </tr>
               <tr class="sms_mu_spacing_div"></tr>
 
@@ -177,7 +174,7 @@ require_once __DIR__ . '/../partials/header.php';
                   $expiry_date_timestamp = strtotime($expiry_date_string);
                   $expiry_formatted_date = date("Y-m-d", $expiry_date_timestamp);
 
-                  ?>
+              ?>
 
                   <tr class="sms_mu_tr">
                     <td class="t_oravg_m">
@@ -196,27 +193,21 @@ require_once __DIR__ . '/../partials/header.php';
                       <div class="d-flex justify-content-center gap-4 w-auto">
 
 
-                        <span class=""  id="delete_coupon" data-bs-toggle="modal"
-                          data-bs-target="#modal-danger" coupon_id="<?php echo $item['id']; ?>">
+                        <span class="" id="delete_coupon" data-bs-toggle="modal" data-bs-target="#modal-danger" coupon_id="<?php echo $item['id']; ?>">
                           <svg width="24" height="24" viewBox="0 0 28 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                              d="M8.45 1.10625C8.7875 0.425 9.48125 0 10.2375 0H17.7625C18.5188 0 19.2125 0.425 19.55 1.10625L20 2H26C27.1063 2 28 2.89375 28 4C28 5.10625 27.1063 6 26 6H2C0.89375 6 0 5.10625 0 4C0 2.89375 0.89375 2 2 2H8L8.45 1.10625ZM2 8H26V28C26 30.2062 24.2062 32 22 32H6C3.79375 32 2 30.2062 2 28V8ZM8 12C7.45 12 7 12.45 7 13V27C7 27.55 7.45 28 8 28C8.55 28 9 27.55 9 27V13C9 12.45 8.55 12 8 12ZM14 12C13.45 12 13 12.45 13 13V27C13 27.55 13.45 28 14 28C14.55 28 15 27.55 15 27V13C15 12.45 14.55 12 14 12ZM20 12C19.45 12 19 12.45 19 13V27C19 27.55 19.45 28 20 28C20.55 28 21 27.55 21 27V13C21 12.45 20.55 12 20 12Z"
-                              fill="#A30505" />
+                            <path d="M8.45 1.10625C8.7875 0.425 9.48125 0 10.2375 0H17.7625C18.5188 0 19.2125 0.425 19.55 1.10625L20 2H26C27.1063 2 28 2.89375 28 4C28 5.10625 27.1063 6 26 6H2C0.89375 6 0 5.10625 0 4C0 2.89375 0.89375 2 2 2H8L8.45 1.10625ZM2 8H26V28C26 30.2062 24.2062 32 22 32H6C3.79375 32 2 30.2062 2 28V8ZM8 12C7.45 12 7 12.45 7 13V27C7 27.55 7.45 28 8 28C8.55 28 9 27.55 9 27V13C9 12.45 8.55 12 8 12ZM14 12C13.45 12 13 12.45 13 13V27C13 27.55 13.45 28 14 28C14.55 28 15 27.55 15 27V13C15 12.45 14.55 12 14 12ZM20 12C19.45 12 19 12.45 19 13V27C19 27.55 19.45 28 20 28C20.55 28 21 27.55 21 27V13C21 12.45 20.55 12 20 12Z" fill="#A30505" />
                           </svg>
                         </span>
-                        <span data-bs-toggle="modal" class="get-row-data-edit-coupon" id="edit_coupon"
-                          data-bs-target="#edit-modal-full-width" coupon_id="<?php echo $item['id']; ?>">
+                        <span data-bs-toggle="modal" class="get-row-data-edit-coupon" id="edit_coupon" data-bs-target="#edit-modal-full-width" coupon_id="<?php echo $item['id']; ?>">
                           <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                              d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z"
-                              fill="#4987D8" />
+                            <path d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z" fill="#4987D8" />
                           </svg>
                         </span>
                       </div>
                   </tr>
                   <tr class="sms_mu_spacing_div"></tr>
 
-                  <?php
+              <?php
                 }
               }
               ?>
@@ -233,13 +224,13 @@ require_once __DIR__ . '/../partials/header.php';
     <div class="modal-content">
       <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
         <div class="py-1 rounded-top text-center">
-          <h3 class="card-title m-0 text-black fs-2 fw-bold">Added a new coupon </h3>
+          <h3 class="card-title m-0 text-black fs-2 fw-bold" data-i18n="popoups.added_new_cupons.heading">Added a new coupon </h3>
         </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <?php
-        include ('manage.php');
+        include('manage.php');
         ?>
       </div>
 
@@ -254,13 +245,13 @@ require_once __DIR__ . '/../partials/header.php';
     <div class="modal-content">
       <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
         <div class="py-1 rounded-top text-center col-10 ">
-          <h3 class="card-title m-0 text-black fs-2 fw-bold">Editing an existing coupon</h3>
+          <h3 class="card-title m-0 text-black fs-2 fw-bold" data-i18n="popoups.added_new_cupons.heading_edit">Editing an existing coupon</h3>
         </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <?php
-        include ('edit.php');
+        include('edit.php');
         ?>
       </div>
 
@@ -269,8 +260,7 @@ require_once __DIR__ . '/../partials/header.php';
 </div>
 
 <!-- edit Modal -->
-<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
-  aria-hidden="true">
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
     <div class="modal-content p-3 ">
 
@@ -278,9 +268,8 @@ require_once __DIR__ . '/../partials/header.php';
         <p>Are you sure you want to delete the coupon?</p>
       </div>
       <div class="d-flex justify-content-between col-6 m-auto">
-        <button type="button" class="btn  cancel-btn" data-dismiss="modal"
-          style="background-color:#afcaee">Cancel</button>
-        <button  type="button" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn  cancel-btn" data-dismiss="modal" style="background-color:#afcaee">Cancel</button>
+        <button type="button" class="btn btn-danger">Delete</button>
       </div>
     </div>
   </div>
@@ -305,8 +294,7 @@ require_once __DIR__ . '/../partials/header.php';
             <div class="col"><a href="#" class="btn w-100" data-bs-dismiss="modal" style="background-color:#afcaee;">
                 Cancel
               </a></div>
-            <div onclick="deleteCoupon('<?php echo $item['id']; ?>')" class="col"><a href="#" class="btn btn-danger w-100"
-                data-bs-dismiss="modal">
+            <div onclick="deleteCoupon('<?php echo $item['id']; ?>')" class="col"><a href="#" class="btn btn-danger w-100" data-bs-dismiss="modal">
                 Delete
               </a></div>
           </div>
@@ -319,12 +307,14 @@ require_once __DIR__ . '/../partials/header.php';
 <script>
   function deleteCoupon(couponId) {
     fetch("/coupons/" + couponId, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ id: couponId })
-    })
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          id: couponId
+        })
+      })
       .then(response => {
         if (response.ok) {
           show_sms_delete_Notification("Coupon deleted successfully");
@@ -343,8 +333,6 @@ require_once __DIR__ . '/../partials/header.php';
       sms_delete_notification.className = isError ? "error show" : "show";
     }
   }
-
-
 </script>
 
 <!-- <script>
@@ -394,7 +382,7 @@ require_once __DIR__ . '/../partials/header.php';
     let statuses = document.querySelectorAll('.sms_coupons_m_status');
 
     // Loop through each status element
-    statuses.forEach(function (status) {
+    statuses.forEach(function(status) {
       // Get the text content of the status
       let statusText = status.textContent.trim().toLowerCase();
 
@@ -419,7 +407,7 @@ require_once __DIR__ . '/../partials/header.php';
     var firstRow = rows[0];
     var remainingRows = Array.from(rows).slice(1);
 
-    remainingRows.forEach(function (row) {
+    remainingRows.forEach(function(row) {
       var rowContainer = row.parentElement;
       var rowCheckbox = document.createElement("input");
       rowCheckbox.type = "checkbox";
@@ -438,17 +426,17 @@ require_once __DIR__ . '/../partials/header.php';
   // addCheckboxAfterRows();
 
 
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function() {
     const searchForm = document.getElementById('sms_customers_w_search_form');
     const searchInput = document.getElementById('sms_coupons_m_search_input');
     const couponTable = document.getElementById('sms_coupon_m_coupon_table');
 
-    searchForm.addEventListener('submit', function (event) {
+    searchForm.addEventListener('submit', function(event) {
       event.preventDefault(); // Prevent form submission
       filterCustomers();
     });
 
-    searchInput.addEventListener('input', function () {
+    searchInput.addEventListener('input', function() {
       filterCustomers();
     });
 

@@ -27,7 +27,7 @@
                 </div>
                 </form>
                 <div class="text-center mt-2 p-2  ">
-                    <button type="submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="fun_edit_variation()">To update
+                    <button type="submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" data-i18n="inventtory_setting.fourth_row_with_check_box.quantity" onclick="fun_edit_variation()">To update
                         the term click here
                         +</button>
                 </div>

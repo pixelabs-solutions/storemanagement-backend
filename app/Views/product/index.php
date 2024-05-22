@@ -166,6 +166,21 @@ require_once __DIR__ . '/../partials/header.php';
     .hidden-file-input {
         display: none;
     }
+    .abc .Sms_mu_for_Eng {
+        display: block;
+    }
+
+    .abc .Sms_mu_for_hebrew {
+        display: none;
+    }
+
+    .rtl .Sms_mu_for_Eng {
+        display: none;
+    }
+
+    .rtl .Sms_mu_for_hebrew {
+        display: block;
+    }
 </style>
 <div class="sms_products_m  p-0 ">
     <div class=" col-12 mt-5">
@@ -463,8 +478,11 @@ require_once __DIR__ . '/../partials/header.php';
                 <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
-                            <div class="py-3 rounded-top text-center col-10">
-                                <h3 class="card-title text-black fs-2 m-0 fw-bold">Editing a regular product</h3>
+                            <div class="py-3 rounded-top text-center Sms_mu_for_Eng">
+                                <h3 class="card-title text-black fs-2 m-0 fw-bold ">Editing a regular product</h3>
+                            </div>
+                            <div class="py-3 rounded-top text-center Sms_mu_for_hebrew">
+                                <h3 class="card-title text-black fs-2 m-0 fw-bold" >עריכת מוצר רגיל</h3>
                             </div>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
