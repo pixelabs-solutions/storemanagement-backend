@@ -31,12 +31,13 @@ class AuthenticationController
         if(isset($_GET['is_rest']) && $_GET['is_rest'] === "true")
         {
             $response = Authentication::loginWithJWT($email, $password);
-            echo $response;
+            echo  $response;
         }
         else
         {
             $response = Authentication::login($email, $password);
             header('Location: /index');
+
         }
         
     }

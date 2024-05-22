@@ -61,7 +61,10 @@ class Dashboard
         try
         {
             $response = $client->request('GET', $data["store_url"] . '/wp-json/wc/v3/orders', [
-                'auth' => [$data["consumer_key"], $data["consumer_secret"]]  
+                'auth' => [$data["consumer_key"], $data["consumer_secret"]],
+                'query' => [
+                    'per_page' => 100
+                ]
             ]);
     
             $orders = json_decode($response->getBody(), true);
@@ -135,7 +138,10 @@ class Dashboard
     
         try {
             $response = $client->request('GET', $data["store_url"] . '/wp-json/wc/v3/orders', [
-                'auth' => [$data["consumer_key"], $data["consumer_secret"]]
+                'auth' => [$data["consumer_key"], $data["consumer_secret"]],
+                'query' => [
+                    'per_page' => 100
+                ]
             ]);
             $orders = json_decode($response->getBody(), true);
             if($orders !== null) 
@@ -158,7 +164,10 @@ class Dashboard
             $topProducts = [];
             foreach ($topProductIds as $productId) {
                 $prodResponse = $client->request('GET', $data["store_url"] . "/wp-json/wc/v3/products/$productId", [
-                    'auth' => [$data["consumer_key"], $data["consumer_secret"]]
+                    'auth' => [$data["consumer_key"], $data["consumer_secret"]],
+                    'query' => [
+                        'per_page' => 100
+                    ]
                 ]);
                 $productDetails = json_decode($prodResponse->getBody(), true);
                 if (isset($productDetails['images']) && count($productDetails['images']) > 0) {
