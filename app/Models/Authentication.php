@@ -209,21 +209,33 @@ class Authentication
 
     public static function getUserIdFromToken() {
         $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+    
+        // Fallback to apache_request_headers if $_SERVER['HTTP_AUTHORIZATION'] is empty
+        if (empty($authHeader)) {
+            if (function_exists('apache_request_headers')) {
+                $headers = apache_request_headers();
+                if (isset($headers['Authorization'])) {
+                    $authHeader = $headers['Authorization'];
+                }
+            }
+        }
+    
         if (empty($authHeader)) {
             return null;
         }
-
+    
         list($jwt) = sscanf($authHeader, 'Bearer %s');
         if (!$jwt) {
             return null;
         }
-
+    
         $decoded = self::verifyJWT($jwt);
         if ($decoded && isset($decoded->user_id)) {
             return $decoded->user_id;
         }
-
+    
         return null;
     }
+    
 
 }

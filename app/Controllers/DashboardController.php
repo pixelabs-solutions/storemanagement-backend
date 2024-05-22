@@ -44,7 +44,7 @@ class DashboardController
             'top_products' => $top_products
         ];
         
-        // print_r(json_encode($dashboard_data));
-        include_once __DIR__ . '/../Views/dashboard/index.php';
+        echo json_encode($dashboard_data, JSON_UNESCAPED_UNICODE);
+        //include_once __DIR__ . '/../Views/dashboard/index.php';
     }
 }
