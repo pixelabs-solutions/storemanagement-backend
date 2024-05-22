@@ -9,23 +9,33 @@ class DashboardController
 {
     public function index()
     {
-        if(isset($_GET['is_rest']) && $_GET['is_rest'] === "true")
-        {
-            
+        $user_id = "";
+        if(isset($_GET['is_rest']) && $_GET['is_rest'] === "true") {
+            $user_id = Authentication::getUserIdFromToken();
+            if($user_id === null){
+                echo json_encode([
+                        "message" => "User not authenticated.",
+                        "status_code" => 401 
+                    ]);
+                exit();
+            }            
         }
-        if(!Authentication::isUserLoggedIn()){
-            //Redirect user to login page
-            header('Location: /authentication/login');
+        else {
+            $user_id = Authentication::getUserId();
+            if($user_id === null){
+                header('Location: /authentication/login');
+            }
         }
+
         $filters = [
             'query' => $_GET['query'] ?? null,
             'date_from' => $_GET['date_from'] ?? null,
             'date_to' => $_GET['date_to'] ?? null
         ];
 
-        $stats = Dashboard::get_dashboard_stats($filters);
-        $customers_location = Dashboard::get_dashboard_data();
-        $top_products = Dashboard::fetchTopSellingProductImages();
+        $stats = Dashboard::get_dashboard_stats($filters, $user_id);
+        $customers_location = Dashboard::get_dashboard_data($user_id);
+        $top_products = Dashboard::fetchTopSellingProductImages($user_id);
 
         $dashboard_data = [
             'statistics' => $stats,
@@ -34,7 +44,7 @@ class DashboardController
             'top_products' => $top_products
         ];
         
-        // print_r(json_encode($dashboard_data));
-        include_once __DIR__ . '/../Views/dashboard/index.php';
+        echo json_encode($dashboard_data, JSON_UNESCAPED_UNICODE);
+        //include_once __DIR__ . '/../Views/dashboard/index.php';
     }
 }

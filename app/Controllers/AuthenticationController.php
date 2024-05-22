@@ -36,7 +36,7 @@ class AuthenticationController
         else
         {
             $response = Authentication::login($email, $password);
-            return $response;
+            header('Location: /index');
         }
         
     }

@@ -124,7 +124,7 @@ class Authentication
     }
 
     //JWT Authentication
-    function loginWithJWT($email, $password) {
+    public static function loginWithJWT($email, $password) {
         global $connection;
     
         if (!empty($email) && !empty($password)) {
@@ -179,7 +179,7 @@ class Authentication
     }
 
 
-    function verifyJWT($token) {
+    public static function verifyJWT($token) {
         $secretKey = "irrULnPSFnSrV1Y65cdV";
         try {
             $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
@@ -194,7 +194,7 @@ class Authentication
         }
     }
 
-    function isUserLoggedInApp() {
+    public static function isUserLoggedInApp() {
         $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
         list($jwt) = sscanf($authHeader, 'Bearer %s');
     
@@ -206,5 +206,36 @@ class Authentication
         }
         return false;
     }
+
+    public static function getUserIdFromToken() {
+        $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+    
+        // Fallback to apache_request_headers if $_SERVER['HTTP_AUTHORIZATION'] is empty
+        if (empty($authHeader)) {
+            if (function_exists('apache_request_headers')) {
+                $headers = apache_request_headers();
+                if (isset($headers['Authorization'])) {
+                    $authHeader = $headers['Authorization'];
+                }
+            }
+        }
+    
+        if (empty($authHeader)) {
+            return null;
+        }
+    
+        list($jwt) = sscanf($authHeader, 'Bearer %s');
+        if (!$jwt) {
+            return null;
+        }
+    
+        $decoded = self::verifyJWT($jwt);
+        if ($decoded && isset($decoded->user_id)) {
+            return $decoded->user_id;
+        }
+    
+        return null;
+    }
+    
 
 }
