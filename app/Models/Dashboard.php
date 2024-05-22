@@ -9,9 +9,9 @@ use Pixelabs\StoreManagement\Models\Base;
 class Dashboard
 {
 
-    public static function get_dashboard_stats($filters = [])
+    public static function get_dashboard_stats($filters = [], $user_id)
     {
-        $response = json_decode(Configuration::getConfiguration(), true);
+        $response = json_decode(Configuration::getConfiguration($user_id), true);
         if ($response['status_code'] != 200) {
             echo $response["message"];
             return [];
@@ -45,9 +45,9 @@ class Dashboard
     } 
 
 
-    public static function get_dashboard_data()
+    public static function get_dashboard_data($user_id)
     {
-        $response = json_decode(Configuration::getConfiguration(), true);
+        $response = json_decode(Configuration::getConfiguration($user_id), true);
         if ($response['status_code'] != 200) {
             echo $response["message"];
             return [];
@@ -121,9 +121,9 @@ class Dashboard
     }
 
 
-    public static function fetchTopSellingProductImages() 
+    public static function fetchTopSellingProductImages($user_id) 
     {
-        $response = json_decode(Configuration::getConfiguration(), true);
+        $response = json_decode(Configuration::getConfiguration($user_id), true);
         if ($response['status_code'] != 200) {
             echo $response["message"];
             return [];

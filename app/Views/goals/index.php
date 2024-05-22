@@ -339,7 +339,7 @@ if ($avg_order_value_increase_left_percentage >= 100) {
                                         <div class="progress-bar" style="width: 90%; border-radius:10px;"
                                             role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
                                             aria-label="90% Complete">
-                                            <span>100%</span>
+                                            <span>90%</span>
                                         </div>
                                     </div>
                                 </div>

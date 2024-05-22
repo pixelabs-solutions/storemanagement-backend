@@ -48,15 +48,22 @@ require_once __DIR__ . '/../partials/header.php';
 <!-- Map Css End -->
 <!-- Header Start -->
 
+
 <div class="row g-2 mt-5 mb-5 align-items-center sms_mu_for_rtl">
     <!-- Stats header Buttons -->
     <div class="col-auto btn-list">
+<<<<<<< HEAD
         <a href="?query=24_hours" class="btn btn-pill btn-light tab-pane sms_w_date_active sms_w_date" data-i18n="dashboard.tabs.first_tab"> 24 Hours</a>
         <a href="?query=last_week" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.second_tab"> Last Week
+=======
+        <a href="?query=24_hours" id="24_hours" class="btn btn-pill btn-light tab-pane  sms_w_date"
+            data-i18n="dashboard.tabs.first_tab"> 24 Hours</a>
+        <a href="?query=last_week" id="last_week" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.second_tab"> Last Week
+>>>>>>> a2ad117a8f83a918467975bce9ad288f8190bb03
         </a>
-        <a href="?query=current_month" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.third_tab"> Last Month
+        <a href="?query=current_month" id="current_month" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.third_tab"> Last Month
         </a>
-        <a href="?query=last_year" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.fourth_tab"> Last Year
+        <a href="?query=last_year" id="last_year" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.fourth_tab"> Last Year
         </a>
     </div>
     <!-- Date Range Button  Start-->
@@ -67,7 +74,39 @@ require_once __DIR__ . '/../partials/header.php';
     </div>
     <!-- Date Range Button End -->
 </div>
+<script>
+        // Function to get query parameters from the URL
+        function getQueryParams() {
+            const params = {};
+            window.location.search.substring(1).split("&").forEach(param => {
+                const [key, value] = param.split("=");
+                params[decodeURIComponent(key)] = decodeURIComponent(value);
+            });
+            return params;
+        }
 
+        // Get query parameters
+        const queryParams = getQueryParams();
+
+        if (queryParams.query === '24_hours') {
+            // Add the .sms_w_date_active class to the element with the ID '24_hours'
+            document.getElementById('24_hours').classList.add('sms_w_date_active');
+        }
+         else if (queryParams.query === 'last_week') {
+            // Add the .sms_w_date_active class to the element with the ID 'last_week'
+            document.getElementById('last_week').classList.add('sms_w_date_active');
+        }
+        else if (queryParams.query === 'current_month') {
+            // Add the .sms_w_date_active class to the element with the ID 'current_month'
+            document.getElementById('current_month').classList.add('sms_w_date_active');
+        }    
+        else if (queryParams.query === 'last_year') {
+            // Add the .sms_w_date_active class to the element with the ID 'last_year'
+            document.getElementById('last_year').classList.add('sms_w_date_active');
+        }
+
+
+    </script>
 <!-- Header End -->
 <!--  -->
 
@@ -516,6 +555,7 @@ require_once __DIR__ . '/../partials/header.php';
             .bindTooltip("Jerusalem")
             .openTooltip();
 
+<<<<<<< HEAD
         // Add event listener for showing tooltip on hover
         marker.on('mouseover', function(e) {
             var tooltip = document.getElementById('tooltip');
@@ -523,6 +563,226 @@ require_once __DIR__ . '/../partials/header.php';
             tooltip.style.left = (e.originalEvent.pageX + 10) + 'px';
             tooltip.style.top = (e.originalEvent.pageY + 10) + 'px';
             tooltip.style.display = 'block';
+=======
+                                        <tr>
+                                            <td class="text-muted"><?php echo $order_id; ?></td>
+                                            <td class="text-muted"><?php echo $order_client; ?></td>
+                                            <td class="text-muted"><?php echo $order_date; ?></td>
+                                            <td><?php echo $order_sum; ?></td>
+                                        </tr>
+
+                                    <?php 
+                                        $count++; // Increment counter
+                                        if ($count >= 3) break; // Break out of the loop when counter reaches 3
+                                    endforeach; 
+                                    ?>
+                    </table>
+                    <!-- <button class="sms_ma_index_to_order_button">click</button> -->
+                </div>
+                <!-- Table End -->
+            </div>
+        </div>
+    </div>
+    <!-- Table End -->
+</div>
+<!-- Card End -->
+<div class="modal modal-blur fade" id="modal-team" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Select a Date Range</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" method="GET">
+                <div class="modal-body">
+                    <div class="row mb-3 align-items-end">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <!-- <label class="form-label">From Date</label> -->
+                            <label for="startDate">Start Date</label>
+                            <input id="startDate" name="date_from" class="form-control" type="date" required>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <label for="startDate">To Date</label>
+                            <input id="startDate" name="date_to" class="form-control" type="date" required>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-pill btn-info" data-bs-dismiss="modal">Search</button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+<script>
+    // Initialize the map
+    var map = L.map('map').setView([31.0461, 34.8516], 7); // Set center to Israel
+
+    // Add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Add a marker with a tooltip to the map
+    var marker = L.marker([31.7683, 35.2137]) // Example location in Jerusalem
+        .addTo(map)
+        .bindTooltip("Jerusalem")
+        .openTooltip();
+
+    // Add event listener for showing tooltip on hover
+    marker.on('mouseover', function (e) {
+        var tooltip = document.getElementById('tooltip');
+        tooltip.innerHTML = "Jerusalem";
+        tooltip.style.left = (e.originalEvent.pageX + 10) + 'px';
+        tooltip.style.top = (e.originalEvent.pageY + 10) + 'px';
+        tooltip.style.display = 'block';
+    });
+
+    // Add event listener for hiding tooltip on mouseout
+    marker.on('mouseout', function () {
+        document.getElementById('tooltip').style.display = 'none';
+    });
+
+</script>
+
+<script>
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     // Get all buttons within the div with class 'col-auto btn-list'
+    //     var buttons = document.querySelectorAll('.sms_w_date');
+
+    //     // Loop through each button
+    //     buttons.forEach(function (button) {
+    //         // Attach onclick event handler
+    //         button.addEventListener('click', function (event) {
+    //             // Prevent default action of the anchor tag
+    //             event.preventDefault();
+
+    //             // Remove active class from all buttons
+    //             buttons.forEach(function (btn) {
+    //                 btn.classList.remove('sms_w_date_active');
+    //             });
+
+    //             // Add active class to the clicked button
+    //             this.classList.add('sms_w_date_active');
+    //         });
+    //     });
+    // });
+
+</script>
+
+
+<script>
+    // @formatter:off
+    document.addEventListener("DOMContentLoaded", function () {
+        window.ApexCharts && (new ApexCharts(document.getElementById('chart-completion-tasks-8'), {
+            chart: {
+                type: "bar",
+                fontFamily: 'inherit',
+                height: 370,
+                parentHeightOffset: 0,
+                toolbar: {
+                    show: false,
+                },
+                animations: {
+                    enabled: false
+                },
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '50%',
+                }
+            },
+            dataLabels: {
+                enabled: false,
+            },
+            fill: {
+                opacity: 1,
+            },
+            series: [{
+                name: "Website",
+                data: [155, 65, 465, 265, 225, 325, 80]
+            }, {
+                name: "Application",
+                data: [113, 42, 65, 54, 76, 65, 35]
+            }],
+            tooltip: {
+                theme: 'dark'
+            },
+            grid: {
+                padding: {
+                    top: -20,
+                    right: 0,
+                    left: -4,
+                    bottom: -4
+                },
+                strokeDashArray: 4,
+            },
+            xaxis: {
+                labels: {
+                    padding: 0,
+                },
+                tooltip: {
+                    enabled: false
+                },
+                axisBorder: {
+                    show: false,
+                },
+                type: 'text',
+            },
+            yaxis: {
+                labels: {
+                    padding: 4
+                },
+            },
+            labels: [
+                'First', 'Second', 'Third', 'Fourth', 'Fifth', 'sixth', 'Seventh'
+            ],
+            colors: [tabler.getColor("primary"), tabler.getColor("info")],
+            legend: {
+                show: false,
+            },
+        })).render();
+    });
+    // @formatter:on
+</script>
+<!-- Include the Google Maps JavaScript API -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4g53Qe1VW1Aq3rLeMZq79ltsBR6YExaE
+&callback=initMap">
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var dropdowns = document.querySelectorAll('.dropdown-tom-select-style');
+        dropdowns.forEach(function (el) {
+            var withInput = el.classList.contains('with-input');
+            if (window.TomSelect) {
+                new TomSelect(el, {
+                    copyClassesToDropdown: false,
+                    dropdownParent: 'body',
+                    controlInput: withInput ? '<input>' : false,
+                    render: {
+                        item: function (data, escape) {
+                            if (data.customProperties) {
+                                return '<div><span class="dropdown-item-indicator">' + data.customProperties + '</span>' + escape(data.text) + '</div>';
+                            }
+                            return '<div>' + escape(data.text) + '</div>';
+                        },
+                        option: function (data, escape) {
+                            if (data.customProperties) {
+                                return '<div><span class="dropdown-item-indicator">' + data.customProperties + '</span>' + escape(data.text) + '</div>';
+                            }
+                            return '<div>' + escape(data.text) + '</div>';
+                        },
+                    },
+                });
+                if (!withInput) {
+                    el.style.width = '100%'; // Set width to 100% for dropdowns without the 'with-input' class
+                }
+                el.classList.add('dropdown-tom-select-style');
+            }
+>>>>>>> a2ad117a8f83a918467975bce9ad288f8190bb03
         });
 
         // Add event listener for hiding tooltip on mouseout
