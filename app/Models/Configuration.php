@@ -51,19 +51,13 @@ class Configuration
         }
     }
 
-    public static function getConfiguration($fromApp = null)
+    public static function getConfiguration($user_id = null)
     {
         global $connection;
-        $user_id = Authentication::getUserId();
-        if($user_id == null)
-        {
-            // return json_encode([
-            //     "message" => "User not authenticated.",
-            //     "status_code" => 401 
-            // ]);
-            header('Location: /authentication/login');
-
+        if($user_id === null){
+            $user_id = Authentication::getUserId();
         }
+        
         // SQL to fetch configuration based on user ID
         $query = "SELECT * FROM user_configurations WHERE user_id = ? LIMIT 1";
 
