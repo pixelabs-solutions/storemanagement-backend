@@ -1,3 +1,9 @@
+<?php
+
+// echo json_encode($orders_stats);
+
+
+?>
 <div class="card" style="border-radius:20px">
                 <div class="card-body p-5">
                     <!-- Header Start -->
@@ -6,12 +12,10 @@
                     <div class="row g-2 align-items-center">
                         <!-- Stats header Buttons -->
                         <div class="col-auto btn-list">
-                            <a href="#row_1" class="btn btn-pill btn-light tab-pane" class="nav-link"
-                                data-bs-toggle="tab" style="background-color:#A8C3E7;" data-i18n="statististics.tabs_in_select_range.week"> Last Week </a>
-                            <a href="#row_2" class="btn btn-pill btn-light tab-pane" class="nav-link"
-                                data-bs-toggle="tab" data-i18n="statististics.tabs_in_select_range.month"> Current
+                        <a href="?query=last_week" class="btn btn-pill last_week btn-light tab-pane" class="nav-link" style="" data-i18n="statististics.tabs_in_select_range.week"> Last Week </a>
+                            <a href="?query=last_month" class="btn btn-pill last_month btn-light tab-pane" class="nav-link" data-i18n="statististics.tabs_in_select_range.month"> Current
                                 Month </a>
-                            <a href="" class="btn btn-pill btn-light tab-pane" data-i18n="statististics.tabs_in_select_range.year"> Last Year </a>
+                            <a href="?query=last_year" class="btn btn-pill last_year btn-light tab-pane" data-i18n="statististics.tabs_in_select_range.year"> Last Year </a>
                         </div>
                         <!-- Date Range Button -->
                         <div class="col-auto ms-auto">
@@ -30,7 +34,7 @@
                                     <div class="text-center">
                                         <img src="assets/dist/img/cart.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3">850</h3>
+                                        <h3 class="mt-3"><?php echo $orders_stats["totalOrders"]; ?></h3>
                                         <strong style="color:#4987D8" data-i18n="statististics.cards_in_orders.card1_in_product.normal_product">Order</strong>
                                     </div>
                                 </div>
@@ -45,7 +49,7 @@
                                     <div class="text-center">
                                         <img src="assets/dist/img/revenue.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3">15,450 NIS</h3>
+                                        <h3 class="mt-3"><?php echo $orders_stats["totalRevenue"]; ?> NIS</h3>
                                         <strong style="color:#4987D8" 
                                         
                                         data-i18n="statististics.cards_in_orders.card2_in_normal_product.normal_product_in_card2"
@@ -63,7 +67,7 @@
                                     <div class="text-center">
                                         <img src="assets/dist/img/revenue.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3">450 NIS</h3>
+                                        <h3 class="mt-3"><?php echo $orders_stats["orderAverage"]; ?> NIS</h3>
                                         <strong style="color:#4987D8"  data-i18n="statististics.cards_in_orders.card3_in_Sale.normal_product">Order Average</strong>
                                     </div>
                                 </div>
@@ -78,7 +82,7 @@
                                     <div class="text-center">
                                         <img src="assets/dist/img/cart.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3">15</h3>
+                                        <h3 class="mt-3"><?php echo $orders_stats["averageItems"]; ?></h3>
                                         <strong style="color:#4987D8"  data-i18n="statististics.cards_in_orders.card4_in_product.normal_product">Average items</strong>
                                     </div>
                                 </div>
@@ -93,7 +97,7 @@
                                     <div class="text-center">
                                         <img src="assets/dist/img/newuser.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3">350</h3>
+                                        <h3 class="mt-3"><?php echo $orders_stats["totalCustomers"]; ?></h3>
                                         <strong style="color:#4987D8" data-i18n="statististics.cards_in_orders.card5_in_product.normal_product">Customers</strong>
                                     </div>
                                 </div>
@@ -211,3 +215,43 @@
 
     // @formatter:on
 </script>
+
+<script>
+                        // Function to get query parameters from the URL
+                        function getQueryParams() {
+                            const params = {};
+                            window.location.search.substring(1).split("&").forEach(param => {
+                                const [key, value] = param.split("=");
+                                params[decodeURIComponent(key)] = decodeURIComponent(value);
+                            });
+                            return params;
+                        }
+
+                        // Get query parameters
+                        const queryParams = getQueryParams();
+
+                        if (queryParams.query === 'last_week') {
+                            // Add the .filter_tab_active class to the element with the ID 'last_week'
+                            const elements = document.querySelectorAll('.last_week');
+                            elements.forEach(element => {
+                                element.classList.add('filter_tab_active');
+                            });
+                        }
+                        else if (queryParams.query === 'last_month') {
+                            // Add the .filter_tab_active class to the element with the ID 'current_month'
+
+                            const elements = document.querySelectorAll('.last_month');
+                            elements.forEach(element => {
+                                element.classList.add('filter_tab_active');
+                            });
+                        }
+                        else if (queryParams.query === 'last_year') {
+                            // Add the .filter_tab_active class to the element with the ID 'last_year'
+                            const elements = document.querySelectorAll('.last_year');
+                            elements.forEach(element => {
+                                element.classList.add('filter_tab_active');
+                            });
+                        }
+
+
+                    </script>
