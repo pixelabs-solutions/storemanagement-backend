@@ -112,14 +112,14 @@ $woocommerce_notify_no_stock_ischecked = ($woocommerce_notify_no_stock_value ===
             </div>
             <div class="row mt-5 gap-0">
                 <div class="col-md-6">
-                    <h2>Threshold quantity for low stock
+                    <h2 data-i18n="inventtory_setting.fifth_row_with_check_box.email_placeholder_P">Threshold quantity for low stock
                     </h2>
                     <input class="border-0 rounded-2 py-3 m-0 p-3 form-control" style="background-color: #EAEAEA"
                         type="number" value="<?php echo $woocommerce_notify_low_stock_amount_value; ?>"
                         id="lowStockThreshold" placeholder="10">
                 </div>
                 <div class="col-md-6">
-                    <h2>Threshold quantity out of stock
+                    <h2 data-i18n="inventtory_setting.fourth_row_with_check_box.quantity">Threshold quantity out of stock
                     </h2>
                     <input class="border-0 rounded-2 py-3 m-0 p-3 form-control" style="background-color: #EAEAEA"
                         type="number" value="<?php echo $woocommerce_notify_no_stock_amount_value; ?>"
@@ -135,7 +135,7 @@ $woocommerce_notify_no_stock_ischecked = ($woocommerce_notify_no_stock_value ===
     <div type="button" onclick="sms_inventory_submit_Form()"
         class="rounded-3 rounded-4 d-flex gap-2 border-0  justify-content-center align-items-center last w-auto"
         style="background: rgba(73, 135, 216, 0.44);">
-        <p class="fs-2 py-3 m-0 align-items-center fw-bold">Updating and saving inventory
+        <p class="fs-2 py-3 m-0 align-items-center fw-bold" data-i18n="inventtory_setting.sixth_row_with_check_box.update_btn">Updating and saving inventory
             settings →</p>
     </div>
 </div>

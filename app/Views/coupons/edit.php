@@ -80,27 +80,27 @@
                                 <!-- header -->
                                 <div class="row gx-3 ">
                                     <div class="col-md-4 mb-3">
-                                        <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">The
+                                        <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.cupon_code">The
                                             coupon
                                             code</label>
                                         <input type="text" class="form-control rounded-3 p-3 fw-bold" id="coupons_code"
                                             style="background-color: #EAEAEA" placeholder="">
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="example-select fs-3 fw-bold" class="form-label fw-bold">Discount
+                                        <label for="example-select fs-3 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.discount_type">Discount
                                             type
                                             (amount/percentage)
                                         </label>
                                         <div>
                                             <select style="background-color:#EAEAEA" id="discount_type"
-                                                class="form-control p-3">
+                                                class="form-control p-3" >
                                                 <option value="fixed_cart">Amount</option>
                                                 <option value="percent">Percentage</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">The
+                                        <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.amounth_discount" >The
                                             amount
                                             of the discount </label>
                                         <input type="text" class="form-control rounded-3 p-3 fw-bold"
@@ -110,7 +110,7 @@
                                 <!-- Adding terms to the feature -->
                                 <div class="row gx-3 ">
                                     <div class="col-md-6 mb-3">
-                                        <label for="example-date-input" class="form-label fs-4 fw-bold">Coupon
+                                        <label for="example-date-input" class="form-label fs-4 fw-bold"  data-i18n="popoups.added_new_cupons.expiry_date">Coupon
                                             expiration
                                             date</label>
                                         <div class="input-group">
@@ -121,7 +121,7 @@
 
 
                                     <div class="col-md-6 mb-3">
-                                        <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Usage
+                                        <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold"   data-i18n="popoups.added_new_cupons.limit">Usage
                                             limit
                                             (leave blank without limit) </label>
                                         <input type="text" class="form-control rounded-3 p-3 fw-bold" id="usage_limit"
@@ -131,7 +131,7 @@
                                 </div>
                                 <div class="text-center mt-5  ">
                                     <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3"
-                                        onclick="sms_meh_coupon_edit_data()">To update the coupon
+                                        onclick="sms_meh_coupon_edit_data()" data-i18n="popoups.added_new_cupons.last_btn_coupon">To update the coupon
                                         click here ←</button>
                                 </div>
                         </div>

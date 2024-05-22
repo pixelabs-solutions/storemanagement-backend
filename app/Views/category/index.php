@@ -212,7 +212,7 @@
     <div class="modal-content ">
       <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
         <div class="py-1 rounded-top text-center col-10 ">
-          <h3 class="card-title m-0 text-black fs-2 fw-bold">Editing a category</h3>
+          <h3 class="card-title m-0 text-black fs-2 fw-bold" data-i18n="popoups.add_new_catageory.popoup_in_catagory.heading_for_edit">Editing a category</h3>
         </div>
         <button type="button" class="btn-close sms_modal_cancel_btn" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -232,7 +232,7 @@
     <div class="modal-content ">
       <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
         <div class="py-1 rounded-top text-center">
-          <h3 class="card-title m-0 text-black fs-2 fw-bold">Added a new category</h3>
+          <h3 class="card-title m-0 text-black fs-2 fw-bold" data-i18n="popoups.add_new_catageory.popoup_in_catagory.heading">Added a new category</h3>
         </div>
         <button type="button" class="btn-close sms_modal_cancel_btn" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>

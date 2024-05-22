@@ -123,9 +123,9 @@
             <thead>
               <tr class="sms_mu_th sms_w_table_head_feature">
                 <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_action">action</th>
-                <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_product">display type</th>
+                <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_type">display type</th>
                 <th class=".sms_mu_th" data-i18n="popoups.future_managment.th_in_feture.th_product">product</th>
-                <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_in_feture">associated feature</th>
+                <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_term">associated feature</th>
                 <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_name_term">the name of the term </th>
                 <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_color">Image/color</th>
 
@@ -192,7 +192,7 @@
     <div class="modal-content">
       <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
         <div class="py-1 rounded-top text-center col-10 ">
-          <h3 class="card-title m-0 text-black fs-2 fw-bold">Added a new feature</h3>
+          <h3 class="card-title m-0 text-black fs-2 fw-bold" data-i18n="popoups.future_managment.add_new_feature.heading">Added a new feature</h3>
         </div>
         <button type="button" class="btn-close sms_modal_cancel_btn" data-bs-dismiss="modal"
           aria-label="Close"></button>
@@ -215,7 +215,7 @@
     <div class="modal-content">
       <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
         <div class="py-1 rounded-top text-center col-10 ">
-          <h3 class="card-title m-0 text-black fs-2 fw-bold">Adding a new term </h3>
+          <h3 class="card-title m-0 text-black fs-2 fw-bold" data-i18n="popoups.future_managment.add_new_term.heading">Adding a new term </h3>
         </div>
         <button type="button" class="btn-close sms_modal_cancel_btn" data-bs-dismiss="modal"
           aria-label="Close"></button>
@@ -238,7 +238,7 @@
     <div class="modal-content">
       <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
         <div class="py-1 rounded-top text-center col-10 ">
-          <h3 class="card-title m-0 text-black fs-2 fw-bold">Editing an existing term</h3>
+          <h3 class="card-title m-0 text-black fs-2 fw-bold" data-i18n="popoups.future_managment.edit_variation_in_product_managment.heading">Editing an existing term</h3>
         </div>
         <button type="button" class="btn-close sms_modal_cancel_btn" data-bs-dismiss="modal"
           aria-label="Close"></button>
