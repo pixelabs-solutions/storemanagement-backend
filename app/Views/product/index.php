@@ -168,6 +168,7 @@ require_once __DIR__ . '/../partials/header.php';
     }
 </style>
 <div class="sms_products_m  p-0 ">
+    
     <div class=" col-12 mt-5">
         <div class="row col-12 d-flex justify-content-between bg-white p-3 m-0 rounded-3">
             <div class="col-sm-12 d-flex flex-column  flex-md-row gap-2 col-lg-8 m-0 ">

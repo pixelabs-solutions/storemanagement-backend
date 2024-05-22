@@ -33,16 +33,17 @@ require_once __DIR__ . '/../partials/header.php';
 <!-- Map Css End -->
 <!-- Header Start -->
 
+
 <div class="row g-2 mt-5 mb-5 align-items-center sms_mu_for_rtl">
     <!-- Stats header Buttons -->
     <div class="col-auto btn-list">
-        <a href="?query=24_hours" class="btn btn-pill btn-light tab-pane sms_w_date_active sms_w_date"
+        <a href="?query=24_hours" id="24_hours" class="btn btn-pill btn-light tab-pane  sms_w_date"
             data-i18n="dashboard.tabs.first_tab"> 24 Hours</a>
-        <a href="?query=last_week" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.second_tab"> Last Week
+        <a href="?query=last_week" id="last_week" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.second_tab"> Last Week
         </a>
-        <a href="?query=current_month" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.third_tab"> Last Month
+        <a href="?query=current_month" id="current_month" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.third_tab"> Last Month
         </a>
-        <a href="?query=last_year" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.fourth_tab"> Last Year
+        <a href="?query=last_year" id="last_year" class="btn btn-pill btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.fourth_tab"> Last Year
         </a>
     </div>
     <!-- Date Range Button  Start-->
@@ -55,7 +56,39 @@ require_once __DIR__ . '/../partials/header.php';
                         </div>
     <!-- Date Range Button End -->
 </div>
+<script>
+        // Function to get query parameters from the URL
+        function getQueryParams() {
+            const params = {};
+            window.location.search.substring(1).split("&").forEach(param => {
+                const [key, value] = param.split("=");
+                params[decodeURIComponent(key)] = decodeURIComponent(value);
+            });
+            return params;
+        }
 
+        // Get query parameters
+        const queryParams = getQueryParams();
+
+        if (queryParams.query === '24_hours') {
+            // Add the .sms_w_date_active class to the element with the ID '24_hours'
+            document.getElementById('24_hours').classList.add('sms_w_date_active');
+        }
+         else if (queryParams.query === 'last_week') {
+            // Add the .sms_w_date_active class to the element with the ID 'last_week'
+            document.getElementById('last_week').classList.add('sms_w_date_active');
+        }
+        else if (queryParams.query === 'current_month') {
+            // Add the .sms_w_date_active class to the element with the ID 'current_month'
+            document.getElementById('current_month').classList.add('sms_w_date_active');
+        }    
+        else if (queryParams.query === 'last_year') {
+            // Add the .sms_w_date_active class to the element with the ID 'last_year'
+            document.getElementById('last_year').classList.add('sms_w_date_active');
+        }
+
+
+    </script>
 <!-- Header End -->
 <!--  -->
 
@@ -512,23 +545,26 @@ require_once __DIR__ . '/../partials/header.php';
                 <h5 class="modal-title">Select a Date Range</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <div class="row mb-3 align-items-end">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        <!-- <label class="form-label">From Date</label> -->
-                        <label for="startDate">Start Date</label>
-                        <input id="startDate" class="form-control" type="date" />
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        <label for="startDate">To Date</label>
-                        <input id="startDate" class="form-control" type="date" />
-                    </div>
+            <form action="" method="GET">
+                <div class="modal-body">
+                    <div class="row mb-3 align-items-end">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <!-- <label class="form-label">From Date</label> -->
+                            <label for="startDate">Start Date</label>
+                            <input id="startDate" name="date_from" class="form-control" type="date" required>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <label for="startDate">To Date</label>
+                            <input id="startDate" name="date_to" class="form-control" type="date" required>
+                        </div>
 
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-pill btn-info" data-bs-dismiss="modal">Search</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-pill btn-info" data-bs-dismiss="modal">Search</button>
+                </div>
+            </form>
+            
         </div>
     </div>
 </div>
