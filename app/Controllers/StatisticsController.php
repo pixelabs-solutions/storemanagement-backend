@@ -10,6 +10,7 @@ class StatisticsController
     public function index()
     {
         include_once __DIR__ . '/../Views/statistics/overview.php';
+
     }
 
     public function products()
@@ -20,7 +21,8 @@ class StatisticsController
             'date_to' => $_GET['date_to'] ?? null
         ];
         $products_stats = Statistics::get_products_stats($filters);
-        echo json_encode($products_stats);
+        include_once __DIR__ . '/../Views/statistics/products.php';
+
     }
 
     public function orders()
@@ -32,7 +34,8 @@ class StatisticsController
         ];
 
         $orders_stats = Statistics::get_orders_stats($filters);
-        echo json_encode($orders_stats);
+        include_once __DIR__ . '/../Views/statistics/orders.php';
+
     }
 
     public function revenue()
@@ -44,7 +47,9 @@ class StatisticsController
         ];
 
         $revenue_stats = Statistics::get_revenue_stats($filters);
-        echo json_encode($revenue_stats);
+        include_once __DIR__ . '/../Views/statistics/revinue.php';
+
+
     }
 
     public function overview()
@@ -56,7 +61,11 @@ class StatisticsController
         ];
 
         $overview_stats = Statistics::get_overview_stats($filters);
-        //echo json_encode($overview_stats);
+        $orders_stats = Statistics::get_orders_stats($filters);
+        $revenue_stats = Statistics::get_revenue_stats($filters);
+        $products_stats = Statistics::get_products_stats($filters);
+
         include_once __DIR__ . '/../Views/statistics/overview.php';
+
     }
 }

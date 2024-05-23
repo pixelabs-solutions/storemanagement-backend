@@ -171,6 +171,7 @@ require_once __DIR__ . '/../partials/header.php';
     .hidden-file-input {
         display: none;
     }
+
     .abc .Sms_mu_for_Eng {
         display: block;
     }
@@ -310,21 +311,9 @@ require_once __DIR__ . '/../partials/header.php';
                         <!-- The Popup -->
                         <div id="popups" class="popup">
                             <div class="popup-content">
-                            <h3 class="text-center">Filter By Category</h3>
+                                <h3 class="text-center">Filter By Category</h3>
                                 <span class="close">&times;</span>
-                                <div style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
-                                    <div class="col-md-12 rounded-4 bg-transparent h-100 ">
-                                        <select id="choices-multiple-remove-button" multiple style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
-                                            <option value="NOSQL">Ctg</option>
-                                            <option value="NodeJS">demo</option>
-                                        </select>
-                                        <span class="span_div">
-                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.00006 7.16667L10.0001 3.16667L8.83339 2L6.00006 4.83333L3.16673 2L2.00006 3.16667L6.00006 7.16667Z" fill="#111" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
+                               
                                 <button id="doneButton" class="btn btn-primary mt-2">Done</button>
 
                             </div>
@@ -511,7 +500,7 @@ require_once __DIR__ . '/../partials/header.php';
                                 <h3 class="card-title text-black fs-2 m-0 fw-bold ">Editing a regular product</h3>
                             </div>
                             <div class="py-3 rounded-top text-center Sms_mu_for_hebrew">
-                                <h3 class="card-title text-black fs-2 m-0 fw-bold" >עריכת מוצר רגיל</h3>
+                                <h3 class="card-title text-black fs-2 m-0 fw-bold">עריכת מוצר רגיל</h3>
                             </div>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -567,52 +556,75 @@ require_once __DIR__ . '/../partials/header.php';
             </script>
             <script>
                 function togglePopup() {
-                    var popup = document.getElementById("popup");
-                    if (popup.style.display === "none" || popup.style.display === "") {
-                        popup.style.display = "block";
+                    var inventoryPopup = document.getElementById("popup");
+                    var categoryPopup = document.getElementById("popups");
+
+                    if (inventoryPopup.style.display === "none" || inventoryPopup.style.display === "") {
+                        inventoryPopup.style.display = "block";
+                        categoryPopup.style.display = "none";
                         // Add event listener to close popup when clicking outside of it
-                        window.addEventListener("click", function (event) {
-                            if (event.target !== popup && event.target.closest(".filter-button") === null) {
-                                popup.style.display = "none";
-                            }
-                        });
+                        window.addEventListener("click", closePopupOnOutsideClick);
                     } else {
-                        popup.style.display = "none";
+                        inventoryPopup.style.display = "none";
+                        window.removeEventListener("click", closePopupOnOutsideClick);
                     }
 
                     // Get the close button inside the popup
-                    var closeButton = popup.querySelector(".close");
+                    var closeButton = inventoryPopup.querySelector(".close");
 
                     // Add click event listener to the close button
                     closeButton.addEventListener("click", function () {
-                        popup.style.display = "none";
+                        inventoryPopup.style.display = "none";
+                        window.removeEventListener("click", closePopupOnOutsideClick);
                     });
                 }
 
                 function togglePopups() {
-                    var popup = document.getElementById("popups");
-                    if (popup.style.display === "none" || popup.style.display === "") {
-                        popup.style.display = "block";
+                    var categoryPopup = document.getElementById("popups");
+                    var inventoryPopup = document.getElementById("popup");
+
+                    if (categoryPopup.style.display === "none" || categoryPopup.style.display === "") {
+                        categoryPopup.style.display = "block";
+                        inventoryPopup.style.display = "none";
                         // Add event listener to close popup when clicking outside of it
-                        window.addEventListener("click", function (event) {
-                            if (event.target !== popup && event.target.closest(".filter-button") === null) {
-                                popup.style.display = "none";
-                            }
-                        });
+                        window.addEventListener("click", closePopupsOnOutsideClick);
                     } else {
-                        popup.style.display = "none";
+                        categoryPopup.style.display = "none";
+                        window.removeEventListener("click", closePopupsOnOutsideClick);
                     }
 
                     // Get the close button inside the popup
-                    var closeButton = popup.querySelector(".close");
+                    var closeButton = categoryPopup.querySelector(".close");
 
                     // Add click event listener to the close button
                     closeButton.addEventListener("click", function () {
-                        popup.style.display = "none";
+                        categoryPopup.style.display = "none";
+                        window.removeEventListener("click", closePopupsOnOutsideClick);
                     });
                 }
 
+                function closePopupOnOutsideClick(event) {
+                    var popup = document.getElementById("popup");
+                    if (!popup.contains(event.target) && event.target.closest(".filter-button") === null) {
+                        popup.style.display = "none";
+                        window.removeEventListener("click", closePopupOnOutsideClick);
+                    }
+                }
 
+                function closePopupsOnOutsideClick(event) {
+                    var popup = document.getElementById("popups");
+                    if (!popup.contains(event.target) && event.target.closest(".filter-button") === null) {
+                        popup.style.display = "none";
+                        window.removeEventListener("click", closePopupsOnOutsideClick);
+                    }
+                }
+
+                // Prevent event propagation inside the popup content
+                document.querySelectorAll(".popup-content").forEach(function (popupContent) {
+                    popupContent.addEventListener("click", function (event) {
+                        event.stopPropagation();
+                    });
+                });
 
                 function setStatusColor() {
                     // Get all elements with class 'status'
