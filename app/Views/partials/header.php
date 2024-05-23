@@ -81,24 +81,25 @@
 
       * {
          scrollbar-color: #4987D8 #DEDEDE;
-         scrollbar-width:  thin;
-   
+         scrollbar-width: thin;
 
-      /* For WebKit browsers (Chrome, Safari, etc.) */
-      /* Adjust the width and other styles as needed */
-      ::-webkit-scrollbar {
-         width: 1px;
-         border-radius: 20px;
-         /* Adjust border radius as needed */
+
+         /* For WebKit browsers (Chrome, Safari, etc.) */
+         /* Adjust the width and other styles as needed */
+         ::-webkit-scrollbar {
+            width: 1px;
+            border-radius: 20px;
+            /* Adjust border radius as needed */
+         }
+
+         /* Adjust scrollbar thumb style */
+         ::-webkit-scrollbar-thumb {
+            background-color: #4987D8;
+            border-radius: 20px;
+            /* Adjust border radius as needed */
+         }
       }
 
-      /* Adjust scrollbar thumb style */
-      ::-webkit-scrollbar-thumb {
-         background-color: #4987D8;
-         border-radius: 20px;
-         /* Adjust border radius as needed */
-      }
-   }
       .rtl .avatar {
          margin-left: 10px;
       }
@@ -320,6 +321,35 @@
          .navbar-expand-lg.navbar-vertical~.page-wrapper {
             margin-left: 0 !important;
          }
+      }
+
+      .abc .Sms_mu_for_Eng {
+         display: block;
+      }
+
+      .abc .Sms_mu_for_hebrew {
+         display: none;
+      }
+
+      .my_div {
+         background-color: #afacac;
+         opacity: 0.5;
+         width: 100%;
+         position: absolute;
+         height: 100%;
+         top: 0;
+         left: 0;
+         right: 0;
+         bottom: 0;
+         display: none;
+      }
+
+      .rtl .Sms_mu_for_Eng {
+         display: none;
+      }
+
+      .rtl .Sms_mu_for_hebrew {
+         display: block;
       }
 
       .rtl .sms_mu_show {

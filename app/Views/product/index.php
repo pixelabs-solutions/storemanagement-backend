@@ -113,6 +113,10 @@ require_once __DIR__ . '/../partials/header.php';
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         right: 8%;
     }
+    .rtl .popup {
+          left: 5% ;
+          right: 75%;
+    }
 
     .popup-content {
         background-color: #ffffff;
@@ -262,11 +266,12 @@ require_once __DIR__ . '/../partials/header.php';
                         <!-- The Popup -->
                         <div id="popup" class="popup">
                             <div class="popup-content">
-                                <h3 class="text-center">Filter By Inventory</h3>
+                                <h3 class="text-center" data-i18n="product_managment.product_search.filter_inventory_btn">Filter By Inventory</h3>
                                 <span class="close">&times;</span>
                                 <input type="number" class="form-control mt-2" placeholder="Input 1">
                                 <input type="number" class="form-control mt-2" placeholder="Input 2">
-                                <button id="doneButton" class="btn btn-primary mt-2">Done</button>
+                                <button id="doneButton" class="btn btn-primary mt-2 Sms_mu_for_Eng">Done</button>
+                                <button id="doneButton" class="btn btn-primary mt-2 Sms_mu_for_hebrew">בוצע</button>
 
                             </div>
                         </div>
@@ -289,7 +294,7 @@ require_once __DIR__ . '/../partials/header.php';
                         <!-- The Popup -->
                         <div id="popups" class="popup">
                             <div class="popup-content">
-                                <h3 class="text-center">Filter By Category</h3>
+                                <h3 class="text-center"  data-i18n="product_managment.product_search.filter_catageary_btn">Filter By Category</h3>
                                 <span class="close">&times;</span>
                                 <div class="-5" style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                     <div class="col-md-12 rounded-4 bg-transparent h-100 text-start">
@@ -304,7 +309,8 @@ require_once __DIR__ . '/../partials/header.php';
                                         </span>
                                     </div>
                                 </div>
-                                <button id="doneButton" class="btn btn-primary mt-2">Done</button>
+                                <button id="doneButton" class="btn btn-primary mt-2 Sms_mu_for_Eng">Done</button>
+                                <button id="doneButton" class="btn btn-primary mt-2 Sms_mu_for_hebrew">בוצע</button>
 
                             </div>
                         </div>
@@ -430,7 +436,9 @@ require_once __DIR__ . '/../partials/header.php';
                     </div>
                 </div>
                 <div class="row g-2">
-                    <p class="col-auto ms-auto mt-5 mb-5 me-5"><span class="fw-bold fs-2">Total products on the site:
+                    <p class="col-auto ms-auto mt-5 mb-5 me-5 Sms_mu_for_Eng"><span class="fw-bold fs-2">Total products on the site:
+                        </span><span class="fs-2"> 450</span></p>
+                    <p class="col-auto ms-auto mt-5 mb-5 me-5 Sms_mu_for_hebrew"><span class="fw-bold fs-2">Total מוצרים באתר:
                         </span><span class="fs-2"> 450</span></p>
                 </div>
             </div>

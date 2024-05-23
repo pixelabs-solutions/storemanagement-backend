@@ -14,6 +14,19 @@
         padding: 14px 15px !important;
     }
 
+    .my_div {
+        background-color: #afacac;
+    opacity: 0.5;
+        width: 100%;
+        position: absolute;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: none;
+    }
+
     .chosen-container.chosen-with-drop .chosen-drop {
         margin-top: 10px !important;
         border: none !important;
@@ -80,7 +93,7 @@
                                 <input type="text" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA" placeholder="" id='sms_The_coupon_code'>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="example-select fs-3 fw-bold" class="form-label fw-bold"  data-i18n="popoups.added_new_cupons.discount_type">Discount type
+                                <label for="example-select fs-3 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.discount_type">Discount type
                                     (amount/percentage)
                                 </label>
                                 <div style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
@@ -94,7 +107,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold"  data-i18n="popoups.added_new_cupons.amounth_discount">The amount
+                                <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.amounth_discount">The amount
                                     of the discount </label>
                                 <input type="number" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA" placeholder="" id="sms_amount_of_the_discount">
                             </div>
@@ -102,7 +115,7 @@
                         <!-- Adding terms to the feature -->
                         <div class="row gx-3 ">
                             <div class="col-md-6 mb-3">
-                                <label for="example-date-input" class="form-label fs-4 fw-bold"   data-i18n="popoups.added_new_cupons.expiry_date">Coupon expiration
+                                <label for="example-date-input" class="form-label fs-4 fw-bold" data-i18n="popoups.added_new_cupons.expiry_date">Coupon expiration
                                     date</label>
                                 <div class="input-group">
                                     <input type="date" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA" id="sms_Coupon_expiration">
@@ -121,7 +134,7 @@
 
                 </div>
                 </form>
-                <div class="modal-body text-center py-4 sms_manage_pop" id="sms_add_coupons_success-message" style="display: none;">
+                <div class="modal-body text-center py-4 sms_manage_pop"  id="sms_add_coupons_success-message" style="display: none;">
                     <!-- Close icon -->
 
                     <button type="button" class="btn-close" aria-label="Close" onclick="sms_add_coupons_close_success_message()"></button>
@@ -134,23 +147,24 @@
                     <h3>Success</h3>
                     <div class="text-muted">Your coupon data has been submitted successfully.</div>
                 </div>
-                <div class="modal-body text-center py-4 sms_manage_pop" id="sms_add_coupons_error-message" style="display: none;">
-                    <!-- Close icon -->
-                    <button type="button" class="btn-close" aria-label="Close" onclick="sms_add_coupous_close_error_message()"></button>
-                    <!-- SVG icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="12" y1="5" x2="12.01" y2="19"></line>
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="12" y1="5" x2="12.01" y2="19"></line>
-                    </svg>
-                    <h3>Error</h3>
-                    <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
+                <div class="my_div" id="sms_add_coupons_success-message_op">   
                 </div>
-
+                <div class="modal-body text-center py-4 sms_manage_pop" id="sms_add_coupons_error-message" style="display: none;">
+                        <!-- Close icon -->
+                        <button type="button" class="btn-close" aria-label="Close" onclick="sms_add_coupous_close_error_message()"></button>
+                        <!-- SVG icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                        </svg>
+                        <h3>Error</h3>
+                        <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
+                    </div>
                 <div class="text-center mt-5  ">
-                    <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="sms_meh_couponmanage_data()"  data-i18n="popoups.added_new_cupons.last_btn_cat">
+                    <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="sms_meh_couponmanage_data()" data-i18n="popoups.added_new_cupons.last_btn_cat">
                         To add the category click here +</button>
                 </div>
             </div>
@@ -173,18 +187,20 @@
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            })
+            }) 
             .then(response => {
                 console.log(response);
                 if (response.status === 201) {
                     // Form submission succeeded, display success message
                     document.getElementById('sms_add_coupons_success-message').style.display = 'block';
                     document.getElementById('sms_add_coupons_error-message').style.display = 'none';
+                    document.getElementById('sms_add_coupons_success-message_op').style.display = 'block';
                     window.location.reload();
                 } else {
                     // Form submission failed, display error message
                     document.getElementById('sms_add_coupons_error-message').style.display = 'block';
-                    document.getElementById('sms_add_coupons_success-message').style.display = 'none'; // Hide success message if it was displayed before
+                    document.getElementById('sms_add_coupons_error-message').style.display = 'block';
+                    document.getElementById('sms_add_coupons_success-message_op').style.display = 'block'; // Hide success message if it was displayed before
                 }
             })
             .catch(error => {
@@ -196,9 +212,11 @@
 
     function sms_add_coupons_close_success_message() {
         document.getElementById('sms_add_coupons_success-message').style.display = 'none';
+        document.getElementById('sms_add_coupons_success-message_op').style.display = 'none';
     }
 
     function sms_add_coupous_close_error_message() {
         document.getElementById('sms_add_coupons_error-message').style.display = 'none';
+        document.getElementById('sms_add_coupons_success-message_op').style.display = 'none';
     }
 </script>
