@@ -312,8 +312,19 @@ require_once __DIR__ . '/../partials/header.php';
                             <div class="popup-content">
                             <h3 class="text-center">Filter By Category</h3>
                                 <span class="close">&times;</span>
-                                <input type="number" class="form-control mt-2" placeholder="Input 1">
-                                <input type="number" class="form-control mt-2" placeholder="Input 2">
+                                <div style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
+                                    <div class="col-md-12 rounded-4 bg-transparent h-100 ">
+                                        <select id="choices-multiple-remove-button" multiple style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
+                                            <option value="NOSQL">Ctg</option>
+                                            <option value="NodeJS">demo</option>
+                                        </select>
+                                        <span class="span_div">
+                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.00006 7.16667L10.0001 3.16667L8.83339 2L6.00006 4.83333L3.16673 2L2.00006 3.16667L6.00006 7.16667Z" fill="#111" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
                                 <button id="doneButton" class="btn btn-primary mt-2">Done</button>
 
                             </div>
