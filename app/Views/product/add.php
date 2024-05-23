@@ -13,7 +13,7 @@
         }
         }
 </style>
-<div class="sms_customers_m container p-0 col-12">
+<div class="sms_customers_m container p-0 col-12" >
   <div class="card border-0">
   <div class="card-body-rounded ">
     <div class="d-flex flex-column ">
@@ -51,7 +51,7 @@
         </div>
         <button type="button" class="btn-close sms_modal_cancel_btn" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-            <div class="modal-body">
+            <div class="modal-body" style="height: 570px; overflow-y:auto">
                 <?php
                 include ('add_forms/add_variation.php');
                 ?>

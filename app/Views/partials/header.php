@@ -62,6 +62,8 @@
          background-color: transparent !important;
          border-radius: 12px;
          height: 100% !important;
+         scrollbar-color: transparent transparent !important;
+
       }
 
       :root {
@@ -77,6 +79,26 @@
          direction: rtl;
       }
 
+      * {
+         scrollbar-color: #4987D8 #DEDEDE;
+         scrollbar-width:  thin;
+   
+
+      /* For WebKit browsers (Chrome, Safari, etc.) */
+      /* Adjust the width and other styles as needed */
+      ::-webkit-scrollbar {
+         width: 1px;
+         border-radius: 20px;
+         /* Adjust border radius as needed */
+      }
+
+      /* Adjust scrollbar thumb style */
+      ::-webkit-scrollbar-thumb {
+         background-color: #4987D8;
+         border-radius: 20px;
+         /* Adjust border radius as needed */
+      }
+   }
       .rtl .avatar {
          margin-left: 10px;
       }
@@ -327,7 +349,7 @@
       .abc #product-heb,
       .abc #inventory-heb,
       .abc #coupons-heb,
-      .abc #support{
+      .abc #support {
          display: none !important;
       }
 
@@ -361,7 +383,7 @@
       .rtl #product-heb,
       .rtl #inventory-heb,
       .rtl #coupons-heb,
-      .rtl #support{
+      .rtl #support {
          display: block !important;
       }
 
@@ -378,7 +400,7 @@
       .rtl #product,
       .rtl #inventory,
       .rtl #coupons,
-      .rtl #support{
+      .rtl #support {
          display: none !important;
       }
    </style>

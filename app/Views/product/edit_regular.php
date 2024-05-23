@@ -56,11 +56,14 @@
     .rtl .sms_mu_btn_heb {
         display: block;
     }
+   input[type="file"] {
+        display: none;
+    }
 </style>
 <!-- </head>
 
 <body> -->
-<div class="page-body">
+<div class="page-body" style="height: 570px; overflow-y:auto; overflow-x:hidden;">
     <div class="container-xl">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10">

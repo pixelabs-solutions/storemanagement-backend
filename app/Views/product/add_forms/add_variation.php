@@ -100,7 +100,7 @@
 <!-- </head>
 
 <body> -->
-<div class="page-body">
+<div class="page-body"  >
     <div class="container-xl">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10">
@@ -251,7 +251,7 @@
                 </div>
                 </form>
                 <div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_add_variations_success_message"
-                    style="display: none;">
+                    style="display: none;" >
                     <!-- Close icon -->
 
                     <button type="button" class="btn-close" aria-label="Close"

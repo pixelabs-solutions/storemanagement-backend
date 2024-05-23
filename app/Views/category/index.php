@@ -1,8 +1,8 @@
-<div class="sms_customers_m  p-2 col-12">
+<div class="sms_customers_m  p-2 col-12" style="height: 570px; overflow-y:auto">
   <div class=" col-12 sms_customers_m_main_box ">
     <div class="row row-cards justify-content-sm-between gap-sm-3 gap-2 gap-lg-0 bg-white p-3 m-0 rounded-3">
       <div class=" col-lg-12 m-0 d-flex flex-md-row flex-column gap-md-0 gap-2 justify-content-between ">
-        <div class="card-body-rounded ">
+        <div class="card-body-rounded " >
           <div>
             <form action="./" method="get" autocomplete="off" novalidate id="sms_customers_w_search_form">
               <div class="input-icon border-bottom border-black">
@@ -111,7 +111,7 @@
           </div>
 
         </div> -->
-        <table class="sms_mu_table" id="sms_category_m_category_table">
+        <table class="sms_mu_table" id="sms_category_m_category_table" >
           <thead>
 
             <tr class="sms_mu_th">

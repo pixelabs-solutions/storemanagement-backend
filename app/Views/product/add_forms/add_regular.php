@@ -89,7 +89,7 @@
 
 <body> -->
 
-<div class="container-xl">
+<div class="container-xl" style="height: 570px; overflow-y:auto">
     <div class="row justify-content-center">
         <div class="col-12 col-md-10">
             <div class="">
@@ -227,11 +227,8 @@
                 </div>
 
             </div>
-
-
-
-    
-            <button class="btn btn-primary col-12 rounded-4 py-3" onclick="fun()">לעדכון המוצר ←</button>
+            <button class="btn Sms_mu_for_hebrew btn-primary col-12 rounded-4 py-3" onclick="fun()">לעדכון המוצר ←</button>
+            <button class="btn btn-primary col-12 rounded-4 py-3 Sms_mu_for_Eng" onclick="fun()">To add the product click here +</button>
         </div>
     </div>
 </div>
