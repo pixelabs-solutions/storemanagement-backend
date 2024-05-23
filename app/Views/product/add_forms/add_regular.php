@@ -89,7 +89,7 @@
 
 <body> -->
 
-<div class="container-xl">
+<div class="container-xl" style="height: 570px; overflow-y:auto">
     <div class="row justify-content-center">
         <div class="col-12 col-md-10">
             <div class="">
@@ -193,14 +193,9 @@
                                         the product</button>
                                 </div> -->
                     </div>
-
-
-
-
                 </form>
                 <div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_add_regular_success_message" style="display: none;">
                     <!-- Close icon -->
-
                     <button type="button" class="btn-close" aria-label="Close" onclick="sms_add_regular_close_success_message()"></button>
                     <!-- SVG icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -227,11 +222,8 @@
                 </div>
 
             </div>
-
-
-
-    
-            <button class="btn btn-primary col-12 rounded-4 py-3" onclick="fun()">לעדכון המוצר ←</button>
+            <button class="btn Sms_mu_for_hebrew btn-primary col-12 rounded-4 py-3" onclick="fun()">לעדכון המוצר ←</button>
+            <button class="btn btn-primary col-12 rounded-4 py-3 Sms_mu_for_Eng" onclick="fun()">To add the product click here +</button>
         </div>
     </div>
 </div>

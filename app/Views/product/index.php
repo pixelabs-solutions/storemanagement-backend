@@ -56,7 +56,7 @@ require_once __DIR__ . '/../partials/header.php';
             display: block !important;
             /* flex-direction: coloumn !important; */
             float: left !important;
-            padding: 16px 13px !important;
+            padding: 1px 13px !important;
             /* position: fixed; */
             /* top: 0; */
         }
@@ -112,6 +112,10 @@ require_once __DIR__ . '/../partials/header.php';
         border-radius: 8px;
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         right: 8%;
+    }
+    .rtl .popup {
+          left: 5% ;
+          right: 75%;
     }
 
     .popup-content {
@@ -190,29 +194,20 @@ require_once __DIR__ . '/../partials/header.php';
 </style>
 <div class="sms_products_m  p-0 ">
 
-    <div class=" col-12 mt-5">
+    <div class=" col-12 mt-5" style="overflow-y: hidden; overflow-x:hidden;">
         <div class="row col-12 d-flex justify-content-between bg-white p-3 m-0 rounded-3">
-            <div class="col-sm-12 d-flex flex-column  flex-md-row gap-2 col-lg-8 m-0 ">
-                <button class="rounded-4 border-0 p-2" data-bs-toggle="modal" data-bs-target="#modal-full-width"
-                    style="background-color:#4987D870; " data-i18n="product_managment.nav.new_product_btn">Add a new
+            <div class="col-sm-12 d-flex flex-column flex-md-row gap-2 col-lg-8 m-0 ">
+                <button class="rounded-4 border-0 p-2" data-bs-toggle="modal" data-bs-target="#modal-full-width" style="background-color:#4987D870; " data-i18n="product_managment.nav.new_product_btn">Add a new
                     product +</button>
-                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870;" data-bs-toggle="modal"
-                    data-bs-target="#modal-Category-large"
-                    data-i18n="product_managment.nav.category_product_btn">Category management</button>
-                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; " data-bs-toggle="modal"
-                    data-bs-target="#modal-large" data-i18n="product_managment.nav.future_product_btn">Feature
+                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870;" data-bs-toggle="modal" data-bs-target="#modal-Category-large" data-i18n="product_managment.nav.category_product_btn">Category management</button>
+                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; " data-bs-toggle="modal" data-bs-target="#modal-large" data-i18n="product_managment.nav.future_product_btn">Feature
                     management</button>
 
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 mt-3 mt-lg-0">
-                <button id="importExportBtn"
-                    class="rounded-4 border-0 d-flex px-3 gap-2 align-items-center justify-content-end w-md-auto p-2"
-                    style="background-color:#4987D8; color: white; float:left;" data-bs-toggle="modal"
-                    data-bs-target="#modal-simple">
+                <button id="importExportBtn" class="rounded-4 border-0 d-flex px-3 gap-2 align-items-center justify-content-end w-md-auto p-2" style="background-color:#4987D8; color: white; float:left;" data-bs-toggle="modal" data-bs-target="#modal-simple">
                     <svg width="23" height="23" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M43.0833 4.58336H25.6667V1.83336C25.6666 1.69558 25.6354 1.55959 25.5756 1.4355C25.5157 1.31141 25.4286 1.20242 25.3208 1.11662C25.213 1.03083 25.0872 0.970445 24.9528 0.939958C24.8185 0.909471 24.6789 0.909666 24.5447 0.94053L0.711333 6.44053C0.509269 6.48697 0.328917 6.60054 0.199723 6.7627C0.0705279 6.92486 0.000122157 7.12603 0 7.33336L0 38.5C8.32958e-05 38.7189 0.0785044 38.9306 0.221079 39.0967C0.363654 39.2628 0.560968 39.3724 0.777333 39.4057L24.6107 43.0724C24.7413 43.0928 24.8748 43.0846 25.002 43.0485C25.1292 43.0123 25.247 42.949 25.3474 42.8629C25.4478 42.7768 25.5283 42.67 25.5834 42.5498C25.6385 42.4296 25.6669 42.2989 25.6667 42.1667V39.4167H43.0833C43.3265 39.4167 43.5596 39.3201 43.7315 39.1482C43.9034 38.9763 44 38.7431 44 38.5V5.50003C44 5.25691 43.9034 5.02376 43.7315 4.85185C43.5596 4.67994 43.3265 4.58336 43.0833 4.58336ZM25.6667 17.4167H31.1667V21.0834H25.6667V17.4167ZM7.47267 28.8475L11.4492 22.4859C11.5408 22.3404 11.5895 22.172 11.5895 22C11.5895 21.8281 11.5408 21.6597 11.4492 21.5142L7.4745 15.1525C7.40471 15.0506 7.35625 14.9356 7.33204 14.8144C7.30782 14.6933 7.30834 14.5685 7.33358 14.4475C7.35882 14.3266 7.40824 14.212 7.47889 14.1106C7.54953 14.0092 7.63994 13.9232 7.74468 13.8577C7.84941 13.7921 7.96632 13.7484 8.08837 13.7292C8.21042 13.71 8.33509 13.7157 8.4549 13.7459C8.5747 13.776 8.68717 13.8301 8.78554 13.9049C8.88391 13.9797 8.96616 14.0735 9.02733 14.1809L12.056 19.0264C12.3915 19.5617 13.2752 19.5617 13.6107 19.0264L16.6393 14.1809C16.7028 14.0784 16.7859 13.9896 16.8838 13.9194C16.9818 13.8492 17.0926 13.799 17.21 13.7717C17.3273 13.7445 17.4489 13.7407 17.5678 13.7605C17.6866 13.7804 17.8004 13.8236 17.9025 13.8875C18.0047 13.9512 18.0934 14.0344 18.1635 14.1323C18.2336 14.2302 18.2837 14.341 18.3109 14.4583C18.3381 14.5756 18.342 14.6972 18.3223 14.816C18.3025 14.9348 18.2596 15.0485 18.1958 15.1507L14.2193 21.5124C14.1277 21.6578 14.079 21.8263 14.079 21.9982C14.079 22.1701 14.1277 22.3386 14.2193 22.484L18.194 28.8457C18.2578 28.9478 18.3009 29.0614 18.3208 29.1802C18.3406 29.2989 18.3369 29.4204 18.3099 29.5377C18.2828 29.6549 18.2329 29.7658 18.163 29.8638C18.0931 29.9618 18.0046 30.0451 17.9025 30.1089C17.6945 30.2314 17.4474 30.2693 17.2123 30.2147C16.9771 30.1601 16.772 30.0172 16.6393 29.8155L13.6107 24.97C13.5275 24.8391 13.4125 24.7314 13.2766 24.6568C13.1406 24.5822 12.9879 24.5431 12.8328 24.5433C12.6777 24.5435 12.5252 24.5829 12.3894 24.6578C12.2536 24.7327 12.1389 24.8408 12.056 24.9719L9.02733 29.8174C8.89435 30.0187 8.68923 30.1613 8.45423 30.2159C8.21923 30.2704 7.97225 30.2328 7.76417 30.1107C7.66209 30.0469 7.57357 29.9636 7.50368 29.8656C7.43378 29.7676 7.38387 29.6568 7.35681 29.5395C7.32974 29.4222 7.32604 29.3007 7.34592 29.182C7.3658 29.0633 7.40887 28.9496 7.47267 28.8475ZM25.6667 22.9167H31.1667V26.5834H25.6667V22.9167ZM33 22.9167H42.1667V26.5834H33V22.9167ZM33 21.0834V17.4167H42.1667V21.0834H33ZM33 15.5834V11.9167H42.1667V15.5834H33ZM31.1667 15.5834H25.6667V11.9167H31.1667V15.5834ZM25.6667 28.4167H31.1667V32.0834H25.6667V28.4167ZM33 28.4167H42.1667V32.0834H33V28.4167ZM42.1667 10.0834H33V6.4167H42.1667V10.0834ZM31.1667 6.4167V10.0834H25.6667V6.4167H31.1667ZM25.6667 33.9167H31.1667V37.5834H25.6667V33.9167ZM33 37.5834V33.9167H42.1667V37.5834H33Z"
-                            fill="#ffffff" />
+                        <path d="M43.0833 4.58336H25.6667V1.83336C25.6666 1.69558 25.6354 1.55959 25.5756 1.4355C25.5157 1.31141 25.4286 1.20242 25.3208 1.11662C25.213 1.03083 25.0872 0.970445 24.9528 0.939958C24.8185 0.909471 24.6789 0.909666 24.5447 0.94053L0.711333 6.44053C0.509269 6.48697 0.328917 6.60054 0.199723 6.7627C0.0705279 6.92486 0.000122157 7.12603 0 7.33336L0 38.5C8.32958e-05 38.7189 0.0785044 38.9306 0.221079 39.0967C0.363654 39.2628 0.560968 39.3724 0.777333 39.4057L24.6107 43.0724C24.7413 43.0928 24.8748 43.0846 25.002 43.0485C25.1292 43.0123 25.247 42.949 25.3474 42.8629C25.4478 42.7768 25.5283 42.67 25.5834 42.5498C25.6385 42.4296 25.6669 42.2989 25.6667 42.1667V39.4167H43.0833C43.3265 39.4167 43.5596 39.3201 43.7315 39.1482C43.9034 38.9763 44 38.7431 44 38.5V5.50003C44 5.25691 43.9034 5.02376 43.7315 4.85185C43.5596 4.67994 43.3265 4.58336 43.0833 4.58336ZM25.6667 17.4167H31.1667V21.0834H25.6667V17.4167ZM7.47267 28.8475L11.4492 22.4859C11.5408 22.3404 11.5895 22.172 11.5895 22C11.5895 21.8281 11.5408 21.6597 11.4492 21.5142L7.4745 15.1525C7.40471 15.0506 7.35625 14.9356 7.33204 14.8144C7.30782 14.6933 7.30834 14.5685 7.33358 14.4475C7.35882 14.3266 7.40824 14.212 7.47889 14.1106C7.54953 14.0092 7.63994 13.9232 7.74468 13.8577C7.84941 13.7921 7.96632 13.7484 8.08837 13.7292C8.21042 13.71 8.33509 13.7157 8.4549 13.7459C8.5747 13.776 8.68717 13.8301 8.78554 13.9049C8.88391 13.9797 8.96616 14.0735 9.02733 14.1809L12.056 19.0264C12.3915 19.5617 13.2752 19.5617 13.6107 19.0264L16.6393 14.1809C16.7028 14.0784 16.7859 13.9896 16.8838 13.9194C16.9818 13.8492 17.0926 13.799 17.21 13.7717C17.3273 13.7445 17.4489 13.7407 17.5678 13.7605C17.6866 13.7804 17.8004 13.8236 17.9025 13.8875C18.0047 13.9512 18.0934 14.0344 18.1635 14.1323C18.2336 14.2302 18.2837 14.341 18.3109 14.4583C18.3381 14.5756 18.342 14.6972 18.3223 14.816C18.3025 14.9348 18.2596 15.0485 18.1958 15.1507L14.2193 21.5124C14.1277 21.6578 14.079 21.8263 14.079 21.9982C14.079 22.1701 14.1277 22.3386 14.2193 22.484L18.194 28.8457C18.2578 28.9478 18.3009 29.0614 18.3208 29.1802C18.3406 29.2989 18.3369 29.4204 18.3099 29.5377C18.2828 29.6549 18.2329 29.7658 18.163 29.8638C18.0931 29.9618 18.0046 30.0451 17.9025 30.1089C17.6945 30.2314 17.4474 30.2693 17.2123 30.2147C16.9771 30.1601 16.772 30.0172 16.6393 29.8155L13.6107 24.97C13.5275 24.8391 13.4125 24.7314 13.2766 24.6568C13.1406 24.5822 12.9879 24.5431 12.8328 24.5433C12.6777 24.5435 12.5252 24.5829 12.3894 24.6578C12.2536 24.7327 12.1389 24.8408 12.056 24.9719L9.02733 29.8174C8.89435 30.0187 8.68923 30.1613 8.45423 30.2159C8.21923 30.2704 7.97225 30.2328 7.76417 30.1107C7.66209 30.0469 7.57357 29.9636 7.50368 29.8656C7.43378 29.7676 7.38387 29.6568 7.35681 29.5395C7.32974 29.4222 7.32604 29.3007 7.34592 29.182C7.3658 29.0633 7.40887 28.9496 7.47267 28.8475ZM25.6667 22.9167H31.1667V26.5834H25.6667V22.9167ZM33 22.9167H42.1667V26.5834H33V22.9167ZM33 21.0834V17.4167H42.1667V21.0834H33ZM33 15.5834V11.9167H42.1667V15.5834H33ZM31.1667 15.5834H25.6667V11.9167H31.1667V15.5834ZM25.6667 28.4167H31.1667V32.0834H25.6667V28.4167ZM33 28.4167H42.1667V32.0834H33V28.4167ZM42.1667 10.0834H33V6.4167H42.1667V10.0834ZM31.1667 6.4167V10.0834H25.6667V6.4167H31.1667ZM25.6667 33.9167H31.1667V37.5834H25.6667V33.9167ZM33 37.5834V33.9167H42.1667V37.5834H33Z" fill="#ffffff" />
                     </svg>
                     <h5 class="m-0" data-i18n="product_managment.nav.excel_product_btn">Import/export from Excel</h5>
                 </button>
@@ -237,34 +232,26 @@ require_once __DIR__ . '/../partials/header.php';
                     </div>
                 </div>
             </div>
-            <div class="d-flex flex-column overflow-auto">
-                <div
-                    class="sms_mu_btns_filter px-5 d-flex w-100 align-items-baseline bg-white mt-5 rounded-top-4 fixed">
+            <div class="d-flex flex-column overflow-auto" >
+                <div class="sms_mu_btns_filter d-flex w-100 align-items-baseline bg-white  rounded-top-4 fixed" style="padding-top: 28px; margin-top:1px;">
                     <form id="sms_products_m_search_form" action="./" method="get" autocomplete="off" novalidate>
                         <div class="input-icon border-bottom border-black">
                             <span class="input-icon-addon">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/search -->
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                     <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
                                     <path d="M21 21l-6 -6" />
                                 </svg>
                             </span>
-                            <input type="text" id="sms_products_m_search_input" value="" class="form-control border-0 "
-                                placeholder="Product search" aria-label="Search in website">
+                            <input type="text" id="sms_products_m_search_input" value="" class="form-control border-0 " placeholder="Product search" aria-label="Search in website">
                         </div>
                     </form>
-                    <div class="d-flex flex-row gap-3 mt-5 text-center w-100 justify-content-end">
-                        <button onclick="togglePopup()"
-                            class="rounded-4 py-2 border-0 align-items-center text-justify-content-center d-flex gap-1 filter-button">
-                            <svg width="23" height="23" class="p-0 m-0" viewBox="0 0 33 33" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
+                    <div class="d-flex flex-row gap-3 text-center w-100 justify-content-end">
+                        <button onclick="togglePopup()" class="rounded-4 py-2 border-0 align-items-center text-justify-content-center d-flex gap-1 filter-button">
+                            <svg width="23" height="23" class="p-0 m-0" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_272_365)">
-                                    <path
-                                        d="M0.743423 3.93125C1.15592 3.05625 2.03092 2.5 2.99967 2.5H29.9997C30.9684 2.5 31.8434 3.05625 32.2559 3.93125C32.6684 4.80625 32.5434 5.8375 31.9309 6.5875L20.4997 20.5562V28.5C20.4997 29.2563 20.0747 29.95 19.3934 30.2875C18.7122 30.625 17.9059 30.5562 17.2997 30.1L13.2997 27.1C12.7934 26.725 12.4997 26.1313 12.4997 25.5V20.5562L1.06217 6.58125C0.455923 5.8375 0.324673 4.8 0.743423 3.93125Z"
-                                        fill="black" />
+                                    <path d="M0.743423 3.93125C1.15592 3.05625 2.03092 2.5 2.99967 2.5H29.9997C30.9684 2.5 31.8434 3.05625 32.2559 3.93125C32.6684 4.80625 32.5434 5.8375 31.9309 6.5875L20.4997 20.5562V28.5C20.4997 29.2563 20.0747 29.95 19.3934 30.2875C18.7122 30.625 17.9059 30.5562 17.2997 30.1L13.2997 27.1C12.7934 26.725 12.4997 26.1313 12.4997 25.5V20.5562L1.06217 6.58125C0.455923 5.8375 0.324673 4.8 0.743423 3.93125Z" fill="black" />
                                 </g>
                                 <defs>
                                     <clipPath id="clip0_272_365">
@@ -279,24 +266,20 @@ require_once __DIR__ . '/../partials/header.php';
                         <!-- The Popup -->
                         <div id="popup" class="popup">
                             <div class="popup-content">
-                                <h3 class="text-center">Filter By Inventory</h3>
+                                <h3 class="text-center" data-i18n="product_managment.product_search.filter_inventory_btn">Filter By Inventory</h3>
                                 <span class="close">&times;</span>
                                 <input type="number" class="form-control mt-2" placeholder="Input 1">
                                 <input type="number" class="form-control mt-2" placeholder="Input 2">
-                                <button id="doneButton" class="btn btn-primary mt-2">Done</button>
+                                <button id="doneButton" class="btn btn-primary mt-2 Sms_mu_for_Eng">Done</button>
+                                <button id="doneButton" class="btn btn-primary mt-2 Sms_mu_for_hebrew">בוצע</button>
 
                             </div>
                         </div>
 
-                        <button onclick="togglePopups()"
-                            class="rounded-4 py-2  border-0  align-items-center text-center justify-content-center  d-flex gap-1 filter-button"
-                            style="background-color:#4987D870; ">
-                            <svg width="23" height="23" viewBox="0 0 33 33" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
+                        <button onclick="togglePopups()" class="rounded-4 py-2  border-0  align-items-center text-center justify-content-center  d-flex gap-1 filter-button" style="background-color:#4987D870; ">
+                            <svg width="23" height="23" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_272_365)">
-                                    <path
-                                        d="M0.743423 3.93125C1.15592 3.05625 2.03092 2.5 2.99967 2.5H29.9997C30.9684 2.5 31.8434 3.05625 32.2559 3.93125C32.6684 4.80625 32.5434 5.8375 31.9309 6.5875L20.4997 20.5562V28.5C20.4997 29.2563 20.0747 29.95 19.3934 30.2875C18.7122 30.625 17.9059 30.5562 17.2997 30.1L13.2997 27.1C12.7934 26.725 12.4997 26.1313 12.4997 25.5V20.5562L1.06217 6.58125C0.455923 5.8375 0.324673 4.8 0.743423 3.93125Z"
-                                        fill="black" />
+                                    <path d="M0.743423 3.93125C1.15592 3.05625 2.03092 2.5 2.99967 2.5H29.9997C30.9684 2.5 31.8434 3.05625 32.2559 3.93125C32.6684 4.80625 32.5434 5.8375 31.9309 6.5875L20.4997 20.5562V28.5C20.4997 29.2563 20.0747 29.95 19.3934 30.2875C18.7122 30.625 17.9059 30.5562 17.2997 30.1L13.2997 27.1C12.7934 26.725 12.4997 26.1313 12.4997 25.5V20.5562L1.06217 6.58125C0.455923 5.8375 0.324673 4.8 0.743423 3.93125Z" fill="black" />
                                 </g>
                                 <defs>
                                     <clipPath id="clip0_272_365">
@@ -311,16 +294,29 @@ require_once __DIR__ . '/../partials/header.php';
                         <!-- The Popup -->
                         <div id="popups" class="popup">
                             <div class="popup-content">
-                                <h3 class="text-center">Filter By Category</h3>
+                                <h3 class="text-center"  data-i18n="product_managment.product_search.filter_catageary_btn">Filter By Category</h3>
                                 <span class="close">&times;</span>
-                               
-                                <button id="doneButton" class="btn btn-primary mt-2">Done</button>
+                                <div class="-5" style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
+                                    <div class="col-md-12 rounded-4 bg-transparent h-100 text-start">
+                                        <select id="category_in_product" multiple style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
+                                            <option value="NOSQL">Bags</option>
+                                            <option value="NodeJS">List</option>
+                                        </select>
+                                        <span class="span_div">
+                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.00006 7.16667L10.0001 3.16667L8.83339 2L6.00006 4.83333L3.16673 2L2.00006 3.16667L6.00006 7.16667Z" fill="#111" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
+                                <button id="doneButton" class="btn btn-primary mt-2 Sms_mu_for_Eng">Done</button>
+                                <button id="doneButton" class="btn btn-primary mt-2 Sms_mu_for_hebrew">בוצע</button>
 
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-x bg-white py-5 sms_mu_main_bg_white rounded-bottom-4 px-2">
+                <div class="card-x bg-white py-5 sms_mu_main_bg_white rounded-bottom-4 px-2" style="height: 390px; overflow-y:scroll">
                     <div class="sms_mu_main_bg_white position-relative  ">
 
                         <table class="sms_mu_table_product rounded-4" id='sms_products_m_products_table'>
@@ -351,11 +347,10 @@ require_once __DIR__ . '/../partials/header.php';
                                     } else {
                                         $prodimage = "https://placehold.co/400x400?text=No%20Image%20Found";
                                     }
-                                    ?>
+                            ?>
                                     <tr class="sms_mu_tr_product">
                                         <td>
-                                            <img class="sms_product_img" height="100px" width="100px"
-                                                src="<?php echo $prodimage; ?>" alt="">
+                                            <img class="sms_product_img" height="100px" width="100px" src="<?php echo $prodimage; ?>" alt="">
                                         </td>
                                         <td class=""><span style="font-weight:bold">Product name:</span>
                                             <?php echo $product['name']; ?></td>
@@ -384,14 +379,9 @@ require_once __DIR__ . '/../partials/header.php';
                                             </span>250
                                         </td>
                                         <td>
-                                            <span data-bs-toggle="modal" data-bs-target="#edit-regular-modal-full-width"
-                                                data-bs-productJson="<?php echo htmlspecialchars($product_json); ?>"
-                                                data-bs-categoriesJson="<?php echo htmlspecialchars($parentCategories_json); ?>">
-                                                <svg width="20" height="20" viewBox="0 0 32 32" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z"
-                                                        fill="black" />
+                                            <span data-bs-toggle="modal" data-bs-target="#edit-regular-modal-full-width" data-bs-productJson="<?php echo htmlspecialchars($product_json); ?>" data-bs-categoriesJson="<?php echo htmlspecialchars($parentCategories_json); ?>">
+                                                <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z" fill="black" />
                                                 </svg>
                                             </span>
 
@@ -408,17 +398,17 @@ require_once __DIR__ . '/../partials/header.php';
                                         <td class=""><span style="font-weight:bold">Product name:</span>
                                             <?php echo $product['name']; ?></td>
                                         <td><span style="font-weight:bold">Category:</span> <?php
-                                        $count = count($product['categories']);
-                                        $const = 0;
-                                        foreach ($product['categories'] as $key => $category) {
-                                            echo $category['name'];
-                                            // Check if it's not the last element and there are more than 1 elements
-                                            if ($const < $count - 1 && $count > 1) {
-                                                echo ', ';
-                                            }
-                                            $const++;
-                                        }
-                                        ?>
+                                                                                            $count = count($product['categories']);
+                                                                                            $const = 0;
+                                                                                            foreach ($product['categories'] as $key => $category) {
+                                                                                                echo $category['name'];
+                                                                                                // Check if it's not the last element and there are more than 1 elements
+                                                                                                if ($const < $count - 1 && $count > 1) {
+                                                                                                    echo ', ';
+                                                                                                }
+                                                                                                $const++;
+                                                                                            }
+                                                                                            ?>
                                         </td>
                                         <td><span style="font-weight:bold">Price:</span> <?php echo $product['price']; ?>
                                             <?php echo $currency['symbol']; ?>
@@ -432,27 +422,27 @@ require_once __DIR__ . '/../partials/header.php';
                                         <td>
                                             <span data-bs-toggle="modal" data-bs-target="#edit-modal-full-width">
 
-                                                <svg width="20" height="20" viewBox="0 0 32 32" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z"
-                                                        fill="black" />
+                                                <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z" fill="black" />
                                                 </svg>
                                             </span>
 
                                         </td>
                                     </tr>
                                     <tr class="sms_mu_spacing_diver"></tr>
-                                <?php }
+                            <?php }
                             } ?>
                         </table>
                     </div>
                 </div>
+                <div class="row g-2">
+                    <p class="col-auto ms-auto mt-5 mb-5 me-5 Sms_mu_for_Eng"><span class="fw-bold fs-2">Total products on the site:
+                        </span><span class="fs-2"> 450</span></p>
+                    <p class="col-auto ms-auto mt-5 mb-5 me-5 Sms_mu_for_hebrew"><span class="fw-bold fs-2">Total מוצרים באתר:
+                        </span><span class="fs-2"> 450</span></p>
+                </div>
             </div>
-            <div class="row g-2">
-                <p class="col-auto ms-auto mt-5 mb-5 me-5"><span class="fw-bold fs-2">Total products on the site:
-                    </span><span class="fs-2"> 450</span></p>
-            </div>
+
             <div class="modal modal-blur fade m-0" id="modal-full-width" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -461,21 +451,19 @@ require_once __DIR__ . '/../partials/header.php';
                         </div>
                         <div class="modal-body">
                             <?php
-                            include ('add.php');
+                            include('add.php');
                             ?>
                         </div>
 
                     </div>
                 </div>
             </div>
-            <div class="modal modal-blur fade m-0" id="edit-modal-full-width" tabindex="-1" role="dialog"
-                aria-hidden="true">
+            <div class="modal modal-blur fade m-0" id="edit-modal-full-width" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
                             <div class="py-3 rounded-top text-center col-10">
-                                <h3 class="card-title text-black fs-2 m-0 fw-bold"
-                                    data-i18n="popoups.future_managment.edit_variation_in_product_managment.heading">
+                                <h3 class="card-title text-black fs-2 m-0 fw-bold" data-i18n="popoups.future_managment.edit_variation_in_product_managment.heading">
                                     Editing
                                     a product with variations</h3>
                             </div>
@@ -483,7 +471,7 @@ require_once __DIR__ . '/../partials/header.php';
                         </div>
                         <div class="modal-body">
                             <?php
-                            include ('edit_variation.php');
+                            include('edit_variation.php');
                             ?>
                         </div>
 
@@ -491,8 +479,7 @@ require_once __DIR__ . '/../partials/header.php';
                 </div>
             </div>
             <!-- edit priduct regular  -->
-            <div class="modal modal-blur fade m-0" id="edit-regular-modal-full-width" tabindex="-1" role="dialog"
-                aria-hidden="true">
+            <div class="modal modal-blur fade m-0" id="edit-regular-modal-full-width" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
@@ -506,7 +493,7 @@ require_once __DIR__ . '/../partials/header.php';
                         </div>
                         <div class="modal-body">
                             <?php
-                            include ('edit_regular.php');
+                            include('edit_regular.php');
                             ?>
                         </div>
 
@@ -573,7 +560,7 @@ require_once __DIR__ . '/../partials/header.php';
                     var closeButton = inventoryPopup.querySelector(".close");
 
                     // Add click event listener to the close button
-                    closeButton.addEventListener("click", function () {
+                    closeButton.addEventListener("click", function() {
                         inventoryPopup.style.display = "none";
                         window.removeEventListener("click", closePopupOnOutsideClick);
                     });
@@ -597,7 +584,7 @@ require_once __DIR__ . '/../partials/header.php';
                     var closeButton = categoryPopup.querySelector(".close");
 
                     // Add click event listener to the close button
-                    closeButton.addEventListener("click", function () {
+                    closeButton.addEventListener("click", function() {
                         categoryPopup.style.display = "none";
                         window.removeEventListener("click", closePopupsOnOutsideClick);
                     });
@@ -620,8 +607,8 @@ require_once __DIR__ . '/../partials/header.php';
                 }
 
                 // Prevent event propagation inside the popup content
-                document.querySelectorAll(".popup-content").forEach(function (popupContent) {
-                    popupContent.addEventListener("click", function (event) {
+                document.querySelectorAll(".popup-content").forEach(function(popupContent) {
+                    popupContent.addEventListener("click", function(event) {
                         event.stopPropagation();
                     });
                 });
@@ -631,7 +618,7 @@ require_once __DIR__ . '/../partials/header.php';
                     let statuses = document.querySelectorAll('.sms_transaction_w_status');
 
                     // Loop through each status element
-                    statuses.forEach(function (status) {
+                    statuses.forEach(function(status) {
                         // Get the text content of the status
                         let statusText = status.textContent.trim().toLowerCase();
 
@@ -650,17 +637,17 @@ require_once __DIR__ . '/../partials/header.php';
 
 
                 // Call the function to add checkboxes after each row container
-                document.addEventListener('DOMContentLoaded', function () {
+                document.addEventListener('DOMContentLoaded', function() {
                     const searchForm = document.getElementById('sms_products_m_search_form');
                     const searchInput = document.getElementById('sms_products_m_search_input');
                     const productsTable = document.getElementById('sms_products_m_products_table');
 
-                    searchForm.addEventListener('submit', function (event) {
+                    searchForm.addEventListener('submit', function(event) {
                         event.preventDefault(); // Prevent form submission
                         filterCustomers();
                     });
 
-                    searchInput.addEventListener('input', function () {
+                    searchInput.addEventListener('input', function() {
                         filterCustomers();
                     });
 

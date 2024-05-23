@@ -56,11 +56,14 @@
     .rtl .sms_mu_btn_heb {
         display: block;
     }
+   input[type="file"] {
+        display: none;
+    }
 </style>
 <!-- </head>
 
 <body> -->
-<div class="page-body">
+<div class="page-body" style="height: 570px; overflow-y:auto; overflow-x:hidden;">
     <div class="container-xl">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10">
@@ -154,18 +157,18 @@
 
                 </form>
                 <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
-                    <div class="text-center mt-2 col-sm-6 col-md-6 sms_mu_btn_eng">
+                    <div class="text-center mt-2 col-sm-6 col-md-6 Sms_mu_for_Eng">
                         <button onclick="fun_Np()" class="  btn btn-primary col-12 rounded-4 py-3">To update
                             the product →</button>
                     </div>
-                    <div class="text-center mt-2 col-sm-6 col-md-6 sms_mu_btn_heb">
+                    <div class="text-center mt-2 col-sm-6 col-md-6 Sms_mu_for_hebrew">
                         <button onclick="fun_Np()" class="btn btn-primary col-12 rounded-4 py-3">לעדכון המוצר ←</button>
                     </div>
-                    <div class="text-center mt-2 col-sm-6 col-md-6  sms_mu_btn_eng">
+                    <div class="text-center mt-2 col-sm-6 col-md-6  Sms_mu_for_Eng">
                         <button type="button" class=" btn btn-danger col-12 rounded-4 py-3" onclick="openModal('sms_edit_product_regular_w_delete_complete_modal')">Deletion of
                             the product</button>
                     </div>
-                    <div class="text-center mt-2 col-sm-6 col-md-6 sms_mu_btn_heb">
+                    <div class="text-center mt-2 col-sm-6 col-md-6 Sms_mu_for_hebrew">
                         <button type="button" class="btn btn-danger col-12 rounded-4 py-3 " onclick="openModal('sms_edit_product_regular_w_delete_complete_modal')">מחיקת המוצר</button>
                     </div>
                 </div>

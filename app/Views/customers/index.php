@@ -191,7 +191,7 @@ $customers = $data['data'];
     border-spacing: 5px;
   }
 </style>
-<div class="sms_customers_m  p-0 overflow-scroll">
+<div class="sms_customers_m  p-0">
   <div class=" col-12 mt-5">
     <div class="row row-cards justify-content-sm-between gap-sm-3 gap-2 gap-lg-0 bg-white p-3 m-0 rounded-3">
       <div class="col-sm-5 col-lg-3 m-0 ">
@@ -219,7 +219,7 @@ $customers = $data['data'];
       </div>
     </div>
     <div class="card-x mt-3">
-      <div style="overflow-x: auto">
+      <div style="overflow-x: auto overflow-y-scroll" style="height: 570px;">
 
         <table class="sms_mu_table sms_customers_m_customer_table">
           <thead>
