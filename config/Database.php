@@ -99,6 +99,17 @@ class Database
         )";
         $this->connection->query($userConfigurationsTable);
 
+        $currentLanguageTable = "CREATE TABLE IF NOT EXISTS current_language
+        (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            user_id INT NOT NULL UNIQUE,
+            current_language VARCHAR(255) NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        )";
+        $this->connection->query($currentLanguageTable);
+
+
         $goalTable = "CREATE TABLE IF NOT EXISTS goals
             (
                 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

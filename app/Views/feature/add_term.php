@@ -138,7 +138,7 @@
                                         id="sms_feature_select">
                                         <?php foreach($attributes  as $attribute)
                                         { ?>
-                                        <option id="<?php echo $attribute['id']; ?>"><?php echo $attribute['name']; ?></option>
+                                        <option id="<?php echo $attribute['id']; ?>" value="<?php echo $attribute['id']; ?>" ><?php echo $attribute['name']; ?></option>
                                         <?php } ?>
                                         
                                     </select>
@@ -315,13 +315,14 @@
             let name = document.getElementById('sms_term_name').value.trim();
             let type = document.getElementById('sms_feature_select').value.trim();
             let colorInput = document.getElementById('sms_term_color').value.trim();
+            let dynamicTerms = document.getElementById('sms_term_image').value.trim();
 
             // Create JSON object to store form data
             let jsonData = {
                 name: name,
-                type: type,
-                colorInput: colorInput,
-                dynamicTerms: []  // Prepare an array to store dynamic term data
+                // type: type,
+                // colorInput: colorInput,
+                // dynamicTerms: dynamicTerms // Prepare an array to store dynamic term data
             };
 
             // Get the values of dynamically added inputs
@@ -343,7 +344,7 @@
             let jsonString = JSON.stringify(jsonData);
 
             // Send JSON data with fetch API
-            fetch('/attributes/{id}/terms/add', {
+            fetch(`/attributes/${type}/terms/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
