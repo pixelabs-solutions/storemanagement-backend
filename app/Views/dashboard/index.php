@@ -2,7 +2,7 @@
 include ('../app/Views/partials/header.php');
 require_once __DIR__ . '/../partials/header.php';
 
-// var_dump($dashboard_data);
+var_dump($dashboard_data);
 ?>
 
 <!-- Leaflet CSS -->
@@ -395,7 +395,9 @@ require_once __DIR__ . '/../partials/header.php';
                         <div class="col-auto ms-auto ">
                             <div class="mb-3">
                                 <select type="text" class="form-select dropdown-tom-select-style with-input"
-                                    placeholder="Filter by city" name="city" multiple>
+                                    placeholder="Filter by city" name="city" multiple
+                                    id="select_city"
+                                    >
 
                                     <?php foreach ($dashboard_data["customers_location"] as $statist): ?>
                                         <?php $city_value = $statist['city']; ?>
@@ -406,6 +408,20 @@ require_once __DIR__ . '/../partials/header.php';
                             </div>
                         </div>
                     </div>
+                    <script>
+                 document.getElementById('select_city').addEventListener('change', function () {
+    let selectedCities = Array.from(this.selectedOptions).map(option => option.value);
+    let cityRows = document.querySelectorAll('.city-row');
+    cityRows.forEach(row => {
+        let cityName = row.dataset.city;
+        if (selectedCities.includes(cityName)) {
+            row.style.display = 'flex';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+});
+                    </script>
                     <!-- End Header -->
                     <!-- Map and City Data Start -->
                     <div class="row g-2 align-items-center">
@@ -417,35 +433,28 @@ require_once __DIR__ . '/../partials/header.php';
                         <!-- Map Data End -->
                         <!-- Filter City Data Start  -->
                         <div class="col-lg-4 col-md-3 col-sm-12">
-                            <!-- City name with progress bar start -->
-
-                            <?php foreach ($dashboard_data["customers_location"] as $statist): ?>
-                                <?php $city_name = $statist['city']; ?>
-                                <?php $city_value = $statist['percentage_of_customers']; ?>
-
-                                <div class="row g-2">
-                                    <div class="col-lg-8 col-md-8 col-sm-8">
-                                        <p class="text-end"><?php echo $city_name; ?></p>
-                                        <div class="progress mb-2"
-                                            style="height:15px; border-radius:10px; margin-top:-10px;">
-                                            <div class="progress-bar"
-                                                style="width: <?php echo $city_value; ?>; border-radius:10px;"
-                                                role="progressbar" aria-valuenow="<?php echo $city_value; ?>"
-                                                aria-valuemin="0" aria-valuemax="100"
-                                                aria-label="<?php echo $city_value; ?>% Complete">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4">
-                                        <br>
-                                        <h4><?php echo $city_value; ?></h4>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-
-                            <!-- City name with progress bar end -->
-
-                        </div>
+    <!-- City name with progress bar start -->
+    <?php foreach ($dashboard_data["customers_location"] as $statist): ?>
+        <?php $city_name = $statist['city']; ?>
+        <?php $city_value = $statist['percentage_of_customers']; ?>
+        <div class="row g-2 city-row" data-city="<?php echo $city_name; ?>">
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <p class="text-end"><?php echo $city_name; ?></p>
+                <div class="progress mb-2" style="height:15px; border-radius:10px; margin-top:-10px;">
+                    <div class="progress-bar" style="width: <?php echo $city_value; ?>; border-radius:10px;"
+                        role="progressbar" aria-valuenow="<?php echo $city_value; ?>" aria-valuemin="0"
+                        aria-valuemax="100" aria-label="<?php echo $city_value; ?>% Complete">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <br>
+                <h4><?php echo $city_value; ?></h4>
+            </div>
+        </div>
+    <?php endforeach; ?>
+    <!-- City name with progress bar end -->
+</div>
                         <!-- Filter City Data End -->
 
                     </div>
