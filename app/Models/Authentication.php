@@ -147,7 +147,7 @@ class Authentication
                     );
     
                     $jwt = JWT::encode($payload, $secretKey, 'HS256');
-    
+                    setcookie('jwt_token', $jwt, $expirationTime, 'storemanagement.test/');
                     http_response_code(200);
                     return json_encode(array(
                         "message" => "Logged in successfully.",
@@ -210,7 +210,6 @@ class Authentication
     public static function getUserIdFromToken() {
         $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
     
-        // Fallback to apache_request_headers if $_SERVER['HTTP_AUTHORIZATION'] is empty
         if (empty($authHeader)) {
             if (function_exists('apache_request_headers')) {
                 $headers = apache_request_headers();
