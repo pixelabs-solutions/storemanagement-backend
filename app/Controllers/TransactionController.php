@@ -5,26 +5,42 @@ namespace Pixelabs\StoreManagement\Controllers;
 use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Models\Transaction;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
+use Pixelabs\StoreManagement\Models\Configuration;
 
 
 class TransactionController
 {
     public function index()
     {
-        $transactions = Base::wc_get("orders");
+        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
+        $transactions = Base::wc_get($configuration, "orders");
+        if($is_rest == "true")
+        {
+            echo json_encode($transactions, JSON_UNESCAPED_UNICODE);
+        }else{
+            include_once __DIR__ . '/../Views/transaction/index.php';
+        }
         // var_dump($transactions);
-        include_once __DIR__ . '/../Views/transaction/index.php';
     }
 
 
     public function get_by_id($id)
     {
-        $transaction = Base::wc_get_by_id("orders/{$id}");
+        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
+        $transaction = Base::wc_get_by_id($configuration, "orders/{$id}");
+        
         echo $transaction;
     }
 
     public function update_status($id)
     {
+        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
         $result = HttpRequestHelper::validate_request("PUT");
         if(!$result["is_data_prepared"])
         {
@@ -38,7 +54,7 @@ class TransactionController
             'status' => $data["status"]
         ]);
 
-        $result = Base::wc_update("orders/{$id}", $payload);
+        $result = Base::wc_update($configuration, "orders/{$id}", $payload);
 
         echo $result;
     }
@@ -46,6 +62,9 @@ class TransactionController
 
     public function update_bulk_status()
     {
+        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
         $result = HttpRequestHelper::validate_request("POST");
         if(!$result["is_data_prepared"])
         {
@@ -68,6 +87,18 @@ class TransactionController
         
 
         $payload = json_encode($updateData);
-        return Transaction::update_bulk_status($payload);
+        return Transaction::update_bulk_status($configuration, $payload);
+    }
+
+
+    public function prepare_configuration($is_rest){
+        $response = Configuration::getConfiguration($is_rest);
+        $result = json_decode($response, true);
+        if ($is_rest && $result['status_code'] != 200) {
+            echo $response;
+            exit;
+        }
+        
+        return $result['data'];
     }
 }

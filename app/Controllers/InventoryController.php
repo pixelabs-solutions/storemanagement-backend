@@ -6,6 +6,7 @@ use Pixelabs\StoreManagement\Models\Inventory;
 
 use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
+use Pixelabs\StoreManagement\Models\Configuration;
 
 
 class InventoryController
@@ -13,7 +14,10 @@ class InventoryController
 
     public function index()
     {
-        $product_settings = Base::wc_get("settings/products");
+        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
+        $product_settings = Base::wc_get($configuration, "settings/products");
         $inventory_settings_ids =
             [
                 'woocommerce_stock_email_recipient',
@@ -35,12 +39,19 @@ class InventoryController
                 );
             }
         }
-
-        include_once __DIR__ . '/../Views/inventory/settings.php';
+        if($is_rest == "true")
+        {
+            echo json_encode($inventory_settings, JSON_UNESCAPED_UNICODE);
+        }else{
+            include_once __DIR__ . '/../Views/inventory/settings.php';
+        }
     }
 
     public function update()
     {
+        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
         $result = HttpRequestHelper::validate_request("PUT");
         if (!$result["is_data_prepared"]) {
             echo $result["message"];
@@ -78,9 +89,20 @@ class InventoryController
                 ]
             ]
         );
-        $result = Base::wc_update("settings/products/batch", $payload);
+        $result = Base::wc_update($configuration, "settings/products/batch", $payload);
 
         echo $result;
+    }
+
+    public function prepare_configuration($is_rest){
+        $response = Configuration::getConfiguration($is_rest);
+        $result = json_decode($response, true);
+        if ($is_rest && $result['status_code'] != 200) {
+            echo $response;
+            exit;
+        }
+        
+        return $result['data'];
     }
 
     // public function update()

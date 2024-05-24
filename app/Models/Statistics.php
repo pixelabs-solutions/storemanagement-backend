@@ -8,25 +8,18 @@ use Pixelabs\StoreManagement\Models\Base;
 
 class Statistics
 {
-    public static function get_products_stats($filters = []) {
-        //var_dump($filters);
-        $response = json_decode(Configuration::getConfiguration(), true);
-        if($response['status_code'] != 200) {
-            echo $response["message"];
-            return [];
-        }
-    
-        $data = $response['data'];
-        $consumer_key = $data["consumer_key"];
-        $consumer_secret = $data["consumer_secret"];
-        $store_url = $data["store_url"];
+    public static function get_products_stats($configuration, $filters = []) {
+        
+        $consumer_key = $configuration["consumer_key"];
+        $consumer_secret = $configuration["consumer_secret"];
+        $store_url = $configuration["store_url"];
         $client = new Client();
         $dateRange = $filters ? self::getDateRange($filters) : [];
-        var_dump($dateRange);
         try {
             // Fetch Products
             $productParams = [
-                'auth' => [$consumer_key, $consumer_secret]
+                'auth' => [$consumer_key, $consumer_secret],
+                'per_page' => 100
             ];
             if (!empty($dateRange)) {
                 $productParams['query'] = [
@@ -52,7 +45,8 @@ class Statistics
     
             // Fetch Orders
             $orderParams = [
-                'auth' => [$consumer_key, $consumer_secret]
+                'auth' => [$consumer_key, $consumer_secret],
+                'per_page' => 100
             ];
             if (!empty($dateRange)) {
                 $orderParams['query'] = [
@@ -87,24 +81,19 @@ class Statistics
     }
 
 
-    public static function get_orders_stats($filters = []) {
-        $response = json_decode(Configuration::getConfiguration(), true);
-        if ($response['status_code'] != 200) {
-            echo $response["message"];
-            return [];
-        }
-    
-        $data = $response['data'];
+    public static function get_orders_stats($configuration, $filters = []) {
+        
         $client = new Client();
         $dateRange = self::getDateRange($filters);
     
         try {
-            $orderParams = ['auth' => [$data["consumer_key"], $data["consumer_secret"]]];
+            $orderParams = ['auth' => [$daconfigurationta["consumer_key"], $configuration["consumer_secret"]],
+            'per_page' => 100];
             if (!empty($dateRange)) {
                 $orderParams['query'] = $dateRange;
             }
     
-            $response = $client->request('GET', $data["store_url"] . '/wp-json/wc/v3/orders', $orderParams);
+            $response = $client->request('GET', $configuration["store_url"] . '/wp-json/wc/v3/orders', $orderParams);
             $orders = json_decode($response->getBody(), true);
     
             // Calculating statistics
@@ -139,19 +128,16 @@ class Statistics
     }
 
 
-    public static function get_revenue_stats($filters = []) {
-        $response = json_decode(Configuration::getConfiguration(), true);
-        if ($response['status_code'] != 200) {
-            echo $response["message"];
-            return [];
-        }
-    
-        $data = $response['data'];
+    public static function get_revenue_stats($configuration, $filters = []) {
+        
         $client = new Client();
         $dateRange = self::getDateRange($filters);
     
         try {
-            $orderParams = ['auth' => [$data["consumer_key"], $data["consumer_secret"]]];
+            $orderParams = [
+                'auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
+                'per_page' => 100
+            ];
             if (!empty($dateRange)) {
                 $orderParams['query'] = $dateRange;
             }
@@ -184,19 +170,15 @@ class Statistics
     }
     
     
-    public static function get_overview_stats($filters = [])
+    public static function get_overview_stats($configuration, $filters = [])
     {
-        $response = json_decode(Configuration::getConfiguration(), true);
-        if ($response['status_code'] != 200) {
-            echo $response["message"];
-            return [];
-        }
-    
-        $data = $response['data'];
         $dateRange = self::getDateRange($filters);
         try
         {
-            $params = ['auth' => [$data["consumer_key"], $data["consumer_secret"]]];
+            $params = [
+                'auth' => [$$configuration, ["consumer_key"], $$configuration, ["consumer_secret"]],
+                'per_page' => 100
+            ];
             if (!empty($dateRange)) {
                 $params['query'] = $dateRange;
             }

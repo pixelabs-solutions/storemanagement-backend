@@ -8,18 +8,11 @@ use GuzzleHttp\Exception\RequestException;
 
 class Transaction
 {
-    public static function update_bulk_status($payload)
+    public static function update_bulk_status($configuration, $payload)
     {
-        $response = json_decode(Configuration::getConfiguration(), true);
-        if($response['status_code'] != 200)
-        {
-            echo $response["message"];
-            return;
-        }
-        $configurations = $response['data'];
-        $consumer_key = $configurations["consumer_key"];
-        $consumer_secret = $configurations["consumer_secret"];
-        $store_url = $configurations["store_url"];
+        $consumer_key = $configuration["consumer_key"];
+        $consumer_secret = $configuration["consumer_secret"];
+        $store_url = $configuration["store_url"];
 
         $client = new Client();
 

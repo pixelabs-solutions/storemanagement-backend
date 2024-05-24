@@ -70,17 +70,11 @@ class Base
         return $affectedRows > 0;
     }
 
-    public static function wc_get($endpoint)
+    public static function wc_get($configuration, $endpoint)
     {
-        $response = json_decode(Configuration::getConfiguration(), true);
-        if($response['status_code'] != 200)
-        {
-            echo $response["message"];
-        }
-        $data = $response['data'];
-        $consumer_key = $data["consumer_key"];
-        $consumer_secret = $data["consumer_secret"];
-        $store_url = $data["store_url"];
+        $consumer_key = $configuration["consumer_key"];
+        $consumer_secret = $configuration["consumer_secret"];
+        $store_url = $configuration["store_url"];
         $client = new Client();
         try 
         {
@@ -90,24 +84,28 @@ class Base
                     'per_page' => 100
                 ]
             ]);
-            
-            return json_decode($response->getBody(), true);
+
+            $response_body = $response->getBody();
+            $sanitized_response = self::sanitizeApiResponse($response_body);
+        
+            $decoded_response = json_decode($sanitized_response, true);
+
+            echo json_encode($decoded_response, JSON_UNESCAPED_UNICODE);
         } 
         catch (RequestException $e) 
         {
             echo $e->getMessage();
         }
     }
-
-    public static function wc_add($endpoint, $payload)
+    private static function sanitizeApiResponse($response_body)
     {
-        $response = json_decode(Configuration::getConfiguration(), true);
-        if($response['status_code'] != 200)
-        {
-            echo $response["message"];
-            return;
-        }
-        $configurations = $response['data'];
+        $sanitized_body = str_replace('\n', '', $response_body);
+
+        return $sanitized_body;
+    }
+
+    public static function wc_add($configuration, $endpoint, $payload)
+    {
         $consumer_key = $configurations["consumer_key"];
         $consumer_secret = $configurations["consumer_secret"];
         $store_url = $configurations["store_url"];
@@ -143,17 +141,11 @@ class Base
         }
     }
 
-    public static function wc_get_by_id($endpoint)
+    public static function wc_get_by_id($configuration, $endpoint)
     {
-        $response = json_decode(Configuration::getConfiguration(), true);
-        if($response['status_code'] != 200)
-        {
-            echo $response["message"];
-        }
-        $data = $response['data'];
-        $consumer_key = $data["consumer_key"];
-        $consumer_secret = $data["consumer_secret"];
-        $store_url = $data["store_url"];
+        $consumer_key = $configuration["consumer_key"];
+        $consumer_secret = $configuration["consumer_secret"];
+        $store_url = $configuration["store_url"];
         $client = new Client();
 
         try 
@@ -166,7 +158,7 @@ class Base
             {
                 http_response_code($response->getStatusCode());
                 $data = json_decode($response->getBody(), true);
-                return json_encode(['message' => 'Fetched successfully', 'status_code' => $response->getStatusCode(), 'data' => $data]);
+                return json_encode(['message' => 'Fetched successfully', 'status_code' => $response->getStatusCode(), 'data' => $data], JSON_UNESCAPED_UNICODE);
             }
             else
             {
@@ -180,17 +172,11 @@ class Base
         }
     }
 
-    public static function wc_delete_by_id($endpoint)
+    public static function wc_delete_by_id($configuration, $endpoint)
     {
-        $response = json_decode(Configuration::getConfiguration(), true);
-        if($response['status_code'] != 200)
-        {
-            echo $response["message"];
-        }
-        $data = $response['data'];
-        $consumer_key = $data["consumer_key"];
-        $consumer_secret = $data["consumer_secret"];
-        $store_url = $data["store_url"];
+        $consumer_key = $configuration["consumer_key"];
+        $consumer_secret = $configuration["consumer_secret"];
+        $store_url = $configuration["store_url"];
 
         $client = new Client();
         try 
@@ -220,14 +206,8 @@ class Base
         }
     }
 
-    public static function wc_update($endpoint, $payload, $request_type = null)
+    public static function wc_update($configurations, $endpoint, $payload, $request_type = null)
     {
-        $response = json_decode(Configuration::getConfiguration(), true);
-        if($response['status_code'] != 200)
-        {
-            echo $response["message"];
-        }
-        $configurations = $response['data'];
         $consumer_key = $configurations["consumer_key"];
         $consumer_secret = $configurations["consumer_secret"];
         $store_url = $configurations["store_url"];

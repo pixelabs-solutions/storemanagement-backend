@@ -9,26 +9,20 @@ use Pixelabs\StoreManagement\Models\Base;
 class Dashboard
 {
 
-    public static function get_dashboard_stats($filters = [], $user_id)
+    public static function get_dashboard_stats($configuration, $filters = [])
     {
-        $response = json_decode(Configuration::getConfiguration($user_id), true);
-        if ($response['status_code'] != 200) {
-            echo $response["message"];
-            return [];
-        }
-    
-        $data = $response['data'];
+       
         $dateRange = self::getDateRange($filters);
         try
         {
-            $params = ['auth' => [$data["consumer_key"], $data["consumer_secret"]]];
+            $params = ['auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]]];
             if (!empty($dateRange)) {
                 $params['query'] = $dateRange;
             }
 
-            $products = Base::get_number_of_products($data["store_url"], $params);
-            $new_customers_count = Base::get_new_customers_count($data["store_url"], $params);
-            $total_transactions = Base::get_total_revenue($data["store_url"], $params);
+            $products = Base::get_number_of_products($configuration["store_url"], $params);
+            $new_customers_count = Base::get_new_customers_count($configuration["store_url"], $params);
+            $total_transactions = Base::get_total_revenue($configuration["store_url"], $params);
 
             $data = [
                 'new_products' => $products,
@@ -45,23 +39,23 @@ class Dashboard
     } 
 
 
-    public static function get_dashboard_data($user_id)
+    public static function get_dashboard_data($configuration)
     {
-        $response = json_decode(Configuration::getConfiguration($user_id), true);
-        if ($response['status_code'] != 200) {
-            echo $response["message"];
-            return [];
-        }
+        // $response = json_decode(Configuration::getConfiguration($user_id), true);
+        // if ($response['status_code'] != 200) {
+        //     echo $response["message"];
+        //     return [];
+        // }
     
-        $data = $response['data'];
+        // $data = $response['data'];
         $cities = [];
         $total_customers = 0;
         $latestOrders = [];
         $client = new Client();
         try
         {
-            $response = $client->request('GET', $data["store_url"] . '/wp-json/wc/v3/orders', [
-                'auth' => [$data["consumer_key"], $data["consumer_secret"]],
+            $response = $client->request('GET', $configuration["store_url"] . '/wp-json/wc/v3/orders', [
+                'auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
                 'query' => [
                     'per_page' => 100
                 ]
@@ -124,21 +118,21 @@ class Dashboard
     }
 
 
-    public static function fetchTopSellingProductImages($user_id) 
+    public static function fetchTopSellingProductImages($configuration) 
     {
-        $response = json_decode(Configuration::getConfiguration($user_id), true);
-        if ($response['status_code'] != 200) {
-            echo $response["message"];
-            return [];
-        }
+        // $response = json_decode(Configuration::getConfiguration($user_id), true);
+        // if ($response['status_code'] != 200) {
+        //     echo $response["message"];
+        //     return [];
+        // }
     
-        $data = $response['data'];
+        // $data = $response['data'];
         $client = new Client();
         $productSales = [];
     
         try {
-            $response = $client->request('GET', $data["store_url"] . '/wp-json/wc/v3/orders', [
-                'auth' => [$data["consumer_key"], $data["consumer_secret"]],
+            $response = $client->request('GET', $configuration["store_url"] . '/wp-json/wc/v3/orders', [
+                'auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
                 'query' => [
                     'per_page' => 100
                 ]
@@ -163,8 +157,8 @@ class Dashboard
     
             $topProducts = [];
             foreach ($topProductIds as $productId) {
-                $prodResponse = $client->request('GET', $data["store_url"] . "/wp-json/wc/v3/products/$productId", [
-                    'auth' => [$data["consumer_key"], $data["consumer_secret"]],
+                $prodResponse = $client->request('GET', $configuration["store_url"] . "/wp-json/wc/v3/products/$productId", [
+                    'auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
                     'query' => [
                         'per_page' => 100
                     ]
