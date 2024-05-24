@@ -148,17 +148,23 @@ class Statistics
             $totalOrders = count($orders);
             $totalRevenue = 0;
             $totalShipments = 0;
-    
+            $totalrehearsals = 0;
             foreach ($orders as $order) {
                 $totalRevenue += $order['total'];
                 $totalShipments += $order['shipping_total']; 
+
+                if($order['status'] == "cancelled"){
+                    $totalrehearsals += $order['total'];
+                }
             }
     
             $orderAverage = $totalOrders > 0 ? round($totalRevenue / $totalOrders) : 0;
-            $netIncome = $totalRevenue - $totalShipments;
+            $totalcuttings = $totalShipments + $totalrehearsals;
+            $netIncome = $totalRevenue - $totalcuttings;
     
             return [
                 'totalRevenue' => $totalRevenue,
+                'totalrehearsals' => $totalrehearsals,
                 'orderAverage' => $orderAverage,
                 'totalShipments' => $totalShipments,
                 'netIncome' => $netIncome

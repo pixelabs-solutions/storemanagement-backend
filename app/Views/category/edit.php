@@ -75,6 +75,8 @@
                                 the
                                 category</label>
                             <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_key_category" style="background-color: #EAEAEA" placeholder="key chain">
+                           
+                            <input type="hidden"  id="sms_mu_id_category" >
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="example-select fs-3 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_catageory.popoup_in_catagory.label_parent_ct">Parent category
@@ -155,7 +157,7 @@
                     </div>
                 </form>
                 <div class="text-center mt-2 p-2  ">
-                    <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" data-i18n="popoups.add_new_catageory.popoup_in_catagory.catageory_btn" style="background-color:#4987D870; " onclick="function_submit_ctg()">To
+                    <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" data-i18n="popoups.add_new_catageory.popoup_in_catagory.catageory_btn" style="background-color:#4987D870; " onclick="submit_edit_ctg_form()">To
                         update
                         the term click here
                         +</button>
@@ -165,40 +167,37 @@
     </div>
 </div>
 <script>
-    function function_submit_ctg() {
+      
+
+    function submit_edit_ctg_form() {
         // Get the select element
-        var selectElement = document.getElementById("sms_mu_select_category");
+      
+        let id = document.getElementById("sms_mu_id_category").value;
+      console.log(id);
 
-        // Get the selected options
-        var selectedOptions = selectElement.selectedOptions;
+  
+      var imageInputs = document.querySelectorAll("#sms_img_ctg"); // Assuming image inputs have a class "image-input"
+var imagesArray = [];
 
-        // Log selected values to the console using a for loop
-        // console.log("Selected values:");
-        for (var i = 0; i < selectedOptions.length; i++) {
-            console.log(selectedOptions[i].value);
-        }
+imageInputs.forEach(function(input) {
+    imagesArray.push(input.value);
+});
 
-        // Prepare form data
-        var form_data = {
-            "name of ctg": document.getElementById("sms_mu_key_category").value,
-            "selected values": [], // Array to store selected values
-            "image value": document.getElementById("sms_img_ctg").value
-        };
+var form_data = {
+    "name": document.getElementById("sms_mu_key_category").value,
+    "parent": document.getElementById("sms_mu_select_category_pop").value,
+    "image": imagesArray
+};
+    
 
-        // Add selected values to the form data
-        for (var i = 0; i < selectedOptions.length; i++) {
-            form_data["selected values"].push(selectedOptions[i].value);
-        }
-
-        // Log form data to the console
         console.log("Form data:", form_data);
-         fetch('/categories/add', {
-                method: 'POST',
+        fetch(`/categories/${id}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     // Add any additional headers if needed
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(form_data)
             })
             .then(response => {
                 if (response.status === 201) {
@@ -226,6 +225,4 @@
         var fileName = input.files[0].name;
         label.innerHTML = '<i class="bi bi-image text-black"></i> ' + fileName;
     }
-
-
 </script>

@@ -37,11 +37,13 @@ class DashboardController
             'latest_orders' => $customers_location['latest_orders'],
             'top_products' => $top_products
         ];
+
         if($is_rest == 'true') {
             echo json_encode($dashboard_data, JSON_UNESCAPED_UNICODE);
         }
         else {
         include_once __DIR__ . '/../Views/dashboard/index.php';
         }
+
     }
 }

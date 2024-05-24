@@ -176,7 +176,7 @@
 
 <body> -->
 
-    <div class="container-xl">
+    <div class="container-xl" style="height: 570px; overflow-y:auto">
         <div class="row justify-content-center">
             <div class="col-12 col-md-12">
                 <div class="">

@@ -1,8 +1,8 @@
-<div class="sms_customers_m  p-2 col-12">
+<div class="sms_customers_m  p-2 col-12" style="height: 570px; overflow-y:auto">
   <div class=" col-12 sms_customers_m_main_box ">
     <div class="row row-cards justify-content-sm-between gap-sm-3 gap-2 gap-lg-0 bg-white p-3 m-0 rounded-3">
       <div class=" col-lg-12 m-0 d-flex flex-md-row flex-column gap-md-0 gap-2 justify-content-between ">
-        <div class="card-body-rounded ">
+        <div class="card-body-rounded " >
           <div>
             <form action="./" method="get" autocomplete="off" novalidate id="sms_customers_w_search_form">
               <div class="input-icon border-bottom border-black">
@@ -111,7 +111,7 @@
           </div>
 
         </div> -->
-        <table class="sms_mu_table" id="sms_category_m_category_table">
+        <table class="sms_mu_table" id="sms_category_m_category_table" >
           <thead>
 
             <tr class="sms_mu_th">
@@ -151,6 +151,8 @@
             } ?>
             <?php foreach ($categories as $category) {
               $cat_array['name'] = $category['name'];
+              $cat_array['id'] = $category['id'];
+
               if (isset($category['image']['src'])) {
                 $cat_array['src'] = $category['image']['src'];
               } else {
@@ -166,11 +168,15 @@
                   $parentCategoryName = '-';
                 }
               }
+            
             ?>
+          
               <tr class="sms_mu_tr">
                 <td class="t_oravg_m">
                   <img src="<?php echo $category['image']['src']; ?>" alt="" height="30px" width="30px">
                 </td>
+                
+         
                 <td><?php echo $category['name']; ?></td>
                 <td><?php echo $parentCategoryName; ?></td>
                 <td><?php echo $category['count']; ?></td>
@@ -186,7 +192,7 @@
                       </svg>
                     </span>
                     <!-- </a> -->
-                    <span onclick="openModal('sms_category_w_delete_modal')">
+                    <span onclick="openModal('sms_category_w_delete_modal')" >
 
 
                       <svg width="24" height="24" viewBox="0 0 28 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -252,11 +258,14 @@
     <div class="modal-content p-3 ">
 
       <div class="modal-body text-center">
-        <p>Are you sure you want to delete the category?</p>
+        <p class="Sms_mu_for_Eng">Are you sure you want to delete the category?</p>
+        <p class="Sms_mu_for_hebrew">האם אתה בטוח שברצונך למחוק את הקטגוריה?</p>
       </div>
       <div class="d-flex justify-content-between col-6 m-auto">
-        <button type="button" class="btn  cancel-btn sms_modal_cancel_btn" data-dismiss="modal" style="background-color:#afcaee">Cancel</button>
-        <button type="button" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn Sms_mu_for_Eng  cancel-btn sms_modal_cancel_btn" data-dismiss="modal" style="background-color:#afcaee">Cancel</button>
+        <button type="button" class="btn Sms_mu_for_hebrew cancel-btn sms_modal_cancel_btn" data-dismiss="modal" style="background-color:#afcaee">לְבַטֵל</button>
+        <button type="button" class="btn btn-danger Sms_mu_for_Eng">Delete</button>
+        <button type="button" class="btn btn-danger Sms_mu_for_hebrew">לִמְחוֹק</button>
       </div>
     </div>
   </div>
@@ -273,8 +282,10 @@
     if (modalId == "sms_category_w_edit_modal") {
       var category_json = JSON.parse(categoryData);
       var parentCategories_json = JSON.parse(parentCategoriesData);
-
+console.log(category_json)
       document.getElementById('sms_mu_key_category').value = category_json.name;
+      document.getElementById('sms_mu_id_category').value = category_json.id;
+
       var selectElement = document.getElementById('sms_mu_select_category_pop');
       selectElement.innerHTML = '';
       console.log(selectElement);

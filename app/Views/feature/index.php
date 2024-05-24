@@ -262,12 +262,14 @@
     <div class="modal-content p-3 ">
 
       <div class="modal-body text-center">
-        <p>Are you sure you want to delete the term?</p>
+        <p class="Sms_mu_for_Eng">Are you sure you want to delete the term?</p>
+        <p class="Sms_mu_for_hebrew">האם אתה בטוח שברצונך למחוק את המונח?</p>
       </div>
       <div class="d-flex justify-content-between col-6 m-auto">
-        <button type="button" class="btn  cancel-btn sms_modal_cancel_btn" data-dismiss="modal"
-          style="background-color:#afcaee">Cancel</button>
-        <button type="button" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn Sms_mu_for_Eng  cancel-btn sms_modal_cancel_btn" data-dismiss="modal" style="background-color:#afcaee">Cancel</button>
+        <button type="button" class="btn Sms_mu_for_hebrew cancel-btn sms_modal_cancel_btn" data-dismiss="modal" style="background-color:#afcaee">לְבַטֵל</button>
+        <button type="button" class="btn btn-danger Sms_mu_for_Eng">Delete</button>
+        <button type="button" class="btn btn-danger Sms_mu_for_hebrew">לִמְחוֹק</button>
       </div>
     </div>
   </div>
