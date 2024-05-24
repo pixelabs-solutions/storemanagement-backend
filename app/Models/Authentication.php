@@ -90,7 +90,7 @@ class Authentication
 
     public static function logout()
     {
-        setcookie('jwt_token', '', time() - 3600, '/', 'storemanagement.test', true, true);
+        setcookie('jwt_token', '', time() - 3600, '/', $_SERVER['HTTP_HOST'], true, true);
 
         // Return a response indicating successful logout
         http_response_code(200);
@@ -144,7 +144,7 @@ class Authentication
     
                     $jwt = JWT::encode($payload, $secretKey, 'HS256');
                     // setcookie('jwt_token', $jwt, $expirationTime, 'storemanagement-backend.test/');
-                    setcookie('jwt_token', $jwt, $expirationTime, '/', 'storemanagement-backend.test');
+                    setcookie('jwt_token', $jwt, $expirationTime, '/', $_SERVER['HTTP_HOST']);
 
                     http_response_code(200);
                     return json_encode(array(
