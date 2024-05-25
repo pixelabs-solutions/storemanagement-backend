@@ -87,7 +87,7 @@ class Statistics
         $dateRange = self::getDateRange($filters);
     
         try {
-            $orderParams = ['auth' => [$daconfigurationta["consumer_key"], $configuration["consumer_secret"]],
+            $orderParams = ['auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
             'per_page' => 100];
             if (!empty($dateRange)) {
                 $orderParams['query'] = $dateRange;
@@ -142,7 +142,7 @@ class Statistics
                 $orderParams['query'] = $dateRange;
             }
     
-            $response = $client->request('GET', $data["store_url"] . '/wp-json/wc/v3/orders', $orderParams);
+            $response = $client->request('GET', $configuration["store_url"] . '/wp-json/wc/v3/orders', $orderParams);
             $orders = json_decode($response->getBody(), true);
     
             $totalOrders = count($orders);
@@ -182,7 +182,7 @@ class Statistics
         try
         {
             $params = [
-                'auth' => [$$configuration, ["consumer_key"], $$configuration, ["consumer_secret"]],
+                'auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
                 'per_page' => 100
             ];
             if (!empty($dateRange)) {
@@ -190,11 +190,11 @@ class Statistics
             }
 
 
-            $total_products = Base::get_number_of_products($data["store_url"], $params);
-            $total_orders = Base::get_number_of_orders($data["store_url"], $params);
-            $total_revenue = Base::get_total_revenue($data["store_url"], $params);
-            $new_customers_count = Base::get_new_customers_count($data["store_url"], $params);
-            $returning_customers_count = Base::get_returning_customers_count($data["store_url"], $params);
+            $total_products = Base::get_number_of_products($configuration["store_url"], $params);
+            $total_orders = Base::get_number_of_orders($configuration["store_url"], $params);
+            $total_revenue = Base::get_total_revenue($configuration["store_url"], $params);
+            $new_customers_count = Base::get_new_customers_count($configuration["store_url"], $params);
+            $returning_customers_count = Base::get_returning_customers_count($configuration["store_url"], $params);
 
             return [
                 'totalProducts' => $total_products,

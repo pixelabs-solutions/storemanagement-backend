@@ -4,6 +4,7 @@ namespace Pixelabs\StoreManagement\Controllers;
 use Pixelabs\StoreManagement\Models\Statistics;
 use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
+use Pixelabs\StoreManagement\Models\Configuration;
 
 class StatisticsController
 {
@@ -105,5 +106,17 @@ class StatisticsController
             include_once __DIR__ . '/../Views/statistics/overview.php';
         }
 
+    }
+
+
+    public function prepare_configuration($is_rest){
+        $response = Configuration::getConfiguration($is_rest);
+        $result = json_decode($response, true);
+        if ($is_rest && $result['status_code'] != 200) {
+            echo $response;
+            exit;
+        }
+        
+        return $result['data'];
     }
 }
