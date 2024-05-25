@@ -2,8 +2,6 @@
 
 namespace Pixelabs\StoreManagement\Models;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
-use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Models\Base;
 
 class Statistics

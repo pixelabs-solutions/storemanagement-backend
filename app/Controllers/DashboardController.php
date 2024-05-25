@@ -2,7 +2,6 @@
 
 namespace Pixelabs\StoreManagement\Controllers;
 
-use Pixelabs\StoreManagement\Models\Authentication;
 use Pixelabs\StoreManagement\Models\Dashboard;
 use Pixelabs\StoreManagement\Models\Configuration;
 class DashboardController

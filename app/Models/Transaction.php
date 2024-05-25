@@ -1,7 +1,6 @@
 <?php
 
 namespace Pixelabs\StoreManagement\Models;
-use Pixelabs\StoreManagement\Models\Configuration;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
