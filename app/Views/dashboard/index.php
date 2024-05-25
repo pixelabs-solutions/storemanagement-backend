@@ -156,7 +156,7 @@ var_dump($dashboard_data);
                             </svg>
                         </div>
                     </div>
-                    <div class="row g-2  sms_mu_for_rtl_row_cards ">
+                    <div class="row g-2  sms_mu_for_rtl_row_cards mt-2">
                         <div class=" col-8 ">
                         <h3> <?php echo $dashboard_data["statistics"]["new_products"]; ?> </h3>
                         </div>
@@ -256,8 +256,8 @@ var_dump($dashboard_data);
                             </svg>
                         </div>
                     </div>
-                    <div class="row g-2 mt-2">
-                        <div class="col-6">
+                    <div class="row g-2 sms_mu_for_rtl_row_cards mt-2">
+                        <div class="col-8">
                             <h3> 1457 </h3>
                         </div>
                         <div class="col-auto ms-auto">
@@ -277,7 +277,7 @@ var_dump($dashboard_data);
         <div class="col-lg-3 col-md-3 col-sm-12">
             <div class="card pt-2 h-100" style="border-radius:20px;">
                 <div class="card-body">
-                    <div class="row g-2 sms_mu_for_rtl_row_cards">
+                    <div class="row g-2 sms_mu_for_rtl_row_cards ">
                         <div class="col-8 ">
                             <h3 class="text-muted" data-i18n="dashboard.card_customers.card_title">> New Customers </h3>
                         </div>
@@ -316,12 +316,12 @@ var_dump($dashboard_data);
                             </svg>
                         </div>
                     </div>
-                    <div class="row g-2 mt-2">
-                        <div class="col-6">
+                    <div class="row g-2 sms_mu_for_rtl_row_cards mt-2">
+                        <div class="col-8">
                             <h3> <?php echo $dashboard_data["statistics"]["new_customers"]; ?> </h3>
                         </div>
                         <div class="col-auto ms-auto">
-                            <span style="color:#B50E0E"> 10 % </span>
+                            <span style="color:#B50E0E"> 10% </span>
                             <svg width="18" height="18" viewBox="0 0 34 27" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -377,8 +377,8 @@ var_dump($dashboard_data);
                             </svg>
                         </div>
                     </div>
-                    <div class="row g-2 mt-2">
-                        <div class="col-6">
+                    <div class="row g-2 sms_mu_for_rtl_row_cards mt-2">
+                        <div class="col-8">
                             <h3> <?php echo $dashboard_data["statistics"]["total_transactions"]; ?></h3>
                         </div>
                         <div class="col-auto ms-auto">

@@ -106,9 +106,9 @@ class Base
 
     public static function wc_add($configuration, $endpoint, $payload)
     {
-        $consumer_key = $configurations["consumer_key"];
-        $consumer_secret = $configurations["consumer_secret"];
-        $store_url = $configurations["store_url"];
+        $consumer_key = $configuration["consumer_key"];
+        $consumer_secret = $configuration["consumer_secret"];
+        $store_url = $configuration["store_url"];
 
         $client = new Client();
         try
