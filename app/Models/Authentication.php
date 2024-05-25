@@ -90,14 +90,10 @@ class Authentication
 
     public static function logout()
     {
-        if (session_status() === PHP_SESSION_NONE) 
-        {
-            session_start();
-        }
-        $_SESSION = [];
+        setcookie('jwt_token', '', time() - 3600, '/', $_SERVER['HTTP_HOST'], true, true);
 
-        session_destroy();
-
+        // Return a response indicating successful logout
+        http_response_code(200);
         return json_encode(array(
             "message" => "Logged out successfully.",
             "status_code" => 200
@@ -147,7 +143,9 @@ class Authentication
                     );
     
                     $jwt = JWT::encode($payload, $secretKey, 'HS256');
-                    setcookie('jwt_token', $jwt, $expirationTime, 'storemanagement.test/');
+                    // setcookie('jwt_token', $jwt, $expirationTime, 'storemanagement-backend.test/');
+                    setcookie('jwt_token', $jwt, $expirationTime, '/', $_SERVER['HTTP_HOST']);
+
                     http_response_code(200);
                     return json_encode(array(
                         "message" => "Logged in successfully.",
@@ -179,25 +177,19 @@ class Authentication
     }
 
 
-    public static function verifyJWT($token) {
+    public static function verifyJWT($jwt) {
         $secretKey = "irrULnPSFnSrV1Y65cdV";
         try {
-            $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
+            $decoded = JWT::decode($jwt, new Key($secretKey, 'HS256'));
             return $decoded;
         } catch (Exception $e) {
-            http_response_code(401);
-            echo json_encode(array(
-                "message" => "Access denied. Invalid token.",
-                "status_code" => 401
-            ));
-            exit();
+            return null;
         }
     }
 
     public static function isUserLoggedInApp() {
-        $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
-        list($jwt) = sscanf($authHeader, 'Bearer %s');
-    
+        $jwt = $_COOKIE['jwt_token'] ?? null;
+
         if ($jwt) {
             $decoded = self::verifyJWT($jwt);
             if ($decoded && isset($decoded->user_id)) {
@@ -208,33 +200,22 @@ class Authentication
     }
 
     public static function getUserIdFromToken() {
-        $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
-    
-        if (empty($authHeader)) {
-            if (function_exists('apache_request_headers')) {
-                $headers = apache_request_headers();
-                if (isset($headers['Authorization'])) {
-                    $authHeader = $headers['Authorization'];
-                }
-            }
-        }
-    
-        if (empty($authHeader)) {
+        if (isset($_COOKIE['jwt_token'])) {
+            $jwt = $_COOKIE['jwt_token'];
+        } 
+        else {
             return null;
         }
-    
-        list($jwt) = sscanf($authHeader, 'Bearer %s');
-        if (!$jwt) {
-            return null;
-        }
-    
+
+        // Verify the JWT token
         $decoded = self::verifyJWT($jwt);
         if ($decoded && isset($decoded->user_id)) {
             return $decoded->user_id;
         }
-    
+
         return null;
     }
+    
     
 
 }

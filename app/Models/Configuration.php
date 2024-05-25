@@ -51,12 +51,26 @@ class Configuration
         }
     }
 
-    public static function getConfiguration($user_id = null)
+    public static function getConfiguration($is_rest)
     {
         global $connection;
-        if($user_id === null){
-            $user_id = Authentication::getUserId();
+
+        $is_logged_in = Authentication::isUserLoggedInApp();
+        
+        if(!$is_logged_in == 1 && $is_rest == 'true')
+        {
+            echo json_encode([
+                "message" => "User not authenticated.",
+                "status_code" => 401 
+            ]);
+            exit;
         }
+        if($is_logged_in != 1 && $is_rest == "false")
+        {
+            header('Location: /authentication/login');
+        }
+        $user_id = Authentication::getUserIdFromToken();
+        
         
         // SQL to fetch configuration based on user ID
         $query = "SELECT * FROM user_configurations WHERE user_id = ? LIMIT 1";
@@ -73,12 +87,14 @@ class Configuration
 
                 // Check if configuration was found
                 if ($configuration) {
+                    http_response_code(200);
                     return json_encode([
                         "message" => "Configuration retrieved successfully.",
                         "status_code" => 200,
                         "data" => $configuration
                     ]);
                 } else {
+                    http_response_code(404);
                     return json_encode([
                         "message" => "No configuration found for the user.",
                         "status_code" => 404
@@ -86,12 +102,14 @@ class Configuration
                 }
             } else {
                 $stmt->close();
+                http_response_code(500);
                 return json_encode([
                     "message" => "Failed to execute query.",
                     "status_code" => 500
                 ]);
             }
         } else {
+            http_response_code(500);
             return json_encode([
                 "message" => "Error preparing SQL statement.",
                 "status_code" => 500

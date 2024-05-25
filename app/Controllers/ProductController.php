@@ -7,6 +7,7 @@ namespace Pixelabs\StoreManagement\Controllers;
 use Pixelabs\StoreManagement\Models\Product;
 use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
+use Pixelabs\StoreManagement\Models\Configuration;
 
 
 class ProductController
@@ -14,7 +15,10 @@ class ProductController
     private $table_name = 'products';
     public function index()
     {
-        $products = Base::wc_get($this->table_name);
+        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
+        $products = Base::wc_get($configuration, $this->table_name);
         if(isset($_GET['category']) && $_GET['category'] !== "")
         {
             $category = $_GET['category'];
@@ -45,31 +49,53 @@ class ProductController
                 }
                 $products = $filteredProducts;
             }
-        $categories = Base::wc_get('products/categories');
-        $attributes = Base::wc_get( 'products/attributes');
-        $currency = Base::wc_get('data/currencies/current');
+        $categories = Base::wc_get($configuration,'products/categories');
+        $attributes = Base::wc_get($configuration, 'products/attributes');
+        $currency = Base::wc_get($configuration, 'data/currencies/current');
         
-        $number_of_products = Product::get_products_count();
+        $number_of_products = Product::get_products_count($configuration);
         // var_dump($products);
-        include_once __DIR__ . '/../Views/product/index.php';
+        if($is_rest == 'true')
+        {
+            $data = [
+                'products' => $products,
+                'categories' => $categories,
+                'attributes' => $attributes,
+                'currency' => $currency,
+                'number_of_products' => $number_of_products
+            ];
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        }
+        else{
+            include_once __DIR__ . '/../Views/product/index.php';
+        }
     }
 
 
     public function product_by_id($id)
     {
-        $product = Base::wc_get_by_id($this->table_name."/".$id);
+        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
 
-        print_r($product);
+        $product = Base::wc_get_by_id($configuration, $this->table_name."/".$id);
+
+        echo $product;
     }
 
     public function delete($id)
     {
-        $result = Base::wc_delete_by_id($this->table_name."/".$id);
-        print_r($result);
+        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
+        $result = Base::wc_delete_by_id($configuration, $this->table_name."/".$id);
+        echo $result;
     }
 
     public function add()
     {
+        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
         $result = HttpRequestHelper::validate_request("POST");
         if(!$result["is_data_prepared"])
         {
@@ -110,20 +136,24 @@ class ProductController
             $variations = $this->generateVariations($data['attributes_options'], $data['attributes_names'], $data['regular_price']);
             $payload['variations'] = $variations;
 
-            echo json_encode($payload);
-
-           $response = Base::wc_add($this->table_name, json_encode($payload));
-            
+           $response = Base::wc_add($configuration, $this->table_name, json_encode($payload));
+            if(is_rest == 'true')
+            {
+                echo $response;
+            }
 
             foreach ($variations as $variationData) {
-                Product::createProductVariation($response['data_id'], $variationData);
+                Product::createProductVariation($configuration, $response['data_id'], $variationData);
             }
 
         }
         else
         {
-            $response = Base::wc_add($this->table_name, json_encode($payload));
-            print_r($response);
+            $response = Base::wc_add($configuration, $this->table_name, json_encode($payload));
+            if(is_rest == 'true')
+            {
+                echo $response;
+            }
         }
 
     }
@@ -181,6 +211,9 @@ class ProductController
 
     public function update($id)
     {
+        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
         $result = HttpRequestHelper::validate_request("PUT");
         if(!$result["is_data_prepared"])
         {
@@ -222,18 +255,30 @@ class ProductController
             $variations = $this->generateVariations($data['attributes_options'], $data['attributes_names'], $data['regular_price']);
             $payload['variations'] = $variations;
 
-            $response = Base::wc_update($this->table_name."/".$id, $payload);
+            $response = Base::wc_update($configuration, $this->table_name."/".$id, $payload);
 
             foreach ($variations as $variationData) {
-                Product::createProductVariation($id, $variationData); // Update variations
+                Product::createProductVariation($configuration, $id, $variationData); // Update variations
             }
         }
         else
         {
-            $response = Base::wc_update($this->table_name."/".$id, $payload);
+            $response = Base::wc_update($configuration, $this->table_name."/".$id, $payload);
         }
+        if($is_rest == 'true'){
+            echo $response;
+        }
+    }
 
-        print_r($response);
+    public function prepare_configuration($is_rest){
+        $response = Configuration::getConfiguration($is_rest);
+        $result = json_decode($response, true);
+        if ($is_rest && $result['status_code'] != 200) {
+            echo $response;
+            exit;
+        }
+        
+        return $result['data'];
     }
 
 

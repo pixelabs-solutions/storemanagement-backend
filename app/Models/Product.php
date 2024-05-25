@@ -12,17 +12,11 @@ use Pixelabs\StoreManagement\Models\Configuration;
 class Product
 {
 
-    public static function get_products()
+    public static function get_products($configuration)
     {
-        $response = json_decode(Configuration::getConfiguration(), true);
-        if($response['status_code'] != 200)
-        {
-            echo $response["message"];
-        }
-        $data = $response['data'];
-        $consumer_key = $data["consumer_key"];
-        $consumer_secret = $data["consumer_secret"];
-        $store_url = $data["store_url"];
+        $consumer_key = $configuration["consumer_key"];
+        $consumer_secret = $configuration["consumer_secret"];
+        $store_url = $configuration["store_url"];
 
         $client = new Client();
         try {
@@ -36,17 +30,11 @@ class Product
         }
     }
 
-    public static function get_product_by_id($id)
+    public static function get_product_by_id($configuration, $id)
     {
-        $response = json_decode(Configuration::getConfiguration(), true);
-        if($response['status_code'] != 200)
-        {
-            echo $response["message"];
-        }
-        $data = $response['data'];
-        $consumer_key = $data["consumer_key"];
-        $consumer_secret = $data["consumer_secret"];
-        $store_url = $data["store_url"];
+        $consumer_key = $configuration["consumer_key"];
+        $consumer_secret = $configuration["consumer_secret"];
+        $store_url = $configuration["store_url"];
         $client = new Client();
         try 
         {
@@ -68,17 +56,11 @@ class Product
     }
 
 
-    public static function delete($id)
+    public static function delete($configuration, $id)
     {
-        $response = json_decode(Configuration::getConfiguration(), true);
-        if($response['status_code'] != 200)
-        {
-            echo $response["message"];
-        }
-        $data = $response['data'];
-        $consumer_key = $data["consumer_key"];
-        $consumer_secret = $data["consumer_secret"];
-        $store_url = $data["store_url"];
+        $consumer_key = $configuration["consumer_key"];
+        $consumer_secret = $configuration["consumer_secret"];
+        $store_url = $configuration["store_url"];
 
         $client = new Client();
         try 
@@ -103,17 +85,11 @@ class Product
     
 
 
-    public static function add($data)
+    public static function add($configuration, $data)
     {
-        $response = json_decode(Configuration::getConfiguration(), true);
-        if($response['status_code'] != 200)
-        {
-            echo $response["message"];
-        }
-        $configurations = $response['data'];
-        $consumer_key = $configurations["consumer_key"];
-        $consumer_secret = $configurations["consumer_secret"];
-        $store_url = $configurations["store_url"];
+        $consumer_key = $configuration["consumer_key"];
+        $consumer_secret = $configuration["consumer_secret"];
+        $store_url = $configuration["store_url"];
 
         $payload = json_encode([
             'name' => $data['name'], 
@@ -159,17 +135,11 @@ class Product
         }
     }
 
-    public static function createProductVariation($productId, $variationData)
+    public static function createProductVariation($configuration, $productId, $variationData)
     {
-        $response = json_decode(Configuration::getConfiguration(), true);
-        if($response['status_code'] != 200)
-        {
-            echo $response["message"];
-        }
-        $configurations = $response['data'];
-        $consumer_key = $configurations["consumer_key"];
-        $consumer_secret = $configurations["consumer_secret"];
-        $store_url = $configurations["store_url"];
+        $consumer_key = $configuration["consumer_key"];
+        $consumer_secret = $configuration["consumer_secret"];
+        $store_url = $configuration["store_url"];
         $client = new Client();
 
         $response = $client->request('POST', $store_url . '/wp-json/wc/v3/products/'.$productId.'/variations', [
@@ -188,15 +158,9 @@ class Product
     }
 
 
-    public static function get_products_count()
+    public static function get_products_count($configuration)
     {
-        $response = json_decode(Configuration::getConfiguration(), true);
-        if($response['status_code'] != 200)
-        {
-            echo $response["message"];
-        }
-        $configurations = $response['data'];
-        $params = ['auth' => [$configurations["consumer_key"], $configurations["consumer_secret"]]];
-        return Base::get_number_of_products($configurations["store_url"], $params);
+        $params = ['auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]]];
+        return Base::get_number_of_products($configuration["store_url"], $params);
     }
 }

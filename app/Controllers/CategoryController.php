@@ -3,32 +3,53 @@
 namespace Pixelabs\StoreManagement\Controllers;
 use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
+use Pixelabs\StoreManagement\Models\Configuration;
 
 class CategoryController
 {
     private $endpoint = 'products/categories';
     public function index()
     {
-        $categories = Base::wc_get($this->endpoint);
-        //include_once __DIR__ . '/../Views/coupons/index.php';
-        echo $categories;
+        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        
+        $configuration = $this->prepare_configuration($is_rest);
+
+        $categories = Base::wc_get($configuration, $this->endpoint);
+        if($is_rest == "true")
+        {
+            echo $categories;
+            exit;
+        }
     }
 
     public function get($id)
     {
-        $category = Base::wc_get_by_id($this->endpoint."/".$id);
+        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
 
-        echo $category;
+        $category = Base::wc_get_by_id($configuration, $this->endpoint."/".$id);
+
+        if($is_rest == "true")
+        {
+            echo $category;
+            exit;
+        }
     }
 
     public function delete($id)
     {
-        $result = Base::wc_delete_by_id($this->endpoint."/".$id);
+        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        
+        $configuration = $this->prepare_configuration($is_rest);
+        $result = Base::wc_delete_by_id($configuration, $this->endpoint."/".$id);
         echo $result;
     }
 
     public function add()
     {
+        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
         $result = HttpRequestHelper::validate_request("POST");
         if(!$result["is_data_prepared"])
         {
@@ -45,12 +66,15 @@ class CategoryController
             ]
         ]);
 
-        $response = Base::wc_add($this->endpoint, $payload);
+        $response = Base::wc_add($configuration, $this->endpoint, $payload);
         echo $response;
     }
 
     public function update($id)
     {
+        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
         $result = HttpRequestHelper::validate_request("PUT");
         if(!$result["is_data_prepared"])
         {
@@ -66,7 +90,19 @@ class CategoryController
                 'src' => $data['image']
             ]
         ]);
-        $response = Base::wc_update($this->endpoint."/".$id, $payload);
+        $response = Base::wc_update($configuration, $this->endpoint."/".$id, $payload);
         echo $response;
+    }
+
+
+    public function prepare_configuration($is_rest){
+        $response = Configuration::getConfiguration($is_rest);
+        $result = json_decode($response, true);
+        if ($is_rest && $result['status_code'] != 200) {
+            echo $response;
+            exit;
+        }
+        
+        return $result['data'];
     }
 }

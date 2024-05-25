@@ -7,24 +7,21 @@ use Pixelabs\StoreManagement\Models\Configuration;
 
 class Customer
 {
-    public static function get_customers()
+    public static function get_customers($configuration)
     {
-        $response = json_decode(Configuration::getConfiguration(), true);
-        if($response['status_code'] != 200)
-        {
-            echo $response["message"];
-        }
-        $data = $response['data'];
-        $consumer_key = $data["consumer_key"];
-        $consumer_secret = $data["consumer_secret"];
-        $store_url = $data["store_url"];
+        $consumer_key = $configuration["consumer_key"];
+        $consumer_secret = $configuration["consumer_secret"];
+        $store_url = $configuration["store_url"];
         $client = new Client();
         $customerData = [];
 
         try 
         {
             $response = $client->request('GET', $store_url . '/wp-json/wc/v3/customers', [
-                'auth' => [$consumer_key, $consumer_secret]
+                'auth' => [$consumer_key, $consumer_secret],
+                'query' => [
+                    'per_page' => 100
+                ]
             ]);
         
             $customers = json_decode($response->getBody(), true);

@@ -21,22 +21,34 @@ class AuthenticationController
         $password = isset($_POST['password']) ? $_POST['password'] : null;
         $result = Authentication::register($name, $email, $password);
         $response = json_decode($result, true);
-        return $response;
+        if(isset($_GET['is_rest']) && $_GET['is_rest'] === "true") {
+            echo $result;
+            exit;
+        }
+        else {
+            header('Location: /authentication/login');
+        }
     }
 
     public function login_user()
     {
         $email = isset($_POST['email']) ? $_POST['email'] : null;
         $password = isset($_POST['password']) ? $_POST['password'] : null;
+        $response = Authentication::loginWithJWT($email, $password);
         if(isset($_GET['is_rest']) && $_GET['is_rest'] === "true")
         {
-            $response = Authentication::loginWithJWT($email, $password);
-            echo  $response;
+            echo $response;
+            exit;
         }
         else
         {
-            $response = Authentication::login($email, $password);
-            header('Location: /index');
+            $result = json_decode($response, true);
+            if($result["status_code"] === 200){
+                header('Location: /index');
+            }
+            else {
+                header('Location: /authentication/login');
+            }
 
         }
         
@@ -45,6 +57,10 @@ class AuthenticationController
     public function logout()
     {
         $result = Authentication::logout();
+        if(isset($_GET['is_rest']) && $_GET['is_rest'] === "true") {
+            echo $result;
+            exit;
+        }
         
         header('Location: /authentication/login');
         // exit;

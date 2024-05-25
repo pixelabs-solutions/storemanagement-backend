@@ -163,31 +163,25 @@ class Goal
         }                                                                   
     }
 
-    public static function get_goals()
+    public static function get_goals($configuration)
     {
-        $response = json_decode(Configuration::getConfiguration(), true);
-        if ($response['status_code'] != 200) {
-            echo $response["message"];
-            return [];
-        }
-        $data = $response['data'];
 
         $start = new \DateTime();
         $end = new \DateTime();
         $start->modify('first day of this month');
         $end->modify('last day of this month');
         $params = [
-            'auth' => [$data["consumer_key"], $data["consumer_secret"]],
+            'auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
             'after' => $start->format('Y-m-d') . 'T00:00:00',
             'before' => $end->format('Y-m-d') . 'T23:59:59'
         ];
 
         $goals = self::get_goals_target();
-        $totalRevenue = Base::get_total_revenue($data["store_url"], $params);
-        $new_customers = Base::get_new_customers_count($data["store_url"], $params);
-        $orders = Base::get_number_of_orders($data["store_url"], $params);
-        $products = Base::get_number_of_products($data["store_url"], $params);
-        $current_month_raise_in_orders = Base::calculate_raise_in_orders($data["store_url"], $params);
+        $totalRevenue = Base::get_total_revenue($configuration["store_url"], $params);
+        $new_customers = Base::get_new_customers_count($configuration["store_url"], $params);
+        $orders = Base::get_number_of_orders($configuration["store_url"], $params);
+        $products = Base::get_number_of_products($configuration["store_url"], $params);
+        $current_month_raise_in_orders = Base::calculate_raise_in_orders($configuration["store_url"], $params);
 
         //Modify date parameter for last month
         $start->modify('first day of last month');
@@ -195,7 +189,7 @@ class Goal
         $params['after'] = $start->format('Y-m-d') . 'T00:00:00';
         $params['before'] = $end->format('Y-m-d') . 'T23:59:59';
 
-        $previous_month_raise_in_average_orders = Base::calculate_raise_in_orders($data["store_url"], $params);
+        $previous_month_raise_in_average_orders = Base::calculate_raise_in_orders($configuration["store_url"], $params);
 
         $current_month_average_items = $current_month_raise_in_orders['average_items'];
         $previous_month_average_items = $previous_month_raise_in_average_orders['average_items'];
@@ -206,36 +200,36 @@ class Goal
         $raise_in_average_price = (($current_month_average_price - $previous_month_average_price)/$previous_month_average_price)*100;
         $goals_data = [
             "orders" => [
-                "target" => $goals['sales_revenue_target'],
+                "target" => $goals['sales_revenue_target'] ??'',
                 "sales" => $totalRevenue
             ],
             "new_customers" => [
-                "target" => $goals['new_customers_target'],
+                "target" => $goals['new_customers_target'] ??'',
                 "customers_count" => $new_customers
             ],
             "new_orders" => [
-                "target" => $goals['new_orders_target'],
+                "target" => $goals['new_orders_target'] ??'',
                 "orders_count" => $orders
             ],
             "new_products" => [
-                "target" => $goals['new_products_target'],
+                "target" => $goals['new_products_target'] ??'',
                 "products_count" => $products
             ],
             "keywords" => [
-                "target" => $goals['target_keywords']
+                "target" => $goals['target_keywords'] ??''
             ],
             "google_rankings" => [
-                "target" => $goals['google_rankings_target']
+                "target" => $goals['google_rankings_target'] ??''
             ],
             "page_views" => [
-                "target" => $goals['page_views_target']
+                "target" => $goals['page_views_target'] ??''
             ],
             "avg_order_value_increase" => [
-                "target" => $goals['avg_order_value_increase_target'],
+                "target" => $goals['avg_order_value_increase_target'] ??'',
                 "rasie_in_average_price" => $raise_in_average_price
             ],
             "avg_order_items_increase" => [
-                "target" => $goals['avg_order_items_increase_target'],
+                "target" => $goals['avg_order_items_increase_target'] ??'',
                 "rasie_in_average_items" => $raise_in_average_items
             ]
         ];
