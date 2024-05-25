@@ -39,24 +39,43 @@ require_once __DIR__ . '/../partials/header.php';
 <?php
 
 $total_sales_left = $goals_data["orders"]['target'] - $goals_data["orders"]['sales'];
-$total_sales_left_percentage = $goals_data["orders"]['sales'] / $goals_data["orders"]['target'] * 100;
+$total_sales_left_percentage = 0;
+if($goals_data["orders"]['target'] != 0){
+    $total_sales_left_percentage = $goals_data["orders"]['sales'] / $goals_data["orders"]['target'] * 100;
+}
+
 
 $new_customers_left = $goals_data["new_customers"]['target'] - $goals_data["new_customers"]['customers_count'];
-$new_customers_left_percentage = $goals_data["new_customers"]['customers_count'] / $goals_data["new_customers"]['target'] * 100;
+$new_customers_left_percentage = 0;
+if($goals_data["new_customers"]['target'] != 0){
+    $new_customers_left_percentage = $goals_data["new_customers"]['customers_count'] / $goals_data["new_customers"]['target'] * 100;
+}
 
 $new_sales_left = $goals_data["new_orders"]['target'] - $goals_data["new_orders"]['orders_count'];
-$new_sales_left_percentage = $goals_data["new_orders"]['orders_count'] / $goals_data["new_orders"]['target'] * 100;
+$new_sales_left_percentage = 0;
+if($goals_data["new_orders"]['target'] != 0){
+    $new_sales_left_percentage = $goals_data["new_orders"]['orders_count'] / $goals_data["new_orders"]['target'] * 100;
+}
 
 
 $new_products_left = $goals_data["new_products"]['target'] - $goals_data["new_products"]['products_count'];
-$new_products_left_percentage = $goals_data["new_products"]['products_count'] / $goals_data["new_products"]['target'] * 100;
+$new_products_left_percentage = 0;
+if($goals_data["new_products"]['target'] != 0){
+    $new_products_left_percentage = $goals_data["new_products"]['products_count'] / $goals_data["new_products"]['target'] * 100;
+}
 
 
 $avg_order_items_increase_left = $goals_data["avg_order_items_increase"]['target'] - $goals_data["avg_order_items_increase"]['rasie_in_average_items'];
-$avg_order_items_increase_left_percentage = $goals_data["avg_order_items_increase"]['rasie_in_average_items'] / $goals_data["avg_order_items_increase"]['target'] * 100;
+$avg_order_items_increase_left_percentage = 0.0;
+if($goals_data["avg_order_items_increase"]['target'] != 0.0){
+    $avg_order_items_increase_left_percentage = $goals_data["avg_order_items_increase"]['rasie_in_average_items'] / $goals_data["avg_order_items_increase"]['target'] * 100;
+}
 
 $avg_order_value_increase_left = $goals_data["avg_order_value_increase"]['target'] - $goals_data["avg_order_value_increase"]['rasie_in_average_price'];
-$avg_order_value_increase_left_percentage = $goals_data["avg_order_value_increase"]['rasie_in_average_price'] / $goals_data["avg_order_value_increase"]['target'] * 100;
+$avg_order_value_increase_left_percentage = 0.0;
+if($goals_data["avg_order_value_increase"]['target'] != 0){
+    $avg_order_value_increase_left_percentage = $goals_data["avg_order_value_increase"]['rasie_in_average_price'] / $goals_data["avg_order_value_increase"]['target'] * 100;
+}
 
 
 // Using round

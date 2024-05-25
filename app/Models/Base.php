@@ -84,31 +84,20 @@ class Base
                     'per_page' => 100
                 ]
             ]);
-
-            $response_body = $response->getBody();
-            $sanitized_response = self::sanitizeApiResponse($response_body);
         
-            $decoded_response = json_decode($sanitized_response, true);
-
-            echo json_encode($decoded_response, JSON_UNESCAPED_UNICODE);
+            return json_decode($response->getBody(), true);
         } 
         catch (RequestException $e) 
         {
             echo $e->getMessage();
         }
     }
-    private static function sanitizeApiResponse($response_body)
-    {
-        $sanitized_body = str_replace('\n', '', $response_body);
-
-        return $sanitized_body;
-    }
 
     public static function wc_add($configuration, $endpoint, $payload)
     {
-        $consumer_key = $configurations["consumer_key"];
-        $consumer_secret = $configurations["consumer_secret"];
-        $store_url = $configurations["store_url"];
+        $consumer_key = $configuration["consumer_key"];
+        $consumer_secret = $configuration["consumer_secret"];
+        $store_url = $configuration["store_url"];
 
         $client = new Client();
         try

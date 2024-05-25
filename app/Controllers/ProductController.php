@@ -137,7 +137,7 @@ class ProductController
             $payload['variations'] = $variations;
 
            $response = Base::wc_add($configuration, $this->table_name, json_encode($payload));
-            if(is_rest == 'true')
+            if($is_rest == 'true')
             {
                 echo $response;
             }
@@ -150,7 +150,7 @@ class ProductController
         else
         {
             $response = Base::wc_add($configuration, $this->table_name, json_encode($payload));
-            if(is_rest == 'true')
+            if($is_rest == 'true')
             {
                 echo $response;
             }

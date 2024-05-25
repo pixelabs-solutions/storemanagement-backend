@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../partials/header.php';
 
-$customers = $data['data'];
+$customers = $customers['data'];
 
 // var_dump($customers);
 

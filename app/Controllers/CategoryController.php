@@ -17,7 +17,7 @@ class CategoryController
         $categories = Base::wc_get($configuration, $this->endpoint);
         if($is_rest == "true")
         {
-            echo $categories;
+            echo json_encode($categories, JSON_UNESCAPED_UNICODE);
             exit;
         }
     }
