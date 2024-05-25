@@ -433,6 +433,9 @@
       .rtl #support {
          display: none !important;
       }
+      .sms_a_add_category_pop{
+         box-shadow: 100vh 100vh 100vh 300vh #00000059 !important;
+      }
    </style>
 </head>
 

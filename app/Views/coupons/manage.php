@@ -16,7 +16,7 @@
 
     .my_div {
         background-color: #afacac;
-    opacity: 0.5;
+        opacity: 0.5;
         width: 100%;
         position: absolute;
         height: 100%;
@@ -59,6 +59,7 @@
         width: 100%;
         z-index: 9999;
         text-align: center;
+        box-shadow: 100vh 100vh 100vh 300vh #00000059;
     }
 
     .sms_manage_pop svg {
@@ -83,7 +84,6 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-12">
                 <div class="">
-
                     <form action="" method="post" class="card-body">
                         <!-- header -->
                         <div class="row gx-3 ">
@@ -134,7 +134,7 @@
 
                 </div>
                 </form>
-                <div class="modal-body text-center py-4 sms_manage_pop"  id="sms_add_coupons_success-message" style="display: none;">
+                <div class="modal-body text-center py-4 sms_manage_pop" id="sms_add_coupons_success-message" style="display: none;">
                     <!-- Close icon -->
 
                     <button type="button" class="btn-close" aria-label="Close" onclick="sms_add_coupons_close_success_message()"></button>
@@ -147,22 +147,20 @@
                     <h3>Success</h3>
                     <div class="text-muted">Your coupon data has been submitted successfully.</div>
                 </div>
-                <div class="my_div" id="sms_add_coupons_success-message_op">   
-                </div>
                 <div class="modal-body text-center py-4 sms_manage_pop" id="sms_add_coupons_error-message" style="display: none;">
-                        <!-- Close icon -->
-                        <button type="button" class="btn-close" aria-label="Close" onclick="sms_add_coupous_close_error_message()"></button>
-                        <!-- SVG icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="12" y1="5" x2="12.01" y2="19"></line>
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="12" y1="5" x2="12.01" y2="19"></line>
-                        </svg>
-                        <h3>Error</h3>
-                        <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
-                    </div>
+                    <!-- Close icon -->
+                    <button type="button" class="btn-close" aria-label="Close" onclick="sms_add_coupous_close_error_message()"></button>
+                    <!-- SVG icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                    </svg>
+                    <h3>Error</h3>
+                    <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
+                </div>
                 <div class="text-center mt-5  ">
                     <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="sms_meh_couponmanage_data()" data-i18n="popoups.added_new_cupons.last_btn_cat">
                         To add the category click here +</button>
@@ -187,20 +185,18 @@
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }) 
+            })
             .then(response => {
                 console.log(response);
                 if (response.status === 201) {
                     // Form submission succeeded, display success message
                     document.getElementById('sms_add_coupons_success-message').style.display = 'block';
                     document.getElementById('sms_add_coupons_error-message').style.display = 'none';
-                    document.getElementById('sms_add_coupons_success-message_op').style.display = 'block';
                     window.location.reload();
                 } else {
                     // Form submission failed, display error message
                     document.getElementById('sms_add_coupons_error-message').style.display = 'block';
                     document.getElementById('sms_add_coupons_error-message').style.display = 'block';
-                    document.getElementById('sms_add_coupons_success-message_op').style.display = 'block'; // Hide success message if it was displayed before
                 }
             })
             .catch(error => {
@@ -212,11 +208,9 @@
 
     function sms_add_coupons_close_success_message() {
         document.getElementById('sms_add_coupons_success-message').style.display = 'none';
-        document.getElementById('sms_add_coupons_success-message_op').style.display = 'none';
     }
 
     function sms_add_coupous_close_error_message() {
         document.getElementById('sms_add_coupons_error-message').style.display = 'none';
-        document.getElementById('sms_add_coupons_success-message_op').style.display = 'none';
     }
 </script>

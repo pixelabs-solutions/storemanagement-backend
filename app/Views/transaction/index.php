@@ -7,19 +7,12 @@ require_once __DIR__ . '/../partials/header.php';
 
 // echo $jsontransactionData;
 ?>
-
-
 <script>
-
-
-
   // const transactionsdata = document.getElementById('transactionData');
 
   // const jsontransactionData = transactionsdata.value;
   // const transactionsArray = JSON.parse(jsontransactionData);
   // console.log(transactionsArray); // Output: "apple"
-
-
 </script>
 
 <style>
@@ -153,15 +146,13 @@ require_once __DIR__ . '/../partials/header.php';
               <div class="input-icon border-bottom border-black">
                 <span class="input-icon-addon">
                   <!-- Download SVG icon from http://tabler-icons.io/i/search -->
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
                     <path d="M21 21l-6 -6" />
                   </svg>
                 </span>
-                <input type="text" id="sms_transaction_w_search_input" value="" class="form-control border-0 "
-                  placeholder="Order search" aria-label="Search in website">
+                <input type="text" id="sms_transaction_w_search_input" value="" class="form-control border-0 " placeholder="Order search" aria-label="Search in website">
               </div>
             </form>
           </div>
@@ -217,7 +208,7 @@ require_once __DIR__ . '/../partials/header.php';
               $date_created_timestamp = strtotime($date_created_date_string);
               $date_created_formatted_date = date("Y-m-d", $date_created_timestamp);
 
-              ?>
+            ?>
 
               <tr class="sms_mu_tr">
                 <td>
@@ -238,14 +229,11 @@ require_once __DIR__ . '/../partials/header.php';
 
                 <td><?php echo $utmSource; ?></td>
                 <td>
-                  <span class="view_order_details" data-transaction-id="<?php echo $item['id']; ?>" data-bs-toggle="modal"
-                    data-bs-target="#edit-modal-full-width">
+                  <span class="view_order_details" data-transaction-id="<?php echo $item['id']; ?>" data-bs-toggle="modal" data-bs-target="#edit-modal-full-width">
 
 
                     <svg width="24" height="24" viewBox="0 0 32 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M15.9996 0.555664C11.5107 0.555664 7.91625 2.60011 5.29959 5.03344C2.69959 7.44455 0.960699 10.3334 0.138477 12.3168C-0.0448568 12.7557 -0.0448568 13.2446 0.138477 13.6834C0.960699 15.6668 2.69959 18.5557 5.29959 20.9668C7.91625 23.4001 11.5107 25.4446 15.9996 25.4446C20.4885 25.4446 24.0829 23.4001 26.6996 20.9668C29.2996 18.5501 31.0385 15.6668 31.8663 13.6834C32.0496 13.2446 32.0496 12.7557 31.8663 12.3168C31.0385 10.3334 29.2996 7.44455 26.6996 5.03344C24.0829 2.60011 20.4885 0.555664 15.9996 0.555664ZM7.99959 13.0001C7.99959 10.8784 8.84244 8.84354 10.3427 7.34325C11.843 5.84296 13.8779 5.00011 15.9996 5.00011C18.1213 5.00011 20.1562 5.84296 21.6564 7.34325C23.1567 8.84354 23.9996 10.8784 23.9996 13.0001C23.9996 15.1218 23.1567 17.1567 21.6564 18.657C20.1562 20.1573 18.1213 21.0001 15.9996 21.0001C13.8779 21.0001 11.843 20.1573 10.3427 18.657C8.84244 17.1567 7.99959 15.1218 7.99959 13.0001ZM15.9996 9.44455C15.9996 11.4057 14.4051 13.0001 12.444 13.0001C12.0496 13.0001 11.6718 12.9334 11.3163 12.8168C11.0107 12.7168 10.6551 12.9057 10.6663 13.2279C10.6829 13.6112 10.7385 13.9946 10.844 14.3779C11.6051 17.2223 14.5329 18.9112 17.3774 18.1501C20.2218 17.389 21.9107 14.4612 21.1496 11.6168C20.5329 9.31122 18.494 7.76122 16.2274 7.66678C15.9051 7.65566 15.7163 8.00566 15.8163 8.31677C15.9329 8.67233 15.9996 9.05011 15.9996 9.44455Z"
-                        fill="black" />
+                      <path d="M15.9996 0.555664C11.5107 0.555664 7.91625 2.60011 5.29959 5.03344C2.69959 7.44455 0.960699 10.3334 0.138477 12.3168C-0.0448568 12.7557 -0.0448568 13.2446 0.138477 13.6834C0.960699 15.6668 2.69959 18.5557 5.29959 20.9668C7.91625 23.4001 11.5107 25.4446 15.9996 25.4446C20.4885 25.4446 24.0829 23.4001 26.6996 20.9668C29.2996 18.5501 31.0385 15.6668 31.8663 13.6834C32.0496 13.2446 32.0496 12.7557 31.8663 12.3168C31.0385 10.3334 29.2996 7.44455 26.6996 5.03344C24.0829 2.60011 20.4885 0.555664 15.9996 0.555664ZM7.99959 13.0001C7.99959 10.8784 8.84244 8.84354 10.3427 7.34325C11.843 5.84296 13.8779 5.00011 15.9996 5.00011C18.1213 5.00011 20.1562 5.84296 21.6564 7.34325C23.1567 8.84354 23.9996 10.8784 23.9996 13.0001C23.9996 15.1218 23.1567 17.1567 21.6564 18.657C20.1562 20.1573 18.1213 21.0001 15.9996 21.0001C13.8779 21.0001 11.843 20.1573 10.3427 18.657C8.84244 17.1567 7.99959 15.1218 7.99959 13.0001ZM15.9996 9.44455C15.9996 11.4057 14.4051 13.0001 12.444 13.0001C12.0496 13.0001 11.6718 12.9334 11.3163 12.8168C11.0107 12.7168 10.6551 12.9057 10.6663 13.2279C10.6829 13.6112 10.7385 13.9946 10.844 14.3779C11.6051 17.2223 14.5329 18.9112 17.3774 18.1501C20.2218 17.389 21.9107 14.4612 21.1496 11.6168C20.5329 9.31122 18.494 7.76122 16.2274 7.66678C15.9051 7.65566 15.7163 8.00566 15.8163 8.31677C15.9329 8.67233 15.9996 9.05011 15.9996 9.44455Z" fill="black" />
                     </svg>
                   </span>
                 </td>
@@ -275,7 +263,7 @@ require_once __DIR__ . '/../partials/header.php';
                 </td>
               </tr> -->
 
-              <?php
+            <?php
 
             }
             ?>
@@ -298,7 +286,7 @@ require_once __DIR__ . '/../partials/header.php';
       </div>
       <div class="modal-body">
         <?php
-        include ('view.php');
+        include('view.php');
         ?>
       </div>
 
@@ -306,44 +294,42 @@ require_once __DIR__ . '/../partials/header.php';
   </div>
 </div>
 <script>
+  const viewOrderDetailsButtons = document.querySelectorAll('.view_order_details');
 
-
-const viewOrderDetailsButtons = document.querySelectorAll('.view_order_details');
-
-viewOrderDetailsButtons.forEach(button => {
+  viewOrderDetailsButtons.forEach(button => {
     button.addEventListener('click', handleOrderDetailsClick);
-});
+  });
 
-function handleOrderDetailsClick(event) {
+  function handleOrderDetailsClick(event) {
     const clickedButton = event.currentTarget; // Get the clicked element
     const transactionId = clickedButton.dataset.transactionId; // Access data attribute
 
     // Make an AJAX request to fetch data for the transaction ID
     fetch(`/transactions/${transactionId}`)
-        .then(response => {
-            if (response.ok) {
-                return response.json(); // Parse response body as JSON
-            } else {
-                throw new Error('Failed to fetch order details');
-            }
-        })
-        .then(data => {
-            // Handle the retrieved data
-            showtransactionData(data);
-            // You can now use the data to populate a modal or display it in some way
-        })
-        .catch(error => {
-            // Handle errors
-            console.error('Error fetching order details:', error);
-        });
-}
+      .then(response => {
+        if (response.ok) {
+          return response.json(); // Parse response body as JSON
+        } else {
+          throw new Error('Failed to fetch order details');
+        }
+      })
+      .then(data => {
+        // Handle the retrieved data
+        showtransactionData(data);
+        // You can now use the data to populate a modal or display it in some way
+      })
+      .catch(error => {
+        // Handle errors
+        console.error('Error fetching order details:', error);
+      });
+  }
   // Function to set the color of status dynamically
   function setStatusColor() {
     // Get all elements with class 'status'
     let statuses = document.querySelectorAll('.sms_transaction_w_status');
 
     // Loop through each status element
-    statuses.forEach(function (status) {
+    statuses.forEach(function(status) {
       // Get the text content of the status
       let statusText = status.textContent.trim().toLowerCase();
 
@@ -368,7 +354,7 @@ function handleOrderDetailsClick(event) {
     var firstRow = rows[0];
     var remainingRows = Array.from(rows).slice(1);
 
-    remainingRows.forEach(function (row) {
+    remainingRows.forEach(function(row) {
       var rowContainer = row.parentElement;
       var rowCheckbox = document.createElement("input");
       rowCheckbox.type = "checkbox";
@@ -387,17 +373,17 @@ function handleOrderDetailsClick(event) {
   // addCheckboxAfterRows();
 
 
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function() {
     const searchForm = document.getElementById('sms_customers_w_search_form');
     const searchInput = document.getElementById('sms_transaction_w_search_input');
     const transactionTable = document.getElementById('sms_transaction_w_transaction_table');
 
-    searchForm.addEventListener('submit', function (event) {
+    searchForm.addEventListener('submit', function(event) {
       event.preventDefault(); // Prevent form submission
       filterCustomers();
     });
 
-    searchInput.addEventListener('input', function () {
+    searchInput.addEventListener('input', function() {
       filterCustomers();
     });
 
@@ -418,9 +404,9 @@ function handleOrderDetailsClick(event) {
 </script>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
     var dropdowns = document.querySelectorAll('.dropdown-tom-select-style');
-    dropdowns.forEach(function (el) {
+    dropdowns.forEach(function(el) {
       var withInput = el.classList.contains('with-input');
       if (window.TomSelect) {
         new TomSelect(el, {
@@ -428,13 +414,13 @@ function handleOrderDetailsClick(event) {
           dropdownParent: 'body',
           controlInput: withInput ? '<input>' : false,
           render: {
-            item: function (data, escape) {
+            item: function(data, escape) {
               if (data.customProperties) {
                 return '<div><span class="dropdown-item-indicator">' + data.customProperties + '</span>' + escape(data.text) + '</div>';
               }
               return '<div>' + escape(data.text) + '</div>';
             },
-            option: function (data, escape) {
+            option: function(data, escape) {
               if (data.customProperties) {
                 return '<div><span class="dropdown-item-indicator">' + data.customProperties + '</span>' + escape(data.text) + '</div>';
               }
@@ -463,24 +449,24 @@ function handleOrderDetailsClick(event) {
     }
 
     notificationElement.style.display = "block";
-    setTimeout(function () {
+    setTimeout(function() {
       notificationElement.style.display = "none";
     }, 3000); // Hide notification after 3 seconds
   }
-  $(document).ready(function () {
+  $(document).ready(function() {
     // Event listener for checkbox changes
-    $('input[type="checkbox"]').change(function () {
+    $('input[type="checkbox"]').change(function() {
       // Handle checkbox change event here
       // You can track which rows are selected and perform actions accordingly
     });
 
     // Event listener for select changes
-    $('#sms_m_form_select').change(function () {
+    $('#sms_m_form_select').change(function() {
       var selectedStatus = $(this).val();
       var selectedIds = [];
 
       // Gather IDs of selected rows
-      $('input[type="checkbox"]:checked').each(function () {
+      $('input[type="checkbox"]:checked').each(function() {
         var id = $(this).closest('tr').find('#transaction_id').text();
         // Remove '#' from the id
         id = id.replace('#', '');
@@ -497,12 +483,12 @@ function handleOrderDetailsClick(event) {
 
       // Make fetch request
       fetch('/transactions/update_bulk_status', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
         .then(response => {
           if (response.status === 200) {
             showNotification("Bulk status updated successfully");

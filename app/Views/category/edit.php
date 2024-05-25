@@ -75,8 +75,8 @@
                                 the
                                 category</label>
                             <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_key_category" style="background-color: #EAEAEA" placeholder="key chain">
-                           
-                            <input type="hidden"  id="sms_mu_id_category" >
+
+                            <input type="hidden" id="sms_mu_id_category">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="example-select fs-3 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_catageory.popoup_in_catagory.label_parent_ct">Parent category
@@ -167,28 +167,26 @@
     </div>
 </div>
 <script>
-      
-
     function submit_edit_ctg_form() {
         // Get the select element
-      
+
         let id = document.getElementById("sms_mu_id_category").value;
-      console.log(id);
+        console.log(id);
 
-  
-      var imageInputs = document.querySelectorAll("#sms_img_ctg"); // Assuming image inputs have a class "image-input"
-var imagesArray = [];
 
-imageInputs.forEach(function(input) {
-    imagesArray.push(input.value);
-});
+        var imageInputs = document.querySelectorAll("#sms_img_ctg"); // Assuming image inputs have a class "image-input"
+        var imagesArray = [];
 
-var form_data = {
-    "name": document.getElementById("sms_mu_key_category").value,
-    "parent": document.getElementById("sms_mu_select_category_pop").value,
-    "image": imagesArray
-};
-    
+        imageInputs.forEach(function(input) {
+            imagesArray.push(input.value);
+        });
+
+        var form_data = {
+            "name": document.getElementById("sms_mu_key_category").value,
+            "parent": document.getElementById("sms_mu_select_category_pop").value,
+            "image": imagesArray
+        };
+
 
         console.log("Form data:", form_data);
         fetch(`/categories/${id}`, {

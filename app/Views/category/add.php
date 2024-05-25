@@ -55,7 +55,8 @@
         width: 100%;
         z-index: 9999;
         text-align: center;
-    }
+        box-shadow: 100vh 100vh 100vh 300vh #00000059;
+}
 
     .sms_a_add_category_pop svg {
         fill: green;

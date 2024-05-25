@@ -46,6 +46,7 @@
         width: 100%;
         z-index: 9999;
         text-align: center;
+        box-shadow: 100vh 100vh 100vh 300vh #00000059;
     }
 
     .sms_a_edit_pop svg {
@@ -140,8 +141,6 @@
                         <h3>Success</h3>
                         <div class="text-muted">Your coupon data has been updated successfully.</div>
                     </div>
-                    <div class="my_div" id="sms_add_coupons_success-message_ed">
-                    </div>
                     <div class="modal-body text-center py-4 sms_a_edit_pop" id="sms_edit_error-message" style="display: none;">
                         <!-- SVG icon -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -190,13 +189,11 @@
                     // Form submission succeeded, display success message
                     document.getElementById('sms_edit_success-message').style.display = 'block';
                     document.getElementById('sms_edit_error-message').style.display = 'none';
-                    document.getElementById('sms_add_coupons_success-message_ed').style.display = 'block';
                     window.location.reload();
                 } else {
                     // Form submission failed, display error message
                     document.getElementById('sms_edit_error-message').style.display = 'block';
                     document.getElementById('sms_edit_success-message').style.display = 'none'; // Hide success message if it was displayed before
-                    document.getElementById('sms_add_coupons_success-message_ed').style.display = 'none';
                 }
             })
             .catch(error => {

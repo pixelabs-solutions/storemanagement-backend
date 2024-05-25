@@ -480,8 +480,8 @@ require_once __DIR__ . '/../partials/header.php';
             </div>
             <!-- edit priduct regular  -->
             <div class="modal modal-blur fade m-0" id="edit-regular-modal-full-width" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-                    <div class="modal-content">
+                <div class="modal-dialog modal-xl modal-dialog-centered" role="document" >
+                    <div class="modal-content" style="height: 576px; overflow-y:auto; overflow-x:hidden;">
                         <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
                             <div class="py-3 rounded-top text-center Sms_mu_for_Eng">
                                 <h3 class="card-title text-black fs-2 m-0 fw-bold ">Editing a regular product</h3>

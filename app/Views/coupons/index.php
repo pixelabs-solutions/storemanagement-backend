@@ -169,7 +169,6 @@ require_once __DIR__ . '/../partials/header.php';
               <?php
               if ($coupons !== null) {
                 foreach ($coupons as $item) {
-
                   $expiry_date_string = $item['date_expires'];
                   $expiry_date_timestamp = strtotime($expiry_date_string);
                   $expiry_formatted_date = date("Y-m-d", $expiry_date_timestamp);

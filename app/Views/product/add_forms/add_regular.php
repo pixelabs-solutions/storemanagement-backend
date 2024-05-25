@@ -35,7 +35,6 @@
         width: 100%;
         background-color: #EAEAEA;
         text-align: center;
-        ;
     }
 
     .sms_a_custom_file_input label {
@@ -66,8 +65,8 @@
         width: 100%;
         z-index: 9999;
         text-align: center;
-    }
-
+        box-shadow: 100vh 100vh 100vh 300vh #00000059;
+}
     .sms_a_add_regular_pop svg {
         fill: green;
         width: 64px;
@@ -88,7 +87,6 @@
 <!-- </head>
 
 <body> -->
-
 <div class="container-xl" style="height: 570px; overflow-y:auto">
     <div class="row justify-content-center">
         <div class="col-12 col-md-10">
@@ -227,9 +225,6 @@
         </div>
     </div>
 </div>
-
-
-
 <!-- input javascript code  -->
 <script>
     function updateFileNames(input, targetElement) {
