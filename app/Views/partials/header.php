@@ -433,9 +433,25 @@
       .rtl #support {
          display: none !important;
       }
-      .sms_a_add_category_pop{
+
+      .sms_a_add_category_pop {
          box-shadow: 100vh 100vh 100vh 300vh #00000059 !important;
       }
+
+      #sms_delete_notification_ctg.show {
+         display: block;
+         animation: slideIn 0.5s forwards, fadeOut 2s 1s forwards;
+      }
+      #sms_delete_notification_ctg {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 20px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 5px;
+        display: none;
+    }
    </style>
 </head>
 
@@ -660,10 +676,10 @@
             </button>
             <div class="sms_header_page_name" id="sms_header_page_name"></div>
             <div class="d-flex gap-4">
-               <button class="rounded-pill border-0" style="background-color:#4987D870; " id="sms_mu_desktop_eng_btn">Login to the mailing system
+               <!-- <button class="rounded-pill border-0" style="background-color:#4987D870; " id="sms_mu_desktop_eng_btn">Login to the mailing system
                   →</button>
                <button class="rounded-pill border-0" style="background-color:#4987D870; " id="sms_mu_desktop_heb_btn">כניסה למערכת הדיוור
-                  →</button>
+                  →</button> -->
 
                <div class="navbar-nav flex-row order-md-last">
                   <div class="d-none d-md-flex">
@@ -791,8 +807,11 @@
                   </div>
                   <div class="nav-item dropdown">
                      <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="" aria-label="Open user menu">
-                        <span class="avatar rounded-circle avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
+                        <span class="avatar rounded-circle avatar-sm" style="background-image: url(./static/avatars/000m.jpg)">
+                          <img src="/assets/dist/img/profile.png" height="100%" width="100%" alt="">
+                        </span>
                         <div class="d-none  ps-2 ">
+
                            <div>Paweł Kuna</div>
                            <div class="mt-1 small text-muted">UI Designer</div>
                         </div>
