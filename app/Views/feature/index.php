@@ -277,7 +277,35 @@
 
 
 <script>
+  function deleteCategory(categoryId) {
+    console.log("Deleting category with ID: " + categoryId);
+    fetch("/categories/" + categoryId, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          id: categoryId
+        })
+      })
+      .then(response => {
+        if (response.ok) {
+          show_sms_delete_Notification("Coupon deleted successfully");
+          window.location.reload(); // Reload the page after successful deletion
+        } else {
+          show_sms_delete_Notification("Failed to delete coupon", true);
+        }
+      })
+      .catch(error => {
+        show_sms_delete_Notification("Error occurred: " + error, true);
+      });
 
+    function show_sms_delete_Notification(message, isError = false) {
+      const sms_delete_notification = document.getElementById("sms_delete_notification_ctg");
+      sms_delete_notification.textContent = message;
+      sms_delete_notification.className = isError ? "error show" : "show";
+    }
+  }
   // Function to open the modal
   function openModal(modalId) {
     // Select the modal using the provided ID
