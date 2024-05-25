@@ -113,13 +113,10 @@
                   <h1 class="fs-3 fw-bold" data-i18n="popoups.transction_pop_popuop.order_detail.client_info">Client
                     Information</h1>
                   <div class="">
-                    <span class="d-block mb-3 fw-bold ">Client's name: <span class="fw-normal "
-                        id="client_first_name"></span>
+                    <span class="d-block mb-3 fw-bold ">Client's name: <span class="fw-normal " id="client_first_name"></span>
                       <span class="fw-normal" id="client_last_name"></span></span>
-                    <span class="d-block mb-3 fw-bold">Phone number: <span class="fs-4 fw-normal "
-                        id="customer_billing_phone"></span></span>
-                    <span class="d-block mb-3 fw-bold ">Email address: <span class="fw-normal "
-                        id="customer_billing_email"></span></span>
+                    <span class="d-block mb-3 fw-bold">Phone number: <span class="fs-4 fw-normal " id="customer_billing_phone"></span></span>
+                    <span class="d-block mb-3 fw-bold ">Email address: <span class="fw-normal " id="customer_billing_email"></span></span>
                   </div>
                 </div>
                 <div class="col-md-5 col-sm-12 mt-md-4">
@@ -134,8 +131,7 @@
               </div>
             </div>
             <div class="col-md-4 justify-content-center mt-3 ">
-              <label for="statusSelect" class="form-label fs-3 fw-bold"
-                data-i18n="popoups.transction_pop_popuop.order_detail.order_status">Change order status</label>
+              <label for="statusSelect" class="form-label fs-3 fw-bold" data-i18n="popoups.transction_pop_popuop.order_detail.order_status">Change order status</label>
               <select class="form-select form-select-lg h-80" id="order_status" style="background-color:#f5f5f5;">
                 <option value="completed">Complete</option>
                 <option value="pending">In Treatment</option>
@@ -148,6 +144,17 @@
 
           <!-- order detail start -->
           <div class="row mt-4 container-xl p-3 rounded-md align-items-end" style="background-color: #F5F5F5;">
+            <div class="col-md-4 rounded-4 bg-white mt-6 sms_order_popup_a">
+              <div class="row">
+                <div class="col-md-12">
+                  <h1 class="fs-2 fw-bold text-dark text-start"></h1>
+                  <div class="text-end">
+                    <span class="d-block mb-3 fw-semibold text-dark" id="delivery_details"></span>
+                    <span class="d-block mb-3 fs-2 fw-bold text-dark" id="total_amount"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="col-md-8">
 
               <div class=" col-12">
@@ -159,14 +166,13 @@
                 <div class="table-responsive">
                   <table id="orderTable" class="table table-vcenter card-table">
                     <thead class="d-flex flex-column ts-text">
-                      <tr class="t-head rounded-4" style="background-color: rgba(73, 135, 216, 0.44);">
-                        <th class="sms_order_popups_a"
-                          data-i18n="popoups.transction_pop_popuop.order_detail.th.item_name">Item name</th>
-                        <th class="sms_order_popups_a" data-i18n="popoups.transction_pop_popuop.order_detail.th.cst">
+                      <tr class="t-head rounded-4 bg-transparent">
+                        <th class="sms_order_popups_a" style="background-color: rgba(73, 135, 216, 0.44);" data-i18n="popoups.transction_pop_popuop.order_detail.th.item_name">Item name</th>
+                        <th class="sms_order_popups_a" style="background-color: rgba(73, 135, 216, 0.44);" data-i18n="popoups.transction_pop_popuop.order_detail.th.cst">
                           Cost</th>
-                        <th class="sms_order_popups_a" data-i18n="popoups.transction_pop_popuop.order_detail.th.amt">
+                        <th class="sms_order_popups_a" style="background-color: rgba(73, 135, 216, 0.44);" data-i18n="popoups.transction_pop_popuop.order_detail.th.amt">
                           >Amount</th>
-                        <th class="sms_order_popups_a" data-i18n="popoups.transction_pop_popuop.order_detail.th.total">
+                        <th class="sms_order_popups_a" style="background-color: rgba(73, 135, 216, 0.44);" data-i18n="popoups.transction_pop_popuop.order_detail.th.total">
                           >Total</th>
                       </tr>
                     </thead>
@@ -174,43 +180,32 @@
 
                       <!-- More rows can be dynamically added here -->
                       <!-- <tr class="mt-2 rounded-4" style="background-color: #EAEAEA">
-                        <td class="sms_order_popups_a">Samsung Galaxy S24</td>
-                        <td class="sms_order_popups_a">4,500 NIS</td>
-                        <td class="sms_order_popups_a">250 NIS</td>
-                        <td class="sms_order_popups_a">15</td>
-                      </tr>
-                      <tr class="mt-2 rounded-4" style="background-color: #EAEAEA">
-                        <td class="sms_order_popups_a">Samsung Galaxy S24</td>
-                        <td class="sms_order_popups_a">4,500 NIS</td>
-                        <td class="sms_order_popups_a">250 NIS</td>
-                        <td class="sms_order_popups_a">15</td>
-                      </tr>
-                      <tr class="mt-2 rounded-4" style="background-color: #EAEAEA">
-                        <td class="sms_order_popups_a">Samsung Galaxy S24</td>
-                        <td class="sms_order_popups_a">4,500 NIS</td>
-                        <td class="sms_order_popups_a">250 NIS</td>
-                        <td class="sms_order_popups_a">15</td>
-                      </tr>
-                      <tr class="mt-2 rounded-4" style="background-color: #EAEAEA">
-                        <td class="sms_order_popups_a">Samsung Galaxy S24</td>
-                        <td class="sms_order_popups_a">4,500 NIS</td>
-                        <td class="sms_order_popups_a">250 NIS</td>
-                        <td class="sms_order_popups_a">15</td>
-                      </tr> -->
+          <td class="sms_order_popups_a">Samsung Galaxy S24</td>
+          <td class="sms_order_popups_a">4,500 NIS</td>
+          <td class="sms_order_popups_a">250 NIS</td>
+          <td class="sms_order_popups_a">15</td>
+        </tr>
+        <tr class="mt-2 rounded-4" style="background-color: #EAEAEA">
+          <td class="sms_order_popups_a">Samsung Galaxy S24</td>
+          <td class="sms_order_popups_a">4,500 NIS</td>
+          <td class="sms_order_popups_a">250 NIS</td>
+          <td class="sms_order_popups_a">15</td>
+        </tr>
+        <tr class="mt-2 rounded-4" style="background-color: #EAEAEA">
+          <td class="sms_order_popups_a">Samsung Galaxy S24</td>
+          <td class="sms_order_popups_a">4,500 NIS</td>
+          <td class="sms_order_popups_a">250 NIS</td>
+          <td class="sms_order_popups_a">15</td>
+        </tr>
+        <tr class="mt-2 rounded-4" style="background-color: #EAEAEA">
+          <td class="sms_order_popups_a">Samsung Galaxy S24</td>
+          <td class="sms_order_popups_a">4,500 NIS</td>
+          <td class="sms_order_popups_a">250 NIS</td>
+          <td class="sms_order_popups_a">15</td>
+        </tr> -->
                       <!-- More rows can be dynamically added here -->
                     </tbody>
                   </table>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 rounded-4 bg-white mt-6 sms_order_popup_a">
-              <div class="row">
-                <div class="col-md-12">
-                  <h1 class="fs-2 fw-bold text-dark text-start"></h1>
-                  <div>
-                    <span class="d-block mb-3 fw-semibold text-dark" id="delivery_details"></span>
-                    <span class="d-block mb-3 fs-2 fw-bold text-dark"  id="total_amount"></span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -220,9 +215,7 @@
           <!-- save button -->
 
           <div class="mt-4 ">
-            <button type="button" style="background-color: rgba(73, 135, 216, 0.44); width: 100%; max-width: 200px;"
-            id="set_order_detail"
-              class="btn rounded-4 py-3" data-i18n="popoups.transction_pop_popuop.order_detail.last_btn">Save
+            <button type="button" style="background-color: rgba(73, 135, 216, 0.44); width: 100%; max-width: 200px;" id="set_order_detail" class="btn rounded-4 py-3" data-i18n="popoups.transction_pop_popuop.order_detail.last_btn">Save
               changes</button>
           </div>
 
@@ -236,14 +229,13 @@
 
 
 <script>
-
   function showtransactionData(transactionData) {
     console.log("Order Details:", transactionData);
 
     transactions = transactionData.data;
-    
+
     console.log(transactions.billing.first_name);
-    
+
 
     document.getElementById("order_id").innerHTML = transactions.id;
 
@@ -311,19 +303,15 @@
     const order_status_select = document.getElementById("order_status");
 
 
-    
-    if(transactions.status == "completed"){
+
+    if (transactions.status == "completed") {
       order_status_select.value = "completed";
-    }
-    else if(transactions.status == "cancelled"){
+    } else if (transactions.status == "cancelled") {
       order_status_select.value = "cancelled";
-    }
-    else if(transactions.status == "processing"){
+    } else if (transactions.status == "processing") {
       order_status_select.value = "pending";
     }
   }
-
-
 </script>
 <script>
   function showNotification(message, isError = false) {
@@ -337,22 +325,22 @@
     }
 
     notificationElement.style.display = "block";
-    setTimeout(function () {
+    setTimeout(function() {
       notificationElement.style.display = "none";
     }, 3000); // Hide notification after 3 seconds
   }
-  $(document).ready(function () {
+  $(document).ready(function() {
     // Event listener for checkbox changes
-    $('input[type="checkbox"]').change(function () {
+    $('input[type="checkbox"]').change(function() {
       // Handle checkbox change event here
       // You can track which rows are selected and perform actions accordingly
     });
 
     // Event listener for select changes
-    $('#set_order_detail').click(function () {
+    $('#set_order_detail').click(function() {
 
-   let id = document.getElementById("order_id").innerHTML ;
-   let selectedStatus = document.getElementById("order_status_view").value;
+      let id = document.getElementById("order_id").innerHTML;
+      let selectedStatus = document.getElementById("order_status_view").value;
 
 
       console.log(id);
@@ -365,12 +353,12 @@
 
       // Make fetch request
       fetch(`/transactions/update_status/${id}`, {
-        method: 'PUT',  
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
         .then(response => {
           if (response.status === 200) {
             showNotification("Bulk status updated successfully");
@@ -385,9 +373,6 @@
         });
     });
   });
-
-
-
 </script>
 
 
