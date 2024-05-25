@@ -3,7 +3,6 @@
 namespace Pixelabs\StoreManagement\Controllers;
 
 use Pixelabs\StoreManagement\Models\Goal;
-use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
 

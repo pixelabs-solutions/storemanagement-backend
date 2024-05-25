@@ -2,7 +2,6 @@
 
 namespace Pixelabs\StoreManagement\Controllers;
 
-use Pixelabs\StoreManagement\Models\Inventory;
 
 use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
