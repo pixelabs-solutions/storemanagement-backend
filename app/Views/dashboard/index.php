@@ -156,50 +156,11 @@ var_dump($dashboard_data);
                             </svg>
                         </div>
                     </div>
-                    <!-- <div class="row g-2  sms_mu_for_rtl_row_cards">
-                        <div class=" col-8 ">
-                            <h3 class=" text-muted" data-i18n="dashboard.card_product.card_title"> New Products </h3>
-                        </div>
-                        <div class="col-auto ms-auto">
-                            <svg width="40" height="40" viewBox="0 0 58 58" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <g filter="url(#filter0_d_272_20)">
-                                    <circle cx="29" cy="25" r="25" fill="url(#pattern0_272_20)"
-                                        shape-rendering="crispEdges" />
-                                    <circle cx="29" cy="25" r="25" fill="#F51975" fill-opacity="0.29"
-                                        shape-rendering="crispEdges" />
-                                </g>
-                                <defs>
-                                    <filter id="filter0_d_272_20" x="0" y="0" width="58" height="58"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                                        <feOffset dy="4" />
-                                        <feGaussianBlur stdDeviation="2" />
-                                        <feComposite in2="hardAlpha" operator="out" />
-                                        <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix"
-                                            result="effect1_dropShadow_272_20" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_272_20"
-                                            result="shape" />
-                                    </filter>
-                                    <pattern id="pattern0_272_20" patternContentUnits="objectBoundingBox" width="1"
-                                        height="1">
-                                        <use xlink:href="#image0_272_20" transform="scale(0.03125)" />
-                                    </pattern>
-                                    <image id="image0_272_20" width="32" height="32"
-                                        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAGjAAABowFXcvtNAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAe9JREFUWIXtlrFuE0EQhr85Ow6yBOEspUuBeAGQ0pqOB0B+AipT7XGu0lBYokljGeFz43dIHVFAgZSSFlIFJYIO2VFoLNu7Q3FnyYV15zs7pvEvbbP6Z/ebmd29g512+s+SooHGmEPgBUClUvna6XT+FFnHKxIUBMFbEbkWkTMROZtOpzdBEJitABhjGsAH4LNzru6cq4vIF+BjGIav7h1ARE6A7+PxuBFF0UUURRe+7zeAS+fcyb0DAM+AT4PBYDqfaLfbE+AceL4NgH3gbsn8HfAg72KZt8AYc+R53jtVnXubwLdkLOo4GQMAEVHP8953u93faeuXMwlFjlX1DfALmABXgA+8XGK/SuYrqnpkrT0H1gMAagDW2nq/379ewU8Yhk+ccz9V1c/yZp4BEakBeJ43WmVzAGvtcDF2LYAki1mv1/u7KkDinYnI+hUg7vctoKsCJN7bjbSA+AwMc2w+12iTLVi5/4sAmzqERQGGxO1bD0BVC7VAREYkV3gtgKIVUNURG6iAAAdJNrkkIkPgMRnPfSpAs9l8BJSTbHIpiSkbYx6m+VKf4mq16jvnUNW9Vqv1NA/AbDbbExFKpVKN5V/PbADiEiIip9ba0zwAInHlrbUHab5UAGvtDxF5TfwPkFuqOgEui8TutNPW9A9LS7Dauv/KAgAAAABJRU5ErkJggg==" />
-                                </defs>
-                            </svg>
-                        </div>
-                    </div> -->
-                    <div class="row g-2  sms_mu_for_rtl_row_cards">
+                    <div class="row g-2  sms_mu_for_rtl_row_cards ">
                         <div class=" col-8 ">
                         <h3> <?php echo $dashboard_data["statistics"]["new_products"]; ?> </h3>
                         </div>
-                        <div class="col-auto ms-auto mt-2">
+                        <div class="col-auto ms-auto">
                             <!-- <svg width="40" height="40" viewBox="0 0 58 58" fill="none"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <g filter="url(#filter0_d_272_20)">

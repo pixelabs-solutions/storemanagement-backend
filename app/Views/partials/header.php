@@ -259,7 +259,7 @@
 
       .rtl .sms_mu_for_rtl_row_cards {
          flex-direction: row-reverse !important;
-         text-align: center !important;
+         text-align: end !important;
          align-items: center !important;
       }
 
