@@ -10,7 +10,7 @@ class CouponsController
     private $endpoint = 'coupons';
     public function index()
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $coupons = Base::wc_get($configuration, $this->endpoint);
@@ -25,7 +25,7 @@ class CouponsController
 
     public function add()
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
         
         $result = HttpRequestHelper::validate_request("POST");
@@ -51,7 +51,7 @@ class CouponsController
 
     public function get($id)
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $coupon = Base::wc_get_by_id($configuration, $this->endpoint."/".$id);
@@ -65,7 +65,7 @@ class CouponsController
 
     public function delete($id)
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         
         $configuration = $this->prepare_configuration($is_rest);
 
@@ -76,7 +76,7 @@ class CouponsController
 
     public function update($id)
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $result = HttpRequestHelper::validate_request("PUT");

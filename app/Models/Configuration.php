@@ -9,8 +9,8 @@ class Configuration
     public static function add($consumer_key, $consumer_secret, $store_url)
     {
         global $connection;
-        $user_id = Authentication::getUserId();
-        if($user_id == null)
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id == null || $user_id == "")
         {
             return json_encode([
                 "message" => "User not authenticated.",
@@ -56,18 +56,20 @@ class Configuration
         global $connection;
 
         $is_logged_in = Authentication::isUserLoggedInApp();
-        
-        if(!$is_logged_in == 1 && $is_rest == 'true')
+        if($is_logged_in !== true && $is_rest == 'true')
         {
+            http_response_code(401);
             echo json_encode([
                 "message" => "User not authenticated.",
                 "status_code" => 401 
             ]);
             exit;
         }
-        if($is_logged_in != 1 && $is_rest == "false")
+        if($is_logged_in !== true && $is_rest == 'false')
         {
+            http_response_code(401);
             header('Location: /authentication/login');
+            exit;
         }
         $user_id = Authentication::getUserIdFromToken();
         

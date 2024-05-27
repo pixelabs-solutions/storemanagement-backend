@@ -10,8 +10,7 @@ class CategoryController
     private $endpoint = 'products/categories';
     public function index()
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
-        
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $categories = Base::wc_get($configuration, $this->endpoint);
@@ -24,7 +23,7 @@ class CategoryController
 
     public function get($id)
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $category = Base::wc_get_by_id($configuration, $this->endpoint."/".$id);
@@ -38,7 +37,7 @@ class CategoryController
 
     public function delete($id)
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         
         $configuration = $this->prepare_configuration($is_rest);
         $result = Base::wc_delete_by_id($configuration, $this->endpoint."/".$id);
@@ -47,7 +46,7 @@ class CategoryController
 
     public function add()
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $result = HttpRequestHelper::validate_request("POST");
@@ -72,7 +71,7 @@ class CategoryController
 
     public function update($id)
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $result = HttpRequestHelper::validate_request("PUT");
