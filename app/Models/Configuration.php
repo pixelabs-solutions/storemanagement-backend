@@ -9,9 +9,10 @@ class Configuration
     public static function add($consumer_key, $consumer_secret, $store_url)
     {
         global $connection;
-        $user_id = Authentication::getUserId();
-        if($user_id == null)
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id == null || $user_id == "")
         {
+            http_response_code(401);
             return json_encode([
                 "message" => "User not authenticated.",
                 "status_code" => 401 
@@ -26,6 +27,7 @@ class Configuration
             if ($stmt->execute()) 
             {
                 $stmt->close();
+                http_response_code(201);
                 return json_encode([
                     "message" => "Configuration added successfully.",
                     "status_code" => 201 
@@ -35,6 +37,7 @@ class Configuration
             {
                 $stmt->close();
                 error_log("Error executing insert: " . $stmt->error);
+                http_response_code(500);
                 return json_encode([
                     "message" => "Failed to add configuration.",
                     "status_code" => 500 // Internal Server Error
@@ -44,6 +47,7 @@ class Configuration
         else 
         {
             error_log("Error preparing statement: " . $connection->error);
+            http_response_code(500);
             return json_encode([
                 "message" => "Error preparing SQL statement.",
                 "status_code" => 500 // Internal Server Error
@@ -56,18 +60,20 @@ class Configuration
         global $connection;
 
         $is_logged_in = Authentication::isUserLoggedInApp();
-        
-        if(!$is_logged_in == 1 && $is_rest == 'true')
+        if($is_logged_in !== true && $is_rest == 'true')
         {
+            http_response_code(401);
             echo json_encode([
                 "message" => "User not authenticated.",
                 "status_code" => 401 
             ]);
             exit;
         }
-        if($is_logged_in != 1 && $is_rest == "false")
+        if($is_logged_in !== true && $is_rest == 'false')
         {
+            http_response_code(401);
             header('Location: /authentication/login');
+            exit;
         }
         $user_id = Authentication::getUserIdFromToken();
         

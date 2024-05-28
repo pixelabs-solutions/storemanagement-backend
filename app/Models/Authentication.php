@@ -90,7 +90,7 @@ class Authentication
 
     public static function logout()
     {
-        setcookie('jwt_token', '', time() - 3600, '/', $_SERVER['HTTP_HOST'], true, true);
+        setcookie('jwt_token', '', time() - 3600, '/', $_SERVER['HTTP_HOST']);
 
         // Return a response indicating successful logout
         http_response_code(200);

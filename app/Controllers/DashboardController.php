@@ -6,9 +6,10 @@ use Pixelabs\StoreManagement\Models\Dashboard;
 use Pixelabs\StoreManagement\Models\Configuration;
 class DashboardController
 {
+
     public function index()
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $response = Configuration::getConfiguration($is_rest);
         $result = json_decode($response, true);
         if ($is_rest && $result['status_code'] != 200) {

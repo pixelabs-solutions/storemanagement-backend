@@ -8,7 +8,7 @@ class CustomerController
     private $table_name = 'customers';
     public function index()
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $customers = Customer::get_customers($configuration);
