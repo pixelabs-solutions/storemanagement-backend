@@ -100,7 +100,7 @@
                                     <div class="col-md-12 rounded-4 bg-transparent h-100 ">
                                         <select id="sms_w_parent_ctg" class="form-select form-select-md" style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
                                             <option value="percent">percentage</option>
-                                            <option value="amount">amount</option>
+                                            <option value="fixed_cart">amount</option>
                                         </select>
 
                                     </div>
