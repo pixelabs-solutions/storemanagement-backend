@@ -87,18 +87,12 @@ class StatisticsController
         ];
 
         $overview_stats = Statistics::get_overview_stats($configuration, $filters);
-        $orders_stats = Statistics::get_orders_stats($configuration, $filters);
-        $revenue_stats = Statistics::get_revenue_stats($configuration, $filters);
-        $products_stats = Statistics::get_products_stats($configuration, $filters);
+        // $orders_stats = Statistics::get_orders_stats($configuration, $filters);
+        // $revenue_stats = Statistics::get_revenue_stats($configuration, $filters);
+        // $products_stats = Statistics::get_products_stats($configuration, $filters);
 
         if($is_rest == 'true'){
-            $data = [
-                'overview_stats' => $overview_stats,
-                'orders_stats' => $orders_stats,
-                'revenue_stats' => $revenue_stats,
-                'products_stats' => $products_stats
-            ];
-            echo json_encode($data);
+            echo json_encode($overview_stats);
         }
         else{
             include_once __DIR__ . '/../Views/statistics/overview.php';
