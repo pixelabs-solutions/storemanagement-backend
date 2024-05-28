@@ -55,10 +55,10 @@ var_dump($dashboard_data);
 <div class="row g-2 mt-5 mb-5 align-items-center sms_mu_for_rtl">
     <!-- Stats header Buttons -->
     <div class="col-auto btn-list">
-        <a href="?query=24_hours" id="24_hours" class="btn btn-pill  tab-pane bg-info     sms_w_date" data-i18n="dashboard.tabs.first_tab "> 24 Hours</a>
-        <a href="?query=last_week" id="last_week" class="btn shadow-none   bg-transparent btn-light border-none outline-none tab-pane sms_w_date" data-i18n="dashboard.tabs.second_tab"> Last Week
+        <a href="?query=24_hours" id="24_hours" class="shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.first_tab" > 24 Hours</a>
+        <a href="?query=last_week" id="last_week" class="btn  btn-pill shadow-none  btn-light  outline-none tab-pane sms_w_date" data-i18n="dashboard.tabs.second_tab" style="background-color:#A8C3E7;"> Last Week
         </a>
-        <a href="?query=current_month" id="current_month" class=" shadow-none border-none outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.third_tab "> Last Month
+        <a href="?query=current_month" id="current_month" class=" shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.third_tab "> Last Month
         </a>
         <a href="?query=last_year" id="last_year" class=" shadow-none btn border-none outline-none  bg-transparent btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.fourth_tab"> Last Year
         </a>
@@ -105,7 +105,7 @@ var_dump($dashboard_data);
 
 <!-- Card Start -->
 <div>
-    <div class="row g-2 mb-5 sms_mu_for_rtl_row_cards">
+    <div class="row g-2 mb-5 flex-row-reverse sms_mu_for_rtl_row_cards">
         <div class="col-lg-3 col-md-3 col-sm-12">
             <div class="card pt-2 h-100 " style="border-radius:20px;">
                 <div class="card-body">

@@ -199,7 +199,7 @@
       }
 
       .rtl .sms_mu_margin {
-         gap: 200px !important;
+         gap: 253px !important;
       }
 
       @media screen and (max-width:990px) {

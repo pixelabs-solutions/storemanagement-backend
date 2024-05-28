@@ -248,7 +248,7 @@ require_once __DIR__ . '/../partials/header.php';
                             <input type="text" id="sms_products_m_search_input" value="" class="form-control border-0 " placeholder="Product search" aria-label="Search in website">
                         </div>
                     </form>
-                    <div class="d-flex flex-row gap-3 text-center w-100 justify-content-end">
+                    <div class="d-flex flex-row gap-3 text-center w-100 justify-content-end" style="margin: 10px 0;">
                         <button onclick="togglePopup()" class="rounded-4 py-2 border-0 align-items-center text-justify-content-center d-flex gap-1 filter-button">
                             <svg width="23" height="23" class="p-0 m-0" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_272_365)">
@@ -329,7 +329,7 @@ require_once __DIR__ . '/../partials/header.php';
                         </div>
                     </div>
                 </div>
-                <div class="card-x bg-white py-5 sms_mu_main_bg_white rounded-bottom-4 px-2" style="height: 390px; overflow-y:scroll">
+                <div class="card-x bg-white pt-5 sms_mu_main_bg_white rounded-bottom-4 px-2" style="height: 400px; overflow-y:scroll">
                     <div class="sms_mu_main_bg_white position-relative  ">
 
                         <table class="sms_mu_table_product rounded-4" id='sms_products_m_products_table'>
