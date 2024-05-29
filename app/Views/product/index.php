@@ -383,7 +383,7 @@ require_once __DIR__ . '/../partials/header.php';
                                             ?>
 
                                         </td>
-                                        <td><span style="font-weight:bold">Price:</span> <?php echo $product['price']; ?>
+                                        <td><span style="font-weight:bold">Price:</span> <?php echo $product['regular_price']; ?>
                                             <?php echo $currency['symbol']; ?>
                                         </td>
                                         <td><span style="font-weight:bold  ">Stock:</span>
