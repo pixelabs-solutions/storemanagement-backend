@@ -69,7 +69,7 @@ class Base
         return $affectedRows > 0;
     }
 
-    public static function wc_get($configuration, $endpoint)
+    public static function wc_get($configuration, $endpoint, $fields = [])
     {
         $consumer_key = $configuration["consumer_key"];
         $consumer_secret = $configuration["consumer_secret"];
@@ -79,9 +79,7 @@ class Base
         {
             $response = $client->request('GET', $store_url . '/wp-json/wc/v3/'.$endpoint, [
                 'auth' => [$consumer_key, $consumer_secret],
-                'query' => [
-                    'per_page' => 100
-                ]
+                'query' => array_merge(['per_page' => 100], $fields)
             ]);
         
             return json_decode($response->getBody(), true);
