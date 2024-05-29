@@ -3,7 +3,6 @@
 namespace Pixelabs\StoreManagement\Controllers;
 
 use Pixelabs\StoreManagement\Models\Goal;
-use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
 
@@ -12,7 +11,7 @@ class GoalsController
 {
     public function index()
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $goals_data = Goal::get_goals($configuration);

@@ -200,36 +200,36 @@ class Goal
         $raise_in_average_price = (($current_month_average_price - $previous_month_average_price)/$previous_month_average_price)*100;
         $goals_data = [
             "orders" => [
-                "target" => $goals['sales_revenue_target'] ??'',
+                "target" => $goals['sales_revenue_target'] ?? 0,
                 "sales" => $totalRevenue
             ],
             "new_customers" => [
-                "target" => $goals['new_customers_target'] ??'',
+                "target" => $goals['new_customers_target'] ?? 0,
                 "customers_count" => $new_customers
             ],
             "new_orders" => [
-                "target" => $goals['new_orders_target'] ??'',
+                "target" => $goals['new_orders_target'] ?? 0,
                 "orders_count" => $orders
             ],
             "new_products" => [
-                "target" => $goals['new_products_target'] ??'',
+                "target" => $goals['new_products_target'] ?? 0,
                 "products_count" => $products
             ],
             "keywords" => [
-                "target" => $goals['target_keywords'] ??''
+                "target" => $goals['target_keywords'] ?? ''
             ],
             "google_rankings" => [
-                "target" => $goals['google_rankings_target'] ??''
+                "target" => $goals['google_rankings_target'] ?? ''
             ],
             "page_views" => [
-                "target" => $goals['page_views_target'] ??''
+                "target" => $goals['page_views_target'] ?? 0
             ],
             "avg_order_value_increase" => [
-                "target" => $goals['avg_order_value_increase_target'] ??'',
+                "target" => $goals['avg_order_value_increase_target'] ?? 0.0,
                 "rasie_in_average_price" => $raise_in_average_price
             ],
             "avg_order_items_increase" => [
-                "target" => $goals['avg_order_items_increase_target'] ??'',
+                "target" => $goals['avg_order_items_increase_target'] ?? 0.0,
                 "rasie_in_average_items" => $raise_in_average_items
             ]
         ];

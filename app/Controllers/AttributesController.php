@@ -3,6 +3,7 @@
 namespace Pixelabs\StoreManagement\Controllers;
 use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
+use Pixelabs\StoreManagement\Models\Configuration;
 
 class AttributesController
 {
@@ -11,26 +12,38 @@ class AttributesController
 
     public function index()
     {
-        $attributes = Base::wc_get($this->endpoint);
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
+        $attributes = Base::wc_get($configuration, $this->endpoint);
         include_once __DIR__ . '/../Views/product/index.php';
     }
 
     public function get($id)
     {
-        $attribute = Base::wc_get_by_id($this->endpoint."/".$id);
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
+        $attribute = Base::wc_get_by_id($configuration, $this->endpoint."/".$id);
 
         echo $attribute;
     }
 
     public function delete($id)
     {
-        $result = Base::wc_delete_by_id($this->endpoint."/".$id);
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
+        $result = Base::wc_delete_by_id($configuration, $this->endpoint."/".$id);
         echo $result;
     }
 
 
     public function add()
     {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
         $result = HttpRequestHelper::validate_request("POST");
         if(!$result["is_data_prepared"])
         {
@@ -47,12 +60,15 @@ class AttributesController
             // 'has_archives' => $data['has_archives']
         ]);
 
-        $response = Base::wc_add($this->endpoint, $payload);
+        $response = Base::wc_add($configuration, $this->endpoint, $payload);
         echo $response;
     }
 
     public function update($id)
     {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
         $result = HttpRequestHelper::validate_request("PUT");
         if(!$result["is_data_prepared"])
         {
@@ -65,7 +81,7 @@ class AttributesController
             'name' => $data['name'], 
             'type' => $data['type']
         ]);
-        $response = Base::wc_update($this->endpoint."/".$id, $payload);
+        $response = Base::wc_update($configuration, $this->endpoint."/".$id, $payload);
         echo $response;
     }
 
@@ -73,7 +89,11 @@ class AttributesController
 
     public function term_index($id)
     {
-        $attribute_terms = Base::wc_get($this->endpoint."/".$id."/"."terms");
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
+
+        $attribute_terms = Base::wc_get($configuration, $this->endpoint."/".$id."/"."terms");
         //include_once __DIR__ . '/../Views/coupons/index.php';
         echo $attribute_terms;
     }
@@ -81,11 +101,13 @@ class AttributesController
     
     public function term_get($id, $term_id)
     {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
         // if(isset($_GET['term_id'])){
         //     $term_id = $_GET['term_id'];
 
         // }
-        $attribute_terms_by_id = Base::wc_get_by_id($this->endpoint."/".$id."/"."terms"."/".$term_id);
+        $attribute_terms_by_id = Base::wc_get_by_id($configuration, $this->endpoint."/".$id."/"."terms"."/".$term_id);
 
         echo $attribute_terms_by_id;
     }
@@ -93,13 +115,19 @@ class AttributesController
 
     public function term_delete($id, $term_id)
     {
-        $result = Base::wc_delete_by_id($this->endpoint."/".$id."/"."terms"."/".$term_id);
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
+        $result = Base::wc_delete_by_id($configuration, $this->endpoint."/".$id."/"."terms"."/".$term_id);
         echo $result;
     }
 
 
     public function term_add($id)
     {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
         $result = HttpRequestHelper::validate_request("POST");
         if(!$result["is_data_prepared"])
         {
@@ -112,12 +140,15 @@ class AttributesController
             'name' => $data['name']
         ]);
 
-        $response = Base::wc_add($this->endpoint."/".$id."/"."terms", $payload);
+        $response = Base::wc_add($configuration, $this->endpoint."/".$id."/"."terms", $payload);
         echo $response;
     }
 
     public function term_update($id, $term_id)
     {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+
         $result = HttpRequestHelper::validate_request("PUT");
         if(!$result["is_data_prepared"])
         {
@@ -130,8 +161,19 @@ class AttributesController
             'name' => $data['name'],
             'slug' => $data['name']
         ]);
-        $response = Base::wc_update($this->endpoint."/".$id."/"."terms"."/".$term_id, $payload);
+        $response = Base::wc_update($configuration, $this->endpoint."/".$id."/"."terms"."/".$term_id, $payload);
         echo $response;
+    }
+
+    public function prepare_configuration($is_rest){
+        $response = Configuration::getConfiguration($is_rest);
+        $result = json_decode($response, true);
+        if ($is_rest && $result['status_code'] != 200) {
+            echo $response;
+            exit;
+        }
+        
+        return $result['data'];
     }
 
 }

@@ -15,7 +15,7 @@ class ProductController
     private $table_name = 'products';
     public function index()
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $products = Base::wc_get($configuration, $this->table_name);
@@ -74,7 +74,7 @@ class ProductController
 
     public function product_by_id($id)
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $product = Base::wc_get_by_id($configuration, $this->table_name."/".$id);
@@ -84,7 +84,7 @@ class ProductController
 
     public function delete($id)
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $result = Base::wc_delete_by_id($configuration, $this->table_name."/".$id);
@@ -93,7 +93,7 @@ class ProductController
 
     public function add()
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $result = HttpRequestHelper::validate_request("POST");
@@ -137,7 +137,7 @@ class ProductController
             $payload['variations'] = $variations;
 
            $response = Base::wc_add($configuration, $this->table_name, json_encode($payload));
-            if(is_rest == 'true')
+            if($is_rest == 'true')
             {
                 echo $response;
             }
@@ -150,7 +150,7 @@ class ProductController
         else
         {
             $response = Base::wc_add($configuration, $this->table_name, json_encode($payload));
-            if(is_rest == 'true')
+            if($is_rest == 'true')
             {
                 echo $response;
             }
@@ -211,7 +211,7 @@ class ProductController
 
     public function update($id)
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $result = HttpRequestHelper::validate_request("PUT");

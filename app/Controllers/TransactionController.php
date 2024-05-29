@@ -12,7 +12,7 @@ class TransactionController
 {
     public function index()
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $transactions = Base::wc_get($configuration, "orders");
@@ -28,7 +28,7 @@ class TransactionController
 
     public function get_by_id($id)
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $transaction = Base::wc_get_by_id($configuration, "orders/{$id}");
@@ -38,7 +38,7 @@ class TransactionController
 
     public function update_status($id)
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $result = HttpRequestHelper::validate_request("PUT");
@@ -62,7 +62,7 @@ class TransactionController
 
     public function update_bulk_status()
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $result = HttpRequestHelper::validate_request("POST");

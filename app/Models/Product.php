@@ -8,7 +8,6 @@ namespace Pixelabs\StoreManagement\Models;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use Pixelabs\StoreManagement\Models\Configuration;
 class Product
 {
 
@@ -160,7 +159,10 @@ class Product
 
     public static function get_products_count($configuration)
     {
-        $params = ['auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]]];
+        $params = [
+            'auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
+            'per_page' => 100
+        ];
         return Base::get_number_of_products($configuration["store_url"], $params);
     }
 }

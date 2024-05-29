@@ -120,7 +120,7 @@ require_once __DIR__ . '/../partials/header.php';
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 14px;
-    background: linear-gradient(135deg, #3498db, #2980b9);
+    background: green;
     /* Gradient background */
     color: #fff;
     display: none;

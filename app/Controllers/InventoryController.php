@@ -2,7 +2,6 @@
 
 namespace Pixelabs\StoreManagement\Controllers;
 
-use Pixelabs\StoreManagement\Models\Inventory;
 
 use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
@@ -14,7 +13,7 @@ class InventoryController
 
     public function index()
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $product_settings = Base::wc_get($configuration, "settings/products");
@@ -49,7 +48,7 @@ class InventoryController
 
     public function update()
     {
-        $is_rest = (isset($_GET['is_rest']) && $_GET['is_rest']) == 1 ? 'true' : 'false';
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $result = HttpRequestHelper::validate_request("PUT");

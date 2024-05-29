@@ -104,7 +104,7 @@ require_once __DIR__ . '/../partials/header.php';
     /* Popup styles */
     .popup {
         display: none;
-        top: 247px;
+        top: 222px;
         position: absolute;
         z-index: 10;
         width: 300px;
@@ -113,9 +113,10 @@ require_once __DIR__ . '/../partials/header.php';
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         right: 8%;
     }
+
     .rtl .popup {
-          left: 5% ;
-          right: 75%;
+        left: 5%;
+        right: 75%;
     }
 
     .popup-content {
@@ -232,7 +233,7 @@ require_once __DIR__ . '/../partials/header.php';
                     </div>
                 </div>
             </div>
-            <div class="d-flex flex-column overflow-auto" >
+            <div class="d-flex flex-column overflow-auto">
                 <div class="sms_mu_btns_filter d-flex w-100 align-items-baseline bg-white  rounded-top-4 fixed" style="padding-top: 28px; margin-top:1px;">
                     <form id="sms_products_m_search_form" action="./" method="get" autocomplete="off" novalidate>
                         <div class="input-icon border-bottom border-black">
@@ -247,7 +248,7 @@ require_once __DIR__ . '/../partials/header.php';
                             <input type="text" id="sms_products_m_search_input" value="" class="form-control border-0 " placeholder="Product search" aria-label="Search in website">
                         </div>
                     </form>
-                    <div class="d-flex flex-row gap-3 text-center w-100 justify-content-end">
+                    <div class="d-flex flex-row gap-3 text-center w-100 justify-content-end" style="margin: 10px 0;">
                         <button onclick="togglePopup()" class="rounded-4 py-2 border-0 align-items-center text-justify-content-center d-flex gap-1 filter-button">
                             <svg width="23" height="23" class="p-0 m-0" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_272_365)">
@@ -265,14 +266,26 @@ require_once __DIR__ . '/../partials/header.php';
 
                         <!-- The Popup -->
                         <div id="popup" class="popup">
+                            <!-- <div class="popup-content">
+                                <h3 class="text-center" data-i18n="product_managment.product_search.filter_inventory_btn">Filter By Inventory</h3>
+                                <span class="close">&times;</span>
+                                <input type="number" id="ctg_Filter_In_mx" class="form-control mt-2" placeholder="Input 1">
+                                <input type="number" id="ctg_Filter_In_mn" class="form-control mt-2" placeholder="Input 2">
+                                <button id="doneButtonENG" class="btn btn-primary mt-2 Sms_mu_for_Eng" onclick="FilterCtg()">Done</button>
+                                <button id="doneButton" class="btn btn-primary mt-2 Sms_mu_for_hebrew">בוצע</button>
+
+                            </div> -->
                             <div class="popup-content">
                                 <h3 class="text-center" data-i18n="product_managment.product_search.filter_inventory_btn">Filter By Inventory</h3>
                                 <span class="close">&times;</span>
-                                <input type="number" class="form-control mt-2" placeholder="Input 1">
-                                <input type="number" class="form-control mt-2" placeholder="Input 2">
-                                <button id="doneButton" class="btn btn-primary mt-2 Sms_mu_for_Eng">Done</button>
-                                <button id="doneButton" class="btn btn-primary mt-2 Sms_mu_for_hebrew">בוצע</button>
-
+                                <input id="input1" type="number" class="form-control mt-2" placeholder="Minimum Stock">
+                                <input id="input2" type="number" class="form-control mt-2" placeholder="Maximum Stock">
+                                <div class="d-flex gap-3 justify-content-center">
+                                    <button id="doneButton" class="btn btn-primary mt-2 Sms_mu_for_Eng" onclick="filterRows()">Done</button>
+                                    <button id="doneButton" class="btn btn-primary mt-2 Sms_mu_for_hebrew" onclick="filterRows()">בוצע</button>
+                                    <button id="doneButton" class="btn btn-primary mt-2 Sms_mu_for_Eng" onclick="filterClearBtn()">Clear</button>
+                                    <button id="doneButton" class="btn btn-primary mt-2 Sms_mu_for_hebrew" onclick="filterClearBtn()">ברור</button>
+                                </div>
                             </div>
                         </div>
 
@@ -294,7 +307,7 @@ require_once __DIR__ . '/../partials/header.php';
                         <!-- The Popup -->
                         <div id="popups" class="popup">
                             <div class="popup-content">
-                                <h3 class="text-center"  data-i18n="product_managment.product_search.filter_catageary_btn">Filter By Category</h3>
+                                <h3 class="text-center" data-i18n="product_managment.product_search.filter_catageary_btn">Filter By Category</h3>
                                 <span class="close">&times;</span>
                                 <div class="-5" style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                     <div class="col-md-12 rounded-4 bg-transparent h-100 text-start">
@@ -316,7 +329,7 @@ require_once __DIR__ . '/../partials/header.php';
                         </div>
                     </div>
                 </div>
-                <div class="card-x bg-white py-5 sms_mu_main_bg_white rounded-bottom-4 px-2" style="height: 390px; overflow-y:scroll">
+                <div class="card-x bg-white pt-5 sms_mu_main_bg_white rounded-bottom-4 px-2" style="height: 400px; overflow-y:scroll">
                     <div class="sms_mu_main_bg_white position-relative  ">
 
                         <table class="sms_mu_table_product rounded-4" id='sms_products_m_products_table'>
@@ -348,7 +361,7 @@ require_once __DIR__ . '/../partials/header.php';
                                         $prodimage = "https://placehold.co/400x400?text=No%20Image%20Found";
                                     }
                             ?>
-                                    <tr class="sms_mu_tr_product">
+                                    <tr class="sms_mu_tr_product category_row">
                                         <td>
                                             <img class="sms_product_img" height="100px" width="100px" src="<?php echo $prodimage; ?>" alt="">
                                         </td>
@@ -372,8 +385,10 @@ require_once __DIR__ . '/../partials/header.php';
                                         <td><span style="font-weight:bold">Price:</span> <?php echo $product['price']; ?>
                                             <?php echo $currency['symbol']; ?>
                                         </td>
-                                        <td><span style="font-weight:bold">Stock:</span>
-                                            <?php echo $product['stock_quantity']; ?>
+                                        <td><span style="font-weight:bold  ">Stock:</span>
+                                            <span class="stock_quantity_class">
+                                                <?php echo $product['stock_quantity']; ?>
+                                            </span>
                                         </td>
                                         <td><span style="font-weight:bold">Number of views:
                                             </span>250
@@ -387,7 +402,7 @@ require_once __DIR__ . '/../partials/header.php';
 
                                         </td>
                                     </tr>
-                                    <tr class="sms_mu_spacing_diver"></tr>
+                                    <tr class="sms_mu_spacing_diver" id="sms_mu_spacing_div"></tr>
                                 <?php }
                                 if ($product['type'] == 'variable') { ?>
                                     <tr class="sms_mu_tr_product">
@@ -413,15 +428,16 @@ require_once __DIR__ . '/../partials/header.php';
                                         <td><span style="font-weight:bold">Price:</span> <?php echo $product['price']; ?>
                                             <?php echo $currency['symbol']; ?>
                                         </td>
-                                        <td><span style="font-weight:bold">Stock:</span>
-                                            <?php echo $product['stock_quantity']; ?>
+                                        <td><span style="font-weight:bold stock_quantity_class"></span> <span class="stock_quantity_class">
+                                                <?php echo $product['stock_quantity']; ?>
+                                            </span>
+
                                         </td>
                                         <td><span style="font-weight:bold">Number of views:
                                             </span>250
                                         </td>
                                         <td>
                                             <span data-bs-toggle="modal" data-bs-target="#edit-modal-full-width">
-
                                                 <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z" fill="black" />
                                                 </svg>
@@ -429,7 +445,7 @@ require_once __DIR__ . '/../partials/header.php';
 
                                         </td>
                                     </tr>
-                                    <tr class="sms_mu_spacing_diver"></tr>
+                                    <tr class="sms_mu_spacing_diver" id="sms_mu_spacing_div"></tr>
                             <?php }
                             } ?>
                         </table>
@@ -480,7 +496,7 @@ require_once __DIR__ . '/../partials/header.php';
             </div>
             <!-- edit priduct regular  -->
             <div class="modal modal-blur fade m-0" id="edit-regular-modal-full-width" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-xl modal-dialog-centered" role="document" >
+                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                     <div class="modal-content" style="height: 576px; overflow-y:auto; overflow-x:hidden;">
                         <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
                             <div class="py-3 rounded-top text-center Sms_mu_for_Eng">
@@ -541,6 +557,121 @@ require_once __DIR__ . '/../partials/header.php';
                     no_results_text: "Oops, nothing found!"
                 })
             </script>
+            <!-- <script>
+                function filterRows() {
+                    // Get the minimum and maximum values from input fields
+                    let minStock = parseInt(document.getElementById('input1').value);
+                    let maxStock = parseInt(document.getElementById('input2').value);
+
+                    // Loop through each category row and apply filtering
+                    let categoryRows = document.getElementsByClassName('category_row');
+                    for (let i = 0; i < categoryRows.length; i++) {
+                        // Get the stock quantity of the current category
+                        let stockQuantityElement = categoryRows[i].querySelector('.stock_quantity');
+                let stockQuantity = parseInt(stockQuantityElement.textContent || stockQuantityElement.innerText);
+                        // Check if the stock quantity is within the specified range
+                        if (stockQuantity >= minStock && stockQuantity <= maxStock) {
+                            // Show the category row
+                            categoryRows[i].style.display = 'table-row';
+                        } else {
+                            // Hide the category row
+                            categoryRows[i].style.display = 'none';
+                        }
+                    }
+                }
+            </script> -->
+            <script>
+                // function filterRows() {
+                //     // Get the minimum and maximum values from input fields
+                //     let minStock = parseInt(document.getElementById('input1').value);
+                //     let maxStock = parseInt(document.getElementById('input2').value);
+
+                //     // Validate input values
+                //     if (isNaN(minStock) || isNaN(maxStock)) {
+                //         alert("Please enter valid numeric values.");
+                //         return; // Exit the function if input values are invalid
+                //     }
+
+                //     // Loop through each product row and apply filtering
+                //     let productRows = document.querySelectorAll('.sms_mu_table_product .sms_mu_tr_product');
+                //     for (let i = 0; i < productRows.length; i++) {
+                //         // Get the element containing the stock quantity for this row
+                //         let stockQuantityElement = productRows[i].querySelector('.stock_quantity_class');
+                //         // Initialize stock quantity to a default value
+                //         let stockQuantity = 0;
+                //         // Check if the element exists and has valid text content
+                //         if (stockQuantityElement && (stockQuantityElement.textContent || stockQuantityElement.innerText)) {
+                //             // Parse the stock quantity from the text content
+                //             stockQuantity = parseInt(stockQuantityElement.textContent || stockQuantityElement.innerText);
+                //         }
+
+                //         // Check if the stock quantity is within the specified range
+                //         if (stockQuantity > minStock && stockQuantity < maxStock) {
+                //             // Show the product row
+                //             productRows[i].style.display = 'table-row';
+                //             document.getElementById('sms_mu_spacing_div').style.display="table-row"
+                //         } else {
+                //             // Hide the product row
+                //             productRows[i].style.display = 'none';
+                //             document.getElementById('sms_mu_spacing_div').style.display="none"
+                //         }
+                //     }
+                // }
+                function filterRows() {
+                    // Get the minimum and maximum values from input fields
+                    let minStock = parseInt(document.getElementById('input1').value);
+                    let maxStock = parseInt(document.getElementById('input2').value);
+
+                    // Validate input values
+                    if (isNaN(minStock) || isNaN(maxStock)) {
+                        alert("Please enter valid numeric values.");
+                        return; // Exit the function if input values are invalid
+                    }
+
+                    // Loop through each product row and apply filtering
+                    let productRows = document.querySelectorAll('.sms_mu_table_product .sms_mu_tr_product');
+                    for (let i = 0; i < productRows.length; i++) {
+                        // Get the element containing the stock quantity for this row
+                        let stockQuantityElement = productRows[i].querySelector('.stock_quantity_class');
+                        // Initialize stock quantity to a default value
+                        let stockQuantity = 0;
+                        // Check if the element exists and has valid text content
+                        if (stockQuantityElement && (stockQuantityElement.textContent || stockQuantityElement.innerText)) {
+                            // Parse the stock quantity from the text content
+                            stockQuantity = parseInt(stockQuantityElement.textContent || stockQuantityElement.innerText);
+                        }
+
+                        // Check if the stock quantity is within the specified range
+                        if (stockQuantity >= minStock && stockQuantity <= maxStock) {
+                            // Show the product row
+                            productRows[i].style.display = 'table-row';
+                            // Show the corresponding spacer row
+                            productRows[i].nextElementSibling.style.display = 'table-row';
+                        } else {
+                            // Hide the product row
+                            productRows[i].style.display = 'none';
+                            // Hide the corresponding spacer row
+                            productRows[i].nextElementSibling.style.display = 'none';
+                        }
+                    }
+                }
+
+                function filterClearBtn() {
+                    // Clear the values of the input fields
+                    document.getElementById('input1').value = "";
+                    document.getElementById('input2').value = "";
+
+                    // Remove the display style property from all product rows and spacer rows
+                    let productRows = document.querySelectorAll('.sms_mu_table_product .sms_mu_tr_product');
+                    for (let i = 0; i < productRows.length; i++) {
+                        productRows[i].style.display = '';
+                        if (productRows[i].nextElementSibling && productRows[i].nextElementSibling.classList.contains('sms_mu_spacing_diver')) {
+                            productRows[i].nextElementSibling.style.display = '';
+                        }
+                    }
+                }
+            </script>
+
             <script>
                 function togglePopup() {
                     var inventoryPopup = document.getElementById("popup");

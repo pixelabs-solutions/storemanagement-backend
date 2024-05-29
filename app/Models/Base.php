@@ -3,7 +3,6 @@
 namespace Pixelabs\StoreManagement\Models;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use Pixelabs\StoreManagement\Models\Configuration;
 
 class Base
 {
@@ -70,7 +69,7 @@ class Base
         return $affectedRows > 0;
     }
 
-    public static function wc_get($configuration, $endpoint)
+    public static function wc_get($configuration, $endpoint, $fields = [])
     {
         $consumer_key = $configuration["consumer_key"];
         $consumer_secret = $configuration["consumer_secret"];
@@ -80,28 +79,15 @@ class Base
         {
             $response = $client->request('GET', $store_url . '/wp-json/wc/v3/'.$endpoint, [
                 'auth' => [$consumer_key, $consumer_secret],
-                'query' => [
-                    'per_page' => 100
-                ]
+                'query' => array_merge(['per_page' => 100], $fields)
             ]);
-
-            $response_body = $response->getBody();
-            $sanitized_response = self::sanitizeApiResponse($response_body);
         
-            $decoded_response = json_decode($sanitized_response, true);
-
-            echo json_encode($decoded_response, JSON_UNESCAPED_UNICODE);
+            return json_decode($response->getBody(), true);
         } 
         catch (RequestException $e) 
         {
             echo $e->getMessage();
         }
-    }
-    private static function sanitizeApiResponse($response_body)
-    {
-        $sanitized_body = str_replace('\n', '', $response_body);
-
-        return $sanitized_body;
     }
 
     public static function wc_add($configuration, $endpoint, $payload)
@@ -141,7 +127,7 @@ class Base
         }
     }
 
-    public static function wc_get_by_id($configuration, $endpoint)
+    public static function wc_get_by_id($configuration, $endpoint, $fields = [])
     {
         $consumer_key = $configuration["consumer_key"];
         $consumer_secret = $configuration["consumer_secret"];
@@ -151,7 +137,8 @@ class Base
         try 
         {
             $response = $client->request('GET', $store_url . '/wp-json/wc/v3/'.$endpoint, [
-                'auth' => [$consumer_key, $consumer_secret]
+                'auth' => [$consumer_key, $consumer_secret],
+                'query' => $fields
             ]);
         
             if($response->getStatusCode() == 200)

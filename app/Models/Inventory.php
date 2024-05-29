@@ -81,7 +81,7 @@ class Inventory
 
         $stmt = $connection->prepare($query);
         if ($stmt === false) {
-            die('MySQL prepare error: ' . $conconnection->error);
+            die('MySQL prepare error: ' . $connection->error);
         }
 
         $isInventoryManagementEnabled = $data["is_inventory_management_enabled"];

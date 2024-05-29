@@ -199,7 +199,7 @@
       }
 
       .rtl .sms_mu_margin {
-         gap: 200px !important;
+         gap: 253px !important;
       }
 
       @media screen and (max-width:990px) {
@@ -433,8 +433,25 @@
       .rtl #support {
          display: none !important;
       }
-      .sms_a_add_category_pop{
+
+      .sms_a_add_category_pop {
          box-shadow: 100vh 100vh 100vh 300vh #00000059 !important;
+      }
+
+      #sms_delete_notification_ctg.show {
+         display: block;
+         animation: slideIn 0.5s forwards, fadeOut 2s 1s forwards;
+      }
+
+      #sms_delete_notification_ctg {
+         position: fixed;
+         top: 20px;
+         right: 20px;
+         padding: 20px 20px;
+         background-color: #4CAF50;
+         color: white;
+         border-radius: 5px;
+         display: none;
       }
    </style>
 </head>
@@ -660,10 +677,10 @@
             </button>
             <div class="sms_header_page_name" id="sms_header_page_name"></div>
             <div class="d-flex gap-4">
-               <button class="rounded-pill border-0" style="background-color:#4987D870; " id="sms_mu_desktop_eng_btn">Login to the mailing system
+               <!-- <button class="rounded-pill border-0" style="background-color:#4987D870; " id="sms_mu_desktop_eng_btn">Login to the mailing system
                   →</button>
                <button class="rounded-pill border-0" style="background-color:#4987D870; " id="sms_mu_desktop_heb_btn">כניסה למערכת הדיוור
-                  →</button>
+                  →</button> -->
 
                <div class="navbar-nav flex-row order-md-last">
                   <div class="d-none d-md-flex">
@@ -782,17 +799,34 @@
                            </div>
                         </div>
                      </div>
-                     <button id="switchBtn" class="border-0 rounded-circle" onclick="switchLanguage()">
+                     <!-- <button id="switchBtn" class="border-0 rounded-circle" onclick="switchLanguage()">
 
                         <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle">
 
-                     </button>
-
+                     </button> -->
+                     <select id="lang-select" style="padding: 5px; font-size: 16px;">
+                        <option value="en">
+                        <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle">
+                           English
+                        </option>
+                        <option value="he">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 640 480">
+                              <path fill="#0038a8" d="M0 0h640v480H0z" />
+                              <path fill="#fff" d="M0 160h640v160H0z" />
+                              <path fill="#d1513a" d="M0 160h640v160H0z" />
+                              <path fill="#fff" d="M256 84.4v36.1L172.4 240l83.6 119.5v36.1L88.4 240 256 48.4z" />
+                           </svg>
+                           עברית
+                        </option>
+                     </select>
                   </div>
                   <div class="nav-item dropdown">
                      <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="" aria-label="Open user menu">
-                        <span class="avatar rounded-circle avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
+                        <span class="avatar rounded-circle avatar-sm" style="background-image: url(./static/avatars/000m.jpg)">
+                           <img src="/assets/dist/img/profile.png" height="100%" width="100%" alt="">
+                        </span>
                         <div class="d-none  ps-2 ">
+
                            <div>Paweł Kuna</div>
                            <div class="mt-1 small text-muted">UI Designer</div>
                         </div>
@@ -831,6 +865,15 @@
       <div class="page-wrapper px-4" id="content">
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
          <!-- <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script> -->
+         <script>
+            // JavaScript for switching language
+            document.getElementById('lang-select').addEventListener('change', function() {
+               var selectedLang = this.value;
+               // Perform actions based on selectedLang, like changing website language
+               // For demonstration purposes, let's just alert the selected language
+               alert("Selected language: " + selectedLang);
+            });
+         </script>
          <script>
             window.addEventListener('load', function() {
                setPageName();
