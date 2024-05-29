@@ -804,21 +804,37 @@
                         <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle">
 
                      </button> -->
-                     <select id="lang-select" style="padding: 5px; font-size: 16px;">
-                        <option value="en">
-                        <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle">
-                           English
-                        </option>
-                        <option value="he">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 640 480">
-                              <path fill="#0038a8" d="M0 0h640v480H0z" />
-                              <path fill="#fff" d="M0 160h640v160H0z" />
-                              <path fill="#d1513a" d="M0 160h640v160H0z" />
-                              <path fill="#fff" d="M256 84.4v36.1L172.4 240l83.6 119.5v36.1L88.4 240 256 48.4z" />
-                           </svg>
-                           עברית
-                        </option>
-                     </select>
+                     <div class="dropdown">
+                        <button  class="btn dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                           Select Language
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                           <a class="dropdown-item" href="#" onclick="selectOption(this, 'English')">
+                              <img width="20" height="20" src="https://img.icons8.com/offices/30/israel.png" alt="israel" />
+                              English
+                           </a>
+                           <a class="dropdown-item" href="#" onclick="selectOption(this, 'Hebrew')">
+                              <img width="20" height="20" src="https://img.icons8.com/color/48/great-britain.png" alt="great-britain" />
+                              Hebrew
+                           </a>
+                        </div>
+                     </div>
+
+                     <!-- <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                           Select Language
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                           <a class="dropdown-item" href="#" onclick="selectOption(this)">
+                              <img width="20" height="20" src="https://img.icons8.com/offices/30/israel.png" alt="israel" />
+                              English
+                           </a>
+                           <a class="dropdown-item" href="#" onclick="selectOption(this)">
+                           
+                              Hebrew
+                           </a>
+                        </div>
+                     </div> -->
                   </div>
                   <div class="nav-item dropdown">
                      <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="" aria-label="Open user menu">
@@ -865,7 +881,7 @@
       <div class="page-wrapper px-4" id="content">
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
          <!-- <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script> -->
-         <script>
+         <!-- <script>
             // JavaScript for switching language
             document.getElementById('lang-select').addEventListener('change', function() {
                var selectedLang = this.value;
@@ -873,6 +889,41 @@
                // For demonstration purposes, let's just alert the selected language
                alert("Selected language: " + selectedLang);
             });
+         </script> -->
+         <script>
+            // JavaScript code to handle the dropdown functionality
+            document.addEventListener("DOMContentLoaded", function() {
+               var dropdownMenuButton = document.getElementById("dropdownMenuButton");
+               var dropdownMenu = dropdownMenuButton.nextElementSibling;
+
+               dropdownMenuButton.addEventListener("click", function() {
+                  if (dropdownMenu.classList.contains("show")) {
+                     dropdownMenu.classList.remove("show");
+                  } else {
+                     dropdownMenu.classList.add("show");
+                  }
+               });
+
+               document.addEventListener("click", function(e) {
+                  if (!dropdownMenuButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                     dropdownMenu.classList.remove("show");
+                  }
+               });
+            });
+
+            var selectedOption = ""; // Variable to store the selected option value
+
+            function selectOption(option, value) {
+               // Store the selected option value
+               selectedOption = value;
+
+               // Close the dropdown after selecting an option
+               var dropdownMenu = option.parentElement;
+               dropdownMenu.classList.remove("show");
+
+               // Use the selectedOption variable as needed
+               console.log("Selected option:", selectedOption);
+            }
          </script>
          <script>
             window.addEventListener('load', function() {
