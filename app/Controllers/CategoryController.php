@@ -12,8 +12,8 @@ class CategoryController
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
-
-        $categories = Base::wc_get($configuration, $this->endpoint);
+        $fields = ['_fields' => 'id, name, parent, image, count'];
+        $categories = Base::wc_get($configuration, $this->endpoint, $fields);
         if($is_rest == "true")
         {
             echo json_encode($categories, JSON_UNESCAPED_UNICODE);
@@ -25,8 +25,8 @@ class CategoryController
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
-
-        $category = Base::wc_get_by_id($configuration, $this->endpoint."/".$id);
+        $fields = ['_fields' => 'id, name, parent, image, count'];
+        $category = Base::wc_get_by_id($configuration, $this->endpoint."/".$id, $fields);
 
         if($is_rest == "true")
         {
