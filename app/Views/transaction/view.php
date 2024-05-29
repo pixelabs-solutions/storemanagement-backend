@@ -310,6 +310,8 @@
       order_status_select.value = "cancelled";
     } else if (transactions.status == "processing") {
       order_status_select.value = "pending";
+    }else if (transactions.status == "pending") {
+      order_status_select.value = "pending";
     }
   }
 </script>
