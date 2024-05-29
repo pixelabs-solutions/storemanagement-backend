@@ -25,8 +25,8 @@ class CategoryController
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
-
-        $category = Base::wc_get_by_id($configuration, $this->endpoint."/".$id);
+        $fields = ['_fields' => 'id, name, parent, image, count'];
+        $category = Base::wc_get_by_id($configuration, $this->endpoint."/".$id, $fields);
 
         if($is_rest == "true")
         {

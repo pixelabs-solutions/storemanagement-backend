@@ -127,7 +127,7 @@ class Base
         }
     }
 
-    public static function wc_get_by_id($configuration, $endpoint)
+    public static function wc_get_by_id($configuration, $endpoint, $fields = [])
     {
         $consumer_key = $configuration["consumer_key"];
         $consumer_secret = $configuration["consumer_secret"];
@@ -137,7 +137,8 @@ class Base
         try 
         {
             $response = $client->request('GET', $store_url . '/wp-json/wc/v3/'.$endpoint, [
-                'auth' => [$consumer_key, $consumer_secret]
+                'auth' => [$consumer_key, $consumer_secret],
+                'query' => $fields
             ]);
         
             if($response->getStatusCode() == 200)
