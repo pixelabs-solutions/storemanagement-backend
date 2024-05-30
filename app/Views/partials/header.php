@@ -201,6 +201,11 @@
       .rtl .sms_mu_margin {
          gap: 253px !important;
       }
+      .lang_select{
+         height: 30px;
+         border: 1px solid lightgray;
+    border-radius: 15px;
+      }
 
       @media screen and (max-width:990px) {
          .rtl .sms_mu_margin {
@@ -670,9 +675,9 @@
          </div>
       </aside>
       <!-- Navbar -->
-      <header class="navbar navbar-expand-md d-none d-lg-flex d-print-none sms_mu_header" style="background-color: #F2F2F2;">
+      <header class="navbar navbar-expand-md sticky-top d-lg-flex d-print-none sms_mu_header" style="background-color: #F2F2F2;">
          <div class="d-flex flex-row w-100 justify-content-between align-items-center px-3">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler d-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="sms_header_page_name" id="sms_header_page_name"></div>
@@ -683,7 +688,7 @@
                   →</button> -->
 
                <div class="navbar-nav flex-row order-md-last">
-                  <div class="d-none d-md-flex">
+                  <div class=" d-flex align-items-center">
                      <a href="?theme=dark" class="nav-link px-0 hide-theme-dark d-none" title="Enable dark mode" data-bs-toggle="tooltip" data-bs-placement="bottom">
                         <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -699,7 +704,7 @@
                            <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
                         </svg>
                      </a>
-                     <div class="nav-item dropdown d-none d-md-flex me-3  ">
+                     <div class="nav-item dropdown  d-md-flex   me-3  ">
                         <a href="#" class="nav-link px-0 bg-light rounded-pill" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications">
                            <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -804,7 +809,7 @@
                         <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle">
 
                      </button> -->
-                     <select id="lang-select" style="padding: 5px; font-size: 16px;">
+                     <select id="lang-select" style="padding: 5px; font-size: 14px;" class="lang_select">
                         <option value="en">
                         <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle">
                            English
@@ -864,26 +869,19 @@
       </header>
       <div class="page-wrapper px-4" id="content">
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-         <!-- <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script> -->
          <script>
-            // JavaScript for switching language
             document.getElementById('lang-select').addEventListener('change', function() {
                var selectedLang = this.value;
-               // Perform actions based on selectedLang, like changing website language
-               // For demonstration purposes, let's just alert the selected language
-               alert("Selected language: " + selectedLang);
+               switchLanguage(selectedLang)
             });
          </script>
          <script>
             window.addEventListener('load', function() {
                setPageName();
             });
-
             function setPageName() {
                const currentURL = window.location.href;
                const domainName = 'storemanagement-frontend';
-
-               // Extract the slug from the URL
                const pathname = new URL(currentURL).pathname;
                const currentSlug = pathname.split('/').filter(Boolean).pop().replace('.php', '') || 'index';
 
