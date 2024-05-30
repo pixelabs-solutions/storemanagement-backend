@@ -8,7 +8,7 @@ class Goal
     public static function add($data)
     {
         global $connection;
-        $user_id = Authentication::getUserId();
+        $user_id = Authentication::getUserIdFromToken();
         echo $user_id;
         if ($user_id == null) {
             // return json_encode([
@@ -78,7 +78,7 @@ class Goal
     public static function update($data)
     {
         global $connection;
-        $user_id = Authentication::getUserId();
+        $user_id = Authentication::getUserIdFromToken();
         if ($user_id == null) {
             header('Location: /authentication/login');
             exit();
@@ -141,7 +141,7 @@ class Goal
 
     public static function get_goals_target(){
         global $connection;
-        $user_id = Authentication::getUserId();
+        $user_id = Authentication::getUserIdFromToken();
         
         $sql = "SELECT * FROM `goals` WHERE user_id = ?";
         $stmt = $connection->prepare($sql);

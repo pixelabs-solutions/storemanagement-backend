@@ -108,8 +108,16 @@
                             <div class="-5" style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                 <div class="col-md-12 rounded-4 bg-transparent h-100 ">
                                     <select id="category_in_product" multiple style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
-                                        <option value="NOSQL">Bags</option>
-                                        <option value="NodeJS">List</option>
+                                    <?php
+
+                                        foreach ($categories as $category) {
+                                            // Access the "name" property of each category object
+                                            ?>   
+                                            <option value="<?php echo $category['id'] ?>"><?php echo $category['name']; ?></option>
+                                            <?php
+                                        }
+
+                                        ?>
                                     </select>
                                     <span class="span_div">
                                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
