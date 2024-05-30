@@ -45,8 +45,6 @@ var_dump($dashboard_data);
     .rtl .sms_mu_we_heb {
         display: block !important;
     }
-
-   
 </style>
 <!-- Map Css End -->
 <!-- Header Start -->
@@ -55,7 +53,7 @@ var_dump($dashboard_data);
 <div class="row g-2 mt-5 mb-5 align-items-center sms_mu_for_rtl">
     <!-- Stats header Buttons -->
     <div class="col-auto btn-list">
-        <a href="?query=24_hours" id="24_hours" class="shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.first_tab" > 24 Hours</a>
+        <a href="?query=24_hours" id="24_hours" class="shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.first_tab"> 24 Hours</a>
         <a href="?query=last_week" id="last_week" class="btn  btn-pill shadow-none  btn-light  outline-none tab-pane sms_w_date" data-i18n="dashboard.tabs.second_tab" style="background-color:#A8C3E7;"> Last Week
         </a>
         <a href="?query=current_month" id="current_month" class=" shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.third_tab "> Last Month
@@ -375,12 +373,10 @@ var_dump($dashboard_data);
                         <div class="col-auto ms-auto ">
                             <div class="mb-3">
                                 <select type="text" class="form-select dropdown-tom-select-style with-input" placeholder="Filter by city" name="city" multiple id="select_city">
-
                                     <?php foreach ($dashboard_data["customers_location"] as $statist) : ?>
                                         <?php $city_value = $statist['city']; ?>
                                         <option value="<?php echo $city_value; ?>"><?php echo $city_value; ?></option>
                                     <?php endforeach; ?>
-
                                 </select>
                             </div>
                         </div>
@@ -389,16 +385,26 @@ var_dump($dashboard_data);
                         document.getElementById('select_city').addEventListener('change', function() {
                             let selectedCities = Array.from(this.selectedOptions).map(option => option.value);
                             let cityRows = document.querySelectorAll('.city-row');
-                            cityRows.forEach(row => {
-                                let cityName = row.dataset.city;
-                                if (selectedCities.includes(cityName)) {
+
+                            if (selectedCities.length === 0) {
+                                // If no option is selected, display all city rows
+                                cityRows.forEach(row => {
                                     row.style.display = 'flex';
-                                } else {
-                                    row.style.display = 'none';
-                                }
-                            });
+                                });
+                            } else {
+                                // If options are selected, display only selected city rows
+                                cityRows.forEach(row => {
+                                    let cityName = row.dataset.city;
+                                    if (selectedCities.includes(cityName)) {
+                                        row.style.display = 'flex';
+                                    } else {
+                                        row.style.display = 'none';
+                                    }
+                                });
+                            }
                         });
                     </script>
+
                     <!-- End Header -->
                     <!-- Map and City Data Start -->
                     <div class="row g-2 align-items-center">

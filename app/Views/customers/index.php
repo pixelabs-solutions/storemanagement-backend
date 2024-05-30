@@ -3,7 +3,7 @@ require_once __DIR__ . '/../partials/header.php';
 
 $customers = $customers['data'];
 
-// var_dump($customers);
+//  var_dump($customers);
 
 //  echo $transactions;
 
@@ -242,9 +242,18 @@ $customers = $customers['data'];
               <tr class="sms_mu_tr">
 
                 <td class="t_oravg_m" >
-                   <?php echo $item['customer_name']; ?>
+                   <?php if(!isset($item['customer_name']) || trim($item['customer_name']) == ""){
+                        echo "Customer Name is not Set";
+                    } else {
+                        echo htmlspecialchars($item['customer_name'], ENT_QUOTES, 'UTF-8');
+                    }  ?>
+                    
                 </td>
-                <td><?php echo $item['date_of_last_order']; ?> </td>
+                <td><?php  if(!isset($item['date_of_last_order']) || trim($item['date_of_last_order']) == ""){
+                        echo "No order placed by this Customer";
+                    } else {
+                        echo $item['date_of_last_order'];
+                    }  ?> </td>
                 <td><?php echo $item['email']; ?></td>
                 <td><?php echo $item['number_of_orders']; ?></td>
                 <td>

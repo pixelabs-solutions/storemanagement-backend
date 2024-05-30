@@ -18,7 +18,11 @@ class ProductController
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
-        $products = Base::wc_get($configuration, $this->table_name);
+        $product_fields = 
+        [
+            '_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations'
+        ];
+        $products = Base::wc_get($configuration, $this->table_name, $product_fields);
         if(isset($_GET['category']) && $_GET['category'] !== "")
         {
             $category = $_GET['category'];
@@ -49,7 +53,8 @@ class ProductController
                 }
                 $products = $filteredProducts;
             }
-        $categories = Base::wc_get($configuration,'products/categories');
+        $category_fields = ['_fields' => 'id, name, parent, image, count'];
+        $categories = Base::wc_get($configuration,'products/categories', $category_fields);
         $attributes = Base::wc_get($configuration, 'products/attributes');
         $currency = Base::wc_get($configuration, 'data/currencies/current');
         
@@ -76,8 +81,11 @@ class ProductController
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
-
-        $product = Base::wc_get_by_id($configuration, $this->table_name."/".$id);
+        $product_fields = 
+        [
+            '_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations'
+        ];
+        $product = Base::wc_get_by_id($configuration, $this->table_name."/".$id, $product_fields);
 
         echo $product;
     }
@@ -109,16 +117,16 @@ class ProductController
             'description' => $data['description'], 
             'manage_stock' => true,
             'stock_quantity' => $data['stock_quantity'], 
-            'category' => array_map(function($category_id) {
+            'categories' => array_map(function($category_id) {
                 return ['id' => $category_id]; 
             }, $data['category']),
-            'image' => array_map(function($image_url) {
+            'images' => array_map(function($image_url) {
                 return ['src' => $image_url]; 
             }, $data['image']),
             'regular_price' => $data['regular_price'],
             'sale_price' => $data['sale_price']
         ];
-
+        // echo json_encode($payload);exit;
         if($data['type'] === "variable")
         {
             // Construct attributes array
@@ -228,12 +236,8 @@ class ProductController
             'description' => $data['description'], 
             'manage_stock' => true,
             'stock_quantity' => $data['stock_quantity'], 
-            'category' => array_map(function($category_id) {
-                return ['id' => $category_id]; 
-            }, $data['category']),
-            'image' => array_map(function($image_url) {
-                return ['src' => $image_url]; 
-            }, $data['image']),
+            'category' => $data['category'],
+            'images' => $data['image'],
             'regular_price' => $data['regular_price'],
             'sale_price' => $data['sale_price']
         ];
