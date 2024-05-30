@@ -1183,6 +1183,7 @@ const translations = {
 };
 // Initial language
 let currentLanguage = "en";
+
 // document.getElementById("switchBtn").innerHTML=currentLanguage;
 
 // Function to update text content based on language
@@ -1209,18 +1210,19 @@ function updateContent(language) {
   });
 }
 // Function to handle language switching
-function switchLanguage() {
-  currentLanguage = currentLanguage === "en" ? "he" : "en";
+function switchLanguage(lang) {
+
+  currentLanguage = lang;
   // document.getElementById("switchBtn").innerHTML=currentLanguage;
   console.log(currentLanguage);
-  const languageIcon = document.getElementById("languageIcon");
-  if (currentLanguage === "he") {
-    languageIcon.src = "/assets/dist/img/uk.png"; // Set English flag image source
-    languageIcon.alt = "English Flag"; // Set alt text
-  } else {
-    languageIcon.src = "/assets/dist/img/israel.png"; // Set Hebrew flag image source
-    languageIcon.alt = "Hebrew Flag"; // Set alt text
-  }
+  // const languageIcon = document.getElementById("languageIcon");
+  // if (currentLanguage === "he") {
+  //   languageIcon.src = "/assets/dist/img/uk.png"; // Set English flag image source
+  //   languageIcon.alt = "English Flag"; // Set alt text
+  // } else {
+  //   languageIcon.src = "/assets/dist/img/israel.png"; // Set Hebrew flag image source
+  //   languageIcon.alt = "Hebrew Flag"; // Set alt text
+  // }
   let myElement = document.getElementById("myDiv");
   if (currentLanguage === "he") {
     myElement.classList.add("rtl");
