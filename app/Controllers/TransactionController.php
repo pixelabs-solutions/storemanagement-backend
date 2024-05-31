@@ -14,8 +14,8 @@ class TransactionController
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
-
-        $transactions = Base::wc_get($configuration, "orders");
+        $fields = ['_fields' => 'id, status, date_created, total, billing'];
+        $transactions = Base::wc_get($configuration, "orders", $fields);
         if($is_rest == "true")
         {
             echo json_encode($transactions, JSON_UNESCAPED_UNICODE);
@@ -30,8 +30,8 @@ class TransactionController
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
-
-        $transaction = Base::wc_get_by_id($configuration, "orders/{$id}");
+        $fields = ['_fields' => 'id, status, date_created, total, billing'];
+        $transaction = Base::wc_get_by_id($configuration, "orders/{$id}", $fields);
         
         echo $transaction;
     }
