@@ -1006,9 +1006,6 @@
 
                var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
                   removeItemButton: true,
-                  maxItemCount: 5,
-                  searchResultLimit: 5,
-                  renderChoiceLimit: 5
                });
 
 
@@ -1018,9 +1015,6 @@
 
                var multipleCancelButton = new Choices('#IOP', {
                   removeItemButton: true,
-                  maxItemCount: 5,
-                  searchResultLimit: 5,
-                  renderChoiceLimit: 5
                });
 
 
@@ -1041,9 +1035,6 @@
 
                var multipleCancelButton = new Choices('#category_in_product', {
                   removeItemButton: true,
-                  maxItemCount: 5,
-                  searchResultLimit: 5,
-                  renderChoiceLimit: 5
                });
 
 
@@ -1052,9 +1043,6 @@
 
                var multipleCancelButton = new Choices('#sms_mu_select_category', {
                   removeItemButton: true,
-                  maxItemCount: 5,
-                  searchResultLimit: 5,
-                  renderChoiceLimit: 5
                });
 
 

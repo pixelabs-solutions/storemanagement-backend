@@ -11,6 +11,10 @@ var_dump($number_of_products)
         cursor: pointer;
     }
 
+    .hidden {
+        display: none;
+    }
+
     .sms_mu_spacing_diver {
         height: 20px;
         background-color: white !important;
@@ -561,35 +565,7 @@ var_dump($number_of_products)
             </div>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
             <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
-            <script>
-                $(".chosen-select").chosen({
-                        no_results_text: "Oops, nothing found!"
-                    }) <
-                    script >
-                    document.getElementById('Sms_MU_doneButton').addEventListener('click', function() {
-                        // Get the selected category from the dropdown
-                        var selectedCategory = document.getElementById('category_in_product').value;
 
-                        // Get all table rows
-                        var rows = document.querySelectorAll('.sms_mu_tr_product');
-
-                        // Loop through each row
-                        rows.forEach(function(row) {
-                            // Get the category cell of the current row
-                            var categoryCell = row.querySelector('td:nth-child(3)');
-
-                            // Get the text content of the category cell
-                            var category = categoryCell.textContent.trim();
-
-                            // If the selected category is empty or matches the row's category, show the row; otherwise, hide it
-                            if (selectedCategory === '' || selectedCategory.includes(category)) {
-                                row.style.display = 'table-row';
-                            } else {
-                                row.style.display = 'none';
-                            }
-                        });
-                    });
-            </script>
             </script>
             <!-- <script>
                 function filterRows() {
