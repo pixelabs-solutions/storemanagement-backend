@@ -60,10 +60,11 @@ class CategoryController
         $payload = json_encode([
             'name' => $data['name'], 
             'parent' => $data['parent'],
-            'images' => [
+            'image' => [
                 'src' => $data['image']
             ]
         ]);
+        // echo $payload;exit;
 
         $response = Base::wc_add($configuration, $this->endpoint, $payload);
         echo $response;
