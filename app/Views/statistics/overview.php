@@ -23,15 +23,20 @@ require_once __DIR__ . '/../partials/header.php';
             width: 100%;
         }
     }
-
+    .rtl .list_button_statis{
+        /* margin-left: 0;
+        margin-right: auto; */
+        gap: 55%;
+    }
+/* 
     .filter_tab_active {
         background-color: #A8C3E7 !important;
-    }
+    } */
 </style>
 
 <!-- Icon Box Start -->
 
-<div class="row g-2 mt-5  mb-5">
+<div class="row g-2 mt-5  mb-5 ">
     <div>
         <ul class="nav justify-content-between nav-tabs" data-bs-toggle="tabs" style="border:none;">
             <li class="nav-item mb-2">
@@ -67,8 +72,7 @@ require_once __DIR__ . '/../partials/header.php';
                 <div class="card-body p-5">
                     <!-- Header Start -->
 
-                    <!-- Header End -->
-                    <div class="row g-2 align-items-center">
+                    <div class="row g-2 align-items-center list_button_statis">
                         <!-- Stats header Buttons -->
                         <div class="col-auto btn-list">
                             <a href="?query=last_week" class="btn btn-pill  last_week btn-light tab-pane"
@@ -83,11 +87,10 @@ require_once __DIR__ . '/../partials/header.php';
                         <!-- Date Range Button -->
                         <div class="col-auto ms-auto">
                             <a href="#" class="btn btn-pill" data-bs-toggle="modal" data-bs-target="#modal-team"
-                                style="background-color:#A8C3E7; border:none;"
-                                data-i18n="statististics.tabs_in_select_range.button">
+                                style="background-color:#A8C3E7; border:none;" data-i18n="statististics.tabs_in_select_range.button">
                                 Select a Date Range
                             </a>
-                        </div>
+                        </div>  
                     </div>
 
 
