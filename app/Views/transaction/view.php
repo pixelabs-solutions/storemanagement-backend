@@ -143,7 +143,7 @@
           <!-- end header -->
 
           <!-- order detail start -->
-          <div class="row mt-4 container-xl p-3 rounded-md align-items-end" style="background-color: #F5F5F5;">
+          <div class="row mt-4 container-xl p-3 rounded-md align-items-end" style="background-color: #F5F5F5; flex-direction:row-reverse;">
             <div class="col-md-4 rounded-4 bg-white mt-6 sms_order_popup_a">
               <div class="row">
                 <div class="col-md-12">
@@ -156,9 +156,8 @@
               </div>
             </div>
             <div class="col-md-8">
-
               <div class=" col-12">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex  justify-content-between">
                   <h4 class="mb-3">Order Details
                   </h4>
                   <h4 class="mb-3" id="order_date"></h4>
@@ -180,30 +179,30 @@
 
                       <!-- More rows can be dynamically added here -->
                       <!-- <tr class="mt-2 rounded-4" style="background-color: #EAEAEA">
-          <td class="sms_order_popups_a">Samsung Galaxy S24</td>
-          <td class="sms_order_popups_a">4,500 NIS</td>
-          <td class="sms_order_popups_a">250 NIS</td>
-          <td class="sms_order_popups_a">15</td>
-        </tr>
-        <tr class="mt-2 rounded-4" style="background-color: #EAEAEA">
-          <td class="sms_order_popups_a">Samsung Galaxy S24</td>
-          <td class="sms_order_popups_a">4,500 NIS</td>
-          <td class="sms_order_popups_a">250 NIS</td>
-          <td class="sms_order_popups_a">15</td>
-        </tr>
-        <tr class="mt-2 rounded-4" style="background-color: #EAEAEA">
-          <td class="sms_order_popups_a">Samsung Galaxy S24</td>
-          <td class="sms_order_popups_a">4,500 NIS</td>
-          <td class="sms_order_popups_a">250 NIS</td>
-          <td class="sms_order_popups_a">15</td>
-        </tr>
-        <tr class="mt-2 rounded-4" style="background-color: #EAEAEA">
-          <td class="sms_order_popups_a">Samsung Galaxy S24</td>
-          <td class="sms_order_popups_a">4,500 NIS</td>
-          <td class="sms_order_popups_a">250 NIS</td>
-          <td class="sms_order_popups_a">15</td>
-        </tr> -->
-                      <!-- More rows can be dynamically added here -->
+                          <td class="sms_order_popups_a">Samsung Galaxy S24</td>
+                          <td class="sms_order_popups_a">4,500 NIS</td>
+                          <td class="sms_order_popups_a">250 NIS</td>
+                          <td class="sms_order_popups_a">15</td>
+                        </tr>
+                        <tr class="mt-2 rounded-4" style="background-color: #EAEAEA">
+                          <td class="sms_order_popups_a">Samsung Galaxy S24</td>
+                          <td class="sms_order_popups_a">4,500 NIS</td>
+                          <td class="sms_order_popups_a">250 NIS</td>
+                          <td class="sms_order_popups_a">15</td>
+                        </tr>
+                        <tr class="mt-2 rounded-4" style="background-color: #EAEAEA">
+                          <td class="sms_order_popups_a">Samsung Galaxy S24</td>
+                          <td class="sms_order_popups_a">4,500 NIS</td>
+                          <td class="sms_order_popups_a">250 NIS</td>
+                          <td class="sms_order_popups_a">15</td>
+                        </tr>
+                        <tr class="mt-2 rounded-4" style="background-color: #EAEAEA">
+                          <td class="sms_order_popups_a">Samsung Galaxy S24</td>
+                          <td class="sms_order_popups_a">4,500 NIS</td>
+                          <td class="sms_order_popups_a">250 NIS</td>
+                          <td class="sms_order_popups_a">15</td>
+                        </tr> -->
+                                      <!-- More rows can be dynamically added here -->
                     </tbody>
                   </table>
                 </div>
@@ -310,7 +309,7 @@
       order_status_select.value = "cancelled";
     } else if (transactions.status == "processing") {
       order_status_select.value = "pending";
-    }else if (transactions.status == "pending") {
+    } else if (transactions.status == "pending") {
       order_status_select.value = "pending";
     }
   }

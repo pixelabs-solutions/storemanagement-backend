@@ -10,7 +10,7 @@
                     <!-- Header Start -->
 
                     <!-- Header End -->
-                    <div class="row g-2 align-items-center">
+                    <div class="row g-2 align-items-center list_button_statis">
                         <!-- Stats header Buttons -->
                         <div class="col-auto btn-list">
                             <a href="?query=last_week" class="btn btn-pill  last_week btn-light tab-pane"

@@ -14,7 +14,9 @@
                     <path d="M21 21l-6 -6" />
                   </svg>
                 </span>
-                <input type="text" id="sms_coupons_m_search_input" value="" class="form-control border-0 " placeholder="Category search" aria-label="Search in website">
+                <!-- <input type="text" id="sms_coupons_m_search_input" value="" class="form-control border-0 " placeholder="Category search" aria-label="Search in website"> -->
+                <input type="text" id="sms_coupons_m_search_input" value="" class="form-control border-0" placeholder="Category search" aria-label="Search in website">
+
               </div>
             </form>
           </div>
@@ -113,19 +115,14 @@
         </div> -->
         <table class="sms_mu_table" id="sms_category_m_category_table">
           <thead>
-
             <tr class="sms_mu_th">
               <th data-i18n="popoups.add_new_catageory.th_in_catageory.th_img" class="sms_mu_td">image</th>
               <th class="sms_mu_td" data-i18n="popoups.add_new_catageory.th_in_catageory.th_catageory">The name of the category</th>
               <th class="sms_mu_td" data-i18n="popoups.add_new_catageory.th_in_catageory.th_parent">Parent category</th>
               <th class="sms_mu_td" data-i18n="popoups.add_new_catageory.th_in_catageory.th_quantity">Quantity of products</th>
               <th class="sms_mu_td" data-i18n="popoups.add_new_catageory.th_in_catageory.th_img"></th>
-
-              <!-- <th>source</th> -->
-
             </tr>
             <tr class="sms_mu_spacing_div"></tr>
-
           </thead>
           <tbody>
             <?php foreach ($categories as $category) {
@@ -145,7 +142,7 @@
                 <td class="t_oravg_m">
                   <img src="<?php echo $category['image']['src']; ?>" alt="" height="30px" width="30px">
                 </td>
-                <td><?php echo $category['name']; ?></td>
+                <td class="category-name"><?php echo $category['name']; ?></td>
                 <td><?php echo $parentCategoryName; ?></td>
                 <td><?php echo $category['count']; ?></td>
                 <td>
@@ -233,7 +230,23 @@
 </div>
 <!-- </body> -->
 
+<!-- category filter -->
+<script>
+  document.getElementById('sms_coupons_m_search_input').addEventListener('input', function() {
+    const filter = this.value.toLowerCase();  
+    const rows = document.querySelectorAll('#sms_category_m_category_table tbody tr.sms_mu_tr');
+    const spacingDivs = document.querySelectorAll('.sms_mu_spacing_diver');
 
+    rows.forEach(row => {
+      const categoryName = row.querySelector('.category-name').textContent.toLowerCase();
+      if (categoryName.includes(filter)) {
+        row.style.display = 'table-row';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+</script>
 <script>
   function deleteCategory(categoryId) {
     // Here you can perform the deletion operation using AJAX or any other method

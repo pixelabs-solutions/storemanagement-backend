@@ -1181,8 +1181,11 @@ const translations = {
     },
   },
 };
+
+var currentLang = getCookie("current_lang");
+
 // Initial language
-let currentLanguage = "en";
+let currentLanguage = currentLang;
 
 // document.getElementById("switchBtn").innerHTML=currentLanguage;
 
@@ -1233,6 +1236,30 @@ function switchLanguage(lang) {
   setPageName();
 }
 // Initial content update
-updateContent(currentLanguage);
+
+function getCookie(name) {
+  let cookieArr = document.cookie.split(";"); // Split the cookies string into individual cookie strings
+  
+  for (let i = 0; i < cookieArr.length; i++) {
+      let cookiePair = cookieArr[i].split("="); // Split each cookie into a key-value pair
+
+      // Remove whitespace at the beginning of the cookie name and compare it with the given name
+      if (name == cookiePair[0].trim()) {
+          return decodeURIComponent(cookiePair[1]); // Return the cookie value
+      }
+  }
+  
+  // Return null if not found
+  return null;
+}
+if (currentLang === "he"){
+  document.getElementById('lang-select').value="he"
+}else{
+  document.getElementById('lang-select').value="en"
+}
+// Example usage
+console.log(currentLang);
+switchLanguage(currentLang);
+updateContent(currentLang);
 
 // Event listener for language switch button

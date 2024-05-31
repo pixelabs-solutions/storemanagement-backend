@@ -201,10 +201,11 @@
       .rtl .sms_mu_margin {
          gap: 253px !important;
       }
-      .lang_select{
+
+      .lang_select {
          height: 30px;
          border: 1px solid lightgray;
-    border-radius: 15px;
+         border-radius: 15px;
       }
 
       @media screen and (max-width:990px) {
@@ -806,7 +807,7 @@
                      </button> -->
                      <select id="lang-select" style="padding: 5px; font-size: 14px;" class="lang_select">
                         <option value="en">
-                        <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle">
+                           <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle">
                            English
                         </option>
                         <option value="he">
@@ -869,7 +870,10 @@
             // JavaScript for switching language
             document.getElementById('lang-select').addEventListener('change', function() {
                var selectedLang = this.value;
-               switchLanguage(selectedLang)
+               
+               switchLanguage(selectedLang);
+               console.log(selectedLang)
+               document.cookie = "current_lang=" + selectedLang + "; path=/";
             });
          </script>
          <script>
@@ -911,6 +915,7 @@
             window.addEventListener('load', function() {
                setPageName();
             });
+
             function setPageName() {
                const currentURL = window.location.href;
                const domainName = 'storemanagement-frontend';
@@ -1006,9 +1011,6 @@
 
                var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
                   removeItemButton: true,
-                  maxItemCount: 5,
-                  searchResultLimit: 5,
-                  renderChoiceLimit: 5
                });
 
 
@@ -1018,9 +1020,6 @@
 
                var multipleCancelButton = new Choices('#IOP', {
                   removeItemButton: true,
-                  maxItemCount: 5,
-                  searchResultLimit: 5,
-                  renderChoiceLimit: 5
                });
 
 
@@ -1041,9 +1040,6 @@
 
                var multipleCancelButton = new Choices('#category_in_product', {
                   removeItemButton: true,
-                  maxItemCount: 5,
-                  searchResultLimit: 5,
-                  renderChoiceLimit: 5
                });
 
 
@@ -1052,9 +1048,6 @@
 
                var multipleCancelButton = new Choices('#sms_mu_select_category', {
                   removeItemButton: true,
-                  maxItemCount: 5,
-                  searchResultLimit: 5,
-                  renderChoiceLimit: 5
                });
 
 
