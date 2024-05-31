@@ -86,7 +86,7 @@ class Base
         } 
         catch (RequestException $e) 
         {
-            echo $e->getMessage();
+            echo "Exception: ".$e->getMessage();
         }
     }
 
@@ -106,7 +106,6 @@ class Base
                 ],
                 'body' => $payload
             ]);
-
 
             if ($response->getStatusCode() == 201) 
             {
