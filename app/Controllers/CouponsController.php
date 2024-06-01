@@ -12,8 +12,8 @@ class CouponsController
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
-
-        $coupons = Base::wc_get($configuration, $this->endpoint);
+        $fields = ['_fields' => 'id, code, discount_type, amount, date_expires, usage_limit, usage_count'];
+        $coupons = Base::wc_get($configuration, $this->endpoint, $fields);
         if($is_rest == "true")
         {
             echo json_encode($coupons, JSON_UNESCAPED_UNICODE);
@@ -35,7 +35,7 @@ class CouponsController
             echo $result["message"];
             return;
         }
-
+        
         $data = $result["data"];
         $payload = json_encode([
             'code' => $data['code'], 
@@ -44,7 +44,6 @@ class CouponsController
             'date_expires' => $data['date_expires'],
             'usage_limit' => $data['usage_limit']
         ]);
-
         $response = Base::wc_add($configuration, $this->endpoint, $payload);
         return $response;
     }
@@ -53,12 +52,8 @@ class CouponsController
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
-
-        $coupon = Base::wc_get_by_id($configuration, $this->endpoint."/".$id);
-        if($is_rest == "true")
-        {
-            echo $coupon;
-        }
+        $fields = ['_fields' => 'id, code, discount_type, amount, date_expires, usage_limit, usage_count'];
+        $coupon = Base::wc_get_by_id($configuration, $this->endpoint."/".$id, $fields);
         echo $coupon;
     }
 

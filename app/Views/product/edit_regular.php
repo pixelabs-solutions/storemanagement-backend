@@ -77,7 +77,9 @@
                             <div class="col-md-6 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.product_name_input">Product
                                     Name</label>
-                                <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_Ip_one" style="background-color: #EAEAEA" placeholder="Blue Gucci bag">
+                               
+                                    <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_Ip_one" style="background-color: #EAEAEA" placeholder="Blue Gucci bag">
+                                    <input type="hidden" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_id_regular_product" style="background-color: #EAEAEA" placeholder="Blue Gucci bag">
                             </div>
                             <div class="col-md-6    ">
                                 <label for="example-select fs-3 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.catageory_managment">Category
@@ -212,7 +214,7 @@
 
         console.log(data);
 
-        fetch('/product/{id}', { // Change the route path to the appropriate endpoint
+        fetch(`/product/${id}`, { // Change the route path to the appropriate endpoint
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -284,16 +286,17 @@
             var button = event.relatedTarget; // Button that triggered the modal
             var productJson = button.getAttribute('data-bs-productJson'); // Product data passed from the button
             var parentCategoriesData = button.getAttribute('data-bs-categoriesJson'); // Product data passed from the button
+            console.log(productJson)
 
             try {
                 // Convert the JSON string to JavaScript object
                 var productData = JSON.parse(productJson);
-
                 // Access the modal content element
-                document.getElementById('sms_mu_Ip_one').value = productData.name;;
-                document.getElementById('sms_mu_Ip_four').value = productData.regular_price;;
-                document.getElementById('sms_mu_Ip_five').value = productData.sale_price;;
-                document.getElementById('sms_mu_Ip_seven').value = productData.stock_quantity;;
+                document.getElementById('sms_mu_Ip_one').value = productData.name;
+                document.getElementById('sms_mu_Ip_four').value = productData.regular_price;
+                document.getElementById('sms_mu_Ip_five').value = productData.sale_price;
+                document.getElementById('sms_mu_Ip_seven').value = productData.stock_quantity;
+                document.getElementById('sms_mu_id_regular_product').value = productData.stock_quantity;
                 document.getElementById('sms_mu_Ip_six').value = productData.description.replace(/<[^>]*>/g, '');
             } catch (error) {
                 console.error('Error parsing JSON:', error);
@@ -320,9 +323,9 @@
 
                 let multipleCancelButton = new Choices('#category_in_popoupop', {
                     removeItemButton: true,
-                    maxItemCount: 5,
-                    searchResultLimit: 5,
-                    renderChoiceLimit: 5
+                    // maxItemCount: 5,
+                    // searchResultLimit: 5,
+                    // renderChoiceLimit: 5
                 });
                 count++;
             }

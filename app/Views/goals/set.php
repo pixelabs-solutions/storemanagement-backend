@@ -74,6 +74,18 @@
         color: #6c757d;
         font-size: 1rem;
     }
+    .abc .HEB_GOLS{
+            display: none;
+    }
+    .rtl .HEB_GOLS{
+            display: block;
+    }
+    .rtl .Eng_Gols{
+        display: none;
+    }
+    .rtl .Eng_Gols{
+        display: block;
+    }
 </style>
 
 <?php
@@ -96,57 +108,46 @@ if (
         <form class="p-4">
             <div class="row  mt-5">
                 <div class="col-lg-4 d-block">
-                    <label class="fs-3 fw-bold">Target sales revenue</label>
-                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["orders"]['target']; ?>"
-                        type="number" id='sms_target_sales_revenue'>
+                    <label class="fs-3 fw-bold " data-i18n="popoups.objective_popoup.target" data-i18n="popoups.objective_popoup.target">Target sales revenue</label>
+                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["orders"]['target']; ?>" type="number" id='sms_target_sales_revenue'>
                 </div>
                 <div class="col-lg-4">
-                    <label for="" class="fs-3 fw-bold">Target recruitment of new customers</label>
-                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["new_customers"]['target']; ?>"
-                        type="number" id='sms_Target_recruitment_of_new_customers'>
+                    <label for="" class="fs-3 fw-bold " data-i18n="popoups.objective_popoup.target_recuriment">Target recruitment of new customers</label>
+                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["new_customers"]['target']; ?>" type="number" id='sms_Target_recruitment_of_new_customers'>
                 </div>
                 <div class="col-lg-4">
-                    <label for=" " class="fs-3 fw-bold">Destination of new orders</label>
-                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["new_orders"]['target']; ?>"
-                        type="number" id='sms_Destination_of_new_orders'>
+                    <label for=" " class="fs-3 fw-bold " data-i18n="popoups.objective_popoup.destination">Destination of new orders</label>
+                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["new_orders"]['target']; ?>" type="number" id='sms_Destination_of_new_orders'>
                 </div>
             </div>
             <div class="row mt-5 ">
                 <div class="col-lg-4">
-                    <label for="" class="fs-3 fw-bold">Target keywords </label>
-                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["keywords"]['target']; ?>"
-                        type="number" id='sms_Target_page_target'>
+                    <label for="" class="fs-3 fw-bold Eng_Gols ">Target keywords </label>
+                    <label for="" class="fs-3 fw-bold HEB_GOLS ">מיקוד מילות מפתח </label>
+                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["keywords"]['target']; ?>" type="number" id='sms_Target_page_target'>
                 </div>
                 <div class="col-lg-4">
-                    <label for="" class="fs-3 fw-bold">Target progress in Google locations</label>
-                    <input class="sms_objective_add_form_input"
-                        value="<?php echo $goals_data["google_rankings"]['target']; ?>" type="number"
-                        id='sms_Target_progress_in_Google_locations'>
+                    <label for="" class="fs-3 fw-bold " data-i18n="popoups.objective_popoup.target_progress_view_page">Target progress in Google locations</label>
+                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["google_rankings"]['target']; ?>" type="number" id='sms_Target_progress_in_Google_locations'>
                 </div>
                 <div class="col-lg-4">
-                    <label for="" class="fs-3 fw-bold">Target page views</label>
-                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["page_views"]['target']; ?>"
-                        type="number" id='sms_Target_page_views'>
+                    <label for="" class="fs-3 fw-bold " data-i18n="popoups.objective_popoup.target_page_view_page">Target page views</label>
+                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["page_views"]['target']; ?>" type="number" id='sms_Target_page_views'>
                 </div>
             </div>
             <div class="row  mt-5 align-items-end">
                 <div class="col-lg-4">
-                    <label for="" class="fs-3 fw-bold">Target new products</label>
-                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["new_products"]['target']; ?>"
-                        type="number" id='sms_Target_new_products'>
+                    <label for="" class="fs-3 fw-bold " data-i18n="popoups.objective_popoup.target_new_view_page">Target new products</label>
+                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["new_products"]['target']; ?>" type="number" id='sms_Target_new_products'>
                 </div>
                 <div class="col-lg-4">
-                    <label for="" class="fs-4 fw-bold">Target to increase the average number of items per order
+                    <label for="" class="fs-4 fw-bold"  data-i18n="popoups.objective_popoup.target_increase_view_page">Target to increase the average number of items per order
                         (%)</label>
-                    <input class="sms_objective_add_form_input"
-                        value="<?php echo $goals_data["avg_order_items_increase"]['target']; ?>" type="number"
-                        id='sms_Target_to_increase_the_average_number_of_items_per_order'>
+                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["avg_order_items_increase"]['target']; ?>" type="number" id='sms_Target_to_increase_the_average_number_of_items_per_order'>
                 </div>
                 <div class="col-lg-4">
-                    <label for="" class="fs-3 fw-bold">Goal of raising the average income from the order</label>
-                    <input class="sms_objective_add_form_input"
-                        value="<?php echo $goals_data["avg_order_value_increase"]['target']; ?>" type="number"
-                        id='sms_Goal_of_raising_the_average_income_from_the_order'>
+                    <label for="" class="fs-3 fw-bold " data-i18n="popoups.objective_popoup.goal_view_page">Goal of raising the average income from the order</label>
+                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["avg_order_value_increase"]['target']; ?>" type="number" id='sms_Goal_of_raising_the_average_income_from_the_order'>
                 </div>
             </div>
             <input type="hidden" value="<?php echo $goals_update_or_delete; ?>" id="goals_update_or_delete">
@@ -155,12 +156,9 @@ if (
         <div class="modal-body text-center py-4 sms_goal_popup" id="sms_goal_success_message" style="display: none;">
             <!-- Close icon -->
 
-            <button type="button" class="btn-close" aria-label="Close"
-                            onclick="sms_goal_close_success_message()"></button>
-        <!-- SVG icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24"
-                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                stroke-linejoin="round">
+            <button type="button" class="btn-close" aria-label="Close" onclick="sms_goal_close_success_message()"></button>
+            <!-- SVG icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
                 <path d="M9 12l2 2l4 -4"></path>
@@ -169,13 +167,10 @@ if (
             <div class="text-muted">Your goals and objectives data has been submitted successfully.</div>
         </div>
         <div class="modal-body text-center py-4 sms_goal_popup" id="sms_goal_error_message" style="display: none;">
-             <!-- Close icon -->
-             <button type="button" class="btn-close" aria-label="Close"
-                            onclick="sms_goal_close_error_message()"></button>
-        <!-- SVG icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24"
-                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                stroke-linejoin="round">
+            <!-- Close icon -->
+            <button type="button" class="btn-close" aria-label="Close" onclick="sms_goal_close_error_message()"></button>
+            <!-- SVG icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <line x1="12" y1="5" x2="12.01" y2="19"></line>
@@ -186,8 +181,7 @@ if (
             <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
         </div>
         <div class="row mt-2 justify-content-end">
-            <input type="button" value="update" onclick="sms_meh_update_goal_data()"
-                class="p-2 px-4 sms_mu_file125_popoup_last_btn w-auto h-5 d-flex align-items-center rounded-3 border-0   mt-5  text-center">
+            <input type="button" value="update" onclick="sms_meh_update_goal_data()" class="p-2 px-4 sms_mu_file125_popoup_last_btn w-auto h-5 d-flex align-items-center rounded-3 border-0   mt-5  text-center">
             <!-- <div type
                         ">
                             <p class=" m-0"> Updating goals and objectives </p>
@@ -196,8 +190,6 @@ if (
     </div>
 </div>
 <script>
-
-
     function sms_meh_update_goal_data() {
         //    let sales_revenue': document.getElementById('sms_target_sales_revenue').value;
         var data = {
@@ -220,12 +212,12 @@ if (
         console.log(requestMethod);
 
         fetch(URL, {
-            method: requestMethod,
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+                method: requestMethod,
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
             .then(response => {
                 if (response.status === 200) {
                     // Form submission succeeded, display success message
@@ -246,12 +238,12 @@ if (
     }
 
     function sms_goal_close_success_message() {
-            document.getElementById('sms_goal_success_message').style.display = 'none';
-        }
+        document.getElementById('sms_goal_success_message').style.display = 'none';
+    }
 
-        function sms_goal_close_error_message() {
-            document.getElementById('sms_goal_error_message').style.display = 'none';
-        }
+    function sms_goal_close_error_message() {
+        document.getElementById('sms_goal_error_message').style.display = 'none';
+    }
 </script>
 
 

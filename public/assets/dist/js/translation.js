@@ -1181,8 +1181,12 @@ const translations = {
     },
   },
 };
+
+var currentLang = getCookie("current_lang");
+
 // Initial language
-let currentLanguage = "en";
+let currentLanguage = currentLang;
+
 // document.getElementById("switchBtn").innerHTML=currentLanguage;
 
 // Function to update text content based on language
@@ -1209,18 +1213,19 @@ function updateContent(language) {
   });
 }
 // Function to handle language switching
-function switchLanguage() {
-  currentLanguage = currentLanguage === "en" ? "he" : "en";
+function switchLanguage(lang) {
+
+  currentLanguage = lang;
   // document.getElementById("switchBtn").innerHTML=currentLanguage;
   console.log(currentLanguage);
-  const languageIcon = document.getElementById("languageIcon");
-  if (currentLanguage === "he") {
-    languageIcon.src = "/assets/dist/img/uk.png"; // Set English flag image source
-    languageIcon.alt = "English Flag"; // Set alt text
-  } else {
-    languageIcon.src = "/assets/dist/img/israel.png"; // Set Hebrew flag image source
-    languageIcon.alt = "Hebrew Flag"; // Set alt text
-  }
+  // const languageIcon = document.getElementById("languageIcon");
+  // if (currentLanguage === "he") {
+  //   languageIcon.src = "/assets/dist/img/uk.png"; // Set English flag image source
+  //   languageIcon.alt = "English Flag"; // Set alt text
+  // } else {
+  //   languageIcon.src = "/assets/dist/img/israel.png"; // Set Hebrew flag image source
+  //   languageIcon.alt = "Hebrew Flag"; // Set alt text
+  // }
   let myElement = document.getElementById("myDiv");
   if (currentLanguage === "he") {
     myElement.classList.add("rtl");
@@ -1231,6 +1236,30 @@ function switchLanguage() {
   setPageName();
 }
 // Initial content update
-updateContent(currentLanguage);
+
+function getCookie(name) {
+  let cookieArr = document.cookie.split(";"); // Split the cookies string into individual cookie strings
+  
+  for (let i = 0; i < cookieArr.length; i++) {
+      let cookiePair = cookieArr[i].split("="); // Split each cookie into a key-value pair
+
+      // Remove whitespace at the beginning of the cookie name and compare it with the given name
+      if (name == cookiePair[0].trim()) {
+          return decodeURIComponent(cookiePair[1]); // Return the cookie value
+      }
+  }
+  
+  // Return null if not found
+  return null;
+}
+if (currentLang === "he"){
+  document.getElementById('lang-select').value="he"
+}else{
+  document.getElementById('lang-select').value="en"
+}
+// Example usage
+console.log(currentLang);
+switchLanguage(currentLang);
+updateContent(currentLang);
 
 // Event listener for language switch button

@@ -4,6 +4,7 @@ namespace Pixelabs\StoreManagement\Controllers;
 use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
+use Pixelabs\StoreManagement\Helpers\FileHelper;
 
 class CategoryController
 {
@@ -57,13 +58,18 @@ class CategoryController
         }
 
         $data = $result["data"];
+
+  
+        $file_path = FileHelper::save_file($data["image"], "categories/".$data['name']);
+
         $payload = json_encode([
             'name' => $data['name'], 
             'parent' => $data['parent'],
-            'images' => [
-                'src' => $data['image']
+            'image' => [
+                'src' => $file_path
             ]
         ]);
+        // echo $payload;exit;
 
         $response = Base::wc_add($configuration, $this->endpoint, $payload);
         echo $response;
@@ -82,13 +88,23 @@ class CategoryController
         }
 
         $data = $result["data"];
-        $payload = json_encode([
+
+        $file_path = '';
+        if(isset($data['image'])) {
+            $file_path = FileHelper::save_file($data["image"], "categories/".$data['name']);
+        }
+        $payload = [
             'name' => $data['name'], 
-            'parent' => $data['parent'],
-            'images' => [
-                'src' => $data['image']
-            ]
-        ]);
+            'parent' => $data['parent']
+        ];
+        if(!empty($file_path)) {
+            $payload['image'] = [
+                'src' => $file_path
+            ];
+        }
+        $payload = json_encode($payload);
+
+        
         $response = Base::wc_update($configuration, $this->endpoint."/".$id, $payload);
         echo $response;
     }

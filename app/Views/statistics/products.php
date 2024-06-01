@@ -7,39 +7,31 @@
         <!-- Header Start -->
 
         <!-- Header End -->
-        <div class="row g-2 align-items-center">
+        <div class="row g-2 align-items-center list_button_statis">
             <!-- Stats header Buttons -->
             <div class="col-auto btn-list">
-                            <a href="?query=last_week" class="btn btn-pill  last_week btn-light tab-pane"
-                                class="nav-link" style="background:#A8C3E7" data-i18n="statististics.tabs_in_select_range.week"> Last Week
-                            </a>
-                            <a href="?query=last_month" class="btn btn-light shadow-none last_month "
-                                class="nav-link" data-i18n="statististics.tabs_in_select_range.month"> Current
-                                Month </a>
-                            <a href="?query=last_year" class="btn btn-light shadow-none last_year"
-                                data-i18n="statististics.tabs_in_select_range.year"> Last Year </a>
-                        </div>
+                <a href="?query=last_week" class="btn btn-pill  last_week btn-light tab-pane" class="nav-link" style="background:#A8C3E7" data-i18n="statististics.tabs_in_select_range.week"> Last Week
+                </a>
+                <a href="?query=last_month" class="btn btn-light shadow-none last_month " class="nav-link" data-i18n="statististics.tabs_in_select_range.month"> Current
+                    Month </a>
+                <a href="?query=last_year" class="btn btn-light shadow-none last_year" data-i18n="statististics.tabs_in_select_range.year"> Last Year </a>
+            </div>
             <!-- Date Range Button -->
             <div class="col-auto ms-auto">
-                <a href="#" class="btn btn-pill" data-bs-toggle="modal" data-bs-target="#modal-team"
-                    style="background-color:#A8C3E7; border:none;"
-                    data-i18n="statististics.tabs_in_select_range.button">
+                <a href="#" class="btn btn-pill" data-bs-toggle="modal" data-bs-target="#modal-team" style="background-color:#A8C3E7; border:none;" data-i18n="statististics.tabs_in_select_range.button">
                     Select a Date Range
                 </a>
             </div>
         </div>
-        <div class="row mt-5 mb-5 d-flex flex-md-row flex-wrap flex-column justify-content-between tab-pane active show"
-            id="row_1">
+        <div class="row mt-5 mb-5 d-flex flex-md-row flex-wrap flex-column justify-content-between tab-pane active show" id="row_1">
             <!-- Product Card Start -->
             <div class="sms_statistics_ma_kpi_card mb-2">
                 <div class=" align-items-center" style="background-color:#F2F2F2; border-radius:20px;">
                     <div class="card-body">
                         <div class="text-center">
-                            <img src="assets/dist/img/cart.png" height="50px;" width="50px;"
-                                style="background-color:white; padding:10px; border-radius:10px;">
+                            <img src="assets/dist/img/cart.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
                             <h3 class="mt-3"><?php echo $products_stats["totalProducts"]; ?></h3>
-                            <strong style="color:#4987D8"
-                                data-i18n="statististics.cards_in_product.product_tab_in_static.card1_in_product.normal_product">Product</strong>
+                            <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card1_in_product.normal_product">Product</strong>
                         </div>
                     </div>
                 </div>
@@ -51,11 +43,9 @@
                 <div class=" align-items-center" style="background-color:#F2F2F2; border-radius:20px;">
                     <div class="card-body">
                         <div class="text-center">
-                            <img src="assets/dist/img/order.png" height="50px;" width="50px;"
-                                style="background-color:white; padding:10px; border-radius:10px;">
+                            <img src="assets/dist/img/order.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
                             <h3 class="mt-3"><?php echo $products_stats["normalProducts"]; ?></h3>
-                            <strong style="color:#4987D8"
-                                data-i18n="statististics.cards_in_product.product_tab_in_static.card2_in_normal_product.normal_product_in_card2">Normal
+                            <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card2_in_normal_product.normal_product_in_card2">Normal
                                 Products</strong>
                         </div>
                     </div>
@@ -68,11 +58,9 @@
                 <div class=" align-items-center" style="background-color:#F2F2F2; border-radius:20px;">
                     <div class="card-body">
                         <div class="text-center">
-                            <img src="assets/dist/img/productsonsale.png" height="50px;" width="50px;"
-                                style="background-color:white; padding:10px; border-radius:10px;">
+                            <img src="assets/dist/img/productsonsale.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
                             <h3 class="mt-3"><?php echo $products_stats["saleProducts"]; ?></h3>
-                            <strong style="color:#4987D8"
-                                data-i18n="statististics.cards_in_product.product_tab_in_static.card3_in_Sale.normal_product">Product
+                            <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card3_in_Sale.normal_product">Product
                                 On Sale</strong>
                         </div>
                     </div>
@@ -85,11 +73,9 @@
                 <div class=" align-items-center" style="background-color:#F2F2F2; border-radius:20px;">
                     <div class="card-body">
                         <div class="text-center">
-                            <img src="assets/dist/img/cart.png" height="50px;" width="50px;"
-                                style="background-color:white; padding:10px; border-radius:10px;">
+                            <img src="assets/dist/img/cart.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
                             <h3 class="mt-3"><?php echo $products_stats["numberOfOrders"]; ?></h3>
-                            <strong style="color:#4987D8"
-                                data-i18n="statististics.cards_in_product.product_tab_in_static.card4_in_product.normal_product">Order</strong>
+                            <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card4_in_product.normal_product">Order</strong>
                         </div>
                     </div>
                 </div>
@@ -101,11 +87,9 @@
                 <div class=" align-items-center" style="background-color:#F2F2F2; border-radius:20px;">
                     <div class="card-body">
                         <div class="text-center">
-                            <img src="assets/dist/img/order.png" height="50px;" width="50px;"
-                                style="background-color:white; padding:10px; border-radius:10px;">
+                            <img src="assets/dist/img/order.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
                             <h3 class="mt-3"><?php echo $products_stats["totalDistinctProductsOnOrder"]; ?></h3>
-                            <strong style="color:#4987D8"
-                                data-i18n="statististics.cards_in_product.product_tab_in_static.card5_in_product.normal_product">Products
+                            <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card5_in_product.normal_product">Products
                                 on order</strong>
                         </div>
                     </div>
@@ -117,20 +101,15 @@
         <!-- Colors Button Start-->
         <div class="row g-2 align-items-center ">
             <div class="col-auto ms-auto btn-list mt-5 mb-5 sms_mu_for_rtl_row_cards">
-                <div class="text-light p-1" style="background-color:#627e0c; border-radius:5px;"
-                    data-i18n="statististics.chart_below_btn.firts_btn.text"> New
+                <div class="text-light p-1" style="background-color:#627e0c; border-radius:5px;" data-i18n="statististics.chart_below_btn.firts_btn.text"> New
                     Customer</div>
-                <div class="text-light p-1" style="background-color:#8b59e4; border-radius:5px;"
-                    data-i18n="statististics.chart_below_btn.second_btn.text"> Customer
+                <div class="text-light p-1" style="background-color:#8b59e4; border-radius:5px;" data-i18n="statististics.chart_below_btn.second_btn.text"> Customer
                 </div>
-                <div class="text-light p-1" style="background-color:#9215a8; border-radius:5px;"
-                    data-i18n="statististics.chart_below_btn.third_btn.text"> Product
+                <div class="text-light p-1" style="background-color:#9215a8; border-radius:5px;" data-i18n="statististics.chart_below_btn.third_btn.text"> Product
                 </div>
-                <div class="text-light p-1" style="background-color:#dc2285; border-radius:5px;"
-                    data-i18n="statististics.chart_below_btn.fourth_btn.text"> Order
+                <div class="text-light p-1" style="background-color:#dc2285; border-radius:5px;" data-i18n="statististics.chart_below_btn.fourth_btn.text"> Order
                 </div>
-                <div class="text-light p-1" style="background-color:#ac3f4f; border-radius:5px;"
-                    data-i18n="statististics.chart_below_btn.five_btn.text"> Revenues
+                <div class="text-light p-1" style="background-color:#ac3f4f; border-radius:5px;" data-i18n="statististics.chart_below_btn.five_btn.text"> Revenues
                 </div>
             </div>
         </div>
@@ -144,7 +123,7 @@
 
 <script>
     // @formatter:off
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         window.ApexCharts && (new ApexCharts(document.getElementById('chart-combination-2'), {
             chart: {
                 type: "bar",
@@ -246,22 +225,18 @@
         elements.forEach(element => {
             element.classList.add('filter_tab_active');
         });
-    }
-    else if (queryParams.query === 'last_month') {
+    } else if (queryParams.query === 'last_month') {
         // Add the .filter_tab_active class to the element with the ID 'current_month'
 
         const elements = document.querySelectorAll('.last_month');
         elements.forEach(element => {
             element.classList.add('filter_tab_active');
         });
-    }
-    else if (queryParams.query === 'last_year') {
+    } else if (queryParams.query === 'last_year') {
         // Add the .filter_tab_active class to the element with the ID 'last_year'
         const elements = document.querySelectorAll('.last_year');
         elements.forEach(element => {
             element.classList.add('filter_tab_active');
         });
     }
-
-
 </script>
