@@ -14,7 +14,7 @@ class TransactionController
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
-        $fields = ['_fields' => 'id, status, date_created, total, billing'];
+        $fields = ['_fields' => 'id, status, date_created, total, billing, meta_data, line_items'];
         $transactions = Base::wc_get($configuration, "orders", $fields);
         if($is_rest == "true")
         {
@@ -30,7 +30,7 @@ class TransactionController
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
-        $fields = ['_fields' => 'id, status, date_created, total, billing'];
+        $fields = ['_fields' => 'id, status, date_created, total, billing, meta_data, line_items'];
         $transaction = Base::wc_get_by_id($configuration, "orders/{$id}", $fields);
         
         echo $transaction;
