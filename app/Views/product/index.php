@@ -109,7 +109,7 @@ require_once __DIR__ . '/../partials/header.php';
     /* Popup styles */
     .popup {
         display: none;
-        top: 31%;
+        top: 30%;
         position: absolute;
         z-index: 10;
         width: 300px;
