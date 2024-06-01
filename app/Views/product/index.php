@@ -665,7 +665,10 @@ var_dump($number_of_products)
                         }
                     }
                 }
-
+          
+                document.getElementById('category_in_product').addEventListener('change', (event) => {
+  console.log(event.target.value);
+});
                 function filterClearBtn() {
                     // Clear the values of the input fields
                     document.getElementById('input1').value = "";
