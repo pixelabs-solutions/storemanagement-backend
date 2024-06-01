@@ -8,6 +8,7 @@ use Pixelabs\StoreManagement\Models\Product;
 use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
+use Pixelabs\StoreManagement\Helpers\FileHelper;
 
 
 class ProductController
@@ -111,6 +112,18 @@ class ProductController
             return;
         }
         $data = $result["data"];
+
+        $image_paths = [];
+        if (is_array($data['images'])) {
+            foreach ($data['images'] as $key => $image) {
+                $filename = "products/".$data['name']."_".$key;
+                $image_paths[] = FileHelper::save_file($image, $filename);
+            }
+        } 
+        else {
+            $image_paths[] = FileHelper::save_file($data['image'], "products/".$data['name']);
+        }
+
         $payload = [
             'name' => $data['name'], 
             'type' => $data['type'],
@@ -122,7 +135,7 @@ class ProductController
             }, $data['category']),
             'images' => array_map(function($image_url) {
                 return ['src' => $image_url]; 
-            }, $data['image']),
+            }, $data['images']),
             'regular_price' => $data['regular_price'],
             'sale_price' => $data['sale_price']
         ];
@@ -230,14 +243,31 @@ class ProductController
         }
 
         $data = $result["data"];
+
+        $image_paths = [];
+        if (is_array($data['images'])) {
+            foreach ($data['images'] as $key => $image) {
+                $filename = "products/".$data['name']."_".$key;
+                $image_paths[] = FileHelper::save_file($image, $filename);
+            }
+        } 
+        else {
+            $image_paths[] = FileHelper::save_file($data['image'], "products/".$data['name']);
+        }
+
+        
         $payload = [
             'name' => $data['name'], 
             'type' => $data['type'],
             'description' => $data['description'], 
             'manage_stock' => true,
             'stock_quantity' => $data['stock_quantity'], 
-            'category' => $data['category'],
-            'images' => $data['image'],
+            'categories' => array_map(function($category_id) {
+                return ['id' => $category_id]; 
+            }, $data['category']),
+            'images' => array_map(function($image_url) {
+                return ['src' => $image_url]; 
+            }, $data['images']),
             'regular_price' => $data['regular_price'],
             'sale_price' => $data['sale_price']
         ];
