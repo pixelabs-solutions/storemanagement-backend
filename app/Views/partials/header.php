@@ -704,7 +704,7 @@
                            <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
                            <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
                         </svg>
-                     </a> <!--
+                     </a>
                      <div class="nav-item dropdown d-none d-md-flex me-3  ">
                         <a href="#" class="nav-link px-0 bg-light rounded-pill" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications">
                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -799,7 +799,7 @@
                               </div>
                            </div>
                         </div>
-                     </div> -->
+                     </div>
                      <!-- <button id="switchBtn" class="border-0 rounded-circle" onclick="switchLanguage()">
 
                         <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle">
@@ -870,7 +870,7 @@
             // JavaScript for switching language
             document.getElementById('lang-select').addEventListener('change', function() {
                var selectedLang = this.value;
-               
+
                switchLanguage(selectedLang);
                console.log(selectedLang)
                document.cookie = "current_lang=" + selectedLang + "; path=/";

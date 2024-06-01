@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../partials/header.php';
 
-var_dump($number_of_products)
+// var_dump($number_of_products)
 ?>
 <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
 <style>
@@ -109,14 +109,14 @@ var_dump($number_of_products)
     /* Popup styles */
     .popup {
         display: none;
-        top: 222px;
+        top: 31%;
         position: absolute;
         z-index: 10;
         width: 300px;
         background-color: rgba(0, 0, 0, 0.4);
         border-radius: 8px;
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        right: 8%;
+        right: 4%;
     }
 
     .rtl .popup {
@@ -665,10 +665,7 @@ var_dump($number_of_products)
                         }
                     }
                 }
-          
-                document.getElementById('category_in_product').addEventListener('change', (event) => {
-  console.log(event.target.value);
-});
+
                 function filterClearBtn() {
                     // Clear the values of the input fields
                     document.getElementById('input1').value = "";

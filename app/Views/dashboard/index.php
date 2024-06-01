@@ -196,7 +196,7 @@ var_dump($dashboard_data);
                 <div class="card-body">
                     <div class="row g-2 sms_mu_for_rtl_row_cards">
                         <div class="col-8">
-                            <h3 class="text-muted" data-i18n="dashboard.card_arrivals.card_title">> New Arivals </h3>
+                            <h3 class="text-muted" data-i18n="dashboard.card_arrivals.card_title"> New Arivals </h3>
                         </div>
                         <div class="col-auto ms-auto">
                             <svg width="40" height="40" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -243,7 +243,7 @@ var_dump($dashboard_data);
                 <div class="card-body">
                     <div class="row g-2 sms_mu_for_rtl_row_cards ">
                         <div class="col-8 ">
-                            <h3 class="text-muted" data-i18n="dashboard.card_customers.card_title">> New Customers </h3>
+                            <h3 class="text-muted" data-i18n="dashboard.card_customers.card_title">New Customers </h3>
                         </div>
                         <div class="col-auto ms-auto">
                             <svg width="40" height="40" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -290,7 +290,7 @@ var_dump($dashboard_data);
                 <div class="card-body">
                     <div class="row g-2 sms_mu_for_rtl_row_cards">
                         <div class="col-8 ">
-                            <h3 class="text-muted" data-i18n="dashboard.card_transaction.card_title">> Total Transiction
+                            <h3 class="text-muted" data-i18n="dashboard.card_transaction.card_title"> Total Transiction
                             </h3>
                         </div>
                         <div class="col-auto ms-auto">

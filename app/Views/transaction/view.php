@@ -214,7 +214,7 @@
           <!-- save button -->
 
           <div class="mt-4 ">
-            <button type="button" style="background-color: rgba(73, 135, 216, 0.44); width: 100%; max-width: 200px;" id="set_order_detail" class="btn rounded-4 py-3" data-i18n="popoups.transction_pop_popuop.order_detail.last_btn">Save
+            <button type="button" style="background-color: rgba(73, 135, 216, 0.44); width: 100%; max-width: 200px;" id="set_order_detail" class="btn rounded-4 py-3 sms_mu_for_save_changes" data-i18n="popoups.transction_pop_popuop.order_detail.last_btn">Save
               changes</button>
           </div>
 
@@ -313,6 +313,47 @@
       order_status_select.value = "pending";
     }
   }
+  $('.sms_mu_for_save_changes').click(function() {
+      var selectedStatus = $(this).val();
+      var selectedIds = [];
+
+      // Gather IDs of selected rows
+      $('input[type="checkbox"]:checked').each(function() {
+        var id = $(this).closest('tr').find('#transaction_id').text();
+        // Remove '#' from the id
+        id = id.replace('#', '');
+        selectedIds.push(id);
+      });
+
+      console.log(selectedIds);
+
+      // Prepare data for POST request
+      var data = {
+        id: selectedIds,
+        status: selectedStatus
+      };
+
+      // Make fetch request
+      fetch('/transactions/update_bulk_status', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => {
+          if (response.status === 200) {
+            showNotification("Bulk status updated successfully");
+            window.location.reload(); // Reload the page after successful update
+          } else {
+            showNotification("Failed to update bulk status", true);
+          }
+        })
+        .catch(error => {
+          // Handle error
+          showNotification("Error occurred: " + error, true);
+        });
+    });
 </script>
 <script>
   function showNotification(message, isError = false) {
