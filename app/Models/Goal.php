@@ -231,7 +231,8 @@ class Goal
             "avg_order_items_increase" => [
                 "target" => $goals['avg_order_items_increase_target'] ?? 0.0,
                 "rasie_in_average_items" => $raise_in_average_items
-            ]
+            ],
+            "status" => $goals === null ? "add" : "update"
         ];
 
         return $goals_data;
