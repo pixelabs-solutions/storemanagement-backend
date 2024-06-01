@@ -93,11 +93,14 @@
                             <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_name_ctg" style="background-color: #EAEAEA" placeholder="key chain">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="example-select fs-3 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_catageory.popoup_in_catagory.label_parent_ct">Parent category
+                            <label for="example-select fs-3 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_catageory.popoup_in_catagory.label_parent_ct">Parent category (Optional)
                             </label>
                             <div style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                 <div class="col-md-12 rounded-4 bg-transparent h-100 ">
                                     <select id="sms_mu_parent_ctg" class="form-select form-select-md" style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
+
+                                    <option value="">Select</option>
+
                                     <?php
 
                                         foreach ($categories as $category) {
