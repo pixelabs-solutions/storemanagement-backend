@@ -229,11 +229,26 @@
 
 <script>
   function showtransactionData(transactionData) {
-    console.log("Order Details:", transactionData);
 
     transactions = transactionData.data;
 
-    console.log(transactions.billing.first_name);
+    const order_status_select = document.getElementById("order_status");
+
+    if (transactions.status == "completed") {
+      order_status_select.value = "completed";
+    } else if (transactions.status == "cancelled") {
+      order_status_select.value = "cancelled";
+    } else if (transactions.status == "processing") {
+      order_status_select.value = "pending";
+    } else if (transactions.status == "pending") {
+      order_status_select.value = "pending";
+    }
+
+
+    // console.log("Order Details:", transactionData);
+
+
+    // console.log(transactions.billing.first_name);
 
 
     document.getElementById("order_id").innerHTML = transactions.id;
@@ -249,9 +264,10 @@
     const dateStr = datetimeStr.split('T')[0];
     document.getElementById("order_date").innerHTML = dateStr;
     subTotal = transactions.total - transactions.shipping_total;
-    document.getElementById("total_amount").innerHTML = "Total Cost: NIS " + subTotal;
+    // console.log(transactions.shipping_total);
+    document.getElementById("total_amount").innerHTML = "Total Cost: NIS " + transactions.total;
 
-
+   
     const tableBody = document.getElementById('orderTable').querySelector('tbody');
 
     const orderProductsArray = transactions.line_items;
@@ -299,19 +315,6 @@
     });
 
 
-    const order_status_select = document.getElementById("order_status");
-
-
-
-    if (transactions.status == "completed") {
-      order_status_select.value = "completed";
-    } else if (transactions.status == "cancelled") {
-      order_status_select.value = "cancelled";
-    } else if (transactions.status == "processing") {
-      order_status_select.value = "pending";
-    } else if (transactions.status == "pending") {
-      order_status_select.value = "pending";
-    }
   }
   $('.sms_mu_for_save_changes').click(function() {
       var selectedStatus = $(this).val();
@@ -325,7 +328,7 @@
         selectedIds.push(id);
       });
 
-      console.log(selectedIds);
+      // console.log(selectedIds);
 
       // Prepare data for POST request
       var data = {

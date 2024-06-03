@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../partials/header.php';
 
-// var_dump($goals_data);
+// var_dump($goals_data['status']);
 
 ?>
 

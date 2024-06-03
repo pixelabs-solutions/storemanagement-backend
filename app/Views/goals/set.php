@@ -89,14 +89,10 @@
 </style>
 
 <?php
-if (
-    isset($goals_data["orders"]['target']) || isset($goals_data["new_customers"]['target']) || isset($goals_data["new_orders"]['target'])
-    || isset($goals_data["keywords"]['target']) || isset($goals_data["google_rankings"]['target']) || isset($goals_data["page_views"]['target']) ||
-    isset($goals_data["new_products"]['target']) || isset($goals_data["avg_order_items_increase"]['target']) || isset($goals_data["avg_order_value_increase"]['target'])
-) {
-    $goals_update_or_delete = 'update';
-} else {
+if ($goals_data['status'] == "add") {
     $goals_update_or_delete = 'add';
+} else {
+    $goals_update_or_delete = 'update';
 }
 
 ?>
@@ -151,7 +147,6 @@ if (
                 </div>
             </div>
             <input type="hidden" value="<?php echo $goals_update_or_delete; ?>" id="goals_update_or_delete">
-
         </form>
         <div class="modal-body text-center py-4 sms_goal_popup" id="sms_goal_success_message" style="display: none;">
             <!-- Close icon -->
