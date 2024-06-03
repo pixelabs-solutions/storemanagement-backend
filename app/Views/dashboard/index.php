@@ -54,7 +54,7 @@ var_dump($dashboard_data);
     <!-- Stats header Buttons -->
     <div class="col-auto btn-list">
         <a href="?query=24_hours" id="24_hours" class="shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.first_tab"> 24 Hours</a>
-        <a href="?query=last_week" id="last_week" class=" shadow-none btn border-none outline-none  bg-transparent btn-light tab-pane sms_w_date"  data-i18n="dashboard.tabs.second_tab" > Last Week
+        <a href="?query=last_week" id="last_week" class=" shadow-none btn border-none outline-none  bg-transparent btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.second_tab"> Last Week
         </a>
         <a href="?query=current_month" id="current_month" class=" shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.third_tab "> Last Month
         </a>
@@ -69,34 +69,7 @@ var_dump($dashboard_data);
     </div>
     <!-- Date Range Button End -->
 </div>
-<script>
-    // Function to get query parameters from the URL
-    function getQueryParams() {
-        const params = {};
-        window.location.search.substring(1).split("&").forEach(param => {
-            const [key, value] = param.split("=");
-            params[decodeURIComponent(key)] = decodeURIComponent(value);
-        });
-        return params;
-    }
 
-    // Get query parameters
-    const queryParams = getQueryParams();
-
-    if (queryParams.query === '24_hours') {
-        // Add the .sms_w_date_active class to the element with the ID '24_hours'
-        document.getElementById('24_hours').classList.add('sms_w_date_active');
-    } else if (queryParams.query === 'last_week') {
-        // Add the .sms_w_date_active class to the element with the ID 'last_week'
-        document.getElementById('last_week').classList.add('sms_w_date_active');
-    } else if (queryParams.query === 'current_month') {
-        // Add the .sms_w_date_active class to the element with the ID 'current_month'
-        document.getElementById('current_month').classList.add('sms_w_date_active');
-    } else if (queryParams.query === 'last_year') {
-        // Add the .sms_w_date_active class to the element with the ID 'last_year'
-        document.getElementById('last_year').classList.add('sms_w_date_active');
-    }
-</script>
 <!-- Header End -->
 <!--  -->
 
@@ -651,7 +624,68 @@ var_dump($dashboard_data);
         //     });
         // });
     </script>
+    <script>
+        // Function to get query parameters from the URL
+        document.getElementById('24_hours').onclick = funClickHour;
+        document.getElementById('last_week').onclick = funClickWeek;
+        document.getElementById('current_month').onclick = funClickMonth;
+        document.getElementById('last_year').onclick = funClickYear;
 
+        function funClickHour() {
+            document.getElementById('24_hours').style.backgroundColor = "#A8C3E7";
+            document.getElementById('last_week').style.backgroundColor = "transparent";
+            document.getElementById('current_month').style.backgroundColor = "transparent";
+            document.getElementById('last_year').style.backgroundColor = "transparent";
+        }
+
+        function funClickWeek() {
+            document.getElementById('24_hours').style.backgroundColor = "transparent";
+            document.getElementById('last_week').style.backgroundColor = "#A8C3E7";
+            document.getElementById('current_month').style.backgroundColor = "transparent";
+            document.getElementById('last_year').style.backgroundColor = "transparent";
+        }
+
+        function funClickMonth() {
+            document.getElementById('24_hours').style.backgroundColor = "transparent";
+            document.getElementById('last_week').style.backgroundColor = "transparent";
+            document.getElementById('current_month').style.backgroundColor = "#A8C3E7";
+            document.getElementById('last_year').style.backgroundColor = "transparent";
+        }
+
+        function funClickYear() {
+            document.getElementById('24_hours').style.backgroundColor = "transparent";
+            document.getElementById('last_week').style.backgroundColor = "transparent";
+            document.getElementById('current_month').style.backgroundColor = "transparent";
+            document.getElementById('last_year').style.backgroundColor = "#A8C3E7";
+        }
+
+
+        function getQueryParams() {
+            const params = {};
+            window.location.search.substring(1).split("&").forEach(param => {
+                const [key, value] = param.split("=");
+                params[decodeURIComponent(key)] = decodeURIComponent(value);
+            });
+            return params;
+        }
+
+        // Get query parameters
+        const queryParams = getQueryParams();
+
+        if (queryParams.query === '24_hours') {
+            // Add the .sms_w_date_active class to the element with the ID '24_hours'
+            document.getElementById('24_hours').classList.add('sms_w_date_active');
+        } else if (queryParams.query === 'last_week') {
+            // Add the .sms_w_date_active class to the element with the ID 'last_week'
+            document.getElementById('last_week').classList.add('sms_w_date_active');
+        } else if (queryParams.query === 'current_month') {
+            // Add the .sms_w_date_active class to the element with the ID 'current_month'
+            document.getElementById('current_month').classList.add('sms_w_date_active');
+        } else if (queryParams.query === 'last_year') {
+            // Add the .sms_w_date_active class to the element with the ID 'last_year'
+            document.getElementById('last_year').classList.add('sms_w_date_active');
+        }
+    </script>
 
     <script>
         // @formatter:off
