@@ -354,7 +354,7 @@ var_dump($dashboard_data);
                             </div>
                         </div>
                     </div>
-                    <script>
+                    <!-- <script>
                         document.getElementById('select_city').addEventListener('change', function() {
                             let selectedCities = Array.from(this.selectedOptions).map(option => option.value);
                             let cityRows = document.querySelectorAll('.city-row');
@@ -376,7 +376,7 @@ var_dump($dashboard_data);
                                 });
                             }
                         });
-                    </script>
+                    </script> -->
 
                     <!-- End Header -->
                     <!-- Map and City Data Start -->
