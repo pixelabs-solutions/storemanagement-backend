@@ -395,7 +395,7 @@ var_dump($dashboard_data);
                                 <?php $city_value = $statist['percentage_of_customers']; ?>
                                 <div class="row g-2 city-row" data-city="<?php echo $city_name; ?>">
                                     <div class="col-lg-8 col-md-8 col-sm-8">
-                                        <p class="text-end"><?php echo $city_name; ?></p>
+                                        <p class="text-end sms_city_name" ><?php echo $city_name; ?></p>
                                         <div class="progress mb-2" style="height:15px; border-radius:10px; margin-top:-10px;">
                                             <div class="progress-bar" style="width: <?php echo $city_value; ?>; border-radius:10px;" role="progressbar" aria-valuenow="<?php echo $city_value; ?>" aria-valuemin="0" aria-valuemax="100" aria-label="<?php echo $city_value; ?>% Complete">
                                             </div>
@@ -572,32 +572,85 @@ var_dump($dashboard_data);
         </div>
     </div>
     <script>
-        // Initialize the map
         var map = L.map('map').setView([31.0461, 34.8516], 7); // Set center to Israel
-
-        // Add OpenStreetMap tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Add a marker with a tooltip to the map
-        var marker = L.marker([31.7683, 35.2137]) // Example location in Jerusalem
-            .addTo(map)
-            .bindTooltip("Jerusalem")
-            .openTooltip();
+        var allCities = <?php echo json_encode(array_column($dashboard_data["customers_location"], 'city')); ?>;
+        var cityCoordinates = {};
+        var markers = [];
 
-        // Add event listener for showing tooltip on hover
-        marker.on('mouseover', function(e) {
-            var tooltip = document.getElementById('tooltip');
-            tooltip.innerHTML = "Jerusalem";
-            tooltip.style.left = (e.originalEvent.pageX + 10) + 'px';
-            tooltip.style.top = (e.originalEvent.pageY + 10) + 'px';
-            tooltip.style.display = 'block';
-        });
+        // Fetch coordinates for all cities initially and store them
+        function fetchAllCoordinates() {
+            let fetchPromises = allCities.map(city => 
+                fetch(`https://nominatim.openstreetmap.org/search?q=${city}&format=json`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length > 0) {
+                            cityCoordinates[city] = [data[0].lat, data[0].lon];
+                        }
+                    })
+                    .catch(error => console.error('Error fetching coordinates:', error))
+            );
 
-        // Add event listener for hiding tooltip on mouseout
-        marker.on('mouseout', function() {
-            document.getElementById('tooltip').style.display = 'none';
+            return Promise.all(fetchPromises);
+        }
+
+        // Function to add markers based on city list
+        function addMarkers(cities) {
+            markers.forEach(marker => map.removeLayer(marker)); // Clear existing markers
+            markers = [];
+
+            cities.forEach(city => {
+                if (cityCoordinates[city]) {
+                    let [lat, lon] = cityCoordinates[city];
+                    let marker = L.marker([lat, lon])
+                        .addTo(map)
+                        .bindTooltip(city);
+
+                    marker.on('mouseover', function(e) {
+                        var tooltip = document.getElementById('tooltip');
+                        tooltip.innerHTML = city;
+                        tooltip.style.left = (e.originalEvent.pageX + 10) + 'px';
+                        tooltip.style.top = (e.originalEvent.pageY + 10) + 'px';
+                        tooltip.style.display = 'block';
+                    });
+
+                    marker.on('mouseout', function() {
+                        document.getElementById('tooltip').style.display = 'none';
+                    });
+
+                    markers.push(marker);
+                }
+            });
+        }
+
+        // Initially fetch all coordinates and add markers for all cities
+        fetchAllCoordinates().then(() => {
+            addMarkers(allCities);
+
+            document.getElementById('select_city').addEventListener('change', function() {
+                let selectedCities = Array.from(this.selectedOptions).map(option => option.value);
+                let cityRows = document.querySelectorAll('.city-row');
+
+                if (selectedCities.length === 0) {
+                    cityRows.forEach(row => {
+                        row.style.display = 'flex';
+                    });
+                    addMarkers(allCities); // Show all markers
+                } else {
+                    cityRows.forEach(row => {
+                        let cityName = row.dataset.city;
+                        if (selectedCities.includes(cityName)) {
+                            row.style.display = 'flex';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+                    addMarkers(selectedCities); // Show selected markers
+                }
+            });
         });
     </script>
 
