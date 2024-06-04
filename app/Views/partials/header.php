@@ -1087,6 +1087,14 @@
             });
             $(document).ready(function() {
 
+var multipleCancelButton = new Choices('#category_in_product_normal_product', {
+   removeItemButton: true,
+});
+
+
+});
+            $(document).ready(function() {
+
                var multipleCancelButton = new Choices('#sms_mu_select_category', {
                   removeItemButton: true,
                });

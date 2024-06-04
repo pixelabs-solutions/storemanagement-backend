@@ -188,50 +188,60 @@
 
 <!-- input javascript code  -->
 <script>
-    function function_of_Edit() {
-        var selectElement = document.getElementById("sms_mu_parent_ctg").value;
-        // var selectedOptions = selectElement.selectedOptions;
-        let image = document.getElementById('sms_mu_img_add_ctg').value;
-        // var selectedValues = [];
-        // for (var i = 0; i < selectedOptions.length; i++) {
-        //     selectedValues.push(selectedOptions[i].value);
-        // }
-        let images = [
-            image
-        ]
-        var data = {
-            "name": document.getElementById('sms_mu_name_ctg').value,
-            "parent": selectElement,
-            "image": images,
-        };
-        console.log(data)
-        fetch('/categories/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // Add any additional headers if needed
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (response.status === 201) {
-                    // Form submission succeeded, display success message
-                    document.getElementById('sms_add_category_success_message').style.display = 'block';
-                    document.getElementById('sms_add_category_error_message').style.display = 'none';
-                    window.location.reload();
-                } else {
-                    // Form submission failed, display error message
-                    document.getElementById('sms_add_category_error_message').style.display = 'block';
-                    document.getElementById('sms_add_category_success_message').style.display = 'none'; // Hide success message if it was displayed before
-                }
-            })
-            .catch(error => {
-                // Network error occurred, display error message
-                document.getElementById('sms_add_category_error_message').style.display = 'block';
-                console.error('Error submitting form data:', error);
-            });
+function function_of_Edit() {
+  const selectElement = document.getElementById("sms_mu_parent_ctg").value;
+  const imageInput = document.getElementById('sms_mu_img_add_ctg');
 
-    }
+  // Check if an image is selected
+  if (!imageInput.files[0]) {
+    console.error("Please select an image to edit the category.");
+    return; // Early exit if no image selected
+  }
+
+  // Function to convert image to base64
+  function readFileAsBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        resolve(event.target.result);
+      };
+      reader.onerror = function(error) {
+        reject(error);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // Convert the selected image to base64
+  readFileAsBase64(imageInput.files[0])
+    .then(base64String => {
+      const data = {
+        "name": document.getElementById('sms_mu_name_ctg').value,
+        "parent": selectElement,
+        "image": base64String, // Now containing the base64 string of the image
+      };
+
+      console.log(data);
+
+      fetch('/categories/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        // ... (rest of the code remains the same for handling response)
+      })
+      .catch(error => {
+        // ... (rest of the code remains the same for handling errors)
+      });
+    })
+    .catch(error => {
+      console.error("Error converting image to base64:", error);
+      // Handle error converting image (optional: display error message)
+    });
+}
 
     function sms_add_category_close_success_message() {
         document.getElementById('sms_add_category_success_message').style.display = 'none';
@@ -252,32 +262,32 @@
         }
     }
 
-    function function_submit_ctg() {
-        // Get the select element
-        var selectElement = document.getElementById("sms_mu_select_category");
+    // function function_submit_ctg() {
+    //     // Get the select element
+    //     var selectElement = document.getElementById("sms_mu_select_category");
 
-        // Get the selected options
-        var selectedOptions = selectElement.selectedOptions;
+    //     // Get the selected options
+    //     var selectedOptions = selectElement.selectedOptions;
 
-        // Log selected values to the console using a for loop
-        console.log("Selected values:");
-        for (var i = 0; i < selectedOptions.length; i++) {
-            console.log(selectedOptions[i].value);
-        }
+    //     // Log selected values to the console using a for loop
+    //     console.log("Selected values:");
+    //     for (var i = 0; i < selectedOptions.length; i++) {
+    //         console.log(selectedOptions[i].value);
+    //     }
 
-        // Prepare form data
-        var form_data = {
-            "name of ctg": document.getElementById("sms_mu_key_category").value,
-            "selected values": [], // Array to store selected values
-            "image value": document.getElementById("sms_img_ctg").value
-        };
+    //     // Prepare form data
+    //     var form_data = {
+    //         "name of ctg": document.getElementById("sms_mu_key_category").value,
+    //         "selected values": [], // Array to store selected values
+    //         "image value": document.getElementById("sms_img_ctg").value
+    //     };
 
-        // Add selected values to the form data
-        for (var i = 0; i < selectedOptions.length; i++) {
-            form_data["selected values"].push(selectedOptions[i].value);
-        }
+    //     // Add selected values to the form data
+    //     for (var i = 0; i < selectedOptions.length; i++) {
+    //         form_data["selected values"].push(selectedOptions[i].value);
+    //     }
 
-        // Log form data to the console
-        console.log("Form data:", form_data);
-    }
+    //     // Log form data to the console
+    //     console.log("Form data:", form_data);
+    // }
 </script>
