@@ -16,7 +16,13 @@ class AttributesController
         $configuration = $this->prepare_configuration($is_rest);
 
         $attributes = Base::wc_get($configuration, $this->endpoint);
-        include_once __DIR__ . '/../Views/product/index.php';
+        if($is_rest == 'true')
+        {
+            echo json_encode($attributes);
+        }
+        else{
+            include_once __DIR__ . '/../Views/product/index.php';
+        }
     }
 
     public function get($id)

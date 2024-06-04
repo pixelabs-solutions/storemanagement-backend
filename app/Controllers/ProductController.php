@@ -201,36 +201,6 @@ class ProductController
         return $variations;
     }
 
-    // public function update($id)
-    // {
-    //     $result = HttpRequestHelper::validate_request("PUT");
-    //     if(!$result["is_data_prepared"])
-    //     {
-    //         echo $result["message"];
-    //         return;
-    //     }
-
-    //     $data = $result["data"];
-    //     $payload = [
-    //         'name' => $data['name'], 
-    //         'type' => $data['type'],
-    //         'description' => $data['description'], 
-    //         'manage_stock' => true,
-    //         'stock_quantity' => $data['stock_quantity'], 
-    //         'category' => array_map(function($category_id) {
-    //             return ['id' => $category_id]; 
-    //         }, $data['category']),
-    //         'image' => array_map(function($image_url) {
-    //             return ['src' => $image_url]; 
-    //         }, $data['image']),
-    //         'regular_price' => $data['regular_price'],
-    //         'sale_price' => $data['sale_price']
-    //     ];
-
-    //     $response = Base::wc_update($this->table_name."/".$id, $payload);
-    //     print_r($response);
-    // }
-
     public function update($id)
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
@@ -303,6 +273,19 @@ class ProductController
         if($is_rest == 'true'){
             echo $response;
         }
+    }
+
+    public function export(){
+        // $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        // $configuration = $this->prepare_configuration($is_rest);
+
+        // $product_fields = 
+        // [
+        //     '_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations'
+        // ];
+        // $products = Base::wc_get($configuration, $this->table_name, $product_fields);
+        // echo $products;
+        echo "export";
     }
 
     public function prepare_configuration($is_rest){
