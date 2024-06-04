@@ -22,6 +22,6 @@ class FileHelper
             mkdir($directory, 0755, true);
         }
         file_put_contents($file_path, $binary_data);
-        return "https://www.pngitem.com/pimgs/m/20-202503_animated-3d-icon-3d-animated-icons-hd-png.png";
+        return $file_path;
     }
 }

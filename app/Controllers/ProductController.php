@@ -155,16 +155,17 @@ class ProductController
             $payload['attributes'] = $attributes;
             
             $variations = $this->generateVariations($data['attributes_options'], $data['attributes_names'], $data['regular_price']);
+            
             $payload['variations'] = $variations;
-
-           $response = Base::wc_add($configuration, $this->table_name, json_encode($payload));
+            $response = Base::wc_add($configuration, $this->table_name, json_encode($payload));
             if($is_rest == 'true')
             {
                 echo $response;
             }
-
+            $result = json_decode($response, true);
+            $product_id = $result['data_id'];
             foreach ($variations as $variationData) {
-                Product::createProductVariation($configuration, $response['data_id'], $variationData);
+                Product::createProductVariation($configuration, $product_id, $variationData);
             }
 
         }
