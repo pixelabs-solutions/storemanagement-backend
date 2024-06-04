@@ -23,7 +23,7 @@
 
         </div>
 
-        <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; " onclick="openModal('sms_category_w_add_modal')" data-i18n="popoups.add_new_catageory.catageory_btn">Added a new category +</button>
+        <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; " id="open_Model_category" data-i18n="popoups.add_new_catageory.catageory_btn">Added a new category +</button>
 
       </div>
     </div>
@@ -147,7 +147,7 @@
                 <td><?php echo $category['count']; ?></td>
                 <td>
                   <div class="d-flex justify-content-center gap-2 w-auto">
-                    <span class="EditPopup">
+                    <span class="EditPopoup">
                       <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z" fill="#4987D8" />
                       </svg>
@@ -214,7 +214,6 @@
   <div id="sms_delete_notification_ctg"></div>
   <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
     <div class="modal-content p-3 ">
-
       <div class="modal-body text-center">
         <p class="Sms_mu_for_Eng">Are you sure you want to delete the category?</p>
         <p class="Sms_mu_for_hebrew">האם אתה בטוח שברצונך למחוק את הקטגוריה?</p>
@@ -233,7 +232,7 @@
 <!-- category filter -->
 <script>
   document.getElementById('sms_coupons_m_search_input').addEventListener('input', function() {
-    const filter = this.value.toLowerCase();  
+    const filter = this.value.toLowerCase();
     const rows = document.querySelectorAll('#sms_category_m_category_table tbody tr.sms_mu_tr');
     const spacingDivs = document.querySelectorAll('.sms_mu_spacing_diver');
 
@@ -248,8 +247,17 @@
   });
 </script>
 <script>
+  // for category 
+  function openModalCategory() {
+    var modal2 = document.getElementById('sms_category_w_add_modal');
+    $(modal2).modal('show');
+  }
+  document.getElementById('open_Model_category').addEventListener('click',openModalCategory );
+
+
+  // for delete and cancel 
+
   function deleteCategory(categoryId) {
-    // Here you can perform the deletion operation using AJAX or any other method
     console.log("Deleting category with ID: " + categoryId);
     fetch("/categories/" + categoryId, {
         method: "DELETE",
@@ -276,148 +284,156 @@
       const sms_delete_notification = document.getElementById("sms_delete_notification_ctg");
       sms_delete_notification.textContent = message;
       sms_delete_notification.className = isError ? "error show" : "show";
-
-      // Hide the notification after 3 seconds
       setTimeout(function() {
         sms_delete_notification.className = "hide";
       }, 3000);
     }
   }
 
-
-  // Add event listener to SVG element
-
-
-  function openModale(modalId, categoryData, parentCategoriesData) {
-    var modal = document.getElementById(modalId);
-    var modale = document.getElementById('sms_category_w_delete_modal');
-    $(modale).modal('show');
-    if (modalId == "sms_category_w_edit_modal") {
-      var category_json = JSON.parse(categoryData);
-      var parentCategories_json = JSON.parse(parentCategoriesData);
-      console.log(category_json)
-      document.getElementById('sms_mu_key_category').value = category_json.name;
-      document.getElementById('sms_mu_id_category').value = category_json.id;
-
-      var selectElement = document.getElementById('sms_mu_select_category_pop');
-      selectElement.innerHTML = '';
-      console.log(selectElement);
-      parentCategories_json.forEach(function(category) {
-        var option = document.createElement('option');
-        option.value = category.id; // Assuming category.id contains the ID
-        option.text = category.name; // Assuming category.text contains the text
-        selectElement.appendChild(option);
-      });
-
-    }
-
-    function openModal2() {
-      var modal2 = document.getElementById('Edit_POPOUP_header');
-      $(modal2).modal('show');
-    }
-    // Show the modal
-    modal.style.display = 'block';
-    modal.classList.add('show');
-    modal.setAttribute('aria-modal', 'true');
-    modal.setAttribute('aria-hidden', 'false');
-
-    // Hide the modal when the cancel button or close button is clicked
-    var cancelButton = modal.querySelector('.sms_modal_cancel_btn');
-    cancelButton.addEventListener('click', closeModal);
-
-    // Hide the modal when outside the modal is clicked
-    modal.addEventListener('click', function(e) {
-      if (e.target === modal) {
-        closeModal();
-      }
-    });
-
-    // Function to close the modal
-    function closeModal() {
-      console.log("Modal closed")
-      modal.style.display = 'none';
-      modal.classList.remove('show');
-      modal.setAttribute('aria-modal', 'false');
-      modal.setAttribute('aria-hidden', 'true');
-    }
-  }
-
-  function openModal2(modalId, categoryData, parentCategoriesData) {
-    var modal = document.getElementById(modalId);
-    var modal2 = document.getElementById('Edit_POPOUP_header');
-    $(modal2).modal('show');
-    if (modalId == "sms_category_w_edit_modal") {
-      var category_json = JSON.parse(categoryData);
-      var parentCategories_json = JSON.parse(parentCategoriesData);
-      console.log(category_json)
-      document.getElementById('sms_mu_key_category').value = category_json.name;
-      document.getElementById('sms_mu_id_category').value = category_json.id;
-
-      var selectElement = document.getElementById('sms_mu_select_category_pop');
-      selectElement.innerHTML = '';
-      console.log(selectElement);
-      parentCategories_json.forEach(function(category) {
-        var option = document.createElement('option');
-        option.value = category.id; // Assuming category.id contains the ID
-        option.text = category.name; // Assuming category.text contains the text
-        selectElement.appendChild(option);
-      });
-
-    }
-
-    function openModal2() {
-      var modal2 = document.getElementById('Edit_POPOUP_header');
-      $(modal2).modal('show');
-    }
-    // Show the modal
-    modal.style.display = 'block';
-    modal.classList.add('show');
-    modal.setAttribute('aria-modal', 'true');
-    modal.setAttribute('aria-hidden', 'false');
-
-    // Hide the modal when the cancel button or close button is clicked
-    var cancelButton = modal.querySelector('.sms_modal_cancel_btn');
-    cancelButton.addEventListener('click', closeModal);
-
-    // Hide the modal when outside the modal is clicked
-    modal.addEventListener('click', function(e) {
-      if (e.target === modal) {
-        closeModal();
-      }
-    });
-
-    // Function to close the modal
-    function closeModal() {
-      console.log("Modal closed")
-      modal.style.display = 'none';
-      modal.classList.remove('show');
-      modal.setAttribute('aria-modal', 'false');
-      modal.setAttribute('aria-hidden', 'true');
-    }
-  }
-
-  function closeModal() {
-    var modal = document.getElementById('sms_mu_model_close'); // Replace 'myModal' with your modal ID
+  function closeModalDelete() {
+    var modal = document.getElementById('sms_category_w_delete_modal'); // Replace 'myModal' with your modal ID
     $(modal).modal('hide');
   }
+
+  document.getElementById('sms_mu_Cancel').addEventListener('click', closeModalDelete);
+
+  function openModalDelete() {
+    var modal2 = document.getElementById('sms_category_w_delete_modal');
+    $(modal2).modal('show');
+  }
+
+  var deleteIcons = document.getElementsByClassName('deleteIcon');
+
+  for (var i = 0; i < deleteIcons.length; i++) {
+    deleteIcons[i].addEventListener('click', openModalDelete);
+  }
+
+  //  for Edit 
+
+  function OpenEditPopoup() {
+    var modal = document.getElementById('Edit_POPOUP_header');
+    $(modal).modal('show');
+  }
+  var editPopoups = document.getElementsByClassName('EditPopoup');
+  for (var j = 0; j < editPopoups.length; j++) {
+    editPopoups[j].addEventListener('click', OpenEditPopoup);
+  }
+  // editPopoup 
+
+  // function openModale(modalId, categoryData, parentCategoriesData) {
+  //   var modal = document.getElementById(modalId);
+  //   var modale = document.getElementById('sms_category_w_delete_modal');
+  //   $(modale).modal('show');
+  //   if (modalId == "sms_category_w_edit_modal") {
+  //     var category_json = JSON.parse(categoryData);
+  //     var parentCategories_json = JSON.parse(parentCategoriesData);
+  //     console.log(category_json)
+  //     document.getElementById('sms_mu_key_category').value = category_json.name;
+  //     document.getElementById('sms_mu_id_category').value = category_json.id;
+
+  //     var selectElement = document.getElementById('sms_mu_select_category_pop');
+  //     selectElement.innerHTML = '';
+  //     console.log(selectElement);
+  //     parentCategories_json.forEach(function(category) {
+  //       var option = document.createElement('option');
+  //       option.value = category.id; // Assuming category.id contains the ID
+  //       option.text = category.name; // Assuming category.text contains the text
+  //       selectElement.appendChild(option);
+  //     });
+
+  //   }
+
+  //   function openModal2() {
+  //     var modal2 = document.getElementById('Edit_POPOUP_header');
+  //     $(modal2).modal('show');
+  //   }
+  //   // Show the modal
+  //   modal.style.display = 'block';
+  //   modal.classList.add('show');
+  //   modal.setAttribute('aria-modal', 'true');
+  //   modal.setAttribute('aria-hidden', 'false');
+
+  //   // Hide the modal when the cancel button or close button is clicked
+  //   var cancelButton = modal.querySelector('.sms_modal_cancel_btn');
+  //   cancelButton.addEventListener('click', closeModal);
+
+  //   // Hide the modal when outside the modal is clicked
+  //   modal.addEventListener('click', function(e) {
+  //     if (e.target === modal) {
+  //       closeModal();
+  //     }
+  //   });
+
+  //   // Function to close the modal
+  //   function closeModal() {
+  //     console.log("Modal closed")
+  //     modal.style.display = 'none';
+  //     modal.classList.remove('show');
+  //     modal.setAttribute('aria-modal', 'false');
+  //     modal.setAttribute('aria-hidden', 'true');
+  //   }
+  // }
+
+  // function openModal2(modalId, categoryData, parentCategoriesData) {
+  //   var modal = document.getElementById(modalId);
+  //   var modal2 = document.getElementById('Edit_POPOUP_header');
+  //   $(modal2).modal('show');
+  //   if (modalId == "sms_category_w_edit_modal") {
+  //     var category_json = JSON.parse(categoryData);
+  //     var parentCategories_json = JSON.parse(parentCategoriesData);
+  //     console.log(category_json)
+  //     document.getElementById('sms_mu_key_category').value = category_json.name;
+  //     document.getElementById('sms_mu_id_category').value = category_json.id;
+
+  //     var selectElement = document.getElementById('sms_mu_select_category_pop');
+  //     selectElement.innerHTML = '';
+  //     console.log(selectElement);
+  //     parentCategories_json.forEach(function(category) {
+  //       var option = document.createElement('option');
+  //       option.value = category.id; // Assuming category.id contains the ID
+  //       option.text = category.name; // Assuming category.text contains the text
+  //       selectElement.appendChild(option);
+  //     });
+
+  //   }
+
+
+
+  //   // Hide the modal when the cancel button or close button is clicked
+  //   var cancelButton = modal.querySelector('.sms_modal_cancel_btn');
+  //   cancelButton.addEventListener('click', closeModal);
+
+  //   // Hide the modal when outside the modal is clicked
+  //   modal.addEventListener('click', function(e) {
+  //     if (e.target === modal) {
+  //       closeModal();
+  //     }
+  //   });
+
+  //   // Function to close the modal
+  //   function closeModal() {
+  //     console.log("Modal closed")
+  //     modal.style.display = 'none';
+  //     modal.classList.remove('show');
+  //     modal.setAttribute('aria-modal', 'false');
+  //     modal.setAttribute('aria-hidden', 'true');
+  //   }
+  // }
+
+
+
   //   function openModal2(modalId, categoryData, parentCategoriesData) {
   //     var modal = document.getElementById(modalId);
   //     var modal2 = document.getElementById('Edit_POPOUP_header');
   //     $(modal2).modal('show');
   // }
   // Adding event listeners to elements with class 'deleteIcon'
-  var deleteIcons = document.getElementsByClassName('deleteIcon');
-  for (var i = 0; i < deleteIcons.length; i++) {
-    deleteIcons[i].addEventListener('click', openModale);
-  }
+
 
   // Adding event listeners to elements with class 'EditPopoup'
-  var editPopoups = document.getElementsByClassName('EditPopoup');
-  for (var j = 0; j < editPopoups.length; j++) {
-    editPopoups[j].addEventListener('click', openModal2);
-  }
 
-  document.getElementById('sms_mu_Cancel').addEventListener('click', closeModale);
+
+
 
   // filter rows 
 
