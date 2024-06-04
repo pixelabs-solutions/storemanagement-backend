@@ -90,7 +90,7 @@
                             <div class="col-md-4 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.cupon_code">The coupon
                                     code</label>
-                                <input type="text" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA" placeholder="" id='sms_The_coupon_code'>
+                                <input type="text" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA" placeholder="Coupon Code" id='sms_The_coupon_code'>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="example-select fs-3 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.discount_type">Discount type
@@ -109,7 +109,7 @@
                             <div class="col-md-4 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.amounth_discount">The amount
                                     of the discount </label>
-                                <input type="number" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA" placeholder="" id="sms_amount_of_the_discount">
+                                <input type="number" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA" placeholder="Amounth of Discount" id="sms_amount_of_the_discount">
                             </div>
                         </div>
                         <!-- Adding terms to the feature -->
@@ -118,7 +118,7 @@
                                 <label for="example-date-input" class="form-label fs-4 fw-bold" data-i18n="popoups.added_new_cupons.expiry_date">Coupon expiration
                                     date</label>
                                 <div class="input-group">
-                                    <input type="date" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA" id="sms_Coupon_expiration">
+                                    <input type="date" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA" id="sms_Coupon_expiration" placeholder="Expiry Date">
                                 </div>
                             </div>
 
@@ -127,7 +127,7 @@
                             <div class="col-md-6 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.limit">Usage limit
                                     (leave blank without limit) </label>
-                                <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_Usage_limit" style="background-color: #EAEAEA" placeholder="key chain">
+                                <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_Usage_limit" style="background-color: #EAEAEA" placeholder="Usage Limit">
                             </div>
 
                         </div>

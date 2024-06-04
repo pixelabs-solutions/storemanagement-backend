@@ -129,7 +129,7 @@
                                     data-i18n="popoups.future_managment.add_new_term.name_of_term">the
                                     name of the term</label>
                                 <input type="text" class="form-control rounded-3 p-3" id="sms_term_name"
-                                    style="background-color: #EAEAEA" placeholder="Pink">
+                                    style="background-color: #EAEAEA" placeholder="Name Of Term">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="example-select" class="form-label"  data-i18n="popoups.future_managment.add_new_term.feature">associated feature </label>
@@ -272,7 +272,7 @@
         <div class="gx-3">
             <div class="col-md-6 mb-3">
                 <label for="${inputCount}" class="form-label">The name of the term</label>
-                <input type="text" class="form-control rounded-3 p-3" id="sms_term_names${inputCount}" style="background-color: #EAEAEA" placeholder="Pink">
+                <input type="text" class="form-control rounded-3 p-3" id="sms_term_names${inputCount}" style="background-color: #EAEAEA" placeholder="Name Of Term">
             </div>
             <div class="rounded">
                 <h3 class="card-title text-black fs-4 fw-bold" style="font-size: 35px;">

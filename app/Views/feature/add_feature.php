@@ -187,7 +187,7 @@
                             <div class="col-md-6 mb-3">
                                 <label for="example-text-input" class="form-label"  data-i18n="popoups.future_managment.add_new_feature.color_select_atr">The attribute name</label>
                                 <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_attribute_name"
-                                    placeholder="Pink">
+                                    placeholder="Attribute Name">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="" class="form-label"  data-i18n="popoups.future_managment.add_new_feature.d_type">Display Type (Color/Image)</label>
@@ -680,9 +680,9 @@
         newInput.classList.add('col-md-12', 'mb-3', 'p-2');
         newInput.innerHTML = `
     <div class='gx-3'>
-        <label for="${uniqueId}" class="form-label">The name of the term</label>
+        <label for="${uniqueId}" class="form-label">Name of the term</label>
         <div> 
-            <input type="text" class="form-control text-dark rounded-3 p-3 fw-bold" id="sms_name_of_attribute"  placeholder="Pink">
+            <input type="text" class="form-control text-dark rounded-3 p-3 fw-bold" id="sms_name_of_attribute"  placeholder="Name Of Term">
         </div>
         <div>
             <label class="form-label mt-4" >Selecting an image to display the term</label>

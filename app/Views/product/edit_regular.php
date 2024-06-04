@@ -77,9 +77,8 @@
                             <div class="col-md-6 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.product_name_input">Product
                                     Name</label>
-                               
                                     <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_Ip_one" style="background-color: #EAEAEA" placeholder="Blue Gucci bag">
-                                    <input type="hidden" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_id_regular_product" style="background-color: #EAEAEA" placeholder="Blue Gucci bag">
+                                    <input type="hidden" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_id_regular_product" style="background-color: #EAEAEA" placeholder="Eg:Blue Gucci bag">
                             </div>
                             <div class="col-md-6    ">
                                 <label for="example-select fs-3 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.catageory_managment">Category
@@ -132,12 +131,12 @@
                             <div class="col-md-6 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.product_name_input">Normal
                                     price</label>
-                                <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_Ip_four" style="background-color: #EAEAEA" placeholder="">
+                                <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_Ip_four" style="background-color: #EAEAEA" placeholder="Normal Price">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.saleprice">Sale price
                                     (optional)</label>
-                                <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_Ip_five" style="background-color: #EAEAEA" placeholder="">
+                                <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_Ip_five" style="background-color: #EAEAEA" placeholder="Sale Price">
                             </div>
                         </div>
                         <!-- description -->
@@ -153,7 +152,7 @@
                         <div class="col-md-12 mt-3 ">
                             <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.unit">Units in
                                 Stock</label>
-                            <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_Ip_seven" style="background-color: #EAEAEA" placeholder="150">
+                            <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_Ip_seven" style="background-color: #EAEAEA" placeholder="Unit Stock">
                         </div>
                 </div>
 

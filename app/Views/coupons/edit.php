@@ -84,7 +84,7 @@
                                         <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.cupon_code">The
                                             coupon
                                             code</label>
-                                        <input type="text" class="form-control rounded-3 p-3 fw-bold" id="coupons_code" style="background-color: #EAEAEA" placeholder="">
+                                        <input type="text" class="form-control rounded-3 p-3 fw-bold" id="coupons_code" style="background-color: #EAEAEA" placeholder="Coupon Code">
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="example-select fs-3 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.discount_type">Discount
@@ -102,7 +102,7 @@
                                         <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.amounth_discount">The
                                             amount
                                             of the discount </label>
-                                        <input type="text" class="form-control rounded-3 p-3 fw-bold" id="discount_amount" style="background-color: #EAEAEA" placeholder="">
+                                        <input type="text" class="form-control rounded-3 p-3 fw-bold" id="discount_amount" style="background-color: #EAEAEA" placeholder=" Amounth of Discount">
                                     </div>
                                 </div>
                                 <!-- Adding terms to the feature -->
@@ -112,7 +112,7 @@
                                             expiration
                                             date</label>
                                         <div class="input-group">
-                                            <input type="date" class="form-control rounded-3 p-3 fw-bold" id="expiration_date" style="background-color: #EAEAEA">
+                                            <input type="date" class="form-control rounded-3 p-3 fw-bold" id="expiration_date" style="background-color: #EAEAEA" placeholder="Expiry date">
                                         </div>
                                     </div>
 
@@ -121,7 +121,7 @@
                                         <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.limit">Usage
                                             limit
                                             (leave blank without limit) </label>
-                                        <input type="text" class="form-control rounded-3 p-3 fw-bold" id="usage_limit" style="background-color: #EAEAEA" placeholder="key chain">
+                                        <input type="text" class="form-control rounded-3 p-3 fw-bold" id="usage_limit" style="background-color: #EAEAEA" placeholder="Limit Usage">
                                     </div>
 
                                 </div>

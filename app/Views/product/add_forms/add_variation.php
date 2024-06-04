@@ -111,7 +111,7 @@
                             <div class="col-md-6 mb-3">
                                 <label for="example-text-input fs-3 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.product_name_input">Product
                                     Name</label>
-                                <input type="text" class="form-control rounded-3 p-3 fw-bold" id="example-text-input" style="background-color: #EAEAEA" placeholder="">
+                                <input type="text" class="form-control rounded-3 p-3 fw-bold" id="example-text-input" style="background-color: #EAEAEA" placeholder="Product Name">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="example-select fs-3 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.catageory_managment">Category

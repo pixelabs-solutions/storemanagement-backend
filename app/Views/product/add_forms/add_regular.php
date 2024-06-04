@@ -100,7 +100,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.product_name_input">Product
                                 Name</label>
-                            <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_product_name" style="background-color: #EAEAEA" placeholder="Blue Gucci bag">
+                            <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_product_name" style="background-color: #EAEAEA" placeholder="E.g:Blue Gucci bag">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="example-select fs-3 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.catageory_managment">Category
@@ -166,12 +166,12 @@
                         <div class="col-md-6 mb-3">
                             <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.term_price">Normal
                                 price</label>
-                            <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_Normal" style="background-color: #EAEAEA" placeholder="">
+                            <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_Normal" style="background-color: #EAEAEA" placeholder="Normal Price">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.saleprice">Sale price
                                 (optional)</label>
-                            <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_sale" style="background-color: #EAEAEA" placeholder="">
+                            <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_sale" style="background-color: #EAEAEA" placeholder="Sale Price">
                         </div>
                     </div>
                     <!-- description -->
@@ -179,7 +179,7 @@
                         <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.text_area_text">A brief
                             description of the product</label>
                         <div class="form-floating">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="sms_mu_textarea" style="height: 100px; background-color: #EAEAEA"></textarea>
+                            <textarea class="form-control" placeholder="Brief Description" id="sms_mu_textarea" style="height: 100px; background-color: #EAEAEA"></textarea>
 
                         </div>
                     </div>
@@ -187,7 +187,7 @@
                     <div class="col-md-12 mt-3 ">
                         <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.unit">Units in
                             Stock</label>
-                        <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_unit" style="background-color: #EAEAEA" placeholder="150">
+                        <input type="number"  class="form-control rounded-3 p-3 fw-bold" id="sms_mu_unit" style="background-color: #EAEAEA" placeholder="Unit Stock">
                     </div>
                     <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
                         <!-- <div class="text-center mt-2 col-sm-6 col-md-6">

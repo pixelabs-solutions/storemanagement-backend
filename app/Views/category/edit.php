@@ -74,7 +74,7 @@
                             <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_catageory.popoup_in_catagory.heading">The name of
                                 the
                                 category</label>
-                            <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_key_category" style="background-color: #EAEAEA" placeholder="key chain">
+                            <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_key_category" style="background-color: #EAEAEA" placeholder="Name Of Category">
 
                             <input type="hidden" id="sms_mu_id_category">
                         </div>
