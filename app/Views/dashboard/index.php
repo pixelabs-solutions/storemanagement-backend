@@ -54,7 +54,7 @@ var_dump($dashboard_data);
     <!-- Stats header Buttons -->
     <div class="col-auto btn-list">
         <a href="?query=24_hours" id="24_hours" class="shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.first_tab"> 24 Hours</a>
-        <a href="?query=last_week" id="last_week" class=" shadow-none btn border-none outline-none  bg-transparent btn-light tab-pane sms_w_date"  data-i18n="dashboard.tabs.second_tab" > Last Week
+        <a href="?query=last_week" id="last_week" class=" shadow-none btn border-none outline-none  bg-transparent btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.second_tab"> Last Week
         </a>
         <a href="?query=current_month" id="current_month" class=" shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.third_tab "> Last Month
         </a>
@@ -69,34 +69,7 @@ var_dump($dashboard_data);
     </div>
     <!-- Date Range Button End -->
 </div>
-<script>
-    // Function to get query parameters from the URL
-    function getQueryParams() {
-        const params = {};
-        window.location.search.substring(1).split("&").forEach(param => {
-            const [key, value] = param.split("=");
-            params[decodeURIComponent(key)] = decodeURIComponent(value);
-        });
-        return params;
-    }
 
-    // Get query parameters
-    const queryParams = getQueryParams();
-
-    if (queryParams.query === '24_hours') {
-        // Add the .sms_w_date_active class to the element with the ID '24_hours'
-        document.getElementById('24_hours').classList.add('sms_w_date_active');
-    } else if (queryParams.query === 'last_week') {
-        // Add the .sms_w_date_active class to the element with the ID 'last_week'
-        document.getElementById('last_week').classList.add('sms_w_date_active');
-    } else if (queryParams.query === 'current_month') {
-        // Add the .sms_w_date_active class to the element with the ID 'current_month'
-        document.getElementById('current_month').classList.add('sms_w_date_active');
-    } else if (queryParams.query === 'last_year') {
-        // Add the .sms_w_date_active class to the element with the ID 'last_year'
-        document.getElementById('last_year').classList.add('sms_w_date_active');
-    }
-</script>
 <!-- Header End -->
 <!--  -->
 
@@ -196,7 +169,7 @@ var_dump($dashboard_data);
                 <div class="card-body">
                     <div class="row g-2 sms_mu_for_rtl_row_cards">
                         <div class="col-8">
-                            <h3 class="text-muted" data-i18n="dashboard.card_arrivals.card_title">> New Arivals </h3>
+                            <h3 class="text-muted" data-i18n="dashboard.card_arrivals.card_title"> New Arivals </h3>
                         </div>
                         <div class="col-auto ms-auto">
                             <svg width="40" height="40" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -243,7 +216,7 @@ var_dump($dashboard_data);
                 <div class="card-body">
                     <div class="row g-2 sms_mu_for_rtl_row_cards ">
                         <div class="col-8 ">
-                            <h3 class="text-muted" data-i18n="dashboard.card_customers.card_title">> New Customers </h3>
+                            <h3 class="text-muted" data-i18n="dashboard.card_customers.card_title">New Customers </h3>
                         </div>
                         <div class="col-auto ms-auto">
                             <svg width="40" height="40" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -290,7 +263,7 @@ var_dump($dashboard_data);
                 <div class="card-body">
                     <div class="row g-2 sms_mu_for_rtl_row_cards">
                         <div class="col-8 ">
-                            <h3 class="text-muted" data-i18n="dashboard.card_transaction.card_title">> Total Transiction
+                            <h3 class="text-muted" data-i18n="dashboard.card_transaction.card_title"> Total Transiction
                             </h3>
                         </div>
                         <div class="col-auto ms-auto">
@@ -381,7 +354,7 @@ var_dump($dashboard_data);
                             </div>
                         </div>
                     </div>
-                    <script>
+                    <!-- <script>
                         document.getElementById('select_city').addEventListener('change', function() {
                             let selectedCities = Array.from(this.selectedOptions).map(option => option.value);
                             let cityRows = document.querySelectorAll('.city-row');
@@ -403,7 +376,7 @@ var_dump($dashboard_data);
                                 });
                             }
                         });
-                    </script>
+                    </script> -->
 
                     <!-- End Header -->
                     <!-- Map and City Data Start -->
@@ -422,7 +395,7 @@ var_dump($dashboard_data);
                                 <?php $city_value = $statist['percentage_of_customers']; ?>
                                 <div class="row g-2 city-row" data-city="<?php echo $city_name; ?>">
                                     <div class="col-lg-8 col-md-8 col-sm-8">
-                                        <p class="text-end"><?php echo $city_name; ?></p>
+                                        <p class="text-end sms_city_name" ><?php echo $city_name; ?></p>
                                         <div class="progress mb-2" style="height:15px; border-radius:10px; margin-top:-10px;">
                                             <div class="progress-bar" style="width: <?php echo $city_value; ?>; border-radius:10px;" role="progressbar" aria-valuenow="<?php echo $city_value; ?>" aria-valuemin="0" aria-valuemax="100" aria-label="<?php echo $city_value; ?>% Complete">
                                             </div>
@@ -599,32 +572,85 @@ var_dump($dashboard_data);
         </div>
     </div>
     <script>
-        // Initialize the map
         var map = L.map('map').setView([31.0461, 34.8516], 7); // Set center to Israel
-
-        // Add OpenStreetMap tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Add a marker with a tooltip to the map
-        var marker = L.marker([31.7683, 35.2137]) // Example location in Jerusalem
-            .addTo(map)
-            .bindTooltip("Jerusalem")
-            .openTooltip();
+        var allCities = <?php echo json_encode(array_column($dashboard_data["customers_location"], 'city')); ?>;
+        var cityCoordinates = {};
+        var markers = [];
 
-        // Add event listener for showing tooltip on hover
-        marker.on('mouseover', function(e) {
-            var tooltip = document.getElementById('tooltip');
-            tooltip.innerHTML = "Jerusalem";
-            tooltip.style.left = (e.originalEvent.pageX + 10) + 'px';
-            tooltip.style.top = (e.originalEvent.pageY + 10) + 'px';
-            tooltip.style.display = 'block';
-        });
+        // Fetch coordinates for all cities initially and store them
+        function fetchAllCoordinates() {
+            let fetchPromises = allCities.map(city => 
+                fetch(`https://nominatim.openstreetmap.org/search?q=${city}&format=json`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length > 0) {
+                            cityCoordinates[city] = [data[0].lat, data[0].lon];
+                        }
+                    })
+                    .catch(error => console.error('Error fetching coordinates:', error))
+            );
 
-        // Add event listener for hiding tooltip on mouseout
-        marker.on('mouseout', function() {
-            document.getElementById('tooltip').style.display = 'none';
+            return Promise.all(fetchPromises);
+        }
+
+        // Function to add markers based on city list
+        function addMarkers(cities) {
+            markers.forEach(marker => map.removeLayer(marker)); // Clear existing markers
+            markers = [];
+
+            cities.forEach(city => {
+                if (cityCoordinates[city]) {
+                    let [lat, lon] = cityCoordinates[city];
+                    let marker = L.marker([lat, lon])
+                        .addTo(map)
+                        .bindTooltip(city);
+
+                    marker.on('mouseover', function(e) {
+                        var tooltip = document.getElementById('tooltip');
+                        tooltip.innerHTML = city;
+                        tooltip.style.left = (e.originalEvent.pageX + 10) + 'px';
+                        tooltip.style.top = (e.originalEvent.pageY + 10) + 'px';
+                        tooltip.style.display = 'block';
+                    });
+
+                    marker.on('mouseout', function() {
+                        document.getElementById('tooltip').style.display = 'none';
+                    });
+
+                    markers.push(marker);
+                }
+            });
+        }
+
+        // Initially fetch all coordinates and add markers for all cities
+        fetchAllCoordinates().then(() => {
+            addMarkers(allCities);
+
+            document.getElementById('select_city').addEventListener('change', function() {
+                let selectedCities = Array.from(this.selectedOptions).map(option => option.value);
+                let cityRows = document.querySelectorAll('.city-row');
+
+                if (selectedCities.length === 0) {
+                    cityRows.forEach(row => {
+                        row.style.display = 'flex';
+                    });
+                    addMarkers(allCities); // Show all markers
+                } else {
+                    cityRows.forEach(row => {
+                        let cityName = row.dataset.city;
+                        if (selectedCities.includes(cityName)) {
+                            row.style.display = 'flex';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+                    addMarkers(selectedCities); // Show selected markers
+                }
+            });
         });
     </script>
 
@@ -651,7 +677,68 @@ var_dump($dashboard_data);
         //     });
         // });
     </script>
+    <script>
+        // Function to get query parameters from the URL
+        document.getElementById('24_hours').onclick = funClickHour;
+        document.getElementById('last_week').onclick = funClickWeek;
+        document.getElementById('current_month').onclick = funClickMonth;
+        document.getElementById('last_year').onclick = funClickYear;
 
+        function funClickHour() {
+            document.getElementById('24_hours').style.backgroundColor = "#A8C3E7";
+            document.getElementById('last_week').style.backgroundColor = "transparent";
+            document.getElementById('current_month').style.backgroundColor = "transparent";
+            document.getElementById('last_year').style.backgroundColor = "transparent";
+        }
+
+        function funClickWeek() {
+            document.getElementById('24_hours').style.backgroundColor = "transparent";
+            document.getElementById('last_week').style.backgroundColor = "#A8C3E7";
+            document.getElementById('current_month').style.backgroundColor = "transparent";
+            document.getElementById('last_year').style.backgroundColor = "transparent";
+        }
+
+        function funClickMonth() {
+            document.getElementById('24_hours').style.backgroundColor = "transparent";
+            document.getElementById('last_week').style.backgroundColor = "transparent";
+            document.getElementById('current_month').style.backgroundColor = "#A8C3E7";
+            document.getElementById('last_year').style.backgroundColor = "transparent";
+        }
+
+        function funClickYear() {
+            document.getElementById('24_hours').style.backgroundColor = "transparent";
+            document.getElementById('last_week').style.backgroundColor = "transparent";
+            document.getElementById('current_month').style.backgroundColor = "transparent";
+            document.getElementById('last_year').style.backgroundColor = "#A8C3E7";
+        }
+
+
+        function getQueryParams() {
+            const params = {};
+            window.location.search.substring(1).split("&").forEach(param => {
+                const [key, value] = param.split("=");
+                params[decodeURIComponent(key)] = decodeURIComponent(value);
+            });
+            return params;
+        }
+
+        // Get query parameters
+        const queryParams = getQueryParams();
+
+        if (queryParams.query === '24_hours') {
+            // Add the .sms_w_date_active class to the element with the ID '24_hours'
+            document.getElementById('24_hours').classList.add('sms_w_date_active');
+        } else if (queryParams.query === 'last_week') {
+            // Add the .sms_w_date_active class to the element with the ID 'last_week'
+            document.getElementById('last_week').classList.add('sms_w_date_active');
+        } else if (queryParams.query === 'current_month') {
+            // Add the .sms_w_date_active class to the element with the ID 'current_month'
+            document.getElementById('current_month').classList.add('sms_w_date_active');
+        } else if (queryParams.query === 'last_year') {
+            // Add the .sms_w_date_active class to the element with the ID 'last_year'
+            document.getElementById('last_year').classList.add('sms_w_date_active');
+        }
+    </script>
 
     <script>
         // @formatter:off

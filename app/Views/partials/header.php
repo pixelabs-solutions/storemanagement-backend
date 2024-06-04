@@ -11,12 +11,14 @@
    <title>Store Managment System</title>
    <!-- CSS files -->
    <link rel="stylesheet" type="text/css" href="assets/dist/css/tabler.min.css" />
-   <link href="assets/dist/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
-   <link href="assets/dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
-   <link href="assets/dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
+   <link href="assets/dist/css/tabler-flags.min.css?1695847769" rel="stylesheet"/>
+   <link href="assets/dist/css/tabler-payments.min.css" rel="stylesheet" />
+   <link href="assets/dist/css/tabler-vendors.min.css" rel="stylesheet" />
    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
    <!-- for select -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+
    <!-- old css links  -->
 
    <!-- <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet" />
@@ -27,6 +29,10 @@
 
    <style>
       @import url('https://rsms.me/inter/inter.css');
+
+      .sms_mu_overDropdown .navbar .navbar-nav .nav-link {
+         display: none !important;
+      }
 
       .choices__list--multiple .choices__item {
          background: #b7adad !important;
@@ -127,6 +133,12 @@
          padding-left: 14px !important;
 
       }
+      .dropdown_logout{
+         position: absolute;
+        top: 49px;
+        margin-left: 15px;
+    }
+
 
       .dropdown-item {
          /* border-left: 4px solid transparent; */
@@ -662,7 +674,7 @@
                   </li>
 
                   <li class="nav-item" id="">
-                     <button id="sms_mu_filter_button_inventory" class="rounded-4 border-0 p-2" style="background-color:#4987D870; color:white">
+                     <button onclick="LogoutDisconecting()" id="sms_mu_filter_button_inventory" class="rounded-4 border-0 p-2" style="background-color:#4987D870; color:white">
                         Disconnecting from the system
 
                         <svg width="24" height="24" viewBox="0 0 32 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -704,7 +716,7 @@
                            <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
                            <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
                         </svg>
-                     </a> <!--
+                     </a>
                      <div class="nav-item dropdown d-none d-md-flex me-3  ">
                         <a href="#" class="nav-link px-0 bg-light rounded-pill" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications">
                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -799,7 +811,7 @@
                               </div>
                            </div>
                         </div>
-                     </div> -->
+                     </div>
                      <!-- <button id="switchBtn" class="border-0 rounded-circle" onclick="switchLanguage()">
 
                         <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle">
@@ -807,16 +819,11 @@
                      </button> -->
                      <select id="lang-select" style="padding: 5px; font-size: 14px;" class="lang_select">
                         <option value="en">
-                           <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle">
-                           English
+                      <span class="flag flag-country-us"> English</span>
+                           
                         </option>
                         <option value="he">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 640 480">
-                              <path fill="#0038a8" d="M0 0h640v480H0z" />
-                              <path fill="#fff" d="M0 160h640v160H0z" />
-                              <path fill="#d1513a" d="M0 160h640v160H0z" />
-                              <path fill="#fff" d="M256 84.4v36.1L172.4 240l83.6 119.5v36.1L88.4 240 256 48.4z" />
-                           </svg>
+                        <span class="flag flag-country-il"></span>
                            עברית
                         </option>
                      </select>
@@ -824,14 +831,17 @@
                   <div class="nav-item dropdown">
                      <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="" aria-label="Open user menu">
                         <span class="avatar rounded-circle avatar-sm" style="background-image: url(./static/avatars/000m.jpg)">
-                           <img src="/assets/dist/img/profile.png" height="100%" width="100%" alt="">
+                           <img onclick="FunLogoutProfile()" src="/assets/dist/img/profile.png" height="100%" width="100%" alt="">
                         </span>
-                        <div class="d-none  ps-2 ">
-
-                           <div>Paweł Kuna</div>
-                           <div class="mt-1 small text-muted">UI Designer</div>
-                        </div>
-                     </a>
+                  </div>
+                  <div class="d-none  ps-2 ">
+                     <div>Paweł Kuna</div>
+                     <div class="mt-1 small text-muted">UI Designer</div>
+                  </div>
+                  </a>
+                  <div id="PopoupLogout" class="dropdown-menu dropdown-menu-end dropdown-menu-arrow dropdown_logout" bis_skin_checked="1" style="display: none ;">
+                        <a href="#" class="dropdown-item" onclick="LogoutDisconecting()">Logout</a>
+                     </div>
                      <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                         <a href="#" class="dropdown-item">Status</a>
                         <a href="./profile.html" class="dropdown-item">Profile</a>
@@ -840,7 +850,6 @@
                         <a href="./settings.html" class="dropdown-item">Settings</a>
                         <a href="./sign-in.html" class="dropdown-item">Logout</a>
                      </div> -->
-                  </div>
                </div>
                <div class="collapse navbar-collapse" id="navbar-menu">
                   <div>
@@ -868,9 +877,41 @@
          <!-- <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script> -->
          <script>
             // JavaScript for switching language
+            function FunLogoutProfile() {
+               var div = document.getElementById('PopoupLogout');
+               if (div.style.display === "none") {
+                  div.style.display = 'block';
+                  console.log("Display set to block");
+               } else {
+                  div.style.display = 'none';
+                  console.log("Display set to none");
+               }
+            }
+
+            function LogoutDisconecting() {
+               fetch('/authentication/logout', {
+                     method: 'GET',
+                     headers: {
+                        'Content-Type': 'application/json'
+                     },
+                     credentials: 'same-origin' // Include cookies in the request
+                  })
+                  .then(response => {
+                     if (response.ok) {
+                        // Handle successful logout, e.g., redirect to login page
+                        window.location.href = '/authentication/login'; // Change this to your login page
+                     } else {
+                        // Handle errors
+                        console.error('Logout failed:', response.statusText);
+                     }
+                  })
+                  .catch(error => {
+                     console.error('Error:', error);
+                  });
+            }
             document.getElementById('lang-select').addEventListener('change', function() {
                var selectedLang = this.value;
-               
+
                switchLanguage(selectedLang);
                console.log(selectedLang)
                document.cookie = "current_lang=" + selectedLang + "; path=/";
@@ -1044,6 +1085,14 @@
 
 
             });
+            $(document).ready(function() {
+
+var multipleCancelButton = new Choices('#category_in_product_normal_product', {
+   removeItemButton: true,
+});
+
+
+});
             $(document).ready(function() {
 
                var multipleCancelButton = new Choices('#sms_mu_select_category', {

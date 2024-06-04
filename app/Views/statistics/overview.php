@@ -268,26 +268,45 @@ require_once __DIR__ . '/../partials/header.php';
 <!-- Model End -->
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Get all nav-link elements
-        var navLinks = document.querySelectorAll('.nav-link');
+   document.addEventListener("DOMContentLoaded", function () {
+    // Get all nav-link elements
+    var navLinks = document.querySelectorAll('.nav-link');
 
-        // Loop through each nav-link element
-        navLinks.forEach(function (navLink) {
-            // Attach onclick event handler
-            navLink.addEventListener('click', function () {
-                // Remove active class from all nav-links
-                navLinks.forEach(function (link) {
-                    link.classList.remove('sms_w_active_item');
-                    link.classList.add('sms_w_item_deactive');
-                });
-
-                // Add active class to the clicked nav-link
-                this.classList.remove('sms_w_item_deactive');
-                this.classList.add('sms_w_active_item');
+    // Retrieve the stored active tab from localStorage
+    var activeTab = localStorage.getItem('activeTab');
+    if (activeTab) {
+        var activeTabLink = document.querySelector(`a[href="${activeTab}"]`);
+        if (activeTabLink) {
+            navLinks.forEach(function (link) {
+                link.classList.remove('sms_w_active_item');
+                link.classList.add('sms_w_item_deactive');
             });
+            activeTabLink.classList.add('sms_w_active_item');
+            activeTabLink.classList.remove('sms_w_item_deactive');
+            new bootstrap.Tab(activeTabLink).show();
+        }
+    }
+
+    // Loop through each nav-link element
+    navLinks.forEach(function (navLink) {
+        // Attach onclick event handler
+        navLink.addEventListener('click', function () {
+            // Remove active class from all nav-links
+            navLinks.forEach(function (link) {
+                link.classList.remove('sms_w_active_item');
+                link.classList.add('sms_w_item_deactive');
+            });
+
+            // Add active class to the clicked nav-link
+            this.classList.remove('sms_w_item_deactive');
+            this.classList.add('sms_w_active_item');
+
+            // Store the active tab in localStorage
+            var href = this.getAttribute('href');
+            localStorage.setItem('activeTab', href);
         });
     });
+});
 
 
 </script>
@@ -413,6 +432,8 @@ require_once __DIR__ . '/../partials/header.php';
 
 
                     </script>
+
+                    
                     
 <?php
 require_once __DIR__ . '/../partials/footer.php';

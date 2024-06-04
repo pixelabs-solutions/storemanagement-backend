@@ -107,7 +107,7 @@
                             </label>
                             <div class="-5" style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                 <div class="col-md-12 rounded-4 bg-transparent h-100 ">
-                                    <select id="category_in_product" multiple style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
+                                    <select id="category_in_product_normal_product"  multiple style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
                                     <?php
 
                                         foreach ($categories as $category) {
@@ -260,66 +260,82 @@
     handleImageUpload('sms_mu_img', 'sms_mu_img_label');
     handleImageUpload('sms_mu_photo', 'sms_mu_photo_label');
 
+        function fun() {
+            let productName = document.getElementById('sms_product_name').value;
+            let photoInput = document.getElementById('sms_mu_photo');
+            let imgInput = document.getElementById('sms_mu_img');
+            let normalInp = document.getElementById('sms_mu_Normal').value;
+            let saleInp = document.getElementById('sms_mu_sale').value;
+            let textareaInp = document.getElementById('sms_mu_textarea').value;
+            let unitInp = document.getElementById('sms_mu_unit').value;
+            let categorySelect = document.getElementById('category_in_product_normal_product');
+            
+            let selectedCategories = [];
 
-    function fun() {
-        let productName = document.getElementById('sms_product_name').value;
-        let photoValue = document.getElementById('sms_mu_photo').value;
-        let imgValue = document.getElementById('sms_mu_img').value;
-        let normalInp = document.getElementById('sms_mu_Normal').value;
-        let saleInp = document.getElementById('sms_mu_sale').value;
-        let textareaInp = document.getElementById('sms_mu_textarea').value;
-        let unitInp = document.getElementById('sms_mu_unit').value;
-        let categorySelect = document.getElementById('category_in_product');
-        let selectedCategories = [];
-
-        for (let i = 0; i < categorySelect.length; i++) {
-            if (categorySelect.options[i].selected) {
-                selectedCategories.push(categorySelect.options[i].value);
-            }
-        }
-        let image = [
-            photoValue, imgValue
-        ]
-        let data = {
-            'name': productName,
-            'category': selectedCategories,
-            'image': image,
-            'type': 'simple',
-            // 'imgValue': imgValue,
-            'regular_price': normalInp,
-            'sale_price': saleInp,
-            'description': textareaInp,
-            'stock_quantity': unitInp,
-        };
-
-        console.log(data);
-
-
-        fetch('/product/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-            .then(response => {
-                if (response.status === 201) {
-                    // Form submission succeeded, display success message
-                    document.getElementById('sms_add_regular_success_message').style.display = 'block';
-                    document.getElementById('sms_add_regular_error_message').style.display = 'none';
-                    window.location.reload();
-                } else {
-                    // Form submission failed, display error message
-                    document.getElementById('sms_add_regular_error_message').style.display = 'block';
-                    document.getElementById('sms_add_regular_success_message').style.display = 'none'; // Hide success message if it was displayed before
+            for (let i = 0; i < categorySelect.length; i++) {
+                if (categorySelect.options[i].selected) {
+                    selectedCategories.push(categorySelect.options[i].value);
                 }
-            })
-            .catch(error => {
-                // Network error occurred, display error message
-                document.getElementById('sms_add_regular_error_message').style.display = 'block';
-                console.error('Error submitting form data:', error);
-            });
-    }
+            }
+
+            let files = [photoInput.files[0], imgInput.files[0]];
+            let base64Array = [];
+
+            function readFileAsBase64(file) {
+                return new Promise((resolve, reject) => {
+                    let reader = new FileReader();
+                    reader.onload = function(event) {
+                        resolve(event.target.result);
+                    };
+                    reader.onerror = function(error) {
+                        reject(error);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            Promise.all(files.map(file => file ? readFileAsBase64(file) : Promise.resolve(null)))
+                .then(base64Strings => {
+                    let data = {
+                        'name': productName,
+                        'category': selectedCategories,
+                        'images': base64Strings.filter(base64 => base64 !== null),
+                        'type': 'simple',
+                        'regular_price': normalInp,
+                        'sale_price': saleInp,
+                        'description': textareaInp,
+                        'stock_quantity': unitInp,
+                    };
+
+                    console.log(data);
+
+                    return fetch('/product/add', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    });
+                })
+                .then(response => {
+                    if (response.status === 201) {
+                        // Form submission succeeded, display success message
+                        document.getElementById('sms_add_regular_success_message').style.display = 'block';
+                        document.getElementById('sms_add_regular_error_message').style.display = 'none';
+                        window.location.reload();
+                    } else {
+                        // Form submission failed, display error message
+                        document.getElementById('sms_add_regular_error_message').style.display = 'block';
+                        document.getElementById('sms_add_regular_success_message').style.display = 'none'; // Hide success message if it was displayed before
+                    }
+                })
+                .catch(error => {
+                    // Network error occurred, display error message
+                    document.getElementById('sms_add_regular_error_message').style.display = 'block';
+                    console.error('Error submitting form data:', error);
+                });
+        }
+    </script>
 </script>
 
 <div class="modal modal-blur fade" id="sms_edit_product_regular_w_delete_complete_modal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
