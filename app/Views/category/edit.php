@@ -84,7 +84,7 @@
                             <div style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                 <div class="col-md-12 rounded-4 bg-transparent h-100 ">
                                     <select id="sms_mu_select_category_pop" class="form-select" style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
-                                    <option value="">Select</option>
+                                    <option  value="">Select</option>
 
                                                 <?php
 
@@ -131,7 +131,7 @@
                                         </div>
                                         <div class="col-auto">
                                             <span class="avatar avatar-md">
-                                                <img src="https://via.placeholder.com/100" alt="Avatar Image">
+                                                <img src="https://via.placeholder.com/100" alt="Avatar Image" id="edit_category_image_placeholder">
                                             </span>
                                         </div>
 
@@ -149,6 +149,50 @@
         </div>
     </div>
 </div>
+
+
+
+
+<script>
+$(document).ready(function() {
+    $('.EditPopoup').click(function() {
+        // Get the row
+        var $row = $(this).closest('tr');
+        
+        // Get values from the row
+        var id = $row.attr('id');
+        var imageSrc = $row.find('td.t_oravg_m img').attr('src');
+        var categoryName = $row.find('td.category-name').text();
+        var parentCategoryName = $row.find('td:nth-child(3)').text();
+        var parentCategoryID = $row.find('td:nth-child(3)').attr('parent-id');
+        var count = $row.find('td:nth-child(4)').text();
+
+        // Now you can use these values as needed
+        // console.log('ID:', id);
+        // console.log('Image Source:', imageSrc);
+        // console.log('Category Name:', categoryName);
+        // console.log('Parent Category Name:', parentCategoryName);
+        // console.log('Parent Category ID:', parentCategoryID);
+        // console.log('Count:', count);
+        
+
+        // You can now use these values to populate your edit form or any other action
+
+        document.getElementById("sms_mu_id_category").value = id;
+        document.getElementById("sms_mu_key_category").value = categoryName;
+        document.getElementById("sms_img_ctg").src = imageSrc;
+        document.getElementById("edit_category_image_placeholder").src = imageSrc;
+
+        document.getElementById("sms_mu_select_category_pop").value = parentCategoryID;
+
+        
+        
+    });
+});
+</script>
+
+
+
 <script>
 
 

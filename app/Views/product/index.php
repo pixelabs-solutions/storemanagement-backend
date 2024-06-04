@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../partials/header.php';
 
-// var_dump($number_of_products)
+// var_dump($products);
 ?>
 <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
 <style>
