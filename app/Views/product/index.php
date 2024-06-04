@@ -358,6 +358,33 @@ require_once __DIR__ . '/../partials/header.php';
                                         </span>
                                     </div>
                                 </div>
+                                <!-- <div class="mb-3" style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
+                                    <div class="col-md-12 rounded-4 bg-transparent h-100 text-start">
+                                        <input type="text" id="product_name_input" placeholder="Enter product name" style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
+                                    </div>
+                                </div> -->
+                                <button id="Sms_MU_doneButton" class="btn btn-primary mt-2 Sms_mu_for_Eng">Done</button>
+                                <button id="doneButton" class="btn btn-primary mt-2 Sms_mu_for_hebrew">בוצע</button>
+                            </div>
+                        </div>
+                        <div id="popups" class="popup">
+                            <div class="popup-content">
+                                <h3 class="text-center" data-i18n="product_managment.product_search.filter_catageary_btn">Filter By Category and Product Name</h3>
+                                <span class="close">&times;</span>
+                                <div class="mb-3" style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
+                                    <div class="col-md-12 rounded-4 bg-transparent h-100 text-start">
+                                        <select id="category_in_product" multiple style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
+                                            <?php foreach ($categories as $category) { ?>
+                                                <option value="<?php echo $category['name']; ?>"><?php echo $category['name']; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                        <span class="span_div">
+                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.00006 7.16667L10.0001 3.16667L8.83339 2L6.00006 4.83333L3.16673 2L2.00006 3.16667L6.00006 7.16667Z" fill="#111" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
                                 <div class="mb-3" style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                     <div class="col-md-12 rounded-4 bg-transparent h-100 text-start">
                                         <input type="text" id="product_name_input" placeholder="Enter product name" style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
@@ -376,7 +403,7 @@ require_once __DIR__ . '/../partials/header.php';
                                         <input type="text" id="product_name_input" placeholder="Enter product name" style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
                                     </div>
                                 </div>
-                                <button id="Sms_MU_doneButton" class="btn btn-primary mt-2 Sms_mu_for_Eng">Done</button>
+                                <button id="doneButton" class="btn btn-primary mt-2 Sms_mu_for_Eng">Done</button>
                                 <button id="doneButton" class="btn btn-primary mt-2 Sms_mu_for_hebrew">בוצע</button>
                             </div>
                         </div>
@@ -503,7 +530,7 @@ require_once __DIR__ . '/../partials/header.php';
                             <?php }
                             } ?>
                         </table> -->
-                        <table class="sms_mu_table_product rounded-4" id="sms_products_m_products_table">
+                        <!-- <table class="sms_mu_table_product rounded-4" id="sms_products_m_products_table">
                             <?php foreach ($products as $product) {
                                 $product_json = json_encode($product);
                                 $prodimage = isset($product['images'][0]['src']) ? $product['images'][0]['src'] : "https://placehold.co/400x400?text=No%20Image%20Found";
@@ -527,7 +554,33 @@ require_once __DIR__ . '/../partials/header.php';
                                 </tr>
                                 <tr class="sms_mu_spacing_diver" id="sms_mu_spacing_div"></tr>
                             <?php } ?>
+                        </table> -->
+                        <table class="sms_mu_table_product rounded-4" id="sms_products_m_products_table">
+                            <?php foreach ($products as $product) {
+                                $product_json = json_encode($product);
+                                $prodimage = isset($product['images'][0]['src']) ? $product['images'][0]['src'] : "https://placehold.co/400x400?text=No%20Image%20Found";
+                            ?>
+                                <tr class="sms_mu_tr_product category_row" data-name="<?php echo $product['name']; ?>" data-categories="<?php echo implode(',', array_column($product['categories'], 'name')); ?>">
+                                    <td>
+                                        <img class="sms_product_img" height="100px" width="100px" src="<?php echo $prodimage; ?>" alt="">
+                                    </td>
+                                    <td><span style="font-weight:bold">Product name:</span> <?php echo $product['name']; ?></td>
+                                    <td><span style="font-weight:bold">Category:</span> <?php echo implode(', ', array_column($product['categories'], 'name')); ?></td>
+                                    <td><span style="font-weight:bold">Price:</span> <?php echo $product['regular_price'] . $currency['symbol']; ?></td>
+                                    <td><span style="font-weight:bold">Stock:</span> <span class="stock_quantity_class"><?php echo $product['stock_quantity']; ?></span></td>
+                                    <td><span style="font-weight:bold">Number of views:</span> 250</td>
+                                    <!-- <td>
+                                        <span data-bs-toggle="modal" data-bs-target="#edit-regular-modal-full-width" data-bs-productjson="<?php echo htmlspecialchars($product_json); ?>" data-bs-categoriesjson="<?php echo htmlspecialchars($parentCategories_json); ?>">
+                                            <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L         <path d=" M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z" fill="black" />
+                                            </svg>
+                                        </span>
+                                    </td> -->
+                                </tr>
+                                <tr class="sms_mu_spacing_diver" id="sms_mu_spacing_dive"></tr>
+                            <?php } ?>
                         </table>
+
                     </div>
                 </div>
                 <div class="row g-2">
@@ -632,6 +685,60 @@ require_once __DIR__ . '/../partials/header.php';
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
             <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
 
+            </script>
+            <script>
+                document.getElementById('category_in_product').addEventListener('change', function() {
+                    filterProducts();
+                });
+
+                document.getElementById('doneButton').addEventListener('click', function() {
+                    filterProductsclose();
+                });
+
+                function filterProductsclose() {
+                    document.getElementById('popups').style.display = 'none';
+                }
+  
+                function filterProducts() {
+                    var elements = document.getElementsByClassName('sms_mu_spacing_div');
+                    // Get selected categories
+                    let selectedCategories = Array.from(document.getElementById('category_in_product').selectedOptions).map(option => option.value);
+
+                    // Get product name input
+                    let productName = document.getElementById('product_name_input').value.toLowerCase();
+
+                    // Get all product rows
+                    let productRows = document.querySelectorAll('#sms_products_m_products_table .category_row');
+
+                    // Filter product rows
+                    productRows.forEach(row => {
+                        let productNameInRow = row.getAttribute('data-name').toLowerCase();
+                        let productCategoriesInRow = row.getAttribute('data-categories').split(',');
+
+                        let nameMatches = productName === '' || productNameInRow.includes(productName);
+                        let categoryMatches = selectedCategories.length === 0 || selectedCategories.some(cat => productCategoriesInRow.includes(cat));
+
+                        if (nameMatches && categoryMatches) {
+                            row.style.display = '';
+                            for (var i = 0; i < elements.length; i++) {
+                                elements[i].style.display = "none";
+                            }
+                        } else {
+                            row.style.display = 'none';
+
+                        }
+                    });
+                }
+
+                // Optional: close popup functionality
+                document.querySelector('.popup .close').addEventListener('click', function() {
+                    document.getElementById('popups').style.display = 'none';
+                });
+
+                // Optional: open popup functionality
+                // document.querySelector('.some-open-popup-button').addEventListener('click', function() {
+                //     document.getElementById('popups').style.display = 'block';
+                // });
             </script>
             <!-- <script>
                 function filterRows() {
