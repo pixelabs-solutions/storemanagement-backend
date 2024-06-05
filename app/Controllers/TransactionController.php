@@ -26,6 +26,13 @@ class TransactionController
     }
 
 
+    public function admin()
+    {
+      
+            include_once __DIR__ . '/../Views/admin/index.php';
+ 
+    }
+
     public function get_by_id($id)
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';

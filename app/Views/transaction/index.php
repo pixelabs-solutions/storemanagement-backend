@@ -183,12 +183,12 @@ require_once __DIR__ . '/../partials/header.php';
           <table class="sms_mu_table" id='sms_transaction_w_transaction_table'>
             <tr class="sms_mu_th">
               <th></th>
-              <th class="sms_mu_td" data-i18n="transction_page.transaction_th.order_no">order no</th>
+              <th class="sms_mu_td" data-i18n="transction_page.transaction_th.order_no">Order No</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.customer_name">Customer's Name</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.status">Status</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.order_date">Order Date </th>
-              <th class="sms_mu_td" data-i18n="transction_page.transaction_th.sum">sum</th>
-              <th class="sms_mu_td" data-i18n="transction_page.transaction_th.source">source</th>
+              <th class="sms_mu_td" data-i18n="transction_page.transaction_th.sum">Sum</th>
+              <th class="sms_mu_td" data-i18n="transction_page.transaction_th.source">Source</th>
               <th></th>
             </tr>
             <tr class="sms_mu_spacing_div"></tr>
