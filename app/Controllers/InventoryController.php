@@ -16,7 +16,7 @@ class InventoryController
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
-        $product_settings = Base::wc_get($configuration, "settings/products");
+        $product_settings = Base::wc_get($configuration, "settings/products", 1);
         $inventory_settings_ids =
             [
                 'woocommerce_stock_email_recipient',

@@ -14,8 +14,8 @@ class AttributesController
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
-
-        $attributes = Base::wc_get($configuration, $this->endpoint);
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $attributes = Base::wc_get($configuration, $this->endpoint, $page);
         if($is_rest == 'true')
         {
             echo json_encode($attributes);
@@ -98,16 +98,16 @@ class AttributesController
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
-
-        $attribute_terms = Base::wc_get($configuration, $this->endpoint."/".$id."/"."terms");
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $attribute_terms = Base::wc_get($configuration, $this->endpoint."/".$id."/"."terms", $page);
         // include_once __DIR__ . '/../Views/product/index.php';
      
-    // Ensure headers are set to return JSON
-    header('Content-Type: application/json');
-    
-    // Output the JSON encoded attribute terms
-    echo json_encode($attribute_terms);
-    //    return json_encode($attribute_terms);
+        // Ensure headers are set to return JSON
+        header('Content-Type: application/json');
+        
+        // Output the JSON encoded attribute terms
+        echo json_encode($attribute_terms);
+        //    return json_encode($attribute_terms);
     }
 
     
