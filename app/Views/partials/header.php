@@ -53,7 +53,7 @@
          right: 4% !important;
          position: absolute;
          top: 30%;
-         display: none;
+         /* display: none; */
       }
 
       .choices {

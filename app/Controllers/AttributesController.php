@@ -98,10 +98,16 @@ class AttributesController
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
-        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-        $attribute_terms = Base::wc_get($configuration, $this->endpoint."/".$id."/"."terms", $page);
-        //include_once __DIR__ . '/../Views/coupons/index.php';
-        echo $attribute_terms;
+
+        $attribute_terms = Base::wc_get($configuration, $this->endpoint."/".$id."/"."terms");
+        // include_once __DIR__ . '/../Views/product/index.php';
+     
+    // Ensure headers are set to return JSON
+    header('Content-Type: application/json');
+    
+    // Output the JSON encoded attribute terms
+    echo json_encode($attribute_terms);
+    //    return json_encode($attribute_terms);
     }
 
     

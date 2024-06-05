@@ -84,18 +84,18 @@
                             <div style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                 <div class="col-md-12 rounded-4 bg-transparent h-100 ">
                                     <select id="sms_mu_select_category_pop" class="form-select" style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
-                                    <option  value="">Select</option>
+                                        <option value="">Select</option>
 
-                                                <?php
+                                        <?php
 
-                                                    foreach ($categories as $category) {
-                                                        // Access the "name" property of each category object
-                                                        ?>   
-                                                        <option value="<?php echo $category['id'] ?>"><?php echo $category['name']; ?></option>
-                                                        <?php
-                                                    }
+                                        foreach ($categories as $category) {
+                                            // Access the "name" property of each category object
+                                        ?>
+                                            <option value="<?php echo $category['id'] ?>"><?php echo $category['name']; ?></option>
+                                        <?php
+                                        }
 
-                                                    ?>
+                                        ?>
                                     </select>
                                     <span class="span_div">
                                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -114,7 +114,7 @@
                                     <h3 class="card-title text-black fs-4 fw-bold sms_mu_ctg_heb">
                                         שם תמונה</h3>
                                 </div>
-                                
+
                                 <div class='gx-3'>
                                     <div class="mb-3 p-2 col-12 rounded-3 d-flex align-items-center justify-content-between " style="background-color: #EAEAEA">
                                         <label class="form-label"></label>
@@ -141,6 +141,33 @@
                             <!-- To update the term click here+ -->
                         </div>
                     </div>
+                    <div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_editForm_success_message" style="display: none;">
+                        <!-- Close icon -->
+
+                        <button type="button" class="btn-close" aria-label="Close" onclick="Sms_mu_close_scucess()"></button>
+                        <!-- SVG icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                            <path d="M9 12l2 2l4 -4"></path>
+                        </svg>
+                        <h3>Success</h3>
+                        <div class="text-muted">Your add regular data has been submitted successfully.</div>
+                    </div>
+                    <div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_add_editForm_error_message" style="display: none;">
+                        <!-- Close icon -->
+                        <button type="button" class="btn-close" aria-label="Close" onclick="Sms_mu_close_error()"></button>
+                        <!-- SVG icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                        </svg>
+                        <h3>Error</h3>
+                        <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
+                    </div>
                 </form>
                 <div class="text-center mt-2 p-2  ">
                     <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" data-i18n="popoups.add_new_catageory.popoup_in_catagory.catageory_btn" style="background-color:#4987D870; " onclick="submit_edit_ctg_form()">To Add the category click here +</button>
@@ -154,115 +181,124 @@
 
 
 <script>
-$(document).ready(function() {
-    $('.EditPopoup').click(function() {
-        // Get the row
-        var $row = $(this).closest('tr');
-        
-        // Get values from the row
-        var id = $row.attr('id');
-        var imageSrc = $row.find('td.t_oravg_m img').attr('src');
-        var categoryName = $row.find('td.category-name').text();
-        var parentCategoryName = $row.find('td:nth-child(3)').text();
-        var parentCategoryID = $row.find('td:nth-child(3)').attr('parent-id');
-        var count = $row.find('td:nth-child(4)').text();
+    $(document).ready(function() {
+        $('.EditPopoup').click(function() {
+            // Get the row
+            var $row = $(this).closest('tr');
 
-        // Now you can use these values as needed
-        // console.log('ID:', id);
-        // console.log('Image Source:', imageSrc);
-        // console.log('Category Name:', categoryName);
-        // console.log('Parent Category Name:', parentCategoryName);
-        // console.log('Parent Category ID:', parentCategoryID);
-        // console.log('Count:', count);
-        
+            // Get values from the row
+            var id = $row.attr('id');
+            var imageSrc = $row.find('td.t_oravg_m img').attr('src');
+            var categoryName = $row.find('td.category-name').text();
+            var parentCategoryName = $row.find('td:nth-child(3)').text();
+            var parentCategoryID = $row.find('td:nth-child(3)').attr('parent-id');
+            var count = $row.find('td:nth-child(4)').text();
 
-        // You can now use these values to populate your edit form or any other action
+            // Now you can use these values as needed
+            // console.log('ID:', id);
+            // console.log('Image Source:', imageSrc);
+            // console.log('Category Name:', categoryName);
+            // console.log('Parent Category Name:', parentCategoryName);
+            // console.log('Parent Category ID:', parentCategoryID);
+            // console.log('Count:', count);
 
-        document.getElementById("sms_mu_id_category").value = id;
-        document.getElementById("sms_mu_key_category").value = categoryName;
-        document.getElementById("sms_img_ctg").src = imageSrc;
-        document.getElementById("edit_category_image_placeholder").src = imageSrc;
 
-        document.getElementById("sms_mu_select_category_pop").value = parentCategoryID;
+            // You can now use these values to populate your edit form or any other action
 
-        
-        
+            document.getElementById("sms_mu_id_category").value = id;
+            document.getElementById("sms_mu_key_category").value = categoryName;
+            document.getElementById("sms_img_ctg").src = imageSrc;
+            document.getElementById("edit_category_image_placeholder").src = imageSrc;
+
+            document.getElementById("sms_mu_select_category_pop").value = parentCategoryID;
+
+
+
+        });
     });
-});
 </script>
 
 
 
 <script>
+    function submit_edit_ctg_form() {
+        // Get the select element and category ID
+        let id = document.getElementById("sms_mu_id_category").value;
+        console.log(id);
 
+        // Get image input elements
+        const imageInputs = document.querySelectorAll("#sms_img_ctg"); // Assuming image inputs have a class "image-input"
 
+        // Check if any images are selected
+        if (!imageInputs.length) {
+            console.log("No images selected for update.");
+            // Submit the form without image data (optional: display a message)
+            return;
+        }
 
+        // Function to convert image to base64 (remains the same)
+        function readFileAsBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    resolve(event.target.result);
+                };
+                reader.onerror = function(error) {
+                    reject(error);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
 
-function submit_edit_ctg_form() {
-  // Get the select element and category ID
-  let id = document.getElementById("sms_mu_id_category").value;
-  console.log(id);
+        // Convert selected images to base64 asynchronously (Promise.all)
+        Promise.all(
+                Array.from(imageInputs).map(input => input.files[0] ? readFileAsBase64(input.files[0]) : Promise.resolve(null)) // Handle cases where no file is selected
+            )
+            .then(base64Strings => {
+                // Filter out any null values (no image selected for an input)
+                const filteredBase64Strings = base64Strings.filter(base64String => base64String !== null);
 
-  // Get image input elements
-  const imageInputs = document.querySelectorAll("#sms_img_ctg"); // Assuming image inputs have a class "image-input"
+                const form_data = {
+                    "name": document.getElementById("sms_mu_key_category").value,
+                    "parent": document.getElementById("sms_mu_select_category_pop").value,
+                    "image": filteredBase64Strings, // Now containing an array of base64 strings
+                };
 
-  // Check if any images are selected
-  if (!imageInputs.length) {
-    console.log("No images selected for update.");
-    // Submit the form without image data (optional: display a message)
-    return;
-  }
+                console.log("Form data:", form_data);
 
-  // Function to convert image to base64 (remains the same)
-  function readFileAsBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = function(event) {
-        resolve(event.target.result);
-      };
-      reader.onerror = function(error) {
-        reject(error);
-      };
-      reader.readAsDataURL(file);
-    });
-  }
+                fetch(`/categories/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(form_data)
+                    })
+                    .then(response => {
+                        if (response.status === 200) {
+                            // Form submission succeeded, display success message
+                            document.getElementById('sms_editForm_success_message').style.display = 'block';
+                            document.getElementById('sms_add_editForm_error_message').style.display = 'none';
+                            window.location.reload();
+                        } else {
+                            // Form submission failed, display error message
+                            document.getElementById('sms_add_editForm_error_message').style.display = 'block';
+                            document.getElementById('sms_editForm_success_message').style.display = 'none';
+                        }
+                    })
+            })
+            .catch(error => {
+                document.getElementById('sms_add_editForm_error_message').style.display = 'block';
+                console.error('Error submitting form data:', error);
+            });
+    }
 
-  // Convert selected images to base64 asynchronously (Promise.all)
-  Promise.all(
-    Array.from(imageInputs).map(input => input.files[0] ? readFileAsBase64(input.files[0]) : Promise.resolve(null)) // Handle cases where no file is selected
-  )
-    .then(base64Strings => {
-      // Filter out any null values (no image selected for an input)
-      const filteredBase64Strings = base64Strings.filter(base64String => base64String !== null);
+    function Sms_mu_close_scucess() {
+        document.getElementById('sms_editForm_success_message').style.display = 'none';
+    }
 
-      const form_data = {
-        "name": document.getElementById("sms_mu_key_category").value,
-        "parent": document.getElementById("sms_mu_select_category_pop").value,
-        "image": filteredBase64Strings, // Now containing an array of base64 strings
-      };
-
-      console.log("Form data:", form_data);
-
-      fetch(`/categories/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(form_data)
-      })
-      .then(response => {
-        // ... (rest of the code for handling response remains the same)
-      })
-      .catch(error => {
-        // ... (rest of the code for handling errors remains the same)
-      });
-    })
-    .catch(error => {
-      console.error("Error converting image(s) to base64:", error);
-      // Handle error converting image (optional: display error message)
-    });
-}
-
+    function Sms_mu_close_error() {
+        document.getElementById('sms_add_editForm_error_message').style.display = 'none';
+    }
 
 
     function showFileName(input) {
