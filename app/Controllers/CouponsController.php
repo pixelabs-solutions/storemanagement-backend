@@ -13,7 +13,8 @@ class CouponsController
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
         $fields = ['_fields' => 'id, code, discount_type, amount, date_expires, usage_limit, usage_count'];
-        $coupons = Base::wc_get($configuration, $this->endpoint, $fields);
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $coupons = Base::wc_get($configuration, $this->endpoint, $page, $fields);
         if($is_rest == "true")
         {
             echo json_encode($coupons, JSON_UNESCAPED_UNICODE);

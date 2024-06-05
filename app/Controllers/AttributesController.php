@@ -14,8 +14,8 @@ class AttributesController
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
-
-        $attributes = Base::wc_get($configuration, $this->endpoint);
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $attributes = Base::wc_get($configuration, $this->endpoint, $page);
         if($is_rest == 'true')
         {
             echo json_encode($attributes);
@@ -98,8 +98,8 @@ class AttributesController
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
-
-        $attribute_terms = Base::wc_get($configuration, $this->endpoint."/".$id."/"."terms");
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $attribute_terms = Base::wc_get($configuration, $this->endpoint."/".$id."/"."terms", $page);
         //include_once __DIR__ . '/../Views/coupons/index.php';
         echo $attribute_terms;
     }

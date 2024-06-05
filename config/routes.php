@@ -34,7 +34,7 @@ $router->get('/index', [DashboardController::class, 'index']);
 //Products
 $router->get('/product', [ProductController::class, 'index']);
 $router->get('product/{id}', [ProductController::class, 'product_by_id']);
-$router->get('/product/export', [ProductController::class, 'export']);
+$router->get('/products/export', [ProductController::class, 'export']);
 $router->delete('/product/{id}', [ProductController::class, 'delete']);
 $router->post('/product/add', [ProductController::class, 'add']);
 $router->put('/product/{id}', [ProductController::class, 'update']);
