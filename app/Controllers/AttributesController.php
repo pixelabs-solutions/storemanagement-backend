@@ -100,8 +100,14 @@ class AttributesController
 
 
         $attribute_terms = Base::wc_get($configuration, $this->endpoint."/".$id."/"."terms");
-        //include_once __DIR__ . '/../Views/coupons/index.php';
-        echo $attribute_terms;
+        // include_once __DIR__ . '/../Views/product/index.php';
+     
+    // Ensure headers are set to return JSON
+    header('Content-Type: application/json');
+    
+    // Output the JSON encoded attribute terms
+    echo json_encode($attribute_terms);
+    //    return json_encode($attribute_terms);
     }
 
     
