@@ -10,7 +10,7 @@ class CustomerController
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
-
+        
         $customers = Customer::get_customers($configuration);
         if($is_rest == "true")
         {
