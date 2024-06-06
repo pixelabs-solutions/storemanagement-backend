@@ -158,6 +158,7 @@ class ProductController
             $variations = $this->generateVariations($data['attributes_options'], $data['attributes_names'], $data['regular_price']);
             
             $payload['variations'] = $variations;
+            // echo json_encode($payload);exit;
             $response = Base::wc_add($configuration, $this->table_name, json_encode($payload));
             if($is_rest == 'true')
             {
@@ -387,6 +388,70 @@ class ProductController
 
         exit;              
 
+    }
+
+
+    public function import()
+    {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+        // Check if the file is uploaded
+        if (!isset($_FILES['csv_file'])) {
+            echo json_encode(['error' => 'No file uploaded'], 400);
+        }
+
+        $file = $_FILES['csv_file']['tmp_name'];
+        $data = array_map('str_getcsv', file($file));
+        $header = array_shift($data);
+
+        $products = [];
+
+        foreach ($data as $row) {
+            $row = array_combine($header, $row);
+
+            $categories = array_map(function($category_id) {
+                return ['id' => (int) $category_id];
+            }, explode(',', $row['category']));
+
+            $images = array_map(function($image_url) {
+                return ['src' => $image_url];
+            }, explode(',', $row['images']));
+
+            $products[] = [
+                'name' => $row['name'],
+                'type' => $row['type'],
+                'description' => $row['description'],
+                'manage_stock' => true,
+                'stock_quantity' => (int) $row['stock_quantity'],
+                'categories' => $categories,
+                'images' => $images,
+                'regular_price' => $row['regular_price'],
+                'sale_price' => $row['sale_price']
+            ];
+            // $payload = [
+            //     'name' => $row['name'],
+            //     'type' => $row['type'],
+            //     'description' => $row['description'],
+            //     'manage_stock' => true,
+            //     'stock_quantity' => (int) $row['stock_quantity'],
+            //     'categories' => $categories,
+            //     'images' => $images,
+            //     'regular_price' => $row['regular_price'],
+            //     'sale_price' => $row['sale_price']
+            // ];
+            // $response = Base::wc_add($configuration, $this->table_name, json_encode($payload));
+            // echo $response;
+        }
+
+        $payload = ['create' => $products];
+        // // echo json_encode($payload, JSON_PRETTY_PRINT);
+        $response = Base::wc_batch($configuration, $this->table_name."/batch", json_encode($payload));
+        echo $response;
+
+        // Replace Base::wc_add and $configuration with your actual implementation details
+        // $response = Base::wc_add($configuration, $this->table_name, json_encode($payload));
+
+        // return response()->json(['success' => 'Products imported successfully', 'response' => $response], 200);
     }
 
     public function prepare_configuration($is_rest){

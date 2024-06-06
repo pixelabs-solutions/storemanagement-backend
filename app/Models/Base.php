@@ -319,4 +319,42 @@ class Base
         }
         return ['average_items' => 0, 'average_price' => 0];
     }
+
+
+
+
+    public static function wc_batch($configuration, $endpoint, $payload)
+    {
+        $consumer_key = $configuration["consumer_key"];
+        $consumer_secret = $configuration["consumer_secret"];
+        $store_url = $configuration["store_url"];
+
+        $client = new Client();
+        try
+        {
+            $response = $client->request('POST', $store_url . '/wp-json/wc/v3/'.$endpoint, [
+                'auth' => [$consumer_key, $consumer_secret],
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                ],
+                'body' => $payload
+            ]);
+
+            if ($response->getStatusCode() == 201) 
+            {
+                http_response_code($response->getStatusCode());
+                return json_encode(['message' => 'Data imported', 'status_code' => $response->getStatusCode()]);
+            } 
+            else 
+            {
+                http_response_code($response->getStatusCode());
+                return json_encode(['message' => 'Could not add data', 'status_code' => $response->getStatusCode()]);
+            }
+        }
+        catch(RequestException $exception)
+        {
+            error_log($exception->getMessage());
+            echo $exception->getMessage();
+        }
+    }
 }
