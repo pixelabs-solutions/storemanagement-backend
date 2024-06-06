@@ -1,7 +1,13 @@
 <?php
 require_once __DIR__ . '/../partials/header.php';
 
-// var_dump($products);
+//  var_dump($products);
+//  foreach($products as $product){
+//     if($product['type'] == "variable"){
+//         var_dump($product);
+//         echo "<br>";
+//     }
+//  }
 ?>
 <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
 <style>
@@ -508,7 +514,7 @@ require_once __DIR__ . '/../partials/header.php';
                                                                                                     ?>
                                         </td> -->
                                         <td><span style="font-weight:bold">Category:</span> <?php echo implode(', ', array_column($product['categories'], 'name')); ?></td>
-                                        <td><span style="font-weight:bold">Price:</span> <?php echo $product['price']; ?>
+                                        <td><span style="font-weight:bold">Price:</span> <?php echo $product['regular_price']; ?>
                                             <?php echo $currency['symbol']; ?>
                                         </td>
                                         <td><span style="font-weight:bold stock_quantity_class"></span> <span class="stock_quantity_class">

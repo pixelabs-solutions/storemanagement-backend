@@ -479,7 +479,8 @@ var_dump($attributes);
 
         let termOfVariationSelected = false;
 
-// Loop through all options
+        // Loop through all options
+        // Loop through all options
 // Loop through all options
 for (let i = 0; i < selectElement.options.length; i++) {
     let option = selectElement.options[i];
@@ -502,7 +503,7 @@ for (let i = 0; i < selectElement.options.length; i++) {
                         <label class="form-label fw-bold mt-5">Select ${option.value} Attribute</label>
                         <div style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                             <div class="col-md-12 rounded-4 bg-transparent h-100 ">
-                                <select class='select_box${i}' class="sMS_MU_SET" multiple
+                                <select class='select_box${i}' id='sMS_MU_SET${i}' multiple
                                     style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
                                     
                                 </select>
@@ -515,9 +516,7 @@ for (let i = 0; i < selectElement.options.length; i++) {
                                 </span>
                             </div>
                         </div>`;
-                        var multipleCancelButton = new Choices('.sMS_MU_SET', {
-            removeItemButton: true
-        });
+
                     // Find the select box inside the new div
                     const selectBox = newDiv.querySelector(`.select_box${i}`);
 
@@ -534,6 +533,11 @@ for (let i = 0; i < selectElement.options.length; i++) {
 
                     // Append the newDiv with populated select box
                     parentDiv.appendChild(newDiv);
+
+                    // Initialize Choices.js for the select box
+                    var multipleCancelButton = new Choices(`#sMS_MU_SET${i}`, {
+                        removeItemButton: true,
+                    });
 
                     console.log('Select box options:', selectBox.innerHTML);
                 })
@@ -554,7 +558,7 @@ for (let i = 0; i < selectElement.options.length; i++) {
 
         // If no option in the term of variation is selected, create divs under the category label
 
-      
+
     }
 
     function generate_variations() {
