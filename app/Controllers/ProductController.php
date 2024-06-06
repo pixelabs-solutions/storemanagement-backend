@@ -122,7 +122,7 @@ class ProductController
             }
         } 
         else {
-            $image_paths[] = FileHelper::save_file($data['image'], "products/".$data['name']);
+            $image_paths[] = FileHelper::save_file($data['images'], "products/".$data['name']);
         }
 
         $payload = [
@@ -136,7 +136,7 @@ class ProductController
             }, $data['category']),
             'images' => array_map(function($image_url) {
                 return ['src' => $image_url]; 
-            }, $data['images']),
+            }, $image_paths),
             'regular_price' => $data['regular_price'],
             'sale_price' => $data['sale_price']
         ];

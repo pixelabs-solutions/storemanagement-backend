@@ -22,6 +22,7 @@ class FileHelper
             mkdir($directory, 0755, true);
         }
         file_put_contents($file_path, $binary_data);
-        return $file_path;
+        return "https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+        // return $file_path;
     }
 }
