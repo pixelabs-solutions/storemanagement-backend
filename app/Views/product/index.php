@@ -33,10 +33,15 @@ require_once __DIR__ . '/../partials/header.php';
     }
 
     .sms_mu_table_product {
-        width: 100%;
-        background-color: white;
-        /* padding: 20px; */
+
+    border-collapse: separate;
+    /* table-layout: fixed; */
+    width: 100%;
+    border-spacing: 0 14px !important;
+    /* margin: 0 2% !important; */
+  
     }
+
 
     .sms_mu_table_product td {
         width: 500px;
@@ -448,7 +453,7 @@ require_once __DIR__ . '/../partials/header.php';
                                         $prodimage = "https://placehold.co/400x400?text=No%20Image%20Found";
                                     }
                             ?>
-                                     <tr class="sms_mu_tr_product category_row" data-name="<?php echo $product['name']; ?>" data-categories="<?php echo implode(',', array_column($product['categories'], 'name')); ?>">
+                                    <tr class="sms_mu_tr_product category_row" data-name="<?php echo $product['name']; ?>" data-categories="<?php echo implode(',', array_column($product['categories'], 'name')); ?>">
                                         <td>
                                             <img class="sms_product_img" height="100px" width="100px" src="<?php echo $prodimage; ?>" alt="">
                                         </td>
@@ -490,10 +495,9 @@ require_once __DIR__ . '/../partials/header.php';
 
                                         </td>
                                     </tr>
-                                    <tr class="sms_mu_spacing_diver" id="sms_mu_spacing_div"></tr>
                                 <?php }
                                 if ($product['type'] == 'variable') { ?>
-                                     <tr class="sms_mu_tr_product category_row" data-name="<?php echo $product['name']; ?>" data-categories="<?php echo implode(',', array_column($product['categories'], 'name')); ?>">
+                                    <tr class="sms_mu_tr_product category_row" data-name="<?php echo $product['name']; ?>" data-categories="<?php echo implode(',', array_column($product['categories'], 'name')); ?>">
                                         <td>
                                             <img class="sms_product_img" src="/assets/dist/img/products/bag.png" alt="">
 
@@ -534,7 +538,6 @@ require_once __DIR__ . '/../partials/header.php';
 
                                         </td>
                                     </tr>
-                                    <tr class="sms_mu_spacing_diver" id="sms_mu_spacing_div"></tr>
                             <?php }
                             } ?>
                         </table>
@@ -657,7 +660,7 @@ require_once __DIR__ . '/../partials/header.php';
                 }
 
                 function filterProducts() {
-                    var elements = document.getElementsByClassName('sms_mu_spacing_div');
+
                     // Get selected categories
                     let selectedCategories = Array.from(document.getElementById('category_in_product').selectedOptions).map(option => option.value);
 

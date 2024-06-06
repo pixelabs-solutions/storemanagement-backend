@@ -1,3 +1,12 @@
+<style>
+   .sms_mu_table {
+    border-collapse: separate;
+    /* table-layout: fixed; */
+    width: 100%;
+    border-spacing: 0 14px !important;
+    /* margin: 0 2% !important; */
+  }
+</style>
 <div class="sms_customers_m  p-2 col-12" style="height: 570px; overflow-y:auto">
   <div class=" col-12 sms_customers_m_main_box ">
     <div class="row row-cards justify-content-sm-between gap-sm-3 gap-2 gap-lg-0 bg-white p-3 m-0 rounded-3">
@@ -127,7 +136,6 @@
                 products</th>
               <th class="sms_mu_td" data-i18n="popoups.add_new_catageory.th_in_catageory.th_img"></th>
             </tr>
-            <tr class="sms_mu_spacing_div"></tr>
           </thead>
           <tbody>
             <?php foreach ($categories as $category) {
@@ -170,7 +178,6 @@
                   </div>
                 </td>
               </tr>
-              <tr class="sms_mu_spacing_div"></tr>
             <?php } ?>
           </tbody>
         </table>
