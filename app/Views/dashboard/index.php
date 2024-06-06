@@ -2,7 +2,7 @@
 include('../app/Views/partials/header.php');
 require_once __DIR__ . '/../partials/header.php';
 
-var_dump($dashboard_data);
+// var_dump($dashboard_data);
 ?>
 
 <!-- Leaflet CSS -->
@@ -45,6 +45,11 @@ var_dump($dashboard_data);
     .rtl .sms_mu_we_heb {
         display: block !important;
     }
+
+    .sms_w_date_active{
+        background-color:#A8C3E7 !important;
+        border-radius: 100px;
+    }
 </style>
 <!-- Map Css End -->
 <!-- Header Start -->
@@ -58,7 +63,7 @@ var_dump($dashboard_data);
         </a>
         <a href="?query=current_month" id="current_month" class=" shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.third_tab "> Last Month
         </a>
-        <a href="?query=last_year" id="last_year" class="btn  btn-pill shadow-none  btn-light  outline-none tab-pane sms_w_date" data-i18n="dashboard.tabs.fourth_tab" style="background-color:#A8C3E7;"> Last Year
+        <a href="?query=last_year" id="last_year" class="shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.fourth_tab" style=""> Last Year
         </a>
     </div>
     <!-- Date Range Button  Start-->
@@ -678,39 +683,39 @@ var_dump($dashboard_data);
         // });
     </script>
     <script>
-        // Function to get query parameters from the URL
-        document.getElementById('24_hours').onclick = funClickHour;
-        document.getElementById('last_week').onclick = funClickWeek;
-        document.getElementById('current_month').onclick = funClickMonth;
-        document.getElementById('last_year').onclick = funClickYear;
+        // // Function to get query parameters from the URL
+        // document.getElementById('24_hours').onclick = funClickHour;
+        // document.getElementById('last_week').onclick = funClickWeek;
+        // document.getElementById('current_month').onclick = funClickMonth;
+        // document.getElementById('last_year').onclick = funClickYear;
 
-        function funClickHour() {
-            document.getElementById('24_hours').style.backgroundColor = "#A8C3E7";
-            document.getElementById('last_week').style.backgroundColor = "transparent";
-            document.getElementById('current_month').style.backgroundColor = "transparent";
-            document.getElementById('last_year').style.backgroundColor = "transparent";
-        }
+        // function funClickHour() {
+        //     document.getElementById('24_hours').style.backgroundColor = "#A8C3E7";
+        //     document.getElementById('last_week').style.backgroundColor = "transparent";
+        //     document.getElementById('current_month').style.backgroundColor = "transparent";
+        //     document.getElementById('last_year').style.backgroundColor = "transparent";
+        // }
 
-        function funClickWeek() {
-            document.getElementById('24_hours').style.backgroundColor = "transparent";
-            document.getElementById('last_week').style.backgroundColor = "#A8C3E7";
-            document.getElementById('current_month').style.backgroundColor = "transparent";
-            document.getElementById('last_year').style.backgroundColor = "transparent";
-        }
+        // function funClickWeek() {
+        //     document.getElementById('24_hours').style.backgroundColor = "transparent";
+        //     document.getElementById('last_week').style.backgroundColor = "#A8C3E7";
+        //     document.getElementById('current_month').style.backgroundColor = "transparent";
+        //     document.getElementById('last_year').style.backgroundColor = "transparent";
+        // }
 
-        function funClickMonth() {
-            document.getElementById('24_hours').style.backgroundColor = "transparent";
-            document.getElementById('last_week').style.backgroundColor = "transparent";
-            document.getElementById('current_month').style.backgroundColor = "#A8C3E7";
-            document.getElementById('last_year').style.backgroundColor = "transparent";
-        }
+        // function funClickMonth() {
+        //     document.getElementById('24_hours').style.backgroundColor = "transparent";
+        //     document.getElementById('last_week').style.backgroundColor = "transparent";
+        //     document.getElementById('current_month').style.backgroundColor = "#A8C3E7";
+        //     document.getElementById('last_year').style.backgroundColor = "transparent";
+        // }
 
-        function funClickYear() {
-            document.getElementById('24_hours').style.backgroundColor = "transparent";
-            document.getElementById('last_week').style.backgroundColor = "transparent";
-            document.getElementById('current_month').style.backgroundColor = "transparent";
-            document.getElementById('last_year').style.backgroundColor = "#A8C3E7";
-        }
+        // function funClickYear() {
+        //     document.getElementById('24_hours').style.backgroundColor = "transparent";
+        //     document.getElementById('last_week').style.backgroundColor = "transparent";
+        //     document.getElementById('current_month').style.backgroundColor = "transparent";
+        //     document.getElementById('last_year').style.backgroundColor = "#A8C3E7";
+        // }
 
 
         function getQueryParams() {

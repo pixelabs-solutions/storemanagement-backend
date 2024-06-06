@@ -436,23 +436,23 @@ var_dump($attributes);
 
         let termOfVariationSelected = false;
 
-        // Loop through all options
-        // Loop through all options
-        for (let i = 0; i < selectElement.options.length; i++) {
-            let option = selectElement.options[i];
-            // Check if the option is selected
-            if (option.selected) {
-                if (option.value === 'add_term_variation') {
-                    termOfVariationSelected = true;
-                    break; // Exit loop immediately if a variation option is selected
-                } else {
-                    // Fetch the terms from the server
-                    fetch(`/attributes/${option.value}/terms`)
-                        .then(response => response.json())
-                        .then(data => {
-                            // Create a new div for the selected option
-                            let newDiv = document.createElement('div');
-                            newDiv.classList.add('selected-option');
+// Loop through all options
+// Loop through all options
+for (let i = 0; i < selectElement.options.length; i++) {
+    let option = selectElement.options[i];
+    // Check if the option is selected
+    if (option.selected) {
+        if (option.value === 'add_term_variation') {
+            termOfVariationSelected = true;
+            break; // Exit loop immediately if a variation option is selected
+        } else {
+            // Fetch the terms from the server
+            fetch(`/attributes/${option.value}/terms`)
+                .then(response => response.json())
+                .then(data => {
+                    // Create a new div for the selected option
+                    let newDiv = document.createElement('div');
+                    newDiv.classList.add('selected-option');
 
                             // Customize the content of the div
                             newDiv.innerHTML = `  
@@ -472,11 +472,11 @@ var_dump($attributes);
                                 </span>x
                             </div>
                         </div>`;
-                            var multipleCancelButton = new Choices('.sMS_MU_SET', {
-                                removeItemButton: true
-                            });
-                            // Find the select box inside the new div
-                            const selectBox = newDiv.querySelector(`.select_box${i}`);
+                        var multipleCancelButton = new Choices('.sMS_MU_SET', {
+            removeItemButton: true
+        });
+                    // Find the select box inside the new div
+                    const selectBox = newDiv.querySelector(`.select_box${i}`);
 
                             // Clear the loading option
                             selectBox.innerHTML = '';
@@ -489,8 +489,8 @@ var_dump($attributes);
                                 selectBox.appendChild(optionElement);
                             });
 
-                            // Append the newDiv with populated select box
-                            parentDiv.appendChild(newDiv);
+                    // Append the newDiv with populated select box
+                    parentDiv.appendChild(newDiv);
 
                             console.log('Select box options:', selectBox.innerHTML);
                         })
