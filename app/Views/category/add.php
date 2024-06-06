@@ -42,6 +42,7 @@
     .sms_a_add_new_category label i {
         margin-right: 5px;
     }
+
     .sms_a_add_category_pop {
         position: fixed;
         top: 50%;
@@ -56,7 +57,7 @@
         z-index: 9999;
         text-align: center;
         box-shadow: 100vh 100vh 100vh 300vh #00000059;
-}
+    }
 
     .sms_a_add_category_pop svg {
         fill: green;
@@ -99,15 +100,15 @@
                                 <div class="col-md-12 rounded-4 bg-transparent h-100 ">
                                     <select id="sms_mu_parent_ctg" class="form-select form-select-md" style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
 
-                                    <option value="">Select</option>
+                                        <option value="">Select</option>
 
-                                    <?php
+                                        <?php
 
                                         foreach ($categories as $category) {
                                             // Access the "name" property of each category object
-                                            ?>   
+                                        ?>
                                             <option value="<?php echo $category['id'] ?>"><?php echo $category['name']; ?></option>
-                                            <?php
+                                        <?php
                                         }
 
                                         ?>
@@ -154,10 +155,10 @@
                         </div>
                     </div>
                 </form>
-                <div class="modal-body text-center py-4 sms_a_add_category_pop" id="sms_add_category_success_message" style="display: none;">
+                <div class="modal-body text-center py-4 sms_a_add_category_pop" id="sms_addForm_category_success_message" style="display: none;">
                     <!-- Close icon -->
 
-                    <button type="button" class="btn-close" aria-label="Close" onclick="sms_add_category_close_success_message()"></button>
+                    <button type="button" class="btn-close" aria-label="Close" onclick="Sms_mu_close_add_form_scucess()"></button>
                     <!-- SVG icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -167,9 +168,9 @@
                     <h3>Success</h3>
                     <div class="text-muted">Your add Category data has been submitted successfully.</div>
                 </div>
-                <div class="modal-body text-center py-4 sms_a_add_category_pop" id="sms_add_category_error_message" style="display: none;">
+                <div class="modal-body text-center py-4 sms_a_add_category_pop" id="sms_addForm_category_error_message" style="display: none;">
                     <!-- Close icon -->
-                    <button type="button" class="btn-close" aria-label="Close" onclick="sms_add_category_close_error_message()"></button>
+                    <button type="button" class="btn-close" aria-label="Close" onclick="Sms_mu_close_add_form_error()"></button>
                     <!-- SVG icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -188,67 +189,74 @@
 
 <!-- input javascript code  -->
 <script>
-function function_of_Edit() {
-  const selectElement = document.getElementById("sms_mu_parent_ctg").value;
-  const imageInput = document.getElementById('sms_mu_img_add_ctg');
+    function function_of_Edit() {
+        const selectElement = document.getElementById("sms_mu_parent_ctg").value;
+        const imageInput = document.getElementById('sms_mu_img_add_ctg');
 
-  // Check if an image is selected
-  if (!imageInput.files[0]) {
-    console.error("Please select an image to edit the category.");
-    return; // Early exit if no image selected
-  }
+        // Check if an image is selected
+        if (!imageInput.files[0]) {
+            console.error("Please select an image to edit the category.");
+            return; // Early exit if no image selected
+        }
 
-  // Function to convert image to base64
-  function readFileAsBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = function(event) {
-        resolve(event.target.result);
-      };
-      reader.onerror = function(error) {
-        reject(error);
-      };
-      reader.readAsDataURL(file);
-    });
-  }
+        // Function to convert image to base64
+        function readFileAsBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    resolve(event.target.result);
+                };
+                reader.onerror = function(error) {
+                    reject(error);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
 
-  // Convert the selected image to base64
-  readFileAsBase64(imageInput.files[0])
-    .then(base64String => {
-      const data = {
-        "name": document.getElementById('sms_mu_name_ctg').value,
-        "parent": selectElement,
-        "image": base64String, // Now containing the base64 string of the image
-      };
+        // Convert the selected image to base64
+        readFileAsBase64(imageInput.files[0])
+            .then(base64String => {
+                const data = {
+                    "name": document.getElementById('sms_mu_name_ctg').value,
+                    "parent": selectElement,
+                    "image": base64String, // Now containing the base64 string of the image
+                };
 
-      console.log(data);
+                console.log(data);
 
-      fetch('/categories/add', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-      })
-      .then(response => {
-        // ... (rest of the code remains the same for handling response)
-      })
-      .catch(error => {
-        // ... (rest of the code remains the same for handling errors)
-      });
-    })
-    .catch(error => {
-      console.error("Error converting image to base64:", error);
-      // Handle error converting image (optional: display error message)
-    });
-}
+                fetch('/categories/add', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => {
+                        if (response.status === 201) {
+                            // Form submission succeeded, display success message
+                            document.getElementById('sms_addForm_category_success_message').style.display = 'block';
+                            document.getElementById('sms_addForm_category_error_message').style.display = 'none';
+                            window.location.reload();
+                        } else {
+                            // Form submission failed, display error message
+                            document.getElementById('sms_addForm_category_error_message').style.display = 'block';
+                            document.getElementById('sms_addForm_category_success_message').style.display = 'none';
+                        }
+                    })
 
-    function sms_add_category_close_success_message() {
-        document.getElementById('sms_add_category_success_message').style.display = 'none';
+            })
+            .catch(error => {
+                document.getElementById('sms_addForm_category_error_message').style.display = 'block';
+                console.error('Error submitting form data:', error);
+            });
     }
 
-    function sms_add_category_close_error_message() {
-        document.getElementById('sms_add_category_error_message').style.display = 'none';
+    function Sms_mu_close_add_form_scucess() {
+        document.getElementById('sms_addForm_category_success_message').style.display = 'none';
+    }
+
+    function Sms_mu_close_add_form_error() {
+        document.getElementById('sms_addForm_category_error_message').style.display = 'none';
     }
 
     function sms_a_add_new_categorys() {
@@ -260,6 +268,14 @@ function function_of_Edit() {
             // Update input label or any other relevant element with the file name
             input.nextElementSibling.innerHTML = fileName;
         }
+    }
+
+    function sms_add_variations_close_success_message() {
+        document.getElementById('sms_addForm_category_success_message').style.display = 'none';
+    }
+
+    function sms_add_variations_close_error_message() {
+        document.getElementById('sms_addForm_category_error_message').style.display = 'none';
     }
 
     // function function_submit_ctg() {

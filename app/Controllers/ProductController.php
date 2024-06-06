@@ -23,7 +23,8 @@ class ProductController
         [
             '_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations'
         ];
-        $products = Base::wc_get($configuration, $this->table_name, $product_fields);
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $products = Base::wc_get($configuration, $this->table_name, $page, $product_fields);
         if(isset($_GET['category']) && $_GET['category'] !== "")
         {
             $category = $_GET['category'];
@@ -55,9 +56,9 @@ class ProductController
                 $products = $filteredProducts;
             }
         $category_fields = ['_fields' => 'id, name, parent, image, count'];
-        $categories = Base::wc_get($configuration,'products/categories', $category_fields);
-        $attributes = Base::wc_get($configuration, 'products/attributes');
-        $currency = Base::wc_get($configuration, 'data/currencies/current');
+        $categories = Base::wc_get($configuration,'products/categories', $page, $category_fields);
+        $attributes = Base::wc_get($configuration, 'products/attributes', $page);
+        $currency = Base::wc_get($configuration, 'data/currencies/current', $page);
         
         $number_of_products = Product::get_products_count($configuration);
         // var_dump($products);
@@ -276,16 +277,116 @@ class ProductController
     }
 
     public function export(){
-        // $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
-        // $configuration = $this->prepare_configuration($is_rest);
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
 
         // $product_fields = 
         // [
         //     '_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations'
         // ];
-        // $products = Base::wc_get($configuration, $this->table_name, $product_fields);
-        // echo $products;
-        echo "export";
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $products = Base::wc_get($configuration, $this->table_name, $page);
+        // echo json_encode($products);exit;
+        $csv_file_path = 'products.csv';
+
+        // Open a file handle for writing
+        $fp = fopen($csv_file_path, 'w');
+        fputs($fp, $bom = chr(0xEF) . chr(0xBB) . chr(0xBF)); 
+        // Write headers
+        $headers = [
+            'ID', 'Name', 'Categories', 'Regular Price', 'Sale Price', 'Stock Quantity', 'Description', 'Type', 'Attributes', 
+            'Variations', 'Slug', 'Permalink', 'Date Created', 'Date Modified', 'Status', 'Featured', 'Catalog Visibility', 
+            'Short Description', 'SKU', 'Price', 'Date On Sale From', 'Date On Sale To', 'On Sale', 'Purchasable', 
+            'Total Sales', 'Virtual', 'Downloadable', 'Downloads', 'External URL', 'Button Text', 'Tax Status', 'Tax Class', 
+            'Manage Stock', 'Backorders', 'Backorders Allowed', 'Backordered', 'Low Stock Amount', 'Sold Individually', 
+            'Weight', 'Dimensions', 'Shipping Required', 'Shipping Taxable', 'Shipping Class', 'Reviews Allowed', 
+            'Average Rating', 'Rating Count', 'Upsell IDs', 'Cross Sell IDs', 'Parent ID', 'Purchase Note', 'Tags', 
+            'Default Attributes', 'Grouped Products', 'Menu Order', 'Price HTML', 'Related IDs', 'Meta Data', 'Stock Status', 
+            'Has Options', 'Post Password'
+        ];
+        fputcsv($fp, $headers);
+
+        // Write data
+        foreach ($products as $product) {
+            $product_data = [
+                $product['id'],
+                $product['name'],
+                implode(', ', array_column($product['categories'], 'name')),
+                $product['regular_price'],
+                $product['sale_price'],
+                $product['stock_quantity'],
+                strip_tags($product['description']),
+                $product['type'],
+                json_encode($product['attributes']),
+                json_encode($product['variations']),
+                $product['slug'],
+                $product['permalink'],
+                $product['date_created'],
+                $product['date_modified'],
+                $product['status'],
+                $product['featured'],
+                $product['catalog_visibility'],
+                strip_tags($product['short_description']),
+                $product['sku'],
+                $product['price'],
+                $product['date_on_sale_from'],
+                $product['date_on_sale_to'],
+                $product['on_sale'],
+                $product['purchasable'],
+                $product['total_sales'],
+                $product['virtual'],
+                $product['downloadable'],
+                json_encode($product['downloads']),
+                $product['external_url'],
+                $product['button_text'],
+                $product['tax_status'],
+                $product['tax_class'],
+                $product['manage_stock'],
+                $product['backorders'],
+                $product['backorders_allowed'],
+                $product['backordered'],
+                $product['low_stock_amount'],
+                $product['sold_individually'],
+                $product['weight'],
+                json_encode($product['dimensions']),
+                $product['shipping_required'],
+                $product['shipping_taxable'],
+                $product['shipping_class'],
+                $product['reviews_allowed'],
+                $product['average_rating'],
+                $product['rating_count'],
+                json_encode($product['upsell_ids']),
+                json_encode($product['cross_sell_ids']),
+                $product['parent_id'],
+                $product['purchase_note'],
+                json_encode($product['tags']),
+                json_encode($product['default_attributes']),
+                json_encode($product['grouped_products']),
+                $product['menu_order'],
+                $product['price_html'],
+                json_encode($product['related_ids']),
+                json_encode($product['meta_data']),
+                $product['stock_status'],
+                $product['has_options'],
+                $product['post_password']
+            ];
+            fputcsv($fp, $product_data);
+        }
+
+        // Close the file handle
+        fclose($fp);
+
+        // Set headers to prompt a download of the CSV file
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . basename($csv_file_path) . '"');
+        header('Content-Length: ' . filesize($csv_file_path));
+        readfile($csv_file_path);
+
+        // Optionally delete the file after download
+        unlink($csv_file_path);
+
+        exit;              
+
     }
 
     public function prepare_configuration($is_rest){

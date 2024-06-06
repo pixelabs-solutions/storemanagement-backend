@@ -15,7 +15,8 @@ class TransactionController
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
         $fields = ['_fields' => 'id, status, total, shipping_total, date_created, total, billing, meta_data, line_items'];
-        $transactions = Base::wc_get($configuration, "orders", $fields);
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $transactions = Base::wc_get($configuration, "orders", $page, $fields);
         if($is_rest == "true")
         {
             echo json_encode($transactions, JSON_UNESCAPED_UNICODE);
@@ -25,6 +26,13 @@ class TransactionController
         // var_dump($transactions);
     }
 
+
+    public function admin()
+    {
+      
+            include_once __DIR__ . '/../Views/admin/index.php';
+ 
+    }
 
     public function get_by_id($id)
     {

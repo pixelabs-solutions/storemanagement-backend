@@ -155,7 +155,7 @@
                             <div class="rounded-4">
                                 <div class="col-12 col-md-12 rounded-2" id="sms_a_add_new_term">
                                     <div class="rounded">
-                                        <h3 class="card-title text-black fs-4 fw-bold" style="font-size: 35px;"  data-i18n="popoups.future_managment.add_new_term.error_alert">
+                                        <h3 class="card-title text-black "   data-i18n="popoups.future_managment.add_new_term.error_alert">
                                             Choosing a color for the display of the term </h3>
                                     </div>
                                     <div class="p-2">
