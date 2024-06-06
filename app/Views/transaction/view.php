@@ -132,7 +132,7 @@
             </div>
             <div class="col-md-4 justify-content-center mt-3 ">
               <label for="statusSelect" class="form-label fs-3 fw-bold" data-i18n="popoups.transction_pop_popuop.order_detail.order_status">Change order status</label>
-              <select class="form-select form-select-lg h-80" id="order_status" style="background-color:#f5f5f5;">
+              <select class="form-select form-select-lg h-80" id="sms_mu_order_status" style="background-color:#f5f5f5;">
                 <option value="completed">Complete</option>
                 <option value="pending">In Treatment</option>
                 <option value="cancelled">Cancelled</option>
@@ -232,7 +232,7 @@
 
     transactions = transactionData.data;
 
-    const order_status_select = document.getElementById("order_status");
+    const order_status_select = document.getElementById("sms_mu_order_status");
 
     if (transactions.status == "completed") {
       order_status_select.value = "completed";
@@ -252,7 +252,6 @@
 
 
     document.getElementById("order_id").innerHTML = transactions.id;
-
     document.getElementById("client_first_name").innerHTML = transactions.billing.first_name;
     document.getElementById("client_last_name").innerHTML = transactions.billing.last_name;
     document.getElementById("customer_billing_phone").innerHTML = transactions.billing.phone;
@@ -317,28 +316,15 @@
 
   }
   $('.sms_mu_for_save_changes').click(function() {
-      var selectedStatus = $(this).val();
-      var selectedIds = [];
-
-      // Gather IDs of selected rows
-      $('input[type="checkbox"]:checked').each(function() {
-        var id = $(this).closest('tr').find('#transaction_id').text();
-        // Remove '#' from the id
-        id = id.replace('#', '');
-        selectedIds.push(id);
-      });
-
-      // console.log(selectedIds);
-
-      // Prepare data for POST request
-      var data = {
-        id: selectedIds,
+      // var selectedStatus = $(this).val();
+      var selectedStatus =document.getElementById("sms_mu_order_status").value;;
+      var data = {       
         status: selectedStatus
       };
 
       // Make fetch request
-      fetch('/transactions/update_bulk_status', {
-          method: 'POST',
+      fetch('/transactions/update_status/'+transactions.id, {
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -346,10 +332,10 @@
         })
         .then(response => {
           if (response.status === 200) {
-            showNotification("Bulk status updated successfully");
+            showNotification("Status updated successfully");
             window.location.reload(); // Reload the page after successful update
           } else {
-            showNotification("Failed to update bulk status", true);
+            showNotification("Failed to update Status", true);
           }
         })
         .catch(error => {
