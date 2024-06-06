@@ -211,7 +211,7 @@
             'stock_quantity': unitInp,
         };
 
-        console.log(data);
+        // console.log(data);
 
         fetch(`/product/${id}`, { // Change the route path to the appropriate endpoint
                 method: 'POST',
@@ -227,7 +227,7 @@
                 return response.json();
             })
             .then(data => {
-                console.log('Data sent:', data);
+                // console.log('Data sent:', data);
                 // You can handle the response data here if needed
             })
             .catch(error => {
@@ -285,7 +285,7 @@
             var button = event.relatedTarget; // Button that triggered the modal
             var productJson = button.getAttribute('data-bs-productJson'); // Product data passed from the button
             var parentCategoriesData = button.getAttribute('data-bs-categoriesJson'); // Product data passed from the button
-            console.log(productJson)
+            // console.log(productJson)
 
             try {
                 // Convert the JSON string to JavaScript object
@@ -297,14 +297,14 @@
                 document.getElementById('sms_mu_Ip_seven').value = productData.stock_quantity;
                 document.getElementById('sms_mu_id_regular_product').value = productData.stock_quantity;
                 document.getElementById('sms_mu_Ip_six').value = productData.description.replace(/<[^>]*>/g, '');
-            } catch (error) {
-                console.error('Error parsing JSON:', error);
-            }
 
-            var parentCategories_json = JSON.parse(parentCategoriesData);
+                var parentCategories_json = JSON.parse(parentCategoriesData);
+                console.log(parentCategories_json);
             var selectElement = document.getElementById('category_in_popoupop');
             selectElement.innerHTML = '';
             var productcategorys = productData.categories;
+            console.log(productData.categories);
+
             parentCategories_json.forEach(function(category) {
                 var option = document.createElement('option');
                 option.value = category.id; // Assuming category.id contains the ID
@@ -312,11 +312,17 @@
                 productcategorys.forEach(function(productcategory) {
                     if (productcategory['id'] == category.id) {
                         option.selected = true;
-                        console.log("SADSAD");
+                        // console.log("SADSAD");
                     }
                 });
                 selectElement.appendChild(option);
             });
+
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+            }
+
+            
             if (count < 1) {
 
 
@@ -359,7 +365,7 @@
 
         // Function to close the modal
         function closeModal() {
-            console.log("Modal closed")
+            // console.log("Modal closed")
             modal.style.display = 'none';
             modal.classList.remove('show');
             modal.setAttribute('aria-modal', 'false');

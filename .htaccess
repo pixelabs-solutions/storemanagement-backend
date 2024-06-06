@@ -1,12 +1,13 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
-    
+
     # Pass the Authorization header to PHP
     RewriteCond %{HTTP:Authorization} ^(.*)
     RewriteRule ^(.*) - [E=HTTP_AUTHORIZATION:%1]
 
-    # Redirect all requests to the index.php file
+    # Redirect all requests to the public/index.php file, including the root
+    RewriteCond %{REQUEST_URI} !^/public/index\.php$
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
