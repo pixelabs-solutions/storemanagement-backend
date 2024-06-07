@@ -11,7 +11,6 @@ class CouponsController
     private $endpoint = 'coupons';
     public function index()
     {
-        // RequestTracker::trackRequest();
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
         $fields = ['_fields' => 'id, code, discount_type, amount, date_expires, usage_limit, usage_count'];
