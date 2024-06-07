@@ -11,21 +11,58 @@ use GuzzleHttp\Exception\RequestException;
 class Product
 {
 
-    public static function get_products($configuration)
+    // public static function get_products($configuration)
+    // {
+    //     $consumer_key = $configuration["consumer_key"];
+    //     $consumer_secret = $configuration["consumer_secret"];
+    //     $store_url = $configuration["store_url"];
+
+    //     $client = new Client();
+    //     try {
+    //         $response = $client->request('GET', $store_url . '/wp-json/wc/v3/products', [
+    //             'auth' => [$consumer_key, $consumer_secret]
+    //         ]);
+        
+    //         return json_decode($response->getBody(), true);
+    //     } catch (RequestException $e) {
+    //         echo $e->getMessage();
+    //     }
+    // }
+
+    public static function get_products($configuration, $endpoint, $fields = [])
     {
         $consumer_key = $configuration["consumer_key"];
         $consumer_secret = $configuration["consumer_secret"];
         $store_url = $configuration["store_url"];
-
         $client = new Client();
-        try {
-            $response = $client->request('GET', $store_url . '/wp-json/wc/v3/products', [
-                'auth' => [$consumer_key, $consumer_secret]
-            ]);
-        
-            return json_decode($response->getBody(), true);
-        } catch (RequestException $e) {
-            echo $e->getMessage();
+        $all_products = [];
+        $page = 1;
+
+        try 
+        {
+            while (true) 
+            {
+                $response = $client->request('GET', $store_url . '/wp-json/wc/v3/'.$endpoint, [
+                    'auth' => [$consumer_key, $consumer_secret],
+                    'query' => array_merge(['per_page' => 100, 'page' => $page], $fields)
+                ]);
+                
+                $products = json_decode($response->getBody(), true);
+                if (empty($products)) 
+                {
+                    break;
+                }
+                
+                $all_products = array_merge($all_products, $products);
+                $page++;
+            }
+            
+            return $all_products;
+        } 
+        catch (RequestException $e) 
+        {
+            echo "Exception: ".$e->getMessage();
+            return null;
         }
     }
 
