@@ -42,9 +42,18 @@ require_once __DIR__ . '/../partials/header.php';
 
   }
 
+  .sms_transaction_w_pending {
+    background-color: #198754;
+    border-radius: 25px;
+    color: white;
+    padding: 15px 20px;
+  }
+
   .sms_mu_table {
-    border-spacing: 0 50px !important;
+    border-collapse: separate;
+    /* table-layout: fixed; */
     width: 100%;
+    border-spacing: 0 14px !important;
     /* margin: 0 2% !important; */
   }
 
@@ -191,7 +200,7 @@ require_once __DIR__ . '/../partials/header.php';
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.source">Source</th>
               <th></th>
             </tr>
-            <tr class="sms_mu_spacing_div"></tr>
+            <!-- <tr class="sms_mu_spacing_div"></tr> -->
 
             <?php
             foreach ($transactions as $item) {
@@ -238,7 +247,7 @@ require_once __DIR__ . '/../partials/header.php';
                   </span>
                 </td>
               </tr>
-              <tr class="sms_mu_spacing_div"></tr>
+              <!-- <tr class="sms_mu_spacing_div"></tr> -->
               <!-- <tr class="sms_mu_tr">
                 <td>
                   <span class="form-check-label"></span>
@@ -267,7 +276,7 @@ require_once __DIR__ . '/../partials/header.php';
 
             }
             ?>
-            <tr class="sms_mu_spacing_div"></tr>
+            <!-- <tr class="sms_mu_spacing_div"></tr> -->
 
           </table>
         </div>
@@ -338,6 +347,8 @@ require_once __DIR__ . '/../partials/header.php';
         status.classList.add('sms_transaction_w_cancelled');
       } else if (statusText === 'completed') {
         status.classList.add('sms_transaction_w_approved');
+      } else if (statusText === 'pending') {
+        status.classList.add('sms_transaction_w_pending');
       }
     });
   }

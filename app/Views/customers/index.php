@@ -124,8 +124,10 @@ $customers = $customers['data'];
             background-color: #f2f2f2;
         } */
   .sms_mu_table {
-    border-spacing: 0 10px !important;
+    border-collapse: separate;
+    /* table-layout: fixed; */
     width: 100%;
+    border-spacing: 0 14px !important;
     /* margin: 0 2% !important; */
   }
 
@@ -144,11 +146,6 @@ $customers = $customers['data'];
     /* border-bottom: 10px solid #F2F2F2 !important; */
   }
 
-  .sms_mu_spacing_div {
-    height: 10px;
-    background-color: #F2F2F2;
-    width: inherit;
-  }
 
   .sms_mu_th {
     background-color: #a8c3e7 !important;
@@ -195,22 +192,19 @@ $customers = $customers['data'];
   <div class=" col-12 mt-5">
     <div class="row row-cards justify-content-sm-between gap-sm-3 gap-2 gap-lg-0 bg-white p-3 m-0 rounded-3">
       <div class="col-sm-5 col-lg-3 m-0 ">
-
         <div class="card-body-rounded">
           <div>
             <form id="sms_customers_m_search_form" action="./" method="get" autocomplete="off" novalidate>
               <div class="input-icon border-bottom border-black">
                 <span class="input-icon-addon">
                   <!-- Download SVG icon from http://tabler-icons.io/i/search -->
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
                     <path d="M21 21l-6 -6" />
                   </svg>
                 </span>
-                <input type="text" id="sms_customers_m_search_input" value="" class="form-control border-0 "
-                  placeholder="Customer search" aria-label="Search in website">
+                <input type="text" id="sms_customers_m_search_input" value="" class="form-control border-0 " placeholder="Customer search" aria-label="Search in website">
               </div>
             </form>
           </div>
@@ -232,27 +226,27 @@ $customers = $customers['data'];
               <th data-i18n="customer_page.customer_th.order_name" class="sms_mu_td">Order average</th>
 
             </tr>
-            <tr class="sms_mu_spacing_div"></tr>
+
 
           </thead>
           <tbody>
             <?php
             foreach ($customers as $item) {
-              ?>
+            ?>
               <tr class="sms_mu_tr">
 
-                <td class="t_oravg_m" >
-                   <?php if(!isset($item['customer_name']) || trim($item['customer_name']) == ""){
-                        echo "Customer Name is not Set";
-                    } else {
-                        echo htmlspecialchars($item['customer_name'], ENT_QUOTES, 'UTF-8');
-                    }  ?>
-                    
+                <td class="t_oravg_m">
+                  <?php if (!isset($item['customer_name']) || trim($item['customer_name']) == "") {
+                    echo "Customer Name is not Set";
+                  } else {
+                    echo htmlspecialchars($item['customer_name'], ENT_QUOTES, 'UTF-8');
+                  }  ?>
+
                 </td>
-                <td><?php  if(!isset($item['date_of_last_order']) || trim($item['date_of_last_order']) == ""){
-                        echo "No order placed by this Customer";
+                <td><?php if (!isset($item['date_of_last_order']) || trim($item['date_of_last_order']) == "") {
+                      echo "No order placed by this Customer";
                     } else {
-                        echo $item['date_of_last_order'];
+                      echo $item['date_of_last_order'];
                     }  ?> </td>
                 <td><?php echo $item['email']; ?></td>
                 <td><?php echo $item['number_of_orders']; ?></td>
@@ -261,9 +255,9 @@ $customers = $customers['data'];
                 </td>
                 <td><?php echo $item['average_order_cost']; ?> NIS</td>
               </tr>
-              
-              <tr class="sms_mu_spacing_div"></tr>
-              <?php
+
+
+            <?php
             }
             ?>
           </tbody>
@@ -273,17 +267,17 @@ $customers = $customers['data'];
   </div>
 </div>
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function() {
     const searchForm = document.getElementById('sms_customers_m_search_form');
     const searchInput = document.getElementById('sms_customers_m_search_input');
     const customerTable = document.getElementById('sms_customers_m_customer_table');
 
-    searchForm.addEventListener('submit', function (event) {
+    searchForm.addEventListener('submit', function(event) {
       event.preventDefault(); // Prevent form submission
       filterCustomers();
     });
 
-    searchInput.addEventListener('input', function () {
+    searchInput.addEventListener('input', function() {
       filterCustomers();
     });
 
