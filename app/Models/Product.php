@@ -159,10 +159,31 @@ class Product
 
     public static function get_products_count($configuration)
     {
+        $client = new Client();
         $params = [
             'auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
-            'per_page' => 100
+            'query' => [
+                'per_page' => 100,
+                'page' => 1
+            ]
         ];
-        return Base::get_number_of_products($configuration["store_url"], $params);
+
+        $total_products = 0;
+
+        while (true) {
+            $response = $client->request('GET', $configuration["store_url"] . '/wp-json/wc/v3/products', $params);
+            $products = json_decode($response->getBody(), true);
+
+            $products_count = count($products);
+
+            if ($products_count == 0) {
+                break;
+            }
+
+            $total_products += $products_count;
+            $params['query']['page'] += 1;
+        }
+
+        return $total_products;
     }
 }
