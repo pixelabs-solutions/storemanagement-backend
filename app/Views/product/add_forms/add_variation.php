@@ -352,118 +352,115 @@ var_dump($attributes);
 
 <script>
     let selectElement = document.getElementById('IOP');
+    selectElement.addEventListener('change', function(){
+        console.log(getSelectedValues('IOP'))
+    })
+   function sms_add_variations_submit() {
+    console.log("hello");
 
-    function sms_add_variations_submit() {
-        console.log("hello")
-        // Log all the form values
-        var formData = {
-            'Product Name': document.getElementById('example-text-input').value,
-            'Category': getSelectedValues('choices-multiple-remove-button'),
-            'product image': document.getElementById('single-image-input').value,
-            'photo gallery': document.getElementById('multiple-images-input').value,
-            'description': document.getElementById('floatingTextarea2').value,
-            'Select Term Attribute': getSelectedValues('IOP'),
-            // 'Select options': getSelectedValues('sMS_MU_SET'),
-            // 'Variations 1': document.getElementById('').value,
-            // 'Variations 2': document.getElementById('document.getElementById').value,
-            // 'Variations 3': document.getElementById('document.getElementById').value,
-            // // 'Configure Variations': getSelectedValues(''),
-            // 'outOfStockThreshold': document.getElementById('outOfStockThreshold').value
+    // Log all the form values
+    var formData = {
+        'name': document.getElementById('example-text-input').value,
+        'type': 'variable',
+        'description': document.getElementById('floatingTextarea2').value,
+        'manage_stock': true,
+        'stock_quantity': 10,  // Assuming stock_quantity is always 10 for the main product
+        'category': getSelectedValues('choices-multiple-remove-button'),
+        'images': [],  // Assuming no images for simplicity
+        'regular_price': '10',  // Assuming regular_price is always 10 for the main product
+        'sale_price': '10',  // Assuming sale_price is always 10 for the main product
+        'attributes': [],
+        'variations': []
+    };
+
+    // Collecting attribute data
+    var attributeInputs = document.querySelectorAll('.attribute-input');
+    attributeInputs.forEach(input => {
+        var attribute = {
+            'name': input.getAttribute('data-attribute-name'),
+            'options': input.value.split(','),
+            'variation': true
+        };
+        formData.attributes.push(attribute);
+    });
+
+    // Collecting variation data
+    var variationInputs = document.querySelectorAll('.sms_mu_variation_in_combination_input');
+    var variationInputsTwo = document.querySelectorAll('.sms_mu_variation_in_combination_input_two');
+    var variationInputsOne = document.querySelectorAll('.sms_mu_variation_in_combination_input_read');
+
+    variationInputsOne.forEach((input, index) => {
+        var variation = {
+            'regular_price': variationInputs[index].value,
+            'stock_quantity': variationInputsTwo[index].value,
+            'attributes': []
         };
 
-
-        var variationInputs = document.querySelectorAll('.sms_mu_variation_in_combination_input_read');
-        var variationInputsTwo = document.querySelectorAll('.sms_mu_variation_in_combination_input_two');
-        var variationInputsOne = document.querySelectorAll('.sms_mu_variation_in_combination_input');
-
-        variations = [];
-
-        // Iterate through variation inputs to get their values
-        variationInputs.forEach((input, index) => {
-            var variation = {}
-            variation['Variation ' + (index + 1)] = input.value,
-                variation['Variation Two ' + (index + 1)] = variationInputsTwo[index].value
-            variation['Variation One' + (index + 1)] = variationInputsOne[index].value
-            variations.push(variation);
+        var attributes = input.value.split('-');
+        attributes.forEach(attr => {
+            var [name, option] = attr.split(':');
+            variation.attributes.push({
+                'name': name?.trim(),
+                'option': option?.trim()
+            });
         });
-        // Add variations to formData
-        variations.forEach(variation => {
-            Object.assign(formData, variation);
-        });
-        const arrays = [];
-        for (let i = 0; i < selectElement.length; i++) {
-            const selectBox = document.querySelector(`.select_box${i}`);
-            if (selectBox) {
-                const values = Array.from(selectBox.options).map(option => option.value);
-                arrays.push(values);
-            }
+
+        formData.variations.push(variation);
+    });
+
+    // Posting form data
+    fetch('product/add', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+            'Content-Type': 'application/json'
         }
-        var dynamicInputValues = [];
-        for (let i = 0; i < selectElement.length; i++) {
-            var selectBox = document.querySelector(`.select_box${i}`);
-            if (selectBox) {
-                const values = Array.from(selectBox.options).map(option => option.value);
-                dynamicInputValues.push(values);
-            }
-            //Posting form data
-            fetch('product/variations', {
-                method: 'POST',
-                body: JSON.stringify(formData),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => {
-                    if (response.status === 200) {
-                        // Form submission succeeded, display success message
-                        document.getElementById('sms_add_variations_success_message').style.display = 'block';
-                        document.getElementById('sms_add_variations_error_message').style.display = 'none';
-                        window.location.reload();
-                    } else {
-                        // Form submission failed, display error message
-                        document.getElementById('sms_add_variations_error_message').style.display = 'block';
-                        document.getElementById('sms_add_variations_success_message').style.display = 'none'; // Hide success message if it was displayed before
-                    }
-                })
-                .catch(error => {
-                    // Network error occurred, display error message
-                    document.getElementById('sms_add_variations_error_message').style.display = 'block';
-                    console.error('Error submitting form data:', error);
-                });
+    })
+    .then(response => {
+        if (response.status === 200) {
+            // Form submission succeeded, display success message
+            document.getElementById('sms_add_variations_success_message').style.display = 'block';
+            document.getElementById('sms_add_variations_error_message').style.display = 'none';
+            window.location.reload();
+        } else {
+            // Form submission failed, display error message
+            document.getElementById('sms_add_variations_error_message').style.display = 'block';
+            document.getElementById('sms_add_variations_success_message').style.display = 'none'; // Hide success message if it was displayed before
         }
+    })
+    .catch(error => {
+        // Network error occurred, display error message
+        document.getElementById('sms_add_variations_error_message').style.display = 'block';
+        console.error('Error submitting form data:', error);
+    });
 
-        // selectBoxes.forEach(selectBox => {
-        //     var values = getSelectedValues(selectBox.id);
-        //     dynamicInputValues.push(values);
-        // });
-        // Add dynamic input values to formData
-        dynamicInputValues.forEach((values, index) => {
-            formData['Dynamic Input Values ' + (index + 1)] = values;
-        });
-        console.log(formData);
+    console.log(formData);
+}
+
+function getSelectedValues(selectId) {
+    var selectedOptions = [];
+    let selectElement = document.getElementById(selectId);
+    for (var i = 0; i < selectElement.options.length; i++) {
+        var option = selectElement.options[i];
+        if (option.selected) {
+            selectedOptions.push(option.value);
+        }
     }
-
-    // You can submit the form programmatically if needed
-    // this.submit();
-    // You can submit the form programmatically if needed
-    // this.submit();
+    return selectedOptions;
+}
 
 
-
-
-    function getSelectedValues(selectId) {
-        var selectedOptions = [];
-        let selectElement = document.getElementById(selectId);
-        for (var i = 0; i < selectElement.options.length; i++) {
-            var option = selectElement.options[i];
-            if (option.selected) {
-                selectedOptions.push(option.value);
-            }
+function getSelectedValues(selectId) {
+    var selectedOptions = [];
+    let selectElement = document.getElementById(selectId);
+    for (var i = 0; i < selectElement.options.length; i++) {
+        var option = selectElement.options[i];
+        if (option.selected) {
+            selectedOptions.push(option.value);
         }
-        return selectedOptions;
     }
-
-
+    return selectedOptions;
+}
 
     function fun_save_changes() {
         let parentDiv = document.getElementById('selectedOptionsDiv');
@@ -562,6 +559,8 @@ var_dump($attributes);
 
     }
 
+    
+    
     function generate_variations() {
         const arrays = [];
         for (let i = 0; i < selectElement.length; i++) {
@@ -609,6 +608,8 @@ var_dump($attributes);
         });
     }
 
+    
+    
     function sms_add_variations_close_success_message() {
         document.getElementById('sms_add_variations_success_message').style.display = 'none';
     }
