@@ -6,6 +6,7 @@ namespace Pixelabs\StoreManagement\Controllers;
 use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
+use Pixelabs\StoreManagement\Models\Authentication;
 
 
 class InventoryController
@@ -13,6 +14,10 @@ class InventoryController
 
     public function index()
     {
+        $user_level = Authentication::getUserLevelFromToken();
+        if ($user_level == ADMIN) {
+            header("Location: /admin/index");
+            } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
@@ -43,7 +48,7 @@ class InventoryController
             echo json_encode($inventory_settings, JSON_UNESCAPED_UNICODE);
         }else{
             include_once __DIR__ . '/../Views/inventory/settings.php';
-        }
+        }}
     }
 
     public function update()

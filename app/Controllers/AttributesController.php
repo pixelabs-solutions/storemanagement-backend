@@ -4,6 +4,7 @@ namespace Pixelabs\StoreManagement\Controllers;
 use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
+use Pixelabs\StoreManagement\Models\Authentication;
 
 class AttributesController
 {
@@ -12,6 +13,10 @@ class AttributesController
 
     public function index()
     {
+        $user_level = Authentication::getUserLevelFromToken();
+        if ($user_level == ADMIN) {
+            header("Location: /admin/index");
+            } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
@@ -23,7 +28,7 @@ class AttributesController
         else{
             include_once __DIR__ . '/../Views/product/index.php';
         }
-    }
+    }}
 
     public function get($id)
     {
