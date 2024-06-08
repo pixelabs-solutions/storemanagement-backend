@@ -23,7 +23,7 @@ class FileHelper
             mkdir($directory, 0755, true);
         }
         file_put_contents($file_path, $binary_data);
-        return "https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
-        // return $file_path;
+        // return "https://assets-global.website-files.com/62d84e447b4f9e7263d31e94/6399a4d27711a5ad2c9bf5cd_ben-sweet-2LowviVHZ-E-unsplash-1.jpeg";
+        return $file_path;
     }
 }
