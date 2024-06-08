@@ -400,6 +400,7 @@ var_dump($attributes);
     variationInputsOne.forEach((input, index) => {
         var variation = {
             'regular_price': variationInputs[index].value,
+            'stock_quantity': variationInputsTwo[index].value, 
             'attributes': []
         };
 
@@ -417,33 +418,64 @@ var_dump($attributes);
         formData.variations.push(variation);
     });
 
-    // Posting form data
-    fetch('product/add', {
-        method: 'POST',
-        body: JSON.stringify(formData),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (response.status === 200) {
-            // Form submission succeeded, display success message
-            document.getElementById('sms_add_variations_success_message').style.display = 'block';
-            document.getElementById('sms_add_variations_error_message').style.display = 'none';
-            window.location.reload();
-        } else {
-            // Form submission failed, display error message
-            document.getElementById('sms_add_variations_error_message').style.display = 'block';
-            document.getElementById('sms_add_variations_success_message').style.display = 'none'; // Hide success message if it was displayed before
-        }
-    })
-    .catch(error => {
-        // Network error occurred, display error message
-        document.getElementById('sms_add_variations_error_message').style.display = 'block';
-        console.error('Error submitting form data:', error);
-    });
+ // Collecting single image
+ let singleImageInput = document.getElementById('single-image-input');
+    let multipleImagesInput = document.getElementById('multiple-images-input');
 
-    console.log(formData);
+    let files = [];
+    if (singleImageInput.files.length > 0) {
+        files.push(singleImageInput.files[0]);
+    }
+    if (multipleImagesInput.files.length > 0) {
+        files.push(...multipleImagesInput.files);
+    }
+
+    let base64Array = [];
+
+    function readFileAsBase64(file) {
+        return new Promise((resolve, reject) => {
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                resolve(event.target.result);
+            };
+            reader.onerror = function(error) {
+                reject(error);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    Promise.all(files.map(file => file ? readFileAsBase64(file) : Promise.resolve(null)))
+        .then(base64Strings => {
+            formData.images = base64Strings.filter(base64 => base64 !== null);
+
+            console.log(formData);
+
+            return fetch('product/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+        })
+        .then(response => {
+            if (response.status === 200) {
+                // Form submission succeeded, display success message
+                document.getElementById('sms_add_variations_success_message').style.display = 'block';
+                document.getElementById('sms_add_variations_error_message').style.display = 'none';
+                window.location.reload();
+            } else {
+                // Form submission failed, display error message
+                document.getElementById('sms_add_variations_error_message').style.display = 'block';
+                document.getElementById('sms_add_variations_success_message').style.display = 'none'; // Hide success message if it was displayed before
+            }
+        })
+        .catch(error => {
+            // Network error occurred, display error message
+            document.getElementById('sms_add_variations_error_message').style.display = 'block';
+            console.error('Error submitting form data:', error);
+        });
 }
 
 function getSelectedValues(selectId) {
