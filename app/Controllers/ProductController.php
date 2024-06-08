@@ -110,7 +110,6 @@ class ProductController
             return;
         }
         $data = $result["data"];
-
         $image_paths = [];
         if (is_array($data['images'])) {
             foreach ($data['images'] as $key => $image) {
@@ -126,12 +125,21 @@ class ProductController
             'type' => $data['type'],
             'description' => $data['description'],
             'manage_stock' => true,
+<<<<<<< HEAD
             'stock_quantity' => $data['stock_quantity'],
             'categories' => array_map(function ($category_id) {
                 return ['id' => $category_id];
             }, $data['category']),
             'images' => array_map(function ($image_url) {
                 return ['src' => $image_url];
+=======
+            'stock_quantity' => $data['stock_quantity'], 
+            'categories' => array_map(function($category_id) {
+                return ['id' => $category_id]; 
+            }, $data['categories']),
+            'images' => array_map(function($image_url) {
+                return ['src' => $image_url]; 
+>>>>>>> 028ee6960b599d15fa8b4d8685c7f1182402ee6a
             }, $image_paths),
             'regular_price' => $data['regular_price'],
             'sale_price' => $data['sale_price']
@@ -139,6 +147,7 @@ class ProductController
         // echo json_encode($payload);exit;
         if ($data['type'] === "variable") {
             // Construct attributes array
+<<<<<<< HEAD
             $attributes = [];
             foreach ($data['attributes_names'] as $index => $name) {
                 $attribute = [
@@ -153,6 +162,23 @@ class ProductController
             $variations = $this->generateVariations($data['attributes_options'], $data['attributes_names'], $data['regular_price']);
 
             $payload['variations'] = $variations;
+=======
+            // $attributes = [];
+            // foreach ($data['attributes_names'] as $index => $name) {
+            //     $attribute = [
+            //         'name' => $name,
+            //         'options' => $data['attributes_options'][$index],
+            //         'variation' => true
+            //     ];
+            //     $attributes[] = $attribute;
+            // }
+            // $payload['attributes'] = $attributes;
+            
+            // $variations = $this->generateVariations($data['attributes_options'], $data['attributes_names'], $data['regular_price']);
+            
+            $payload['attributes'] = $data['attributes'];
+            $payload['variations'] = $data['variations'];
+>>>>>>> 028ee6960b599d15fa8b4d8685c7f1182402ee6a
             // echo json_encode($payload);exit;
             $response = Base::wc_add($configuration, $this->table_name, json_encode($payload));
             if ($is_rest == 'true') {
@@ -160,8 +186,8 @@ class ProductController
             }
             $result = json_decode($response, true);
             $product_id = $result['data_id'];
-            foreach ($variations as $variationData) {
-                Product::createProductVariation($configuration, $product_id, $variationData);
+            foreach ($payload['variations'] as $variation) {
+                Product::createProductVariation($configuration, $product_id, $variation);
             }
         } else {
             $response = Base::wc_add($configuration, $this->table_name, json_encode($payload));
@@ -221,12 +247,21 @@ class ProductController
             'type' => $data['type'],
             'description' => $data['description'],
             'manage_stock' => true,
+<<<<<<< HEAD
             'stock_quantity' => $data['stock_quantity'],
             'categories' => array_map(function ($category_id) {
                 return ['id' => $category_id];
             }, $data['category']),
             'images' => array_map(function ($image_url) {
                 return ['src' => $image_url];
+=======
+            'stock_quantity' => $data['stock_quantity'], 
+            'categories' => array_map(function($category_id) {
+                return ['id' => $category_id]; 
+            }, $data['categories']),
+            'images' => array_map(function($image_url) {
+                return ['src' => $image_url]; 
+>>>>>>> 028ee6960b599d15fa8b4d8685c7f1182402ee6a
             }, $data['images']),
             'regular_price' => $data['regular_price'],
             'sale_price' => $data['sale_price']
@@ -234,6 +269,7 @@ class ProductController
 
         if ($data['type'] === "variable") {
             // Construct attributes array
+<<<<<<< HEAD
             $attributes = [];
             foreach ($data['attributes_names'] as $index => $name) {
                 $attribute = [
@@ -247,11 +283,28 @@ class ProductController
 
             $variations = $this->generateVariations($data['attributes_options'], $data['attributes_names'], $data['regular_price']);
             $payload['variations'] = $variations;
+=======
+            // $attributes = [];
+            // foreach ($data['attributes_names'] as $index => $name) {
+            //     $attribute = [
+            //         'name' => $name,
+            //         'options' => $data['attributes_options'][$index],
+            //         'variation' => true
+            //     ];
+            //     $attributes[] = $attribute;
+            // }
+            // $payload['attributes'] = $attributes;
+            
+            // $variations = $this->generateVariations($data['attributes_options'], $data['attributes_names'], $data['regular_price']);
+            // $payload['variations'] = $variations;
+            $payload['attributes'] = $data['attributes'];
+            $payload['variations'] = $data['variations'];
+>>>>>>> 028ee6960b599d15fa8b4d8685c7f1182402ee6a
 
             $response = Base::wc_update($configuration, $this->table_name . "/" . $id, $payload);
 
-            foreach ($variations as $variationData) {
-                Product::createProductVariation($configuration, $id, $variationData); // Update variations
+            foreach ($payload['variations'] as $variation) {
+                Product::createProductVariation($configuration, $id, $variation); // Update variations
             }
         } else {
             $response = Base::wc_update($configuration, $this->table_name . "/" . $id, $payload);

@@ -41,7 +41,7 @@ class Database
     private function tablesExist()
     {
         //List all tables in array
-        $tables = ['users', 'user_meta', 'user_configurations', 'goals', 'categories', 'products', 'inventory_settings', 'coupons', 'customers', 'transactions'];
+        $tables = ['users', 'user_meta', 'user_configurations', 'goals', 'categories', 'products', 'inventory_settings', 'coupons', 'customers', 'transactions', 'request_tracking'];
         $tableNameList = "'" . implode("', '", $tables) . "'"; // Create a string for the SQL query
         $query = "SELECT COUNT(*) AS count FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE() AND table_name IN ($tableNameList)";
         $result = $this->connection->query($query);
@@ -188,5 +188,13 @@ class Database
             shipping_address VARCHAR(255)
         )";
         $this->connection->query($transactionsTable);
+
+        $requestTrackingTable = "CREATE TABLE `request_tracking` (
+            `id` int(11) NOT NULL,
+            `ip_address` varchar(45) NOT NULL,
+            `request_date` date NOT NULL,
+            `is_mobile` tinyint(1) NOT NULL DEFAULT 0
+        )";
+        $this->connection->query($requestTrackingTable);
     }
 }
