@@ -56,14 +56,15 @@
     .rtl .sms_mu_btn_heb {
         display: block;
     }
-   input[type="file"] {
+
+    input[type="file"] {
         display: none;
     }
 </style>
 <!-- </head>
 
 <body> -->
-<div class="page-body" >
+<div class="page-body">
     <div class="container-xl">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10">
@@ -77,8 +78,8 @@
                             <div class="col-md-6 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.product_name_input">Product
                                     Name</label>
-                                    <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_Ip_one" style="background-color: #EAEAEA" placeholder="Blue Gucci bag">
-                                    <input type="hidden" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_id_regular_product" style="background-color: #EAEAEA" placeholder="Eg:Blue Gucci bag">
+                                <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_Ip_one" style="background-color: #EAEAEA" placeholder="Blue Gucci bag">
+                                <input type="hidden" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_id_regular_product" style="background-color: #EAEAEA" placeholder="Eg:Blue Gucci bag">
                             </div>
                             <div class="col-md-6    ">
                                 <label for="example-select fs-3 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.catageory_managment">Category
@@ -148,6 +149,7 @@
 
                             </div>
                         </div>
+                        <input type="hidden" name="product_id" id=product_id>
                         <!-- To add another term click here + -->
                         <div class="col-md-12 mt-3 ">
                             <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.unit">Units in
@@ -181,15 +183,79 @@
 
 <!-- input javascript code  -->
 <script>
+    // function fun_Np() {
+    //     let Name = document.getElementById('sms_mu_Ip_one').value;
+    //     let CtgValue = document.getElementById('category_in_popoupop');
+    //     let ImgValue = document.getElementById('sms_mu_Ip_two').value;
+    //     let ImgVlueTwo = document.getElementById('sms_mu_Ip_three').value;
+    //     let NormalPrice = document.getElementById('sms_mu_Ip_four').value;
+    //     let SalePrice = document.getElementById('sms_mu_Ip_five').value;
+    //     let textareaInp = document.getElementById('sms_mu_Ip_six').value;
+    //     let unitInp = document.getElementById('sms_mu_Ip_seven').value;
+    //     let Id = document.getElementById('product_id').value;
+    //     let selectedCategories = [];
+
+    //     // Collect selected categories
+    //     for (let i = 0; i < CtgValue.options.length; i++) {
+    //         if (CtgValue.options[i].selected) {
+    //             selectedCategories.push(CtgValue.options[i].value);
+    //         }
+    //     }
+
+    //     let image = [ImgValue, ImgVlueTwo];
+    //     let data = {
+    //         'name': Name,
+    //         'category': selectedCategories,
+    //         'images':[image],
+    //         'type': 'simple',
+    //         'regular_price': NormalPrice,
+    //         'sale_price': SalePrice,
+    //         'description': textareaInp,
+    //         'stock_quantity': unitInp,
+    //     };
+
+    //     fetch(`/product/${Id}`, {
+    //             method: 'PUT', // Changed from POST to PUT
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify(data),
+    //         })
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error('Network response was not ok');
+    //             }
+    //             return response.json();
+    //         })
+    //         .then(data => {
+    //             console.log('Data sent:', data);
+    //             // Handle the response data here if needed
+    //         })
+    //         .catch(error => {
+    //             console.error('There was a problem with your fetch operation:', error);
+    //             // Provide user feedback if needed
+    //         });
+    // }
+
+    function readFileAsBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    }
+
     function fun_Np() {
         let Name = document.getElementById('sms_mu_Ip_one').value;
         let CtgValue = document.getElementById('category_in_popoupop');
-        let ImgValue = document.getElementById('sms_mu_Ip_two').value;
-        let ImgVlueTwo = document.getElementById('sms_mu_Ip_three').value;
+        let ImgValue = document.getElementById('sms_mu_Ip_two').files[0]; // Changed to files[0] to get the file object
+        let ImgVlueTwo = document.getElementById('sms_mu_Ip_three').files[0]; // Changed to files[0] to get the file object
         let NormalPrice = document.getElementById('sms_mu_Ip_four').value;
         let SalePrice = document.getElementById('sms_mu_Ip_five').value;
         let textareaInp = document.getElementById('sms_mu_Ip_six').value;
         let unitInp = document.getElementById('sms_mu_Ip_seven').value;
+        let Id = document.getElementById('product_id').value;
         let selectedCategories = [];
 
         // Collect selected categories
@@ -199,42 +265,51 @@
             }
         }
 
-        let image = [ImgValue, ImgVlueTwo];
-        let data = {
-            'name': Name,
-            'category': selectedCategories,
-            'image': image,
-            'type': 'simple',
-            'regular_price': NormalPrice,
-            'sale_price': SalePrice,
-            'description': textareaInp,
-            'stock_quantity': unitInp,
-        };
+        let files = [ImgValue, ImgVlueTwo];
 
-        // console.log(data);
+        // Read files as Base64 strings and send the data
+        Promise.all(files.map(file => file ? readFileAsBase64(file) : Promise.resolve(null)))
+            .then(base64Strings => {
+                let data = {
+                    'name': Name,
+                    'category': selectedCategories,
+                    'images': base64Strings.filter(base64 => base64 !== null), // Filter out null values
+                    'type': 'simple',
+                    'regular_price': NormalPrice,
+                    'sale_price': SalePrice,
+                    'description': textareaInp,
+                    'stock_quantity': unitInp,
+                };
 
-        fetch(`/product/${id}`, { // Change the route path to the appropriate endpoint
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
+                console.log(data);
+
+                return fetch(`/product/${Id}`, {
+                    method: 'PUT', // Changed from POST to PUT
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
             })
             .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                if (response.ok) {
+                    // Form submission succeeded, display success message
+                    document.getElementById('sms_add_regular_success_message').style.display = 'block';
+                    document.getElementById('sms_add_regular_error_message').style.display = 'none';
+                    window.location.reload();
+                } else {
+                    // Form submission failed, display error message
+                    document.getElementById('sms_add_regular_error_message').style.display = 'block';
+                    document.getElementById('sms_add_regular_success_message').style.display = 'none'; // Hide success message if it was displayed before
                 }
-                return response.json();
-            })
-            .then(data => {
-                // console.log('Data sent:', data);
-                // You can handle the response data here if needed
             })
             .catch(error => {
-                console.error('There was a problem with your fetch operation:', error);
-                // Provide user feedback if needed
+                // Network error occurred, display error message
+                document.getElementById('sms_add_regular_error_message').style.display = 'block';
+                console.error('Error submitting form data:', error);
             });
     }
+
 
     function sms_a_edit_product_variations_image() {
         var input = document.getElementById('sms_mu_Ip_two');
@@ -292,6 +367,7 @@
                 var productData = JSON.parse(productJson);
                 // Access the modal content element
                 document.getElementById('sms_mu_Ip_one').value = productData.name;
+                document.getElementById('product_id').value = productData.id;
                 document.getElementById('sms_mu_Ip_four').value = productData.regular_price;
                 document.getElementById('sms_mu_Ip_five').value = productData.sale_price;
                 document.getElementById('sms_mu_Ip_seven').value = productData.stock_quantity;
@@ -300,29 +376,29 @@
 
                 var parentCategories_json = JSON.parse(parentCategoriesData);
                 console.log(parentCategories_json);
-            var selectElement = document.getElementById('category_in_popoupop');
-            selectElement.innerHTML = '';
-            var productcategorys = productData.categories;
-            console.log(productData.categories);
+                var selectElement = document.getElementById('category_in_popoupop');
+                selectElement.innerHTML = '';
+                var productcategorys = productData.categories;
+                console.log(productData.categories);
 
-            parentCategories_json.forEach(function(category) {
-                var option = document.createElement('option');
-                option.value = category.id; // Assuming category.id contains the ID
-                option.text = category.name; // Assuming category.text contains the text
-                productcategorys.forEach(function(productcategory) {
-                    if (productcategory['id'] == category.id) {
-                        option.selected = true;
-                        // console.log("SADSAD");
-                    }
+                parentCategories_json.forEach(function(category) {
+                    var option = document.createElement('option');
+                    option.value = category.id; // Assuming category.id contains the ID
+                    option.text = category.name; // Assuming category.text contains the text
+                    productcategorys.forEach(function(productcategory) {
+                        if (productcategory['id'] == category.id) {
+                            option.selected = true;
+                            // console.log("SADSAD");
+                        }
+                    });
+                    selectElement.appendChild(option);
                 });
-                selectElement.appendChild(option);
-            });
 
             } catch (error) {
                 console.error('Error parsing JSON:', error);
             }
 
-            
+
             if (count < 1) {
 
 

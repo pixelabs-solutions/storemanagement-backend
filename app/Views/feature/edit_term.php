@@ -1,93 +1,95 @@
+<style>
+    @import url('https://rsms.me/inter/inter.css');
 
-        <style>
-            @import url('https://rsms.me/inter/inter.css');
+    :root {
+        --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+    }
 
-            :root {
-                --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-            }
+    body {
+        font-feature-settings: "cv03", "cv04", "cv11";
+    }
 
-            body {
-                font-feature-settings: "cv03", "cv04", "cv11";
-            }
+    .rtl {
+        direction: rtl;
+    }
 
-            .rtl {
-                direction: rtl;
-            }
+    .rtl .avatar {
+        margin-left: 10px;
+    }
 
-            .rtl .avatar {
-                margin-left: 10px;
-            }
+    .sms_a_custom_file_input {
+        position: relative;
+        /* display: inline-block; */
+    }
 
-            .sms_a_custom_file_input {
-                position: relative;
-                /* display: inline-block; */
-            }
+    .sms_a_custom_file_input input[type="file"] {
+        position: absolute;
+        left: -9999px;
+    }
 
-            .sms_a_custom_file_input input[type="file"] {
-                position: absolute;
-                left: -9999px;
-            }
+    .sms_a_custom_file_input label {
+        /* display: inline-block; */
+        padding: 12px 16px;
+        border: 1px solid #ced4da;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        background-color: #EAEAEA;
+        text-align: center;
+    }
 
-            .sms_a_custom_file_input label {
-                /* display: inline-block; */
-                padding: 12px 16px;
-                border: 1px solid #ced4da;
-                border-radius: 8px;
-                cursor: pointer;
-                width: 100%;
-                background-color: #EAEAEA;
-                text-align: center;
-            }
+    .sms_a_custom_file_input label i {
+        margin-right: 5px;
+    }
 
-            .sms_a_custom_file_input label i {
-                margin-right: 5px;
-            }
-            .abc .for_eng{
-                display: block;
-            }
-            .abc .for_heb{
-                display: none;
-            }
-            .rtl .for_eng{
-                display: none;
-            }
-            .rtl .for_heb{
-                display: block;
-            }
-        </style>
-        <!-- </head>
+    .abc .for_eng {
+        display: block;
+    }
+
+    .abc .for_heb {
+        display: none;
+    }
+
+    .rtl .for_eng {
+        display: none;
+    }
+
+    .rtl .for_heb {
+        display: block;
+    }
+</style>
+<!-- </head>
 
         <body> -->
-    
-            <div class="container-xl">
-                <div class="row justify-content-center">
-                    <div class="col-12 col-md-10">
-                        <div class="">
 
-                            <!-- form start -->
-                            <form action="" method="post" class="card-body">
-                                <!-- header -->
-                                <div class="row gx-3">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="example-text-input fs-2 fw-bold" class="form-label for_eng">Name of the
-                                            Variation</label>
-                                        <label for="example-text-input fs-2 fw-bold" class="form-label for_heb">שם הווריאציה</label>
-                                        <input type="text" class="form-control rounded-3 p-3" id="e_name_term" style="background-color: #EAEAEA" placeholder="NAme Of Variation">
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="example-select fs-3 fw-bold" class="form-label for_eng">associated feature
-                                        </label>
-                                        <label for="example-select fs-3 fw-bold" class="form-label for_heb">תכונה קשורה</label>
-                                        <select class="form-select rounded-3 p-3" id="sms_mu_select_name_term" style="background-color: #EAEAEA">
-                                        <?php foreach($attributes  as $attribute)
-                                        { ?>
-                                        <option id="<?php echo $attribute['id']; ?>"><?php echo $attribute['name']; ?></option>
-                                        <?php } ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <!-- Adding terms to the feature -->
-                                <!-- <div class="rounded-4">
+<div class="container-xl">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10">
+            <div class="">
+
+                <!-- form start -->
+                <form action="" method="post" class="card-body">
+                    <!-- header -->
+                    <div class="row gx-3">
+                        <div class="col-md-6 mb-3">
+                            <label for="example-text-input fs-2 fw-bold" class="form-label for_eng">Name of the
+                                Variation</label>
+                            <label for="example-text-input fs-2 fw-bold" class="form-label for_heb">שם הווריאציה</label>
+                            <input type="text" class="form-control rounded-3 p-3" id="e_name_term" style="background-color: #EAEAEA" placeholder="Name Of Variation">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="example-select fs-3 fw-bold" class="form-label for_eng">Associated feature
+                            </label>
+                            <label for="example-select fs-3 fw-bold" class="form-label for_heb">תכונה קשורה</label>
+                            <select class="form-select rounded-3 p-3" id="sms_mu_select_name_term" style="background-color: #EAEAEA">
+                                <?php foreach ($attributes  as $attribute) { ?>
+                                    <option id="<?php echo $attribute['id']; ?>"><?php echo $attribute['name']; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Adding terms to the feature -->
+                    <!-- <div class="rounded-4">
                                     <div class="col-12 col-md-12" id="sms_a_edit_term_dynamic-input-container">
                                         <div class=" rounded">
                                             <h3 class="card-title text-black fs-4 fw-bold">Color change </h3>
@@ -99,7 +101,7 @@
                                                 <input type="color" class="form-control text-dark w-50 " id="-text-input" placeholder="Pink">
 
                                             </div> -->
-                                <!-- <div class="col-md-12 mb-3">
+                    <!-- <div class="col-md-12 mb-3">
                                                     <label class="form-label">
                                                         <label class="form-label">Selecting an image to display the term</label>
                                                         <div class="sms_a_custom_file_input">
@@ -117,8 +119,8 @@
                                                     </label>
                                                 </div> -->
 
-                                <!-- </div> -->
-                                <!-- <div class='gx-3'>
+                    <!-- </div> -->
+                    <!-- <div class='gx-3'>
                                                 <div class="">
                                                     <div class="mb-3 p-2 col-12 rounded-3 d-flex align-items-center justify-content-between "
                                                         style="background-color: #EAEAEA">
@@ -131,52 +133,74 @@
                                                 </div>
                                             </div> -->
 
-                                <!-- </div> -->
-                                <!-- To update the term click here+ -->
-                                <!-- </div> -->
-                                <!-- </div> -->
-                                <div class='gx-3' id="colorPickerDiv__edit">
-                                    <div class="">
-                                        <div class="mb-3 p-2 col-12 rounded-3 d-flex align-items-center justify-content-between " style="background-color: #EAEAEA">
-                                            <label class="form-label"></label>
-                                            <label class="form-label for_eng">Color change</label>
-                                            <label class="form-label for_heb">שינוי צבע</label>
-                                            <input type="color" class="form-control p-0 form-control-color" id="sms_mu_color_name_term__edit" value="#206bc4" title="Choose your color">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="text-center mt-2 p-2  ">
-                                <button type="submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3 for_eng" onclick="fun_etid_term()">To update
-                                    the term click here
-                                    +</button>
-                                <button type="submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3 for_heb" onclick="fun_etid_term()">לעדכון המונח לחץ כאן
-                                    +</button>
+                    <!-- </div> -->
+                    <!-- To update the term click here+ -->
+                    <!-- </div> -->
+                    <!-- </div> -->
+                    <div class='gx-3' id="colorPickerDiv__edit">
+                        <div class="">
+                            <div class="mb-3 p-2 col-12 rounded-3 d-flex align-items-center justify-content-between " style="background-color: #EAEAEA">
+                                <label class="form-label"></label>
+                                <label class="form-label for_eng">Color change</label>
+                                <label class="form-label for_heb">שינוי צבע</label>
+                                <input type="color" class="form-control p-0 form-control-color" id="sms_mu_color_name_term__edit" value="#206bc4" title="Choose your color">
                             </div>
                         </div>
                     </div>
+                </form>
+                <div class="text-center mt-2 p-2  ">
+                    <button type="submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3 for_eng" onclick="fun_etid_term()">To update
+                        the term click here
+                        +</button>
+                    <button type="submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3 for_heb" onclick="fun_etid_term()">לעדכון המונח לחץ כאן
+                        +</button>
                 </div>
             </div>
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    // Get the color input element
-                    var colorInput = document.getElementById("sms_mu_color_name_term__edit");
-                    // Get the div to trigger color selection
-                    var colorPickerDiv = document.getElementById("colorPickerDiv__edit");
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the color input element
+        var colorInput = document.getElementById("sms_mu_color_name_term__edit");
+        // Get the div to trigger color selection
+        var colorPickerDiv = document.getElementById("colorPickerDiv__edit");
 
-                    // Function to open color selection when the div is clicked
-                    colorPickerDiv.addEventListener("click", function() {
-                        colorInput.click();
-                    });
-                });
+        // Function to open color selection when the div is clicked
+        colorPickerDiv.addEventListener("click", function() {
+            colorInput.click();
+        });
+    });
 
-                function fun_etid_term() {
-                    let data_form_exsist = {
-                        'nameOfTerm': document.getElementById('e_name_term').value,
-                        'select_value': document.getElementById('sms_mu_select_name_term').value,
-                        'Color_value': document.getElementById('sms_mu_color_name_term__edit').value,
-                    }
-                    console.log(data_form_exsist)
+    function fun_etid_term() {
+        let data_form_exsist = {
+            'nameOfTerm': document.getElementById('e_name_term').value,
+            'select_value': document.getElementById('sms_mu_select_name_term').value,
+            'Color_value': document.getElementById('sms_mu_color_name_term__edit').value,
+        }
+        console.log(data_form_exsist)
+        fetch(`/categories/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(form_data)
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    // Form submission succeeded, display success message
+                    document.getElementById('sms_editForm_success_message').style.display = 'block';
+                    document.getElementById('sms_add_editForm_error_message').style.display = 'none';
+                    window.location.reload();
+                } else {
+                    // Form submission failed, display error message
+                    document.getElementById('sms_add_editForm_error_message').style.display = 'block';
+                    document.getElementById('sms_editForm_success_message').style.display = 'none';
                 }
-            </script>
-           
+            })
+    .catch(error => {
+        document.getElementById('sms_add_editForm_error_message').style.display = 'block';
+        console.error('Error submitting form data:', error);
+    });
+    }
+</script>
