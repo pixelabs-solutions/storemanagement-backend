@@ -224,10 +224,7 @@ $customers = $customers['data'];
               <th data-i18n="customer_page.customer_th.number_name" class="sms_mu_td">Number of orders </th>
               <th data-i18n="customer_page.customer_th.total_name" class="sms_mu_td">Total</th>
               <th data-i18n="customer_page.customer_th.order_name" class="sms_mu_td">Order average</th>
-
             </tr>
-
-
           </thead>
           <tbody>
             <?php
@@ -267,34 +264,58 @@ $customers = $customers['data'];
   </div>
 </div>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const searchForm = document.getElementById('sms_customers_m_search_form');
-    const searchInput = document.getElementById('sms_customers_m_search_input');
-    const customerTable = document.getElementById('sms_customers_m_customer_table');
+  // document.addEventListener('DOMContentLoaded', function() {
+  //   const searchForm = document.getElementById('sms_customers_m_search_form');
+  //   const searchInput = document.getElementById('sms_customers_m_search_input');
+  //   const customerTable = document.getElementById('sms_customers_m_customer_table');
 
-    searchForm.addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent form submission
-      filterCustomers();
-    });
+  //   searchForm.addEventListener('submit', function(event) {
+  //     event.preventDefault(); // Prevent form submission
+  //     filterCustomers();
+  //   });
 
-    searchInput.addEventListener('input', function() {
-      filterCustomers();
-    });
+  //   searchInput.addEventListener('input', function() {
+  //     filterCustomers();
+  //   });
 
-    function filterCustomers() {
-      const searchValue = searchInput.value.toLowerCase();
-      const rows = customerTable.querySelectorAll('tbody tr:not(.sms_mu_table)'); // Exclude the table header row
+  //   function filterCustomers() {
+  //     const searchValue = searchInput.value.toLowerCase();
+  //     const rows = customerTable.querySelectorAll('tbody tr:not(.sms_mu_table)'); // Exclude the table header row
 
-      rows.forEach(row => {
-        let rowTextContent = row.textContent.toLowerCase();
-        if (rowTextContent.includes(searchValue)) {
-          row.style.display = ''; // Show the row
-        } else {
-          row.style.display = 'none'; // Hide the row
-        }
-      });
+  //     rows.forEach(row => {
+  //       let rowTextContent = row.textContent.toLowerCase();
+  //       if (rowTextContent.includes(searchValue)) {
+  //         row.style.display = ''; // Show the row
+  //       } else {
+  //         row.style.display = 'none'; // Hide the row
+  //       }
+  //     });
+  //   }
+  // });
+
+document.getElementById('sms_customers_m_search_input').addEventListener('keyup', function() {
+  var filterValue = this.value.toLowerCase();
+  var rows = document.querySelectorAll('tbody tr');
+  var anyVisible = false;
+
+  rows.forEach(function(row) {
+    var customerNameCell = row.querySelector('td:nth-child(1)');
+    var customerName = customerNameCell ? customerNameCell.textContent.toLowerCase() : '';
+
+    if (customerName.includes(filterValue)) {
+      row.style.display = '';
+      anyVisible = true;
+    } else {
+      row.style.display = 'none';
     }
   });
+
+  if (!anyVisible) {
+    rows.forEach(function(row) {
+      row.style.display = 'none';
+    });
+  }
+});
 </script>
 
 
