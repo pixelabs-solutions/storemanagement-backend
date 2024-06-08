@@ -6,7 +6,7 @@ class FileHelper
 {
     public static function save_file($base64, $file_name)
     {
-        if($base64 === null || $base64 === "") return;
+        if($base64 === null || $base64 === "") return "";
         if (preg_match('/^data:image\/(\w+);base64,/', $base64, $type)) {
             $extension = $type[1];
             $base64_string = substr($base64, strpos($base64, ',') + 1);

@@ -59,9 +59,11 @@ class CategoryController
         }
 
         $data = $result["data"];
-
-  
-        $file_path = FileHelper::save_file($data["image"], "categories/".$data['name']);
+        $image = "";
+        if(!empty($data["image"])){
+            $image = $data["image"][0];
+        }
+        $file_path = FileHelper::save_file($image, "categories/".$data['name']);
 
         $payload = json_encode([
             'name' => $data['name'], 
