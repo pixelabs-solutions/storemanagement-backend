@@ -355,7 +355,8 @@ var_dump($attributes);
     selectElement.addEventListener('change', function(){
         console.log(getSelectedValues('IOP'))
     })
-   function sms_add_variations_submit() {
+
+    function sms_add_variations_submit() {
     console.log("hello");
 
     // Log all the form values
@@ -364,8 +365,7 @@ var_dump($attributes);
         'type': 'variable',
         'description': document.getElementById('floatingTextarea2').value,
         'manage_stock': true,
-        'stock_quantity': 10,  // Assuming stock_quantity is always 10 for the main product
-        'category': getSelectedValues('choices-multiple-remove-button'),
+        'categories': getSelectedValues('choices-multiple-remove-button'),
         'images': [],  // Assuming no images for simplicity
         'regular_price': '10',  // Assuming regular_price is always 10 for the main product
         'sale_price': '10',  // Assuming sale_price is always 10 for the main product
@@ -373,15 +373,23 @@ var_dump($attributes);
         'variations': []
     };
 
-    // Collecting attribute data
-    var attributeInputs = document.querySelectorAll('.attribute-input');
-    attributeInputs.forEach(input => {
-        var attribute = {
-            'name': input.getAttribute('data-attribute-name'),
-            'options': input.value.split(','),
-            'variation': true
-        };
-        formData.attributes.push(attribute);
+    // Collecting attribute data from dynamically generated select boxes
+    var attributeDivs = document.querySelectorAll('#selectedOptionsDiv .selected-option');
+    attributeDivs.forEach(div => {
+        let selectBox = div.querySelector('select');
+        if (selectBox) {
+            let attributeName = div.querySelector('label').textContent.replace('Select ', '').replace(' Attribute', '');
+            let options = Array.from(selectBox.options).filter(option => option.selected).map(option => option.textContent);
+
+            if (options.length > 0) {
+                var attribute = {
+                    'name': attributeName,
+                    'options': options,
+                    'variation': true
+                };
+                formData.attributes.push(attribute);
+            }
+        }
     });
 
     // Collecting variation data
@@ -392,17 +400,18 @@ var_dump($attributes);
     variationInputsOne.forEach((input, index) => {
         var variation = {
             'regular_price': variationInputs[index].value,
-            'stock_quantity': variationInputsTwo[index].value,
             'attributes': []
         };
 
         var attributes = input.value.split('-');
         attributes.forEach(attr => {
             var [name, option] = attr.split(':');
-            variation.attributes.push({
-                'name': name?.trim(),
-                'option': option?.trim()
-            });
+            if (name && option) {
+                variation.attributes.push({
+                    'name': name.trim(),
+                    'option': option.trim()
+                });
+            }
         });
 
         formData.variations.push(variation);
@@ -461,155 +470,133 @@ function getSelectedValues(selectId) {
     }
     return selectedOptions;
 }
+function fun_save_changes() {
+    let parentDiv = document.getElementById('selectedOptionsDiv');
+    if (selectElement.length < 1) {
+        document.getElementById('SMS_MU_ADD_GENERATE_VARIATIONS').style.display = 'none';
+    } else {
+        document.getElementById('SMS_MU_ADD_GENERATE_VARIATIONS').style.display = 'flex';
+    }
 
-    function fun_save_changes() {
-        let parentDiv = document.getElementById('selectedOptionsDiv');
-        if (selectElement.length < 1) {
-            document.getElementById('SMS_MU_ADD_GENERATE_VARIATIONS').style.display = 'none'
+    // Remove existing divs
+    parentDiv.innerHTML = '';
 
-        } else {
-            document.getElementById('SMS_MU_ADD_GENERATE_VARIATIONS').style.display = 'flex'
+    // Loop through all options
+    for (let i = 0; i < selectElement.options.length; i++) {
+        let option = selectElement.options[i];
+        // Check if the option is selected
+        if (option.selected) {
+            fetch(`/attributes/${option.value}/terms`)
+                .then(response => response.json())
+                .then(data => {
+                    // Create a new div for the selected option
+                    let newDiv = document.createElement('div');
+                    newDiv.classList.add('selected-option');
+
+                    // Customize the content of the div
+                    newDiv.innerHTML = `  
+                    <label class="form-label fw-bold mt-5">Select ${option.value} Attribute</label>
+                    <div style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
+                        <div class="col-md-12 rounded-4 bg-transparent h-100 ">
+                            <select class='select_box${i}' id='sMS_MU_SET${i}' data-attribute-name='${option.value}' multiple
+                                style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
+                                
+                            </select>
+                            <span class="span_div">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M6.00006 7.16667L10.0001 3.16667L8.83339 2L6.00006 4.83333L3.16673 2L2.00006 3.16667L6.00006 7.16667Z"
+                                        fill="#111" />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>`;
+
+                    // Append the newDiv to the parent div
+                    parentDiv.appendChild(newDiv);
+
+                    // Find the select box inside the new div
+                    const selectBox = newDiv.querySelector(`.select_box${i}`);
+
+                    // Clear the loading option
+                    selectBox.innerHTML = '';
+
+                    // Populate the select box with the fetched data
+                    data.forEach(item => {
+                        const optionElement = document.createElement('option');
+                        optionElement.value = item.id;
+                        optionElement.textContent = item.name;
+                        selectBox.appendChild(optionElement);
+                    });
+
+                    // Initialize Choices on the newly added select box
+                    var multipleCancelButton = new Choices(selectBox, {
+                        removeItemButton: true
+                    });
+
+                    console.log('Select box options:', selectBox.innerHTML);
+                })
+                .catch(error => {
+                    console.error('Error fetching terms:', error);
+                    // Optionally handle the error by displaying a message to the user
+                    const selectBox = newDiv.querySelector(`.select_box${i}`);
+                    selectBox.innerHTML = '<option>Error loading options</option>';
+                });
         }
-
-        // Remove existing divs
-        parentDiv.innerHTML = '';
-
-        let termOfVariationSelected = false;
-
-        // Loop through all options
-        // Loop through all options
-        for (let i = 0; i < selectElement.options.length; i++) {
-            let option = selectElement.options[i];
-            // Check if the option is selected
-            if (option.selected) {
-                if (option.value === 'add_term_variation') {
-                    termOfVariationSelected = true;
-                    break; // Exit loop immediately if a variation option is selected
-                }
-                else {
-    // Fetch the terms from the server
-    fetch(`/attributes/${option.value}/terms`)
-        .then(response => response.json())
-        .then(data => {
-            // Create a new div for the selected option
-            let newDiv = document.createElement('div');
-            newDiv.classList.add('selected-option');
-
-            // Customize the content of the div
-            newDiv.innerHTML = `  
-            <label class="form-label fw-bold mt-5">Select ${option.value} Attribute</label>
-            <div style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
-                <div class="col-md-12 rounded-4 bg-transparent h-100 ">
-                    <select class='select_box${i}' id='sMS_MU_SET${i}' multiple
-                        style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
-                        
-                    </select>
-                    <span class="span_div">
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M6.00006 7.16667L10.0001 3.16667L8.83339 2L6.00006 4.83333L3.16673 2L2.00006 3.16667L6.00006 7.16667Z"
-                                fill="#111" />
-                        </svg>
-                    </span>
-                </div>
-            </div>`;
-
-            // Append the newDiv to the parent div
-            parentDiv.appendChild(newDiv);
-
-            // Find the select box inside the new div
-            const selectBox = newDiv.querySelector(`.select_box${i}`);
-
-            // Clear the loading option
-            selectBox.innerHTML = '';
-
-            // Populate the select box with the fetched data
-            data.forEach(item => {
-                const optionElement = document.createElement('option');
-                optionElement.value = item.id;
-                optionElement.textContent = item.name;
-                selectBox.appendChild(optionElement);
-            });
-
-            // Initialize Choices on the newly added select box
-            var multipleCancelButton = new Choices(selectBox, {
-                removeItemButton: true
-            });
-
-            console.log('Select box options:', selectBox.innerHTML);
-        })
-        .catch(error => {
-            console.error('Error fetching terms:', error);
-            // Optionally handle the error by displaying a message to the user
-            const selectBox = newDiv.querySelector(`.select_box${i}`);
-            selectBox.innerHTML = '<option>Error loading options</option>';
-        });
+    }
 }
 
-            }
+function generate_variations() {
+    const arrays = [];
+    for (let i = 0; i < selectElement.length; i++) {
+        const selectBox = document.querySelector(`.select_box${i}`);
+        if (selectBox) {
+            const values = Array.from(selectBox.options)
+                .filter(option => option.selected)
+                .map(option => ({
+                    id: option.value,
+                    name: option.textContent,
+                    attributeName: selectBox.getAttribute('data-attribute-name')
+                }));
+            arrays.push(values);
         }
-
-
-
-        // Check if any option in the term of variation is selected
-
-
-        // If no option in the term of variation is selected, create divs under the category label
-
-
     }
 
-    
-    
-    function generate_variations() {
-        const arrays = [];
-        for (let i = 0; i < selectElement.length; i++) {
-            const selectBox = document.querySelector(`.select_box${i}`);
-            if (selectBox) {
-                const values = Array.from(selectBox.options).map(option => option.value);
-                arrays.push(values);
-            }
-        }
-        const combinations = getCombinations(arrays);
+    const combinations = getCombinations(arrays);
 
-        const container = document.getElementById('inputs-container'); // Assuming there's a container for the inputs in your HTML
+    const container = document.getElementById('inputs-container'); // Assuming there's a container for the inputs in your HTML
 
-        // Clear previous inputs
-        container.innerHTML = '';
+    // Clear previous inputs
+    container.innerHTML = '';
 
-        // Create inputs for each combination
-        combinations.forEach(combination => {
-            const readOnlyInput = document.createElement('input');
-            readOnlyInput.classList.add('sms_mu_variation_in_combination_input_read');
-            // readOnlyInput.id = 'sms_mu_variation_combination_input_read';
-            readOnlyInput.type = 'text';
-            readOnlyInput.readOnly = true;
-            readOnlyInput.value = combination.join('-');
-            container.appendChild(readOnlyInput);
+    // Create inputs for each combination
+    combinations.forEach(combination => {
+        const readOnlyInput = document.createElement('input');
+        readOnlyInput.classList.add('sms_mu_variation_in_combination_input_read');
+        readOnlyInput.type = 'text';
+        readOnlyInput.readOnly = true;
+        readOnlyInput.value = combination.map(c => `${c.attributeName}:${c.name}`).join('-');
+        container.appendChild(readOnlyInput);
 
-            const numberInput1 = document.createElement('input');
-            numberInput1.text = "Variations"
-            numberInput1.placeholder = "Variations Price"
-            numberInput1.classList.add('sms_mu_variation_in_combination_input');
-            // numberInput.id = 'sms_mu_variation_combination_input';
-            numberInput1.type = 'number';
-            container.appendChild(numberInput1);
+        const numberInput1 = document.createElement('input');
+        numberInput1.text = "Variations";
+        numberInput1.placeholder = "Variations Price";
+        numberInput1.classList.add('sms_mu_variation_in_combination_input');
+        numberInput1.type = 'number';
+        container.appendChild(numberInput1);
 
-            const numberInput2 = document.createElement('input');
-            numberInput2.classList.add('sms_mu_variation_in_combination_input_two');
-            numberInput2.type = 'number';
-            numberInput2.placeholder = "Variations Stock"
-            // numberInput2.id = 'sms_mu_variation_combination_input_two';
-            container.appendChild(numberInput2);
+        const numberInput2 = document.createElement('input');
+        numberInput2.classList.add('sms_mu_variation_in_combination_input_two');
+        numberInput2.type = 'number';
+        numberInput2.placeholder = "Variations Stock";
+        container.appendChild(numberInput2);
 
-            container.appendChild(document.createElement('br')); // Add line break
-            container.appendChild(document.createElement('hr')); // Add line break
-            document.getElementById('sms_mu_configure').style.display = "flex";
-        });
-    }
+        container.appendChild(document.createElement('br')); // Add line break
+        container.appendChild(document.createElement('hr')); // Add line break
+        document.getElementById('sms_mu_configure').style.display = "flex";
+    });
+}
 
-    
-    
     function sms_add_variations_close_success_message() {
         document.getElementById('sms_add_variations_success_message').style.display = 'none';
     }
