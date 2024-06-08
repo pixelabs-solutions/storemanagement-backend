@@ -274,7 +274,7 @@
         document.getElementById('sms_editForm_product_success_message').style.display = 'none';
     }
 
-    function Sms_mu_scucess_product() {
+    function Sms_mu_close_product() {
         document.getElementById('sms_add_editForm_product_error_message').style.display = 'none';
     }
 
