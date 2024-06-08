@@ -51,4 +51,33 @@ class RequestTracker {
     private function isMobileUserAgent($userAgent) {
         return (strpos($userAgent, 'Mobile') !== false || strpos($userAgent, 'Android') !== false || strpos($userAgent, 'iPhone') !== false || strpos($userAgent, 'iPad') !== false);
     }
+    public static function getRequestsLastSevenDays() {
+        global $connection;
+
+        $stmt = $connection->prepare("
+            SELECT 
+                dates.request_date,
+                IFNULL(SUM(CASE WHEN rt.is_mobile = 1 THEN 1 ELSE 0 END), 0) AS mobile_requests,
+                IFNULL(SUM(CASE WHEN rt.is_mobile = 0 THEN 1 ELSE 0 END), 0) AS web_requests
+            FROM 
+                (SELECT CURDATE() - INTERVAL seq DAY AS request_date 
+                 FROM (SELECT 0 AS seq UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6) AS seq) AS dates
+            LEFT JOIN 
+                request_tracking rt ON dates.request_date = rt.request_date
+            WHERE 
+                dates.request_date >= CURDATE() - INTERVAL 7 DAY
+            GROUP BY 
+                dates.request_date
+            ORDER BY 
+                dates.request_date DESC
+        ");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $requests = [];
+        while ($row = $result->fetch_assoc()) {
+            $requests[] = $row;
+        }
+        $stmt->close();
+        return $requests;
+    }
 }
