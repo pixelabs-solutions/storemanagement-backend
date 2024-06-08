@@ -237,7 +237,7 @@ class ProductController
             'stock_quantity' => $data['stock_quantity'], 
             'categories' => array_map(function($category_id) {
                 return ['id' => $category_id]; 
-            }, $data['category']),
+            }, $data['categories']),
             'images' => array_map(function($image_url) {
                 return ['src' => $image_url]; 
             }, $data['images']),
