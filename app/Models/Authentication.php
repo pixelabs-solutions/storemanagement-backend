@@ -159,6 +159,19 @@ class Authentication
     }
 
 
+    public static function get_meta_by_xcode($xcode){
+        global $connection;
+        $meta_key = 'x_code';
+        $stmt = $connection->prepare("SELECT * FROM user_meta WHERE meta_key = ? AND meta_value = ?");
+
+        $stmt->bind_param("ss", $meta_key, $xcode);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
     public static function getAllUsersdata(){
         global $connection;
         $stmt = $connection->prepare("SELECT * FROM users");

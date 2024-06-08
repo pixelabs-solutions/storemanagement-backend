@@ -89,6 +89,7 @@ $router->get('/admin', [TransactionController::class, 'admin']);
 
 //User Configurations
 $router->post('/configurations/add', [ConfigurationController::class, 'add']);
+$router->post('/configurations/add_by_verifying_xcode', [ConfigurationController::class, 'verify_xcode_and_add_configurations']);
 
 
 //Categories
