@@ -15,7 +15,9 @@ class HttpRequestHelper
         }
 
         $rawData = file_get_contents("php://input");
+        // echo $rawData;exit;
         $data = json_decode($rawData, true);
+        // print_r($data);exit;
         if (is_null($data)) {
             return [
                 "message" => "Invalid JSON data.",
