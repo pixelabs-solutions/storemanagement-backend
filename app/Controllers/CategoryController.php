@@ -94,7 +94,12 @@ class CategoryController
 
         $file_path = '';
         if(isset($data['image'])) {
-            $file_path = FileHelper::save_file($data["image"], "categories/".$data['name']);
+            $data = $result["data"];
+            $image = "";
+            if(!empty($data["image"])){
+                $image = $data["image"][0];
+            }
+            $file_path = FileHelper::save_file($image, "categories/".$data['name']);
         }
         $payload = [
             'name' => $data['name'], 
