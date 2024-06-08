@@ -24,7 +24,8 @@ class ProductController
             '_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations'
         ];
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-        $products = Base::wc_get($configuration, $this->table_name, $page, $product_fields);
+        // $products = Base::wc_get($configuration, $this->table_name, $page, $product_fields);
+        $products = Product::get_products($configuration, $this->table_name, $product_fields);
         if(isset($_GET['category']) && $_GET['category'] !== "")
         {
             $category = $_GET['category'];
@@ -60,8 +61,7 @@ class ProductController
         $attributes = Base::wc_get($configuration, 'products/attributes', $page);
         $currency = Base::wc_get($configuration, 'data/currencies/current', $page);
         
-        $number_of_products = Product::get_products_count($configuration);
-        // var_dump($products);
+        $number_of_products = count($products);
         if($is_rest == 'true')
         {
             $data = [
