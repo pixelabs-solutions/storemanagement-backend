@@ -179,7 +179,31 @@
         </div>
     </div>
 </div>
-
+<div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_editForm_product_success_message" style="display: none;">
+    <button type="button" class="btn-close" aria-label="Close" onclick="Sms_mu_scucess_product()"></button>
+    <!-- SVG icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+        <path d="M9 12l2 2l4 -4"></path>
+    </svg>
+    <h3>Success</h3>
+    <div class="text-muted">Your add Regular data has been submitted successfully.</div>
+</div>
+<div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_add_editForm_product_error_message" style="display: none;">
+    <!-- Close icon -->
+    <button type="button" class="btn-close" aria-label="Close" onclick="Sms_mu_close_product()"></button>
+    <!-- SVG icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="12" y1="5" x2="12.01" y2="19"></line>
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="12" y1="5" x2="12.01" y2="19"></line>
+    </svg>
+    <h3>Error</h3>
+    <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
+</div>
 
 <!-- input javascript code  -->
 <script>
@@ -246,6 +270,14 @@
         });
     }
 
+    function Sms_mu_scucess_product() {
+        document.getElementById('sms_editForm_product_success_message').style.display = 'none';
+    }
+
+    function Sms_mu_scucess_product() {
+        document.getElementById('sms_add_editForm_product_error_message').style.display = 'none';
+    }
+
     function fun_Np() {
         let Name = document.getElementById('sms_mu_Ip_one').value;
         let CtgValue = document.getElementById('category_in_popoupop');
@@ -294,21 +326,22 @@
             .then(response => {
                 if (response.ok) {
                     // Form submission succeeded, display success message
-                    document.getElementById('sms_add_regular_success_message').style.display = 'block';
-                    document.getElementById('sms_add_regular_error_message').style.display = 'none';
+                    document.getElementById('sms_editForm_product_success_message').style.display = 'block';
+                    document.getElementById('sms_add_editForm_product_error_message').style.display = 'none';
                     window.location.reload();
                 } else {
                     // Form submission failed, display error message
-                    document.getElementById('sms_add_regular_error_message').style.display = 'block';
-                    document.getElementById('sms_add_regular_success_message').style.display = 'none'; // Hide success message if it was displayed before
+                    document.getElementById('sms_add_editForm_product_error_message').style.display = 'block';
+                    document.getElementById('sms_editForm_product_success_message').style.display = 'none'; // Hide success message if it was displayed before
                 }
             })
             .catch(error => {
                 // Network error occurred, display error message
-                document.getElementById('sms_add_regular_error_message').style.display = 'block';
+                document.getElementById('sms_add_editForm_product_error_message').style.display = 'block';
                 console.error('Error submitting form data:', error);
             });
     }
+
 
 
     function sms_a_edit_product_variations_image() {
