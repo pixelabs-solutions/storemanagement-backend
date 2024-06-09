@@ -192,6 +192,7 @@
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.customer_name">Email</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.status">Phone</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.order_date">Business Name</th>
+              <th class="sms_mu_td" data-i18n="transction_page.transaction_th.order_date">Registered Since</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.sum">X Code</th>
               <th></th>
             </tr>
@@ -217,7 +218,11 @@
                     echo $business_name['meta_value'];
                   }
                 } ?></td>
-
+<td><?php foreach ($customer_data['business_name'] as $business_name) {
+                  if ($business_name['user_id'] == $customer['id']) {
+                    echo $business_name['meta_value'];
+                  }
+                } ?></td>
 
                 <?php foreach ($customer_data['users_x_code'] as $users_x_code) {
                   if ($users_x_code['user_id'] == $customer['id']) {
