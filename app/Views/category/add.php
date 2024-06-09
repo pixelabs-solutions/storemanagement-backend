@@ -232,7 +232,7 @@
                         body: JSON.stringify(data)
                     })
                     .then(response => {
-                        if (response.status === 201) {
+                        if (response.ok ) {
                             // Form submission succeeded, display success message
                             document.getElementById('sms_addForm_category_success_message').style.display = 'block';
                             document.getElementById('sms_addForm_category_error_message').style.display = 'none';
