@@ -2,12 +2,12 @@
 require_once __DIR__ . '/../partials/header.php';
 
 //  var_dump($products);
- foreach($products as $product){
-    if($product['type'] == "variable"){
-        var_dump($product);
-        echo "<br>";
-    }
- }
+//  foreach($products as $product){
+//     if($product['type'] == "variable"){
+//         var_dump($product);
+//         echo "<br>";
+//     }
+//  }
 ?>
 <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
 <style>

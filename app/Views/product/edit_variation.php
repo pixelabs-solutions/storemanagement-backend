@@ -10,10 +10,13 @@
     body {
         font-feature-settings: "cv03", "cv04", "cv11";
     }
-    .markdown>table thead th, .table thead th {
+
+    .markdown>table thead th,
+    .table thead th {
         background: transparent;
         color: white;
     }
+
     .rtl {
         direction: rtl;
     }
@@ -180,7 +183,7 @@
                             <div class=" col-12 mt-5" id="sms_a_edit_product_variation">
                                 <div class="table-responsive">
                                     <table class="table table-vcenter card-table w-100">
-                                        <thead style = "background-color: #4987d8;">
+                                        <thead style="background-color: #4987d8;">
                                             <tr class="t-head gap-2 rounded-4 py-2"
                                                 style="background-color: rgba(73, 135, 216, 0.44);">
                                                 <th class="">
@@ -206,7 +209,7 @@
 
                                         </tbody>
 
-                                       
+
                                         <!-- More rows can be dynamically added here -->
                                         <!-- </div>
                                             </div>
@@ -445,36 +448,37 @@
 
 
 <script>
-    const buttons = document.querySelectorAll(".variation_edit");
+    document.addEventListener('DOMContentLoaded', function () {
+        const tableContainer = document.querySelector(".variation_edit_container"); // Replace with the container element for your table
+        tableContainer.addEventListener("click", function (event) {
+            if (event.target.classList.contains("variation_edit")) {
+                // Get the closest table row (tr) element
+                const row = this.closest("tr");
 
-    buttons.forEach(button => {
-        button.addEventListener("click", function() {
-            // Get the closest table row (tr) element
-            const row = this.closest("tr");
+                // Create an empty object to store data
+                const rowData = {};
 
-            // Create an empty object to store data
-            const rowData = {};
+                // Loop through all cells (td) in the row
+                row.querySelectorAll("td").forEach(cell => {
+                    // Get the text content of each cell
+                    const cellValue = cell.textContent.trim();
 
-            // Loop through all cells (td) in the row
-            row.querySelectorAll("td").forEach(cell => {
-                // Get the text content of each cell
-                const cellValue = cell.textContent.trim();
+                    // Extract the data based on the cell's position (index) or add custom logic
+                    const dataKey = cell.cellIndex; // Access by cell index (0, 1, 2, ...)
+                    // You can also use cell.dataset (if you have data-* attributes on cells)
+                    rowData[dataKey] = cellValue;
+                });
 
-                // Extract the data based on the cell's position (index) or add custom logic
-                const dataKey = cell.cellIndex; // Access by cell index (0, 1, 2, ...)
-                // You can also use cell.dataset (if you have data-* attributes on cells)
-                rowData[dataKey] = cellValue;
-            });
-
-            console.log("Row Data:", rowData);
-            // var usageLimit = rowData[3].split('/')[1]; // This will extract "15" from "0/15"
-            // document.getElementById('coupons_code').value = rowData[0];
-            // document.getElementById('discount_amount').value = rowData[2];
-            // document.getElementById('usage_limit').value = usageLimit;
-            // document.getElementById('expiration_date').value = rowData[4];
+                console.log("Row Data:", rowData);
+                // var usageLimit = rowData[3].split('/')[1]; // This will extract "15" from "0/15"
+                // document.getElementById('coupons_code').value = rowData[0];
+                // document.getElementById('discount_amount').value = rowData[2];
+                // document.getElementById('usage_limit').value = usageLimit;
+                // document.getElementById('expiration_date').value = rowData[4];
 
 
-            // You can use the rowData object for further processing
+                // You can use the rowData object for further processing
+            }
         });
     });
 </script>
@@ -521,15 +525,15 @@
 
                             let variations_stock_quantity = "";
                             let variations_regular_price = "";
-                            if(variationsDataRow.stock_quantity == null){
-                               variations_stock_quantity = "Not Available";
-                            }else{
+                            if (variationsDataRow.stock_quantity == null) {
+                                variations_stock_quantity = "Not Available";
+                            } else {
                                 variations_stock_quantity = variationsDataRow.stock_quantity;
                             }
 
-                            if(variationsDataRow.regular_price == ""){
+                            if (variationsDataRow.regular_price == "") {
                                 variations_regular_price = "Not Price Added";
-                            }else{
+                            } else {
                                 variations_regular_price = variationsDataRow.regular_price;
                             }
                             // Customize the content of the div
@@ -544,9 +548,9 @@
                                 <td class="text-center ">${variations_stock_quantity}</td>
                                 <td>
                                     <div class="d-flex justify-content-end gap-1 w-auto ">
-                                        <span class="variation_edit"
+                                        <span class="variation_edit_container"
                                             onclick="openModal('sms_edit_product_variation_w_edit_product_modal')">
-                                            <svg width="24" height="24" viewBox="0 0 32 32" fill="none"
+                                            <svg class="variation_edit" onclick="edit_variation(this)" width="24" height="24" viewBox="0 0 32 32" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z"
@@ -577,6 +581,8 @@
 
 
                             // });
+
+
                         });
                         // Your code to handle variationsData goes here
                     })
@@ -700,6 +706,36 @@
     });
 </script>
 <script>
+
+    function edit_variation(clickedButton) {
+        console.log("edit_variation working");
+        // Get the closest table row (tr) element
+        const button = clickedButton;
+
+        const row = button.closest("tr"); // Find the closest table row
+        // const row = clickedRow;
+
+        // Create an empty object to store data
+        const rowData = {};
+
+        // Loop through all cells (td) in the row
+        row.querySelectorAll("td").forEach(cell => {
+            // Get the text content of each cell
+            const cellValue = cell.textContent.trim();
+
+            // Extract the data based on the cell's position (index) or add custom logic
+            const dataKey = cell.cellIndex; // Access by cell index (0, 1, 2, ...)
+            // You can also use cell.dataset (if you have data-* attributes on cells)
+            rowData[dataKey] = cellValue;
+        });
+
+        console.log("Row Data:", rowData);
+
+        document.getElementById('sms_mu_name_variation').value=rowData[1];
+        document.getElementById('sms_mu_price_variation').value=rowData[2];
+        document.getElementById('sms_mu_inventory_variation').value=rowData[3];
+
+    }
     // Function to open the modal
     function openModal(modalId) {
         // Select the modal using the provided ID
