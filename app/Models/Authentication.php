@@ -174,7 +174,7 @@ class Authentication
 
     public static function getAllUsersdata(){
         global $connection;
-        $stmt = $connection->prepare("SELECT * FROM users");
+        $stmt = $connection->prepare("SELECT * FROM users where user_level=1");
         $stmt->execute();
         $result = $stmt->get_result();
         $users_data = $result->fetch_all(MYSQLI_ASSOC);

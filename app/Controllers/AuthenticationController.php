@@ -33,7 +33,7 @@ class AuthenticationController
             exit;
         }
         else {
-            header('Location: /authentication/login');
+            header('Location: /admin/index');
         }
     }
 
