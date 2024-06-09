@@ -46,6 +46,9 @@ $router->post('/products/import', [ProductController::class, 'import']);
 $router->delete('/product/{id}', [ProductController::class, 'delete']);
 $router->post('/product/add', [ProductController::class, 'add']);
 $router->put('/product/{id}', [ProductController::class, 'update']);
+$router->get('/product/{id}/variations', [ProductController::class, 'variations']);
+
+$router->get('/product/{id}/variations/{var_id}', [ProductController::class, 'variation_by_id']);
 
 
 //Coupons
