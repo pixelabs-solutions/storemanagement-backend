@@ -178,30 +178,14 @@ body {
                <button class="rounded-pill border-0" style="background-color:#4987D870; " id="sms_mu_desktop_heb_btn">כניסה למערכת הדיוור
                   →</button> -->
 
-               <div class="navbar-nav flex-row order-md-last gap-2">
-                  <div class=" d-flex align-items-center">
-                
-                     <!-- <button id="switchBtn" class="border-0 rounded-circle" onclick="switchLanguage()">
-
-                        <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle">
-
-                     </button> -->
-                     <select id="lang-select" style="padding: 5px; font-size: 14px;" class="lang_select">
-                        <option value="en">
-                      <span class="flag flag-country-us"> English</span>
-                           
-                        </option>
-                        <option value="he">
-                        <span class="flag flag-country-il"></span>
-                           עברית
-                        </option>
-                     </select>
-                  </div>
-                  <div class="nav-item dropdown">
+               <div class="navbar-nav flex-row order-md-last gap-2 align-center">
+                <p>Admin Page</p>
+             
+                  <div class="nav-item ">
                      <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="" aria-label="Open user menu">
-                        <span class="avatar rounded-circle avatar-sm" style="background-image: url(./static/avatars/000m.jpg)">
-                           <img onclick="FunLogoutProfile()" src="/assets/dist/img/profile.png" height="100%" width="100%" alt="">
-                        </span>
+
+                         <button onclick="LogoutDisconecting()" class="btn btn-primry">logout</button>
+                  
                   </div>
             
                   </a>
