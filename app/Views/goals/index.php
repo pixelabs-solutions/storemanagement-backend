@@ -254,7 +254,10 @@ if ($avg_order_value_increase_left_percentage >= 100) {
                                     <div class="col-7">
                                         <p class="text-start text-nowrap">
                                             <?php echo $goals_data["new_customers"]['customers_count']; ?>
+                                            <span data-i18n="objective.card_two_in_objective.card_title">
                                             customers were recruited
+                                            </span>
+                                       
                                         </p>
                                     </div>
                                     <div class="col-5">

@@ -320,7 +320,7 @@ const translations = {
         card_tag_p_right: "NIS 50,000 left",
       },
       card_two_in_objective: {
-        card_title: "Recruit 250 new customers",
+        card_title: "customers were recruited",
         card_one_p_left: "NIS 50,000 was received",
         card_tag_p_right: "NIS 50,000 left",
       },
@@ -912,7 +912,7 @@ const translations = {
         card_tag_p_right: 'נותרו 50,000 ש"ח',
       },
       card_two_in_objective: {
-        card_title: "לגייס 250 לקוחות חדשים",
+        card_title: "לקוחות גויסו",
         card_one_p_left: 'התקבלו 50,000 ש"ח',
         card_tag_p_right: 'נותרו 50,000 ש"ח',
       },

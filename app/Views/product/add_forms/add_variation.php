@@ -105,6 +105,22 @@ var_dump($attributes);
     .sms_a_add_product_variations label i {
         margin-right: 5px;
     }
+    .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.pagination a {
+    margin: 0 5px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.pagination a:hover {
+    background-color: #0056b3;
+}
 </style>
 <!-- </head>
 

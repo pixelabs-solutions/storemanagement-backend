@@ -107,10 +107,8 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <!-- Upload a product image  -->
-
                         <div class="row gx-3">
                             <div class="col-md-6 mb-4">
                                 <label class="form-label" data-i18n="popoups.future_managment.edit_variation_in_product_managment.image_upload">Upload
