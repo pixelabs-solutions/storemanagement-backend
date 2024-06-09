@@ -1,1 +1,2 @@
 name,type,description,stock_quantity,category,images,regular_price,sale_price
+atif,simple,test for import,10,110,"src=""https://via.placeholder.com/20""",1200,800
