@@ -320,6 +320,16 @@ require_once __DIR__ . '/../partials/header.php';
         <!-- Graph Start -->
         <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
             <div class="card h-100" style="border-radius:20px;">
+                <div class="row pt-5 px-5 pb-0 t sms_mu_margin">
+                <div class="col-6 text-star">
+                            <h4 class="text-primary sms_mu_we_en">For All The details</h4>
+                            <h4 class="text-primary sms_mu_we_heb">לכל הפרטים</h4>
+                        </div>
+                        <div class="col-6 text-end ">
+                            <h4 class="sms_mu_we_en">Revenue graph</h4>
+                            <h4 class=" sms_mu_we_heb">גרף הכנסות</h4>
+                        </div>
+                </div>
                 <div class="">
                     <div class="row card-body d-flex justify-content-end sms_mu_for_rtl_row_cards">
                         <div class="col-2 d-flex flex-column justify-content-center">
@@ -343,7 +353,7 @@ require_once __DIR__ . '/../partials/header.php';
             <div class="card h-100" style="border-radius:20px;">
                 <div class="card-body">
                     <!-- Start header -->
-                    <div class="row g-2 align-items-center sms_mu_margin">
+                    <div class="row g-2 align-items-center ">
                         <div class="col-auto ">
                             <h4 class="text-primary sms_mu_we_en">Customer Location</h4>
                             <h4 class="text-primary sms_mu_we_heb">מיקום_לקוחd</h4>

@@ -61,30 +61,40 @@
 <!-- </head>
 
 <body> -->
+
 <div class="container-xl">
     <div class="row justify-content-center">
         <div class="col-12 col-md-10">
             <div class="">
+
                 <form action="" method="post" class="card-body">
                     <!-- header -->
                     <div class="row gx-3">
                         <div class="col-md-6 mb-3">
-                            <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_catageory.popoup_in_catagory.heading">The name of the category</label>
+                            <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_catageory.popoup_in_catagory.heading">The name of
+                                the
+                                category</label>
                             <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_key_category" style="background-color: #EAEAEA" placeholder="Name Of Category">
+
                             <input type="hidden" id="sms_mu_id_category">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="example-select fs-3 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_catageory.popoup_in_catagory.label_parent_ct">Parent category</label>
+                            <label for="example-select fs-3 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_catageory.popoup_in_catagory.label_parent_ct">Parent category
+                            </label>
                             <div style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                 <div class="col-md-12 rounded-4 bg-transparent h-100 ">
                                     <select id="sms_mu_select_category_pop" class="form-select" style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
                                         <option value="">Select</option>
+
                                         <?php
+
                                         foreach ($categories as $category) {
+                                            // Access the "name" property of each category object
                                         ?>
                                             <option value="<?php echo $category['id'] ?>"><?php echo $category['name']; ?></option>
                                         <?php
                                         }
+
                                         ?>
                                     </select>
                                     <span class="span_div">
@@ -99,9 +109,12 @@
                         <div class="rounded-4">
                             <div class="col-12 col-md-12" id="dynamic-input-container">
                                 <div class=" rounded">
-                                    <h3 class="card-title text-black fs-4 fw-bold sms_mu_ctg_eng">Image Name </h3>
-                                    <h3 class="card-title text-black fs-4 fw-bold sms_mu_ctg_heb">שם תמונה</h3>
+                                    <h3 class="card-title text-black fs-4 fw-bold sms_mu_ctg_eng">
+                                        Image Name </h3>
+                                    <h3 class="card-title text-black fs-4 fw-bold sms_mu_ctg_heb">
+                                        שם תמונה</h3>
                                 </div>
+
                                 <div class='gx-3'>
                                     <div class="mb-3 p-2 col-12 rounded-3 d-flex align-items-center justify-content-between " style="background-color: #EAEAEA">
                                         <label class="form-label"></label>
@@ -121,13 +134,16 @@
                                                 <img src="https://via.placeholder.com/100" alt="Avatar Image" id="edit_category_image_placeholder">
                                             </span>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
+                            <!-- To update the term click here+ -->
                         </div>
                     </div>
                     <div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_editForm_success_message" style="display: none;">
                         <!-- Close icon -->
+
                         <button type="button" class="btn-close" aria-label="Close" onclick="Sms_mu_close_scucess()"></button>
                         <!-- SVG icon -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -161,6 +177,9 @@
     </div>
 </div>
 
+
+
+
 <script>
     $(document).ready(function() {
         $('.EditPopoup').click(function() {
@@ -169,164 +188,126 @@
 
             // Get values from the row
             var id = $row.attr('id');
+            console.log("gkg")
+            console.log(id)
+            var catID = id.replace(/\D/g, '');
+
             var imageSrc = $row.find('td.t_oravg_m img').attr('src');
             var categoryName = $row.find('td.category-name').text();
             var parentCategoryName = $row.find('td:nth-child(3)').text();
             var parentCategoryID = $row.find('td:nth-child(3)').attr('parent-id');
             var count = $row.find('td:nth-child(4)').text();
 
+            // Now you can use these values as needed
+            // console.log('ID:', id);
+            // console.log('Image Source:', imageSrc);
+            // console.log('Category Name:', categoryName);
+            // console.log('Parent Category Name:', parentCategoryName);
+            // console.log('Parent Category ID:', parentCategoryID);
+            // console.log('Count:', count);
+
+
             // You can now use these values to populate your edit form or any other action
-            document.getElementById("sms_mu_id_category").value = id;
+
+            document.getElementById("sms_mu_id_category").value = catID;
             document.getElementById("sms_mu_key_category").value = categoryName;
             document.getElementById("sms_img_ctg").src = imageSrc;
             document.getElementById("edit_category_image_placeholder").src = imageSrc;
             document.getElementById("sms_mu_select_category_pop").value = parentCategoryID;
+
+
+
         });
     });
+</script>
 
 
-    function submit_edit_ctg_form() {
-        // Get the select element and category ID
-        let id = document.getElementById("sms_mu_id_category").value;
-        console.log(id);
 
-        // Get the image input element
-        const imageInput = document.getElementById("sms_img_ctg");
-        console.log("Number of files selected:", imageInput.files.length);
+<script>
+function submit_edit_ctg_form() {
+    // Get the select element and category ID
+    let id = document.getElementById("sms_mu_id_category").value;
 
-        // Check if an image is selected
-        if (imageInput.files.length === 0) {
-            console.log("No images selected for update.");
-            // Submit the form with default values only
-            submitFormWithDefaults(id);
-            return;
-        }
+    // Get image input elements
+    const imageInputs = document.querySelectorAll("#sms_img_ctg");
 
-        // Function to convert image to base64
-        function readFileAsBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    resolve(event.target.result);
-                };
-                reader.onerror = function(error) {
-                    reject(error);
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-
-        // Convert selected image to base64
-        readFileAsBase64(imageInput.files[0])
-            .then(base64String => {
-                const form_data = {
-                    "name": document.getElementById("sms_mu_key_category").value,
-                    "parent": document.getElementById("sms_mu_select_category_pop").value,
-                    "image": [base64String], // Now containing an array with one base64 string
-                };
-
-                console.log("Form data:", form_data);
-
-                // Submit the form with both default values and image data
-                submitFormWithImage(id, form_data);
-            })
-            .catch(error => {
-                console.error('Error converting image to base64:', error);
-            });
+    // Check if any images are selected
+    if (!imageInputs.length) {
+        console.log("No images selected for update.");
+        // Submit the form without image data (optional: display a message)
+        // Show success message
+        document.getElementById('sms_editForm_success_message').style.display = 'block';
+        // Reload window after a delay
+        setTimeout(function(){
+            location.reload();
+        }, 2000); // Reload after 2 seconds (adjust as needed)
+        return;
     }
 
-    function submitFormWithDefaults(id) {
-    const defaultImageSrc = document.getElementById("sms_img_ctg").src;
-    const form_data = {
-                "name": document.getElementById("sms_mu_key_category").value,
-                "parent": document.getElementById("sms_mu_select_category_pop").value,
-                "image": [defaultImageSrc], // Include base64 string of default image
+    // Function to convert image to base64 (remains the same)
+    function readFileAsBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                resolve(event.target.result);
             };
-            submitFormWithImage(id, form_data);
+            reader.onerror = function(error) {
+                reject(error);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
 
-    // Convert default image to base64
-    // convertImageToBase64(defaultImageSrc)
-    //     .then(base64String => {
-    //         const form_data = {
-    //             "name": document.getElementById("sms_mu_key_category").value,
-    //             "parent": document.getElementById("sms_mu_select_category_pop").value,
-    //             "image": [base64String], // Include base64 string of default image
-    //         };
+    // Convert selected images to base64 asynchronously (Promise.all)
+    Promise.all(
+        Array.from(imageInputs).map(input => input.files[0] ? readFileAsBase64(input.files[0]) : Promise.resolve(null)) // Handle cases where no file is selected
+    )
+    .then(base64Strings => {
+        // Filter out any null values (no image selected for an input)
+        const filteredBase64Strings = base64Strings.filter(base64String => base64String !== null);
 
-    //         console.log("Form data with defaults only:", form_data);
-
-    //         // Submit the form with default values and default image data
-    //         submitFormWithImage(id, form_data);
-    //     })
-    //     .catch(error => {
-    //         console.error('Error converting default image to base64:', error);
-    //     });
-}
-
-// Function to convert an image to base64
-function convertImageToBase64(imageUrl) {
-    return new Promise((resolve, reject) => {
-        // Create a new Image object
-        const img = new Image();
-        img.crossOrigin = 'Anonymous'; // This allows loading cross-origin images
-
-        // Set up event handlers
-        img.onload = function() {
-            // Create a canvas element
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-
-            // Set canvas dimensions to match the image
-            canvas.width = img.width;
-            canvas.height = img.height;
-
-            // Draw the image onto the canvas
-            ctx.drawImage(img, 0, 0);
-
-            // Get the data URL of the canvas content (in base64 format)
-            const dataUrl = canvas.toDataURL('image/png');
-
-            // Resolve the promise with the base64 data URL
-            resolve(dataUrl);
+        const form_data = {
+            "name": document.getElementById("sms_mu_key_category").value,
+            "parent": document.getElementById("sms_mu_select_category_pop").value,
+            "image": filteredBase64Strings, // Now containing an array of base64 strings
         };
 
-        // Handle errors
-        img.onerror = function(error) {
-            reject(error);
-        };
-
-        // Set the image source (this triggers the onload event)
-        img.src = imageUrl;
+        console.log("Form data:", form_data);
+        const apiUrl = `/categories/${id}`;
+        fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(form_data)
+        })
+        .then(response => {
+            // Show success message
+            document.getElementById('sms_editForm_success_message').style.display = 'block';
+            // Reload window after a delay
+            setTimeout(function(){
+                location.reload();
+            }, 2000); // Reload after 2 seconds (adjust as needed)
+            // ... (rest of the code for handling response remains the same)
+        })
+        .catch(error => {
+            // ... (rest of the code for handling errors remains the same)
+        });
+    })
+    .catch(error => {
+        console.error("Error converting image(s) to base64:", error);
+        // Handle error converting image (optional: display error message)
     });
 }
 
-    function submitFormWithImage(id, form_data) {
-        const parts = id.split('_');
-        const numericId = parts[parts.length - 1];
-        fetch(`/categories/${numericId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(form_data)
-            })
-            .then(response => {
-                if (response.status === 200) {
-                    // Form submission succeeded, display success message
-                    document.getElementById('sms_editForm_success_message').style.display = 'block';
-                    document.getElementById('sms_add_editForm_error_message').style.display = 'none';
-                    window.location.reload();
-                } else {
-                    // Form submission failed, display error message
-                    document.getElementById('sms_add_editForm_error_message').style.display = 'block';
-                    document.getElementById('sms_editForm_success_message').style.display = 'none';
-                }
-            })
-            .catch(error => {
-                document.getElementById('sms_add_editForm_error_message').style.display = 'block';
-                console.error('Error submitting form data:', error);
-            });
-    }
+  
+  
+  
+      function showFileName(input) {
+          var label = input.nextElementSibling;
+          var fileName = input.files[0].name;
+          label.innerHTML = '<i class="bi bi-image text-black"></i> ' + fileName;
+      }
 
 
 
@@ -339,17 +320,10 @@ function convertImageToBase64(imageUrl) {
         document.getElementById('sms_add_editForm_error_message').style.display = 'none';
     }
 
+
     function showFileName(input) {
         var label = input.nextElementSibling;
         var fileName = input.files[0].name;
-        var selectedFile = input.files[0];
-
-        var reader = new FileReader();
-        reader.onload = function(event) {
-            document.getElementById("edit_category_image_placeholder").src = event.target.result;
-        };
-        reader.readAsDataURL(selectedFile);
-
         label.innerHTML = '<i class="bi bi-image text-black"></i> ' + fileName;
     }
 </script>

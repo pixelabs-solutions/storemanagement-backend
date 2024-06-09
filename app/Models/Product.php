@@ -92,6 +92,33 @@ class Product
     }
 
 
+    // public static function get_variation_by_id($configuration, $id, $var_id)
+    // {
+    //     $consumer_key = $configuration["consumer_key"];
+    //     $consumer_secret = $configuration["consumer_secret"];
+    //     $store_url = $configuration["store_url"];
+    //     $client = new Client();
+    //     try 
+    //     {
+    //         $response = $client->request('GET', $store_url . '/wp-json/wc/v3/products/'.$id.'/variations/'.$var_id, [
+    //             'auth' => [$consumer_key, $consumer_secret]
+    //         ]);
+        
+    //         $product_variation = json_decode($response->getBody(), true);
+    //         // if($product['status'] !== 'publish')
+    //         // {
+    //         //     return null;
+    //         // }
+    //         return $product_variation;
+    //     } 
+    //     catch (RequestException $e) 
+    //     {
+    //         echo $e->getMessage();
+    //     }
+    // }
+
+
+
     public static function delete($configuration, $id)
     {
         $consumer_key = $configuration["consumer_key"];

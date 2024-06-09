@@ -85,7 +85,7 @@ class Database
         $name = 'Admin';
         $username = 'admin';
         $email = 'admin@woo-management.com';
-        $user_level = 0;
+        $user_level = 2;
         $adminPassword = 'admin123';
 
         // Check if the admin user already exists

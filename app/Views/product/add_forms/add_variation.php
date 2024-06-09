@@ -11,7 +11,7 @@
     <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
     <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" /> -->
 
-<?php
+    <?php
 var_dump($attributes);
 ?>
 <style>

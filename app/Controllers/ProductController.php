@@ -96,6 +96,32 @@ class ProductController
         echo $product;
     }
 
+
+    public function variation_by_id($id, $var_id)
+    {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+        // if(isset($_GET['term_id'])){
+        //     $term_id = $_GET['term_id'];
+
+        // }
+        $variations_by_id = Base::wc_get_by_id($configuration, $this->table_name."/".$id."/"."variations"."/".$var_id);
+
+        echo $variations_by_id;
+    }
+    public function variations($id)
+    {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $configuration = $this->prepare_configuration($is_rest);
+        // if(isset($_GET['term_id'])){
+        //     $term_id = $_GET['term_id'];
+
+        // }
+        $variations = Base::wc_get_by_id($configuration, $this->table_name."/".$id."/"."variations");
+
+        echo $variations;
+    }
+    
     public function delete($id)
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
