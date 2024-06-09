@@ -323,6 +323,7 @@ var_dump($attributes);
     function sms_add_variations_submit() {
         console.log("hello");
 
+<<<<<<< HEAD
         // Log all the form values
         var formData = {
             'name': document.getElementById('example-text-input').value,
@@ -335,6 +336,51 @@ var_dump($attributes);
             'sale_price': '10', // Assuming sale_price is always 10 for the main product
             'attributes': [],
             'variations': []
+=======
+    // Log all the form values
+    var formData = {
+        'name': document.getElementById('example-text-input').value,
+        'type': 'variable',
+        'description': document.getElementById('floatingTextarea2').value,
+        'manage_stock': true,
+        'categories': getSelectedValues('choices-multiple-remove-button'),
+        'images': [],  // Assuming no images for simplicity
+        'regular_price': '10',  // Assuming regular_price is always 10 for the main product
+        'sale_price': '10',  // Assuming sale_price is always 10 for the main product
+        'attributes': [],
+        'variations': []
+    };
+
+    // Collecting attribute data from dynamically generated select boxes
+    var attributeDivs = document.querySelectorAll('#selectedOptionsDiv .selected-option');
+    attributeDivs.forEach(div => {
+        let selectBox = div.querySelector('select');
+        if (selectBox) {
+            let attributeName = div.querySelector('label').textContent.replace('Select ', '').replace(' Attribute', '');
+            let options = Array.from(selectBox.options).filter(option => option.selected).map(option => option.textContent);
+
+            if (options.length > 0) {
+                var attribute = {
+                    'name': attributeName,
+                    'options': options,
+                    'variation': true
+                };
+                formData.attributes.push(attribute);
+            }
+        }
+    });
+
+    // Collecting variation data
+    var variationInputs = document.querySelectorAll('.sms_mu_variation_in_combination_input');
+    var variationInputsTwo = document.querySelectorAll('.sms_mu_variation_in_combination_input_two');
+    var variationInputsOne = document.querySelectorAll('.sms_mu_variation_in_combination_input_read');
+
+    variationInputsOne.forEach((input, index) => {
+        var variation = {
+            'regular_price': variationInputs[index].value,
+            'stock_quantity': variationInputsTwo[index].value, 
+            'attributes': []
+>>>>>>> 22042f144f2dbb963660c739a32d52d8a67f557c
         };
 
         // Collecting attribute data from dynamically generated select boxes
@@ -361,6 +407,7 @@ var_dump($attributes);
         var variationInputsTwo = document.querySelectorAll('.sms_mu_variation_in_combination_input_two');
         var variationInputsOne = document.querySelectorAll('.sms_mu_variation_in_combination_input_read');
 
+<<<<<<< HEAD
         variationInputsOne.forEach((input, index) => {
             var variation = {
                 'regular_price': variationInputs[index].value,
@@ -445,6 +492,67 @@ var_dump($attributes);
 
         // Remove existing divs
         parentDiv.innerHTML = '';
+=======
+ // Collecting single image
+ let singleImageInput = document.getElementById('single-image-input');
+    let multipleImagesInput = document.getElementById('multiple-images-input');
+
+    let files = [];
+    if (singleImageInput.files.length > 0) {
+        files.push(singleImageInput.files[0]);
+    }
+    if (multipleImagesInput.files.length > 0) {
+        files.push(...multipleImagesInput.files);
+    }
+
+    let base64Array = [];
+
+    function readFileAsBase64(file) {
+        return new Promise((resolve, reject) => {
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                resolve(event.target.result);
+            };
+            reader.onerror = function(error) {
+                reject(error);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    Promise.all(files.map(file => file ? readFileAsBase64(file) : Promise.resolve(null)))
+        .then(base64Strings => {
+            formData.images = base64Strings.filter(base64 => base64 !== null);
+
+            console.log(formData);
+
+            return fetch('product/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+        })
+        .then(response => {
+            if (response.status === 200) {
+                // Form submission succeeded, display success message
+                document.getElementById('sms_add_variations_success_message').style.display = 'block';
+                document.getElementById('sms_add_variations_error_message').style.display = 'none';
+                window.location.reload();
+            } else {
+                // Form submission failed, display error message
+                document.getElementById('sms_add_variations_error_message').style.display = 'block';
+                document.getElementById('sms_add_variations_success_message').style.display = 'none'; // Hide success message if it was displayed before
+            }
+        })
+        .catch(error => {
+            // Network error occurred, display error message
+            document.getElementById('sms_add_variations_error_message').style.display = 'block';
+            console.error('Error submitting form data:', error);
+        });
+}
+>>>>>>> 22042f144f2dbb963660c739a32d52d8a67f557c
 
         // Loop through all options
         for (let i = 0; i < selectElement.options.length; i++) {

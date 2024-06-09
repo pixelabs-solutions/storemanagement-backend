@@ -16,6 +16,7 @@ use Pixelabs\StoreManagement\Controllers\AuthenticationController;
 use Pixelabs\StoreManagement\Controllers\ConfigurationController;
 use Pixelabs\StoreManagement\Controllers\CategoryController;
 use Pixelabs\StoreManagement\Controllers\AttributesController;
+use Pixelabs\StoreManagement\Controllers\AdminController;
 
 // Define routes
 
@@ -26,6 +27,12 @@ $router->post('/authentication/register', [AuthenticationController::class, 'reg
 $router->get('/authentication/login', [AuthenticationController::class, 'login']);
 $router->post('/authentication/login', [AuthenticationController::class, 'login_user']);
 $router->get('/authentication/logout', [AuthenticationController::class, 'logout']);
+
+
+
+//Admin
+$router->get('/admin/index', [AdminController::class, 'index']);
+
 
 //Dashboard
 $router->get('/index', [DashboardController::class, 'index']);
@@ -82,6 +89,7 @@ $router->get('/admin', [TransactionController::class, 'admin']);
 
 //User Configurations
 $router->post('/configurations/add', [ConfigurationController::class, 'add']);
+$router->post('/configurations/add_by_verifying_xcode', [ConfigurationController::class, 'verify_xcode_and_add_configurations']);
 
 
 //Categories

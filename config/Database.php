@@ -6,7 +6,7 @@ namespace Pixelabs\StoreManagement\Config;
 class Database
 {
     protected $connection;
-    
+
     public function __construct($host, $username, $password, $database)
     {
         $this->connection = new \mysqli($host, $username, $password);
@@ -23,12 +23,12 @@ class Database
         $this->connection->select_db($database);
 
         $this->connection->set_charset("utf8");
-        if(!$this->tablesExist()) {
+        if (!$this->tablesExist()) {
             $this->createTables();
-        }        
-        
+        }
+
     }
-    
+
     private function databaseExists($database)
     {
         $query = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = ?";
@@ -65,18 +65,54 @@ class Database
     }
 
     // Add methods to load SQL structure, execute queries, etc.
-    private function createTables(){
+    private function createTables()
+    {
         $createUsersTableQuery = "CREATE TABLE IF NOT EXISTS users
         (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(50) NOT NULL,
             username VARCHAR(50) NOT NULL UNIQUE,
             email VARCHAR(50) NOT NULL UNIQUE,
+            user_level TINYINT,
             password VARCHAR(255) NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )";
         $this->connection->query($createUsersTableQuery);
+
+
+        // Define admin user details
+        $name = 'Admin';
+        $username = 'admin';
+        $email = 'admin@woo-management.com';
+        $user_level = 0;
+        $adminPassword = 'admin123';
+
+        // Check if the admin user already exists
+        $checkUserQuery = "SELECT id FROM users WHERE username = ? OR email = ?";
+        $stmt = $this->connection->prepare($checkUserQuery);
+        $stmt->bind_param('ss', $username, $email);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows === 0) {
+            // Admin user does not exist, proceed with insertion
+            $hashedPassword = password_hash($adminPassword, PASSWORD_DEFAULT);
+
+            // SQL query to insert the admin user
+            $insertAdminUserQuery = "INSERT INTO users (name, username, email, user_level, password) VALUES (?, ?, ?, ?, ?)";
+            $stmtInsert = $this->connection->prepare($insertAdminUserQuery);
+            $stmtInsert->bind_param('sssds', $name, $username, $email, $user_level, $hashedPassword);
+            $stmtInsert->execute();
+            $stmtInsert->close();
+        } else {
+            // Admin user already exists
+            echo "Admin user already exists.";
+        }
+
+        // Close the statement
+        $stmt->close();
+
 
         $createUserMetaTableQuery = "CREATE TABLE IF NOT EXISTS user_meta
         (

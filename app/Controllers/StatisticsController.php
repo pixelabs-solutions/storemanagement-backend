@@ -3,17 +3,27 @@
 namespace Pixelabs\StoreManagement\Controllers;
 use Pixelabs\StoreManagement\Models\Statistics;
 use Pixelabs\StoreManagement\Models\Configuration;
+use Pixelabs\StoreManagement\Models\Authentication;
 
 class StatisticsController
 {
     public function index()
     {
+        $user_level = Authentication::getUserLevelFromToken();
+        if ($user_level == ADMIN) {
+            header("Location: /admin/index");
+            } else {
         include_once __DIR__ . '/../Views/statistics/overview.php';
-
+            }
     }
 
     public function products()
     {
+
+        $user_level = Authentication::getUserLevelFromToken();
+        if ($user_level == ADMIN) {
+            header("Location: /admin/index");
+            } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
@@ -29,11 +39,16 @@ class StatisticsController
         else{
             include_once __DIR__ . '/../Views/statistics/products.php';
         }
-
+    }
     }
 
     public function orders()
     {
+
+        $user_level = Authentication::getUserLevelFromToken();
+        if ($user_level == ADMIN) {
+            header("Location: /admin/index");
+            } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
@@ -51,10 +66,15 @@ class StatisticsController
             include_once __DIR__ . '/../Views/statistics/orders.php';
         }
 
-    }
+    }}
 
     public function revenue()
     {
+
+        $user_level = Authentication::getUserLevelFromToken();
+        if ($user_level == ADMIN) {
+            header("Location: /admin/index");
+            } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
@@ -73,10 +93,15 @@ class StatisticsController
         }
 
 
-    }
+    }}
 
     public function overview()
     {
+
+        $user_level = Authentication::getUserLevelFromToken();
+        if ($user_level == ADMIN) {
+            header("Location: /admin/index");
+            } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
@@ -97,7 +122,7 @@ class StatisticsController
         else{
             include_once __DIR__ . '/../Views/statistics/overview.php';
         }
-
+    }
     }
 
 

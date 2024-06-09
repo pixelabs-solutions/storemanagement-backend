@@ -5,12 +5,19 @@ use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Helpers\RequestTracker;
+use Pixelabs\StoreManagement\Models\Authentication;
 
 class CouponsController
 {
     private $endpoint = 'coupons';
     public function index()
     {
+        $user_level = Authentication::getUserLevelFromToken();
+        if ($user_level == ADMIN) {
+            header("Location: /admin/index");
+            } else {
+
+        // RequestTracker::trackRequest();
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
         $fields = ['_fields' => 'id, code, discount_type, amount, date_expires, usage_limit, usage_count'];
@@ -23,7 +30,7 @@ class CouponsController
             include_once __DIR__ . '/../Views/coupons/index.php';
         }
     }
-
+    }
 
     public function add()
     {

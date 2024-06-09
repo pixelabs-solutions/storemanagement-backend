@@ -2,6 +2,7 @@
 
 namespace Pixelabs\StoreManagement\Controllers;
 use Pixelabs\StoreManagement\Models\Configuration;
+use Pixelabs\StoreManagement\Models\Authentication;
 
 class ConfigurationController
 {
@@ -17,6 +18,24 @@ class ConfigurationController
         $areConfigurationsAdded = Configuration::add($consumer_key, $consumer_secret, $store_url);
 
         echo $areConfigurationsAdded;
+    }
+    
+    public function verify_xcode_and_add_configurations()
+    {
+        $xcode = "";
+        if(isset($_GET['xcode'])){
+            $xcode = $_GET['x_code'];
+        }
+        $data = Authentication::get_meta_by_xcode($xcode);
+
+        $user_id = $data['user_id'];
+        $store_url = $_GET['store_url'];
+        $consumer_key = $_GET['consumer_key'];
+        $consumer_secret = $_GET['consumer_secret'];
+
+        $result = Configuration::add($consumer_key, $consumer_secret, $store_url, $user_id);
+        echo json_encode($result);
+        
     }
 
 }

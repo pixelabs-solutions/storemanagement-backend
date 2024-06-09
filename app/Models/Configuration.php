@@ -6,10 +6,12 @@ use Pixelabs\StoreManagement\Models\Authentication;
 
 class Configuration
 {
-    public static function add($consumer_key, $consumer_secret, $store_url)
+    public static function add($consumer_key, $consumer_secret, $store_url, $user_id = null)
     {
         global $connection;
-        $user_id = Authentication::getUserIdFromToken();
+        if($user_id == null){
+            $user_id = Authentication::getUserIdFromToken();
+        }
         if($user_id == null || $user_id == "")
         {
             http_response_code(401);

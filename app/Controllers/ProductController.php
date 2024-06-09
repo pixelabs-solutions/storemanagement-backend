@@ -9,6 +9,7 @@ use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Helpers\FileHelper;
+use Pixelabs\StoreManagement\Models\Authentication;
 
 
 class ProductController
@@ -16,6 +17,11 @@ class ProductController
     private $table_name = 'products';
     public function index()
     {
+
+        $user_level = Authentication::getUserLevelFromToken();
+        if ($user_level == ADMIN) {
+            header("Location: /admin/index");
+            } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
@@ -75,7 +81,7 @@ class ProductController
             include_once __DIR__ . '/../Views/product/index.php';
         }
     }
-
+    }
 
     public function product_by_id($id)
     {
@@ -125,34 +131,34 @@ class ProductController
             'name' => $data['name'],
             'type' => $data['type'],
             'description' => $data['description'],
-            'manage_stock' => true,
-            'stock_quantity' => $data['stock_quantity'],
             'categories' => array_map(function ($category_id) {
                 return ['id' => $category_id];
-            }, $data['category']),
+            }, $data['categories']),
             'images' => array_map(function ($image_url) {
                 return ['src' => $image_url];
-            }, $image_paths),
-            'regular_price' => $data['regular_price'],
-            'sale_price' => $data['sale_price']
+            }, $image_paths)
         ];
         // echo json_encode($payload);exit;
         if ($data['type'] === "variable") {
             // Construct attributes array
-            $attributes = [];
-            foreach ($data['attributes_names'] as $index => $name) {
-                $attribute = [
-                    'name' => $name,
-                    'options' => $data['attributes_options'][$index],
-                    'variation' => true
-                ];
-                $attributes[] = $attribute;
-            }
-            $payload['attributes'] = $attributes;
+            // $attributes = [];
+            // foreach ($data['attributes_names'] as $index => $name) {
+            //     $attribute = [
+            //         'name' => $name,
+            //         'options' => $data['attributes_options'][$index],
+            //         'variation' => true
+            //     ];
+            //     $attributes[] = $attribute;
+            // }
+            // $payload['attributes'] = $attributes;
 
-            $variations = $this->generateVariations($data['attributes_options'], $data['attributes_names'], $data['regular_price']);
+            // $variations = $this->generateVariations($data['attributes_options'], $data['attributes_names'], $data['regular_price']);
 
-            $payload['variations'] = $variations;
+            // $payload['variations'] = $variations;
+            // echo json_encode($payload);exit;
+
+            $payload['attributes'] = $data['attributes'];
+            $payload['variations'] = $data['variations'];
             // echo json_encode($payload);exit;
             $response = Base::wc_add($configuration, $this->table_name, json_encode($payload));
             if ($is_rest == 'true') {
@@ -160,10 +166,15 @@ class ProductController
             }
             $result = json_decode($response, true);
             $product_id = $result['data_id'];
-            foreach ($variations as $variationData) {
-                Product::createProductVariation($configuration, $product_id, $variationData);
+            foreach ($payload['variations'] as $variation) {
+                Product::createProductVariation($configuration, $product_id, $variation);
             }
         } else {
+            $payload['manage_stock'] = true;
+            $payload['stock_quantity'] = $data['stock_quantity'];
+            $payload['regular_price'] = $data['regular_price'];
+            $payload['sale_price'] = $data['sale_price'];
+
             $response = Base::wc_add($configuration, $this->table_name, json_encode($payload));
             if ($is_rest == 'true') {
                 echo $response;
@@ -234,26 +245,31 @@ class ProductController
 
         if ($data['type'] === "variable") {
             // Construct attributes array
-            $attributes = [];
-            foreach ($data['attributes_names'] as $index => $name) {
-                $attribute = [
-                    'name' => $name,
-                    'options' => $data['attributes_options'][$index],
-                    'variation' => true
-                ];
-                $attributes[] = $attribute;
-            }
-            $payload['attributes'] = $attributes;
+            // $attributes = [];
+            // foreach ($data['attributes_names'] as $index => $name) {
+            //     $attribute = [
+            //         'name' => $name,
+            //         'options' => $data['attributes_options'][$index],
+            //         'variation' => true
+            //     ];
+            //     $attributes[] = $attribute;
+            // }
+            // $payload['attributes'] = $attributes;
 
-            $variations = $this->generateVariations($data['attributes_options'], $data['attributes_names'], $data['regular_price']);
-            $payload['variations'] = $variations;
-
+            // $variations = $this->generateVariations($data['attributes_options'], $data['attributes_names'], $data['regular_price']);
+            // $payload['variations'] = $variations;
+            $payload['attributes'] = $data['attributes'];
+            $payload['variations'] = $data['variations'];
             $response = Base::wc_update($configuration, $this->table_name . "/" . $id, $payload);
 
-            foreach ($variations as $variationData) {
-                Product::createProductVariation($configuration, $id, $variationData); // Update variations
+            foreach ($payload['variations'] as $variation) {
+                Product::createProductVariation($configuration, $id, $variation); // Update variations
             }
         } else {
+            $payload['manage_stock'] = true;
+            $payload['stock_quantity'] = $data['stock_quantity'];
+            $payload['regular_price'] = $data['regular_price'];
+            $payload['sale_price'] = $data['sale_price'];
             $response = Base::wc_update($configuration, $this->table_name . "/" . $id, $payload);
         }
         if ($is_rest == 'true') {

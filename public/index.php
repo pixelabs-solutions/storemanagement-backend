@@ -18,6 +18,9 @@ $database = $_ENV['DB_DATABASE'];
 $database = new Database($host, $username, $password, $database);
 $connection = $database->getConnection();
 define('BASE_DIR', __DIR__);
+define('ADMIN', 0);
+define('USER', 1);
+
 // Create a new instance of the application
 $app = new Pixelabs\StoreManagement\Application();
 

@@ -5,12 +5,18 @@ use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Helpers\FileHelper;
+use Pixelabs\StoreManagement\Models\Authentication;
 
 class CategoryController
 {
     private $endpoint = 'products/categories';
     public function index()
     {
+        $user_level = Authentication::getUserLevelFromToken();
+        if ($user_level == ADMIN) {
+            include_once __DIR__ . '/../Views/admin/index.php';
+        } else {
+
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
         $fields = ['_fields' => 'id, name, parent, image, count'];
@@ -20,7 +26,7 @@ class CategoryController
         {
             echo json_encode($categories, JSON_UNESCAPED_UNICODE);
             exit;
-        }
+        }}
     }
 
     public function get($id)

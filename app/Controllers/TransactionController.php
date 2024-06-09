@@ -6,12 +6,18 @@ use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Models\Transaction;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
+use Pixelabs\StoreManagement\Models\Authentication;
 
 
 class TransactionController
 {
     public function index()
     {
+
+        $user_level = Authentication::getUserLevelFromToken();
+        if ($user_level == ADMIN) {
+            header("Location: /admin/index");
+            } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
         $fields = ['_fields' => 'id, status, total, shipping_total, date_created, total, billing, meta_data, line_items'];
@@ -25,7 +31,7 @@ class TransactionController
         }
         // var_dump($transactions);
     }
-
+    }
 
     public function admin()
     {
