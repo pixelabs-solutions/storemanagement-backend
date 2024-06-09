@@ -718,8 +718,8 @@ require_once __DIR__ . '/../partials/header.php';
             <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
 
             </script>
-            <script>
-                document.getElementById('category_in_product').addEventListener('change', function () {
+            <!-- <script>
+                document.getElementById('category_in_product').addEventListener('change', function() {
                     filterProducts();
                 });
 
@@ -753,7 +753,7 @@ require_once __DIR__ . '/../partials/header.php';
                         if (nameMatches && categoryMatches) {
                             row.style.display = '';
                             for (var i = 0; i < elements.length; i++) {
-                                elements[i].style.display = "none";
+                                elements[i].style.display = "block";
                             }
                         } else {
                             row.style.display = 'none';
@@ -771,6 +771,89 @@ require_once __DIR__ . '/../partials/header.php';
                 // document.querySelector('.some-open-popup-button').addEventListener('click', function() {
                 //     document.getElementById('popups').style.display = 'block';
                 // });
+            </script> -->
+            <script>
+                document.getElementById('category_in_product').addEventListener('change', function() {
+    filterProducts();
+});
+
+function filterProducts() {
+    // Get selected categories
+    let selectedCategories = Array.from(document.getElementById('category_in_product').selectedOptions).map(option => option.value);
+
+    // Get product name input
+    let productName = document.getElementById('product_name_input').value.toLowerCase();
+
+    // Get all product rows
+    let productRows = document.querySelectorAll('#sms_products_m_products_table .category_row');
+
+    // Filter product rows
+    productRows.forEach(row => {
+        let productNameInRow = row.getAttribute('data-name').toLowerCase();
+        let productCategoriesInRow = row.getAttribute('data-categories').split(',');
+
+        let nameMatches = productName === '' || productNameInRow.includes(productName);
+        let categoryMatches = selectedCategories.length === 0 || selectedCategories.every(cat => productCategoriesInRow.includes(cat));
+
+        if (nameMatches && categoryMatches) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}
+
+                // Optional: close popup functionality
+                document.querySelector('.popup .close').addEventListener('click', function() {
+                    document.getElementById('popups').style.display = 'none';
+                });
+
+                // Optional: open popup functionality
+                // document.querySelector('.some-open-popup-button').addEventListener('click', function() {
+                //     document.getElementById('popups').style.display = 'block';
+                // });
+            </script> -->
+            <script>
+                document.getElementById('category_in_product').addEventListener('change', function() {
+    filterProducts();
+});
+
+function filterProducts() {
+    // Get selected categories
+    let selectedCategories = Array.from(document.getElementById('category_in_product').selectedOptions).map(option => option.value);
+
+    // Get product name input
+    let productName = document.getElementById('product_name_input').value.toLowerCase();
+
+    // Get all product rows
+    let productRows = document.querySelectorAll('#sms_products_m_products_table .category_row');
+
+    // Filter product rows
+    productRows.forEach(row => {
+        let productNameInRow = row.getAttribute('data-name').toLowerCase();
+        let productCategoriesInRow = row.getAttribute('data-categories').split(',');
+
+        let nameMatches = productName === '' || productNameInRow.includes(productName);
+        let categoryMatches = selectedCategories.length === 0 || selectedCategories.every(cat => productCategoriesInRow.includes(cat));
+
+        if (nameMatches && categoryMatches) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}
+
+// Optional: close popup functionality
+document.querySelector('.popup .close').addEventListener('click', function() {
+    document.getElementById('popups').style.display = 'none';
+});
+
+// Optional: open popup functionality
+// document.querySelector('.some-open-popup-button').addEventListener('click', function() {
+//     document.getElementById('popups').style.display = 'block';
+// });
+
             </script>
             <!-- <script>
                 function filterRows() {
