@@ -211,7 +211,8 @@
       }
 
       .rtl .sms_mu_margin {
-         gap: 228px !important;
+         /* gap: 228px !important; */
+         text-align: start;
       }
 
       .lang_select {
