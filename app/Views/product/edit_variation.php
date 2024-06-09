@@ -128,10 +128,8 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <!-- Upload a product image  -->
-
                         <div class="row gx-3">
                             <div class="col-md-6 mb-4">
                                 <label class="form-label"
