@@ -2,12 +2,18 @@
 
 namespace Pixelabs\StoreManagement\Controllers;
 use Pixelabs\StoreManagement\Models\Authentication;
+use Pixelabs\StoreManagement\Models\Product;
+use Pixelabs\StoreManagement\Services\CronJobService;
 
 class AuthenticationController
 {
 
     public function register()
     {
+        CronJobService::store_categories_in_db();
+        // $products = Product::getAllProducts();
+        // echo json_encode($products);
+        exit;
         include_once __DIR__ . '/../Views/authentication/register.php';
     }
     public function login()

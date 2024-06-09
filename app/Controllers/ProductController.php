@@ -10,7 +10,7 @@ use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Helpers\FileHelper;
 use Pixelabs\StoreManagement\Models\Authentication;
-
+use Pixelabs\StoreManagement\Models\Category;
 
 class ProductController
 {
@@ -19,19 +19,20 @@ class ProductController
     {
 
         $user_level = Authentication::getUserLevelFromToken();
-        if ($user_level == ADMIN) {
-            header("Location: /admin/index");
-            } else {
+        // if ($user_level == ADMIN) {
+        //     header("Location: /admin/index");
+        //     } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
         $product_fields =
             [
-                '_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations'
+                '_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations, date_created'
             ];
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
         // $products = Base::wc_get($configuration, $this->table_name, $page, $product_fields);
-        $products = Product::get_products($configuration, $this->table_name, $product_fields);
+        $products = Product::getAllProducts();
+        // echo json_encode($products);exit;
         if (isset($_GET['category']) && $_GET['category'] !== "") {
             $category = $_GET['category'];
             $filteredProducts = [];
@@ -62,8 +63,9 @@ class ProductController
             }
             $products = $filteredProducts;
         }
-        $category_fields = ['_fields' => 'id, name, parent, image, count'];
-        $categories = Base::wc_get($configuration, 'products/categories', $page, $category_fields);
+        // $category_fields = ['_fields' => 'id, name, parent, image, count'];
+        // $categories = Base::wc_get($configuration, 'products/categories', $page, $category_fields);
+        $categories = Category::get_all_categories();
         $attributes = Base::wc_get($configuration, 'products/attributes', $page);
         $currency = Base::wc_get($configuration, 'data/currencies/current', $page);
 
@@ -80,7 +82,7 @@ class ProductController
         } else {
             include_once __DIR__ . '/../Views/product/index.php';
         }
-    }
+    // }
     }
 
     public function product_by_id($id)
@@ -89,7 +91,7 @@ class ProductController
         $configuration = $this->prepare_configuration($is_rest);
         $product_fields =
             [
-                '_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations'
+                '_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations, date_created'
             ];
         $product = Base::wc_get_by_id($configuration, $this->table_name . "/" . $id, $product_fields);
 

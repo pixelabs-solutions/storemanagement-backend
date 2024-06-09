@@ -136,22 +136,21 @@ class Database
         $this->connection->query($userConfigurationsTable);
 
 
-        $goalTable = "CREATE TABLE IF NOT EXISTS goals
-            (
-                id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                user_id INT(20),
-                new_orders_target INT(20),
-                new_customers_target INT(20),
-                sales_revenue_target INT(20),
-                target_keywords VARCHAR(255),
-                google_rankings_target INT(20),
-                page_views_target INT(20),
-                avg_order_value_increase_target FLOAT,
-                avg_order_items_increase_target FLOAT,
-                new_products_target INT(20),
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-            )
+        $goalTable = "CREATE TABLE products (
+            id INT PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            images TEXT,
+            categories TEXT,
+            regular_price DECIMAL(10, 2),
+            sale_price DECIMAL(10, 2),
+            stock_quantity INT,
+            description TEXT,
+            type VARCHAR(50),
+            attributes TEXT,
+            variations TEXT,
+            date_created DATETIME
+        )
+
         ";
         $this->connection->query($goalTable);
 
