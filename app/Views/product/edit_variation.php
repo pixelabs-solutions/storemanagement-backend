@@ -10,7 +10,10 @@
     body {
         font-feature-settings: "cv03", "cv04", "cv11";
     }
-
+    .markdown>table thead th, .table thead th {
+        background: transparent;
+        color: white;
+    }
     .rtl {
         direction: rtl;
     }
@@ -179,95 +182,33 @@
                             <div class=" col-12 mt-5" id="sms_a_edit_product_variation">
                                 <div class="table-responsive">
                                     <table class="table table-vcenter card-table w-100">
-                                        <tr class="t-head gap-2 rounded-4 py-2"
-                                            style="background-color: rgba(73, 135, 216, 0.44);">
-                                            <th class="">
-                                                <!-- Image/color -->
-                                            </th>
-                                            <th class=" sms_edit_product_variations_a"
-                                                data-i18n="popoups.future_managment.edit_variation_in_product_managment.th_in_variation.th_term">
-                                                Variation Name</th>
-                                            <th class="sms_edit_product_variations_a"
-                                                data-i18n="popoups.future_managment.edit_variation_in_product_managment.th_in_variation.th_price">
-                                                Variation Price
-                                            </th>
-                                            <th class="sms_edit_product_variations_a"
-                                                data-i18n="popoups.future_managment.edit_variation_in_product_managment.th_in_variation.th_inventory">
-                                                Variation
-                                                inventory</th>
-                                            <th class="sms_edit_product_variations_a px-5"></th>
-                                            <!-- <th class="w-25 sms_edit_product_variations_a"></th> -->
-                                        </tr>
+                                        <thead style = "background-color: #4987d8;">
+                                            <tr class="t-head gap-2 rounded-4 py-2"
+                                                style="background-color: rgba(73, 135, 216, 0.44);">
+                                                <th class="">
+                                                    <!-- Image/color -->
+                                                </th>
+                                                <th class=" sms_edit_product_variations_a"
+                                                    data-i18n="popoups.future_managment.edit_variation_in_product_managment.th_in_variation.th_term">
+                                                    Variation Name</th>
+                                                <th class="sms_edit_product_variations_a"
+                                                    data-i18n="popoups.future_managment.edit_variation_in_product_managment.th_in_variation.th_price">
+                                                    Variation Price
+                                                </th>
+                                                <th class="sms_edit_product_variations_a"
+                                                    data-i18n="popoups.future_managment.edit_variation_in_product_managment.th_in_variation.th_inventory">
+                                                    Variation
+                                                    inventory</th>
+                                                <th class="sms_edit_product_variations_a px-5"></th>
+                                                <!-- <th class="w-25 sms_edit_product_variations_a"></th> -->
+                                            </tr>
+                                        </thead>
 
-                                        <tr class="sms_mu_spacing_diver"></tr>
-                                        <!-- <div class="card-x mt-3">
-                                            <div style="overflow-x: auto">
-                                                <div class="table-responsive"> -->
-                                        <tr class="mt-2 rounded-4 w-100" style="background-color: #EAEAEA; ">
-                                            <!-- <td class="w-25 pe-5 ">
-                                                                <div class="text-start" style="height: 30px; width: 30px; background-color: pink;">
-                                                                </div>
-                                                            </td> -->
-                                            <td class=""></td>
-                                            <td class="text-center ">pink</td>
-                                            <td class="text-center ">250 NIS</td>
-                                            <td class="text-center ">15</td>
-                                            <td>
-                                                <div class="d-flex justify-content-end gap-1 w-auto ">
-                                                    <span class=""
-                                                        onclick="openModal('sms_edit_product_variation_w_edit_product_modal')">
-                                                        <svg width="24" height="24" viewBox="0 0 32 32" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z"
-                                                                fill="#4987D8" />
-                                                        </svg>
-                                                    </span>
-                                                    <span class=""
-                                                        onclick="openModal('sms_edit_product_variation_w_delete_modal')">
-                                                        <svg width="24" height="24" viewBox="0 0 28 32" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M8.45 1.10625C8.7875 0.425 9.48125 0 10.2375 0H17.7625C18.5188 0 19.2125 0.425 19.55 1.10625L20 2H26C27.1063 2 28 2.89375 28 4C28 5.10625 27.1063 6 26 6H2C0.89375 6 0 5.10625 0 4C0 2.89375 0.89375 2 2 2H8L8.45 1.10625ZM2 8H26V28C26 30.2062 24.2062 32 22 32H6C3.79375 32 2 30.2062 2 28V8ZM8 12C7.45 12 7 12.45 7 13V27C7 27.55 7.45 28 8 28C8.55 28 9 27.55 9 27V13C9 12.45 8.55 12 8 12ZM14 12C13.45 12 13 12.45 13 13V27C13 27.55 13.45 28 14 28C14.55 28 15 27.55 15 27V13C15 12.45 14.55 12 14 12ZM20 12C19.45 12 19 12.45 19 13V27C19 27.55 19.45 28 20 28C20.55 28 21 27.55 21 27V13C21 12.45 20.55 12 20 12Z"
-                                                                fill="#A30505" />
-                                                        </svg>
-                                                    </span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="sms_mu_spacing_diver"></tr>
-                                        <tr class="mt-2 rounded-4 w-100 " style="background-color: #EAEAEA">
-                                            <!-- <td class="w-25 pe-5   ">
-                                                                <div class="text-start" style="height: 30px; width: 30px; background-color: pink;">
-                                                                </div>
-                                                            </td> -->
-                                            <td class=""></td>
-                                            <td class="text-center ">pink</td>
-                                            <td class="text-center ">250 NIS</td>
-                                            <td class="text-center ">15</td>
-                                            <td>
-                                                <div class="d-flex justify-content-end gap-1 w-auto ">
-                                                    <span class="" pe-5
-                                                        onclick="openModal('sms_edit_product_variation_w_edit_product_modal')">
-                                                        <svg width="24" height="24" viewBox="0 0 32 32" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z"
-                                                                fill="#4987D8" />
-                                                        </svg>
-                                                    </span>
-                                                    <span class=""
-                                                        onclick="openModal('sms_edit_product_variation_w_delete_modal')">
-                                                        <svg width="24" height="24" viewBox="0 0 28 32" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M8.45 1.10625C8.7875 0.425 9.48125 0 10.2375 0H17.7625C18.5188 0 19.2125 0.425 19.55 1.10625L20 2H26C27.1063 2 28 2.89375 28 4C28 5.10625 27.1063 6 26 6H2C0.89375 6 0 5.10625 0 4C0 2.89375 0.89375 2 2 2H8L8.45 1.10625ZM2 8H26V28C26 30.2062 24.2062 32 22 32H6C3.79375 32 2 30.2062 2 28V8ZM8 12C7.45 12 7 12.45 7 13V27C7 27.55 7.45 28 8 28C8.55 28 9 27.55 9 27V13C9 12.45 8.55 12 8 12ZM14 12C13.45 12 13 12.45 13 13V27C13 27.55 13.45 28 14 28C14.55 28 15 27.55 15 27V13C15 12.45 14.55 12 14 12ZM20 12C19.45 12 19 12.45 19 13V27C19 27.55 19.45 28 20 28C20.55 28 21 27.55 21 27V13C21 12.45 20.55 12 20 12Z"
-                                                                fill="#A30505" />
-                                                        </svg>
-                                                    </span>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        <tbody id="variations_data_table_rows">
+
+                                        </tbody>
+
+                                       
                                         <!-- More rows can be dynamically added here -->
                                         <!-- </div>
                                             </div>
@@ -506,6 +447,42 @@
 
 
 <script>
+    const buttons = document.querySelectorAll(".variation_edit");
+
+    buttons.forEach(button => {
+        button.addEventListener("click", function() {
+            // Get the closest table row (tr) element
+            const row = this.closest("tr");
+
+            // Create an empty object to store data
+            const rowData = {};
+
+            // Loop through all cells (td) in the row
+            row.querySelectorAll("td").forEach(cell => {
+                // Get the text content of each cell
+                const cellValue = cell.textContent.trim();
+
+                // Extract the data based on the cell's position (index) or add custom logic
+                const dataKey = cell.cellIndex; // Access by cell index (0, 1, 2, ...)
+                // You can also use cell.dataset (if you have data-* attributes on cells)
+                rowData[dataKey] = cellValue;
+            });
+
+            console.log("Row Data:", rowData);
+            // var usageLimit = rowData[3].split('/')[1]; // This will extract "15" from "0/15"
+            // document.getElementById('coupons_code').value = rowData[0];
+            // document.getElementById('discount_amount').value = rowData[2];
+            // document.getElementById('usage_limit').value = usageLimit;
+            // document.getElementById('expiration_date').value = rowData[4];
+
+
+            // You can use the rowData object for further processing
+        });
+    });
+</script>
+
+
+<script>
     document.addEventListener('DOMContentLoaded', function () {
         const modalElements = document.querySelectorAll('.variation_edit_data');
         modalElements.forEach(function (modalElement) {
@@ -520,7 +497,8 @@
 
                 document.getElementById('variable_product_id').value = productData.id;
                 var productId = productData.id;
-
+                let newTablebody = document.getElementById('variations_data_table_rows');
+                newTablebody.innerHTML = " ";
                 fetch(`/product/${productId}/variations`)
                     .then(response => {
                         if (!response.ok) {
@@ -530,7 +508,78 @@
                     })
                     .then(variationsData => {
                         // Process variationsData
-                        console.log(variationsData);
+                        var variationsDataArray = variationsData.data;
+                        variationsDataArray.forEach(function (variationsDataRow) {
+                            console.log(variationsDataRow);
+
+
+
+                            var newTablerow = document.createElement('tr'); // is a node
+                            newTablerow.classList.add('mt-2');
+                            newTablerow.classList.add('rounded-4');
+                            newTablerow.classList.add('w-100');
+                            newTablerow.style.background = "#EAEAEA";
+                            newTablerow.style.margin = "8px";
+
+                            let variations_stock_quantity = "";
+                            let variations_regular_price = "";
+                            if(variationsDataRow.stock_quantity == null){
+                               variations_stock_quantity = "Not Available";
+                            }else{
+                                variations_stock_quantity = variationsDataRow.stock_quantity;
+                            }
+
+                            if(variationsDataRow.regular_price == ""){
+                                variations_regular_price = "Not Price Added";
+                            }else{
+                                variations_regular_price = variationsDataRow.regular_price;
+                            }
+                            // Customize the content of the div
+                            newTablerow.innerHTML = `  
+                        <tr class="sms_mu_spacing_diver"></tr>
+
+                        <tr class="mt-2 rounded-4 w-100" style="background-color: #EAEAEA; ">
+
+                            <td class=""></td>
+                                <td class="text-center ">${variationsDataRow.name}</td>
+                                <td class="text-center ">${variationsDataRow.regular_price}</td>
+                                <td class="text-center ">${variations_stock_quantity}</td>
+                                <td>
+                                    <div class="d-flex justify-content-end gap-1 w-auto ">
+                                        <span class="variation_edit"
+                                            onclick="openModal('sms_edit_product_variation_w_edit_product_modal')">
+                                            <svg width="24" height="24" viewBox="0 0 32 32" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z"
+                                                    fill="#4987D8" />
+                                            </svg>
+                                        </span>
+                                        <span class="variation_delete"
+                                            onclick="openModal('sms_edit_product_variation_w_delete_modal')">
+                                            <svg width="24" height="24" viewBox="0 0 28 32" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M8.45 1.10625C8.7875 0.425 9.48125 0 10.2375 0H17.7625C18.5188 0 19.2125 0.425 19.55 1.10625L20 2H26C27.1063 2 28 2.89375 28 4C28 5.10625 27.1063 6 26 6H2C0.89375 6 0 5.10625 0 4C0 2.89375 0.89375 2 2 2H8L8.45 1.10625ZM2 8H26V28C26 30.2062 24.2062 32 22 32H6C3.79375 32 2 30.2062 2 28V8ZM8 12C7.45 12 7 12.45 7 13V27C7 27.55 7.45 28 8 28C8.55 28 9 27.55 9 27V13C9 12.45 8.55 12 8 12ZM14 12C13.45 12 13 12.45 13 13V27C13 27.55 13.45 28 14 28C14.55 28 15 27.55 15 27V13C15 12.45 14.55 12 14 12ZM20 12C19.45 12 19 12.45 19 13V27C19 27.55 19.45 28 20 28C20.55 28 21 27.55 21 27V13C21 12.45 20.55 12 20 12Z"
+                                                    fill="#A30505" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </td></tr>
+                                `;
+
+                            // Append the newDiv to the parent div
+                            newTablebody.appendChild(newTablerow);
+
+
+                            // variationsDataAttributes = variationsDataRow.attributes;
+                            // variationsDataAttributes.forEach(function (variationsDataAttribute) {
+                            //     // console.log(variationsDataAttribute.name);
+
+
+
+                            // });
+                        });
                         // Your code to handle variationsData goes here
                     })
                     .catch(error => {
