@@ -180,12 +180,8 @@
             var count = $row.find('td:nth-child(4)').text();
 
             // You can now use these values to populate your edit form or any other action
-<<<<<<< HEAD
 
             document.getElementById("sms_mu_id_category").value = catID;
-=======
-            document.getElementById("sms_mu_id_category").value = id;
->>>>>>> 22042f144f2dbb963660c739a32d52d8a67f557c
             document.getElementById("sms_mu_key_category").value = categoryName;
             document.getElementById("sms_img_ctg").src = imageSrc;
             document.getElementById("edit_category_image_placeholder").src = imageSrc;
@@ -194,95 +190,6 @@
     });
 
 
-<<<<<<< HEAD
-
-<script>
-function submit_edit_ctg_form() {
-    // Get the select element and category ID
-    let id = document.getElementById("sms_mu_id_category").value;
-
-    // Get image input elements
-    const imageInputs = document.querySelectorAll("#sms_img_ctg");
-
-    // Check if any images are selected
-    if (!imageInputs.length) {
-        console.log("No images selected for update.");
-        // Submit the form without image data (optional: display a message)
-        // Show success message
-        document.getElementById('sms_editForm_success_message').style.display = 'block';
-        // Reload window after a delay
-        setTimeout(function(){
-            location.reload();
-        }, 2000); // Reload after 2 seconds (adjust as needed)
-        return;
-    }
-
-    // Function to convert image to base64 (remains the same)
-    function readFileAsBase64(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                resolve(event.target.result);
-            };
-            reader.onerror = function(error) {
-                reject(error);
-            };
-            reader.readAsDataURL(file);
-        });
-    }
-
-    // Convert selected images to base64 asynchronously (Promise.all)
-    Promise.all(
-        Array.from(imageInputs).map(input => input.files[0] ? readFileAsBase64(input.files[0]) : Promise.resolve(null)) // Handle cases where no file is selected
-    )
-    .then(base64Strings => {
-        // Filter out any null values (no image selected for an input)
-        const filteredBase64Strings = base64Strings.filter(base64String => base64String !== null);
-
-        const form_data = {
-            "name": document.getElementById("sms_mu_key_category").value,
-            "parent": document.getElementById("sms_mu_select_category_pop").value,
-            "image": filteredBase64Strings, // Now containing an array of base64 strings
-        };
-
-        console.log("Form data:", form_data);
-        const apiUrl = `/categories/${id}`;
-        fetch(apiUrl, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(form_data)
-        })
-        .then(response => {
-            // Show success message
-            document.getElementById('sms_editForm_success_message').style.display = 'block';
-            // Reload window after a delay
-            setTimeout(function(){
-                location.reload();
-            }, 2000); // Reload after 2 seconds (adjust as needed)
-            // ... (rest of the code for handling response remains the same)
-        })
-        .catch(error => {
-            // ... (rest of the code for handling errors remains the same)
-        });
-    })
-    .catch(error => {
-        console.error("Error converting image(s) to base64:", error);
-        // Handle error converting image (optional: display error message)
-    });
-}
-
-  
-  
-  
-      function showFileName(input) {
-          var label = input.nextElementSibling;
-          var fileName = input.files[0].name;
-          label.innerHTML = '<i class="bi bi-image text-black"></i> ' + fileName;
-      }
-
-=======
     function submit_edit_ctg_form() {
         // Get the select element and category ID
         let id = document.getElementById("sms_mu_id_category").value;
@@ -338,7 +245,7 @@ function submit_edit_ctg_form() {
     const form_data = {
                 "name": document.getElementById("sms_mu_key_category").value,
                 "parent": document.getElementById("sms_mu_select_category_pop").value,
-                "image": [defaultImageSrc], // Include base64 string of default image
+                "image": [], // Include base64 string of default image
             };
             submitFormWithImage(id, form_data);
 
@@ -426,7 +333,6 @@ function convertImageToBase64(imageUrl) {
             });
     }
 
->>>>>>> 22042f144f2dbb963660c739a32d52d8a67f557c
 
 
 

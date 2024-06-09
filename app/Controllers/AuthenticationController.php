@@ -51,10 +51,14 @@ class AuthenticationController
         {
             $result = json_decode($response, true);
             if($result["status_code"] === 200){
-                $user_level = Authentication::getUserLevelFromToken();
-                if($user_level == ADMIN)
-                {
-                    header('Location: ../admin/index');
+                
+                $user_level = Authentication::getUserLevelFromToken($result['token']);
+                echo "USer level:" . $user_level;
+                echo "admin = " .ADMIN;
+               
+                if($user_level === ADMIN)
+                { 
+                    header('Location: /admin/index');
                 }
                 else{
                     header('Location: /index');

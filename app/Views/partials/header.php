@@ -1101,6 +1101,17 @@ var multipleCancelButton = new Choices('#category_in_product_normal_product', {
 
 
             });
+
+
+            $(document).ready(function() {
+
+var multipleCancelButton = new Choices('#variation_category_select', {
+   removeItemButton: true,
+});
+
+
+});
+
             // $(document).ready(function () {
 
             //    var multipleCancelButton = new Choices('#sms_mu_parent_ctg', {

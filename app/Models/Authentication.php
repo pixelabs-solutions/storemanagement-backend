@@ -259,7 +259,7 @@ class Authentication
                     $jwt = JWT::encode($payload, $secretKey, 'HS256');
                     // setcookie('jwt_token', $jwt, $expirationTime, 'storemanagement-backend.test/');
                     setcookie('jwt_token', $jwt, $expirationTime, '/', $_SERVER['HTTP_HOST']);
-
+                   
                     http_response_code(200);
                     return json_encode(
                         array(
@@ -340,9 +340,12 @@ class Authentication
         return null;
     }
 
-    public static function getUserLevelFromToken()
+    public static function getUserLevelFromToken($jwt_token = null)
     {
-        if (isset($_COOKIE['jwt_token'])) {
+        if($jwt_token != null){
+            $jwt = $jwt_token;
+        }
+        else if (isset($_COOKIE['jwt_token'])) {
             $jwt = $_COOKIE['jwt_token'];
         } else {
             return null;
