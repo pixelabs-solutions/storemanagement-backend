@@ -211,7 +211,8 @@
       }
 
       .rtl .sms_mu_margin {
-         gap: 253px !important;
+         /* gap: 228px !important; */
+         text-align: start;
       }
 
       .lang_select {
@@ -289,7 +290,7 @@
          border-radius: 0px !important;
       }
 
-      .rtl .sms_mu_margin {
+      /* .rtl .sms_mu_margin {
          gap: 200px !important;
       }
 
@@ -298,7 +299,7 @@
             gap: 0px !important;
          }
 
-      }
+      } */
 
       .sms_ma_index_to_order_button {
          background-color: #4987D8 !important;
