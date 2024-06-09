@@ -211,7 +211,8 @@
       }
 
       .rtl .sms_mu_margin {
-         gap: 228px !important;
+         /* gap: 228px !important; */
+         text-align: start;
       }
 
       .lang_select {
@@ -1101,6 +1102,17 @@ var multipleCancelButton = new Choices('#category_in_product_normal_product', {
 
 
             });
+
+
+            $(document).ready(function() {
+
+var multipleCancelButton = new Choices('#variation_category_select', {
+   removeItemButton: true,
+});
+
+
+});
+
             // $(document).ready(function () {
 
             //    var multipleCancelButton = new Choices('#sms_mu_parent_ctg', {

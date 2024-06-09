@@ -23,11 +23,12 @@ class ConfigurationController
     public function verify_xcode_and_add_configurations()
     {
         $xcode = "";
-        if(isset($_GET['xcode'])){
+        if(isset($_GET['x_code'])){
             $xcode = $_GET['x_code'];
         }
         $data = Authentication::get_meta_by_xcode($xcode);
-
+        echo json_encode($data);
+        exit;
         $user_id = $data['user_id'];
         $store_url = $_GET['store_url'];
         $consumer_key = $_GET['consumer_key'];
