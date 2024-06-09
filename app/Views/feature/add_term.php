@@ -126,13 +126,13 @@
                         <div class="row gx-3">
                             <div class="col-md-6 mb-3">
                                 <label for="example-text-input" class="form-label"
-                                    data-i18n="popoups.future_managment.add_new_term.name_of_term">the
+                                    data-i18n="popoups.future_managment.add_new_term.name_of_term">The
                                     name of the term</label>
                                 <input type="text" class="form-control rounded-3 p-3" id="sms_term_name"
                                     style="background-color: #EAEAEA" placeholder="Name Of Term">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="example-select" class="form-label"  data-i18n="popoups.future_managment.add_new_term.feature">associated feature </label>
+                                <label for="example-select" class="form-label"  data-i18n="popoups.future_managment.add_new_term.feature">Associated feature </label>
                                 <!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
                                 <div class="sms_mu_bg_div rounded-2">
                                     <select class="form-select form-select-md h-100 bg-transparent"
@@ -195,16 +195,26 @@
 
                                 </div>
                                 <!-- To add another term click here + -->
-                                <div class="text-center mt-2 p-2  ">
+                                <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
+                                <div class="text-center mt-2 col-sm-6 col-md-6">
+                                    <button type="button" onclick="sms_a_add_new_term_input()" class="btn btn-primary col-12 col-md-12 rounded-2 py-3" data-i18n="popoups.future_managment.add_new_term.term_end_btn">To add
+                                    another term click here +</button>
+                                </div>
+                                <div class="text-center mt-2 col-sm-6 col-md-6">
+                                    <button type="button" onclick="submit_add_term()" class="btn btn-info col-12 col-md-12 rounded-2 py-3 " data-i18n="popoups.future_managment.add_new_term.term_end_submit_btn">This is
+                                    submit button</button>
+                                </div>
+                            </div>
+                                <!-- <div class="text-center mt-2 p-2  ">
                                     <button type="button" onclick="sms_a_add_new_term_input()"
                                         class="btn btn-primary col-12 col-md-12 rounded-4 py-3"  data-i18n="popoups.future_managment.add_new_term.term_end_btn">To add
                                         another term click here +</button>
                                 </div>
                                 <div class="text-center mt-2 p-2  ">
                                     <button type="button" class="btn btn-danger col-12 col-md-12 rounded-4 py-3"
-                                        onclick="submit_add_term()"  data-i18n="popoups.future_managment.add_new_term.term_end_submit_btn">this is
+                                        onclick="submit_add_term()"  data-i18n="popoups.future_managment.add_new_term.term_end_submit_btn">This is
                                         submit button</button>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </form>
