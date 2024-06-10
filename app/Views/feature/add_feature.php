@@ -189,9 +189,10 @@
                         <div class="col-md-6 mb-3">
                             <label for="" class="form-label" data-i18n="popoups.future_managment.add_new_feature.d_type">Display Type (Color/Image)</label>
                             <div class="h-100">
-                                <select class="form-select form-select-md h-80 bg-transparent" id="sms_attribute_select" style="    height: 66%;">
+                                <select class="form-select form-select-md h-80 bg-transparent" id="sms_attribute_select" style="height: 66%;">
                                     <option value="color">Color</option>
                                     <option value="image">Image</option>
+                                    <option value="size">Size</option>
                                 </select>
                             </div>
                         </div>
@@ -534,54 +535,122 @@
 
 
 <script>
+    // function submit_add_feature_Data() {
+    //     const name = document.getElementById('sms_attribute_name').value;
+    //     const type = document.getElementById('sms_attribute_select').value;
+
+    //     console.log("Attribute Name:", name);
+    //     console.log("Display Type:", type);
+
+    //     let jsonData = {
+    //         name: name,
+    //         type: type,
+    //         swatches: [],
+    //         dynamicTermNames: [],
+    //         dynamicTermImages: []
+    //     };
+
+    //     // For each swatch preview section
+    //     document.querySelectorAll('.sms_a_swatches_preview').forEach((swatch) => {
+    //         const checkbox = swatch.querySelector('.form-colorinput-input');
+
+    //         if (checkbox.checked) {
+    //             const title = swatch.querySelector('.form-check-label').textContent.trim();
+    //             const options = [{
+    //                 name: checkbox.name,
+    //                 checked: checkbox.checked
+    //             }];
+
+    //             console.log("Title:", title);
+    //             console.log("Options:", options);
+
+    //             jsonData.swatches.push({
+    //                 title: title,
+    //                 options: options
+    //             });
+    //         }
+    //     });
+
+    //     let dynamicTermNames = document.querySelectorAll('[id^="sms_name_of_attribute"]');
+    //     let dynamicTermImages = document.querySelectorAll('[id^="sms_image_input"]');
+
+    //     // Collect dynamically added input values
+    //     dynamicTermNames.forEach((input, index) => {
+    //         jsonData.dynamicTermNames.push(input.value);
+    //         console.log("Dynamic Term Name " + (index + 1) + ":", input.value);
+    //     });
+
+    //     dynamicTermImages.forEach((input, index) => {
+    //         jsonData.dynamicTermImages.push(input.files[0]);
+    //         console.log("Dynamic Term Image " + (index + 1) + ":", input.files[0]);
+    //     });
+
+    //     // Send JSON data with fetch API
+    //     fetch('/attributes/add', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //                 // Add any additional headers if required, such as authorization token
+    //             },
+    //             body: JSON.stringify(jsonData)
+    //         })
+    //         .then(response => {
+    //             if (response.ok) {
+    //                 // Form submission succeeded, display success message
+    //                 document.getElementById('sms_feature_success_message').style.display = 'block';
+    //                 document.getElementById('sms_feature_error_message').style.display = 'none';
+    //                 window.location.reload();
+    //             } else {
+    //                 // Form submission failed, display error message
+    //                 document.getElementById('sms_feature_error_message').style.display = 'block';
+    //                 document.getElementById('sms_feature_success_message').style.display = 'none'; // Hide success message if it was displayed before
+    //             }
+    //         })
+    //         .catch(error => {
+    //             // Network error occurred, display error message
+    //             document.getElementById('sms_feature_error_message').style.display = 'block';
+    //             console.error('Error submitting form data:', error);
+    //         });
+    // }
     function submit_add_feature_Data() {
         const name = document.getElementById('sms_attribute_name').value;
         const type = document.getElementById('sms_attribute_select').value;
 
-        console.log("Attribute Name:", name);
-        console.log("Display Type:", type);
-
         let jsonData = {
             name: name,
             type: type,
-            swatches: [],
-            dynamicTermNames: [],
-            dynamicTermImages: []
+            // swatches: [],
+            // dynamicTermNames: [],
+            // dynamicTermImages: []
         };
 
-        // For each swatch preview section
-        document.querySelectorAll('.sms_a_swatches_preview').forEach((swatch) => {
-            const checkbox = swatch.querySelector('.form-colorinput-input');
+        // Add swatches if needed
+        // document.querySelectorAll('.sms_a_swatches_preview').forEach((swatch) => {
+        //     const checkbox = swatch.querySelector('.form-colorinput-input');
+        //     if (checkbox.checked) {
+        //         const title = swatch.querySelector('.form-check-label').textContent.trim();
+        //         const options = [{
+        //             name: checkbox.name,
+        //             checked: checkbox.checked
+        //         }];
+        //         jsonData.swatches.push({
+        //             title: title,
+        //             options: options
+        //         });
+        //     }
+        // });
 
-            if (checkbox.checked) {
-                const title = swatch.querySelector('.form-check-label').textContent.trim();
-                const options = [{
-                    name: checkbox.name,
-                    checked: checkbox.checked
-                }];
-
-                console.log("Title:", title);
-                console.log("Options:", options);
-
-                jsonData.swatches.push({
-                    title: title,
-                    options: options
-                });
-            }
-        });
-
-        let dynamicTermNames = document.querySelectorAll('[id^="sms_name_of_attribute"]');
-        let dynamicTermImages = document.querySelectorAll('[id^="sms_image_input"]');
-
-        // Collect dynamically added input values
+        // Add dynamic term names and images
+        const dynamicTermNames = document.querySelectorAll('[id^="sms_name_of_attribute"]');
+        const dynamicTermImages = document.querySelectorAll('[id^="sms_image_input"]');
         dynamicTermNames.forEach((input, index) => {
             jsonData.dynamicTermNames.push(input.value);
-            console.log("Dynamic Term Name " + (index + 1) + ":", input.value);
-        });
-
-        dynamicTermImages.forEach((input, index) => {
-            jsonData.dynamicTermImages.push(input.files[0]);
-            console.log("Dynamic Term Image " + (index + 1) + ":", input.files[0]);
+            const file = dynamicTermImages[index].files[0];
+            if (file) {
+                jsonData.dynamicTermImages.push(file);
+            } else {
+                jsonData.dynamicTermImages.push(null);
+            }
         });
 
         // Send JSON data with fetch API
@@ -589,7 +658,6 @@
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
-                    // Add any additional headers if required, such as authorization token
                 },
                 body: JSON.stringify(jsonData)
             })
@@ -679,6 +747,9 @@
                 // If 'image' is selected, hide the color div and display the image input container
                 document.getElementById('Sms_mu_color_div').style.display = "none";
                 document.getElementById('imageInputContainer').style.display = "flex";
+            }  else{
+                document.getElementById('Sms_mu_color_div').style.display = "none";
+                document.getElementById('imageInputContainer').style.display = "none";
             }
         });
     });
