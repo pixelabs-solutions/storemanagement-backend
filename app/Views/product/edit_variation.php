@@ -236,10 +236,15 @@
                                 </div>
                             </div>
 
-                            <!-- submit button -->
-                            <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
+                       
+
+                        </div>
+                    </form>
+                         <!-- submit button -->
+                         <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
                                 <div class="text-center mt-2 col-sm-6 col-md-6">
                                     <button type="submit" class="btn btn-primary col-12 rounded-4 py-3"
+                                    onclick="logFormValues()"
                                         data-i18n="popoups.future_managment.edit_variation_in_product_managment.update_product_btn">To
                                         update
                                         the product →</button>
@@ -252,9 +257,6 @@
                                         the product</button>
                                 </div>
                             </div>
-
-                        </div>
-                    </form>
                 </div>
                 <!-- </div> -->
             </div>
@@ -446,7 +448,28 @@
     </div>
 </div>
 
+<script>
+    function logFormValues() {
+    const productID = document.getElementById('variable_product_id').value;
+    const productName = document.getElementById('variation_product_name').value;
+    const categorySelect = document.getElementById('variation_category_select');
+    const selectedCategories = Array.from(categorySelect.selectedOptions).map(option => option.value);
 
+    // Collect values from the file inputs
+    const singleImageInput = document.getElementById('sms_a_edit_product_variation_single_images');
+    const singleImageFile = singleImageInput.files[0] ? singleImageInput.files[0].name : 'No file selected';
+
+    const multipleImageInput = document.getElementById('sms_a_edit_product_variation_multiple_image');
+    const multipleImageFiles = Array.from(multipleImageInput.files).map(file => file.name);
+
+    console.log('Product ID:', productID);
+    console.log('Product Name:', productName);
+    console.log('Selected Categories:', selectedCategories);
+    console.log('Single Image File:', singleImageFile);
+    console.log('Multiple Image Files:', multipleImageFiles);
+}
+
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const tableContainer = document.querySelector(".variation_edit_container"); // Replace with the container element for your table
@@ -482,8 +505,6 @@
         });
     });
 </script>
-
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const modalElements = document.querySelectorAll('.variation_edit_data');
@@ -498,6 +519,7 @@
                 document.getElementById('variation_description').value = productData.description;
 
                 document.getElementById('variable_product_id').value = productData.id;
+                
                 var productId = productData.id;
                 let newTablebody = document.getElementById('variations_data_table_rows');
                 newTablebody.innerHTML = " ";

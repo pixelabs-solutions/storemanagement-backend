@@ -116,19 +116,19 @@ if ($goals_data['status'] == "add") {
                     <input class="sms_objective_add_form_input" value="<?php echo $goals_data["new_orders"]['target']; ?>" type="number" id='sms_Destination_of_new_orders'>
                 </div>
             </div>
-            <div class="row mt-5 ">
+            <div class="row mt-5 " style="display:none;">
                 <div class="col-lg-4">
                     <label for="" class="fs-3 fw-bold Eng_Gols ">Target keywords </label>
                     <label for="" class="fs-3 fw-bold HEB_GOLS ">מיקוד מילות מפתח </label>
-                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["keywords"]['target']; ?>" type="number" id='sms_Target_page_target'>
+                    <input class="sms_objective_add_form_input" value="0<?php //echo $goals_data["keywords"]['target']; ?>" type="number" id='sms_Target_page_target'>
                 </div>
                 <div class="col-lg-4">
                     <label for="" class="fs-3 fw-bold " data-i18n="popoups.objective_popoup.target_progress_view_page">Target progress in Google locations</label>
-                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["google_rankings"]['target']; ?>" type="number" id='sms_Target_progress_in_Google_locations'>
+                    <input class="sms_objective_add_form_input" value="0<?php  //echo $goals_data["google_rankings"]['target']; ?>" type="number" id='sms_Target_progress_in_Google_locations'>
                 </div>
                 <div class="col-lg-4">
                     <label for="" class="fs-3 fw-bold " data-i18n="popoups.objective_popoup.target_page_view_page">Target page views</label>
-                    <input class="sms_objective_add_form_input" value="<?php echo $goals_data["page_views"]['target']; ?>" type="number" id='sms_Target_page_views'>
+                    <input class="sms_objective_add_form_input" value="0<?php //echo $goals_data["page_views"]['target']; ?>" type="number" id='sms_Target_page_views'>
                 </div>
             </div>
             <div class="row  mt-5 align-items-end">
