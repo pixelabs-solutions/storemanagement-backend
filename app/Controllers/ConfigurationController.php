@@ -27,16 +27,19 @@ class ConfigurationController
             $xcode = $_GET['x_code'];
         }
         $data = Authentication::get_meta_by_xcode($xcode);
-        echo json_encode($data);
-        exit;
-        $user_id = $data['user_id'];
+        
+        $user_id = $data[0]['user_id'];
         $store_url = $_GET['store_url'];
         $consumer_key = $_GET['consumer_key'];
         $consumer_secret = $_GET['consumer_secret'];
-
-        $result = Configuration::add($consumer_key, $consumer_secret, $store_url, $user_id);
-        echo json_encode($result);
         
+        if(!$user_id || $user_id === null){
+            echo json_encode(array("error_uid"=>"invalid x-code"));            
+        } elseif($store_url === null || $store_url === "" || $consumer_key === null || $consumer_key === "" || $consumer_secret === null || $consumer_secret === ""){
+             echo json_encode(array("data_uid"=>$user_id));            
+        }
+        else{
+            echo $result = Configuration::add($consumer_key, $consumer_secret, $store_url, $user_id);
+        }
     }
-
 }
