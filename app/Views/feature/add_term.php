@@ -321,65 +321,124 @@
         //     sms_a_add_new_term_input();
         // });
 
+        // function submit_add_term() {
+        //     // Get the values of the existing inputs
+        //     let name = document.getElementById('sms_term_name').value.trim();
+        //     let type = document.getElementById('sms_feature_select').value.trim();
+        //     let colorInput = document.getElementById('sms_term_color').value.trim();
+
+        //     // Create JSON object to store form data
+        //     let jsonData = {
+        //         data: name,
+        //         content: colorInput,
+        //         // colorInput: ,
+        //         // dynamicTerms: []  // Prepare an array to store dynamic term data
+        //     };
+
+        //     // Get the values of dynamically added inputs
+        //     let dynamicnames = document.querySelectorAll('[id^="sms_term_names"]');
+        //     let dynamicTermColors = document.querySelectorAll('[id^="sms_term_colors"]');
+        //     let dynamicTermImages = document.querySelectorAll('[id^="sms_term_image"]');
+
+        //     // Loop through dynamic data and populate jsonData.dynamicTerms
+        //     dynamicnames.forEach((input, index) => {
+        //         let name = input.value.trim();
+        //         if (name !== '') {
+        //             let color = dynamicTermColors[index].value.trim(); // Assuming corresponding color exists
+        //             let imageSrc = dynamicTermImages[index].getAttribute('src'); // Get the image source URL
+        //             jsonData.dynamicTerms.push({ name: name, color: color, image: imageSrc });
+        //         }
+        //     });
+
+        //     // Convert JSON data to string
+        //     let jsonString = JSON.stringify(jsonData);
+
+        //     // Send JSON data with fetch API
+        //     fetch('/attributes/{id}/terms/add', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: jsonString
+        //     })
+        //         .then(response => {
+        //             if (response.status === 201) {
+        //                 // Form submission succeeded, display success message
+        //                 document.getElementById('sms_term_success-message').style.display = 'block';
+        //                 document.getElementById('sms_term_error-message').style.display = 'none';
+        //                 window.location.reload();
+        //             } else {
+        //                 // Form submission failed, display error message
+        //                 document.getElementById('sms_term_error-message').style.display = 'block';
+        //                 document.getElementById('sms_term_success-message').style.display = 'none'; // Hide success message if it was displayed before
+        //             }
+        //         })
+        //         .catch(error => {
+        //             // Network error occurred, display error message
+        //             document.getElementById('sms_term_error-message').style.display = 'block';
+        //             console.error('Error submitting form data:', error);
+        //         });
+        // }
+
         function submit_add_term() {
-            // Get the values of the existing inputs
-            let name = document.getElementById('sms_term_name').value.trim();
-            let type = document.getElementById('sms_feature_select').value.trim();
-            let colorInput = document.getElementById('sms_term_color').value.trim();
+    // Get the values of the existing inputs
+    let name = document.getElementById('sms_term_name').value.trim();
+    let AssociatedFeatures = document.getElementById('sms_feature_select').value;
+    let type = document.getElementById('sms_feature_select').value.trim();
+    let colorInput = document.getElementById('sms_term_color').value.trim();
 
-            // Create JSON object to store form data
-            let jsonData = {
-                name: name,
-                type: type,
-                colorInput: colorInput,
-                dynamicTerms: []  // Prepare an array to store dynamic term data
-            };
+    // Create JSON object to store form data
+    let jsonData = {
+        name: name, // Ensuring the key is 'name'
+        contents: colorInput, // Assuming you need to send the type as well
+        // color: colorInput,
+        // dynamicTerms: []  // Prepare an array to store dynamic term data
+    };
 
-            // Get the values of dynamically added inputs
-            let dynamicnames = document.querySelectorAll('[id^="sms_term_names"]');
-            let dynamicTermColors = document.querySelectorAll('[id^="sms_term_colors"]');
-            let dynamicTermImages = document.querySelectorAll('[id^="sms_term_image"]');
+    // Get the values of dynamically added inputs
+    let dynamicnames = document.querySelectorAll('[id^="sms_term_names"]');
+    let dynamicTermColors = document.querySelectorAll('[id^="sms_term_colors"]');
+    let dynamicTermImages = document.querySelectorAll('[id^="sms_term_image"]');
 
-            // Loop through dynamic data and populate jsonData.dynamicTerms
-            dynamicnames.forEach((input, index) => {
-                let name = input.value.trim();
-                if (name !== '') {
-                    let color = dynamicTermColors[index].value.trim(); // Assuming corresponding color exists
-                    let imageSrc = dynamicTermImages[index].getAttribute('src'); // Get the image source URL
-                    jsonData.dynamicTerms.push({ name: name, color: color, image: imageSrc });
-                }
-            });
-
-            // Convert JSON data to string
-            let jsonString = JSON.stringify(jsonData);
-
-            // Send JSON data with fetch API
-            fetch('/attributes/{id}/terms/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: jsonString
-            })
-                .then(response => {
-                    if (response.status === 201) {
-                        // Form submission succeeded, display success message
-                        document.getElementById('sms_term_success-message').style.display = 'block';
-                        document.getElementById('sms_term_error-message').style.display = 'none';
-                        window.location.reload();
-                    } else {
-                        // Form submission failed, display error message
-                        document.getElementById('sms_term_error-message').style.display = 'block';
-                        document.getElementById('sms_term_success-message').style.display = 'none'; // Hide success message if it was displayed before
-                    }
-                })
-                .catch(error => {
-                    // Network error occurred, display error message
-                    document.getElementById('sms_term_error-message').style.display = 'block';
-                    console.error('Error submitting form data:', error);
-                });
+    // Loop through dynamic data and populate jsonData.dynamicTerms
+    dynamicnames.forEach((input, index) => {
+        let name = input.value.trim();
+        if (name !== '') {
+            let color = dynamicTermColors[index].value.trim(); // Assuming corresponding color exists
+            let imageSrc = dynamicTermImages[index].getAttribute('src'); // Get the image source URL
+            jsonData.dynamicTerms.push({ name: name, color: color, image: imageSrc });
         }
+    });
 
+    // Convert JSON data to string
+    let jsonString = JSON.stringify(jsonData);
+
+    // Send JSON data with fetch API
+    fetch(`/attributes/${AssociatedFeatures}/terms/add`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: jsonString
+    })
+    .then(response => {
+        if (response.status === 200 ) {
+            // Form submission succeeded, display success message
+            document.getElementById('sms_term_success-message').style.display = 'block';
+            document.getElementById('sms_term_error-message').style.display = 'none';
+            window.location.reload();
+        } else {
+            // Form submission failed, display error message
+            document.getElementById('sms_term_error-message').style.display = 'block';
+            document.getElementById('sms_term_success-message').style.display = 'none'; // Hide success message if it was displayed before
+        }
+    })
+    .catch(error => {
+        // Network error occurred, display error message
+        document.getElementById('sms_term_error-message').style.display = 'block';
+        console.error('Error submitting form data:', error);
+    });
+}
 
         function sms_term_close_success_message() {
             document.getElementById('sms_term_success-message').style.display = 'none';
