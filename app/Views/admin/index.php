@@ -474,12 +474,13 @@ body {
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.customer_name">Email</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.status">Phone</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.order_date">Business Name</th>
-              <th class="sms_mu_td" data-i18n="transction_page.transaction_th.order_date">Registered Since</th>
+              <th class="sms_mu_td" data-i18n="transction_page.transaction_th.order_date">Status</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.sum">X Code</th>
               <th></th>
             </tr>
 
             <?php
+            // var_dump($customer_data);
             foreach ($customer_data['data'] as $customer) {
               ?>
               <tr class="sms_mu_spacing_div"></tr>
@@ -504,6 +505,12 @@ body {
                   if ($business_name['user_id'] == $customer['id']) {
                     echo $business_name['meta_value'];
                   }
+                } ?></td>
+             <td><?php foreach ($customer_data['users_configuration_status'] as $users_configuration_status) {
+              // echo json_encode($customer['id']); 
+                  if ($customer['id'] == $users_configuration_status['user_id']) {
+                    echo "API Connected";
+                  } 
                 } ?></td>
 
                 <?php foreach ($customer_data['users_x_code'] as $users_x_code) {

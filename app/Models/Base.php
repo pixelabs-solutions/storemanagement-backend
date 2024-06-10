@@ -80,7 +80,7 @@ class Base
         {
             $response = $client->request('GET', $store_url . '/wp-json/wc/v3/'.$endpoint, [
                 'auth' => [$consumer_key, $consumer_secret],
-                'query' => array_merge(['per_page' => 100, 'page' => $page], $fields)
+                'query' => array_merge(['per_page' => 10, 'page' => $page], $fields)
             ]);
         
             return json_decode($response->getBody(), true);
