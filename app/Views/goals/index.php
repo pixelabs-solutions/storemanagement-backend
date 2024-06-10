@@ -136,7 +136,7 @@ if ($avg_order_value_increase_left_percentage >= 100) {
                 <h1 style="color:#4987d8" data-i18n="objective.top_section_like_nav.text_hading">
                     Business Goals and Objectives
                 </h1>
-                <p style="margin-top:-10px;" data-i18n="objective.top_section_like_nav.text_hading">You should set
+                <p style="margin-top:-10px;" data-i18n="objective.top_section_like_nav.paragraph_heading">You should set
                     goals, it's challenging and addicting and causes sales to
                     increase.</p>
             </div>
