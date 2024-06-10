@@ -201,7 +201,7 @@
                                     another term click here +</button>
                                 </div>
                                 <div class="text-center mt-2 col-sm-6 col-md-6">
-                                    <button type="button" onclick="submit_add_term()" class="btn btn-info col-12 col-md-12 rounded-2 py-3 " data-i18n="popoups.future_managment.add_new_term.term_end_submit_btn">This is
+                                    <button type="button" onclick="submit_add_term()" id="term_disable"   class="btn btn-info col-12 col-md-12 rounded-2 py-3 " data-i18n="popoups.future_managment.add_new_term.term_end_submit_btn">This is
                                     submit button</button>
                                 </div>
                             </div>
@@ -366,12 +366,16 @@
                         // Form submission succeeded, display success message
                         document.getElementById('sms_term_success-message').style.display = 'block';
                         document.getElementById('sms_term_error-message').style.display = 'none';
+                        document.getElementById("term_disable").disabled = true;
+
                         window.location.reload();
                     } else {
                         // Form submission failed, display error message
                         document.getElementById('sms_term_error-message').style.display = 'block';
                         document.getElementById('sms_term_success-message').style.display = 'none'; // Hide success message if it was displayed before
+                        document.getElementById("term_disable").disabled = false;
                     }
+
                 })
                 .catch(error => {
                     // Network error occurred, display error message
