@@ -661,7 +661,7 @@ require_once __DIR__ . '/../partials/header.php';
                                     </td>
                                     <td><span style="font-weight:bold stock_quantity_class"></span> <span
                                             class="stock_quantity_class">
-                                            <?php echo $product['stock_quantity']; ?>
+                                           <strong>Stock:</strong> <?php echo $product['stock_quantity']; ?>
                                         </span>
 
                                         </td>
