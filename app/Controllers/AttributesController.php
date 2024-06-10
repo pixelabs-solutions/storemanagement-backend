@@ -5,6 +5,7 @@ use Pixelabs\StoreManagement\Models\Base;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Models\Authentication;
+use Pixelabs\StoreManagement\Models\Attribute;
 
 class AttributesController
 {
@@ -63,15 +64,12 @@ class AttributesController
         }
 
         $data = $result["data"];
-        $payload = json_encode([
+        $payload = [
             'name' => $data['name'],
-            // 'slug' => $data['slug'],
-            'type' => $data['type'],
-            // 'order_by' => $data['order_by'],
-            // 'has_archives' => $data['has_archives']
-        ]);
+            'type' => $data['type']
+        ];
 
-        $response = Base::wc_add($configuration, $this->endpoint, $payload);
+        $response = Attribute::add($configuration, $payload);
         echo $response;
     }
 
@@ -154,10 +152,11 @@ class AttributesController
 
         $data = $result["data"];
         $payload = json_encode([
-            'name' => $data['name']
+            'name' => 'data',
+            'contents' => $data['contents']
         ]);
 
-        $response = Base::wc_add($configuration, $this->endpoint."/".$id."/"."terms", $payload);
+        $response = Attribute::add_term($configuration, $payload, $id, $data['name']);
         echo $response;
     }
 

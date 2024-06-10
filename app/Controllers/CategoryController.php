@@ -67,10 +67,9 @@ class CategoryController
         $data = $result["data"];
         $image = "";
         if(!empty($data["image"])){
-            $image = $data["image"][0];
+            $image = $data["image"];
         }
         $file_path = FileHelper::save_file($image, "categories/".$data['name']);
-
         $payload = json_encode([
             'name' => $data['name'], 
             'parent' => $data['parent'],
@@ -102,16 +101,17 @@ class CategoryController
         if(isset($data['image'])) {
             $data = $result["data"];
             $image = "";
-            if(!empty($data["image"])){
-                $image = $data["image"][0];
+            if($data["image"] !== ""){
+                $image = $data["image"];
+                $file_path = FileHelper::save_file($image, "categories/".$data['name']);
             }
-            $file_path = FileHelper::save_file($image, "categories/".$data['name']);
+            
         }
         $payload = [
             'name' => $data['name'], 
             'parent' => $data['parent']
         ];
-        if(!empty($file_path)) {
+        if($file_path !== "") {
             $payload['image'] = [
                 'src' => $file_path
             ];

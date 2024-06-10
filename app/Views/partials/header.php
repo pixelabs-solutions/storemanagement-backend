@@ -579,7 +579,7 @@
 
                         </span>
                         <span class="nav-link-title" id="sms_mu_desktop_eng3">
-                           Transcaction
+                           Transaction
                         </span>
                         <span class="nav-link-title" id="sms_mu_desktop_heb3">
                            עִסקָה

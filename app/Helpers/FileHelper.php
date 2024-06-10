@@ -16,14 +16,16 @@ class FileHelper
             throw new \Exception('Invalid image data');
         }
         $binary_data = base64_decode($base64_string);
-        $file_path = BASE_DIR . "/uploads/" . $file_name . time() . "." . $extension;
+        $filepathURI = $file_name . time() . "." . $extension;
+        $file_path = BASE_DIR . "/uploads/" . $filepathURI;
         
         $directory = dirname($file_path);
         if (!is_dir($directory)) {
             mkdir($directory, 0755, true);
         }
         file_put_contents($file_path, $binary_data);
-        // return "https://assets-global.website-files.com/62d84e447b4f9e7263d31e94/6399a4d27711a5ad2c9bf5cd_ben-sweet-2LowviVHZ-E-unsplash-1.jpeg";
-        return $file_path;
+        
+        $url = "https://woo-management.com/". "public/uploads/" .$filepathURI;
+        return $url;
     }
 }
