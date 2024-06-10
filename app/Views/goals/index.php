@@ -351,17 +351,15 @@ if ($avg_order_value_increase_left_percentage >= 100) {
 
 
                             <!-- Page View Card Start -->
-                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                            <!-- <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
                                 <div class="card pt-2 pb-2" style=" border-radius:20px;">
-                                    <!-- Ribbon Start -->
                                     <div class="sms_m_ribbon  bg-light text-dark" style="display: none;">Well done</div>
-                                    <!-- Ribbon End -->
                                     <div class="card-body">
                                         <div class="text-center">
                                             <svg width="44" height="36" viewBox="0 0 44 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M1.03156 1.43098C1.67781 0.791602 2.72281 0.791602 3.36906 1.43098L7.70031 5.76223V3.14973C7.70031 2.23535 8.43594 1.49973 9.35031 1.49973C10.2647 1.49973 11.0003 2.23535 11.0003 3.14973V9.74973C11.0003 10.6641 10.2647 11.3997 9.35031 11.3997H2.75031C1.83594 11.3997 1.10031 10.6641 1.10031 9.74973C1.10031 8.83535 1.83594 8.09973 2.75031 8.09973H5.36969L1.03156 3.76848C0.392187 3.12223 0.392187 2.07723 1.03156 1.43098ZM9.17844 17.1679C10.9041 13.7097 15.3109 8.09973 22.0003 8.09973C28.6897 8.09973 33.0966 13.7097 34.8222 17.1679C35.0834 17.6904 35.0834 18.3022 34.8222 18.8316C33.0966 22.2897 28.6897 27.8997 22.0003 27.8997C15.3109 27.8997 10.9041 22.2897 9.17844 18.8316C8.91719 18.3091 8.91719 17.6972 9.17844 17.1679ZM22.0003 22.3997C23.1673 22.3997 24.2864 21.9362 25.1116 21.111C25.9367 20.2858 26.4003 19.1667 26.4003 17.9997C26.4003 16.8328 25.9367 15.7136 25.1116 14.8885C24.2864 14.0633 23.1673 13.5997 22.0003 13.5997C20.8334 13.5997 19.7142 14.0633 18.889 14.8885C18.0639 15.7136 17.6003 16.8328 17.6003 17.9997C17.6003 19.1667 18.0639 20.2858 18.889 21.111C19.7142 21.9362 20.8334 22.3997 22.0003 22.3997ZM40.6316 1.43098C41.2778 0.784727 42.3228 0.784727 42.9622 1.43098C43.6016 2.07723 43.6084 3.12223 42.9622 3.7616L38.6309 8.09285H41.2503C42.1647 8.09285 42.9003 8.82848 42.9003 9.74285C42.9003 10.6572 42.1647 11.3929 41.2503 11.3929H34.6503C33.7359 11.3929 33.0003 10.6572 33.0003 9.74285V3.14973C33.0003 2.23535 33.7359 1.49973 34.6503 1.49973C35.5647 1.49973 36.3003 2.23535 36.3003 3.14973V5.7691L40.6316 1.43785V1.43098ZM1.03156 34.5685C0.385312 33.9222 0.385312 32.8772 1.03156 32.2379L5.36281 27.9066H2.75031C1.83594 27.9066 1.10031 27.171 1.10031 26.2566C1.10031 25.3422 1.83594 24.6066 2.75031 24.6066H9.35031C10.2647 24.6066 11.0003 25.3422 11.0003 26.2566V32.8566C11.0003 33.771 10.2647 34.5066 9.35031 34.5066C8.43594 34.5066 7.70031 33.771 7.70031 32.8566V30.2304L3.36906 34.5685C2.72281 35.2147 1.67781 35.2147 1.03844 34.5685H1.03156ZM40.6316 34.5685L36.3003 30.2372V32.8497C36.3003 33.7641 35.5647 34.4997 34.6503 34.4997C33.7359 34.4997 33.0003 33.7641 33.0003 32.8497V26.2497C33.0003 25.3354 33.7359 24.5997 34.6503 24.5997H41.2503C42.1647 24.5997 42.9003 25.3354 42.9003 26.2497C42.9003 27.1641 42.1647 27.8997 41.2503 27.8997H38.6309L42.9622 32.231C43.6084 32.8772 43.6084 33.9222 42.9622 34.5616C42.3159 35.201 41.2709 35.2079 40.6316 34.5616V34.5685Z" fill="#4987D8" />
                                             </svg>
-                                            <h3 class="mt-3 text-nowrap"> <?php echo $goals_data["page_views"]['target']; ?>
+                                            <h3 class="mt-3 text-nowrap"> <?php //echo $goals_data["page_views"]['target']; ?>
                                                 <span data-i18n="objective.card_four_in_objective.card_title">
                                                     card_four_in_objective
                                                 </span>
@@ -384,15 +382,13 @@ if ($avg_order_value_increase_left_percentage >= 100) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- Page View Card End -->
 
                             <!-- positions on Google Card Start -->
-                            <div class="col-lg-4  col-md-4 col-sm-12 mb-2">
+                            <!-- <div class="col-lg-4  col-md-4 col-sm-12 mb-2">
                                 <div class="card pt-2 pb-2" style=" border-radius:20px;">
-                                    <!-- Ribbon Start -->
                                     <div class="sms_m_ribbon  bg-light text-dark text-nowrap" style="display: none;">Well done</div>
-                                    <!-- Ribbon End -->
                                     <div class="card-body">
                                         <div class="text-center">
                                             <svg width="42" height="44" viewBox="0 0 42 44" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -401,7 +397,7 @@ if ($avg_order_value_increase_left_percentage >= 100) {
                                             <h3 class="mt-3 text-nowrap">
                                                 <span data-i18n="objective.card_five_in_objective.title">
                                                     Advance
-                                                </span> <?php echo $goals_data["google_rankings"]['target']; ?>
+                                                </span> <?php //echo $goals_data["google_rankings"]['target']; ?>
                                                 <span data-i18n="objective.card_five_in_objective.card_one_p_left">
                                                     positions on
                                                     Google
@@ -428,15 +424,13 @@ if ($avg_order_value_increase_left_percentage >= 100) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- positions on Google Card End -->
 
                             <!-- keywords on Google Card Start -->
-                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                            <!-- <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
                                 <div class="card pt-2 pb-2" style=" border-radius:20px;">
-                                    <!-- Ribbon Start -->
                                     <div class="sms_m_ribbon  bg-light text-dark" style="display: none;">Well done</div>
-                                    <!-- Ribbon End -->
                                     <div class="card-body">
                                         <div class="text-center">
                                             <svg width="42" height="44" viewBox="0 0 42 44" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -444,7 +438,7 @@ if ($avg_order_value_increase_left_percentage >= 100) {
                                             </svg>
                                             <h3 class="mt-3 text-nowrap"> <span data-i18n="objective.card_six_in_objective.card_tag_p_right">
                                                     Added
-                                                </span><?php echo $goals_data["keywords"]['target']; ?> <span data-i18n="objective.card_seven_in_objective.card_title">
+                                                </span><?php //echo $goals_data["keywords"]['target']; ?> <span data-i18n="objective.card_seven_in_objective.card_title">
                                                     new keywords
                                                 </span>
                                             </h3>
@@ -470,7 +464,7 @@ if ($avg_order_value_increase_left_percentage >= 100) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- keywords on Google Card End -->
 
                             <!-- New Product Card Start -->

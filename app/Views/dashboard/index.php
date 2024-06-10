@@ -1,7 +1,7 @@
 <?php
 // include('../app/Views/partials/header.php');
 require_once __DIR__ . '/../partials/header.php';
- var_dump($dashboard_data);
+//  var_dump($dashboard_data);
 ?>
 
 <!-- Leaflet CSS -->

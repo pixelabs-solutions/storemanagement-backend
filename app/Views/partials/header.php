@@ -617,9 +617,9 @@
                         </span>
                      </a>
                   </li>
-                  <li class="nav-item" id="optimization">
+                  <!-- <li class="nav-item" id="optimization">
                      <a class="nav-link" href="./optimization.php">
-                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
                            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M0 14C0 15.1062 0.89375 16 2 16C3.10625 16 4 15.1062 4 14C4 10.6875 6.6875 8 10 8H20V10C20 10.8062 20.4875 11.5375 21.2375 11.85C21.9875 12.1625 22.8438 11.9875 23.4188 11.4187L27.4188 7.41875C28.2 6.6375 28.2 5.36875 27.4188 4.5875L23.4188 0.5875C22.8438 0.0124996 21.9875 -0.15625 21.2375 0.15625C20.4875 0.46875 20 1.19375 20 2V4H10C4.475 4 0 8.475 0 14ZM32 18C32 16.8937 31.1063 16 30 16C28.8937 16 28 16.8937 28 18C28 21.3125 25.3125 24 22 24H12V22C12 21.1938 11.5125 20.4625 10.7625 20.15C10.0125 19.8375 9.15625 20.0125 8.58125 20.5812L4.58125 24.5812C3.8 25.3625 3.8 26.6313 4.58125 27.4125L8.58125 31.4125C9.15625 31.9875 10.0125 32.1562 10.7625 31.8438C11.5125 31.5312 12 30.8062 12 29.9937V28H22C27.525 28 32 23.525 32 18Z" fill="#4987D8" />
                            </svg>
@@ -640,7 +640,7 @@
                   <h4 class="m-0 px-3" id="support">Support</h4>
                   <li class="nav-item" id="setting">
                      <a class="nav-link" href="./setting.php">
-                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
                            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M26.0812 22.5063L21.6063 22.2062C21.2812 22.1875 20.9625 22.275 20.7 22.4688C20.4375 22.6625 20.25 22.9312 20.175 23.25L19.075 27.6C18.0938 27.8625 17.0625 28 16 28C14.9375 28 13.9062 27.8625 12.925 27.6L11.825 23.25C11.7437 22.9375 11.5563 22.6625 11.3 22.4688C11.0437 22.275 10.7188 22.1875 10.3938 22.2062L5.91875 22.5063C4.81875 20.8062 4.1375 18.8062 4.01875 16.6562L7.8125 14.2688C8.0875 14.0938 8.2875 13.8312 8.3875 13.525C8.4875 13.2188 8.475 12.8875 8.35625 12.5875L6.6875 8.425C8 6.825 9.70625 5.5625 11.6687 4.80625L15.1187 7.68125C15.3687 7.8875 15.6812 8 16 8C16.3188 8 16.6375 7.8875 16.8813 7.68125L20.3312 4.80625C22.2875 5.5625 24 6.825 25.3062 8.425L23.6375 12.5875C23.5188 12.8875 23.5063 13.2188 23.6063 13.525C23.7063 13.8312 23.9125 14.0938 24.1812 14.2688L27.975 16.6562C27.8563 18.8062 27.175 20.8062 26.075 22.5063H26.0812ZM16 32C20.2435 32 24.3131 30.3143 27.3137 27.3137C30.3143 24.3131 32 20.2435 32 16C32 11.7565 30.3143 7.68687 27.3137 4.68629C24.3131 1.68571 20.2435 0 16 0C11.7565 0 7.68687 1.68571 4.68629 4.68629C1.68571 7.68687 0 11.7565 0 16C0 20.2435 1.68571 24.3131 4.68629 27.3137C7.68687 30.3143 11.7565 32 16 32ZM16.8813 11.6438C16.3563 11.2625 15.6437 11.2625 15.1187 11.6438L12.125 13.8125C11.6 14.1938 11.3813 14.8688 11.5813 15.4875L12.725 19.0063C12.925 19.625 13.5 20.0438 14.15 20.0438H17.85C18.5 20.0438 19.075 19.625 19.275 19.0063L20.4188 15.4875C20.6188 14.8688 20.4 14.1938 19.875 13.8125L16.8813 11.6375V11.6438Z" fill="#4987D8" />
                            </svg>
@@ -658,7 +658,7 @@
 
                   <li class="nav-item" id="optimization">
                      <a class="nav-link" href="./help.php">
-                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
                            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M16 32C20.2435 32 24.3131 30.3143 27.3137 27.3137C30.3143 24.3131 32 20.2435 32 16C32 11.7565 30.3143 7.68687 27.3137 4.68629C24.3131 1.68571 20.2435 0 16 0C11.7565 0 7.68687 1.68571 4.68629 4.68629C1.68571 7.68687 0 11.7565 0 16C0 20.2435 1.68571 24.3131 4.68629 27.3137C7.68687 30.3143 11.7565 32 16 32ZM10.6125 10.3313C11.1062 8.9375 12.4313 8 13.9125 8H17.5562C19.7375 8 21.5 9.76875 21.5 11.9438C21.5 13.3563 20.7437 14.6625 19.5187 15.3687L17.5 16.525C17.4875 17.3375 16.8188 18 16 18C15.1687 18 14.5 17.3312 14.5 16.5V15.6562C14.5 15.1187 14.7875 14.625 15.2563 14.3562L18.025 12.7688C18.3188 12.6 18.5 12.2875 18.5 11.95C18.5 11.425 18.075 11.0063 17.5562 11.0063H13.9125C13.7 11.0063 13.5125 11.1375 13.4438 11.3375L13.4187 11.4125C13.1438 12.1938 12.2812 12.6 11.5063 12.325C10.7313 12.05 10.3188 11.1875 10.5938 10.4125L10.6187 10.3375L10.6125 10.3313ZM14 22C14 21.4696 14.2107 20.9609 14.5858 20.5858C14.9609 20.2107 15.4696 20 16 20C16.5304 20 17.0391 20.2107 17.4142 20.5858C17.7893 20.9609 18 21.4696 18 22C18 22.5304 17.7893 23.0391 17.4142 23.4142C17.0391 23.7893 16.5304 24 16 24C15.4696 24 14.9609 23.7893 14.5858 23.4142C14.2107 23.0391 14 22.5304 14 22Z" fill="#4987D8" />
                            </svg>
@@ -672,7 +672,7 @@
                            עזרה ותמיכה
                         </span>
                      </a>
-                  </li>
+                  </li> -->
 
                   <li class="nav-item" id="">
                      <button onclick="LogoutDisconecting()" id="sms_mu_filter_button_inventory" class="rounded-4 border-0 p-2" style="background-color:#4987D870; color:white">
@@ -718,7 +718,7 @@
                            <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
                         </svg>
                      </a>
-                     <div class="nav-item dropdown d-none d-md-flex me-3  ">
+                     <!-- <div class="nav-item dropdown d-none d-md-flex me-3  ">
                         <a href="#" class="nav-link px-0 bg-light rounded-pill" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications">
                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -812,7 +812,7 @@
                               </div>
                            </div>
                         </div>
-                     </div>
+                     </div> -->
                      <!-- <button id="switchBtn" class="border-0 rounded-circle" onclick="switchLanguage()">
 
                         <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle">
@@ -852,12 +852,11 @@
                         <a href="./sign-in.html" class="dropdown-item">Logout</a>
                      </div> -->
                </div>
-               <div class="collapse navbar-collapse" id="navbar-menu">
+               <!-- <div class="collapse navbar-collapse" id="navbar-menu">
                   <div>
                      <form action="./" method="get" autocomplete="off" novalidate>
                         <div class="input-icon border-bottom" style="background-color: #F2F2F2;">
                            <span class="input-icon-addon">
-                              <!-- Download SVG icon from http://tabler-icons.io/i/search -->
                               <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                  <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
@@ -868,7 +867,7 @@
                         </div>
                      </form>
                   </div>
-               </div>
+               </div> -->
             </div>
 
          </div>
