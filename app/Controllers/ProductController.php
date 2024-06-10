@@ -313,7 +313,7 @@ class ProductController
         //     '_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations'
         // ];
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-        $products = Base::wc_get($configuration, $this->table_name, $page);
+        $products = Product::get_products($configuration, $this->table_name);
         // echo json_encode($products);exit;
         $csv_file_path = 'products.csv';
 
