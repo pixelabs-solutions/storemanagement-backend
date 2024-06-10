@@ -45,7 +45,8 @@ class Attribute
         $client = new Client();
         try
         {
-            $endpoint = $store_url."/wp-admin/admin-ajax.php?action=woomanagement_add_term&name=".$term_name."&attribute_id=".$attributes_id;
+            $endpoint = $store_url."/wp-admin/admin-ajax.php?action=woomanagement_add_term&name=".$term_name."&description=&attribute_id=".$attributes_id;
+            // echo $endpoint;exit;
             $response = $client->request('POST', $endpoint, [
                 'headers' => [
                     'Content-Type' => 'application/json',
