@@ -29,6 +29,9 @@ body {
       border: 0 !important;
     }
   }
+  p{
+    margin-top: 1 !important;
+  }
   .dropdown_logout{
          position: absolute;
         top: 49px;
@@ -178,8 +181,8 @@ body {
                <button class="rounded-pill border-0" style="background-color:#4987D870; " id="sms_mu_desktop_heb_btn">כניסה למערכת הדיוור
                   →</button> -->
 
-               <div class="navbar-nav flex-row order-md-last gap-2 align-center">
-                <p>Admin Page</p>
+               <div class="navbar-nav flex-row align-items-center order-md-last gap-2 align-center">
+                <h4 class="m-0">Admin Page</h4>
              
                   <div class="nav-item ">
                      <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="" aria-label="Open user menu">
@@ -239,8 +242,8 @@ body {
                         <div class=" col-8 ">
                             <h3> 500</h3>
                         </div>
-                        <div class="col-auto ms-auto">
-                            <!-- <svg width="40" height="40" viewBox="0 0 58 58" fill="none"
+                        <!-- <div class="col-auto ms-auto">
+                            <svg width="40" height="40" viewBox="0 0 58 58" fill="none"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <g filter="url(#filter0_d_272_20)">
                                     <circle cx="29" cy="25" r="25" fill="url(#pattern0_272_20)"
@@ -271,13 +274,13 @@ body {
                                     <image id="image0_272_20" width="32" height="32"
                                         xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAGjAAABowFXcvtNAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAe9JREFUWIXtlrFuE0EQhr85Ow6yBOEspUuBeAGQ0pqOB0B+AipT7XGu0lBYokljGeFz43dIHVFAgZSSFlIFJYIO2VFoLNu7Q3FnyYV15zs7pvEvbbP6Z/ebmd29g512+s+SooHGmEPgBUClUvna6XT+FFnHKxIUBMFbEbkWkTMROZtOpzdBEJitABhjGsAH4LNzru6cq4vIF+BjGIav7h1ARE6A7+PxuBFF0UUURRe+7zeAS+fcyb0DAM+AT4PBYDqfaLfbE+AceL4NgH3gbsn8HfAg72KZt8AYc+R53jtVnXubwLdkLOo4GQMAEVHP8953u93faeuXMwlFjlX1DfALmABXgA+8XGK/SuYrqnpkrT0H1gMAagDW2nq/379ewU8Yhk+ccz9V1c/yZp4BEakBeJ43WmVzAGvtcDF2LYAki1mv1/u7KkDinYnI+hUg7vctoKsCJN7bjbSA+AwMc2w+12iTLVi5/4sAmzqERQGGxO1bD0BVC7VAREYkV3gtgKIVUNURG6iAAAdJNrkkIkPgMRnPfSpAs9l8BJSTbHIpiSkbYx6m+VKf4mq16jvnUNW9Vqv1NA/AbDbbExFKpVKN5V/PbADiEiIip9ba0zwAInHlrbUHab5UAGvtDxF5TfwPkFuqOgEui8TutNPW9A9LS7Dauv/KAgAAAABJRU5ErkJggg==" />
                                 </defs>
-                            </svg> -->
+                            </svg> 
                             <span style="color:#40A826"> 10% </span>
                             <svg width="18" height="18" viewBox="0 0 34 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4.35621 0.521719C3.53976 0.38134 2.7641 0.929399 2.62372 1.74585L0.336094 15.0506C0.195717 15.8671 0.743774 16.6427 1.56022 16.7831C2.37667 16.9235 3.15233 16.3754 3.29271 15.559L5.32616 3.73252L17.1526 5.76596C17.9691 5.90634 18.7447 5.35828 18.8851 4.54183C19.0255 3.72539 18.4774 2.94973 17.661 2.80935L4.35621 0.521719ZM33.5991 24.3221C24.9338 20.5471 19.9658 18.8874 17.0744 18.0973C15.6206 17.7001 14.7023 17.5257 14.1339 17.4159C13.8253 17.3564 13.7208 17.3334 13.6734 17.3188C13.6399 17.3085 13.8963 17.3753 14.1163 17.6511C14.3093 17.8931 14.3274 18.124 14.3063 18.0066C14.2987 17.9647 14.291 17.9118 14.2751 17.804C14.2606 17.7055 14.2418 17.5803 14.2165 17.4349C14.1115 16.8312 13.9091 15.9738 13.4063 14.7066C12.4134 12.2045 10.2447 8.09426 5.32708 1.13444L2.87698 2.86561C7.73256 9.73765 9.75025 13.6268 10.6178 15.8131C11.0451 16.89 11.1913 17.5491 11.261 17.9492C11.2793 18.0548 11.2934 18.1485 11.3072 18.2418C11.3196 18.3258 11.3356 18.4376 11.3538 18.5382C11.3839 18.7059 11.4608 19.133 11.771 19.5219C12.1083 19.9446 12.5402 20.109 12.7918 20.1863C13.0293 20.2594 13.319 20.314 13.5651 20.3615C14.106 20.466 14.9382 20.6236 16.2836 20.9912C18.9908 21.7309 23.8165 23.3327 32.4009 27.0724L33.5991 24.3221Z" fill="#40A826" />
                             </svg>
                             <p style="font-size:10px;">last 7 days </p>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- <div class="row g-2 mt-2">
                         <div class="col-6">
@@ -326,13 +329,13 @@ body {
                         <div class="col-8">
                             <h3> 1457 </h3>
                         </div>
-                        <div class="col-auto ms-auto">
+                        <!-- <div class="col-auto ms-auto">
                             <span style="color:#40A826"> 10 % </span>
                             <svg width="18" height="18" viewBox="0 0 34 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4.35621 0.521719C3.53976 0.38134 2.7641 0.929399 2.62372 1.74585L0.336094 15.0506C0.195717 15.8671 0.743774 16.6427 1.56022 16.7831C2.37667 16.9235 3.15233 16.3754 3.29271 15.559L5.32616 3.73252L17.1526 5.76596C17.9691 5.90634 18.7447 5.35828 18.8851 4.54183C19.0255 3.72539 18.4774 2.94973 17.661 2.80935L4.35621 0.521719ZM33.5991 24.3221C24.9338 20.5471 19.9658 18.8874 17.0744 18.0973C15.6206 17.7001 14.7023 17.5257 14.1339 17.4159C13.8253 17.3564 13.7208 17.3334 13.6734 17.3188C13.6399 17.3085 13.8963 17.3753 14.1163 17.6511C14.3093 17.8931 14.3274 18.124 14.3063 18.0066C14.2987 17.9647 14.291 17.9118 14.2751 17.804C14.2606 17.7055 14.2418 17.5803 14.2165 17.4349C14.1115 16.8312 13.9091 15.9738 13.4063 14.7066C12.4134 12.2045 10.2447 8.09426 5.32708 1.13444L2.87698 2.86561C7.73256 9.73765 9.75025 13.6268 10.6178 15.8131C11.0451 16.89 11.1913 17.5491 11.261 17.9492C11.2793 18.0548 11.2934 18.1485 11.3072 18.2418C11.3196 18.3258 11.3356 18.4376 11.3538 18.5382C11.3839 18.7059 11.4608 19.133 11.771 19.5219C12.1083 19.9446 12.5402 20.109 12.7918 20.1863C13.0293 20.2594 13.319 20.314 13.5651 20.3615C14.106 20.466 14.9382 20.6236 16.2836 20.9912C18.9908 21.7309 23.8165 23.3327 32.4009 27.0724L33.5991 24.3221Z" fill="#40A826" />
                             </svg>
                             <p style="font-size:10px;">last 7 days </p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -373,13 +376,13 @@ body {
                         <div class="col-8">
                             <h3> 300</h3>
                         </div>
-                        <div class="col-auto ms-auto">
+                        <!-- <div class="col-auto ms-auto">
                             <span style="color:#B50E0E"> 10% </span>
                             <svg width="18" height="18" viewBox="0 0 34 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4.34266 26.723C3.52496 26.8559 2.75435 26.3008 2.62146 25.4831L0.455822 12.1579C0.322929 11.3402 0.878071 10.5696 1.69577 10.4367C2.51347 10.3038 3.28408 10.8589 3.41697 11.6766L5.34198 23.5212L17.1866 21.5962C18.0043 21.4633 18.7749 22.0185 18.9078 22.8362C19.0407 23.6539 18.4855 24.4245 17.6678 24.5574L4.34266 26.723ZM33.5894 3.37936C24.9245 7.08173 19.9574 8.70925 17.0673 9.48379C15.6143 9.87318 14.6967 10.0441 14.1286 10.1517C13.8205 10.21 13.7145 10.2328 13.6656 10.2475C13.6281 10.2588 13.8847 10.1945 14.1074 9.92073C14.306 9.67649 14.326 9.44074 14.3054 9.55321C14.298 9.59317 14.2904 9.64396 14.2745 9.7502C14.2599 9.84685 14.2411 9.97026 14.2157 10.1136C14.11 10.7095 13.9065 11.5538 13.4025 12.7997C12.4079 15.2583 10.2371 19.2924 5.3191 26.1192L2.88496 24.3657C7.74014 17.6261 9.75583 13.8143 10.6215 11.6746C11.0476 10.6212 11.1929 9.9782 11.2618 9.58951C11.2801 9.48673 11.2941 9.39542 11.3078 9.30394C11.3201 9.22206 11.3364 9.1113 11.3547 9.01149C11.3854 8.84441 11.4641 8.41616 11.78 8.02782C12.1198 7.60993 12.552 7.44991 12.7995 7.37529C13.0356 7.30411 13.3239 7.25074 13.5704 7.20405C14.1115 7.10157 14.9444 6.94686 16.2907 6.58605C18.9992 5.86016 23.8259 4.28874 32.4106 0.620639L33.5894 3.37936Z" fill="#B50E0E" />
                             </svg>
                             <p style="font-size:10px;">last 7 days </p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -421,13 +424,13 @@ body {
                         <div class="col-8">
                             <h3>100</h3>
                         </div>
-                        <div class="col-auto ms-auto">
+                        <!-- <div class="col-auto ms-auto">
                             <span style="color:#40A826"> 10 % </span>
                             <svg width="18" height="18" viewBox="0 0 34 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4.35621 0.521719C3.53976 0.38134 2.7641 0.929399 2.62372 1.74585L0.336094 15.0506C0.195717 15.8671 0.743774 16.6427 1.56022 16.7831C2.37667 16.9235 3.15233 16.3754 3.29271 15.559L5.32616 3.73252L17.1526 5.76596C17.9691 5.90634 18.7447 5.35828 18.8851 4.54183C19.0255 3.72539 18.4774 2.94973 17.661 2.80935L4.35621 0.521719ZM33.5991 24.3221C24.9338 20.5471 19.9658 18.8874 17.0744 18.0973C15.6206 17.7001 14.7023 17.5257 14.1339 17.4159C13.8253 17.3564 13.7208 17.3334 13.6734 17.3188C13.6399 17.3085 13.8963 17.3753 14.1163 17.6511C14.3093 17.8931 14.3274 18.124 14.3063 18.0066C14.2987 17.9647 14.291 17.9118 14.2751 17.804C14.2606 17.7055 14.2418 17.5803 14.2165 17.4349C14.1115 16.8312 13.9091 15.9738 13.4063 14.7066C12.4134 12.2045 10.2447 8.09426 5.32708 1.13444L2.87698 2.86561C7.73256 9.73765 9.75025 13.6268 10.6178 15.8131C11.0451 16.89 11.1913 17.5491 11.261 17.9492C11.2793 18.0548 11.2934 18.1485 11.3072 18.2418C11.3196 18.3258 11.3356 18.4376 11.3538 18.5382C11.3839 18.7059 11.4608 19.133 11.771 19.5219C12.1083 19.9446 12.5402 20.109 12.7918 20.1863C13.0293 20.2594 13.319 20.314 13.5651 20.3615C14.106 20.466 14.9382 20.6236 16.2836 20.9912C18.9908 21.7309 23.8165 23.3327 32.4009 27.0724L33.5991 24.3221Z" fill="#40A826" />
                             </svg>
                             <p style="font-size:10px;">last 7 days </p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -438,12 +441,11 @@ body {
   <div class=" col-12 mt-5">
     <div class="row row-cards justify-content-sm-between gap-sm-3 gap-2 gap-lg-0 bg-white p-3 m-0 rounded-3">
       <div class="col-sm-5 col-lg-12 m-0 d-flex flex-column flex-sm-row justify-content-between ">
-        <div class="card-body-rounded sms_m_search_input mb-3 mb-sm-0">
+        <!-- <div class="card-body-rounded sms_m_search_input mb-3 mb-sm-0">
           <div>
             <form id="sms_customers_w_search_form" action="./" method="get" autocomplete="off" novalidate>
               <div class="input-icon border-bottom border-black">
                 <span class="input-icon-addon">
-                  <!-- Download SVG icon from http://tabler-icons.io/i/search -->
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -456,7 +458,7 @@ body {
               </div>
             </form>
           </div>
-        </div>
+        </div> -->
 
         <div class="d-flex">
           <label for="statusSelect" class="form-label"></label>
