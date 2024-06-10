@@ -194,8 +194,8 @@ require_once __DIR__ . '/../partials/header.php';
               <th></th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.order_no">Order No</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.customer_name">Customer's Name</th>
-              <th class="sms_mu_td" data-i18n="transction_page.transaction_th.status">Status</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.order_date">Order Date </th>
+              <th class="sms_mu_td" data-i18n="transction_page.transaction_th.status">Status</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.sum">Sum</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.source">Source</th>
               <th></th>
@@ -228,10 +228,10 @@ require_once __DIR__ . '/../partials/header.php';
                 <td id="transaction_id"><?php echo "#" . $item['id']; ?> </td>
 
                 <td><?php echo $item['billing']['first_name'] . " " . $item['billing']['last_name']; ?></td>
+                <td><?php echo $date_created_formatted_date; ?></td>
 
                 <td><span class="sms_transaction_w_status"> <?php echo $item['status']; ?> </span></td>
 
-                <td><?php echo $date_created_formatted_date; ?></td>
                 <td><?php echo "NIS " . $item['total']; ?> </td>
 
                 <!-- <td>#1152</td> -->

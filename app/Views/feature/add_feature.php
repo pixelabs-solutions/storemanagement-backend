@@ -360,7 +360,7 @@
                             <div class="sms_a_swatches_preview rounded-4 mt-2 "
                                 style="background-color: #EAEAEA; padding: 20px;">
                                 <div class="d-flex align-items-center mb-3">
-                                    <label class="form-check-label fs-2 "  data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.card_Radio_buttons.h1">Rounded edges</label>
+                                    <label class="form-check-label fs-2 "  data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.card_selection.h2">Rounded edges</label>
                                     <div class="col-auto ms-auto">
                                         <label class="form-colorinput form-colorinput-light">
                                             <input name="color-rounded" type="checkbox" value="white"
@@ -439,7 +439,7 @@
                             <div class="sms_a_swatches_preview rounded-4 mt-2 "
                                 style="background-color: #EAEAEA; padding: 20px;">
                                 <div class="d-flex align-items-center mb-3">
-                                    <label class="form-check-label fs-2 "  data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.card_Radio_buttons.h1">Rounded edges</label>
+                                    <label class="form-check-label fs-2 "  data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.card_selection.h3">Rounded edges</label>
                                     <div class="col-auto ms-auto">
                                         <label class="form-colorinput form-colorinput-light">
                                             <input name="color-rounded" type="checkbox" value="white"
@@ -487,7 +487,7 @@
                             <div class="sms_a_swatches_preview rounded-4 mt-2 "
                                 style="background-color: #EAEAEA; padding: 20px;">
                                 <div class="d-flex align-items-center mb-3">
-                                    <label class="form-check-label fs-2 "  data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.card_Radio_buttons.h1">Radio buttons</label>
+                                    <label class="form-check-label fs-2 "  data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.card_selection.h4">Radio buttons</label>
                                     <div class="col-auto ms-auto">
                                         <label class="form-colorinput form-colorinput-light">
                                             <input name="color-rounded" type="checkbox" value="white"

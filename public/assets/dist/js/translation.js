@@ -314,8 +314,7 @@ const translations = {
         button: "Goal Setting",
       },
       card_one_in_objective: {
-        card_title:
-          "in sales",
+        card_title: "in sales",
         card_one_p_left: "NIS",
         card_tag_p_right: "left",
       },
@@ -380,8 +379,8 @@ const translations = {
         select_area_text: "Select an attribute for product variations",
         added_new_term_btn: "Added terms for variations",
         name_of_term: "Name of  Term",
-        term_price: "Term price",
-        saleprice: "Sale Price",
+        term_price: "Normal Price",
+        saleprice: "Sale price (optional)",
         select_term: "Select Term Attribute",
         unit: "unit in stock",
         term_inventory: "Term inventory",
@@ -446,6 +445,10 @@ const translations = {
           add_new_term_feature: {
             card_selection: {
               h1: "Selection Field",
+              h2: "Rounded Edges",
+              h3: "rounded edges (image)",
+              h4: "radio buttons (image)",
+
             },
             card_Radio_buttons: {
               h1: "Radio buttons",
@@ -616,7 +619,7 @@ const translations = {
         filter_btn: "סנן לפי תאריכים ",
       },
       card_product: {
-        customer_location:"מיקום_לקוח",
+        customer_location: "מיקום_לקוח",
         card_title: "מוצרים חדשים",
         card_num: "647",
         card_percentage: "10%",
@@ -755,7 +758,7 @@ const translations = {
         dates_name: "תאריך ההזמנה האחרונה",
         mails_name: "כתובת אימייל",
         number_name: "מספר הזמנות",
-        total_name: 'סה"כ',
+        total_name: 'סכום כולל',
         order_name: "ממוצע הזמנה",
       },
       customer_tr: {
@@ -790,16 +793,16 @@ const translations = {
     },
     statististics: {
       tabs_in_static: {
-        tab_overview: "סקירה כללית",
+        tab_overview: "מבט כללי",
         tab_Products: "מוצרים",
-        tab_Revenues: "רווחים",
+        tab_Revenues: "הכנסות",
         tab_Orders: "הזמנות",
       },
       tabs_in_select_range: {
-        week: "שבוע שעבר",
-        month: "החודש הנוכחי",
+        week: "השבוע האחרון",
+        month: "חודש נוכחי",
         year: "שנה שעברה",
-        button: "בחר טווח תאריכים",
+        button:"בחירת טווח תאריכים",
       },
       cards_in_overview: {
         "it is only for tab 1 all card number": "",
@@ -807,8 +810,8 @@ const translations = {
         crad_text_blue_in_card_customer: "לקוחות חדשים",
         crad_text_blue_in_card_returing: "לקוחות קיימים",
         crad_text_blue_in_card_product: "מוצר",
-        crad_text_blue_in_card_order: "הזמנה",
-        crad_text_blue_in_card_revenue: "רווח",
+        crad_text_blue_in_card_order: "מוצרים",
+        crad_text_blue_in_card_revenue: "הכנסות",
       },
       cards_in_product: {
         product_tab_in_static: {
@@ -906,14 +909,14 @@ const translations = {
         button: "קביעת מטרות",
       },
       card_one_in_objective: {
-        card_title:"במכירות",
+        card_title: "במכירות",
         card_one_p_left: ' ש"ח',
-        card_tag_p_right: 'נותרו',
+        card_tag_p_right: "נותרו",
       },
       card_two_in_objective: {
         card_title: "רקריט",
-        card_one_p_left: 'ניו קוסטומר',
-        card_tag_p_right: 'קוסטומר וירה רקרואיטד',
+        card_one_p_left: "ניו קוסטומר",
+        card_tag_p_right: "קוסטומר וירה רקרואיטד",
       },
       card_three_in_objective: {
         card_title: "קוסטומר לפט",
@@ -926,7 +929,7 @@ const translations = {
         card_tag_p_right: "0 נותרו",
       },
       card_five_in_objective: {
-        title:"התקדם",
+        title: "התקדם",
         card_one_p_left: " מיקומים בגוגל",
         card_tag_p_right: "התקדמת ",
       },
@@ -948,32 +951,33 @@ const translations = {
       card_nine_in_objective: {
         card_title: "בסדר הממוצע",
         card_one_p_left: 'גבתה ב-0 ש"ח',
-        card_tag_p_right: '   עלייה של שקלים',
+        card_tag_p_right: "   עלייה של שקלים",
       },
     },
     popoups: {
       add_new_type: {
-        heading: "בחירת סוג המוצר",
+        heading: "בחרו את סוג המוצר",
         variation: "מוצר עם שינויים",
         new_product: "מוצר רגיל",
       },
       add_new_product_popoup: {
-        adding_new_product: "הוספת מוצר חדש ושינויים",
+        adding_new_product: "הוספת מוצר וראציות חדש",
         normal_product: "הוספת מוצר רגיל חדש",
         product_name_input: "שם המוצר",
         catageory_managment: "קטגוריה",
-        image_upload: "העלאת תמונת מוצר",
-        image_upload_text: "בחירת תמונה",
+        image_upload: "בחר/י תמונה",
+        image_upload_text: "בחר/י תמונות",
         gallery_upload: "העלאת גלריית תמונות",
         gallery_upload_text: "בחירת תמונות",
         saleprice: "מחיר מבצע",
-        select_term:"בחר מאפיין מונח",
+        select_term: "בחר מאפיין מונח",
         unit: "יחידות במלאי",
         text_area_text: "תיאור קצר של המוצר",
         select_area_text: "בחירת מאפיין לשינויים במוצר",
         added_new_term_btn: "הוספת מונחים לשינויים",
         name_of_term: "שם המונח",
-        term_price: "מחיר המונח",
+        term_price: "מחיר רגיל",
+        saleprice: "מחיר מבצע ( לא חובה )",
         term_inventory: "מלאי המונח",
         adding_btn_variation: "הוספת מונח נוסף ל+ שינויים",
       },
@@ -983,7 +987,7 @@ const translations = {
         th_in_catageory: {
           th_img: "תמונה",
           th_catageory: "שם הקטגוריה",
-          th_parent: "קטגורית הורה",
+          th_parent: "קטגוריית אב",
           th_quantity: "כמות המוצרים",
         },
         tr_new_catagary: {
@@ -1010,10 +1014,10 @@ const translations = {
         th_in_feture: {
           th_action: "פעולה",
           th_type: "סוג תצוגה",
-          th_product: "מוצר",
-          th_term: "מאפיין משויך",
+          th_product: "מוצרים",
+          th_term: "תכונה משוייכת",
           th_name_term: "שם המונח",
-          th_color: "תמונה/צבע",
+          th_color: "תמונת/צבע  המונח",
         },
         tr_new_catagary: {
           th_action: "",
@@ -1024,11 +1028,11 @@ const translations = {
           th_color: "",
         },
         add_new_feature: {
-          heading: "הוספת מאפיין חדש",
+          heading: "הוספת תכונה חדשה",
           heading_for_edit: "",
-          color_select_atr: "שם המאפיין",
-          d_type: "סוג התצוגה (תמונה/צבע)",
-          hero_heading: "הוספת מונחים למאפיין",
+          color_select_atr: "שם התכונה",
+          d_type: "סוג תצוגה (צבע/תמונה)",
+          hero_heading: "הגדרות נראות  וראציות",
           name_of_term: "שם המונח",
           select_img_uplode: "בחירת תמונה",
           select_color: "שינוי צבע",
@@ -1036,9 +1040,12 @@ const translations = {
           add_new_term_feature: {
             card_selection: {
               h1: "שדה בחירה",
+              h2: "קצוות מעוגלים",
+              h3: "קצוות מעוגלים (תמונה)",
+              h4: "כפתורי רדיו (תמונה)",
             },
             card_Radio_buttons: {
-              h1: "לחצני רדיו",
+              h1:"קצוות מעוגלים",
               sizes: {
                 XL: "XL",
                 L: "L",
@@ -1062,7 +1069,7 @@ const translations = {
           heading: "הוספת מונח חדש",
           heading_for_edit: "",
           name_of_term: "שם המונח",
-          feature: "מאפיין משויך",
+          feature: "תכונה משוייכת ",
           error_alert: "בחירת צבע לתצוגת המונח",
           name_of_term_pink: "שם המונח",
           d_term: "בחירת תמונה לתצוגת המונח",
@@ -1213,7 +1220,6 @@ function updateContent(language) {
 }
 // Function to handle language switching
 function switchLanguage(lang) {
-
   currentLanguage = lang;
   // document.getElementById("switchBtn").innerHTML=currentLanguage;
   console.log(currentLanguage);
@@ -1238,23 +1244,23 @@ function switchLanguage(lang) {
 
 function getCookie(name) {
   let cookieArr = document.cookie.split(";"); // Split the cookies string into individual cookie strings
-  
-  for (let i = 0; i < cookieArr.length; i++) {
-      let cookiePair = cookieArr[i].split("="); // Split each cookie into a key-value pair
 
-      // Remove whitespace at the beginning of the cookie name and compare it with the given name
-      if (name == cookiePair[0].trim()) {
-          return decodeURIComponent(cookiePair[1]); // Return the cookie value
-      }
+  for (let i = 0; i < cookieArr.length; i++) {
+    let cookiePair = cookieArr[i].split("="); // Split each cookie into a key-value pair
+
+    // Remove whitespace at the beginning of the cookie name and compare it with the given name
+    if (name == cookiePair[0].trim()) {
+      return decodeURIComponent(cookiePair[1]); // Return the cookie value
+    }
   }
-  
+
   // Return null if not found
   return null;
 }
-if (currentLang === "he"){
-  document.getElementById('lang-select').value="he"
-}else{
-  document.getElementById('lang-select').value="en"
+if (currentLang === "he") {
+  document.getElementById("lang-select").value = "he";
+} else {
+  document.getElementById("lang-select").value = "en";
 }
 // Example usage
 console.log(currentLang);
