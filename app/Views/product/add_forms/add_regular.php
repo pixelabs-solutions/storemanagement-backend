@@ -298,7 +298,7 @@
                 .then(base64Strings => {
                     let data = {
                         'name': productName,
-                        'category': selectedCategories,
+                        'categories': selectedCategories,
                         'images': base64Strings.filter(base64 => base64 !== null),
                         'type': 'simple',
                         'regular_price': normalInp,
