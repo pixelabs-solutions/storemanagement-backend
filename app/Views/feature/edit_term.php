@@ -149,10 +149,10 @@
                     </div>
                 </form>
                 <div class="text-center mt-2 p-2  ">
-                    <button type="submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3 for_eng" onclick="fun_etid_term()">To update
+                    <button type="submit" id="edit_term" class="btn btn-primary col-12 col-md-12 rounded-4 py-3 for_eng" onclick="fun_etid_term()">To update
                         the term click here
                         +</button>
-                    <button type="submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3 for_heb" onclick="fun_etid_term()">לעדכון המונח לחץ כאן
+                    <button type="submit" id="edit_term" class="btn btn-primary col-12 col-md-12 rounded-4 py-3 for_heb" onclick="fun_etid_term()">לעדכון המונח לחץ כאן
                         +</button>
                 </div>
             </div>
@@ -191,11 +191,15 @@
                     // Form submission succeeded, display success message
                     document.getElementById('sms_editForm_success_message').style.display = 'block';
                     document.getElementById('sms_add_editForm_error_message').style.display = 'none';
+                    document.getElementById("edit_term").disabled = true;
+
                     window.location.reload();
                 } else {
                     // Form submission failed, display error message
                     document.getElementById('sms_add_editForm_error_message').style.display = 'block';
                     document.getElementById('sms_editForm_success_message').style.display = 'none';
+                    document.getElementById("edit_term").disabled = false;
+
                 }
             })
     .catch(error => {

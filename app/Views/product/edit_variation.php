@@ -16,7 +16,11 @@
         background: transparent;
         color: white;
     }
-
+.table-vcenter{
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
     .rtl {
         direction: rtl;
     }

@@ -54,7 +54,7 @@ class CouponsController
             'usage_limit' => $data['usage_limit']
         ]);
         $response = Base::wc_add($configuration, $this->endpoint, $payload);
-        return $response;
+        echo $response;
     }
 
     public function get($id)

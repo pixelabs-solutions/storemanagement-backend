@@ -228,8 +228,8 @@
                 </div>
 
             </div>
-            <button class="btn Sms_mu_for_hebrew btn-primary col-12 rounded-4 py-3" onclick="fun()">להוספת המוצר לחץ כאן +</button>
-            <button class="btn btn-primary col-12 rounded-4 py-3 Sms_mu_for_Eng" onclick="fun()">To add the product click here +</button>
+            <button class="btn Sms_mu_for_hebrew btn-primary col-12 rounded-4 py-3" id="disable_regular" onclick="fun()">להוספת המוצר לחץ כאן +</button>
+            <button class="btn btn-primary col-12 rounded-4 py-3 Sms_mu_for_Eng" id="disable_regular" onclick="fun()">To add the product click here +</button>
         </div>
     </div>
 </div>
@@ -322,11 +322,15 @@
                         // Form submission succeeded, display success message
                         document.getElementById('sms_add_regular_success_message').style.display = 'block';
                         document.getElementById('sms_add_regular_error_message').style.display = 'none';
+                        document.getElementById("disable_regular").disabled = true;
+
                         window.location.reload();
                     } else {
                         // Form submission failed, display error message
                         document.getElementById('sms_add_regular_error_message').style.display = 'block';
-                        document.getElementById('sms_add_regular_success_message').style.display = 'none'; // Hide success message if it was displayed before
+                        document.getElementById('sms_add_regular_success_message').style.display = 'none'; 
+                        document.getElementById("disable_regular").disabled = false;
+
                     }
                 })
                 .catch(error => {
