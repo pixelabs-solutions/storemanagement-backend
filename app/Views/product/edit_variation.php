@@ -236,10 +236,15 @@
                                 </div>
                             </div>
 
-                            <!-- submit button -->
-                            <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
+                       
+
+                        </div>
+                    </form>
+                         <!-- submit button -->
+                         <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
                                 <div class="text-center mt-2 col-sm-6 col-md-6">
                                     <button type="submit" class="btn btn-primary col-12 rounded-4 py-3"
+                                    onclick="logFormValuesInEdit()"
                                         data-i18n="popoups.future_managment.edit_variation_in_product_managment.update_product_btn">To
                                         update
                                         the product →</button>
@@ -252,9 +257,6 @@
                                         the product</button>
                                 </div>
                             </div>
-
-                        </div>
-                    </form>
                 </div>
                 <!-- </div> -->
             </div>
@@ -446,7 +448,49 @@
     </div>
 </div>
 
+<script>
+function logFormValuesInEdit() {
+    // Collect form data
+    const productID = document.getElementById('variable_product_id').value;
+    const productName = document.getElementById('variation_product_name').value;
+    const categorySelect = document.getElementById('variation_category_select');
+    const selectedCategories = Array.from(categorySelect.selectedOptions).map(option => option.value);
 
+    // Construct form data object
+    const formData = {
+        product_id: productID,
+        product_name: productName,
+        selected_categories: selectedCategories
+        type :'variation'
+        // Add more form fields as needed
+    };
+
+    // Send data via fetch
+    fetch('/product/'+product_id, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Response:', data);
+        // Handle response as needed
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Handle errors
+    });
+}
+
+
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const tableContainer = document.querySelector(".variation_edit_container"); // Replace with the container element for your table
@@ -482,8 +526,6 @@
         });
     });
 </script>
-
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const modalElements = document.querySelectorAll('.variation_edit_data');
