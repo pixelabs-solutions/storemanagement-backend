@@ -158,6 +158,17 @@ class Authentication
 
     }
 
+    public static function get_users_configuration_status()
+    {
+
+        global $connection;
+        $stmt = $connection->prepare("SELECT user_id FROM user_configurations");
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+
+    }
 
     public static function get_meta_by_xcode($xcode){
         global $connection;
@@ -179,11 +190,13 @@ class Authentication
         $result = $stmt->get_result();
         $users_data = $result->fetch_all(MYSQLI_ASSOC);
         $users_x_code = self::get_users_meta_by_key('x_code');
+        $users_configuration_status = self::get_users_configuration_status();
         $users_phone = self::get_users_meta_by_key('phone');
         $users_business_name = self::get_users_meta_by_key('business_name');
 
         $users_data = [
             'data'=> $users_data,
+            'users_configuration_status'=> $users_configuration_status,
             'users_phone'=> $users_phone,
             'business_name'=> $users_business_name,
             'users_x_code' =>  $users_x_code
