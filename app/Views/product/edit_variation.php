@@ -450,45 +450,65 @@
 
 <script>
 function logFormValuesInEdit() {
-    // Collect form data
     const productID = document.getElementById('variable_product_id').value;
     const productName = document.getElementById('variation_product_name').value;
     const categorySelect = document.getElementById('variation_category_select');
     const selectedCategories = Array.from(categorySelect.selectedOptions).map(option => option.value);
+    const productDescription = document.getElementById('variation_description').value;
+    const stockQuantity = document.getElementById('sms_mu_unit').value;
+    const regularPrice = document.getElementById('sms_mu_Normal').value;
+    const salePrice = document.getElementById('sms_mu_sale').value;
 
-    // Construct form data object
-    const formData = {
-        product_id: productID,
-        product_name: productName,
-        selected_categories: selectedCategories
-        type :'variation'
-        // Add more form fields as needed
-    };
+    const singleImage = document.getElementById('sms_a_edit_product_variation_single_images').files[0];
+    const multipleImages = document.getElementById('sms_a_edit_product_variation_multiple_image').files;
 
-    // Send data via fetch
-    fetch('/product/'+product_id, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Response:', data);
-        // Handle response as needed
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        // Handle errors
-    });
+    function readFileAsBase64(file) {
+        return new Promise((resolve, reject) => {
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                resolve(event.target.result);
+            };
+            reader.onerror = function(error) {
+                reject(error);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    const files = [singleImage, ...multipleImages];
+    Promise.all(files.map(file => file ? readFileAsBase64(file) : Promise.resolve(null)))
+        .then(base64Strings => {
+            let data = {
+                'product_id': productID,
+                'name': productName,
+                'category': selectedCategories,
+                'type': 'variation',
+                'description': productDescription,
+                'images': base64Strings.filter(base64 => base64 !== null),
+                'stock_quantity': stockQuantity,
+                'regular_price': regularPrice,
+                'sale_price': salePrice
+            };
+
+            return fetch(`/product/${productID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Form submission succeeded');
+            } else {
+                console.error('Form submission failed');
+            }
+        })
+        .catch(error => {
+            console.error('Error submitting form data:', error);
+        });
 }
-
 
 </script>
 <script>

@@ -198,7 +198,7 @@
                         </div>
                     </div>
                     <!-- Adding terms to the feature -->
-                    <div class="rounded-4 mt-4" style="background-color: #EAEAEA">
+                    <div class="rounded-4 mt-4" style="background-color: #EAEAEA; display:none">
                         <div class="col-12 col-md-12 rounded-2" id="sms_a_add_feature">
                             <div class="py-3 rounded">
                                 <h3 class="card-title text-black fs-2 fw-bold p-2" style="font-size: 35px;" data-i18n="popoups.future_managment.add_new_feature.hero_heading">
