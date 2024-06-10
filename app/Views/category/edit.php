@@ -152,7 +152,7 @@
                             <path d="M9 12l2 2l4 -4"></path>
                         </svg>
                         <h3>Success</h3>
-                        <div class="text-muted">Your add regular data has been submitted successfully.</div>
+                        <div class="text-muted">Your Category data has been Updated successfully.</div>
                     </div>
                     <div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_add_editForm_error_message" style="display: none;">
                         <!-- Close icon -->
@@ -170,7 +170,7 @@
                     </div>
                 </form>
                 <div class="text-center mt-2 p-2  ">
-                    <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" data-i18n="popoups.add_new_catageory.popoup_in_catagory.catageory_btn" style="background-color:#4987D870; " onclick="submit_edit_ctg_form()">To Add the category click here +</button>
+                    <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" data-i18n="popoups.add_new_catageory.popoup_in_catagory.catageory_btn2" onclick="submit_edit_ctg_form()">To Update the Category click here +</button>
                 </div>
             </div>
         </div>
