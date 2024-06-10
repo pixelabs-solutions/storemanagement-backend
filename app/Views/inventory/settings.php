@@ -58,8 +58,52 @@ $woocommerce_notify_no_stock_ischecked = ($woocommerce_notify_no_stock_value ===
         background-color: #c0392b;
         /* Red color for error */
     }
+
+   /* Add this in the style tag or a separate CSS file */
+#loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    text-align: center;
+}
+
+#loader .spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loader h1 {
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
 </style>
 <div class=" bg-white position-relative mt-5 p-3">
+<div id="loader">
+    <div class="spinner"></div>
+    <h1>Loading, please wait...</h1>
+</div>
     <div id="notification" class="notification"></div>
     <form action="" id="form">
 
@@ -227,7 +271,12 @@ $woocommerce_notify_no_stock_ischecked = ($woocommerce_notify_no_stock_value ===
             });
     }
 </script>
+<script>
+              window.addEventListener('load', function() {
+        document.getElementById('loader').style.display = 'none';
+    });
 
+        </script>
 
 <?php
 require_once __DIR__ . '/../partials/footer.php';
