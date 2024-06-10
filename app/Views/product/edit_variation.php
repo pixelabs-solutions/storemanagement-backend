@@ -16,7 +16,11 @@
         background: transparent;
         color: white;
     }
-
+.table-vcenter{
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
     .rtl {
         direction: rtl;
     }
@@ -460,7 +464,7 @@ function logFormValuesInEdit() {
     const formData = {
         product_id: productID,
         product_name: productName,
-        selected_categories: selectedCategories
+        selected_categories: selectedCategories,
         type :'variation'
         // Add more form fields as needed
     };
