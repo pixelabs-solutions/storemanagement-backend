@@ -468,7 +468,7 @@
                 </tr>
 
             <?php
-            // var_dump($customer_data);
+            //  var_dump($customer_data);
             foreach ($customer_data['data'] as $customer) {
               ?>
               <tr class="sms_mu_spacing_div"></tr>
@@ -488,12 +488,18 @@
                   if ($business_name['user_id'] == $customer['id']) {
                     echo $business_name['meta_value'];
                   }
-                } ?></td>
-<td><?php foreach ($customer_data['business_name'] as $business_name) {
-                  if ($business_name['user_id'] == $customer['id']) {
-                    echo $business_name['meta_value'];
-                  }
-                } ?></td>
+                } ?>
+                
+              </td>
+<td><?php  
+
+// Create a DateTime object
+$datetime = new DateTime($customer['created_at']);
+
+// Format the DateTime object to get only the date part
+$dateOnly = $datetime->format('Y-m-d');
+echo $dateOnly;
+?></td>
              <td><?php foreach ($customer_data['users_configuration_status'] as $users_configuration_status) {
               // echo json_encode($customer['id']); 
                   if ($customer['id'] == $users_configuration_status['user_id']) {

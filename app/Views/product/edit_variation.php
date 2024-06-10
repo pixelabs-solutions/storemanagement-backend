@@ -244,7 +244,7 @@
                          <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
                                 <div class="text-center mt-2 col-sm-6 col-md-6">
                                     <button type="submit" class="btn btn-primary col-12 rounded-4 py-3"
-                                    onclick="logFormValues()"
+                                    onclick="logFormValuesInEdit()"
                                         data-i18n="popoups.future_managment.edit_variation_in_product_managment.update_product_btn">To
                                         update
                                         the product →</button>
@@ -449,25 +449,46 @@
 </div>
 
 <script>
-    function logFormValues() {
+function logFormValuesInEdit() {
+    // Collect form data
     const productID = document.getElementById('variable_product_id').value;
     const productName = document.getElementById('variation_product_name').value;
     const categorySelect = document.getElementById('variation_category_select');
     const selectedCategories = Array.from(categorySelect.selectedOptions).map(option => option.value);
 
-    // Collect values from the file inputs
-    const singleImageInput = document.getElementById('sms_a_edit_product_variation_single_images');
-    const singleImageFile = singleImageInput.files[0] ? singleImageInput.files[0].name : 'No file selected';
+    // Construct form data object
+    const formData = {
+        product_id: productID,
+        product_name: productName,
+        selected_categories: selectedCategories
+        type :'variation'
+        // Add more form fields as needed
+    };
 
-    const multipleImageInput = document.getElementById('sms_a_edit_product_variation_multiple_image');
-    const multipleImageFiles = Array.from(multipleImageInput.files).map(file => file.name);
-
-    console.log('Product ID:', productID);
-    console.log('Product Name:', productName);
-    console.log('Selected Categories:', selectedCategories);
-    console.log('Single Image File:', singleImageFile);
-    console.log('Multiple Image Files:', multipleImageFiles);
+    // Send data via fetch
+    fetch('/product/'+product_id, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Response:', data);
+        // Handle response as needed
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Handle errors
+    });
 }
+
 
 </script>
 <script>

@@ -89,7 +89,7 @@ const translations = {
         new_product_btn: "Add a new product +",
         category_product_btn: "Category management",
         future_product_btn: "Feature management",
-        excel_product_btn: "Import/export from Excel",
+        excel_product_btn: "Import/Export From Excel",
       },
       product_search: {
         serach_product_bar_placeholder: "Product search",
@@ -308,7 +308,7 @@ const translations = {
     },
     objective: {
       top_section_like_nav: {
-        text_hading: "Bring in NIS",
+        text_hading: "Business goals and objectives",
         paragraph_heading:
           "You should set goals, it's challenging and addicting and causes sales to increase.",
         button: "Goal Setting",
@@ -408,7 +408,7 @@ const translations = {
           label_parent_ct: "Parent category",
           label_up_img: "Uploading a picture",
           select_img_text: " Selecting an image",
-          catageory_btn: "To Add the category click here +",
+          catageory_btn2: "To Update the Category click here +",
         },
         edit_catageory: {},
       },
@@ -448,7 +448,6 @@ const translations = {
               h2: "Rounded Edges",
               h3: "rounded edges (image)",
               h4: "radio buttons (image)",
-
             },
             card_Radio_buttons: {
               h1: "Radio buttons",
@@ -758,7 +757,7 @@ const translations = {
         dates_name: "תאריך ההזמנה האחרונה",
         mails_name: "כתובת אימייל",
         number_name: "מספר הזמנות",
-        total_name: 'סכום כולל',
+        total_name: "סכום כולל",
         order_name: "ממוצע הזמנה",
       },
       customer_tr: {
@@ -802,7 +801,7 @@ const translations = {
         week: "השבוע האחרון",
         month: "חודש נוכחי",
         year: "שנה שעברה",
-        button:"בחירת טווח תאריכים",
+        button: "בחירת טווח תאריכים",
       },
       cards_in_overview: {
         "it is only for tab 1 all card number": "",
@@ -903,9 +902,9 @@ const translations = {
     },
     objective: {
       top_section_like_nav: {
-        text_hading: "תביאו שקלים",
+        text_hading: "יעדים ומטרות עסקיות",
         paragraph_heading:
-          "עליך להגדיר מטרות, זה מאתגר וממכר וגורם לגיוון במכירות להיגדל.",
+          "כדאי לכם לקבוע יעדים, זה מאתגר וממכר וגורם להגדלת המכירות.",
         button: "קביעת מטרות",
       },
       card_one_in_objective: {
@@ -1045,7 +1044,7 @@ const translations = {
               h4: "כפתורי רדיו (תמונה)",
             },
             card_Radio_buttons: {
-              h1:"קצוות מעוגלים",
+              h1: "קצוות מעוגלים",
               sizes: {
                 XL: "XL",
                 L: "L",
