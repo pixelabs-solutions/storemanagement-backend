@@ -121,7 +121,7 @@
                                         <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.limit">Usage
                                             limit
                                             (leave blank without limit) </label>
-                                        <input type="text" class="form-control rounded-3 p-3 fw-bold" id="usage_limit" style="background-color: #EAEAEA" placeholder="Limit Usage">
+                                        <input type="number" class="form-control rounded-3 p-3 fw-bold" id="usage_limit" style="background-color: #EAEAEA" placeholder="Limit Usage">
                                     </div>
 
                                 </div>
