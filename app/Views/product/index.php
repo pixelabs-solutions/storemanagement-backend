@@ -1214,7 +1214,10 @@ require_once __DIR__ . '/../partials/header.php';
                         console.log('POST request successful');
                         console.log(data);
                         document.getElementById('sms_delete_notification').innerHTML = '<div class="alert alert-success" role="alert">File uploaded successfully!</div>';
-                    })
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000);               
+                     })
                     .catch(error => {
                         console.error('There was a problem with your fetch operation:', error);
                         document.getElementById('sms_delete_notification').innerHTML = '<div class="alert alert-danger" role="alert">There was an error uploading the file. Please try again.</div>';
