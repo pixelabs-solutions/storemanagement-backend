@@ -9,34 +9,57 @@ class Configuration
     public static function add($consumer_key, $consumer_secret, $store_url, $user_id = null)
     {
         global $connection;
-        if($user_id == null){
+        if ($user_id == null) {
             $user_id = Authentication::getUserIdFromToken();
         }
-        if($user_id == null || $user_id == "")
-        {
+        if ($user_id == null || $user_id == "") {
             http_response_code(401);
             return json_encode([
                 "message" => "User not authenticated.",
-                "status_code" => 401 
+                "status_code" => 401
             ]);
         }
+    
+        // Check if configuration already exists for the given user_id
+        $check_sql = "SELECT id FROM user_configurations WHERE user_id = ?";
+        if ($check_stmt = $connection->prepare($check_sql)) {
+            $check_stmt->bind_param("s", $user_id);
+            $check_stmt->execute();
+            $check_stmt->store_result();
+    
+            if ($check_stmt->num_rows > 0) {
+                // Configuration already exists for this user
+                $check_stmt->close();
+                http_response_code(409); // Conflict
+                return json_encode([
+                    "message" => "Configuration already exists for this user.",
+                    "status_code" => 409
+                ]);
+            }
+    
+            $check_stmt->close();
+        } else {
+            error_log("Error preparing check statement: " . $connection->error);
+            http_response_code(500);
+            return json_encode([
+                "message" => "Error preparing SQL check statement.",
+                "status_code" => 500 // Internal Server Error
+            ]);
+        }
+    
+        // Insert new configuration
         $sql = "INSERT INTO user_configurations (user_id, consumer_key, consumer_secret, store_url) VALUES (?, ?, ?, ?)";
-
-        if ($stmt = $connection->prepare($sql)) 
-        {
+        if ($stmt = $connection->prepare($sql)) {
             $stmt->bind_param("ssss", $user_id, $consumer_key, $consumer_secret, $store_url);
-
-            if ($stmt->execute()) 
-            {
+    
+            if ($stmt->execute()) {
                 $stmt->close();
                 http_response_code(201);
                 return json_encode([
                     "message" => "Configuration added successfully.",
-                    "status_code" => 201 
+                    "status_code" => 201
                 ]);
-            } 
-            else 
-            {
+            } else {
                 $stmt->close();
                 error_log("Error executing insert: " . $stmt->error);
                 http_response_code(500);
@@ -45,9 +68,7 @@ class Configuration
                     "status_code" => 500 // Internal Server Error
                 ]);
             }
-        } 
-        else 
-        {
+        } else {
             error_log("Error preparing statement: " . $connection->error);
             http_response_code(500);
             return json_encode([
