@@ -86,7 +86,7 @@
                                 </label>
                                 <div class="-5" style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                     <div class="col-md-12 rounded-4 bg-transparent h-100 ">
-                                        <select id="category_in_popoupop" multiple style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
+                                        <select id="edit_regular_category_in_popoupop" multiple style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
                                         </select>
                                         <span class="span_div">
                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -209,7 +209,7 @@
 <script>
     // function fun_Np() {
     //     let Name = document.getElementById('sms_mu_Ip_one').value;
-    //     let CtgValue = document.getElementById('category_in_popoupop');
+    //     let CtgValue = document.getElementById('edit_regular_category_in_popoupop');
     //     let ImgValue = document.getElementById('sms_mu_Ip_two').value;
     //     let ImgVlueTwo = document.getElementById('sms_mu_Ip_three').value;
     //     let NormalPrice = document.getElementById('sms_mu_Ip_four').value;
@@ -280,7 +280,7 @@
 
     function fun_Np() {
         let Name = document.getElementById('sms_mu_Ip_one').value;
-        let CtgValue = document.getElementById('category_in_popoupop');
+        let CtgValue = document.getElementById('edit_regular_category_in_popoupop');
         let ImgValue = document.getElementById('sms_mu_Ip_two').files[0]; // Changed to files[0] to get the file object
         let ImgVlueTwo = document.getElementById('sms_mu_Ip_three').files[0]; // Changed to files[0] to get the file object
         let NormalPrice = document.getElementById('sms_mu_Ip_four').value;
@@ -409,7 +409,7 @@
 
                 var parentCategories_json = JSON.parse(parentCategoriesData);
                 console.log(parentCategories_json);
-                var selectElement = document.getElementById('category_in_popoupop');
+                var selectElement = document.getElementById('edit_regular_category_in_popoupop');
                 selectElement.innerHTML = '';
                 var productcategorys = productData.categories;
                 console.log(productData.categories);
@@ -435,7 +435,7 @@
             if (count < 1) {
 
 
-                let multipleCancelButton = new Choices('#category_in_popoupop', {
+                let multipleCancelButton = new Choices('#edit_regular_category_in_popoupop', {
                     removeItemButton: true,
                     // maxItemCount: 5,
                     // searchResultLimit: 5,

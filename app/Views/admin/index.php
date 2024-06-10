@@ -178,30 +178,14 @@ body {
                <button class="rounded-pill border-0" style="background-color:#4987D870; " id="sms_mu_desktop_heb_btn">כניסה למערכת הדיוור
                   →</button> -->
 
-               <div class="navbar-nav flex-row order-md-last gap-2">
-                  <div class=" d-flex align-items-center">
-                
-                     <!-- <button id="switchBtn" class="border-0 rounded-circle" onclick="switchLanguage()">
-
-                        <img id="languageIcon" src="/assets/dist/img/israel.png" alt="English Flag" height="24px" width="24px" class="rounded-circle">
-
-                     </button> -->
-                     <select id="lang-select" style="padding: 5px; font-size: 14px;" class="lang_select">
-                        <option value="en">
-                      <span class="flag flag-country-us"> English</span>
-                           
-                        </option>
-                        <option value="he">
-                        <span class="flag flag-country-il"></span>
-                           עברית
-                        </option>
-                     </select>
-                  </div>
-                  <div class="nav-item dropdown">
+               <div class="navbar-nav flex-row order-md-last gap-2 align-center">
+                <p>Admin Page</p>
+             
+                  <div class="nav-item ">
                      <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="" aria-label="Open user menu">
-                        <span class="avatar rounded-circle avatar-sm" style="background-image: url(./static/avatars/000m.jpg)">
-                           <img onclick="FunLogoutProfile()" src="/assets/dist/img/profile.png" height="100%" width="100%" alt="">
-                        </span>
+
+                         <button onclick="LogoutDisconecting()" class="btn btn-primry">logout</button>
+                  
                   </div>
             
                   </a>
@@ -490,11 +474,13 @@ body {
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.customer_name">Email</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.status">Phone</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.order_date">Business Name</th>
+              <th class="sms_mu_td" data-i18n="transction_page.transaction_th.order_date">Status</th>
               <th class="sms_mu_td" data-i18n="transction_page.transaction_th.sum">X Code</th>
               <th></th>
             </tr>
 
             <?php
+            // var_dump($customer_data);
             foreach ($customer_data['data'] as $customer) {
               ?>
               <tr class="sms_mu_spacing_div"></tr>
@@ -515,7 +501,17 @@ body {
                     echo $business_name['meta_value'];
                   }
                 } ?></td>
-
+<td><?php foreach ($customer_data['business_name'] as $business_name) {
+                  if ($business_name['user_id'] == $customer['id']) {
+                    echo $business_name['meta_value'];
+                  }
+                } ?></td>
+             <td><?php foreach ($customer_data['users_configuration_status'] as $users_configuration_status) {
+              // echo json_encode($customer['id']); 
+                  if ($customer['id'] == $users_configuration_status['user_id']) {
+                    echo "API Connected";
+                  } 
+                } ?></td>
 
                 <?php foreach ($customer_data['users_x_code'] as $users_x_code) {
                   if ($users_x_code['user_id'] == $customer['id']) {
