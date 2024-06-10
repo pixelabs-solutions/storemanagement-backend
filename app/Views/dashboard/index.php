@@ -50,7 +50,8 @@ require_once __DIR__ . '/../partials/header.php';
         border-radius: 100px;
     }
 
-    #loader {
+/* Add this in the style tag or a separate CSS file */
+#loader {
     position: fixed;
     left: 0;
     top: 0;
@@ -59,8 +60,12 @@ require_once __DIR__ . '/../partials/header.php';
     z-index: 9999;
     background: #fff;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    text-align: center;
 }
 
 #loader .spinner {
@@ -70,11 +75,18 @@ require_once __DIR__ . '/../partials/header.php';
     width: 60px;
     height: 60px;
     animation: spin 2s linear infinite;
+    margin-bottom: 20px;
 }
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loader h1 {
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0;
 }
 </style>
 <!-- Map Css End -->
@@ -84,6 +96,7 @@ require_once __DIR__ . '/../partials/header.php';
 <div class="row g-2 mt-5 mb-5 align-items-center sms_mu_for_rtl">
 <div id="loader">
     <div class="spinner"></div>
+    <h1>Loading, please wait...</h1>
 </div>
     <!-- Stats header Buttons -->
     <div class="col-auto btn-list">

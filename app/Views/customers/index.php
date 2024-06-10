@@ -188,7 +188,8 @@ $customers = $customers['data'];
     border-spacing: 5px;
   }
 
-  #loader {
+/* Add this in the style tag or a separate CSS file */
+#loader {
     position: fixed;
     left: 0;
     top: 0;
@@ -197,8 +198,12 @@ $customers = $customers['data'];
     z-index: 9999;
     background: #fff;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    text-align: center;
 }
 
 #loader .spinner {
@@ -208,16 +213,24 @@ $customers = $customers['data'];
     width: 60px;
     height: 60px;
     animation: spin 2s linear infinite;
+    margin-bottom: 20px;
 }
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loader h1 {
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0;
 }
 </style>
 <div class="sms_customers_m  p-0">
 <div id="loader">
     <div class="spinner"></div>
+    <h1>Loading, please wait...</h1>
 </div>
   <div class=" col-12 mt-5">
     <div class="row row-cards justify-content-sm-between gap-sm-3 gap-2 gap-lg-0 bg-white p-3 m-0 rounded-3">
