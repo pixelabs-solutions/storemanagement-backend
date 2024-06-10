@@ -187,8 +187,38 @@ $customers = $customers['data'];
   .table-spacing {
     border-spacing: 5px;
   }
+
+  #loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#loader .spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 </style>
 <div class="sms_customers_m  p-0">
+<div id="loader">
+    <div class="spinner"></div>
+</div>
   <div class=" col-12 mt-5">
     <div class="row row-cards justify-content-sm-between gap-sm-3 gap-2 gap-lg-0 bg-white p-3 m-0 rounded-3">
       <div class="col-sm-5 col-lg-3 m-0 ">
@@ -291,6 +321,12 @@ $customers = $customers['data'];
     </div>
   </div>
 </div>
+<script>
+              window.addEventListener('load', function() {
+        document.getElementById('loader').style.display = 'none';
+    });
+
+        </script>
 <script>
   // document.addEventListener('DOMContentLoaded', function() {
   //   const searchForm = document.getElementById('sms_customers_m_search_form');

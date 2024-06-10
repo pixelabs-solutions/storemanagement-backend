@@ -142,8 +142,37 @@ require_once __DIR__ . '/../partials/header.php';
     background-color: #c0392b;
     /* Red color for error */
   }
+  #loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#loader .spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 </style>
 <div class="sms_transaction_w  p-0">
+<div id="loader">
+    <div class="spinner"></div>
+</div>
   <div id="notification" class="notification"></div>
 
   <div class=" col-12 mt-5">
@@ -329,6 +358,12 @@ require_once __DIR__ . '/../partials/header.php';
     </div>
   </div>
 </div>
+<script>
+              window.addEventListener('load', function() {
+        document.getElementById('loader').style.display = 'none';
+    });
+
+        </script>
 <script>
   const viewOrderDetailsButtons = document.querySelectorAll('.view_order_details');
 

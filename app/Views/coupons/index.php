@@ -119,8 +119,38 @@ require_once __DIR__ . '/../partials/header.php';
       opacity: 0;
     }
   }
+
+  #loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#loader .spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 </style>
 <div class="sms_coupons_m  p-0">
+<div id="loader">
+    <div class="spinner"></div>
+</div>
   <div id="sms_delete_notification"></div>
 
   <div class=" col-12 mt-5">
@@ -494,6 +524,12 @@ require_once __DIR__ . '/../partials/header.php';
     }
   });
 </script>
+<script>
+              window.addEventListener('load', function() {
+        document.getElementById('loader').style.display = 'none';
+    });
+
+        </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
 <script>

@@ -32,11 +32,40 @@ require_once __DIR__ . '/../partials/header.php';
     .filter_tab_active {
         background-color: #A8C3E7 !important;
     } */
+    #loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#loader .spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 </style>
 
 <!-- Icon Box Start -->
 
 <div class="row g-2 mt-5  mb-5 ">
+<div id="loader">
+    <div class="spinner"></div>
+</div>
     <div>
         <ul class="nav justify-content-between nav-tabs" data-bs-toggle="tabs" style="border:none;">
             <li class="nav-item mb-2">
@@ -310,6 +339,12 @@ require_once __DIR__ . '/../partials/header.php';
 
 
 </script>
+<script>
+              window.addEventListener('load', function() {
+        document.getElementById('loader').style.display = 'none';
+    });
+
+        </script>
 <script>
     // @formatter:off
     document.addEventListener("DOMContentLoaded", function () {
