@@ -80,7 +80,7 @@ class Base
         {
             $response = $client->request('GET', $store_url . '/wp-json/wc/v3/'.$endpoint, [
                 'auth' => [$consumer_key, $consumer_secret],
-                'query' => array_merge(['per_page' => 100, 'page' => $page], $fields)
+                'query' => array_merge(['per_page' => 10, 'page' => $page], $fields)
             ]);
         
             return json_decode($response->getBody(), true);
@@ -340,16 +340,11 @@ class Base
                 'body' => $payload
             ]);
 
-            if ($response->getStatusCode() == 201) 
+            if ($response->getStatusCode() == 200) 
             {
                 http_response_code($response->getStatusCode());
                 return json_encode(['message' => 'Data imported', 'status_code' => $response->getStatusCode()]);
             } 
-            else 
-            {
-                http_response_code($response->getStatusCode());
-                return json_encode(['message' => 'Could not add data', 'status_code' => $response->getStatusCode()]);
-            }
         }
         catch(RequestException $exception)
         {

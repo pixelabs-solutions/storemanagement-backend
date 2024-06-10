@@ -468,10 +468,11 @@
                   <th></th>
                 </tr>
 
-                <?php
-                foreach ($customer_data['data'] as $customer) {
-                ?>
-                  <tr class="sms_mu_spacing_div"></tr>
+            <?php
+            // var_dump($customer_data);
+            foreach ($customer_data['data'] as $customer) {
+              ?>
+              <tr class="sms_mu_spacing_div"></tr>
 
                   <tr class="sms_mu_tr">
                     <td><?php echo $customer['name']; ?></td>
@@ -484,16 +485,22 @@
                           }
                         } ?></td>
 
-                    <td><?php foreach ($customer_data['business_name'] as $business_name) {
-                          if ($business_name['user_id'] == $customer['id']) {
-                            echo $business_name['meta_value'];
-                          }
-                        } ?></td>
-                    <td><?php foreach ($customer_data['business_name'] as $business_name) {
-                          if ($business_name['user_id'] == $customer['id']) {
-                            echo $business_name['meta_value'];
-                          }
-                        } ?></td>
+                <td><?php foreach ($customer_data['business_name'] as $business_name) {
+                  if ($business_name['user_id'] == $customer['id']) {
+                    echo $business_name['meta_value'];
+                  }
+                } ?></td>
+<td><?php foreach ($customer_data['business_name'] as $business_name) {
+                  if ($business_name['user_id'] == $customer['id']) {
+                    echo $business_name['meta_value'];
+                  }
+                } ?></td>
+             <td><?php foreach ($customer_data['users_configuration_status'] as $users_configuration_status) {
+              // echo json_encode($customer['id']); 
+                  if ($customer['id'] == $users_configuration_status['user_id']) {
+                    echo "API Connected";
+                  } 
+                } ?></td>
 
                     <?php foreach ($customer_data['users_x_code'] as $users_x_code) {
                       if ($users_x_code['user_id'] == $customer['id']) {

@@ -37,7 +37,6 @@ $router->get('/admin/index', [AdminController::class, 'index']);
 //Dashboard
 $router->get('/index', [DashboardController::class, 'index']);
 
-
 //Products
 $router->get('/product', [ProductController::class, 'index']);
 $router->get('product/{id}', [ProductController::class, 'product_by_id']);

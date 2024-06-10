@@ -77,9 +77,9 @@
             </form>
           </div>
         </div>
-        <div class="text-center text-secondary mt-3">
+        <!-- <div class="text-center text-secondary mt-3">
           Don't have account yet? <a href="register" tabindex="-1">Sign up</a>
-        </div>
+        </div> -->
       </div>
     </div>
     <!-- Libs JS -->

@@ -498,6 +498,7 @@
                 document.getElementById('variation_description').value = productData.description;
 
                 document.getElementById('variable_product_id').value = productData.id;
+                
                 var productId = productData.id;
                 let newTablebody = document.getElementById('variations_data_table_rows');
                 newTablebody.innerHTML = " ";

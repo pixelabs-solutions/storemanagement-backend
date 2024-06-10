@@ -224,8 +224,50 @@ require_once __DIR__ . '/../partials/header.php';
         display: block;
         animation: slideIn 0.5s forwards, fadeOut 2s 1s forwards;
     }
+/* Add this in the style tag or a separate CSS file */
+#loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    text-align: center;
+}
+
+#loader .spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loader h1 {
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0;
+}
 </style>
 <div class="sms_products_m  p-0 ">
+<div id="loader">
+    <div class="spinner"></div>
+    <h1>Loading, please wait...</h1>
+</div>
     <div id="sms_delete_notification"></div>
     <div class=" col-12 mt-5" style="overflow-y: hidden; overflow-x:hidden;">
         <div class="row col-12 d-flex justify-content-between bg-white p-3 m-0 rounded-3">
@@ -619,7 +661,7 @@ require_once __DIR__ . '/../partials/header.php';
                                     </td>
                                     <td><span style="font-weight:bold stock_quantity_class"></span> <span
                                             class="stock_quantity_class">
-                                            <?php echo $product['stock_quantity']; ?>
+                                           <strong>Stock:</strong> <?php echo $product['stock_quantity']; ?>
                                         </span>
 
                                         </td>
@@ -748,7 +790,9 @@ require_once __DIR__ . '/../partials/header.php';
         <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
 
         <script>
-            f
+              window.addEventListener('load', function() {
+        document.getElementById('loader').style.display = 'none';
+    });
 
         </script>
         <!-- <script>
