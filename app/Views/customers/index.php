@@ -259,30 +259,22 @@ $customers = $customers['data'];
             ?>
           </tbody>
         </table>
-        <div class="sm-mu-buttons d-flex justify-content-end">
+        <div class="sm-mu-buttons d-flex mb-4 justify-content-end">
     <?php 
     $current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
     $next_page = $current_page + 1;
     $prev_page = $current_page > 1 ? $current_page - 1 : 1;
-    ?>
-    <!-- SVG icon for Previous button -->
-    <button class="rounded-4 border-0 p-2 sms_m_transaction_new_category me-2" style="background-color:#4987D870;" onclick="window.location.href='?page=<?php echo $prev_page; ?>'">
-        <!-- SVG icon for Previous button -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" style="width: 16px; height: 16px;">
-            <path style="fill:#232326" d="M24 12.001H2.914l5.294-5.295-.707-.707L1 12.501l6.5 6.5.707-.707-5.293-5.293H24v-1z" data-name="Left"/>
-        </svg>
-        <span style="vertical-align: middle;">Previous</span>
+    ?>  
+                              <input type="radio" class="btn-check" name="btn-radio-dropdown" id="btn-radio-dropdown-1" autocomplete="off" onclick="window.location.href='?page=<?php echo $prev_page; ?>'">
+                              <label for="btn-radio-dropdown-1" type="button" class="btn">
+                                
+                                Back
+                              </label>
+                              <input type="radio" class="btn-check" name="btn-radio-dropdown" id="btn-radio-dropdown-2" autocomplete="off" onclick="window.location.href='?page=<?php echo $next_page; ?>'">
+                              <label for="btn-radio-dropdown-2" type="button" class="btn">
 
-       
-    </button>
-    <button class="rounded-4 border-0 p-2 sms_m_transaction_new_category" style="background-color:#4987D870;" onclick="window.location.href='?page=<?php echo $next_page; ?>'">
-    <span style="vertical-align: middle;">Next</span>    
-    <!-- SVG icon for Next button -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" style="width: 16px; height: 16px;">
-            <path style="fill:#232326" d="m17.5 5.999-.707.707 5.293 5.293H1v1h21.086l-5.294 5.295.707.707L24 12.499l-6.5-6.5z" data-name="Right"/>
-        </svg>
-        
-    </button>
+                              Next
+                              </label>
 </div>
 
 
