@@ -66,30 +66,30 @@ class Product
         }
     }
 
-    public static function get_product_by_id($configuration, $id)
-    {
-        $consumer_key = $configuration["consumer_key"];
-        $consumer_secret = $configuration["consumer_secret"];
-        $store_url = $configuration["store_url"];
-        $client = new Client();
-        try 
-        {
-            $response = $client->request('GET', $store_url . '/wp-json/wc/v3/products/'.$id, [
-                'auth' => [$consumer_key, $consumer_secret]
-            ]);
+    // public static function get_product_by_id($configuration, $id)
+    // {
+    //     $consumer_key = $configuration["consumer_key"];
+    //     $consumer_secret = $configuration["consumer_secret"];
+    //     $store_url = $configuration["store_url"];
+    //     $client = new Client();
+    //     try 
+    //     {
+    //         $response = $client->request('GET', $store_url . '/wp-json/wc/v3/products/'.$id, [
+    //             'auth' => [$consumer_key, $consumer_secret]
+    //         ]);
         
-            $product = json_decode($response->getBody(), true);
-            // if($product['status'] !== 'publish')
-            // {
-            //     return null;
-            // }
-            return $product;
-        } 
-        catch (RequestException $e) 
-        {
-            echo $e->getMessage();
-        }
-    }
+    //         $product = json_decode($response->getBody(), true);
+    //         // if($product['status'] !== 'publish')
+    //         // {
+    //         //     return null;
+    //         // }
+    //         return $product;
+    //     } 
+    //     catch (RequestException $e) 
+    //     {
+    //         echo $e->getMessage();
+    //     }
+    // }
 
 
     // public static function get_variation_by_id($configuration, $id, $var_id)
@@ -325,6 +325,47 @@ class Product
         return $products;
     }
 
+    public static function get_product_by_id($product_id)
+    {
+        global $connection;
+        $product = null; // Initialize a variable to hold the product data
+
+        try {
+            // Prepare the SQL statement
+            $stmt = $connection->prepare("SELECT * FROM products WHERE id = ?");
+            if ($stmt === false) {
+                throw new \mysqli_sql_exception("Unable to prepare statement: " . $connection->error);
+            }
+
+            // Bind the parameter to the statement
+            $stmt->bind_param("i", $product_id);
+
+            // Execute the statement
+            if ($stmt->execute()) {
+                // Get the result set from the executed statement
+                $result = $stmt->get_result();
+                if ($result->num_rows > 0) {
+                    // Fetch the product record
+                    $row = $result->fetch_assoc();
+                    $row['images'] = json_decode($row['images'], true);
+                    $row['categories'] = json_decode($row['categories'], true);
+                    $row['attributes'] = json_decode($row['attributes'], true);
+                    $row['variations'] = json_decode($row['variations'], true);
+                    $product = $row;
+                } else {
+                    echo "No product found with the given ID.\n";
+                }
+                $result->free();
+            } else {
+                echo "Error executing query: " . $stmt->error . "\n";
+            }
+            $stmt->close();
+        } catch (\mysqli_sql_exception $e) {
+            echo "Database error: " . $e->getMessage() . "\n";
+        }
+
+        return $product;
+    }
     public static function delete_all_products()
     {
         global $connection;

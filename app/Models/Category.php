@@ -66,6 +66,7 @@ class Category
 
         return $categories;
     }
+    
 
     // public static function get_categories($configuration, $endpoint, $fields = [])
     // {
