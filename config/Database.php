@@ -221,16 +221,16 @@ class Database
         )";
         $this->connection->query($customersTable);
 
-        $transactionsTable = "CREATE TABLE IF NOT EXISTS transactions
-        (
-            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            customer_id INT NOT NULL,
-            product_id INT NOT NULL,
-            status VARCHAR(55),
-            order_date DATE,
-            sum FLOAT,
-            source VARCHAR(55),
-            shipping_address VARCHAR(255)
+        $transactionsTable = "CREATE TABLE IF NOT EXISTS transactions (
+            id INT PRIMARY KEY,
+            user_id int(11) NOT NULL,
+            status VARCHAR(255),
+            date_created DATETIME,
+            shipping_total DECIMAL(10, 2),
+            total DECIMAL(10, 2),
+            billing TEXT,
+            meta_data TEXT,
+            line_items TEXT
         )";
         $this->connection->query($transactionsTable);
 
