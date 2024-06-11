@@ -72,7 +72,7 @@ class CategoryController
         $file_path = FileHelper::save_file($image, "categories/".$data['name']);
         $payload = json_encode([
             'name' => $data['name'], 
-            'parent' => $data['parent'],
+            'parent' => $data['parent'] === "" ? 0 : $data['parent'],
             'image' => [
                 'src' => $file_path
             ]

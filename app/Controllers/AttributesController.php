@@ -152,8 +152,7 @@ class AttributesController
 
         $data = $result["data"];
         $payload = json_encode([
-            'name' => 'data',
-            'contents' => $data['contents']
+            'data' => $data['data']
         ]);
 
         $response = Attribute::add_term($configuration, $payload, $id, $data['name']);

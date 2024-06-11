@@ -162,7 +162,7 @@
                     <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
                 </div>
                 <div class="text-center mt-5  ">
-                    <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="sms_meh_couponmanage_data()" data-i18n="popoups.added_new_cupons.last_btn_cat">
+                    <button type="button" id="sms_mu_manage_submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="sms_meh_couponmanage_data()" data-i18n="popoups.added_new_cupons.last_btn_cat">
                         To add the category click here +</button>
                 </div>
             </div>
@@ -171,6 +171,7 @@
 </div>
 <script>
     function sms_meh_couponmanage_data() {
+        document.getElementById('sms_mu_manage_submit').disabled = true;
         var Coupon_manage_Data = {
             'code': document.getElementById('sms_The_coupon_code').value,
             'discount_type': document.getElementById('sms_w_parent_ctg').value,
@@ -192,16 +193,19 @@
                     // Form submission succeeded, display success message
                     document.getElementById('sms_add_coupons_success-message').style.display = 'block';
                     document.getElementById('sms_add_coupons_error-message').style.display = 'none';
+
                     window.location.reload();
                 } else {
                     // Form submission failed, display error message
                     document.getElementById('sms_add_coupons_error-message').style.display = 'block';
                     document.getElementById('sms_add_coupons_error-message').style.display = 'block';
+                    document.getElementById('sms_mu_manage_submit').disabled = false;
                 }
             })
             .catch(error => {
                 // Network error occurred, display error message
                 document.getElementById('sms_add_coupons_error-message').style.display = 'block';
+                document.getElementById('sms_mu_manage_submit').disabled = false;
                 console.error('Error submitting form data:', error);
             });
     }

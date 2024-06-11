@@ -170,7 +170,7 @@
                     </div>
                 </form>
                 <div class="text-center mt-2 p-2  ">
-                    <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" data-i18n="popoups.add_new_catageory.popoup_in_catagory.catageory_btn2" onclick="submit_edit_ctg_form()">To Update the Category click here +</button>
+                    <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" id="submit_for_edit" data-i18n="popoups.add_new_catageory.popoup_in_catagory.catageory_btn2" onclick="submit_edit_ctg_form()">To Update the Category click here +</button>
                 </div>
             </div>
         </div>
@@ -284,6 +284,8 @@ function submit_edit_ctg_form() {
         .then(response => {
             // Show success message
             document.getElementById('sms_editForm_success_message').style.display = 'block';
+            document.getElementById("submit_for_edit").disabled = true;
+
             // Reload window after a delay
             setTimeout(function(){
                 location.reload();
@@ -291,7 +293,16 @@ function submit_edit_ctg_form() {
             // ... (rest of the code for handling response remains the same)
         })
         .catch(error => {
-            // ... (rest of the code for handling errors remains the same)
+          
+            // Show error message
+            document.getElementById('sms_add_editForm_error_message').style.display = 'block';
+            document.getElementById("submit_for_edit").disabled = false;
+
+            // Reload window after a delay
+            setTimeout(function(){
+                location.reload();
+            }, 2000); // Reload after 2 seconds (adjust as needed)
+            // ... (rest of the code for handling response remains the same)
         });
     })
     .catch(error => {

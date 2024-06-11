@@ -16,7 +16,11 @@
         background: transparent;
         color: white;
     }
-
+.table-vcenter{
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
     .rtl {
         direction: rtl;
     }
@@ -244,7 +248,7 @@
                          <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
                                 <div class="text-center mt-2 col-sm-6 col-md-6">
                                     <button type="submit" class="btn btn-primary col-12 rounded-4 py-3"
-                                    onclick="logFormValues()"
+                                    onclick="logFormValuesInEdit()"
                                         data-i18n="popoups.future_managment.edit_variation_in_product_managment.update_product_btn">To
                                         update
                                         the product →</button>
@@ -449,24 +453,65 @@
 </div>
 
 <script>
-    function logFormValues() {
+function logFormValuesInEdit() {
     const productID = document.getElementById('variable_product_id').value;
     const productName = document.getElementById('variation_product_name').value;
     const categorySelect = document.getElementById('variation_category_select');
     const selectedCategories = Array.from(categorySelect.selectedOptions).map(option => option.value);
+    const productDescription = document.getElementById('variation_description').value;
+    const stockQuantity = document.getElementById('sms_mu_unit').value;
+    const regularPrice = document.getElementById('sms_mu_Normal').value;
+    const salePrice = document.getElementById('sms_mu_sale').value;
 
-    // Collect values from the file inputs
-    const singleImageInput = document.getElementById('sms_a_edit_product_variation_single_images');
-    const singleImageFile = singleImageInput.files[0] ? singleImageInput.files[0].name : 'No file selected';
+    const singleImage = document.getElementById('sms_a_edit_product_variation_single_images').files[0];
+    const multipleImages = document.getElementById('sms_a_edit_product_variation_multiple_image').files;
 
-    const multipleImageInput = document.getElementById('sms_a_edit_product_variation_multiple_image');
-    const multipleImageFiles = Array.from(multipleImageInput.files).map(file => file.name);
+    function readFileAsBase64(file) {
+        return new Promise((resolve, reject) => {
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                resolve(event.target.result);
+            };
+            reader.onerror = function(error) {
+                reject(error);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
 
-    console.log('Product ID:', productID);
-    console.log('Product Name:', productName);
-    console.log('Selected Categories:', selectedCategories);
-    console.log('Single Image File:', singleImageFile);
-    console.log('Multiple Image Files:', multipleImageFiles);
+    const files = [singleImage, ...multipleImages];
+    Promise.all(files.map(file => file ? readFileAsBase64(file) : Promise.resolve(null)))
+        .then(base64Strings => {
+            let data = {
+                'product_id': productID,
+                'name': productName,
+                'category': selectedCategories,
+                'type': 'variation',
+                'description': productDescription,
+                'images': base64Strings.filter(base64 => base64 !== null),
+                'stock_quantity': stockQuantity,
+                'regular_price': regularPrice,
+                'sale_price': salePrice
+            };
+
+            return fetch(`/product/${productID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Form submission succeeded');
+            } else {
+                console.error('Form submission failed');
+            }
+        })
+        .catch(error => {
+            console.error('Error submitting form data:', error);
+        });
 }
 
 </script>

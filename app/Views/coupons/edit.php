@@ -126,7 +126,7 @@
 
                                 </div>
                                 <div class="text-center mt-5  ">
-                                    <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="sms_meh_coupon_edit_data()" data-i18n="popoups.added_new_cupons.last_btn_coupon">To update the coupon
+                                    <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="sms_meh_coupon_edit_data()" id="Sms_mu_btn_submit" data-i18n="popoups.added_new_cupons.last_btn_coupon">To update the coupon
                                         click here ←</button>
                                 </div>
                         </div>
@@ -165,7 +165,9 @@
 
 
 <script>
+
     function sms_meh_coupon_edit_data() {
+        document.getElementById('Sms_mu_btn_submit').disabled = true;
         var CouponeditData = {
             'code': document.getElementById('coupons_code').value,
             'discount_type': document.getElementById('discount_type').value,
@@ -188,7 +190,6 @@
                 if (response.status === 200) {
                     // Form submission succeeded, display success message
                     document.getElementById('sms_edit_success-message').style.display = 'block';
-                    document.getElementById('sms_edit_error-message').style.display = 'none';
                     window.location.reload();
                 } else {
                     // Form submission failed, display error message
@@ -199,6 +200,7 @@
             .catch(error => {
                 // Network error occurred, display error message
                 document.getElementById('sms_edit_error-message').style.display = 'block';
+                document.getElementById('Sms_mu_btn_submit').disabled = false;
                 console.error('Error submitting form data:', error);
             });
     }
