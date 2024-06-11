@@ -50,12 +50,14 @@ class Transaction
         try {
             foreach ($transactions as $transaction) {
                 $stmt = $connection->prepare("
-                    INSERT INTO transactions (id, user_id, status, date_created, shipping_total, total, billing, meta_data, line_items)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    INSERT INTO transactions (id, user_id, status, date_created, customer_id, shipping_total, total, billing, meta_data, line_items)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ");
                 $id = $transaction['id'];
                 $status = $transaction['status'];
                 $date_created = $transaction['date_created'];
+                $customer_id = $transaction['customer_id'];
+
                 $shipping_total = $transaction['shipping_total'];
                 $total = $transaction['total'];
                 $billing = json_encode($transaction['billing']);
@@ -63,11 +65,12 @@ class Transaction
                 $line_items = json_encode($transaction['line_items']);
 
                 $stmt->bind_param(
-                    'iisssdsss',
+                    'iissisdsss',
                     $id,
                     $user_id,
                     $status,
                     $date_created,
+                    $customer_id,
                     $shipping_total,
                     $total,
                     $billing,

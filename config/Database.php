@@ -191,25 +191,22 @@ class Database
 
         $inventorySettingsTable = "CREATE TABLE IF NOT EXISTS inventory_settings
         (
-            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            user_id INT NOT NULL UNIQUE,
-            is_inventory_management_enabled BOOLEAN,
-            is_out_of_stock_alert_enabled BOOLEAN,
-            is_low_stock_alert_enabled BOOLEAN,
-            email VARCHAR(255),
-            out_of_stock_threshold INT(6),
-            low_stock_threshold INT(6)
+            `user_id` int(11) NOT NULL,            
+            `id` VARCHAR(255) NOT NULL,
+            `value` VARCHAR(255) NOT NULL
         )";
         $this->connection->query($inventorySettingsTable);
 
         $couponsTable = "CREATE TABLE IF NOT EXISTS coupons
         (
-            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            coupon_code VARCHAR(255) NOT NULL,
-            coupon_type VARCHAR(255),
-            discount_type VARCHAR(255), 
-            discount_amount FLOAT,
-            expiry_date DATE 
+            `id` int(11) NOT NULL,
+            `user_id` int(11) NOT NULL,            
+            `code` VARCHAR(255) NOT NULL,
+            `discount_type` VARCHAR(255),
+            `amount` int(11) NOT NULL,
+            `usage_limit` int(11) NOT NULL,
+            `usage_count` int(11) NOT NULL,
+            `date_expires` DATE 
         )";
         $this->connection->query($couponsTable);
 
@@ -229,6 +226,7 @@ class Database
             status VARCHAR(255),
             date_created DATETIME,
             shipping_total DECIMAL(10, 2),
+            customer_id int(11) NOT NULL,
             total DECIMAL(10, 2),
             billing TEXT,
             meta_data TEXT,

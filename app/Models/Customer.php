@@ -33,11 +33,14 @@ class Customer
                 $averageOrderCost = 0;
     
                 try {
-                    $ordersResponse = $client->request('GET', $store_url. '/wp-json/wc/v3/orders', [
-                        'auth' => [$consumer_key, $consumer_secret],
-                        'query' => ['customer' => $customerId]
-                    ]);
-                    $orders = json_decode($ordersResponse->getBody(), true);
+
+                    $orders = Transaction::get_all_transactions($user_id);
+
+                    // $ordersResponse = $client->request('GET', $store_url. '/wp-json/wc/v3/orders', [
+                    //     'auth' => [$consumer_key, $consumer_secret],
+                    //     'query' => ['customer' => $customerId]
+                    // ]);
+                    // $orders = json_decode($ordersResponse->getBody(), true);
 
                     $orderCount = count($orders);
                     
