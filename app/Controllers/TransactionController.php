@@ -56,9 +56,22 @@ class TransactionController
     public function get_by_id($id)
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
-        $configuration = $this->prepare_configuration($is_rest);
-        $fields = ['_fields' => 'id, status, date_created, total, billing, meta_data, line_items'];
-        $transaction = Base::wc_get_by_id($configuration, "orders/{$id}", $fields);
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id === null)
+        {
+            if ($is_rest == 'true') {
+                http_response_code(401);
+                echo json_encode(array(
+                    "message" => "User not authenticated",
+                    "status_code" => 401
+                ));
+                exit;
+            }
+            else{
+                header('Location: /authentication/login');
+            }
+        }
+        $transaction = Transaction::get_transaction_by_id($id);
         
         echo $transaction;
     }

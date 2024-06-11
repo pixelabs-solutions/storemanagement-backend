@@ -114,4 +114,39 @@ class Transaction
 
         return $orders;
     }
+
+    public static function get_transaction_by_id($transaction_id)
+    {
+        global $connection;
+        $transaction = null; 
+
+        try {
+            // Prepare the SQL statement
+            $stmt = $connection->prepare("SELECT * FROM transactions WHERE id = ?");
+            if ($stmt === false) {
+                throw new \mysqli_sql_exception("Unable to prepare statement: " . $connection->error);
+            }
+            $stmt->bind_param("i", $transaction_id);
+
+            if ($stmt->execute()) {
+                $result = $stmt->get_result();
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $row['billing'] = json_decode($row['billing'], true);
+                    $row['meta_data'] = json_decode($row['meta_data'], true);
+                    $row['line_items'] = json_decode($row['line_items'], true);
+                    $transaction = $row;
+                } else {
+                    echo "No order found with the given ID.\n";
+                }
+                $result->free();
+            } else {
+                echo "Error executing query: " . $stmt->error . "\n";
+            }
+            $stmt->close();
+        } catch (\mysqli_sql_exception $e) {
+            echo "Database error: " . $e->getMessage() . "\n";
+        }
+        return json_encode(['message' => 'Fetched successfully', 'status_code' => 200, 'data' => $transaction], JSON_UNESCAPED_UNICODE);
+    }
 }
