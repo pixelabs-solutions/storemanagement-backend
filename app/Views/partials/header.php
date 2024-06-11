@@ -109,6 +109,11 @@
       .rtl .avatar {
          margin-left: 10px;
       }
+      .sms_header_page_name{
+         font-weight: 400 !important;
+         color: black !important;
+         font-size: 20px;
+      }
 
       .choices__input {
          background-color: transparent !important;
