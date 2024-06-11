@@ -8,12 +8,13 @@ use Pixelabs\StoreManagement\Models\Product;
 use Pixelabs\StoreManagement\Models\Attribute;
 use Pixelabs\StoreManagement\Models\Currency;
 use Pixelabs\StoreManagement\Models\Authentication;
+use Pixelabs\StoreManagement\Models\Customer;
 
 class SynchronizationController
 {
     public function sync_data()
     {
-        $tables = ['products', 'attributes', 'categories', 'currencies'];
+        $tables = ['products', 'attributes', 'categories', 'currencies', 'customers'];
         
         $user_id = Authentication::getUserIdFromToken();
 
@@ -44,6 +45,12 @@ class SynchronizationController
         $currency_fields = ['_fields' => 'code, name, symbol'];
         $currency = Base::wc_get($configuration, "data/currencies/current", $currency_fields);
         Currency::store_currencies($currency, $user_id);
+
+        $customers_fields = ['_fields' => 'id, first_name, last_name, email'];
+        $customers = Base::wc_get($configuration, "customers", $customers_fields);
+        Customer::store_customers($customers, $user_id);
+
+
         echo "done";
 
     }

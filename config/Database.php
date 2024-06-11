@@ -215,9 +215,11 @@ class Database
 
         $customersTable = "CREATE TABLE IF NOT EXISTS customers
         (
-            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(55) NOT NULL,
-            email VARCHAR(55) NOT NULL
+            `id` int(11) NOT NULL,
+            `user_id` int(11) NOT NULL,
+            `first_name` VARCHAR(55) NOT NULL,
+            `last_name` VARCHAR(55) NOT NULL,
+            `email` VARCHAR(55) NOT NULL
         )";
         $this->connection->query($customersTable);
 
