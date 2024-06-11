@@ -41,7 +41,7 @@ class Database
     private function tablesExist()
     {
         //List all tables in array
-        $tables = ['users', 'user_meta', 'user_configurations', 'goals', 'categories', 'products', 'inventory_settings', 'coupons', 'customers', 'transactions', 'request_tracking'];
+        $tables = ['users', 'user_meta', 'user_configurations', 'goals', 'categories', 'products', 'inventory_settings', 'coupons', 'customers', 'transactions', 'request_tracking', 'currencies', 'attributes'];
         $tableNameList = "'" . implode("', '", $tables) . "'"; // Create a string for the SQL query
         $query = "SELECT COUNT(*) AS count FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE() AND table_name IN ($tableNameList)";
         $result = $this->connection->query($query);

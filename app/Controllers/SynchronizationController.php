@@ -15,7 +15,7 @@ class SynchronizationController
 {
     public function sync_data()
     {
-        $tables = ['products', 'attributes', 'categories', 'currencies', 'transactions'];
+        $tables = ['products', 'attributes', 'categories', 'currencies', 'transactions', 'customers'];
         
         $user_id = Authentication::getUserIdFromToken();
 
