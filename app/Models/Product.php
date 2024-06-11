@@ -251,59 +251,60 @@ class Product
         return $total_products;
     }
 
-    public static function store_product($product)
+    public static function store_products($products)
     {
         global $connection;
         try {
-            $stmt = $connection->prepare("
-                INSERT INTO products (id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations, date_created)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                ON DUPLICATE KEY UPDATE
-                    name = VALUES(name),
-                    images = VALUES(images),
-                    categories = VALUES(categories),
-                    regular_price = VALUES(regular_price),
-                    sale_price = VALUES(sale_price),
-                    stock_quantity = VALUES(stock_quantity),
-                    description = VALUES(description),
-                    type = VALUES(type),
-                    attributes = VALUES(attributes),
-                    variations = VALUES(variations),
-                    date_created = VALUES(date_created)
-            ");
-            $id = $product['id'];
-            $name = $product['name'];
-            $images = json_encode($product['images']);
-            $categories = json_encode($product['categories']);
-            $attributes = json_encode($product['attributes']);
-            $variations = json_encode($product['variations']);
-            $regular_price = $product['regular_price'] ?: null;
-            $sale_price = $product['sale_price'] ?: null;
-            $stock_quantity = $product['stock_quantity'];
-            $description = $product['description'];
-            $type = $product['type'];
-            $date_created = $product['date_created'];
+            foreach ($products as $product) {
+                $stmt = $connection->prepare("
+                    INSERT INTO products (id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations, date_created)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ON DUPLICATE KEY UPDATE
+                        name = VALUES(name),
+                        images = VALUES(images),
+                        categories = VALUES(categories),
+                        regular_price = VALUES(regular_price),
+                        sale_price = VALUES(sale_price),
+                        stock_quantity = VALUES(stock_quantity),
+                        description = VALUES(description),
+                        type = VALUES(type),
+                        attributes = VALUES(attributes),
+                        variations = VALUES(variations),
+                        date_created = VALUES(date_created)
+                ");
+                $id = $product['id'];
+                $name = $product['name'];
+                $images = json_encode($product['images']);
+                $categories = json_encode($product['categories']);
+                $attributes = json_encode($product['attributes']);
+                $variations = json_encode($product['variations']);
+                $regular_price = $product['regular_price'] ?: null;
+                $sale_price = $product['sale_price'] ?: null;
+                $stock_quantity = $product['stock_quantity'];
+                $description = $product['description'];
+                $type = $product['type'];
+                $date_created = $product['date_created'];
 
-            $stmt->bind_param(
-                'issssdisisss',
-                $id,
-                $name,
-                $images,
-                $categories,
-                $regular_price,
-                $sale_price,
-                $stock_quantity,
-                $description,
-                $type,
-                $attributes,
-                $variations,
-                $date_created
-            );
+                $stmt->bind_param(
+                    'issssdisisss',
+                    $id,
+                    $name,
+                    $images,
+                    $categories,
+                    $regular_price,
+                    $sale_price,
+                    $stock_quantity,
+                    $description,
+                    $type,
+                    $attributes,
+                    $variations,
+                    $date_created
+                );
 
-            $stmt->execute();
-            $stmt->close();
-
-            echo "Product {$id} stored successfully.\n";
+                $stmt->execute();
+                $stmt->close();
+            }
+            
         } catch (\mysqli_sql_exception $e) {
             echo "Database error: " . $e->getMessage() . "\n";
         }

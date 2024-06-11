@@ -155,30 +155,37 @@ class Database
         ";
         $this->connection->query($goalTable);
 
-        $categoriesTable = "CREATE TABLE IF NOT EXISTS categories
-        (
-            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(55),
-            parent_category_id INT,
-            image VARCHAR(255)
-        )";
+        $categoriesTable = "CREATE TABLE `categories` (
+            `id` int(11) NOT NULL,
+            `name` varchar(255) NOT NULL,
+            `parent` int(11) DEFAULT NULL,
+            `image` text DEFAULT NULL,
+            `count` int(11) DEFAULT NULL
+            )";
         $this->connection->query($categoriesTable);
 
-        $productsTable = "CREATE TABLE IF NOT EXISTS products
-        (
-            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(255),
-            units_in_stock INT(6),
-            description VARCHAR(255),
-            thumbnail VARCHAR(255),
-            sale_price FLOAT,
-            normal_price FLOAT,
-            photo_gallery TEXT,
-            category_id INT,
-            product_type ENUM('normal', 'variation') NOT NULL DEFAULT 'normal'
-        )";
+        $productsTable = "CREATE TABLE `products` (
+            `id` int(11) NOT NULL,
+            `name` varchar(255) NOT NULL,
+            `images` text DEFAULT NULL,
+            `categories` text DEFAULT NULL,
+            `regular_price` decimal(10,2) DEFAULT NULL,
+            `sale_price` decimal(10,2) DEFAULT NULL,
+            `stock_quantity` int(11) DEFAULT NULL,
+            `description` text DEFAULT NULL,
+            `type` varchar(50) DEFAULT NULL,
+            `attributes` text DEFAULT NULL,
+            `variations` text DEFAULT NULL,
+            `date_created` datetime DEFAULT NULL
+            )";
         $this->connection->query($productsTable);
 
+        $currencies = "CREATE TABLE currencies (
+            `id` int(11) NOT NULL,
+            `name` varchar(255) NOT NULL,
+            `symbol` varchar(255) NOT NULL,
+        )";
+        $this->connection->query($currencies);
 
         $inventorySettingsTable = "CREATE TABLE IF NOT EXISTS inventory_settings
         (

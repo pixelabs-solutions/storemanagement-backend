@@ -69,25 +69,52 @@ class Base
         return $affectedRows > 0;
     }
 
-    public static function wc_get($configuration, $endpoint, $page, $fields = [])
+    public static function truncate_tables($tables)
+    {
+        global $connection;
+        try{
+            $query = "TRUNCATE TABLE ".$tables;
+            $connection->query($query);            
+        }
+        catch (\mysqli_sql_exception $e) {
+            echo "Database error: " . $e->getMessage() . "\n";
+        }
+    }
+
+    public static function wc_get($configuration, $endpoint, $fields = [])
     {
         $consumer_key = $configuration["consumer_key"];
         $consumer_secret = $configuration["consumer_secret"];
         $store_url = $configuration["store_url"];
         $client = new Client();
         $all_records = [];
+        $page = 1;
+
         try 
         {
-            $response = $client->request('GET', $store_url . '/wp-json/wc/v3/'.$endpoint, [
-                'auth' => [$consumer_key, $consumer_secret],
-                'query' => array_merge(['per_page' => 10, 'page' => $page], $fields)
-            ]);
-        
-            return json_decode($response->getBody(), true);
+            while (true) 
+            {
+                $response = $client->request('GET', $store_url . '/wp-json/wc/v3/'.$endpoint, [
+                    'auth' => [$consumer_key, $consumer_secret],
+                    'query' => array_merge(['per_page' => 100, 'page' => $page], $fields)
+                ]);
+
+                $result = json_decode($response->getBody(), true);
+                if (empty($categories)) 
+                {
+                    break;
+                }
+
+                $all_categories = array_merge($all_records, $result);
+                $page++;
+            }
+
+            return $all_records;
         } 
         catch (RequestException $e) 
         {
             echo "Exception: ".$e->getMessage();
+            return null;
         }
     }
 
