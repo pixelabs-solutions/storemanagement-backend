@@ -36,6 +36,12 @@ require_once __DIR__ . '/../partials/header.php';
     .rtl .sms_mu_we_en {
         display: none !important;
     }
+    .text_for_revenue_graph{
+        text-align: end !important;
+    }
+    .rtl .text_for_all_products{
+        text-align: end !important;
+    }
 
     .abc .sms_mu_we_heb {
         display: none !important;
@@ -110,7 +116,7 @@ require_once __DIR__ . '/../partials/header.php';
     </div>
     <!-- Date Range Button  Start-->
     <div class="col-auto ms-auto">
-        <a href="#" class="btn btn-pill" data-bs-toggle="modal" data-bs-target="#modal-team" style="background-color:#A8C3E7; border:none;" data-i18n="statististics.tabs_in_select_range.button">
+        <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#modal-team" style="border-radius:10px" data-i18n="statististics.tabs_in_select_range.button">
             Select a Date Range
         </a>
     </div>
@@ -362,14 +368,15 @@ require_once __DIR__ . '/../partials/header.php';
         <!-- Graph Start -->
         <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
             <div class="card h-100" style="border-radius:20px;">
-                <div class="row pt-5 px-5 pb-0 t sms_mu_margin">
-                <div class="col-6 text-star">
-                            <h4 class="text-primary sms_mu_we_en">For All The details</h4>
-                            <h4 class="text-primary sms_mu_we_heb">לכל הפרטים</h4>
-                        </div>
-                        <div class="col-6 text-end ">
+                <div class="row pt-4 px-5 pb-0 t sms_mu_margin">
+               
+                        <div class="col-6  ">
                             <h4 class="sms_mu_we_en">Revenue graph</h4>
                             <h4 class=" sms_mu_we_heb">גרף הכנסות</h4>
+                        </div>
+                        <div class="col-6 text_for_revenue_graph">
+                            <h4 class="text-primary sms_mu_we_en ">For All The details</h4>
+                            <h4 class="text-primary sms_mu_we_heb">לכל הפרטים</h4>
                         </div>
                 </div>
                 <div class="">
@@ -395,12 +402,12 @@ require_once __DIR__ . '/../partials/header.php';
             <div class="card h-100" style="border-radius:20px;">
                 <div class="card-body">
                     <!-- Start header -->
-                    <div class="row g-2 align-items-center ">
+                    <div class="row g-2 align-items-center justify-content-between ">
                         <div class="col-auto ">
                             <h4 class="text-primary sms_mu_we_en">Customer Location</h4>
                             <h4 class="text-primary sms_mu_we_heb">מיקום_לקוחd</h4>
                         </div>
-                        <div class="col-auto ms-auto ">
+                        <div class="col-6 ">
                             <div class="mb-3">
                                 <select type="text" class="form-select dropdown-tom-select-style with-input" placeholder="Filter by city" name="city" multiple id="select_city">
                                     <?php foreach ($dashboard_data["customers_location"] as $statist) : ?>
@@ -492,7 +499,7 @@ require_once __DIR__ . '/../partials/header.php';
                 <div class="card-body">
                     <!-- Stats header -->
                     <div class="row g-2 align-items-center  sms_mu_for_rtl_demo">
-                        <div class="col-5">
+                        <div class="col-5 text_for_all_products">
                             <h4 class="text-primary sms_mu_we_en">For All
                                 Products</h4>
                             <h4 class="text-primary sms_mu_we_heb">לכל המוצרים</h4>
