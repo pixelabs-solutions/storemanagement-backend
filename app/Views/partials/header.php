@@ -969,8 +969,8 @@
                // Define page names for English and Hebrew
                const pageNames = {
                   'index': {
-                     en: 'Dashboard',
-                     he: 'לוח מחוונים'
+                     en: 'Desktop',
+                     he: 'שולחן עבודה'
                   },
                   'product': {
                      en: 'Product Management',

@@ -39,6 +39,9 @@ require_once __DIR__ . '/../partials/header.php';
     .text_for_revenue_graph{
         text-align: end !important;
     }
+    .rtl .text_for_all_products{
+        text-align: end !important;
+    }
 
     .abc .sms_mu_we_heb {
         display: none !important;
@@ -496,7 +499,7 @@ require_once __DIR__ . '/../partials/header.php';
                 <div class="card-body">
                     <!-- Stats header -->
                     <div class="row g-2 align-items-center  sms_mu_for_rtl_demo">
-                        <div class="col-5">
+                        <div class="col-5 text_for_all_products">
                             <h4 class="text-primary sms_mu_we_en">For All
                                 Products</h4>
                             <h4 class="text-primary sms_mu_we_heb">לכל המוצרים</h4>
