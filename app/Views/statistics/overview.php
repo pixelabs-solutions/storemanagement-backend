@@ -92,24 +92,21 @@ require_once __DIR__ . '/../partials/header.php';
         <ul class="nav justify-content-between nav-tabs" data-bs-toggle="tabs" style="border:none;">
             <li class="nav-item mb-2">
                 <a href="#tabs_overview" class="nav-link_stats active sms_w_active_item_stats justify-content-center"
-                    data-bs-toggle="tab" style=" border-radius:20px; padding: 5px 30px; width:150px;"
-                    data-i18n="statististics.tabs_in_static.tab_overview">Overview</a>
+                    data-bs-toggle="tab" style=" border-radius:20px; padding: 5px 30px; width:150px; color:black;text-decoration: none"
+                    data-i18n="statististics.tabs_in_static.tab_overview" >Overview</a>
             </li>
             <li class="nav-item mb-2">
                 <a href="#tabs_product" class="nav-link_stats sms_w_item_deactive_stats justify-content-center" data-bs-toggle="tab"
-                    style=" border-radius:20px; padding: 5px 30px; width:150px; "
-                    data-i18n="statististics.tabs_in_static.tab_Products">Products</a>
+                    style=" border-radius:20px; padding: 5px 30px; width:150px;  color:black;text-decoration: none"        data-i18n="statististics.tabs_in_static.tab_Products">Products</a>
             </li>
             <li class="nav-item mb-2">
                 <a href="#tabs_revenues" class="nav-link_stats sms_w_item_deactive_stats justify-content-center"
-                    data-bs-toggle="tab" style=" border-radius:20px; padding: 5px 30px; width:150px;"
-                    data-i18n="statististics.tabs_in_static.tab_Revenues">Revenues</a>
+                    data-bs-toggle="tab" style=" border-radius:20px; padding: 5px 30px; width:150px;     color:black;text-decoration: none"   data-i18n="statististics.tabs_in_static.tab_Revenues">Revenues</a>
 
             </li>
             <li class="nav-item mb-2">
                 <a href="#tabs_orders" class="nav-link_stats sms_w_item_deactive_stats justify-content-center" data-bs-toggle="tab"
-                    style=" border-radius:20px; padding: 5px 30px; width:150px;"
-                    data-i18n="statististics.tabs_in_static.tab_Orders">Orders</a>
+                    style=" border-radius:20px; padding: 5px 30px; width:150px;  color:black;text-decoration: none"       data-i18n="statististics.tabs_in_static.tab_Orders">Orders</a>
 
             </li>
 
