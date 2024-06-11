@@ -155,7 +155,7 @@ class Database
         ";
         $this->connection->query($goalTable);
 
-        $categoriesTable = "CREATE TABLE `categories` (
+        $categoriesTable = "CREATE TABLE IF NOT EXISTS `categories` (
             `id` int(11) NOT NULL,
             `name` varchar(255) NOT NULL,
             `parent` int(11) DEFAULT NULL,
@@ -164,7 +164,7 @@ class Database
             )";
         $this->connection->query($categoriesTable);
 
-        $productsTable = "CREATE TABLE `products` (
+        $productsTable = "CREATE TABLE IF NOT EXISTS `products` (
             `id` int(11) NOT NULL,
             `name` varchar(255) NOT NULL,
             `images` text DEFAULT NULL,
@@ -180,10 +180,10 @@ class Database
             )";
         $this->connection->query($productsTable);
 
-        $currencies = "CREATE TABLE currencies (
+        $currencies = "CREATE TABLE IF NOT EXISTS currencies (
             `id` int(11) NOT NULL,
             `name` varchar(255) NOT NULL,
-            `symbol` varchar(255) NOT NULL,
+            `symbol` varchar(255) NOT NULL
         )";
         $this->connection->query($currencies);
 
