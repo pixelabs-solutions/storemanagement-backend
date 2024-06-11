@@ -201,7 +201,7 @@
                                     another term click here +</button>
                                 </div>
                                 <div class="text-center mt-2 col-sm-6 col-md-6">
-                                    <button type="button" onclick="submit_add_term()" class="btn btn-info col-12 col-md-12 rounded-2 py-3 " data-i18n="popoups.future_managment.add_new_term.term_end_submit_btn">This is
+                                    <button type="button" onclick="submit_add_term()" id="term_disable"   class="btn btn-info col-12 col-md-12 rounded-2 py-3 " data-i18n="popoups.future_managment.add_new_term.term_end_submit_btn">This is
                                     submit button</button>
                                 </div>
                             </div>

@@ -319,7 +319,7 @@ var_dump($attributes);
                         </div>
                         <!-- submit button -->
                         <div class="text-center mt-4 ">
-                            <button type="button" onclick="sms_add_variations_submit()"
+                            <button type="button" id="product_variation" onclick="sms_add_variations_submit()"
                                 class=" btn btn-primary col-12 col-md-12 fs-3 rounded-3 py-3 border-0 fw-bold"
                                 data-i18n="popoups.add_new_product_popoup.adding_btn_variation">To
                                 add the product click here +</button>
@@ -480,11 +480,15 @@ var_dump($attributes);
                 // Form submission succeeded, display success message
                 document.getElementById('sms_add_variations_success_message').style.display = 'block';
                 document.getElementById('sms_add_variations_error_message').style.display = 'none';
+                document.getElementById("product_variation").disabled = true;
+
                 window.location.reload();
             } else {
                 // Form submission failed, display error message
                 document.getElementById('sms_add_variations_error_message').style.display = 'block';
-                document.getElementById('sms_add_variations_success_message').style.display = 'none'; // Hide success message if it was displayed before
+                document.getElementById('sms_add_variations_success_message').style.display = 'none'; 
+                document.getElementById("product_variation").disabled = false;
+
             }
         })
         .catch(error => {

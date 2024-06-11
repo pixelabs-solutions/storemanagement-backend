@@ -148,7 +148,7 @@
                             <!-- To update the term click here+ -->
                             <!-- To add another term click here + -->
                             <div class="text-center mt-2 p-2  ">
-                                <button type="button" onclick="function_of_Edit()" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" data-i18n="popoups.add_new_catageory.popoup_in_catagory.catageory_btn">To add the
+                                <button type="button" onclick="function_of_Edit()" id="disable_for_submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" data-i18n="popoups.add_new_catageory.popoup_in_catagory.catageory_btn">To add the
                                     category click here +</button>
                             </div>
 
@@ -190,9 +190,10 @@
 <!-- input javascript code  -->
 <script>
     function function_of_Edit() {
+      
         const selectElement = document.getElementById("sms_mu_parent_ctg").value;
         const imageInput = document.getElementById('sms_mu_img_add_ctg');
-
+        // document.getElementById("disable_for_submit").disabled = true;
         // Check if an image is selected
         if (!imageInput.files[0]) {
             console.error("Please select an image to edit the category.");
@@ -236,11 +237,14 @@
                             // Form submission succeeded, display success message
                             document.getElementById('sms_addForm_category_success_message').style.display = 'block';
                             document.getElementById('sms_addForm_category_error_message').style.display = 'none';
+                            document.getElementById("disable_for_submit").disabled = true;
+
                             window.location.reload();
                         } else {
                             // Form submission failed, display error message
                             document.getElementById('sms_addForm_category_error_message').style.display = 'block';
                             document.getElementById('sms_addForm_category_success_message').style.display = 'none';
+                            document.getElementById("disable_for_submit").disabled = false;
                         }
                     })
 

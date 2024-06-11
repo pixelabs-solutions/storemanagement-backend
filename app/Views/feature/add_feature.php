@@ -198,7 +198,7 @@
                         </div>
                     </div>
                     <!-- Adding terms to the feature -->
-                    <div class="rounded-4 mt-4" style="background-color: #EAEAEA">
+                    <div class="rounded-4 mt-4" style="background-color: #EAEAEA; display:none">
                         <div class="col-12 col-md-12 rounded-2" id="sms_a_add_feature">
                             <div class="py-3 rounded">
                                 <h3 class="card-title text-black fs-2 fw-bold p-2" style="font-size: 35px;" data-i18n="popoups.future_managment.add_new_feature.hero_heading">
@@ -494,13 +494,15 @@
                         </div>
                     </div>
 
-                    <div class="text-center mt-2 p-2  ">
-                        <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="submit_add_feature_Data()" data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.last_btn_feature">To add the
-                            feature click here +</button>
-                    </div>
-                </form>
-                <div class="modal-body text-center py-4 sms_manage_feature_pop " id="sms_feature_success_message" style="display: none;">
-                    <!-- Close icon -->
+                        <div class="text-center mt-2 p-2  ">
+                            <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3"
+                                onclick="submit_add_feature_Data()" id="feature_disbale" data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.last_btn_feature">To add the
+                                feature click here +</button>
+                        </div>
+                    </form>
+                    <div class="modal-body text-center py-4 sms_manage_feature_pop " id="sms_feature_success_message"
+                        style="display: none;">
+                        <!-- Close icon -->
 
                     <button type="button" class="btn-close" aria-label="Close" onclick="sms_add_featrue_close_success_message()"></button>
                     <!-- SVG icon -->
@@ -666,11 +668,15 @@
                     // Form submission succeeded, display success message
                     document.getElementById('sms_feature_success_message').style.display = 'block';
                     document.getElementById('sms_feature_error_message').style.display = 'none';
+                    document.getElementById("feature_disbale").disabled = true;
+
                     window.location.reload();
                 } else {
                     // Form submission failed, display error message
                     document.getElementById('sms_feature_error_message').style.display = 'block';
-                    document.getElementById('sms_feature_success_message').style.display = 'none'; // Hide success message if it was displayed before
+                    document.getElementById('sms_feature_success_message').style.display = 'none'; 
+                    document.getElementById("feature_disbale").disabled = false;
+            
                 }
             })
             .catch(error => {
