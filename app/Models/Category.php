@@ -6,20 +6,15 @@ use GuzzleHttp\Exception\RequestException;
 
 class Category
 {
-    public static function store_categories($categories)
+    public static function store_categories($categories, $user_id)
     {
         global $connection;
 
         try {
             foreach ($categories as $category) {
                 $stmt = $connection->prepare("
-                    INSERT INTO categories (id, name, parent, image, count)
-                    VALUES (?, ?, ?, ?, ?)
-                    ON DUPLICATE KEY UPDATE
-                        name = VALUES(name),
-                        parent = VALUES(parent),
-                        image = VALUES(image),
-                        count = VALUES(count)
+                    INSERT INTO categories (id, user_id, name, parent, image, count)
+                    VALUES (?, ?, ?, ?, ?, ?)
                 ");
 
                 $id = $category['id'];
@@ -29,8 +24,9 @@ class Category
                 $count = $category['count'];
 
                 $stmt->bind_param(
-                    'isiss',
+                    'iisiss',
                     $id,
+                    $user_id,
                     $name,
                     $parent,
                     $image,
@@ -42,17 +38,17 @@ class Category
             }
         }
         catch (\mysqli_sql_exception $e) {
-            echo "Database error: " . $e->getMessage() . "\n";
+            echo "store_categories() Database error: " . $e->getMessage() . "\n";
         }
     }
 
-    public static function get_all_categories()
+    public static function get_all_categories($user_id)
     {
         global $connection;
         $categories = [];
 
         try {
-            $query = "SELECT * FROM categories";
+            $query = "SELECT * FROM categories WHERE user_id = $user_id";
             $result = $connection->query($query);
 
             if ($result) {

@@ -251,25 +251,14 @@ class Product
         return $total_products;
     }
 
-    public static function store_products($products)
+    public static function store_products($products, $user_id)
     {
         global $connection;
         try {
             foreach ($products as $product) {
                 $stmt = $connection->prepare("
-                    INSERT INTO products (id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                    ON DUPLICATE KEY UPDATE
-                        name = VALUES(name),
-                        images = VALUES(images),
-                        categories = VALUES(categories),
-                        regular_price = VALUES(regular_price),
-                        sale_price = VALUES(sale_price),
-                        stock_quantity = VALUES(stock_quantity),
-                        description = VALUES(description),
-                        type = VALUES(type),
-                        attributes = VALUES(attributes),
-                        variations = VALUES(variations)
+                    INSERT INTO products (id, user_id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ");
                 $id = $product['id'];
                 $name = $product['name'];
@@ -284,8 +273,9 @@ class Product
                 $type = $product['type'];
 
                 $stmt->bind_param(
-                    'issssdisiss',
+                    'iissssdisiss',
                     $id,
+                    $user_id,
                     $name,
                     $images,
                     $categories,
@@ -303,17 +293,17 @@ class Product
             }
             
         } catch (\mysqli_sql_exception $e) {
-            echo "Database error: " . $e->getMessage() . "\n";
+            echo "store_products() Database error: " . $e->getMessage() . "\n";
         }
     }
 
-    public static function get_all_products()
+    public static function get_all_products($user_id)
     {
         global $connection;
         $products = [];
 
         try {
-            $query = "SELECT * FROM products";
+            $query = "SELECT * FROM products WHERE user_id = $user_id";
             $result = $connection->query($query);
 
             if ($result) {

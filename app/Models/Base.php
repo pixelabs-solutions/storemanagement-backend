@@ -69,7 +69,7 @@ class Base
         return $affectedRows > 0;
     }
 
-    public static function truncate_table($tables)
+    public static function truncate_table($tables, $user_id)
     {
         global $connection;
         
@@ -78,7 +78,7 @@ class Base
             foreach ($tables as $table) {
                 // Escape table name to prevent SQL injection
                 $escapedTable = $connection->real_escape_string($table);
-                $query = "TRUNCATE TABLE `" . $escapedTable . "`";
+                $query = "DELETE FROM `" . $escapedTable . "` WHERE user_id = $user_id";
                 $connection->query($query);
             }
                       
@@ -87,6 +87,8 @@ class Base
             echo "Database error: " . $e->getMessage() . "\n";
         }
     }
+
+    
 
     public static function wc_get($configuration, $endpoint, $fields = [])
     {

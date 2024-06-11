@@ -278,21 +278,11 @@ require_once __DIR__ . '/../partials/header.php';
     <div class=" col-12 mt-5" style="overflow-y: hidden; overflow-x:hidden;">
         <div class="row col-12 d-flex justify-content-between bg-white p-3 m-0" style="border-radius:20px;">
             <div class="col-sm-10 d-flex flex-column flex-md-row gap-2 col-lg-6 m-0 ">
-<<<<<<< HEAD
                 <button class="rounded-4 border-0 p-2" data-bs-toggle="modal" data-bs-target="#modal-full-width" style="background-color:#4987D870; " data-i18n="product_managment.nav.new_product_btn">Add a new
                     product +</button>
                 <button class="rounded-4 border-0 p-2" style="background-color:#4987D870;" data-bs-toggle="modal" data-bs-target="#modal-Category-large" data-i18n="product_managment.nav.category_product_btn">Category management</button>
                 <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; " data-bs-toggle="modal" data-bs-target="#modal-large" data-i18n="product_managment.nav.future_product_btn">Feature
                     management</button>
-=======
-                <button class="rounded-4 border-0 p-2" data-bs-toggle="modal" data-bs-target="#modal-full-width"
-                    style="background-color:#4987D870; " data-i18n="product_managment.nav.new_product_btn"></button>
-                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870;" data-bs-toggle="modal"
-                    data-bs-target="#modal-Category-large"
-                    data-i18n="product_managment.nav.category_product_btn"></button>
-                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; " data-bs-toggle="modal"
-                    data-bs-target="#modal-large" data-i18n="product_managment.nav.future_product_btn"></button>
->>>>>>> 70e4a2f9d786c8ca506cf83326ed606760e18e5f
 
             </div>
             <div class="col-lg-2 col-md-6 col-sm-11  mt-3 mt-lg-0">

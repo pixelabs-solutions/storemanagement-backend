@@ -10,19 +10,39 @@ use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Helpers\FileHelper;
 use Pixelabs\StoreManagement\Models\Authentication;
-
+use Pixelabs\StoreManagement\Models\Category;
+use Pixelabs\StoreManagement\Models\Attribute;
+use Pixelabs\StoreManagement\Models\Currency;
 
 class ProductController
 {
     private $table_name = 'products';
     public function index()
     {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id === null)
+        {
+            if ($is_rest == 'true') {
+                http_response_code(401);
+                echo json_encode(array(
+                    "message" => "User not authenticated",
+                    "status_code" => 401
+                ));
+                exit;
+            }
+            else{
+                header('Location: /authentication/login');
+            }
+        }
+        
+
 
         $user_level = Authentication::getUserLevelFromToken();
         if ($user_level == ADMIN) {
             header("Location: /admin/index");
             } else {
-        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        
         $configuration = $this->prepare_configuration($is_rest);
 
         $product_fields =
@@ -31,7 +51,7 @@ class ProductController
             ];
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
         // $products = Base::wc_get($configuration, $this->table_name, $page, $product_fields);
-        $products = Product::get_products($configuration, $this->table_name, $product_fields);
+        $products = Product::get_all_products($user_id);
         if (isset($_GET['category']) && $_GET['category'] !== "") {
             $category = $_GET['category'];
             $filteredProducts = [];
@@ -62,10 +82,9 @@ class ProductController
             }
             $products = $filteredProducts;
         }
-        $category_fields = ['_fields' => 'id, name, parent, image, count'];
-        $categories = Base::wc_get($configuration, 'products/categories', $page, $category_fields);
-        $attributes = Base::wc_get($configuration, 'products/attributes', $page);
-        $currency = Base::wc_get($configuration, 'data/currencies/current', $page);
+        $categories = Category::get_all_categories($user_id);
+        $attributes = Attribute::get_all_attributes($user_id);
+        $currency = Currency::get_current_currency($user_id);
 
         $number_of_products = count($products);
         if ($is_rest == 'true') {

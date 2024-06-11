@@ -8,18 +8,15 @@ class Attribute
 {
 
 
-    public static function store_attributes($attributes)
+    public static function store_attributes($attributes, $user_id)
     {
         global $connection;
 
         try {
             foreach($attributes as $attribute){
                 $stmt = $connection->prepare("
-                    INSERT INTO attributes (id, name, type)
-                    VALUES (?, ?, ?)
-                    ON DUPLICATE KEY UPDATE
-                        name = VALUES(name),
-                        type = VALUES(type)
+                    INSERT INTO attributes (id, user_id, name, type)
+                    VALUES (?, ?, ?, ?)
                 ");
 
                 $id = $attribute['id'];
@@ -27,8 +24,9 @@ class Attribute
                 $type = $attribute['type'];
 
                 $stmt->bind_param(
-                    'iss',
+                    'iiss',
                     $id,
+                    $user_id, 
                     $name,
                     $type
                 );
@@ -40,17 +38,17 @@ class Attribute
 
         }
         catch (\mysqli_sql_exception $e) {
-            echo "Database error: " . $e->getMessage() . "\n";
+            echo "store_attributes() Database error: " . $e->getMessage() . "\n";
         }
     }
 
-    public static function get_all_attributes()
+    public static function get_all_attributes($user_id)
     {
         global $connection;
         $attributes = [];
 
         try {
-            $query = "SELECT * FROM attributes";
+            $query = "SELECT * FROM attributes WHERE user_id = $user_id";
             $result = $connection->query($query);
 
             if ($result) {
