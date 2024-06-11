@@ -17,7 +17,6 @@ class Attribute
                 INSERT INTO attributes (id, name, type)
                 VALUES (?, ?, ?)
                 ON DUPLICATE KEY UPDATE
-                    id = VALUES(id),
                     name = VALUES(name),
                     type = VALUES(type)
             ");
@@ -45,6 +44,7 @@ class Attribute
     public static function get_all_attributes()
     {
         global $connection;
+        $attributes = [];
 
         try {
             $query = "SELECT * FROM attributes";

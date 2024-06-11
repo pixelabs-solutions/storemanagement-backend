@@ -48,7 +48,7 @@ class Category
     public static function get_all_categories()
     {
         global $connection;
-        $products = [];
+        $categories = [];
 
         try {
             $query = "SELECT * FROM categories";
