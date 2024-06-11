@@ -175,13 +175,12 @@ class Database
             `description` text DEFAULT NULL,
             `type` varchar(50) DEFAULT NULL,
             `attributes` text DEFAULT NULL,
-            `variations` text DEFAULT NULL,
-            `date_created` datetime DEFAULT NULL
+            `variations` text DEFAULT NULL
             )";
         $this->connection->query($productsTable);
 
         $currencies = "CREATE TABLE IF NOT EXISTS currencies (
-            `id` int(11) NOT NULL,
+            `code` varchar(255) NOT NULL,
             `name` varchar(255) NOT NULL,
             `symbol` varchar(255) NOT NULL
         )";

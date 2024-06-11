@@ -8,32 +8,35 @@ class Attribute
 {
 
 
-    public static function store_attributes($attribute)
+    public static function store_attributes($attributes)
     {
         global $connection;
 
         try {
-            $stmt = $connection->prepare("
-                INSERT INTO attributes (id, name, type)
-                VALUES (?, ?, ?)
-                ON DUPLICATE KEY UPDATE
-                    name = VALUES(name),
-                    type = VALUES(type)
-            ");
+            foreach($attributes as $attribute){
+                $stmt = $connection->prepare("
+                    INSERT INTO attributes (id, name, type)
+                    VALUES (?, ?, ?)
+                    ON DUPLICATE KEY UPDATE
+                        name = VALUES(name),
+                        type = VALUES(type)
+                ");
 
-            $id = $attribute['id'];
-            $name = $attribute['name'];
-            $type = $attribute['type'];
+                $id = $attribute['id'];
+                $name = $attribute['name'];
+                $type = $attribute['type'];
 
-            $stmt->bind_param(
-                'iss',
-                $id,
-                $name,
-                $type
-            );
+                $stmt->bind_param(
+                    'iss',
+                    $id,
+                    $name,
+                    $type
+                );
 
-            $stmt->execute();
-            $stmt->close();
+                $stmt->execute();
+                $stmt->close();
+            }
+            
 
         }
         catch (\mysqli_sql_exception $e) {

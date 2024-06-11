@@ -4,34 +4,34 @@ namespace Pixelabs\StoreManagement\Models;
 
 class Currency
 {
-    public static function store_currencies($currencies)
+    public static function store_currencies($currency)
     {
         global $connection;
 
         try {
-            foreach ($currencies as $currency) {
-                $stmt = $connection->prepare("
-                    INSERT INTO categories (id, name, symbol)
-                    VALUES (?, ?, ?)
-                    ON DUPLICATE KEY UPDATE
-                        name = VALUES(name),
-                        symbol = VALUES(parent)
-                ");
+            $stmt = $connection->prepare("
+                INSERT INTO currencies (code, name, symbol)
+                VALUES (?, ?, ?)
+                ON DUPLICATE KEY UPDATE
+                    code = VALUES(code),
+                    name = VALUES(name),
+                    symbol = VALUES(symbol)
+            ");
 
-                $id = $currency['id'];
-                $name = $currency['name'];
-                $symbol = $currency['symbol'];
+            $code = $currency['code'];
+            $name = $currency['name'];
+            $symbol = $currency['symbol'];
 
-                $stmt->bind_param(
-                    'iss',
-                    $id,
-                    $name,
-                    $symbol
-                );
+            $stmt->bind_param(
+                'sss',
+                $code,
+                $name,
+                $symbol
+            );
 
-                $stmt->execute();
-                $stmt->close();
-            }
+            $stmt->execute();
+            $stmt->close();
+            
         }
         catch (\mysqli_sql_exception $e) {
             echo "Database error: " . $e->getMessage() . "\n";

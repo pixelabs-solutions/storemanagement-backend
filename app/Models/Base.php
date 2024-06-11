@@ -69,12 +69,19 @@ class Base
         return $affectedRows > 0;
     }
 
-    public static function truncate_tables($tables)
+    public static function truncate_table($tables)
     {
         global $connection;
+        
+
         try{
-            $query = "TRUNCATE TABLE ".$tables;
-            $connection->query($query);            
+            foreach ($tables as $table) {
+                // Escape table name to prevent SQL injection
+                $escapedTable = $connection->real_escape_string($table);
+                $query = "TRUNCATE TABLE `" . $escapedTable . "`";
+                $connection->query($query);
+            }
+                      
         }
         catch (\mysqli_sql_exception $e) {
             echo "Database error: " . $e->getMessage() . "\n";
@@ -87,6 +94,11 @@ class Base
         $consumer_secret = $configuration["consumer_secret"];
         $store_url = $configuration["store_url"];
         $client = new Client();
+
+        // [
+        //     'timeout' => 300, 
+        //     'connect_timeout' => 30, 
+        // ]
         $all_records = [];
         $page = 1;
 
@@ -100,12 +112,17 @@ class Base
                 ]);
 
                 $result = json_decode($response->getBody(), true);
-                if (empty($categories)) 
+                
+                if (empty($result)) 
                 {
                     break;
                 }
 
-                $all_categories = array_merge($all_records, $result);
+                $all_records = array_merge($all_records, $result);
+                $total_results = count($result); 
+                if ($total_results < 100){
+                    break;
+                }
                 $page++;
             }
 
