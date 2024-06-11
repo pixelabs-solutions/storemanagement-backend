@@ -23,93 +23,90 @@ require_once __DIR__ . '/../partials/header.php';
             width: 100%;
         }
     }
-
-    .rtl .list_button_statis {
+    .rtl .list_button_statis{
         /* margin-left: 0;
         margin-right: auto; */
         gap: 55%;
     }
 
-    .stats_filters_active {
+    .stats_filters_active{
         background: #A8C3E7;
         border-radius: 100px;
     }
-
-    .stats_filters_active:hover {
+    .stats_filters_active:hover{
         background: #A8C3E7;
         border-radius: 100px;
     }
-
-    /* 
+/* 
     .filter_tab_active {
         background-color: #A8C3E7 !important;
     } */
-    /* Add this in the style tag or a separate CSS file */
-    #loader {
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 9999;
-        background: #fff;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        font-family: 'Arial', sans-serif;
-        color: #333;
-        text-align: center;
-    }
+ /* Add this in the style tag or a separate CSS file */
+#loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    text-align: center;
+}
 
-    #loader .spinner {
-        border: 8px solid #f3f3f3;
-        border-top: 8px solid #3498db;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        animation: spin 2s linear infinite;
-        margin-bottom: 20px;
-    }
+#loader .spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+    margin-bottom: 20px;
+}
 
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
-    #loader h1 {
-        font-size: 1.5em;
-        margin: 0;
-        padding: 0;
-    }
+#loader h1 {
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0;
+}
 </style>
 
 <!-- Icon Box Start -->
 
 <div class="row g-2 mt-5  mb-5 ">
-    <div id="loader">
-        <div class="spinner"></div>
-        <h1>Loading, please wait...</h1>
-    </div>
+<div id="loader">
+    <div class="spinner"></div>
+    <h1>Loading, please wait...</h1>
+</div>
     <div>
         <ul class="nav justify-content-between nav-tabs" data-bs-toggle="tabs" style="border:none;">
             <li class="nav-item mb-2">
-                <a href="#tabs_overview" class="nav-link_stats active sms_w_active_item_stats justify-content-center" data-bs-toggle="tab" style=" border-radius:20px; padding: 5px 30px; width:150px;" data-i18n="statististics.tabs_in_static.tab_overview">Overview</a>
+                <a href="#tabs_overview" class="nav-link_stats active sms_w_active_item_stats justify-content-center"
+                    data-bs-toggle="tab" style=" border-radius:20px; padding: 5px 30px; width:150px; color:black;text-decoration: none"
+                    data-i18n="statististics.tabs_in_static.tab_overview" >Overview</a>
             </li>
             <li class="nav-item mb-2">
-                <a href="#tabs_product" class="nav-link_stats sms_w_item_deactive_stats justify-content-center" data-bs-toggle="tab" style=" border-radius:20px; padding: 5px 30px; width:150px; " data-i18n="statististics.tabs_in_static.tab_Products">Products</a>
+                <a href="#tabs_product" class="nav-link_stats sms_w_item_deactive_stats justify-content-center" data-bs-toggle="tab"
+                    style=" border-radius:20px; padding: 5px 30px; width:150px;  color:black;text-decoration: none"        data-i18n="statististics.tabs_in_static.tab_Products ">Products</a>
             </li>
             <li class="nav-item mb-2">
-                <a href="#tabs_revenues" class="nav-link_stats sms_w_item_deactive_stats justify-content-center" data-bs-toggle="tab" style=" border-radius:20px; padding: 5px 30px; width:150px;" data-i18n="statististics.tabs_in_static.tab_Revenues">Revenues</a>
+                <a href="#tabs_revenues" class="nav-link_stats sms_w_item_deactive_stats justify-content-center"
+                    data-bs-toggle="tab" style=" border-radius:20px; padding: 5px 30px; width:150px;     color:black;text-decoration: none"       data-i18n="statististics.tabs_in_static.tab_Revenues ">Revenues</a>
 
             </li>
             <li class="nav-item mb-2">
-                <a href="#tabs_orders" class="nav-link_stats sms_w_item_deactive_stats justify-content-center" data-bs-toggle="tab" style=" border-radius:20px; padding: 5px 30px; width:150px;" data-i18n="statististics.tabs_in_static.tab_Orders">Orders</a>
+                <a href="#tabs_orders" class="nav-link_stats sms_w_item_deactive_stats justify-content-center" data-bs-toggle="tab"
+                    style=" border-radius:20px; padding: 5px 30px; width:150px;  color:black;text-decoration: none"       data-i18n="statististics.tabs_in_static.tab_Orders ">Orders</a>
 
             </li>
 
@@ -126,69 +123,76 @@ require_once __DIR__ . '/../partials/header.php';
                     <div class="row g-2 align-items-center list_button_statis">
                         <!-- Stats header Buttons -->
                         <div class="col-auto btn-list">
-                            <a href="?query=last_week" id="overview_last_week" class="btn btn-light shadow-none last_week " class="nav-link_stats" data-i18n="statististics.tabs_in_select_range.week"> Last Week
+                            <a href="?query=last_week" id="overview_last_week" class="btn btn-light shadow-none last_week "
+                                class="nav-link_stats" data-i18n="statististics.tabs_in_select_range.week"> Last Week
                             </a>
-                            <a href="?query=last_month" id="overview_last_month" class="btn btn-light shadow-none last_month " class="nav-link_stats" data-i18n="statististics.tabs_in_select_range.month"> Current
+                            <a href="?query=last_month" id="overview_last_month" class="btn btn-light shadow-none last_month "
+                                class="nav-link_stats" data-i18n="statististics.tabs_in_select_range.month"> Current
                                 Month </a>
-                            <a href="?query=last_year" id="overview_last_year" class="btn btn-light shadow-none last_year" data-i18n="statististics.tabs_in_select_range.year"> Last Year </a>
+                            <a href="?query=last_year" id="overview_last_year" class="btn btn-light shadow-none last_year"
+                                data-i18n="statististics.tabs_in_select_range.year"> Last Year </a>
                         </div>
                         <!-- Date Range Button -->
                         <div class="col-auto ms-auto">
-                            <a href="#" class="btn btn-pill" data-bs-toggle="modal" data-bs-target="#modal-team" style="background-color:#EFEFEF; border:none;" data-i18n="statististics.tabs_in_select_range.button">
+                            <a href="#" class="btn btn-pill" data-bs-toggle="modal" data-bs-target="#modal-team"
+                                style="background-color:#EFEFEF; border:none;" data-i18n="statististics.tabs_in_select_range.button">
                                 Select a Date Range
                             </a>
-                        </div>
+                        </div>  
                     </div>
 
 
-                    <script>
-                        function getQueryParams() {
-                            const params = {};
-                            window.location.search.substring(1).split("&").forEach(param => {
-                                const [key, value] = param.split("=");
-                                params[decodeURIComponent(key)] = decodeURIComponent(value);
-                            });
-                            return params;
-                        }
+<script>
+            function getQueryParams() {
+            const params = {};
+            window.location.search.substring(1).split("&").forEach(param => {
+                const [key, value] = param.split("=");
+                params[decodeURIComponent(key)] = decodeURIComponent(value);
+            });
+            return params;
+        }
 
-                        // Get query parameters
-                        var queryParams = getQueryParams();
+        // Get query parameters
+        var queryParams = getQueryParams();
 
-                        if (queryParams.query === 'last_week') {
-                            // Add the .sms_w_date_active class to the element with the ID 'last_week'
-                            document.getElementById('overview_last_week').classList.add('stats_filters_active');
-                            document.getElementById('products_last_week').classList.add('stats_filters_active');
-                            document.getElementById('orders_last_week').classList.add('stats_filters_active');
-                            document.getElementById('revenue_last_week').classList.add('stats_filters_active');
+     if (queryParams.query === 'last_week') {
+            // Add the .sms_w_date_active class to the element with the ID 'last_week'
+            document.getElementById('overview_last_week').classList.add('stats_filters_active');
+            document.getElementById('products_last_week').classList.add('stats_filters_active');
+            document.getElementById('orders_last_week').classList.add('stats_filters_active');
+            document.getElementById('revenue_last_week').classList.add('stats_filters_active');
+
+            
+
+        } else if (queryParams.query === 'last_month') {
+            // Add the .sms_w_date_active class to the element with the ID 'current_month'
+            document.getElementById('overview_last_month').classList.add('stats_filters_active');
+            document.getElementById('products_last_month').classList.add('stats_filters_active');
+            document.getElementById('orders_last_month').classList.add('stats_filters_active');
+            document.getElementById('revenue_last_month').classList.add('stats_filters_active');
 
 
+        } else if (queryParams.query === 'last_year') {
+            // Add the .sms_w_date_active class to the element with the ID 'last_year'
+            document.getElementById('overview_last_year').classList.add('stats_filters_active');
+            document.getElementById('products_last_year').classList.add('stats_filters_active');
+            document.getElementById('orders_last_year').classList.add('stats_filters_active');
+            document.getElementById('revenue_last_year').classList.add('stats_filters_active');
 
-                        } else if (queryParams.query === 'last_month') {
-                            // Add the .sms_w_date_active class to the element with the ID 'current_month'
-                            document.getElementById('overview_last_month').classList.add('stats_filters_active');
-                            document.getElementById('products_last_month').classList.add('stats_filters_active');
-                            document.getElementById('orders_last_month').classList.add('stats_filters_active');
-                            document.getElementById('revenue_last_month').classList.add('stats_filters_active');
-
-
-                        } else if (queryParams.query === 'last_year') {
-                            // Add the .sms_w_date_active class to the element with the ID 'last_year'
-                            document.getElementById('overview_last_year').classList.add('stats_filters_active');
-                            document.getElementById('products_last_year').classList.add('stats_filters_active');
-                            document.getElementById('orders_last_year').classList.add('stats_filters_active');
-                            document.getElementById('revenue_last_year').classList.add('stats_filters_active');
-
-                        }
-                    </script>
-                    <div class="row mt-5 mb-5 d-flex flex-md-row flex-wrap flex-column justify-content-between tab-pane active show sms_mu_for_rtl_row_cards" id="row_1">
+        }
+</script>
+                    <div class="row mt-5 mb-5 d-flex flex-md-row flex-wrap flex-column justify-content-between tab-pane active show sms_mu_for_rtl_row_cards"
+                        id="row_1">
                         <!-- New Customer Card Start -->
                         <div class="sms_statistics_ma_kpi_card mb-2">
                             <div class=" align-items-center" style="background-color:#F2F2F2; border-radius:20px;">
                                 <div class="card-body">
                                     <div class="text-center">
-                                        <img src="assets/dist/img/newuser.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
+                                        <img src="assets/dist/img/newuser.png" height="50px;" width="50px;"
+                                            style="background-color:white; padding:10px; border-radius:10px;">
                                         <h3 class="mt-3"><?php echo $overview_stats["newCustomers"]; ?></h3>
-                                        <strong style="color:#4987D8" data-i18n="statististics.cards_in_overview.crad_text_blue_in_card_customer">New
+                                        <strong style="color:#4987D8"
+                                            data-i18n="statististics.cards_in_overview.crad_text_blue_in_card_customer">New
                                             Customer</strong>
                                     </div>
                                 </div>
@@ -201,9 +205,11 @@ require_once __DIR__ . '/../partials/header.php';
                             <div class=" align-items-center" style="background-color:#F2F2F2; border-radius:20px;">
                                 <div class="card-body">
                                     <div class="text-center">
-                                        <img src="assets/dist/img/returning.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
+                                        <img src="assets/dist/img/returning.png" height="50px;" width="50px;"
+                                            style="background-color:white; padding:10px; border-radius:10px;">
                                         <h3 class="mt-3"><?php echo $overview_stats["returningCustomers"]; ?></h3>
-                                        <strong style="color:#4987D8" data-i18n="statististics.cards_in_overview.crad_text_blue_in_card_returing">Returning
+                                        <strong style="color:#4987D8"
+                                            data-i18n="statististics.cards_in_overview.crad_text_blue_in_card_returing">Returning
                                             Customer</strong>
                                     </div>
                                 </div>
@@ -216,9 +222,11 @@ require_once __DIR__ . '/../partials/header.php';
                             <div class=" align-items-center" style="background-color:#F2F2F2; border-radius:20px;">
                                 <div class="card-body">
                                     <div class="text-center">
-                                        <img src="assets/dist/img/cart.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
+                                        <img src="assets/dist/img/cart.png" height="50px;" width="50px;"
+                                            style="background-color:white; padding:10px; border-radius:10px;">
                                         <h3 class="mt-3"><?php echo $overview_stats["totalProducts"]; ?></h3>
-                                        <strong style="color:#4987D8" data-i18n="statististics.cards_in_overview.crad_text_blue_in_card_product">Product</strong>
+                                        <strong style="color:#4987D8"
+                                            data-i18n="statististics.cards_in_overview.crad_text_blue_in_card_product">Product</strong>
                                     </div>
                                 </div>
                             </div>
@@ -230,9 +238,11 @@ require_once __DIR__ . '/../partials/header.php';
                             <div class=" align-items-center" style="background-color:#F2F2F2; border-radius:20px;">
                                 <div class="card-body">
                                     <div class="text-center">
-                                        <img src="assets/dist/img/order.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
+                                        <img src="assets/dist/img/order.png" height="50px;" width="50px;"
+                                            style="background-color:white; padding:10px; border-radius:10px;">
                                         <h3 class="mt-3"><?php echo $overview_stats["totalOrders"]; ?></h3>
-                                        <strong style="color:#4987D8" data-i18n="statististics.cards_in_overview.crad_text_blue_in_card_order">Order</strong>
+                                        <strong style="color:#4987D8"
+                                            data-i18n="statististics.cards_in_overview.crad_text_blue_in_card_order">Order</strong>
                                     </div>
                                 </div>
                             </div>
@@ -244,9 +254,11 @@ require_once __DIR__ . '/../partials/header.php';
                             <div class=" align-items-center" style="background-color:#F2F2F2; border-radius:20px;">
                                 <div class="card-body">
                                     <div class="text-center">
-                                        <img src="assets/dist/img/revenue.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
+                                        <img src="assets/dist/img/revenue.png" height="50px;" width="50px;"
+                                            style="background-color:white; padding:10px; border-radius:10px;">
                                         <h3 class="mt-3"><?php echo $overview_stats["totalRevenue"]; ?></h3>
-                                        <strong style="color:#4987D8" data-i18n="statististics.cards_in_overview.crad_text_blue_in_card_revenue">Revenue</strong>
+                                        <strong style="color:#4987D8"
+                                            data-i18n="statististics.cards_in_overview.crad_text_blue_in_card_revenue">Revenue</strong>
                                     </div>
                                 </div>
                             </div>
@@ -281,17 +293,17 @@ require_once __DIR__ . '/../partials/header.php';
         </div>
         <div class="tab-pane" id="tabs_product">
             <?php
-            include('products.php');
+            include ('products.php');
             ?>
         </div>
         <div class="tab-pane" id="tabs_revenues">
             <?php
-            include('revinue.php');
+            include ('revinue.php');
             ?>
         </div>
         <div class="tab-pane" id="tabs_orders">
             <?php
-            include('orders.php');
+            include ('orders.php');
             ?>
         </div>
     </div>
@@ -340,60 +352,61 @@ require_once __DIR__ . '/../partials/header.php';
 <!-- Model End -->
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Get all nav-link_stats elements
-        var navLinks = document.querySelectorAll('.nav-link_stats');
+document.addEventListener("DOMContentLoaded", function () {
+    // Get all nav-link_stats elements
+    var navLinks = document.querySelectorAll('.nav-link_stats');
 
-        // Function to activate a tab
-        function activateTab(tabLink) {
-            // Remove active class from all nav-link_stats
-            navLinks.forEach(function(link) {
-                link.classList.remove('sms_w_active_item_stats');
-                link.classList.add('sms_w_item_deactive_stats');
-            });
+    // Function to activate a tab
+    function activateTab(tabLink) {
+        // Remove active class from all nav-link_stats
+        navLinks.forEach(function (link) {
+            link.classList.remove('sms_w_active_item_stats');
+            link.classList.add('sms_w_item_deactive_stats');
+        });
 
-            // Add active class to the specified nav-link_stats
-            tabLink.classList.remove('sms_w_item_deactive_stats');
-            tabLink.classList.add('sms_w_active_item_stats');
+        // Add active class to the specified nav-link_stats
+        tabLink.classList.remove('sms_w_item_deactive_stats');
+        tabLink.classList.add('sms_w_active_item_stats');
 
-            // Activate the Bootstrap tab
-            new bootstrap.Tab(tabLink).show();
+        // Activate the Bootstrap tab
+        new bootstrap.Tab(tabLink).show();
+    }
+
+    // Retrieve the stored active tab from localStorage
+    var activeTab = localStorage.getItem('activeTab');
+    if (activeTab) {
+        var activeTabLink = document.querySelector(`a[href="${activeTab}"]`);
+        if (activeTabLink) {
+            activateTab(activeTabLink);
         }
+    }
 
-        // Retrieve the stored active tab from localStorage
-        var activeTab = localStorage.getItem('activeTab');
-        if (activeTab) {
-            var activeTabLink = document.querySelector(`a[href="${activeTab}"]`);
-            if (activeTabLink) {
-                activateTab(activeTabLink);
-            }
-        }
+    // Loop through each nav-link_stats element
+    navLinks.forEach(function (navLink) {
+        // Attach onclick event handler
+        navLink.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the default link behavior
 
-        // Loop through each nav-link_stats element
-        navLinks.forEach(function(navLink) {
-            // Attach onclick event handler
-            navLink.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent the default link behavior
+            // Activate the clicked tab
+            activateTab(this);
 
-                // Activate the clicked tab
-                activateTab(this);
-
-                // Store the active tab in localStorage
-                var href = this.getAttribute('href');
-                localStorage.setItem('activeTab', href);
-            });
+            // Store the active tab in localStorage
+            var href = this.getAttribute('href');
+            localStorage.setItem('activeTab', href);
         });
     });
+});
 </script>
 
 <script>
-    window.addEventListener('load', function() {
+              window.addEventListener('load', function() {
         document.getElementById('loader').style.display = 'none';
     });
-</script>
+
+        </script>
 <script>
     // @formatter:off
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         window.ApexCharts && (new ApexCharts(document.getElementById('chart-combination'), {
             chart: {
                 type: "bar",
@@ -475,45 +488,47 @@ require_once __DIR__ . '/../partials/header.php';
 </script>
 
 <script>
-    // // Function to get query parameters from the URL
-    // function getQueryParams() {
-    //     const params = {};
-    //     window.location.search.substring(1).split("&").forEach(param => {
-    //         const [key, value] = param.split("=");
-    //         params[decodeURIComponent(key)] = decodeURIComponent(value);
-    //     });
-    //     return params;
-    // }
+                        // // Function to get query parameters from the URL
+                        // function getQueryParams() {
+                        //     const params = {};
+                        //     window.location.search.substring(1).split("&").forEach(param => {
+                        //         const [key, value] = param.split("=");
+                        //         params[decodeURIComponent(key)] = decodeURIComponent(value);
+                        //     });
+                        //     return params;
+                        // }
 
-    // // Get query parameters
-    // const queryParams = getQueryParams();
+                        // // Get query parameters
+                        // const queryParams = getQueryParams();
 
-    // if (queryParams.query === 'last_week') {
-    //     // Add the .filter_tab_active class to the element with the ID 'last_week'
-    //     const elements = document.querySelectorAll('.last_week');
-    //     elements.forEach(element => {
-    //         element.classList.add('filter_tab_active');
-    //     });
-    // }
-    // else if (queryParams.query === 'last_month') {
-    //     // Add the .filter_tab_active class to the element with the ID 'current_month'
+                        // if (queryParams.query === 'last_week') {
+                        //     // Add the .filter_tab_active class to the element with the ID 'last_week'
+                        //     const elements = document.querySelectorAll('.last_week');
+                        //     elements.forEach(element => {
+                        //         element.classList.add('filter_tab_active');
+                        //     });
+                        // }
+                        // else if (queryParams.query === 'last_month') {
+                        //     // Add the .filter_tab_active class to the element with the ID 'current_month'
 
-    //     const elements = document.querySelectorAll('.last_month');
-    //     elements.forEach(element => {
-    //         element.classList.add('filter_tab_active');
-    //     });
-    // }
-    // else if (queryParams.query === 'last_year') {
-    //     // Add the .filter_tab_active class to the element with the ID 'last_year'
-    //     const elements = document.querySelectorAll('.last_year');
-    //     elements.forEach(element => {
-    //         element.classList.add('filter_tab_active');
-    //     });
-    // }
-</script>
-
+                        //     const elements = document.querySelectorAll('.last_month');
+                        //     elements.forEach(element => {
+                        //         element.classList.add('filter_tab_active');
+                        //     });
+                        // }
+                        // else if (queryParams.query === 'last_year') {
+                        //     // Add the .filter_tab_active class to the element with the ID 'last_year'
+                        //     const elements = document.querySelectorAll('.last_year');
+                        //     elements.forEach(element => {
+                        //         element.classList.add('filter_tab_active');
+                        //     });
+                        // }
 
 
+                    </script>
+
+                    
+                    
 <?php
 require_once __DIR__ . '/../partials/footer.php';
 
