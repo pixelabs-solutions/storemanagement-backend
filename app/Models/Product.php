@@ -273,7 +273,7 @@ class Product
                 $type = $product['type'];
 
                 $stmt->bind_param(
-                    'iissssdisiss',
+                    'iissssdissss',
                     $id,
                     $user_id,
                     $name,

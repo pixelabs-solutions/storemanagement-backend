@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../partials/header.php';
 
-//  var_dump($products);
+//  var_dump($currency);
 //  foreach($products as $product){
 //     if($product['type'] == "variable"){
 //         var_dump($product);
@@ -565,7 +565,7 @@ require_once __DIR__ . '/../partials/header.php';
                                         <?php echo implode(', ', array_column($product['categories'], 'name')); ?></td>
                                     <td><span style="font-weight:bold">Price:</span>
                                         <?php echo $product['regular_price']; ?>
-                                        <?php echo $currency['symbol']; ?>
+                                        <?php echo $currency[0]['symbol']; ?>
                                     </td>
                                     <td><span style="font-weight:bold  ">Stock:</span>
                                         <span class="stock_quantity_class">
@@ -610,7 +610,7 @@ require_once __DIR__ . '/../partials/header.php';
                                         <?php echo implode(', ', array_column($product['categories'], 'name')); ?></td>
                                     <td><span style="font-weight:bold">Price:</span>
                                         <?php echo $product['regular_price']; ?>
-                                        <?php echo $currency['symbol']; ?>
+                                        <?php echo $currency[0]['symbol']; ?>
                                     </td>
                                     <td><span style="font-weight:bold stock_quantity_class"></span> <span class="stock_quantity_class">
                                             <strong>Stock:</strong> <?php echo $product['stock_quantity']; ?>
