@@ -43,13 +43,6 @@ class ProductController
             header("Location: /admin/index");
             } else {
         
-        $configuration = $this->prepare_configuration($is_rest);
-
-        $product_fields =
-            [
-                '_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations'
-            ];
-        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
         // $products = Base::wc_get($configuration, $this->table_name, $page, $product_fields);
         $products = Product::get_all_products($user_id);
         if (isset($_GET['category']) && $_GET['category'] !== "") {
@@ -105,14 +98,10 @@ class ProductController
     public function product_by_id($id)
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
-        $configuration = $this->prepare_configuration($is_rest);
-        $product_fields =
-            [
-                '_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations'
-            ];
-        $product = Base::wc_get_by_id($configuration, $this->table_name . "/" . $id, $product_fields);
 
-        echo $product;
+        $product = Product::get_product_by_id($id);
+
+        echo json_encode($product);
     }
 
 
