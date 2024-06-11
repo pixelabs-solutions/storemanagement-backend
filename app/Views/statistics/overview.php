@@ -138,7 +138,7 @@ require_once __DIR__ . '/../partials/header.php';
                         <!-- Date Range Button -->
                         <div class="col-auto ms-auto">
                             <a href="#" class="btn btn-pill" data-bs-toggle="modal" data-bs-target="#modal-team"
-                                style="background-color:#A8C3E7; border:none;" data-i18n="statististics.tabs_in_select_range.button">
+                                style="background-color:#EFEFEF; border:none;" data-i18n="statististics.tabs_in_select_range.button">
                                 Select a Date Range
                             </a>
                         </div>  
@@ -184,9 +184,6 @@ require_once __DIR__ . '/../partials/header.php';
 
         }
 </script>
-
-  
-
                     <div class="row mt-5 mb-5 d-flex flex-md-row flex-wrap flex-column justify-content-between tab-pane active show sms_mu_for_rtl_row_cards"
                         id="row_1">
                         <!-- New Customer Card Start -->

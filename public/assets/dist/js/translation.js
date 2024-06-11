@@ -532,7 +532,7 @@ const translations = {
       transction_pop_popuop: {
         order_detail: {
           heading: "Order details #1152",
-          client_info: "Client Information",
+          client_info: "Customer details and shipping address",
           Cl_name: "Client's name: Eliyahu Malka",
           Pone: "Phone number: 054-6268012",
           mail: "Email address: elikako.m@gmail.com",
@@ -559,7 +559,7 @@ const translations = {
             total_cost: "Total cost of order",
             product: "Products: NIS 10,450",
             delivery: "Delivery up to 5 business days: NIS 39.9",
-            total: "Total: NIS 10,499.9",
+            total: "Order date:",
           },
           last_btn: "Save changes",
         },
@@ -1126,7 +1126,7 @@ const translations = {
       transction_pop_popuop: {
         order_detail: {
           heading: "פרטי הזמנה #1152",
-          client_info: "פרטי לקוח",
+          client_info: "פרטי הלקוח וכתובת המשלוח",
           Cl_name: "שם הלקוח: אליהו מלכה",
           Pone: "מספר טלפון: 054-6268012",
           mail: 'כתובת דוא"ל: elikako.m@gmail.com',
@@ -1152,7 +1152,7 @@ const translations = {
             total_cost: "עלות כוללת של ההזמנה",
             product: 'מוצרים: 10,450 ש"ח',
             delivery: 'משלוח עד 5 ימי עסקים: 39.9 ש"ח',
-            total: 'סה"כ: 10,499.9 ש"ח',
+            total: 'תאריך הזמנה:',
           },
           last_btn: "שמירת השינויים",
         },
