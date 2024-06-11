@@ -382,7 +382,7 @@
       }
 
       .rtl .sms_mu_header {
-         margin-right: 17%;
+         margin-right: 15%;
       }
 
       .abc #sms_mu_desktop_heb,
@@ -451,6 +451,9 @@
       .rtl #coupons,
       .rtl #support {
          display: none !important;
+      }
+      .rtl .header_row_for_hebrew{
+         padding-right: 2rem !important;
       }
 
       .sms_a_add_category_pop {
@@ -690,7 +693,7 @@
       </aside>
       <!-- Navbar -->
       <header class="navbar navbar-expand-md sticky-top d-lg-flex d-print-none sms_mu_header" style="background-color: #F2F2F2;">
-         <div class="d-flex flex-row w-100 justify-content-between align-items-center px-3">
+         <div class="d-flex flex-row w-100 justify-content-between align-items-center px-3 header_row_for_hebrew">
             <button class="navbar-toggler d-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
             </button>
