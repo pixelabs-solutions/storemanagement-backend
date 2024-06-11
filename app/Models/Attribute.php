@@ -6,6 +6,67 @@ use GuzzleHttp\Exception\RequestException;
 
 class Attribute
 {
+
+
+    public static function store_attributes($attribute)
+    {
+        global $connection;
+
+        try {
+            $stmt = $connection->prepare("
+                INSERT INTO attributes (id, name, type)
+                VALUES (?, ?, ?)
+                ON DUPLICATE KEY UPDATE
+                    id = VALUES(id),
+                    name = VALUES(name),
+                    type = VALUES(type)
+            ");
+
+            $id = $attribute['id'];
+            $name = $attribute['name'];
+            $type = $attribute['type'];
+
+            $stmt->bind_param(
+                'iss',
+                $id,
+                $name,
+                $type
+            );
+
+            $stmt->execute();
+            $stmt->close();
+
+        }
+        catch (\mysqli_sql_exception $e) {
+            echo "Database error: " . $e->getMessage() . "\n";
+        }
+    }
+
+    public static function get_all_attributes()
+    {
+        global $connection;
+
+        try {
+            $query = "SELECT * FROM attributes";
+            $result = $connection->query($query);
+
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    $attributes[] = $row;
+                }
+                $result->free();
+            } else {
+                echo "Error executing query: " . $connection->error . "\n";
+            }
+        } catch (\mysqli_sql_exception $e) {
+            echo "Database error: " . $e->getMessage() . "\n";
+        }
+
+        return $attributes;
+    }
+
+
+
     public static function add($configuration, $payload)
     {
         $store_url = $configuration["store_url"];

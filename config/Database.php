@@ -225,12 +225,19 @@ class Database
         )";
         $this->connection->query($transactionsTable);
 
-        $requestTrackingTable = "CREATE TABLE `request_tracking` (
+        $requestTrackingTable = "CREATE TABLE IF NOT EXISTS `request_tracking` (
             `id` int(11) NOT NULL,
             `ip_address` varchar(45) NOT NULL,
             `request_date` date NOT NULL,
             `is_mobile` tinyint(1) NOT NULL DEFAULT 0
         )";
         $this->connection->query($requestTrackingTable);
+
+        $localAttributes = "CREATE TABLE IF NOT EXISTS `attributes` (
+            `id` int(11) NOT NULL,
+            `name` varchar(45) NOT NULL,
+            `type` varchar(45) NOT NULL
+        )";
+        $this->connection->query($localAttributes);
     }
 }
