@@ -156,6 +156,7 @@ class Database
         $this->connection->query($goalTable);
 
         $categoriesTable = "CREATE TABLE IF NOT EXISTS `categories` (
+            `user_id` int(11) NOT NULL,
             `id` int(11) NOT NULL,
             `name` varchar(255) NOT NULL,
             `parent` int(11) DEFAULT NULL,
@@ -165,6 +166,7 @@ class Database
         $this->connection->query($categoriesTable);
 
         $productsTable = "CREATE TABLE IF NOT EXISTS `products` (
+             `user_id` int(11) NOT NULL,
             `id` int(11) NOT NULL,
             `name` varchar(255) NOT NULL,
             `images` text DEFAULT NULL,
@@ -180,6 +182,7 @@ class Database
         $this->connection->query($productsTable);
 
         $currencies = "CREATE TABLE IF NOT EXISTS currencies (
+            `user_id` int(11) NOT NULL,
             `code` varchar(255) NOT NULL,
             `name` varchar(255) NOT NULL,
             `symbol` varchar(255) NOT NULL
@@ -240,6 +243,7 @@ class Database
         $this->connection->query($requestTrackingTable);
 
         $localAttributes = "CREATE TABLE IF NOT EXISTS `attributes` (
+            `user_id` int(11) NOT NULL,
             `id` int(11) NOT NULL,
             `name` varchar(45) NOT NULL,
             `type` varchar(45) NOT NULL
