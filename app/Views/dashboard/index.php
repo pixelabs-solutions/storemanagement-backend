@@ -115,11 +115,41 @@ require_once __DIR__ . '/../partials/header.php';
         </a>
     </div>
     <!-- Date Range Button  Start-->
-    <div class="col-auto ms-auto">
-        <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#modal-team" style="border-radius:10px" data-i18n="statististics.tabs_in_select_range.button">
+    <div class="col-auto ms-auto bg-light p-2 text-center" style="border-radius:10px">
+        <a href="#" class="text-dark font-weight-bold" data-bs-toggle="modal" data-bs-target="#modal-team"  data-i18n="statististics.tabs_in_select_range.button">
             Select a Date Range
+
         </a>
+        <div id="date_stored_element"></div>
+
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Function to get query parameter by name
+            function getQueryParam(name) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(name);
+            }
+
+            // Get the start and end dates from the URL
+            let dateFrom = getQueryParam('date_from');
+            let dateTo = getQueryParam('date_to');
+
+            // Only show the dates if both are present
+            if (dateFrom && dateTo) {
+                // Replace - with /
+                dateFrom = dateFrom.replace(/-/g, '/');
+                dateTo = dateTo.replace(/-/g, '/');
+
+                // Store the dates in the element with ID date_stored_element
+                const dateStoredElement = document.getElementById('date_stored_element');
+                if (dateStoredElement) {
+                    dateStoredElement.innerHTML = ` ${dateFrom}-${dateTo}`;
+                }
+            }
+        });
+    </script>
+
     <!-- Date Range Button End -->
 </div>
 
