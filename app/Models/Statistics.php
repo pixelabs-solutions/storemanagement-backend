@@ -6,19 +6,16 @@ use Pixelabs\StoreManagement\Models\Base;
 
 class Statistics
 {
-    public static function get_products_stats($configuration, $filters = []) {
-        
-        $consumer_key = $configuration["consumer_key"];
-        $consumer_secret = $configuration["consumer_secret"];
-        $store_url = $configuration["store_url"];
-        $client = new Client();
+    public static function get_products_stats($filters = []) 
+    {
+        global $connection;
         $date_range = $filters ? self::getDateRange($filters) : [];
         try {
             
             $user_id = Authentication::getUserIdFromToken();
             $totalProducts = Base::get_number_of_products($user_id, $date_range);
             
-            global $connection;
+            
             // SQL query to count the number of rows in the products table
             $query = "SELECT *  FROM products WHERE user_id = $user_id";
             if ($date_range != null && !empty($date_range)) {
@@ -83,7 +80,7 @@ class Statistics
     }
 
 
-    public static function get_orders_stats($configuration, $filters = []) {
+    public static function get_orders_stats($filters = []) {
         global $connection;
         $date_range = $filters ? self::getDateRange($filters) : [];
     
@@ -139,7 +136,7 @@ class Statistics
     }
 
 
-    public static function get_revenue_stats($configuration, $filters = []) {
+    public static function get_revenue_stats($filters = []) {
         global $connection;
         $date_range = $filters ? self::getDateRange($filters) : [];
         try {
@@ -193,7 +190,7 @@ class Statistics
     }
     
     
-    public static function get_overview_stats($configuration, $filters = [])
+    public static function get_overview_stats($filters = [])
     {
         $date_range = $filters ? self::getDateRange($filters) : [];
         try

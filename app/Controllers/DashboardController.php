@@ -19,24 +19,14 @@ class DashboardController
         } else {
             RequestTracker::trackRequest();
             $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
-            $response = Configuration::getConfiguration($is_rest);
-            $result = json_decode($response, true);
-            if ($is_rest && $result['status_code'] != 200) {
-                echo $response;
-                exit;
-            }
-
-            $configuration = $result['data'];
-
-
-
+            
             $filters = [
                 'query' => $_GET['query'] ?? null,
                 'date_from' => $_GET['date_from'] ?? null,
                 'date_to' => $_GET['date_to'] ?? null
             ];
 
-            $stats = Dashboard::get_dashboard_stats();
+            $stats = Dashboard::get_dashboard_stats($filters);
             $customers_location = Dashboard::get_dashboard_data();
             $top_products = Dashboard::fetchTopSellingProductImages();
             $requests = RequestTracker::getRequestsLastSevenDays();
