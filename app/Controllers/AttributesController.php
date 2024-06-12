@@ -143,19 +143,25 @@ class AttributesController
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
-        $result = HttpRequestHelper::validate_request("POST");
-        if(!$result["is_data_prepared"])
-        {
-            echo $result["message"];
-            return;
-        }
+        // $result = HttpRequestHelper::validate_request("POST");
+        // if(!$result["is_data_prepared"])
+        // {
+        //     echo $result["message"];
+        //     return;
+        // }
 
-        $data = $result["data"];
-        $payload = json_encode([
-            'data' => $data['data']
-        ]);
+        // $data = $result["data"];
+        $name = $_POST['name'];
+        $attribute_id = $_POST['attribute_id'];
+        $data = $_POST['data'];
 
-        $response = Attribute::add_term($configuration, $payload, $id, $data['name']);
+        $payload = [
+            'name' => $name,
+            'attribute_id' => $attribute_id,
+            'data' => $data
+        ];
+
+        $response = Attribute::add_term($configuration, $payload);
         echo $response;
     }
 

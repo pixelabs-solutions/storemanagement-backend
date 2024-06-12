@@ -221,6 +221,9 @@
       .rtl td {
          border-radius: 0px !important;
       }
+      .fw-bold{
+         font-weight: 900 !important;
+      }
 
       .rtl .sms_mu_margin {
          /* gap: 228px !important; */
