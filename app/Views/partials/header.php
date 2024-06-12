@@ -475,6 +475,51 @@
          border-radius: 5px;
          display: none;
       }
+
+      #sync_woocommerce{
+         border-radius: 100px;
+      }
+
+
+      #loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    text-align: center;
+}
+
+#loader .spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loader h1 {
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
+
    </style>
 </head>
 
@@ -705,6 +750,9 @@
                   →</button> -->
 
                <div class="navbar-nav flex-row order-md-last">
+               <div class=" d-flex align-items-center">
+                  <button class="btn m-2" id="sync_woocommerce">SYNC</button>
+               </div>
                   <div class=" d-flex align-items-center">
                      <a href="?theme=dark" class="nav-link px-0 hide-theme-dark d-none" title="Enable dark mode" data-bs-toggle="tooltip" data-bs-placement="bottom">
                         <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
@@ -1127,3 +1175,48 @@ var multipleCancelButton = new Choices('#variation_category_select', {
 
             // });
          </script>
+
+
+
+<script>
+                document.addEventListener('DOMContentLoaded', function() {
+            var syncButton = document.getElementById('sync_woocommerce');
+            var loader = document.getElementById('loader');
+
+            syncButton.addEventListener('click', function() {
+                // Show the loader
+                loader.style.display = 'block';
+
+                // Create a new XMLHttpRequest
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'sync', true);
+
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        // Hide the loader
+                        loader.style.display = 'none';
+
+                        if (xhr.status === 200) {
+                            // Handle the response
+                            if (xhr.responseText === 'done') {
+                                alert('Sync completed successfully!');
+                                // Reload the page after the alert
+                                location.reload();
+                            } else {
+                                alert('Sync failed.');
+                                // Reload the page after the alert
+                                location.reload();
+                            }
+                        } else {
+                            alert('An error occurred while syncing.');
+                            // Reload the page after the alert
+                            location.reload();
+                        }
+                    }
+                };
+
+                // Send the request
+                xhr.send();
+            });
+        });
+    </script>
