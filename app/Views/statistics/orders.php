@@ -24,7 +24,7 @@
                         <!-- Date Range Button -->
                         <div class="col-auto ms-auto">
                             <a href="#" class="btn btn-pill" data-bs-toggle="modal" data-bs-target="#modal-team"
-                                style="background-color:#A8C3E7; border:none;" data-i18n="statististics.tabs_in_select_range.button">
+                            style="background-color:#EFEFEF; border:none;" data-i18n="statististics.tabs_in_select_range.button">
                                 Select a Date Range
                             </a>
                         </div>

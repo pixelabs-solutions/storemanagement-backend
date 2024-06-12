@@ -91,21 +91,21 @@ require_once __DIR__ . '/../partials/header.php';
     <div>
         <ul class="nav justify-content-between nav-tabs" data-bs-toggle="tabs" style="border:none;">
             <li class="nav-item mb-2">
-                <a href="#tabs_overview" class="nav-link_stats active sms_w_active_item_stats justify-content-center"
+                <a href="#tabs_overview" class="nav-link_stats weight_400 active sms_w_active_item_stats justify-content-center"
                     data-bs-toggle="tab" style=" border-radius:20px; padding: 5px 30px; width:150px; color:black;text-decoration: none"
                     data-i18n="statististics.tabs_in_static.tab_overview" >Overview</a>
             </li>
             <li class="nav-item mb-2">
-                <a href="#tabs_product" class="nav-link_stats sms_w_item_deactive_stats justify-content-center" data-bs-toggle="tab"
+                <a href="#tabs_product" class="nav-link_stats weight_400 sms_w_item_deactive_stats justify-content-center" data-bs-toggle="tab"
                     style=" border-radius:20px; padding: 5px 30px; width:150px;  color:black;text-decoration: none"        data-i18n="statististics.tabs_in_static.tab_Products">Products</a>
             </li>
             <li class="nav-item mb-2">
-                <a href="#tabs_revenues" class="nav-link_stats sms_w_item_deactive_stats justify-content-center"
+                <a href="#tabs_revenues" class="nav-link_stats weight_400 sms_w_item_deactive_stats justify-content-center"
                     data-bs-toggle="tab" style=" border-radius:20px; padding: 5px 30px; width:150px;     color:black;text-decoration: none"   data-i18n="statististics.tabs_in_static.tab_Revenues">Revenues</a>
 
             </li>
             <li class="nav-item mb-2">
-                <a href="#tabs_orders" class="nav-link_stats sms_w_item_deactive_stats justify-content-center" data-bs-toggle="tab"
+                <a href="#tabs_orders" class="nav-link_stats weight_400 sms_w_item_deactive_stats justify-content-center" data-bs-toggle="tab"
                     style=" border-radius:20px; padding: 5px 30px; width:150px;  color:black;text-decoration: none"       data-i18n="statististics.tabs_in_static.tab_Orders">Orders</a>
             </li>
 
@@ -141,45 +141,65 @@ require_once __DIR__ . '/../partials/header.php';
                     </div>
 
 
-<script>
-            function getQueryParams() {
-            const params = {};
-            window.location.search.substring(1).split("&").forEach(param => {
-                const [key, value] = param.split("=");
-                params[decodeURIComponent(key)] = decodeURIComponent(value);
-            });
-            return params;
-        }
+                    <script>
+    function getQueryParams() {
+        const params = {};
+        window.location.search.substring(1).split("&").forEach(param => {
+            const [key, value] = param.split("=");
+            params[decodeURIComponent(key)] = decodeURIComponent(value);
+        });
+        return params;
+    }
 
+    window.onload = function() {
         // Get query parameters
         var queryParams = getQueryParams();
 
-     if (queryParams.query === 'last_week') {
-            // Add the .sms_w_date_active class to the element with the ID 'last_week'
+        // Define an array of all possible element IDs
+        const filterIds = [
+            'overview_last_week', 'products_last_week', 'orders_last_week', 'revenue_last_week',
+            'overview_last_month', 'products_last_month', 'orders_last_month', 'revenue_last_month',
+            'overview_last_year', 'products_last_year', 'orders_last_year', 'revenue_last_year'
+        ];
+
+        // Function to remove the class from all elements
+        function removeClassFromAll() {
+            filterIds.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.classList.remove('stats_filters_active');
+                }
+            });
+        }
+
+        // First, remove the class from all elements
+        removeClassFromAll();
+
+        // Check if queryParams.query is defined, if not, set it to 'last_week' by default
+        if (!queryParams.query) {
+            queryParams.query = 'last_week';
+        }
+
+        // Add the class to the relevant elements based on queryParams.query
+        if (queryParams.query === 'last_week') {
             document.getElementById('overview_last_week').classList.add('stats_filters_active');
             document.getElementById('products_last_week').classList.add('stats_filters_active');
             document.getElementById('orders_last_week').classList.add('stats_filters_active');
             document.getElementById('revenue_last_week').classList.add('stats_filters_active');
-
-            
-
         } else if (queryParams.query === 'last_month') {
-            // Add the .sms_w_date_active class to the element with the ID 'current_month'
             document.getElementById('overview_last_month').classList.add('stats_filters_active');
             document.getElementById('products_last_month').classList.add('stats_filters_active');
             document.getElementById('orders_last_month').classList.add('stats_filters_active');
             document.getElementById('revenue_last_month').classList.add('stats_filters_active');
-
-
         } else if (queryParams.query === 'last_year') {
-            // Add the .sms_w_date_active class to the element with the ID 'last_year'
             document.getElementById('overview_last_year').classList.add('stats_filters_active');
             document.getElementById('products_last_year').classList.add('stats_filters_active');
             document.getElementById('orders_last_year').classList.add('stats_filters_active');
             document.getElementById('revenue_last_year').classList.add('stats_filters_active');
-
         }
+    };
 </script>
+
                     <div class="row mt-5 mb-5 d-flex flex-md-row flex-wrap flex-column justify-content-between tab-pane active show sms_mu_for_rtl_row_cards"
                         id="row_1">
                         <!-- New Customer Card Start -->
