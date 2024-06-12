@@ -21,13 +21,13 @@
         <div class="d-flex justify-content-center gap-4 flex-md-row flex-column">
             <span onclick="openModal('sms_product_variation_modal')"  class="card  w-md-25 d-flex justify-content-center align-items-center sms_select_produc_card" style=" background-color:#4987D8; " >
             <div>
-           <h2  data-i18n="popoups.add_new_type.variation"> A product with variations</h2>
+           <h2  data-i18n="popoups.add_new_type.variation" class="fw-bold"> A product with variations</h2>
             </div>
             </span>
             <span  onclick="openModal('sms_product_regular_modal')"  class="card  w-md-25  d-flex justify-content-center align-items-center sms_select_produc_card" style=" background-color:#afcaee; " >
         
             <div >
-           <h2  data-i18n="popoups.add_new_type.new_product"> normal product</h2>
+           <h2  data-i18n="popoups.add_new_type.new_product" class="fw-bold"> normal product</h2>
             </div>
         </span>
          
@@ -44,7 +44,7 @@
         <div class="modal-content">
         <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
         <div class="py-1 rounded-top text-center">
-          <h3 class="card-title m-0 text-black fs-2 fw-bold Sms_mu_for_Eng">Adding a new product and variations </h3>
+          <h3 class="card-title m-0 text-black fs-2 fw-bold Sms_mu_for_Eng fw-bold">Adding a new product and variations </h3>
         </div>
         <div class="py-1 rounded-top text-center Sms_mu_for_hebrew">
           <h3 class="card-title m-0 text-black fs-2 fw-bold"> הוספת מוצר חדש וגרסאות </h3>
@@ -69,10 +69,10 @@
         <div class="modal-content">
         <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
         <div class="py-1 rounded-top text-center Sms_mu_for_Eng ">
-          <h3 class="card-title m-0 text-black fs-2 fw-bold ">Adding a new regular product</h3>
+          <h3 class="card-title m-0 text-black fs-2 f-bold ">Adding a new regular product</h3>
         </div>
         <div class="py-1 rounded-top text-center Sms_mu_for_hebrew ">
-          <h3 class="card-title m-0 text-black fs-2 fw-bold ">הוספת מוצר רגיל חדש</h3>
+          <h3 class="card-title m-0 text-black fs-2 f-bold ">הוספת מוצר רגיל חדש</h3>
         </div>
         <button type="button" class="btn-close sms_modal_cancel_btn" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>

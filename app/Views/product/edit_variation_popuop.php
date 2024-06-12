@@ -9,18 +9,18 @@
                         <!-- header -->
                         <div class="row gx-3">
                             <div class="col-md-6 mb-3">
-                                <label for="example-text-input fs-2 fw-bold" class="form-label">Name of the
+                                <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold">Name of the
                                     Variation</label>
                                 <input type="text" read class="form-control rounded-3 p-3" id="sms_mu_name_variation" style="background-color: #EAEAEA" placeholder="Pink">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="example-select fs-3 fw-bold" class="form-label">Variation Price
+                                <label for="example-select fs-3 fw-bold" class="form-label fw-bold">Variation Price
                                 </label>
                                 <input type="number" class="form-control rounded-3 p-3" id="sms_mu_price_variation" style="background-color: #EAEAEA" placeholder="Pink">
                             </div>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label for="example-select fs-3 fw-bold" class="form-label">Variation Inventory
+                            <label for="example-select fs-3 fw-bold" class="form-label fw-bold">Variation Inventory
                             </label>
                             <input type="number" class="form-control rounded-3 p-3" id="sms_mu_inventory_variation" style="background-color: #EAEAEA" placeholder="Pink">
                         </div>

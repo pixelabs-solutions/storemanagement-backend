@@ -16,6 +16,9 @@ require_once __DIR__ . '/../partials/header.php';
     svg {
         cursor: pointer;
     }
+    /* label{
+        font-weight: 700 !important;
+    } */
 
     .hidden {
         display: none;
