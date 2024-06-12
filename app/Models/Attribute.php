@@ -39,19 +39,18 @@ class Attribute
         }
     }
 
-    public static function add_term($configuration, $payload, $attributes_id, $term_name){
+    public static function add_term($configuration, $payload){
         $store_url = $configuration["store_url"];
 
         $client = new Client();
         try
         {
-            $endpoint = $store_url."/wp-admin/admin-ajax.php?action=woomanagement_add_term&name=".$term_name."&description=&attribute_id=".$attributes_id;
+            $endpoint = $store_url."/wp-admin/admin-ajax.php?action=woomanagement_add_term&name=".$payload['name']."&description=&attribute_id=".$payload['attribute_id'];
             // echo $endpoint;exit;
             $response = $client->request('POST', $endpoint, [
-                'headers' => [
-                    'Content-Type' => 'application/json',
-                ],
-                'body' => json_encode($payload)
+                'multipart' => [
+                    'data' => $payload['data']
+                ]
             ]);
 
 

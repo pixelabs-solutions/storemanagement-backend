@@ -122,7 +122,7 @@
             <div class="col-12 col-md-12">
                 <div class="card">
 
-                    <form class="card-body">
+                    <form class="card-body" id="term_form_data">
                         <!-- header -->
                         <div class="row gx-3">
                             <div class="col-md-6 mb-3">
@@ -130,17 +130,18 @@
                                     data-i18n="popoups.future_managment.add_new_term.name_of_term">The
                                     name of the term</label>
                                 <input type="text" class="form-control rounded-3 p-3" id="sms_term_name"
-                                    style="background-color: #EAEAEA" placeholder="Name Of Term">
+                                    style="background-color: #EAEAEA" placeholder="Name Of Term" name="name[]">
                             </div>
                             <div class="col-md-6 mb-3 ">
                                 <label for="example-select" class="form-label fw-bold"   data-i18n="popoups.future_managment.add_new_term.feature">Associated feature </label>
                                 <!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
                                 <div class="sms_mu_bg_div rounded-2">
                                     <select class="form-select form-select-md h-100 bg-transparent"
+                                    name="attribute_id"
                                         id="sms_feature_select">
                                         <?php foreach($attributes  as $attribute)
                                         { ?>
-                                        <option id="<?php echo $attribute['id']; ?>"><?php echo $attribute['name']; ?></option>
+                                        <option id="<?php echo $attribute['id']; ?>" value="<?php echo $attribute['id']; ?>"><?php echo $attribute['name']; ?></option>
                                         <?php } ?>
                                         
                                     </select>
@@ -171,6 +172,7 @@
                                             style="background-color: #EAEAEA">
                                             <label class="form-label"  data-i18n="popoups.future_managment.add_new_term.select_color">Color change</label>
                                             <input type="color" class="form-control p-0 form-control-color"
+                                            name="data[]"
                                                 id="sms_term_color" value="#206bc4" title="Choose your color">
                                         </div>
                                         <div class="col-md-12 mb-3">
@@ -178,6 +180,7 @@
                                                 <label class="form-label"  data-i18n="popoups.future_managment.add_new_term.d_term">Selecting an image to display the term</label>
                                                 <div class="sms_a_add_term_input">
                                                     <input type="file" id="sms_term_image" accept="image/*"
+                                                    name=""
                                                         style="background-color:#FFFFFF;"
                                                         onchange="sms_a_add_term_showFileName(this)">
                                                     <label for="sms_term_image"><i class="bi bi-image text-black"></i>
@@ -291,7 +294,7 @@
             </div>
             <div class="mb-3 p-2 col-12 rounded-3 d-flex align-items-center justify-content-between" style="background-color: #EAEAEA">
                 <label class="form-label">Color change</label>
-                <input type="color" class="form-control p-0 form-control-color" id="sms_term_colors${inputCount}" value="#206bc4" title="Choose your color">
+                <input type="color" name='color' class="form-control p-0 form-control-color" id="sms_term_colors${inputCount}" value="#206bc4" title="Choose your color">
             </div>
             <label class="form-label mt-4 fs-3 p-0 fw-bold">Selecting an image to display the term</label>
             <div class="sms_a_add_term_input">
@@ -380,50 +383,20 @@
         //             console.error('Error submitting form data:', error);
         //         });
         // }
-
         function submit_add_term() {
-    // Get the values of the existing inputs
-    let name = document.getElementById('sms_term_name').value.trim();
-    let AssociatedFeatures = document.getElementById('sms_feature_select').value;
-    let type = document.getElementById('sms_feature_select').value.trim();
-    let colorInput = document.getElementById('sms_term_color').value.trim();
+    // Get the form element
+    let form = document.getElementById('term_form_data');
+    // Create FormData object from the form
+    let formData = new FormData(form);
+    console.log('form data ',formData)
 
-    // Create JSON object to store form data
-    let jsonData = {
-        name: name, // Ensuring the key is 'name'
-        contents: colorInput, // Assuming you need to send the type as well
-        // color: colorInput,
-        // dynamicTerms: []  // Prepare an array to store dynamic term data
-    };
-
-    // Get the values of dynamically added inputs
-    let dynamicnames = document.querySelectorAll('[id^="sms_term_names"]');
-    let dynamicTermColors = document.querySelectorAll('[id^="sms_term_colors"]');
-    let dynamicTermImages = document.querySelectorAll('[id^="sms_term_image"]');
-
-    // Loop through dynamic data and populate jsonData.dynamicTerms
-    dynamicnames.forEach((input, index) => {
-        let name = input.value.trim();
-        if (name !== '') {
-            let color = dynamicTermColors[index].value.trim(); // Assuming corresponding color exists
-            let imageSrc = dynamicTermImages[index].getAttribute('src'); // Get the image source URL
-            jsonData.dynamicTerms.push({ name: name, color: color, image: imageSrc });
-        }
-    });
-
-    // Convert JSON data to string
-    let jsonString = JSON.stringify(jsonData);
-
-    // Send JSON data with fetch API
-    fetch(`/attributes/${AssociatedFeatures}/terms/add`, {
+    // Send form data with fetch API
+    fetch(`/attributes/${formData.get('sms_feature_select')}/terms/add`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: jsonString
+        body: formData
     })
     .then(response => {
-        if (response.status === 200 ) {
+        if (response.ok) {
             // Form submission succeeded, display success message
             document.getElementById('sms_term_success-message').style.display = 'block';
             document.getElementById('sms_term_error-message').style.display = 'none';
@@ -440,7 +413,6 @@
         console.error('Error submitting form data:', error);
     });
 }
-
         function sms_term_close_success_message() {
             document.getElementById('sms_term_success-message').style.display = 'none';
         }
