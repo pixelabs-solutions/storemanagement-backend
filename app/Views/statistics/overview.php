@@ -107,7 +107,6 @@ require_once __DIR__ . '/../partials/header.php';
             <li class="nav-item mb-2">
                 <a href="#tabs_orders" class="nav-link_stats weight_400 sms_w_item_deactive_stats justify-content-center" data-bs-toggle="tab"
                     style=" border-radius:20px; padding: 5px 30px; width:150px;  color:black;text-decoration: none"       data-i18n="statististics.tabs_in_static.tab_Orders">Orders</a>
-
             </li>
 
 
