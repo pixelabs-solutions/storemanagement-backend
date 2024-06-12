@@ -7,20 +7,15 @@ use Pixelabs\StoreManagement\Models\Base;
 class Dashboard
 {
 
-    public static function get_dashboard_stats($configuration = [], $filters = [])
+    public static function get_dashboard_stats($filters = [])
     {
         $user_id = Authentication::getUserIdFromToken();
-
-        $dateRange = self::getDateRange($filters);
+        $date_range = $filters ? self::getDateRange($filters) : [];
         try {
-            // $params = ['auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]]];
-            if (!empty($dateRange)) {
-                $params['query'] = $dateRange;
-            }
 
-            $products = Base::get_number_of_products($user_id);
-            $new_customers_count = Base::get_new_customers_count($user_id);
-            $total_transactions = Base::get_total_revenue($user_id);
+            $products = Base::get_number_of_products($user_id, $date_range);
+            $new_customers_count = Base::get_new_customers_count($user_id, $date_range);
+            $total_transactions = Base::get_total_revenue($user_id, $date_range);
 
             $data = [
                 'new_products' => $products,
@@ -35,33 +30,16 @@ class Dashboard
     }
 
 
-    public static function get_dashboard_data($configuration = [])
+    public static function get_dashboard_data()
     {
+        global $connection;
         $user_id = Authentication::getUserIdFromToken();
-
-        // $response = json_decode(Configuration::getConfiguration($user_id), true);
-        // if ($response['status_code'] != 200) {
-        //     echo $response["message"];
-        //     return [];
-        // }
-
-        // $data = $response['data'];
         $cities = [];
         $total_customers = 0;
         $latestOrders = [];
         // $client = new Client();
         try {
-            // $response = $client->request('GET', $configuration["store_url"] . '/wp-json/wc/v3/orders', [
-            //     'auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
-            //     'query' => [
-            //         'per_page' => 100
-            //     ]
-            // ]);
-
-            // $orders = json_decode($response->getBody(), true);
-            global $connection;
-
-            // SQL query to count the number of rows in the products table
+            
             $query = "SELECT * FROM transactions WHERE user_id = $user_id";
             $result = $connection->query($query);
 
@@ -126,35 +104,16 @@ class Dashboard
 
     public static function fetchTopSellingProductImages($configuration = [])
     {
-        // $response = json_decode(Configuration::getConfiguration($user_id), true);
-        // if ($response['status_code'] != 200) {
-        //     echo $response["message"];
-        //     return [];
-        // }
+        global $connection;
         $user_id = Authentication::getUserIdFromToken();
-
-        // $data = $response['data'];
-        // $client = new Client();
         $productSales = [];
 
-        try {
-            // $response = $client->request('GET', $configuration["store_url"] . '/wp-json/wc/v3/orders', [
-            //     'auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
-            //     'query' => [
-            //         'per_page' => 100
-            //     ]
-            // ]);
-            // $orders = json_decode($response->getBody(), true);
-
-            // $orders = json_decode($response->getBody(), true);
-            global $connection;
-
-            // SQL query to count the number of rows in the products table
+        try 
+        {
             $query = "SELECT * FROM transactions WHERE user_id = $user_id";
             $result = $connection->query($query);
 
             $customerOrdersCount = [];
-            // if($orders === null) return 0;
             while ($order = $result->fetch_assoc()) {
 
                 $order_lineitem_array = json_decode($order['line_items'] , true); 
@@ -172,34 +131,17 @@ class Dashboard
             $topProductIds = array_slice(array_keys($productSales), 0, 3);
 
             $topProducts = [];
-            foreach ($topProductIds as $productId) {
-                // $prodResponse = $client->request('GET', $configuration["store_url"] . "/wp-json/wc/v3/products/$productId", [
-                //     'auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
-                //     'query' => [
-                //         'per_page' => 100
-                //     ]
-                // ]);
-                // $productDetails = json_decode($prodResponse->getBody(), true);
-                // $orders = json_decode($response->getBody(), true);
+            foreach ($topProductIds as $productId) 
+            {
 
-                // SQL query to count the number of rows in the products table
                 $prod_query = "SELECT * FROM products WHERE user_id = $user_id AND id = $productId";
                 $prod_result = $connection->query($prod_query);
                 $productDetails = $prod_result->fetch_assoc();
                 $product_image_decoded = json_decode($productDetails['images'], true);
-                // echo json_encode($product_image_decoded); 
                 $topProducts[] = [
                     'product_name' => $productDetails['name'],
                     'image_url' => $product_image_decoded[0]['src']
                 ];
-                // if (isset($product_image_decoded['images']) ) {
-                  
-                // } else {
-                //     $topProducts[] = [
-                //         'product_name' => $productDetails['name'] ?? "",
-                //         'image_url' => 'No image available'
-                //     ];
-                // }
             }
             return $topProducts;
 
