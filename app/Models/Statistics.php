@@ -84,27 +84,18 @@ class Statistics
 
 
     public static function get_orders_stats($configuration, $filters = []) {
-        
-        $client = new Client();
-        $dateRange = self::getDateRange($filters);
+        global $connection;
+        $date_range = $filters ? self::getDateRange($filters) : [];
     
         try {
-            global $connection;
+            
             $user_id = Authentication::getUserIdFromToken();
 
-
-            // $orderParams = ['auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
-            // 'per_page' => 100];
-            // if (!empty($dateRange)) {
-            //     $orderParams['query'] = $dateRange;
-            // }
-    
-            // $response = $client->request('GET', $configuration["store_url"] . '/wp-json/wc/v3/orders', $orderParams);
-            // $orders = json_decode($response->getBody(), true);
-    
-            // Calculating statistics
-            // $totalOrders = count($orders);
             $query = "SELECT COUNT(*) AS transaction_count FROM transactions WHERE user_id = $user_id";
+            if ($date_range != null && !empty($date_range)) {
+                $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+            }
+            
             $result = $connection->query($query);
             $row = $result->fetch_assoc();
  
@@ -117,6 +108,9 @@ class Statistics
     
 
             $query = "SELECT *  FROM transactions WHERE user_id = $user_id";
+            if ($date_range != null && !empty($date_range)) {
+                $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+            }
             $result = $connection->query($query);
 
             while ($order = $result->fetch_assoc()) {
@@ -146,32 +140,15 @@ class Statistics
 
 
     public static function get_revenue_stats($configuration, $filters = []) {
-        
-        // $client = new Client();
-        // $dateRange = self::getDateRange($filters);
-    
+        global $connection;
+        $date_range = $filters ? self::getDateRange($filters) : [];
         try {
-            // $orderParams = [
-            //     'auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
-            //     'per_page' => 100
-            // ];
-            // if (!empty($dateRange)) {
-            //     $orderParams['query'] = $dateRange;
-            // }
-    
-            $user_id = Authentication::getUserIdFromToken();
-
-
-            global $connection;
-
-            // SQL query to count the number of rows in the products table
-    
-
-            // $response = $client->request('GET', $configuration["store_url"] . '/wp-json/wc/v3/orders', $orderParams);
-            // $orders = json_decode($response->getBody(), true);
-    
+            $user_id = Authentication::getUserIdFromToken();    
             
             $order_total_query = "SELECT COUNT(*) AS transaction_count FROM transactions WHERE user_id = $user_id";
+            if ($date_range != null && !empty($date_range)) {
+                $order_total_query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+            }
             $order_total_result = $connection->query($order_total_query);
             $order_total_row = $order_total_result->fetch_assoc();
 
@@ -181,6 +158,9 @@ class Statistics
 
 
             $query = "SELECT *  FROM transactions WHERE user_id = $user_id";
+            if ($date_range != null && !empty($date_range)) {
+                $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+            }
             $result = $connection->query($query);
 
             $totalRevenue = 0;
@@ -215,24 +195,16 @@ class Statistics
     
     public static function get_overview_stats($configuration, $filters = [])
     {
-        $dateRange = self::getDateRange($filters);
+        $date_range = $filters ? self::getDateRange($filters) : [];
         try
         {
-            $params = [
-                'auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
-                'per_page' => 100
-            ];
-            if (!empty($dateRange)) {
-                $params['query'] = $dateRange;
-            }
-
             $user_id = Authentication::getUserIdFromToken();
 
-            $total_products = Base::get_number_of_products($user_id);
-            $total_orders = Base::get_number_of_orders($user_id);
-            $total_revenue = Base::get_total_revenue($user_id);
-            $new_customers_count = Base::get_new_customers_count($user_id);
-            $returning_customers_count = Base::get_returning_customers_count($user_id);
+            $total_products = Base::get_number_of_products($user_id, $date_range);
+            $total_orders = Base::get_number_of_orders($user_id, $date_range);
+            $total_revenue = Base::get_total_revenue($user_id, $date_range);
+            $new_customers_count = Base::get_new_customers_count($user_id, $date_range);
+            $returning_customers_count = Base::get_returning_customers_count($user_id, $date_range);
 
             return [
                 'totalProducts' => $total_products,
