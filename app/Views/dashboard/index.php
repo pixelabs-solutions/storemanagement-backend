@@ -818,20 +818,27 @@ require_once __DIR__ . '/../partials/header.php';
 
         // Get query parameters
         const queryParams = getQueryParams();
+        const dateIds = ['24_hours', 'last_week', 'current_month', 'last_year'];
 
-        if (queryParams.query === '24_hours') {
-            // Add the .sms_w_date_active class to the element with the ID '24_hours'
-            document.getElementById('24_hours').classList.add('sms_w_date_active');
-        } else if (queryParams.query === 'last_week') {
-            // Add the .sms_w_date_active class to the element with the ID 'last_week'
-            document.getElementById('last_week').classList.add('sms_w_date_active');
-        } else if (queryParams.query === 'current_month') {
-            // Add the .sms_w_date_active class to the element with the ID 'current_month'
-            document.getElementById('current_month').classList.add('sms_w_date_active');
-        } else if (queryParams.query === 'last_year') {
-            // Add the .sms_w_date_active class to the element with the ID 'last_year'
-            document.getElementById('last_year').classList.add('sms_w_date_active');
-        }
+
+        function removeClassFromAll() {
+    dateIds.forEach(id => {
+        document.getElementById(id).classList.remove('sms_w_date_active');
+    });
+}
+removeClassFromAll();
+if (!queryParams.query) {
+    queryParams.query = '24_hours';
+}
+if (queryParams.query === '24_hours') {
+    document.getElementById('24_hours').classList.add('sms_w_date_active');
+} else if (queryParams.query === 'last_week') {
+    document.getElementById('last_week').classList.add('sms_w_date_active');
+} else if (queryParams.query === 'current_month') {
+    document.getElementById('current_month').classList.add('sms_w_date_active');
+} else if (queryParams.query === 'last_year') {
+    document.getElementById('last_year').classList.add('sms_w_date_active');
+}
     </script>
      <script>
               window.addEventListener('load', function() {

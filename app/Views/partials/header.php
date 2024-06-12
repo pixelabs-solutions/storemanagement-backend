@@ -114,7 +114,14 @@
          color: black !important;
          font-size: 20px;
       }
-
+.weight_500{
+   font-weight: 500 !important;
+   color: black !important;
+}
+.weight_400{
+   font-weight: 400 !important;
+   color: black !important;
+}
       .choices__input {
          background-color: transparent !important;
       }
@@ -884,6 +891,8 @@
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
          <!-- <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script> -->
          <script>
+
+            
             // JavaScript for switching language
             function FunLogoutProfile() {
                var div = document.getElementById('PopoupLogout');
