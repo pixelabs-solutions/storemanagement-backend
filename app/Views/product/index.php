@@ -279,7 +279,7 @@ require_once __DIR__ . '/../partials/header.php';
     </div>
 
     <div class=" col-12 mt-5" style="overflow-y: hidden; overflow-x:hidden;">
-        <div class="row col-12 d-flex justify-content-between bg-white p-3 m-0" style="border-radius:20px;">
+        <div class="row col-12 d-flex justify-content-between bg-white p-3 m-0 overflow-hidden" style="border-radius:20px;">
             <div class="col-sm-10 d-flex flex-column flex-md-row gap-2 col-lg-6 m-0 ">
                 <button class="rounded-4 border-0 p-2" data-bs-toggle="modal" data-bs-target="#modal-full-width"
                     style="background-color:#4987D870; " data-i18n="product_managment.nav.new_product_btn"></button>

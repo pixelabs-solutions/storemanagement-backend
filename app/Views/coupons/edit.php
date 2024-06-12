@@ -112,7 +112,8 @@
                                             expiration
                                             date</label>
                                         <div class="input-group">
-                                            <input type="date" class="form-control rounded-3 p-3 fw-bold" id="expiration_date" style="background-color: #EAEAEA" placeholder="Expiry date">
+                                            <!-- <input type="date" class="form-control rounded-3 p-3 fw-bold" id="expiration_date" style="background-color: #EAEAEA" placeholder="Expiry date"> -->
+                                            <input type="date" id="expiration_date" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA"   placeholder="Expiry date" min="<?php echo date("Y-m-d"); ?>">
                                         </div>
                                     </div>
 

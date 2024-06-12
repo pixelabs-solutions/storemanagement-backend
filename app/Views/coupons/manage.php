@@ -118,7 +118,8 @@
                                 <label for="example-date-input" class="form-label fs-4 fw-bold" data-i18n="popoups.added_new_cupons.expiry_date">Coupon expiration
                                     date</label>
                                 <div class="input-group">
-                                    <input type="date" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA" id="sms_Coupon_expiration" placeholder="Expiry Date">
+                                    <!-- <input type="date" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA" id="sms_Coupon_expiration" placeholder="Expiry Date"> -->
+                                    <input type="date" id="sms_Coupon_expiration" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA"   placeholder="Expiry date" min="<?php echo date("Y-m-d"); ?>">
                                 </div>
                             </div>
 
