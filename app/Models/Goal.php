@@ -165,6 +165,7 @@ class Goal
 
     public static function get_goals($configuration)
     {
+        $user_id = Authentication::getUserIdFromToken();
 
         $start = new \DateTime();
         $end = new \DateTime();
@@ -177,19 +178,19 @@ class Goal
         ];
 
         $goals = self::get_goals_target();
-        $totalRevenue = Base::get_total_revenue($configuration["store_url"], $params);
-        $new_customers = Base::get_new_customers_count($configuration["store_url"], $params);
-        $orders = Base::get_number_of_orders($configuration["store_url"], $params);
-        $products = Base::get_number_of_products($configuration["store_url"], $params);
-        $current_month_raise_in_orders = Base::calculate_raise_in_orders($configuration["store_url"], $params);
-
+        $totalRevenue = Base::get_total_revenue($user_id, $params);
+        $new_customers = Base::get_new_customers_count($user_id, $params);
+        $orders = Base::get_number_of_orders($user_id, $params);
+        $products = Base::get_number_of_products($user_id, $params);
+        $current_month_raise_in_orders = Base::calculate_raise_in_orders($user_id, $params);
+ 
         //Modify date parameter for last month
         $start->modify('first day of last month');
         $end->modify('last day of last month');
         $params['after'] = $start->format('Y-m-d') . 'T00:00:00';
         $params['before'] = $end->format('Y-m-d') . 'T23:59:59';
 
-        $previous_month_raise_in_average_orders = Base::calculate_raise_in_orders($configuration["store_url"], $params);
+        $previous_month_raise_in_average_orders = Base::calculate_raise_in_orders($user_id, $params);
 
         $current_month_average_items = $current_month_raise_in_orders['average_items'];
         $previous_month_average_items = $previous_month_raise_in_average_orders['average_items'];

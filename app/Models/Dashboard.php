@@ -49,7 +49,7 @@ class Dashboard
         $cities = [];
         $total_customers = 0;
         $latestOrders = [];
-        $client = new Client();
+        // $client = new Client();
         try {
             // $response = $client->request('GET', $configuration["store_url"] . '/wp-json/wc/v3/orders', [
             //     'auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
