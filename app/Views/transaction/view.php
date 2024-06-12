@@ -118,10 +118,10 @@
                 <div class="col-md-7 rounded-4 ">
                   <h1 class="fs-3 fw-bold" data-i18n="popoups.transction_pop_popuop.order_detail.client_info">Customer details and shipping address</h1>
                   <div class="">
-                    <span class="d-block mb-3 fw-bold ">Client's name: <span class="fw-normal " id="client_first_name"></span>
+                    <span class="d-block mb-3 fw-bold "><span data-i18n="transction_page.transaction_tr.customer_name">Client's Name:</span>&nbsp; : &nbsp;<span class="fw-normal " id="client_first_name"></span>
                       <span class="fw-normal" id="client_last_name"></span></span>
-                    <span class="d-block mb-3 fw-bold">Phone number: <span class="fs-4 fw-normal " id="customer_billing_phone"></span></span>
-                    <span class="d-block mb-3 fw-bold ">Email address: <span class="fw-normal " id="customer_billing_email"></span></span>
+                    <span class="d-block mb-3 fw-bold"><span data-i18n="transction_page.transaction_tr.Phone_Number">Phone Number:</span>&nbsp;: &nbsp;<span class="fs-4 fw-normal " id="customer_billing_phone"></span></span>
+                    <span class="d-block mb-3 fw-bold "><span data-i18n="transction_page.transaction_tr.Email_address">Email Address:</span>&nbsp;:&nbsp; <span class="fw-normal " id="customer_billing_email"></span></span>
                   </div>
                 </div>
                 <div class="col-md-5 col-sm-12 mt-md-4">
@@ -138,9 +138,9 @@
             <div class="col-md-4 justify-content-center mt-3 ">
               <label for="statusSelect" class="form-label fs-3 fw-bold" data-i18n="popoups.transction_pop_popuop.order_detail.order_status">Change order status</label>
               <select class="form-select form-select-lg h-80" id="sms_mu_order_status" style="background-color:#f5f5f5;">
-                <option value="completed">Complete</option>
-                <option value="pending">In Treatment</option>
-                <option value="cancelled">Cancelled</option>
+                <option value="completed" data-i18n="transction_page.status_tr.Complete">Complete</option>
+                <option value="pending" data-i18n="transction_page.status_tr.In_Treatment">In Treatment</option>
+                <option value="cancelled" data-i18n="transction_page.status_tr.Cancelled">Cancelled</option>
 
               </select>
             </div>
@@ -157,7 +157,7 @@
               </div>
               <div class="d-flex flex-end col-6 justify-content-end">
                 <h4 class="mb-3 fs-3 fw-bold" data-i18n="popoups.transction_pop_popuop.order_detail.card_order.total">Order date:
-                </h4>
+                </h4> &nbsp;
                 <p class="mb-3" id="order_date"></p>
               </div>
             </div>
@@ -185,9 +185,9 @@
                           <th class="sms_order_popups_a" style="background-color: rgba(73, 135, 216, 0.44);" data-i18n="popoups.transction_pop_popuop.order_detail.th.cst">
                             Cost</th>
                           <th class="sms_order_popups_a" style="background-color: rgba(73, 135, 216, 0.44);" data-i18n="popoups.transction_pop_popuop.order_detail.th.amt">
-                            >Amount</th>
+                            Amount</th>
                           <th class="sms_order_popups_a" style="background-color: rgba(73, 135, 216, 0.44);" data-i18n="popoups.transction_pop_popuop.order_detail.th.total">
-                            >Total</th>
+                            Total</th>
                         </tr>
                       </thead>
                       <tbody id="orderTable">
@@ -279,7 +279,7 @@
     document.getElementById("order_date").innerHTML = dateStr;
     subTotal = transactions.total - transactions.shipping_total;
     // console.log(transactions.shipping_total);
-    document.getElementById("total_amount").innerHTML = "Total Cost: NIS " + transactions.total;
+    document.getElementById("total_amount").innerHTML = "Total Cost : NIS " + transactions.total;
 
 
     const tableBody = document.getElementById('orderTable').querySelector('tbody');

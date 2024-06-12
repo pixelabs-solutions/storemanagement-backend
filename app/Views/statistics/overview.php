@@ -272,7 +272,7 @@ require_once __DIR__ . '/../partials/header.php';
                         </div>
                         <!-- Revenue Card End -->
                     </div>
-                    <!-- <div id="chart-combination"></div>
+                    <div id="chart-combination"></div>
                     <div class="row g-2 align-items-center ">
                         <div class="col-auto ms-auto btn-list mt-5 mb-5 sms_mu_for_rtl_row_cards">
                             <div class="text-light p-1" style="background-color:#627e0c; border-radius:5px;"
@@ -291,7 +291,7 @@ require_once __DIR__ . '/../partials/header.php';
                                 data-i18n="statististics.chart_below_btn.five_btn.text"> Revenues
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                     <!-- Colors Button End -->
 
                     <!-- Icon Box End -->
@@ -336,13 +336,13 @@ require_once __DIR__ . '/../partials/header.php';
                             <!-- <label class="form-label">From Date</label> -->
                             <label for="startDate">Start Date</label>
                             <!-- <input id="startDate" name="date_from" class="form-control" type="date" /> -->
-                            <input id="startDate" name="date_from" class="form-control" type="date" min="<?php echo date("Y-m-d"); ?>">
+                            <input id="startDate" name="date_from" class="form-control" type="date" max="<?php echo date("Y-m-d"); ?>">
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <label for="startDate">To Date</label>
                             <!-- <input id="startDate" name="date_to" class="form-control" type="date" /> -->
-                            <input  id="startDate" name="date_to" class="form-control" type="date" min="<?php echo date("Y-m-d"); ?>">
+                            <input  id="startDate" name="date_to" class="form-control" type="date" max="<?php echo date("Y-m-d"); ?>">
                         </div>
 
                     </div>
@@ -497,41 +497,41 @@ require_once __DIR__ . '/../partials/header.php';
 </script>
 
 <script>
-    // // Function to get query parameters from the URL
-    // function getQueryParams() {
-    //     const params = {};
-    //     window.location.search.substring(1).split("&").forEach(param => {
-    //         const [key, value] = param.split("=");
-    //         params[decodeURIComponent(key)] = decodeURIComponent(value);
-    //     });
-    //     return params;
-    // }
+    // Function to get query parameters from the URL
+    function getQueryParams() {
+        const params = {};
+        window.location.search.substring(1).split("&").forEach(param => {
+            const [key, value] = param.split("=");
+            params[decodeURIComponent(key)] = decodeURIComponent(value);
+        });
+        return params;
+    }
 
-    // // Get query parameters
-    // const queryParams = getQueryParams();
+    // Get query parameters
+    const queryParams = getQueryParams();
 
-    // if (queryParams.query === 'last_week') {
-    //     // Add the .filter_tab_active class to the element with the ID 'last_week'
-    //     const elements = document.querySelectorAll('.last_week');
-    //     elements.forEach(element => {
-    //         element.classList.add('filter_tab_active');
-    //     });
-    // }
-    // else if (queryParams.query === 'last_month') {
-    //     // Add the .filter_tab_active class to the element with the ID 'current_month'
+    if (queryParams.query === 'last_week') {
+        // Add the .filter_tab_active class to the element with the ID 'last_week'
+        const elements = document.querySelectorAll('.last_week');
+        elements.forEach(element => {
+            element.classList.add('filter_tab_active');
+        });
+    }
+    else if (queryParams.query === 'last_month') {
+        // Add the .filter_tab_active class to the element with the ID 'current_month'
 
-    //     const elements = document.querySelectorAll('.last_month');
-    //     elements.forEach(element => {
-    //         element.classList.add('filter_tab_active');
-    //     });
-    // }
-    // else if (queryParams.query === 'last_year') {
-    //     // Add the .filter_tab_active class to the element with the ID 'last_year'
-    //     const elements = document.querySelectorAll('.last_year');
-    //     elements.forEach(element => {
-    //         element.classList.add('filter_tab_active');
-    //     });
-    // }
+        const elements = document.querySelectorAll('.last_month');
+        elements.forEach(element => {
+            element.classList.add('filter_tab_active');
+        });
+    }
+    else if (queryParams.query === 'last_year') {
+        // Add the .filter_tab_active class to the element with the ID 'last_year'
+        const elements = document.querySelectorAll('.last_year');
+        elements.forEach(element => {
+            element.classList.add('filter_tab_active');
+        });
+    }
 </script>
 
 

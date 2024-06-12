@@ -641,9 +641,7 @@ if ($avg_order_value_increase_left_percentage >= 100) {
                                                             <div class="modal-content">
                                                                 <div class="modal-header" style="background-color: #4987D870">
                                                                     <div class="py-1 rounded-top text-center">
-                                                                        <h3 class="card-title m-0 text-black fs-2 fw-bold text-nowrap">Definitions of goals
-                                                                            and
-                                                                            objectives
+                                                                        <h3 class="card-title m-0 text-black fs-2 fw-bold text-nowrap" data-i18n="popoups.objective_popoup.heading">Definitions of goals and objectives
                                                                         </h3>
                                                                     </div>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

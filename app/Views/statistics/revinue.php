@@ -107,7 +107,7 @@
                         </div>
                         <!-- net income Card End -->
                     </div>
-                    <!-- <div id="chart-combination-3"></div>
+                    <div id="chart-combination-3"></div>
                     <div class="row g-2 align-items-center">
                         <div class="col-auto ms-auto btn-list mt-5 mb-5 sms_mu_for_rtl_row_cards">
                             <div class="text-light p-1" style="background-color:#627e0c; border-radius:5px;"
@@ -126,7 +126,7 @@
                                 data-i18n="statististics.chart_below_btn.five_btn.text"> Revenues
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                     <!-- Colors Button End -->
 
                     <!-- Icon Box End -->
@@ -219,41 +219,41 @@
 
 
 <script>
-                        // // Function to get query parameters from the URL
-                        // function getQueryParams() {
-                        //     const params = {};
-                        //     window.location.search.substring(1).split("&").forEach(param => {
-                        //         const [key, value] = param.split("=");
-                        //         params[decodeURIComponent(key)] = decodeURIComponent(value);
-                        //     });
-                        //     return params;
-                        // }
+                        // Function to get query parameters from the URL
+                        function getQueryParams() {
+                            const params = {};
+                            window.location.search.substring(1).split("&").forEach(param => {
+                                const [key, value] = param.split("=");
+                                params[decodeURIComponent(key)] = decodeURIComponent(value);
+                            });
+                            return params;
+                        }
 
-                        // // Get query parameters
-                        // const queryParams = getQueryParams();
+                        // Get query parameters
+                        const queryParams = getQueryParams();
 
-                        // if (queryParams.query === 'last_week') {
-                        //     // Add the .filter_tab_active class to the element with the ID 'last_week'
-                        //     const elements = document.querySelectorAll('.last_week');
-                        //     elements.forEach(element => {
-                        //         element.classList.add('filter_tab_active');
-                        //     });
-                        // }
-                        // else if (queryParams.query === 'last_month') {
-                        //     // Add the .filter_tab_active class to the element with the ID 'current_month'
+                        if (queryParams.query === 'last_week') {
+                            // Add the .filter_tab_active class to the element with the ID 'last_week'
+                            const elements = document.querySelectorAll('.last_week');
+                            elements.forEach(element => {
+                                element.classList.add('filter_tab_active');
+                            });
+                        }
+                        else if (queryParams.query === 'last_month') {
+                            // Add the .filter_tab_active class to the element with the ID 'current_month'
 
-                        //     const elements = document.querySelectorAll('.last_month');
-                        //     elements.forEach(element => {
-                        //         element.classList.add('filter_tab_active');
-                        //     });
-                        // }
-                        // else if (queryParams.query === 'last_year') {
-                        //     // Add the .filter_tab_active class to the element with the ID 'last_year'
-                        //     const elements = document.querySelectorAll('.last_year');
-                        //     elements.forEach(element => {
-                        //         element.classList.add('filter_tab_active');
-                        //     });
-                        // }
+                            const elements = document.querySelectorAll('.last_month');
+                            elements.forEach(element => {
+                                element.classList.add('filter_tab_active');
+                            });
+                        }
+                        else if (queryParams.query === 'last_year') {
+                            // Add the .filter_tab_active class to the element with the ID 'last_year'
+                            const elements = document.querySelectorAll('.last_year');
+                            elements.forEach(element => {
+                                element.classList.add('filter_tab_active');
+                            });
+                        }
 
 
                     </script>
