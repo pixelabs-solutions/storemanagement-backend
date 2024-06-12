@@ -654,12 +654,22 @@ require_once __DIR__ . '/../partials/header.php';
                                 <!-- <label class="form-label">From Date</label> -->
                                 <label for="startDate" data-i18n="popoups.static_popoup.date_range.start_date">Start
                                     Date</label>
-                                <input id="startDate" name="date_from" class="form-control" type="date" />
+                                <!-- <input id="startDate" name="date_from" class="form-control" type="date" /> -->
+                                <?php
+                                    // Get today's date
+                                    $today = date("Y-m-d");
+                                    ?>
+                                    <input type="date" id="startDate" name="date_from" class="form-control" max="<?php echo $today; ?>">
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <label for="startDate" data-i18n="popoups.static_popoup.date_range.To_date">To
                                     Date</label>
-                                <input id="startDate" name="date_to" class="form-control" type="date" />
+                                <!-- <input id="startDate" name="date_to" class="form-control" type="date" /> -->
+                                <?php
+                                    // Get today's date
+                                    $today = date("Y-m-d");
+                                    ?>
+                                    <input id="startDate" name="date_to" class="form-control" type="date" max="<?php echo $today; ?>">
                             </div>
 
                         </div>

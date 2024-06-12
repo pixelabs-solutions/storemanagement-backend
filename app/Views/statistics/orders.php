@@ -12,13 +12,13 @@
                     <div class="row g-2 align-items-center list_button_statis">
                         <!-- Stats header Buttons -->
                         <div class="col-auto btn-list">
-                            <a href="?query=last_week" id="orders_last_week" class="btn btn-light shadow-none last_week"
+                            <a href="?query=last_week" id="orders_last_week" class="btn bg-transparent btn-light shadow-none last_week"
                                 class="nav-link" data-i18n="statististics.tabs_in_select_range.week"> Last Week
                             </a>
-                            <a href="?query=last_month" id="orders_last_month" class="btn btn-light shadow-none last_month "
+                            <a href="?query=last_month" id="orders_last_month" class="btn bg-transparent btn-light shadow-none last_month "
                                 class="nav-link" data-i18n="statististics.tabs_in_select_range.month"> Current
                                 Month </a>
-                            <a href="?query=last_year" id="orders_last_year" class="btn btn-light shadow-none last_year"
+                            <a href="?query=last_year" id="orders_last_year" class="btn bg-transparent btn-light shadow-none last_year"
                                 data-i18n="statististics.tabs_in_select_range.year"> Last Year </a>
                         </div>
                         <!-- Date Range Button -->
