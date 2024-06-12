@@ -37,7 +37,7 @@ class Dashboard
         $cities = [];
         $total_customers = 0;
         $latestOrders = [];
-        $client = new Client();
+        // $client = new Client();
         try {
             
             $query = "SELECT * FROM transactions WHERE user_id = $user_id";

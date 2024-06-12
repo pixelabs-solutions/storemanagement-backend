@@ -307,7 +307,8 @@ class Base
     public static function get_total_revenue($user_id, $date_range = []) {
         global $connection;
 
-        $query = "SELECT total FROM transactions WHERE user_id = $user_id";
+        // SQL query to count the number of rows in the products table
+        $query = "SELECT total, date_created FROM transactions WHERE user_id = $user_id";
         if ($date_range != null && !empty($date_range)) {
             $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
         }
@@ -373,27 +374,35 @@ class Base
         return count($returningCustomers);
     }
 
-    public static function calculate_raise_in_orders($store_url, $params)
+    public static function calculate_raise_in_orders($user_id, $params = [])
     {
-        $client = new Client();
-        $response = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', $params);
-        if ($response->getStatusCode() == 200) {
-            $orders = json_decode($response->getBody(), true);
+        // $client = new Client();
+        // $response = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', $params);
+        global $connection;
+
+        $query = "SELECT *  FROM transactions WHERE user_id = $user_id";
+        $result = $connection->query($query);
+
+        $order_count_query = "SELECT COUNT(*) AS orders_count FROM transactions WHERE user_id = $user_id";
+    
+        $order_count_result = $connection->query($order_count_query);
+        $totalOrders = $order_count_result->fetch_assoc();
+
             $totalItems = 0;
             $totalPrice = 0;
-            $totalOrders = count($orders);
-            if($totalOrders === 0) return ['average_items' => 0, 'average_price' => 0];
-            foreach ($orders as $order) {
-                foreach ($order['line_items'] as $line_item) {
+            // $totalOrders = count($orders);
+            if($totalOrders['orders_count'] === 0) return ['average_items' => 0, 'average_price' => 0];
+            while ($order = $result->fetch_assoc()) {
+                $line_items = json_decode($order['line_items'], true);
+                foreach ($line_items as $line_item) {
                     $totalItems += $line_item['quantity'];
                 }
                 $totalPrice += $order['total'];
             }
-            $averageItemsPerOrder = $totalItems / $totalOrders;
-            $averageOrderPrice = $totalPrice / $totalOrders;
+            $averageItemsPerOrder = $totalItems / $totalOrders['orders_count'];
+            $averageOrderPrice = $totalPrice / $totalOrders['orders_count'];
             return ['average_items' => $averageItemsPerOrder, 'average_price' => $averageOrderPrice];
-        }
-        return ['average_items' => 0, 'average_price' => 0];
+
     }
 
 
