@@ -7,6 +7,7 @@ use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Models\Authentication;
 
 use Pixelabs\StoreManagement\Helpers\RequestTracker;
+
 class DashboardController
 {
 
@@ -17,7 +18,7 @@ class DashboardController
             header("Location: /admin/index");
         } else {
             RequestTracker::trackRequest();
-        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+            $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
             $response = Configuration::getConfiguration($is_rest);
             $result = json_decode($response, true);
             if ($is_rest && $result['status_code'] != 200) {
@@ -35,17 +36,17 @@ class DashboardController
                 'date_to' => $_GET['date_to'] ?? null
             ];
 
-            $stats = Dashboard::get_dashboard_stats($configuration, $filters);
-            $customers_location = Dashboard::get_dashboard_data($configuration);
-            $top_products = Dashboard::fetchTopSellingProductImages($configuration);
-        $requests = RequestTracker::getRequestsLastSevenDays();
+            $stats = Dashboard::get_dashboard_stats();
+            $customers_location = Dashboard::get_dashboard_data();
+            $top_products = Dashboard::fetchTopSellingProductImages();
+            $requests = RequestTracker::getRequestsLastSevenDays();
 
             $dashboard_data = [
                 'statistics' => $stats,
                 'customers_location' => $customers_location['customers_location'],
                 'latest_orders' => $customers_location['latest_orders'],
                 'top_products' => $top_products,
-            'requests' => $requests
+                'requests' => $requests
             ];
 
             if ($is_rest == 'true') {
