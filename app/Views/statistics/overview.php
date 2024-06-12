@@ -9,12 +9,12 @@ require_once __DIR__ . '/../partials/header.php';
         width: 19%;
     }
 
-    .sms_w_active_item {
+    .sms_w_active_item_stats {
         background-color: #4987D870 !important;
 
     }
 
-    .sms_w_item_deactive {
+    .sms_w_item_deactive_stats {
         background-color: white;
     }
 
@@ -91,25 +91,22 @@ require_once __DIR__ . '/../partials/header.php';
     <div>
         <ul class="nav justify-content-between nav-tabs" data-bs-toggle="tabs" style="border:none;">
             <li class="nav-item mb-2">
-                <a href="#tabs_overview" class="nav-link active sms_w_active_item justify-content-center"
-                    data-bs-toggle="tab" style=" border-radius:20px; padding: 5px 30px; width:150px;"
-                    data-i18n="statististics.tabs_in_static.tab_overview">Overview</a>
+                <a href="#tabs_overview" class="nav-link_stats active sms_w_active_item_stats justify-content-center"
+                    data-bs-toggle="tab" style=" border-radius:20px; padding: 5px 30px; width:150px; color:black;text-decoration: none"
+                    data-i18n="statististics.tabs_in_static.tab_overview" >Overview</a>
             </li>
             <li class="nav-item mb-2">
-                <a href="#tabs_product" class="nav-link sms_w_item_deactive justify-content-center" data-bs-toggle="tab"
-                    style=" border-radius:20px; padding: 5px 30px; width:150px; "
-                    data-i18n="statististics.tabs_in_static.tab_Products">Products</a>
+                <a href="#tabs_product" class="nav-link_stats sms_w_item_deactive_stats justify-content-center" data-bs-toggle="tab"
+                    style=" border-radius:20px; padding: 5px 30px; width:150px;  color:black;text-decoration: none"        data-i18n="statististics.tabs_in_static.tab_Products">Products</a>
             </li>
             <li class="nav-item mb-2">
-                <a href="#tabs_revenues" class="nav-link sms_w_item_deactive justify-content-center"
-                    data-bs-toggle="tab" style=" border-radius:20px; padding: 5px 30px; width:150px;"
-                    data-i18n="statististics.tabs_in_static.tab_Revenues">Revenues</a>
+                <a href="#tabs_revenues" class="nav-link_stats sms_w_item_deactive_stats justify-content-center"
+                    data-bs-toggle="tab" style=" border-radius:20px; padding: 5px 30px; width:150px;     color:black;text-decoration: none"   data-i18n="statististics.tabs_in_static.tab_Revenues">Revenues</a>
 
             </li>
             <li class="nav-item mb-2">
-                <a href="#tabs_orders" class="nav-link sms_w_item_deactive justify-content-center" data-bs-toggle="tab"
-                    style=" border-radius:20px; padding: 5px 30px; width:150px;"
-                    data-i18n="statististics.tabs_in_static.tab_Orders">Orders</a>
+                <a href="#tabs_orders" class="nav-link_stats sms_w_item_deactive_stats justify-content-center" data-bs-toggle="tab"
+                    style=" border-radius:20px; padding: 5px 30px; width:150px;  color:black;text-decoration: none"       data-i18n="statististics.tabs_in_static.tab_Orders">Orders</a>
 
             </li>
 
@@ -127,10 +124,10 @@ require_once __DIR__ . '/../partials/header.php';
                         <!-- Stats header Buttons -->
                         <div class="col-auto btn-list">
                             <a href="?query=last_week" id="overview_last_week" class="btn btn-light shadow-none last_week "
-                                class="nav-link" data-i18n="statististics.tabs_in_select_range.week"> Last Week
+                                class="nav-link_stats" data-i18n="statististics.tabs_in_select_range.week"> Last Week
                             </a>
                             <a href="?query=last_month" id="overview_last_month" class="btn btn-light shadow-none last_month "
-                                class="nav-link" data-i18n="statististics.tabs_in_select_range.month"> Current
+                                class="nav-link_stats" data-i18n="statististics.tabs_in_select_range.month"> Current
                                 Month </a>
                             <a href="?query=last_year" id="overview_last_year" class="btn btn-light shadow-none last_year"
                                 data-i18n="statististics.tabs_in_select_range.year"> Last Year </a>
@@ -138,7 +135,7 @@ require_once __DIR__ . '/../partials/header.php';
                         <!-- Date Range Button -->
                         <div class="col-auto ms-auto">
                             <a href="#" class="btn btn-pill" data-bs-toggle="modal" data-bs-target="#modal-team"
-                                style="background-color:#A8C3E7; border:none;" data-i18n="statististics.tabs_in_select_range.button">
+                                style="background-color:#EFEFEF; border:none;" data-i18n="statististics.tabs_in_select_range.button">
                                 Select a Date Range
                             </a>
                         </div>  
@@ -184,9 +181,6 @@ require_once __DIR__ . '/../partials/header.php';
 
         }
 </script>
-
-  
-
                     <div class="row mt-5 mb-5 d-flex flex-md-row flex-wrap flex-column justify-content-between tab-pane active show sms_mu_for_rtl_row_cards"
                         id="row_1">
                         <!-- New Customer Card Start -->
@@ -358,38 +352,43 @@ require_once __DIR__ . '/../partials/header.php';
 <!-- Model End -->
 
 <script>
-   document.addEventListener("DOMContentLoaded", function () {
-    // Get all nav-link elements
-    var navLinks = document.querySelectorAll('.nav-link');
+document.addEventListener("DOMContentLoaded", function () {
+    // Get all nav-link_stats elements
+    var navLinks = document.querySelectorAll('.nav-link_stats');
+
+    // Function to activate a tab
+    function activateTab(tabLink) {
+        // Remove active class from all nav-link_stats
+        navLinks.forEach(function (link) {
+            link.classList.remove('sms_w_active_item_stats');
+            link.classList.add('sms_w_item_deactive_stats');
+        });
+
+        // Add active class to the specified nav-link_stats
+        tabLink.classList.remove('sms_w_item_deactive_stats');
+        tabLink.classList.add('sms_w_active_item_stats');
+
+        // Activate the Bootstrap tab
+        new bootstrap.Tab(tabLink).show();
+    }
 
     // Retrieve the stored active tab from localStorage
     var activeTab = localStorage.getItem('activeTab');
     if (activeTab) {
         var activeTabLink = document.querySelector(`a[href="${activeTab}"]`);
         if (activeTabLink) {
-            navLinks.forEach(function (link) {
-                link.classList.remove('sms_w_active_item');
-                link.classList.add('sms_w_item_deactive');
-            });
-            activeTabLink.classList.add('sms_w_active_item');
-            activeTabLink.classList.remove('sms_w_item_deactive');
-            new bootstrap.Tab(activeTabLink).show();
+            activateTab(activeTabLink);
         }
     }
 
-    // Loop through each nav-link element
+    // Loop through each nav-link_stats element
     navLinks.forEach(function (navLink) {
         // Attach onclick event handler
-        navLink.addEventListener('click', function () {
-            // Remove active class from all nav-links
-            navLinks.forEach(function (link) {
-                link.classList.remove('sms_w_active_item');
-                link.classList.add('sms_w_item_deactive');
-            });
+        navLink.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the default link behavior
 
-            // Add active class to the clicked nav-link
-            this.classList.remove('sms_w_item_deactive');
-            this.classList.add('sms_w_active_item');
+            // Activate the clicked tab
+            activateTab(this);
 
             // Store the active tab in localStorage
             var href = this.getAttribute('href');
@@ -397,9 +396,8 @@ require_once __DIR__ . '/../partials/header.php';
         });
     });
 });
-
-
 </script>
+
 <script>
               window.addEventListener('load', function() {
         document.getElementById('loader').style.display = 'none';

@@ -142,8 +142,9 @@ require_once __DIR__ . '/../partials/header.php';
     background-color: #c0392b;
     /* Red color for error */
   }
-/* Add this in the style tag or a separate CSS file */
-#loader {
+
+  /* Add this in the style tag or a separate CSS file */
+  #loader {
     position: fixed;
     left: 0;
     top: 0;
@@ -158,9 +159,9 @@ require_once __DIR__ . '/../partials/header.php';
     font-family: 'Arial', sans-serif;
     color: #333;
     text-align: center;
-}
+  }
 
-#loader .spinner {
+  #loader .spinner {
     border: 8px solid #f3f3f3;
     border-top: 8px solid #3498db;
     border-radius: 50%;
@@ -168,24 +169,29 @@ require_once __DIR__ . '/../partials/header.php';
     height: 60px;
     animation: spin 2s linear infinite;
     margin-bottom: 20px;
-}
+  }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
 
-#loader h1 {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  #loader h1 {
     font-size: 1.5em;
     margin: 0;
     padding: 0;
-}
+  }
 </style>
 <div class="sms_transaction_w  p-0">
-<div id="loader">
+  <div id="loader">
     <div class="spinner"></div>
     <h1>Loading, please wait...</h1>
-</div>
+  </div>
   <div id="notification" class="notification"></div>
 
   <div class=" col-12 mt-5">
@@ -322,22 +328,22 @@ require_once __DIR__ . '/../partials/header.php';
 
           </table>
           <div class="sm-mu-buttons d-flex mb-4 justify-content-end">
-    <?php 
-    $current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-    $next_page = $current_page + 1;
-    $prev_page = $current_page > 1 ? $current_page - 1 : 1;
-    ?>  
-                              <input type="radio" class="btn-check" name="btn-radio-dropdown" id="btn-radio-dropdown-1" autocomplete="off" onclick="window.location.href='?page=<?php echo $prev_page; ?>'">
-                              <label for="btn-radio-dropdown-1" type="button" class="btn">
-                                
-                                Back
-                              </label>
-                              <input type="radio" class="btn-check" name="btn-radio-dropdown" id="btn-radio-dropdown-2" autocomplete="off" onclick="window.location.href='?page=<?php echo $next_page; ?>'">
-                              <label for="btn-radio-dropdown-2" type="button" class="btn">
+            <?php
+            $current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+            $next_page = $current_page + 1;
+            $prev_page = $current_page > 1 ? $current_page - 1 : 1;
+            ?>
+            <input type="radio" class="btn-check" name="btn-radio-dropdown" id="btn-radio-dropdown-1" autocomplete="off" onclick="window.location.href='?page=<?php echo $prev_page; ?>'">
+            <label for="btn-radio-dropdown-1" type="button" class="btn">
 
-                              Next
-                              </label>
-</div>
+              Back
+            </label>
+            <input type="radio" class="btn-check" name="btn-radio-dropdown" id="btn-radio-dropdown-2" autocomplete="off" onclick="window.location.href='?page=<?php echo $next_page; ?>'">
+            <label for="btn-radio-dropdown-2" type="button" class="btn">
+
+              Next
+            </label>
+          </div>
 
 
         </div>
@@ -349,8 +355,8 @@ require_once __DIR__ . '/../partials/header.php';
   <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header" style="background-color: #4987D870">
-        <div class="py-1 rounded-top text-center">
-          <h3 class="card-title text-black fs-2 fw-bold m-0">Order details #<span id="order_id"></span></h3>
+        <div class="py-1 rounded-top text-center w-100">
+          <span class="card-title text-black fs-2 fw-bold text-center d-flex justify-content-center m-0"><span class="m-0 card-title text-black fs-2 fw-bold text-center" data-i18n="popoups.transction_pop_popuop.order_detail.Order_detail">Order details</span> #<span id="order_id"></span></span>
         </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -364,11 +370,10 @@ require_once __DIR__ . '/../partials/header.php';
   </div>
 </div>
 <script>
-              window.addEventListener('load', function() {
-        document.getElementById('loader').style.display = 'none';
-    });
-
-        </script>
+  window.addEventListener('load', function() {
+    document.getElementById('loader').style.display = 'none';
+  });
+</script>
 <script>
   const viewOrderDetailsButtons = document.querySelectorAll('.view_order_details');
 

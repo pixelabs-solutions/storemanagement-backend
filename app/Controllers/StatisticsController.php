@@ -106,10 +106,11 @@ class StatisticsController
         $configuration = $this->prepare_configuration($is_rest);
 
         $filters = [
-            'query' => $_GET['query'] ?? null,
-            'date_from' => $_GET['date_from'] ?? null,
-            'date_to' => $_GET['date_to'] ?? null
+            'query' => isset($_GET['query']) ? $_GET['query'] : null,
+            'date_from' => isset($_GET['date_from']) ? $_GET['date_from'] : null,
+            'date_to' => isset($_GET['date_to']) ? $_GET['date_to'] : null
         ];
+        // echo json_encode($filters);exit;
 
         $overview_stats = Statistics::get_overview_stats($configuration, $filters);
         $orders_stats = Statistics::get_orders_stats($configuration, $filters);

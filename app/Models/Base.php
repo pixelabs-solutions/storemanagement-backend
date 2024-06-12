@@ -276,35 +276,32 @@ class Base
 
     }
 
-    public static function get_number_of_products($user_id, $params = []) {
+    public static function get_number_of_products($user_id, $date_range = []) {
         global $connection;
-
         // SQL query to count the number of rows in the products table
         $query = "SELECT COUNT(*) AS product_count FROM products WHERE user_id = $user_id";
+        if ($date_range != null && !empty($date_range)) {
+            $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+        }
+        // echo json_encode($params);exit;
         $result = $connection->query($query);
         $row = $result->fetch_assoc();
-        // echo var_dump($row);
-        // $client = new Client();
-        // $response = $client->request('GET', $store_url . '/wp-json/wc/v3/products', $params);
- 
-        // $products = json_decode($response->getBody(), true);
-        // return ($row['product_count'] !== null) ? $row['product_count'] : 0;
         return $row['product_count'];
     }
 
     
 
-    public static function get_number_of_orders($user_id, $params = []) {
+    public static function get_number_of_orders($user_id, $date_range = []) {
         global $connection;
 
         // SQL query to count the number of rows in the products table
         $query = "SELECT COUNT(*) AS orders_count FROM transactions WHERE user_id = $user_id";
+        if ($date_range != null && !empty($date_range)) {
+            $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+        }
         $result = $connection->query($query);
         $row = $result->fetch_assoc();
 
-        // $client = new Client();
-        // $response = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', $params);
-        // $orders = json_decode($response->getBody(), true);
         return $row['orders_count'];
     }
 
@@ -326,7 +323,7 @@ class Base
   
         return $totalRevenue;
     }
-    public static function get_new_customers_count($user_id, $params = []) {
+    public static function get_new_customers_count($user_id, $date_range = []) {
         // $client = new Client();
         // $response = $client->request('GET', $store_url. '/wp-json/wc/v3/orders', $params);
         // $orders = json_decode($response->getBody(), true);
@@ -334,6 +331,9 @@ class Base
 
         // SQL query to count the number of rows in the products table
         $query = "SELECT customer_id, id  FROM transactions WHERE user_id = $user_id";
+        if ($date_range != null && !empty($date_range)) {
+            $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+        }
         $result = $connection->query($query);
 
         $customerOrdersCount = [];
@@ -353,15 +353,15 @@ class Base
         return count($newCustomers);
     }
 
-    public static function get_returning_customers_count($user_id, $params = []) {
-        // $client = new Client();
-        // $response = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', $params);
-        // $orders = json_decode($response->getBody(), true);
+    public static function get_returning_customers_count($user_id, $date_range = []) {
+        
 
         global $connection;
 
-        // SQL query to count the number of rows in the products table
         $query = "SELECT customer_id, id  FROM transactions WHERE user_id = $user_id";
+        if ($date_range != null && !empty($date_range)) {
+            $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+        }
         $result = $connection->query($query);
 
         $customerOrdersCount = [];
