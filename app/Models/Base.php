@@ -276,19 +276,16 @@ class Base
 
     }
 
-    public static function get_number_of_products($user_id, $params = []) {
+    public static function get_number_of_products($user_id, $date_range = []) {
         global $connection;
-
         // SQL query to count the number of rows in the products table
         $query = "SELECT COUNT(*) AS product_count FROM products WHERE user_id = $user_id";
+        if ($date_range != null && !empty($date_range)) {
+            $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+        }
+        // echo json_encode($params);exit;
         $result = $connection->query($query);
         $row = $result->fetch_assoc();
-        // echo var_dump($row);
-        // $client = new Client();
-        // $response = $client->request('GET', $store_url . '/wp-json/wc/v3/products', $params);
- 
-        // $products = json_decode($response->getBody(), true);
-        // return ($row['product_count'] !== null) ? $row['product_count'] : 0;
         return $row['product_count'];
     }
 

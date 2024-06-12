@@ -177,7 +177,8 @@ class Database
             `description` text DEFAULT NULL,
             `type` varchar(50) DEFAULT NULL,
             `attributes` text DEFAULT NULL,
-            `variations` text DEFAULT NULL
+            `variations` text DEFAULT NULL,
+            `date_created` DATETIME
             )";
         $this->connection->query($productsTable);
 

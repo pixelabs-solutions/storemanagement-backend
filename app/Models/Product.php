@@ -257,8 +257,8 @@ class Product
         try {
             foreach ($products as $product) {
                 $stmt = $connection->prepare("
-                    INSERT INTO products (id, user_id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    INSERT INTO products (id, user_id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations, date_created)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ");
                 $id = $product['id'];
                 $name = $product['name'];
@@ -271,9 +271,10 @@ class Product
                 $stock_quantity = $product['stock_quantity'];
                 $description = $product['description'];
                 $type = $product['type'];
+                $date_created = $product['date_created'];
 
                 $stmt->bind_param(
-                    'iissssdissss',
+                    'iissssdisssss',
                     $id,
                     $user_id,
                     $name,
@@ -285,7 +286,8 @@ class Product
                     $description,
                     $type,
                     $attributes,
-                    $variations
+                    $variations, 
+                    $date_created
                 );
 
                 $stmt->execute();

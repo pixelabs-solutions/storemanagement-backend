@@ -106,18 +106,19 @@ class StatisticsController
         $configuration = $this->prepare_configuration($is_rest);
 
         $filters = [
-            'query' => $_GET['query'] ?? null,
-            'date_from' => $_GET['date_from'] ?? null,
-            'date_to' => $_GET['date_to'] ?? null
+            'query' => isset($_GET['query']) ? $_GET['query'] : null,
+            'date_from' => isset($_GET['date_from']) ? $_GET['date_from'] : null,
+            'date_to' => isset($_GET['date_to']) ? $_GET['date_to'] : null
         ];
+        // echo json_encode($filters);exit;
 
-        $overview_stats = Statistics::get_overview_stats($configuration, $filters);
-        $orders_stats = Statistics::get_orders_stats($configuration, $filters);
-        $revenue_stats = Statistics::get_revenue_stats($configuration, $filters);
+        // $overview_stats = Statistics::get_overview_stats($configuration, $filters);
+        // $orders_stats = Statistics::get_orders_stats($configuration, $filters);
+        // $revenue_stats = Statistics::get_revenue_stats($configuration, $filters);
         $products_stats = Statistics::get_products_stats($configuration, $filters);
 
         if($is_rest == 'true'){
-            echo json_encode($overview_stats);
+            echo json_encode($products_stats);
         }
         else{
             include_once __DIR__ . '/../Views/statistics/overview.php';

@@ -12,36 +12,24 @@ class Statistics
         $consumer_secret = $configuration["consumer_secret"];
         $store_url = $configuration["store_url"];
         $client = new Client();
-        $dateRange = $filters ? self::getDateRange($filters) : [];
+        $date_range = $filters ? self::getDateRange($filters) : [];
         try {
-            // Fetch Products
-            $productParams = [
-                'auth' => [$consumer_key, $consumer_secret],
-                'per_page' => 100
-            ];
-            if (!empty($dateRange)) {
-                $productParams['query'] = [
-                    'after' => $dateRange['after'],
-                    'before' => $dateRange['before']
-                ];
-            }
-            // $response = $client->request('GET', $store_url . '/wp-json/wc/v3/products', $productParams);
+            
             $user_id = Authentication::getUserIdFromToken();
-
-            $totalProducts = Base::get_number_of_products($user_id);
-
+            $totalProducts = Base::get_number_of_products($user_id, $date_range);
+            
             global $connection;
-
             // SQL query to count the number of rows in the products table
             $query = "SELECT *  FROM products WHERE user_id = $user_id";
+            if ($date_range != null && !empty($date_range)) {
+                $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+            }
+
             $result = $connection->query($query);
 
-            // $products = json_decode($response->getBody(), true);
-            // $totalProducts = count($products);
             $normalProducts = 0;
             $saleProducts = 0;
         
-            // $products = $result->fetch_assoc();
 
             while ($product = $result->fetch_assoc()) {
                 // echo json_encode($product);
@@ -53,36 +41,27 @@ class Statistics
                 }
             }
     
-            // Fetch Orders
-            $orderParams = [
-                'auth' => [$consumer_key, $consumer_secret],
-                'per_page' => 100
-            ];
-            if (!empty($dateRange)) {
-                $orderParams['query'] = [
-                    'after' => $dateRange['after'],
-                    'before' => $dateRange['before']
-                ];
+
+
+            $query = "SELECT COUNT(*) AS transaction_count FROM transactions WHERE user_id = $user_id";
+            if ($date_range != null && !empty($date_range)) {
+                $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
             }
-            // $orderResponse = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', $orderParams);
-            // $orders = json_decode($orderResponse->getBody(), true);
-
-
-                $query = "SELECT COUNT(*) AS transaction_count FROM transactions WHERE user_id = $user_id";
-                $result = $connection->query($query);
-                $row = $result->fetch_assoc();
+            $result = $connection->query($query);
+            $row = $result->fetch_assoc();
      
 
             $numberOfOrders = $row['transaction_count'];
             $distinctProductsOnOrder = [];
 
+            $order_query = "SELECT *  FROM transactions WHERE user_id = $user_id";
+            if ($date_range != null && !empty($date_range)) {
+                $order_query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+            }
+                
+            $order_result = $connection->query($order_query);
 
-                      // SQL query to count the number of rows in the products table
-                      $order_query = "SELECT *  FROM transactions WHERE user_id = $user_id";
-                      $order_result = $connection->query($order_query);
-
-
-             while ($order = $order_result->fetch_assoc()) {
+            while ($order = $order_result->fetch_assoc()) {
                 if (isset($order['line_items']) && is_array($order['line_items'])) {
                     foreach ($order['line_items'] as $item) {
                         $distinctProductsOnOrder[$item['product_id']] = true;  

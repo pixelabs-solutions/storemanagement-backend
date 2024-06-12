@@ -31,12 +31,12 @@ class SynchronizationController
             ));
             exit;
         }
-        // Base::truncate_table($tables, $user_id);
-       $configuration = $this->prepare_configuration();
+        Base::truncate_table($tables, $user_id);
+        $configuration = $this->prepare_configuration();
         
-        // $product_fields = ['_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations'];
-        // $products = Base::wc_get($configuration, "products", $product_fields);
-        // Product::store_products($products, $user_id);
+        $product_fields = ['_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations, date_created'];
+        $products = Base::wc_get($configuration, "products", $product_fields);
+        Product::store_products($products, $user_id);
 
         // $category_fields = ['_fields' => 'id, name, parent, image, count'];
         // $categories = Base::wc_get($configuration, "products/categories", $category_fields);
