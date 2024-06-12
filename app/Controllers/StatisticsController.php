@@ -113,9 +113,9 @@ class StatisticsController
         // echo json_encode($filters);exit;
 
         $overview_stats = Statistics::get_overview_stats($configuration, $filters);
-        // $orders_stats = Statistics::get_orders_stats($configuration, $filters);
-        // $revenue_stats = Statistics::get_revenue_stats($configuration, $filters);
-        // $products_stats = Statistics::get_products_stats($configuration, $filters);
+        $orders_stats = Statistics::get_orders_stats($configuration, $filters);
+        $revenue_stats = Statistics::get_revenue_stats($configuration, $filters);
+        $products_stats = Statistics::get_products_stats($configuration, $filters);
 
         if($is_rest == 'true'){
             echo json_encode($overview_stats);
