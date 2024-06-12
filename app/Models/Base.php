@@ -276,39 +276,70 @@ class Base
 
     }
 
-    public static function get_number_of_products($store_url, $params) {
-        $client = new Client();
-        $response = $client->request('GET', $store_url . '/wp-json/wc/v3/products', $params);
-        $products = json_decode($response->getBody(), true);
-        return ($products !== null) ? count($products) : 0;
+    public static function get_number_of_products($user_id, $params = []) {
+        global $connection;
+
+        // SQL query to count the number of rows in the products table
+        $query = "SELECT COUNT(*) AS product_count FROM products WHERE user_id = $user_id";
+        $result = $connection->query($query);
+        $row = $result->fetch_assoc();
+        // echo var_dump($row);
+        // $client = new Client();
+        // $response = $client->request('GET', $store_url . '/wp-json/wc/v3/products', $params);
+ 
+        // $products = json_decode($response->getBody(), true);
+        // return ($row['product_count'] !== null) ? $row['product_count'] : 0;
+        return $row['product_count'];
     }
 
-    public static function get_number_of_orders($store_url, $params) {
-        $client = new Client();
-        $response = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', $params);
-        $orders = json_decode($response->getBody(), true);
-        return count($orders);
+    
+
+    public static function get_number_of_orders($user_id, $params = []) {
+        global $connection;
+
+        // SQL query to count the number of rows in the products table
+        $query = "SELECT COUNT(*) AS orders_count FROM transactions WHERE user_id = $user_id";
+        $result = $connection->query($query);
+        $row = $result->fetch_assoc();
+
+        // $client = new Client();
+        // $response = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', $params);
+        // $orders = json_decode($response->getBody(), true);
+        return $row['orders_count'];
     }
 
-    public static function get_total_revenue($store_url, $params) {
-        $client = new Client();
-        $response = $client->request('GET', $store_url.'/wp-json/wc/v3/orders', $params);
-        $orders = json_decode($response->getBody(), true);
-        if($orders === null) return 0;
+    public static function get_total_revenue($user_id, $params = []) {
+        // $client = new Client();
+        // $response = $client->request('GET', $store_url.'/wp-json/wc/v3/orders', $params);
+        // $orders = json_decode($response->getBody(), true);
+        global $connection;
+
+        // SQL query to count the number of rows in the products table
+        $query = "SELECT total FROM transactions WHERE user_id = $user_id";
+        $result = $connection->query($query);
         $totalRevenue = 0;
-        foreach ($orders as $order) {
-            $totalRevenue += $order['total'];
+
+        while ($row = $result->fetch_assoc()) {
+            // echo json_encode($row);
+            $totalRevenue += $row['total'];
         }
+  
         return $totalRevenue;
     }
-    public static function get_new_customers_count($store_url, $params) {
-        $client = new Client();
-        $response = $client->request('GET', $store_url. '/wp-json/wc/v3/orders', $params);
-        $orders = json_decode($response->getBody(), true);
+    public static function get_new_customers_count($user_id, $params = []) {
+        // $client = new Client();
+        // $response = $client->request('GET', $store_url. '/wp-json/wc/v3/orders', $params);
+        // $orders = json_decode($response->getBody(), true);
+        global $connection;
+
+        // SQL query to count the number of rows in the products table
+        $query = "SELECT customer_id, id  FROM transactions WHERE user_id = $user_id";
+        $result = $connection->query($query);
+
         $customerOrdersCount = [];
-        if($orders === null) return 0;
-        foreach ($orders as $order) {
-            $customerId = $order['customer_id'] ?? 'guest_' . ($order['id'] ?? uniqid());
+        // if($orders === null) return 0;
+        while ($row = $result->fetch_assoc()) {
+            $customerId = $row['customer_id'] ?? 'guest_' . ($row['id'] ?? uniqid());
             if (!isset($customerOrdersCount[$customerId])) {
                 $customerOrdersCount[$customerId] = 0;
             }
@@ -322,14 +353,21 @@ class Base
         return count($newCustomers);
     }
 
-    public static function get_returning_customers_count($store_url, $params) {
-        $client = new Client();
-        $response = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', $params);
-        $orders = json_decode($response->getBody(), true);
+    public static function get_returning_customers_count($user_id, $params = []) {
+        // $client = new Client();
+        // $response = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', $params);
+        // $orders = json_decode($response->getBody(), true);
+
+        global $connection;
+
+        // SQL query to count the number of rows in the products table
+        $query = "SELECT customer_id, id  FROM transactions WHERE user_id = $user_id";
+        $result = $connection->query($query);
+
         $customerOrdersCount = [];
 
-        foreach ($orders as $order) {
-            $customerId = $order['customer_id'] ?? 'guest_' . ($order['id'] ?? uniqid());
+        while ($row = $result->fetch_assoc()) {
+            $customerId = $row['customer_id'] ?? 'guest_' . ($row['id'] ?? uniqid());
             if (!isset($customerOrdersCount[$customerId])) {
                 $customerOrdersCount[$customerId] = 0;
             }

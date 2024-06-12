@@ -9,12 +9,16 @@ use Pixelabs\StoreManagement\Models\Attribute;
 use Pixelabs\StoreManagement\Models\Currency;
 use Pixelabs\StoreManagement\Models\Authentication;
 use Pixelabs\StoreManagement\Models\Transaction;
+use Pixelabs\StoreManagement\Models\Customer;
+use Pixelabs\StoreManagement\Models\Coupon;
+use Pixelabs\StoreManagement\Models\Inventory;
+
 
 class SynchronizationController
 {
     public function sync_data()
     {
-        $tables = ['products', 'attributes', 'categories', 'currencies, transactions'];
+        $tables = ['products', 'attributes', 'categories', 'currencies', 'transactions', 'customers', 'coupons', 'inventory_settings'];
         
         $user_id = Authentication::getUserIdFromToken();
 
@@ -27,28 +31,40 @@ class SynchronizationController
             ));
             exit;
         }
-        Base::truncate_table($tables, $user_id);
-        $configuration = $this->prepare_configuration();
+        // Base::truncate_table($tables, $user_id);
+       $configuration = $this->prepare_configuration();
         
-        $product_fields = ['_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations'];
-        $products = Base::wc_get($configuration, "products", $product_fields);
-        Product::store_products($products, $user_id);
+        // $product_fields = ['_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations'];
+        // $products = Base::wc_get($configuration, "products", $product_fields);
+        // Product::store_products($products, $user_id);
 
-        $category_fields = ['_fields' => 'id, name, parent, image, count'];
-        $categories = Base::wc_get($configuration, "products/categories", $category_fields);
-        Category::store_categories($categories, $user_id);
+        // $category_fields = ['_fields' => 'id, name, parent, image, count'];
+        // $categories = Base::wc_get($configuration, "products/categories", $category_fields);
+        // Category::store_categories($categories, $user_id);
 
-        $attribute_fields = ['_fields' => 'id, name, type'];
-        $attributes = Base::wc_get($configuration, "products/attributes", $attribute_fields);
-        Attribute::store_attributes($attributes, $user_id);
+        // $attribute_fields = ['_fields' => 'id, name, type'];
+        // $attributes = Base::wc_get($configuration, "products/attributes", $attribute_fields);
+        // Attribute::store_attributes($attributes, $user_id);
 
-        $currency_fields = ['_fields' => 'code, name, symbol'];
-        $currency = Base::wc_get($configuration, "data/currencies/current", $currency_fields);
-        Currency::store_currencies($currency, $user_id);
+        // $currency_fields = ['_fields' => 'code, name, symbol'];
+        // $currency = Base::wc_get($configuration, "data/currencies/current", $currency_fields);
+        // Currency::store_currencies($currency, $user_id);
 
-        $transaction_fields = ['_fields' => 'id, status, total, shipping_total, date_created, total, billing, meta_data, line_items'];
+        $transaction_fields = ['_fields' => 'id, status, total, shipping_total, customer_id, date_created, total, billing, meta_data, line_items'];
         $transactions = Base::wc_get($configuration, "orders", $transaction_fields);
         Transaction::store_transactions($transactions, $user_id);
+
+        // $customers_fields = ['_fields' => 'id, first_name, last_name, email'];
+        // $customers = Base::wc_get($configuration, "customers", $customers_fields);
+        // Customer::store_customers($customers, $user_id);
+
+        // $coupons_fields = ['_fields' => 'id, code, date_expires, discount_type, usage_limit, usage_count, amount'];
+        // $coupons = Base::wc_get($configuration, "coupons", $coupons_fields);
+        // Coupon::store_coupons($coupons, $user_id);
+
+        // $inventory_settings = Base::wc_get($configuration, "settings/products");
+        // Inventory::store_inventory_settings($inventory_settings, $user_id);
+
         echo "done";
 
     }
