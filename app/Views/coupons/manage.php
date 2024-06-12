@@ -199,12 +199,13 @@
                     // Form submission failed, display error message
                     document.getElementById('sms_add_coupons_error-message').style.display = 'block';
                     document.getElementById('sms_add_coupons_error-message').style.display = 'block';
+                    document.getElementById('sms_mu_manage_submit').disabled = false;
                 }
             })
             .catch(error => {
                 // Network error occurred, display error message
                 document.getElementById('sms_add_coupons_error-message').style.display = 'block';
-                document.getElementById('btn2').removeAttribute('disabled');
+                document.getElementById('sms_mu_manage_submit').disabled = false;
                 console.error('Error submitting form data:', error);
             });
     }
