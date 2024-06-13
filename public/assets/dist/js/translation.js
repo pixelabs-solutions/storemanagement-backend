@@ -188,13 +188,17 @@ const translations = {
         source: "source",
       },
       transaction_tr: {
-        order_no: "#1152",
-        customer_name: "mubashir Malka",
-        status: "completed",
-        order_date: "24/07/2024",
-        sum: "NIS 1,370",
-        source: "Google Organic",
+        customer_name: "Client's Name",
+        Phone_Number: "Phone Number",
+        Email_address: "Email Address",
       },
+
+      status_tr:{
+        Complete : "Complete",
+        In_Treatment : "In Treatment",
+        Cancelled : "Cancelled",
+        changed : "Group status change"
+      }
     },
     statististics: {
       tabs_in_static: {
@@ -555,11 +559,12 @@ const translations = {
             amt: "250 NIS",
             total: "15",
           },
-          card_order: {
+          card_order: {   
             total_cost: "Total cost of order",
-            product: "Products: NIS 10,450",
-            delivery: "Delivery up to 5 business days: NIS 39.9",
+            product: "Products: NIS",
+            delivery: "Delivery up to 5 business days: NIS",
             total: "Order date:",
+            total_cost: "Total Cost : NIS"
           },
           last_btn: "Save changes",
         },
@@ -584,7 +589,7 @@ const translations = {
         target_increase_view_page:
           "Target to increase the average number of items per order (%)",
         goal_view_page: "Goal of raising the average income from the order",
-        update_btn_last: "update",
+        update_btn_last: "Update",
       },
       delete_popoup: {
         text: "Are you sure you want to delete the category?",
@@ -782,13 +787,18 @@ const translations = {
         source: "מקור",
       },
       transaction_tr: {
-        order_no: "#1152",
-        customer_name: "מובשר מלכא",
-        status: "הושלם",
-        order_date: "24/07/2024",
-        sum: '1,370 ש"ח',
-        source: "אורגני Google",
+        customer_name: "שם הלקוח",
+        Phone_Number: "מספר טלפון",
+        Email_address: 'כתובת דוא"ל',
       },
+
+      status_tr:{
+        Complete : "לְהַשְׁלִים",
+        In_Treatment : "בטיפול",
+        Cancelled : "מבוטל",
+        changed : "שינוי סטטוס הקבוצה"
+      }
+      
     },
     statististics: {
       tabs_in_static: {
@@ -1153,6 +1163,8 @@ const translations = {
             product: 'מוצרים: 10,450 ש"ח',
             delivery: 'משלוח עד 5 ימי עסקים: 39.9 ש"ח',
             total: 'תאריך הזמנה:',
+            total_cost: "עלות כוללת  : NIS"
+
           },
           last_btn: "שמירת השינויים",
         },

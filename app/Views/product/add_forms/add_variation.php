@@ -154,7 +154,7 @@ var_dump($attributes);
                                             foreach ($categories as $category) {
                                                 // Access the "name" property of each category object
                                                 ?>
-                                                <option value="<?php echo $category['id'] ?>">
+                                                <option value="<?php echo $category['id'] ?>" name="<?php echo $category['name']; ?>">
                                                     <?php echo $category['name']; ?>
                                                 </option>
                                                 <?php
@@ -281,7 +281,7 @@ var_dump($attributes);
                                     <?php
                                     foreach ($attributes as $attribute) {
                                         ?>
-                                        <option value="<?php echo $attribute['id']; ?>"><?php echo $attribute['name']; ?>
+                                        <option value="<?php echo $attribute['id']; ?>" name="<?php echo $attribute['name']; ?>"><?php echo $attribute['name']; ?>
                                         </option>
                                         <?php
                                     }
@@ -466,7 +466,7 @@ var_dump($attributes);
             formData.images = base64Strings.filter(base64 => base64 !== null);
 
             console.log(formData);
-
+            document.getElementById("product_variation").disabled = true;
             return fetch('product/add', {
                 method: 'POST',
                 headers: {
@@ -480,7 +480,7 @@ var_dump($attributes);
                 // Form submission succeeded, display success message
                 document.getElementById('sms_add_variations_success_message').style.display = 'block';
                 document.getElementById('sms_add_variations_error_message').style.display = 'none';
-                document.getElementById("product_variation").disabled = true;
+ 
 
                 window.location.reload();
             } else {
@@ -544,10 +544,10 @@ function fun_save_changes() {
                     // Create a new div for the selected option
                     let newDiv = document.createElement('div');
                     newDiv.classList.add('selected-option');
-
+console.log(option)
                     // Customize the content of the div
                     newDiv.innerHTML = `  
-                    <label class="form-label fw-bold mt-5">Select ${option.value} Attribute</label>
+                    <label class="form-label fw-bold mt-5" data-attribute-selection="${option.value}">Select ${option.value} Attribute</label>
                     <div style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                         <div class="col-md-12 rounded-4 bg-transparent h-100 ">
                             <select class='select_box${i}' id='sMS_MU_SET${i}' data-attribute-name='${option.value}' multiple
@@ -564,9 +564,22 @@ function fun_save_changes() {
                         </div>
                     </div>`;
 
+                    var addItem = true;
+                    let AllSelectors = document.querySelectorAll('label[data-attribute-selection]');
+                    AllSelectors.forEach((selector)=>{
+                        // console.log(selector.getAttribute('data-attribute-selection'));
+
+                        if(selector.getAttribute('data-attribute-selection') == option.value){
+                            addItem = false;
+                        }
+                    })
+
+                    if(addItem) {
+
                     // Append the newDiv to the parent div
                     parentDiv.appendChild(newDiv);
 
+                    }
                     // Find the select box inside the new div
                     const selectBox = newDiv.querySelector(`.select_box${i}`);
 

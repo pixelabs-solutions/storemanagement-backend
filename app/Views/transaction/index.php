@@ -222,10 +222,10 @@ require_once __DIR__ . '/../partials/header.php';
         <div class="d-flex">
           <label for="statusSelect" class="form-label"></label>
           <select class="sms_m_form_select form-select dropdown-tom-select-style" id="sms_m_form_select">
-            <option value="Group status change" disabled selected>Group status change</option>
-            <option value="completed">Completed</option>
-            <option value="cancelled">Cancelled</option>
-            <option value="pending">In Treatment</option>
+            <option value="Group status change"  data-i18n="transction_page.status_tr.changed" disabled selected>Group status change</option>
+            <option value="completed" data-i18n="transction_page.status_tr.Complete">Completed</option>
+            <option value="cancelled" data-i18n="transction_page.status_tr.Cancelled">Cancelled</option>
+            <option value="pending" data-i18n="transction_page.status_tr.In_Treatment">In Treatment</option>
           </select>
         </div>
         <!-- <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

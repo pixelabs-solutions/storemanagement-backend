@@ -72,15 +72,15 @@
                     <!-- header -->
                     <div class="row gx-3">
                         <div class="col-md-6 mb-3">
-                            <label for="example-text-input fs-2 fw-bold" class="form-label for_eng">Name of the
+                            <label for="example-text-input fs-2 fw-bold" class="form-label for_eng fw-bold">Name of the
                                 Variation</label>
-                            <label for="example-text-input fs-2 fw-bold" class="form-label for_heb">שם הווריאציה</label>
+                            <label for="example-text-input fs-2 fw-bold" class="form-label for_heb fw-bold">שם הווריאציה</label>
                             <input type="text" class="form-control rounded-3 p-3" id="e_name_term" style="background-color: #EAEAEA" placeholder="Name Of Variation">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="example-select fs-3 fw-bold" class="form-label for_eng">Associated feature
+                            <label for="example-select fs-3 fw-bold" class="form-label for_eng fw-bold">Associated feature
                             </label>
-                            <label for="example-select fs-3 fw-bold" class="form-label for_heb">תכונה קשורה</label>
+                            <label for="example-select fs-3 fw-bold" class="form-label for_heb fw-bold">תכונה קשורה</label>
                             <select class="form-select rounded-3 p-3" id="sms_mu_select_name_term" style="background-color: #EAEAEA">
                                 <?php foreach ($attributes  as $attribute) { ?>
                                     <option id="<?php echo $attribute['id']; ?>"><?php echo $attribute['name']; ?></option>
@@ -141,8 +141,8 @@
                         <div class="">
                             <div class="mb-3 p-2 col-12 rounded-3 d-flex align-items-center justify-content-between " style="background-color: #EAEAEA">
                                 <label class="form-label"></label>
-                                <label class="form-label for_eng">Color change</label>
-                                <label class="form-label for_heb">שינוי צבע</label>
+                                <label class="form-label for_eng fw-bold">Color change</label>
+                                <label class="form-label for_heb fw-bold">שינוי צבע</label>
                                 <input type="color" class="form-control p-0 form-control-color" id="sms_mu_color_name_term__edit" value="#206bc4" title="Choose your color">
                             </div>
                         </div>

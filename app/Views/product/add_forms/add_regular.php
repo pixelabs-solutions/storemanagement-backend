@@ -307,7 +307,8 @@
                         'stock_quantity': unitInp,
                     };
 
-                    console.log(data);
+                    document.getElementById("disable_regular").disabled = true;
+
 
                     return fetch('/product/add', {
                         method: 'POST',
@@ -322,7 +323,6 @@
                         // Form submission succeeded, display success message
                         document.getElementById('sms_add_regular_success_message').style.display = 'block';
                         document.getElementById('sms_add_regular_error_message').style.display = 'none';
-                        document.getElementById("disable_regular").disabled = true;
 
                         window.location.reload();
                     } else {
