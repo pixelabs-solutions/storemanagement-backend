@@ -568,7 +568,7 @@ const translations = {
             total: "15",
           },
           card_order: {
-            total_cost: "Total cost of order",
+            total_cost_product: "The total cost of the order",
             product: "Products: NIS",
             delivery: "Delivery up to 5 business days: NIS",
             total: "Order date:",
@@ -1174,7 +1174,7 @@ const translations = {
             total: "15",
           },
           card_order: {
-            total_cost: "עלות כוללת של ההזמנה",
+            total_cost_product: "עלות כוללת של ההזמנה",
             product: 'מוצרים: 10,450 ש"ח',
             delivery: 'משלוח עד 5 ימי עסקים: 39.9 ש"ח',
             total: "תאריך הזמנה:",

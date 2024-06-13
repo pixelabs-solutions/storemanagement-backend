@@ -164,7 +164,7 @@
               <div class="col-md-4 rounded-4 bg-white mt-6 sms_order_popup_a">
                 <div class="row">
                   <div class="col-md-12 text-end px-4 py-2">
-                    <h3 data-i18n="popoups.transction_pop_popuop.order_detail.card_order.total_cost">a</h3>
+                    <h3 data-i18n="popoups.transction_pop_popuop.order_detail.card_order.total_cost_product">a</h3>
                     <!-- <h4 class="fs-2 fw-bold text-dark text-start"></h4> -->
                     <div class="text-end">
                       <h4 data-i18n="popoups.transction_pop_popuop.order_detail.card_order.product"></h4>
