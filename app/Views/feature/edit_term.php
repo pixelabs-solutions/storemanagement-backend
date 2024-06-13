@@ -74,15 +74,20 @@
                         <div class="col-md-6 mb-3">
                             <label for="example-text-input fs-2 fw-bold" class="form-label for_eng fw-bold">Name of the
                                 Variation</label>
-                            <label for="example-text-input fs-2 fw-bold" class="form-label for_heb fw-bold">שם הווריאציה</label>
-                            <input type="text" class="form-control rounded-3 p-3" id="e_name_term" style="background-color: #EAEAEA" placeholder="Name Of Variation">
+                            <label for="example-text-input fs-2 fw-bold" class="form-label for_heb fw-bold">שם
+                                הווריאציה</label>
+                            <input type="text" class="form-control rounded-3 p-3" id="e_name_term"
+                                style="background-color: #EAEAEA" placeholder="Name Of Variation">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="example-select fs-3 fw-bold" class="form-label for_eng fw-bold">Associated feature
+                            <label for="example-select fs-3 fw-bold" class="form-label for_eng fw-bold">Associated
+                                feature
                             </label>
-                            <label for="example-select fs-3 fw-bold" class="form-label for_heb fw-bold">תכונה קשורה</label>
-                            <select class="form-select rounded-3 p-3" id="sms_mu_select_name_term" style="background-color: #EAEAEA">
-                                <?php foreach ($attributes  as $attribute) { ?>
+                            <label for="example-select fs-3 fw-bold" class="form-label for_heb fw-bold">תכונה
+                                קשורה</label>
+                            <select class="form-select rounded-3 p-3" id="sms_mu_select_name_term"
+                                style="background-color: #EAEAEA">
+                                <?php foreach ($attributes as $attribute) { ?>
                                     <option id="<?php echo $attribute['id']; ?>"><?php echo $attribute['name']; ?></option>
                                 <?php } ?>
                             </select>
@@ -139,20 +144,58 @@
                     <!-- </div> -->
                     <div class='gx-3' id="colorPickerDiv__edit">
                         <div class="">
-                            <div class="mb-3 p-2 col-12 rounded-3 d-flex align-items-center justify-content-between " style="background-color: #EAEAEA">
+                            <div class="mb-3 p-2 col-12 rounded-3 d-flex align-items-center justify-content-between "
+                                style="background-color: #EAEAEA">
                                 <label class="form-label"></label>
                                 <label class="form-label for_eng fw-bold">Color change</label>
                                 <label class="form-label for_heb fw-bold">שינוי צבע</label>
-                                <input type="color" class="form-control p-0 form-control-color" id="sms_mu_color_name_term__edit" value="#206bc4" title="Choose your color">
+                                <input type="color" class="form-control p-0 form-control-color"
+                                    id="sms_mu_color_name_term__edit" value="#206bc4" title="Choose your color">
                             </div>
                         </div>
                     </div>
                 </form>
+                <div class="modal-body text-center py-4 sms_a_add_category_pop"
+                    id="sms_addForm_category_success_message" style="display: none;">
+                    <!-- Close icon -->
+
+                    <!-- <button type="button" class="btn-close" aria-label="Close" onclick="sms_term_success_message()"></button> -->
+                    <!-- SVG icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                        <path d="M9 12l2 2l4 -4"></path>
+                    </svg>
+                    <h3>Success</h3>
+                    <div class="text-muted">Your add Category data has been submitted successfully.</div>
+                </div>
+                <div class="modal-body text-center py-4 sms_a_add_category_pop" id="Sms_mu_close_add_term_errors"
+                    style="display: none;">
+                    <!-- Close icon -->
+                    <button type="button" class="btn-close" aria-label="Close"
+                        onclick="Sms_mu_close_add_term_error()"></button>
+                    <!-- SVG icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                    </svg>
+                    <h3>Error</h3>
+                    <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
+                </div>
                 <div class="text-center mt-2 p-2  ">
-                    <button type="submit" id="edit_term" class="btn btn-primary col-12 col-md-12 rounded-4 py-3 for_eng" onclick="fun_etid_term()">To update
+                    <button type="submit" id="edit_term" class="btn btn-primary col-12 col-md-12 rounded-4 py-3 for_eng"
+                        onclick="fun_etid_term()">To update
                         the term click here
                         +</button>
-                    <button type="submit" id="edit_term" class="btn btn-primary col-12 col-md-12 rounded-4 py-3 for_heb" onclick="fun_etid_term()">לעדכון המונח לחץ כאן
+                    <button type="submit" id="edit_term" class="btn btn-primary col-12 col-md-12 rounded-4 py-3 for_heb"
+                        onclick="fun_etid_term()">לעדכון המונח לחץ כאן
                         +</button>
                 </div>
             </div>
@@ -160,14 +203,14 @@
     </div>
 </div>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         // Get the color input element
         var colorInput = document.getElementById("sms_mu_color_name_term__edit");
         // Get the div to trigger color selection
         var colorPickerDiv = document.getElementById("colorPickerDiv__edit");
 
         // Function to open color selection when the div is clicked
-        colorPickerDiv.addEventListener("click", function() {
+        colorPickerDiv.addEventListener("click", function () {
             colorInput.click();
         });
     });
@@ -180,12 +223,12 @@
         }
         console.log(data_form_exsist)
         fetch(`/categories/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(form_data)
-            })
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(form_data)
+        })
             .then(response => {
                 if (response.status === 200) {
                     // Form submission succeeded, display success message
@@ -202,9 +245,16 @@
 
                 }
             })
-    .catch(error => {
-        document.getElementById('sms_add_editForm_error_message').style.display = 'block';
-        console.error('Error submitting form data:', error);
-    });
+            .catch(error => {
+                document.getElementById('sms_add_editForm_error_message').style.display = 'block';
+                console.error('Error submitting form data:', error);
+            });
+    }
+    function sms_term_success_message() {
+        document.getElementById('sms_addForm_category_success_message').style.display = 'none';
+    }
+
+    function Sms_mu_close_add_term_error() {
+        document.getElementById('Sms_mu_close_add_term_errors').style.display = 'none';
     }
 </script>
