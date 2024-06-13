@@ -222,8 +222,11 @@
                     "parent": selectElement,
                     "image": base64String, // Now containing the base64 string of the image
                 };
+// Get the button element
+const submitButton = document.getElementById("disable_for_submit");
 
-                console.log(data);
+// Disable the button before making the request
+submitButton.disabled = true;
 
                 fetch('/categories/add', {
                         method: 'POST',
@@ -233,11 +236,12 @@
                         body: JSON.stringify(data)
                     })
                     .then(response => {
+
                         if (response.ok ) {
                             // Form submission succeeded, display success message
                             document.getElementById('sms_addForm_category_success_message').style.display = 'block';
                             document.getElementById('sms_addForm_category_error_message').style.display = 'none';
-                            document.getElementById("disable_for_submit").disabled = true;
+                            // document.getElementById("disable_for_submit").disabled = true;
 
                             window.location.reload();
                         } else {

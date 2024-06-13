@@ -173,7 +173,7 @@ if ($goals_data['status'] == "add") {
                 <line x1="12" y1="5" x2="12.01" y2="19"></line>
             </svg>
             <h3>Error</h3>
-            <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
+            <div class="text-muted">An error occurred while updated data. Please try again later.</div>
         </div>
         <div class="row mt-2 justify-content-end">
             <button type="submit" data-i18n="popoups.objective_popoup.update_btn_last" onclick="sms_meh_update_goal_data()" class="p-2 px-4 sms_mu_file125_popoup_last_btn w-auto h-5 d-flex align-items-center rounded-3 border-0   mt-5  text-center">Update</button>

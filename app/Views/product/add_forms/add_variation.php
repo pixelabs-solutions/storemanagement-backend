@@ -466,7 +466,7 @@ var_dump($attributes);
             formData.images = base64Strings.filter(base64 => base64 !== null);
 
             console.log(formData);
-
+            document.getElementById("product_variation").disabled = true;
             return fetch('product/add', {
                 method: 'POST',
                 headers: {
@@ -480,7 +480,7 @@ var_dump($attributes);
                 // Form submission succeeded, display success message
                 document.getElementById('sms_add_variations_success_message').style.display = 'block';
                 document.getElementById('sms_add_variations_error_message').style.display = 'none';
-                document.getElementById("product_variation").disabled = true;
+ 
 
                 window.location.reload();
             } else {

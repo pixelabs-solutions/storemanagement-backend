@@ -38,6 +38,9 @@ require_once __DIR__ . '/../partials/header.php';
     .card {
         cursor: pointer;
     }
+    .rtl .goal_setting_text{
+        margin-right: 2px;
+    }
 </style>
 
 <?php
@@ -146,8 +149,8 @@ if ($avg_order_value_increase_left_percentage >= 100) {
             </div>
             <!-- Page title actions -->
             <div class="col-auto ms-auto" data-bs-toggle="modal" data-bs-target="#add-modal-full-width">
-                <div class="btn-list">
-                    <a href="#" class="btn btn-pill" aria-label="Goal Setting" style="background-color:#A8C3E7;">
+                <div class="btn-list" aria-label="Goal Setting">
+                    <a href="#" class="btn btn-pill "  style="background-color:#A8C3E7;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-react">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M6.306 8.711c-2.602 .723 -4.306 1.926 -4.306 3.289c0 2.21 4.477 4 10 4c.773 0 1.526 -.035 2.248 -.102" />
@@ -158,8 +161,9 @@ if ($avg_order_value_increase_left_percentage >= 100) {
                             <path d="M12 18.574c1.926 1.893 3.821 2.768 5 2.086c1.913 -1.104 1.226 -5.877 -1.536 -10.66c-.375 -.65 -.78 -1.283 -1.212 -1.897" />
                             <path d="M11.5 12.866a1 1 0 1 0 1 -1.732a1 1 0 0 0 -1 1.732z" />
                         </svg>
-                        <b data-i18n="objective.top_section_like_nav.button">Goal Setting</b>
                     </a>
+                        <b data-i18n="objective.top_section_like_nav.button" class="goal_setting_text">Goal Setting</b>
+                        <span></span>
                 </div>
             </div>
         </div>

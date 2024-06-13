@@ -407,6 +407,8 @@ function sms_a_add_new_term_input() {
     let formData = new FormData(form);
     console.log('form data ',formData)
 
+const submitButton = document.getElementById("term_disable");
+submitButton.disabled = true;
     // Send form data with fetch API
     fetch(`/attributes/${formData.get('sms_feature_select')}/terms/add`, {
         method: 'POST',
