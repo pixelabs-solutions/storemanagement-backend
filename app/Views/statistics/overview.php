@@ -27,7 +27,7 @@ require_once __DIR__ . '/../partials/header.php';
     .rtl .list_button_statis {
         /* margin-left: 0;
         margin-right: auto; */
-        gap: 55%;
+        /* gap: 55%; */
     }
 
     .stats_filters_active {
@@ -122,7 +122,7 @@ require_once __DIR__ . '/../partials/header.php';
                 <div class="card-body p-5">
                     <!-- Header Start -->
 
-                    <div class="row g-2 align-items-center list_button_statis">
+                    <div class="row g-2 align-items-center list_button_statis justify-content-between">
                         <!-- Stats header Buttons -->
                         <div class="col-auto btn-list">
                             <a href="?query=last_week" id="overview_last_week" class="btn  bg-transparent btn-light  shadow-none last_week " class="nav-link_stats" data-i18n="statististics.tabs_in_select_range.week"> Last Week
@@ -132,7 +132,7 @@ require_once __DIR__ . '/../partials/header.php';
                             <a href="?query=last_year" id="overview_last_year" class="btn  bg-transparent btn-light  shadow-none last_year" data-i18n="statististics.tabs_in_select_range.year"> Last Year </a>
                         </div>
                         <!-- Date Range Button -->
-                        <div class="col-auto ms-auto">
+                        <div class="col-2">
                             <a href="#" class="btn btn-pill" data-bs-toggle="modal" data-bs-target="#modal-team" style="background-color:#EFEFEF; border:none;" data-i18n="statististics.tabs_in_select_range.button">
                                 Select a Date Range
                             </a>

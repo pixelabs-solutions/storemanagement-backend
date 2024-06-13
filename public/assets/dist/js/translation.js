@@ -818,8 +818,8 @@ const translations = {
         num_h1_card_customer_title: "150",
         crad_text_blue_in_card_customer: "לקוחות חדשים",
         crad_text_blue_in_card_returing: "לקוחות קיימים",
-        crad_text_blue_in_card_product: "מוצר",
-        crad_text_blue_in_card_order: "מוצרים",
+        crad_text_blue_in_card_product: " מוצרים",
+        crad_text_blue_in_card_order: " הזמנות",
         crad_text_blue_in_card_revenue: "הכנסות",
       },
       cards_in_product: {

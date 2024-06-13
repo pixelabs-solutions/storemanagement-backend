@@ -314,11 +314,11 @@ function submit_edit_ctg_form() {
   
   
   
-      function showFileName(input) {
-          var label = input.nextElementSibling;
-          var fileName = input.files[0].name;
-          label.innerHTML = '<i class="bi bi-image text-black"></i> ' + fileName;
-      }
+    //   function showFileName(input) {
+    //       var label = input.nextElementSibling;
+    //       var fileName = input.files[0].name;
+    //       label.innerHTML = '<i class="bi bi-image text-black"></i> ' + fileName;
+    //   }
 
 
 
@@ -333,8 +333,17 @@ function submit_edit_ctg_form() {
 
 
     function showFileName(input) {
-        var label = input.nextElementSibling;
-        var fileName = input.files[0].name;
-        label.innerHTML = '<i class="bi bi-image text-black"></i> ' + fileName;
-    }
+            var label = input.nextElementSibling;
+            var file = input.files[0];
+            
+            if (file) {
+                // Create a URL for the selected file and set it as the src of the image element
+                var imgSrc = URL.createObjectURL(file);
+                document.getElementById("edit_category_image_placeholder").src = imgSrc;
+
+                // Set the label text to the file name
+                var fileName = file.name;
+                label.innerHTML = '<i class="bi bi-image text-black"></i> ' + fileName;
+            }
+        }
 </script>
