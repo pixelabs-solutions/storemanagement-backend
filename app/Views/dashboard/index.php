@@ -131,30 +131,30 @@ require_once __DIR__ . '/../partials/header.php';
 
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Function to get query parameter by name
-            function getQueryParam(name) {
-                const urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get(name);
-            }
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     // Function to get query parameter by name
+        //     function getQueryParam(name) {
+        //         const urlParams = new URLSearchParams(window.location.search);
+        //         return urlParams.get(name);
+        //     }
 
-            // Get the start and end dates from the URL
-            let dateFrom = getQueryParam('date_from');
-            let dateTo = getQueryParam('date_to');
+        //     // Get the start and end dates from the URL
+        //     let dateFrom = getQueryParam('date_from');
+        //     let dateTo = getQueryParam('date_to');
 
-            // Only show the dates if both are present
-            if (dateFrom && dateTo) {
-                // Replace - with /
-                dateFrom = dateFrom.replace(/-/g, '/');
-                dateTo = dateTo.replace(/-/g, '/');
+        //     // Only show the dates if both are present
+        //     if (dateFrom && dateTo) {
+        //         // Replace - with /
+        //         dateFrom = dateFrom.replace(/-/g, '/');
+        //         dateTo = dateTo.replace(/-/g, '/');
 
-                // Store the dates in the element with ID date_stored_element
-                const dateStoredElement = document.getElementById('date_stored_element');
-                if (dateStoredElement) {
-                    dateStoredElement.innerHTML = ` ${dateFrom}-${dateTo}`;
-                }
-            }
-        });
+        //         // Store the dates in the element with ID date_stored_element
+        //         const dateStoredElement = document.getElementById('date_stored_element');
+        //         if (dateStoredElement) {
+        //             dateStoredElement.innerHTML = ` ${dateFrom}-${dateTo}`;
+        //         }
+        //     }
+        // });
     </script>
 
     <!-- Date Range Button End -->
@@ -844,9 +844,7 @@ require_once __DIR__ . '/../partials/header.php';
     });
 }
 removeClassFromAll();
-if (!queryParams.query) {
-    queryParams.query = '24_hours';
-}
+
 if (queryParams.query === '24_hours') {
     document.getElementById('24_hours').classList.add('sms_w_date_active');
 } else if (queryParams.query === 'last_week') {
