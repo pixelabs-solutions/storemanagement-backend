@@ -150,10 +150,20 @@
 
       }
 
-      .dropdown_logout {
+      .abc .dropdown_logout {
          position: absolute;
          top: 49px;
-         margin-left: 15px;
+         /* margin-right: 15px; */
+         right: 2%;
+         /* left: 0; */
+      }
+
+      .rtl .dropdown_logout {
+         position: absolute;
+         top: 49px;
+         /* margin-right: 15px; */
+         left: 2%;
+         /* right: 0; */
       }
 
 
@@ -187,18 +197,20 @@
          border-left: 4px solid #4987D8 !important;
          background-color: #F1F4FF;
       }
+
       .dropdown-menu-column .sms_e_active_item {
          border-left: 4px solid transparent !important;
          color: white !important;
          background-color: #4987D8;
       }
-     .rtl .sms_e_active_item {
+
+      .rtl .sms_e_active_item {
          border-right: 4px solid #4987D8 !important;
          border-left: 4px solid transparent !important;
          background-color: #F1F4FF;
       }
 
-     .rtl .dropdown-menu-column .sms_e_active_item {
+      .rtl .dropdown-menu-column .sms_e_active_item {
          border-right: 4px solid transparent !important;
          color: white !important;
          background-color: #4987D8;
@@ -538,13 +550,13 @@
                               <a href="/inventory" class="dropdown-item" id="inventory">
                                  <span class="Sms_mu_for_Eng">Inventory settings</span>
                                  <span class="Sms_mu_for_hebrew">
-                                 הגדרות מלאי
+                                    הגדרות מלאי
                                  </span>
                               </a>
-                              <a  href="/coupons"  class="dropdown-item" id="coupons">
+                              <a href="/coupons" class="dropdown-item" id="coupons">
                                  <span class="Sms_mu_for_Eng">Coupons and benefits</span>
                                  <span class="Sms_mu_for_hebrew">
-                                 קופונים והטבות
+                                    קופונים והטבות
                                  </span>
                               </a>
                               <!-- <a href="/inventory" class="dropdown-item" id="product"> </a>
