@@ -15,7 +15,7 @@
                             <a href="?query=last_week" id="orders_last_week" class="btn bg-transparent btn-light shadow-none last_week"
                                 class="nav-link" data-i18n="statististics.tabs_in_select_range.week"> Last Week
                             </a>
-                            <a href="?query=last_month" id="orders_last_month" class="btn bg-transparent btn-light shadow-none last_month "
+                            <a href="?query=current_month" id="orders_last_month" class="btn bg-transparent btn-light shadow-none last_month "
                                 class="nav-link" data-i18n="statististics.tabs_in_select_range.month"> Current
                                 Month </a>
                             <a href="?query=last_year" id="orders_last_year" class="btn bg-transparent btn-light shadow-none last_year"
@@ -220,41 +220,41 @@
 </script>
 
 <script>
-                        // Function to get query parameters from the URL
-                        function getQueryParams() {
-                            const params = {};
-                            window.location.search.substring(1).split("&").forEach(param => {
-                                const [key, value] = param.split("=");
-                                params[decodeURIComponent(key)] = decodeURIComponent(value);
-                            });
-                            return params;
-                        }
+                        // // Function to get query parameters from the URL
+                        // function getQueryParams() {
+                        //     const params = {};
+                        //     window.location.search.substring(1).split("&").forEach(param => {
+                        //         const [key, value] = param.split("=");
+                        //         params[decodeURIComponent(key)] = decodeURIComponent(value);
+                        //     });
+                        //     return params;
+                        // }
 
-                        // Get query parameters
-                        const queryParams = getQueryParams();
+                        // // Get query parameters
+                        // const queryParams = getQueryParams();
 
-                        if (queryParams.query === 'last_week') {
-                            // Add the .filter_tab_active class to the element with the ID 'last_week'
-                            const elements = document.querySelectorAll('.last_week');
-                            elements.forEach(element => {
-                                element.classList.add('filter_tab_active');
-                            });
-                        }
-                        else if (queryParams.query === 'last_month') {
-                            // Add the .filter_tab_active class to the element with the ID 'current_month'
+                        // if (queryParams.query === 'last_week') {
+                        //     // Add the .filter_tab_active class to the element with the ID 'last_week'
+                        //     const elements = document.querySelectorAll('.last_week');
+                        //     elements.forEach(element => {
+                        //         element.classList.add('filter_tab_active');
+                        //     });
+                        // }
+                        // else if (queryParams.query === 'last_month') {
+                        //     // Add the .filter_tab_active class to the element with the ID 'current_month'
 
-                            const elements = document.querySelectorAll('.last_month');
-                            elements.forEach(element => {
-                                element.classList.add('filter_tab_active');
-                            });
-                        }
-                        else if (queryParams.query === 'last_year') {
-                            // Add the .filter_tab_active class to the element with the ID 'last_year'
-                            const elements = document.querySelectorAll('.last_year');
-                            elements.forEach(element => {
-                                element.classList.add('filter_tab_active');
-                            });
-                        }
+                        //     const elements = document.querySelectorAll('.last_month');
+                        //     elements.forEach(element => {
+                        //         element.classList.add('filter_tab_active');
+                        //     });
+                        // }
+                        // else if (queryParams.query === 'last_year') {
+                        //     // Add the .filter_tab_active class to the element with the ID 'last_year'
+                        //     const elements = document.querySelectorAll('.last_year');
+                        //     elements.forEach(element => {
+                        //         element.classList.add('filter_tab_active');
+                        //     });
+                        // }
 
 
                     </script>
@@ -280,7 +280,7 @@
 
             
 
-        } else if (queryParamsOrders.query === 'last_month') {
+        } else if (queryParamsOrders.query === 'current_month') {
             // Add the .sms_w_date_active class to the element with the ID 'current_month'
             document.getElementById('overview_last_month').classList.add('stats_filters_active');
             document.getElementById('products_last_month').classList.add('stats_filters_active');

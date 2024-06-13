@@ -85,6 +85,9 @@ class SynchronizationController
         $inventory_settings = Base::wc_get($configuration, "settings/products");
         Inventory::store_inventory_settings($inventory_settings, $user_id);
 
+        $current_date_time = date('Y-m-d H:i:s');
+        Authentication::update_user_meta($user_id, "last_sync_datetime", $current_date_time);
+
         echo "done";
 
     }

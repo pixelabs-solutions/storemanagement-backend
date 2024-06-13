@@ -1,5 +1,9 @@
-<!doctype html>
 
+
+<!doctype html>
+<?php
+use Pixelabs\StoreManagement\Models\Authentication;
+?>
 
 
 <html lang="en">
@@ -787,6 +791,12 @@
 
                <div class="navbar-nav flex-row order-md-last">
                <div class=" d-flex align-items-center">
+                  <p class="m-0"><strong>Date & Time of last Sync: </strong><?php $user_id = Authentication::getUserIdFromToken();
+                     $last_sync_datetime = Authentication::get_user_meta($user_id, 'last_sync_datetime');
+                     while ($row = $last_sync_datetime->fetch_assoc()) {
+                        echo $row['meta_value'];
+                    }
+                     ?></p>
                   <button class="btn m-2" id="sync_woocommerce">SYNC</button>
                </div>
                   <div class=" d-flex align-items-center">

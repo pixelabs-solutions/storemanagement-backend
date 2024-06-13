@@ -22,7 +22,7 @@ class Authentication
                 $lastInsertedId = $connection->insert_id;
                 self::update_user_meta($lastInsertedId, "phone", $phone);
                 self::update_user_meta($lastInsertedId, "business_name", $business_name);
-                $x_code = self:: generateRandomCode();
+                $x_code = self::generateRandomCode();
                 self::update_user_meta($lastInsertedId, "x_code", $x_code);
 
                 return json_encode(
@@ -51,7 +51,8 @@ class Authentication
         }
     }
 
-    public static function generateRandomCode($length = 15) {
+    public static function generateRandomCode($length = 15)
+    {
         // Ensure that the length is a multiple of 2 for bin2hex to work correctly
         $bytes = ceil($length / 2);
         $randomBytes = random_bytes($bytes);
@@ -119,22 +120,39 @@ class Authentication
     {
 
         global $connection;
-        if (!empty($user_id) && !empty($user_id)) {
-            $stmt = $connection->prepare("INSERT INTO user_meta (user_id, meta_key, meta_value) VALUES (?, ?, ?)");
-            $stmt->bind_param("iss", $user_id, $meta_key, $meta_value);
-            $stmt->execute();
-            $stmt->close();
-        } 
-        
+
+        // Check if a record with the same user_id and meta_key exists
+        $check_stmt = $connection->prepare("SELECT COUNT(*) FROM user_meta WHERE user_id = ? AND meta_key = ?");
+        $check_stmt->bind_param("is", $user_id, $meta_key);
+        $check_stmt->execute();
+        $check_stmt->bind_result($count);
+        $check_stmt->fetch();
+        $check_stmt->close();
+
+        if ($count > 0) {
+            // Update existing record
+            $update_stmt = $connection->prepare("UPDATE user_meta SET meta_value = ? WHERE user_id = ? AND meta_key = ?");
+            $update_stmt->bind_param("sis", $meta_value, $user_id, $meta_key);
+            $update_stmt->execute();
+            $update_stmt->close();
+        } else {
+            // Insert new record
+            $insert_stmt = $connection->prepare("INSERT INTO user_meta (user_id, meta_key, meta_value) VALUES (?, ?, ?)");
+            $insert_stmt->bind_param("iss", $user_id, $meta_key, $meta_value);
+            $insert_stmt->execute();
+            $insert_stmt->close();
+        }
+
+
     }
 
 
-    
+
     public static function get_user_meta($user_id, $meta_key)
     {
 
         global $connection;
-        $stmt = $connection->prepare("SELECT meta_value FROM user_meta WHERE user_id = ? && meta_key = ?");
+        $stmt = $connection->prepare("SELECT meta_value FROM user_meta WHERE user_id = ? AND meta_key = ?");
 
         $stmt->bind_param("is", $user_id, $meta_key);
 
@@ -170,7 +188,8 @@ class Authentication
 
     }
 
-    public static function get_meta_by_xcode($xcode){
+    public static function get_meta_by_xcode($xcode)
+    {
         global $connection;
         $meta_key = 'x_code';
         $stmt = $connection->prepare("SELECT * FROM user_meta WHERE meta_key = ? AND meta_value = ?");
@@ -183,7 +202,8 @@ class Authentication
     }
 
 
-    public static function getAllUsersdata(){
+    public static function getAllUsersdata()
+    {
         global $connection;
         $stmt = $connection->prepare("SELECT * FROM users where user_level=1");
         $stmt->execute();
@@ -195,11 +215,11 @@ class Authentication
         $users_business_name = self::get_users_meta_by_key('business_name');
 
         $users_data = [
-            'data'=> $users_data,
-            'users_configuration_status'=> $users_configuration_status,
-            'users_phone'=> $users_phone,
-            'business_name'=> $users_business_name,
-            'users_x_code' =>  $users_x_code
+            'data' => $users_data,
+            'users_configuration_status' => $users_configuration_status,
+            'users_phone' => $users_phone,
+            'business_name' => $users_business_name,
+            'users_x_code' => $users_x_code
         ];
 
         return $users_data;
@@ -272,7 +292,7 @@ class Authentication
                     $jwt = JWT::encode($payload, $secretKey, 'HS256');
                     // setcookie('jwt_token', $jwt, $expirationTime, 'storemanagement-backend.test/');
                     setcookie('jwt_token', $jwt, $expirationTime, '/', $_SERVER['HTTP_HOST']);
-                   
+
                     http_response_code(200);
                     return json_encode(
                         array(
@@ -355,10 +375,9 @@ class Authentication
 
     public static function getUserLevelFromToken($jwt_token = null)
     {
-        if($jwt_token != null){
+        if ($jwt_token != null) {
             $jwt = $jwt_token;
-        }
-        else if (isset($_COOKIE['jwt_token'])) {
+        } else if (isset($_COOKIE['jwt_token'])) {
             $jwt = $_COOKIE['jwt_token'];
         } else {
             return null;
