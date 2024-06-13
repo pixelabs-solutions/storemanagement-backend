@@ -201,7 +201,7 @@
                 </form>
                 <div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_add_regular_success_message" style="display: none;">
                     <!-- Close icon -->
-                    <button type="button" class="btn-close" aria-label="Close" onclick="sms_add_regular_close_success_message()"></button>
+                    <!-- <button type="button" class="btn-close" aria-label="Close" onclick="sms_add_regular_close_success_message()"></button> -->
                     <!-- SVG icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

@@ -330,8 +330,8 @@ var_dump($attributes);
                     style="display: none;">
                     <!-- Close icon -->
 
-                    <button type="button" class="btn-close" aria-label="Close"
-                        onclick="sms_add_variations_close_success_message()"></button>
+                    <!-- <button type="button" class="btn-close" aria-label="Close"
+                        onclick="sms_add_variations_close_success_message()"></button> -->
                     <!-- SVG icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24"
                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -465,6 +465,8 @@ var_dump($attributes);
         .then(base64Strings => {
             formData.images = base64Strings.filter(base64 => base64 !== null);
 
+            let product_variation =document.getAnimations('product_variation');
+            product_variation.disabled = true;
             console.log(formData);
             document.getElementById("product_variation").disabled = true;
             return fetch('product/add', {

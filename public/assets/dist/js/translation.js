@@ -14,6 +14,7 @@ const translations = {
       Setting: "Setting",
       Help: "Help and support",
       Disconecting: "Disconnecting from the system ",
+      Logout : "Logout",
     },
     dashboard: {
       tabs: {
@@ -620,6 +621,7 @@ const translations = {
       Setting: "הגדרות",
       Help: "עזרה ותמיכה",
       Disconecting: "ניתוק מהמערכת",
+      Logout : "להתנתק",
     },
     dashboard: {
       tabs: {
@@ -831,8 +833,8 @@ const translations = {
         num_h1_card_customer_title: "150",
         crad_text_blue_in_card_customer: "לקוחות חדשים",
         crad_text_blue_in_card_returing: "לקוחות קיימים",
-        crad_text_blue_in_card_product: "מוצר",
-        crad_text_blue_in_card_order: "מוצרים",
+        crad_text_blue_in_card_product: " מוצרים",
+        crad_text_blue_in_card_order: " הזמנות",
         crad_text_blue_in_card_revenue: "הכנסות",
       },
       cards_in_product: {
