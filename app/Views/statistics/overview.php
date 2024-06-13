@@ -265,7 +265,7 @@ require_once __DIR__ . '/../partials/header.php';
                         </div>
                         <!-- Revenue Card End -->
                     </div>
-                    <!-- <div id="chart-combination"></div>
+                    <div id="chart-combination"></div>
                     <div class="row g-2 align-items-center ">
                         <div class="col-auto ms-auto btn-list mt-5 mb-5 sms_mu_for_rtl_row_cards">
                             <div class="text-light p-1" style="background-color:#627e0c; border-radius:5px;"
@@ -284,7 +284,7 @@ require_once __DIR__ . '/../partials/header.php';
                                 data-i18n="statististics.chart_below_btn.five_btn.text"> Revenues
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                     <!-- Colors Button End -->
 
                     <!-- Icon Box End -->
