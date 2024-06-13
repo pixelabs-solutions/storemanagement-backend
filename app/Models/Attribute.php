@@ -6,6 +6,68 @@ use GuzzleHttp\Exception\RequestException;
 
 class Attribute
 {
+
+
+    public static function store_attributes($attributes, $user_id)
+    {
+        global $connection;
+
+        try {
+            foreach($attributes as $attribute){
+                $stmt = $connection->prepare("
+                    INSERT INTO attributes (id, user_id, name, type)
+                    VALUES (?, ?, ?, ?)
+                ");
+
+                $id = $attribute['id'];
+                $name = $attribute['name'];
+                $type = $attribute['type'];
+
+                $stmt->bind_param(
+                    'iiss',
+                    $id,
+                    $user_id, 
+                    $name,
+                    $type
+                );
+
+                $stmt->execute();
+                $stmt->close();
+            }
+            
+
+        }
+        catch (\mysqli_sql_exception $e) {
+            echo "store_attributes() Database error: " . $e->getMessage() . "\n";
+        }
+    }
+
+    public static function get_all_attributes($user_id)
+    {
+        global $connection;
+        $attributes = [];
+
+        try {
+            $query = "SELECT * FROM attributes WHERE user_id = $user_id";
+            $result = $connection->query($query);
+
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    $attributes[] = $row;
+                }
+                $result->free();
+            } else {
+                echo "Error executing query: " . $connection->error . "\n";
+            }
+        } catch (\mysqli_sql_exception $e) {
+            echo "Database error: " . $e->getMessage() . "\n";
+        }
+
+        return $attributes;
+    }
+
+
+
     public static function add($configuration, $payload)
     {
         $store_url = $configuration["store_url"];

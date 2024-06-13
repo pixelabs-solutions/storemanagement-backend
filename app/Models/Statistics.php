@@ -6,33 +6,30 @@ use Pixelabs\StoreManagement\Models\Base;
 
 class Statistics
 {
-    public static function get_products_stats($configuration, $filters = []) {
-        
-        $consumer_key = $configuration["consumer_key"];
-        $consumer_secret = $configuration["consumer_secret"];
-        $store_url = $configuration["store_url"];
-        $client = new Client();
-        $dateRange = $filters ? self::getDateRange($filters) : [];
+    public static function get_products_stats($filters = []) 
+    {
+        global $connection;
+        $date_range = $filters ? self::getDateRange($filters) : [];
         try {
-            // Fetch Products
-            $productParams = [
-                'auth' => [$consumer_key, $consumer_secret],
-                'per_page' => 100
-            ];
-            if (!empty($dateRange)) {
-                $productParams['query'] = [
-                    'after' => $dateRange['after'],
-                    'before' => $dateRange['before']
-                ];
+            
+            $user_id = Authentication::getUserIdFromToken();
+            $totalProducts = Base::get_number_of_products($user_id, $date_range);
+            
+            
+            // SQL query to count the number of rows in the products table
+            $query = "SELECT *  FROM products WHERE user_id = $user_id";
+            if ($date_range != null && !empty($date_range)) {
+                $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
             }
-            $response = $client->request('GET', $store_url . '/wp-json/wc/v3/products', $productParams);
-        
-            $products = json_decode($response->getBody(), true);
-            $totalProducts = count($products);
+
+            $result = $connection->query($query);
+
             $normalProducts = 0;
             $saleProducts = 0;
         
-            foreach ($products as $product) {
+
+            while ($product = $result->fetch_assoc()) {
+                // echo json_encode($product);
                 if (isset($product['type']) && $product['type'] === 'simple') {
                     $normalProducts++;
                 }
@@ -41,23 +38,27 @@ class Statistics
                 }
             }
     
-            // Fetch Orders
-            $orderParams = [
-                'auth' => [$consumer_key, $consumer_secret],
-                'per_page' => 100
-            ];
-            if (!empty($dateRange)) {
-                $orderParams['query'] = [
-                    'after' => $dateRange['after'],
-                    'before' => $dateRange['before']
-                ];
+
+
+            $query = "SELECT COUNT(*) AS transaction_count FROM transactions WHERE user_id = $user_id";
+            if ($date_range != null && !empty($date_range)) {
+                $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
             }
-            $orderResponse = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', $orderParams);
-            $orders = json_decode($orderResponse->getBody(), true);
-            $numberOfOrders = count($orders);
+            $result = $connection->query($query);
+            $row = $result->fetch_assoc();
+     
+
+            $numberOfOrders = $row['transaction_count'];
             $distinctProductsOnOrder = [];
-    
-            foreach ($orders as $order) {
+
+            $order_query = "SELECT *  FROM transactions WHERE user_id = $user_id";
+            if ($date_range != null && !empty($date_range)) {
+                $order_query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+            }
+                
+            $order_result = $connection->query($order_query);
+
+            while ($order = $order_result->fetch_assoc()) {
                 if (isset($order['line_items']) && is_array($order['line_items'])) {
                     foreach ($order['line_items'] as $item) {
                         $distinctProductsOnOrder[$item['product_id']] = true;  
@@ -79,30 +80,39 @@ class Statistics
     }
 
 
-    public static function get_orders_stats($configuration, $filters = []) {
-        
-        $client = new Client();
-        $dateRange = self::getDateRange($filters);
+    public static function get_orders_stats($filters = []) {
+        global $connection;
+        $date_range = $filters ? self::getDateRange($filters) : [];
     
         try {
-            $orderParams = ['auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
-            'per_page' => 100];
-            if (!empty($dateRange)) {
-                $orderParams['query'] = $dateRange;
+            
+            $user_id = Authentication::getUserIdFromToken();
+
+            $query = "SELECT COUNT(*) AS transaction_count FROM transactions WHERE user_id = $user_id";
+            if ($date_range != null && !empty($date_range)) {
+                $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
             }
-    
-            $response = $client->request('GET', $configuration["store_url"] . '/wp-json/wc/v3/orders', $orderParams);
-            $orders = json_decode($response->getBody(), true);
-    
-            // Calculating statistics
-            $totalOrders = count($orders);
+            
+            $result = $connection->query($query);
+            $row = $result->fetch_assoc();
+ 
+
+         $totalOrders = $row['transaction_count'];
+
             $totalRevenue = 0;
             $totalItems = 0;
             $customers = [];
     
-            foreach ($orders as $order) {
+
+            $query = "SELECT *  FROM transactions WHERE user_id = $user_id";
+            if ($date_range != null && !empty($date_range)) {
+                $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+            }
+            $result = $connection->query($query);
+
+            while ($order = $result->fetch_assoc()) {
                 $totalRevenue += $order['total'];  
-                $totalItems += count($order['line_items']);  
+                $totalItems += count(json_decode($order['line_items']));  
                 if (!in_array($order['customer_id'], $customers)) {
                     $customers[] = $order['customer_id'];  
                 }
@@ -126,28 +136,34 @@ class Statistics
     }
 
 
-    public static function get_revenue_stats($configuration, $filters = []) {
-        
-        $client = new Client();
-        $dateRange = self::getDateRange($filters);
-    
+    public static function get_revenue_stats($filters = []) {
+        global $connection;
+        $date_range = $filters ? self::getDateRange($filters) : [];
         try {
-            $orderParams = [
-                'auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
-                'per_page' => 100
-            ];
-            if (!empty($dateRange)) {
-                $orderParams['query'] = $dateRange;
+            $user_id = Authentication::getUserIdFromToken();    
+            
+            $order_total_query = "SELECT COUNT(*) AS transaction_count FROM transactions WHERE user_id = $user_id";
+            if ($date_range != null && !empty($date_range)) {
+                $order_total_query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
             }
-    
-            $response = $client->request('GET', $configuration["store_url"] . '/wp-json/wc/v3/orders', $orderParams);
-            $orders = json_decode($response->getBody(), true);
-    
-            $totalOrders = count($orders);
+            $order_total_result = $connection->query($order_total_query);
+            $order_total_row = $order_total_result->fetch_assoc();
+
+            $totalOrders = $order_total_row['transaction_count'];
+
+            // $totalOrders = count($orders);
+
+
+            $query = "SELECT *  FROM transactions WHERE user_id = $user_id";
+            if ($date_range != null && !empty($date_range)) {
+                $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+            }
+            $result = $connection->query($query);
+
             $totalRevenue = 0;
             $totalShipments = 0;
             $totalrehearsals = 0;
-            foreach ($orders as $order) {
+            while ($order = $result->fetch_assoc()) {
                 $totalRevenue += $order['total'];
                 $totalShipments += $order['shipping_total']; 
 
@@ -174,25 +190,18 @@ class Statistics
     }
     
     
-    public static function get_overview_stats($configuration, $filters = [])
+    public static function get_overview_stats($filters = [])
     {
-        $dateRange = self::getDateRange($filters);
+        $date_range = $filters ? self::getDateRange($filters) : [];
         try
         {
-            $params = [
-                'auth' => [$configuration["consumer_key"], $configuration["consumer_secret"]],
-                'per_page' => 100
-            ];
-            if (!empty($dateRange)) {
-                $params['query'] = $dateRange;
-            }
+            $user_id = Authentication::getUserIdFromToken();
 
-
-            $total_products = Base::get_number_of_products($configuration["store_url"], $params);
-            $total_orders = Base::get_number_of_orders($configuration["store_url"], $params);
-            $total_revenue = Base::get_total_revenue($configuration["store_url"], $params);
-            $new_customers_count = Base::get_new_customers_count($configuration["store_url"], $params);
-            $returning_customers_count = Base::get_returning_customers_count($configuration["store_url"], $params);
+            $total_products = Base::get_number_of_products($user_id, $date_range);
+            $total_orders = Base::get_number_of_orders($user_id, $date_range);
+            $total_revenue = Base::get_total_revenue($user_id, $date_range);
+            $new_customers_count = Base::get_new_customers_count($user_id, $date_range);
+            $returning_customers_count = Base::get_returning_customers_count($user_id, $date_range);
 
             return [
                 'totalProducts' => $total_products,

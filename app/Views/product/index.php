@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../partials/header.php';
 
-//  var_dump($products);
+//  var_dump($currency);
 //  foreach($products as $product){
 //     if($product['type'] == "variable"){
 //         var_dump($product);
@@ -281,13 +281,11 @@ require_once __DIR__ . '/../partials/header.php';
     <div class=" col-12 mt-5" style="overflow-y: hidden; overflow-x:hidden;">
         <div class="row col-12 d-flex justify-content-between bg-white p-3 m-0 overflow-hidden" style="border-radius:20px;">
             <div class="col-sm-10 d-flex flex-column flex-md-row gap-2 col-lg-6 m-0 ">
-                <button class="rounded-4 border-0 p-2" data-bs-toggle="modal" data-bs-target="#modal-full-width"
-                    style="background-color:#4987D870; " data-i18n="product_managment.nav.new_product_btn"></button>
-                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870;" data-bs-toggle="modal"
-                    data-bs-target="#modal-Category-large"
-                    data-i18n="product_managment.nav.category_product_btn"></button>
-                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; " data-bs-toggle="modal"
-                    data-bs-target="#modal-large" data-i18n="product_managment.nav.future_product_btn"></button>
+                <button class="rounded-4 border-0 p-2" data-bs-toggle="modal" data-bs-target="#modal-full-width" style="background-color:#4987D870; " data-i18n="product_managment.nav.new_product_btn">Add a new
+                    product +</button>
+                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870;" data-bs-toggle="modal" data-bs-target="#modal-Category-large" data-i18n="product_managment.nav.category_product_btn">Category management</button>
+                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; " data-bs-toggle="modal" data-bs-target="#modal-large" data-i18n="product_managment.nav.future_product_btn">Feature
+                    management</button>
 
             </div>
             <div class="col-lg-2 col-md-6 col-sm-11  mt-3 mt-lg-0">
@@ -570,7 +568,7 @@ require_once __DIR__ . '/../partials/header.php';
                                         <?php echo implode(', ', array_column($product['categories'], 'name')); ?></td>
                                     <td><span style="font-weight:bold">Price:</span>
                                         <?php echo $product['regular_price']; ?>
-                                        <?php echo $currency['symbol']; ?>
+                                        <?php echo $currency[0]['symbol']; ?>
                                     </td>
                                     <td><span style="font-weight:bold  ">Stock:</span>
                                         <span class="stock_quantity_class">
@@ -615,7 +613,7 @@ require_once __DIR__ . '/../partials/header.php';
                                         <?php echo implode(', ', array_column($product['categories'], 'name')); ?></td>
                                     <td><span style="font-weight:bold">Price:</span>
                                         <?php echo $product['regular_price']; ?>
-                                        <?php echo $currency['symbol']; ?>
+                                        <?php echo $currency[0]['symbol']; ?>
                                     </td>
                                     <td><span style="font-weight:bold stock_quantity_class"></span> <span class="stock_quantity_class">
                                             <strong>Stock:</strong> <?php echo $product['stock_quantity']; ?>

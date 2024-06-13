@@ -12,6 +12,24 @@ class GoalsController
 {
     public function index()
     {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id === null)
+        {
+            if ($is_rest == 'true') {
+                http_response_code(401);
+                echo json_encode(array(
+                    "message" => "User not authenticated",
+                    "status_code" => 401
+                ));
+                exit;
+            }
+            else{
+                header('Location: /authentication/login');
+            }
+        }
+        
+        
 
         $user_level = Authentication::getUserLevelFromToken();
         if ($user_level == ADMIN) {

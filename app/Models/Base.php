@@ -69,25 +69,71 @@ class Base
         return $affectedRows > 0;
     }
 
-    public static function wc_get($configuration, $endpoint, $page, $fields = [])
+    public static function truncate_table($tables, $user_id)
+    {
+        global $connection;
+        
+
+        try{
+            foreach ($tables as $table) {
+                // Escape table name to prevent SQL injection
+                $escapedTable = $connection->real_escape_string($table);
+                $query = "DELETE FROM `" . $escapedTable . "` WHERE user_id = $user_id";
+                $connection->query($query);
+            }
+                      
+        }
+        catch (\mysqli_sql_exception $e) {
+            echo "Database error: " . $e->getMessage() . "\n";
+        }
+    }
+
+    
+
+    public static function wc_get($configuration, $endpoint, $fields = [])
     {
         $consumer_key = $configuration["consumer_key"];
         $consumer_secret = $configuration["consumer_secret"];
         $store_url = $configuration["store_url"];
         $client = new Client();
+
+        // [
+        //     'timeout' => 300, 
+        //     'connect_timeout' => 30, 
+        // ]
         $all_records = [];
+        $page = 1;
+
         try 
         {
-            $response = $client->request('GET', $store_url . '/wp-json/wc/v3/'.$endpoint, [
-                'auth' => [$consumer_key, $consumer_secret],
-                'query' => array_merge(['per_page' => 10, 'page' => $page], $fields)
-            ]);
-        
-            return json_decode($response->getBody(), true);
+            while (true) 
+            {
+                $response = $client->request('GET', $store_url . '/wp-json/wc/v3/'.$endpoint, [
+                    'auth' => [$consumer_key, $consumer_secret],
+                    'query' => array_merge(['per_page' => 100, 'page' => $page], $fields)
+                ]);
+
+                $result = json_decode($response->getBody(), true);
+                
+                if (empty($result)) 
+                {
+                    break;
+                }
+
+                $all_records = array_merge($all_records, $result);
+                $total_results = count($result); 
+                if ($total_results < 100){
+                    break;
+                }
+                $page++;
+            }
+
+            return $all_records;
         } 
         catch (RequestException $e) 
         {
             echo "Exception: ".$e->getMessage();
+            return null;
         }
     }
 
@@ -230,39 +276,63 @@ class Base
 
     }
 
-    public static function get_number_of_products($store_url, $params) {
-        $client = new Client();
-        $response = $client->request('GET', $store_url . '/wp-json/wc/v3/products', $params);
-        $products = json_decode($response->getBody(), true);
-        return ($products !== null) ? count($products) : 0;
-    }
-
-    public static function get_number_of_orders($store_url, $params) {
-        $client = new Client();
-        $response = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', $params);
-        $orders = json_decode($response->getBody(), true);
-        return count($orders);
-    }
-
-    public static function get_total_revenue($store_url, $params) {
-        $client = new Client();
-        $response = $client->request('GET', $store_url.'/wp-json/wc/v3/orders', $params);
-        $orders = json_decode($response->getBody(), true);
-        if($orders === null) return 0;
-        $totalRevenue = 0;
-        foreach ($orders as $order) {
-            $totalRevenue += $order['total'];
+    public static function get_number_of_products($user_id, $date_range = []) {
+        global $connection;
+        // echo json_encode($date_range);exit;
+        $query = "SELECT COUNT(*) AS product_count FROM products WHERE user_id = $user_id";
+        if ($date_range != null && !empty($date_range)) {
+            $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
         }
+        $result = $connection->query($query);
+        $row = $result->fetch_assoc();
+        return $row['product_count'];
+    }
+
+    
+
+    public static function get_number_of_orders($user_id, $date_range = []) {
+        global $connection;
+
+        // SQL query to count the number of rows in the products table
+        $query = "SELECT COUNT(*) AS orders_count FROM transactions WHERE user_id = $user_id";
+        if ($date_range != null && !empty($date_range)) {
+            $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+        }
+        $result = $connection->query($query);
+        $row = $result->fetch_assoc();
+
+        return $row['orders_count'];
+    }
+
+    public static function get_total_revenue($user_id, $date_range = []) {
+        global $connection;
+
+        // SQL query to count the number of rows in the products table
+        $query = "SELECT total, date_created FROM transactions WHERE user_id = $user_id";
+        if ($date_range != null && !empty($date_range)) {
+            $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+        }
+        $result = $connection->query($query);
+        $totalRevenue = 0;
+
+        while ($row = $result->fetch_assoc()) {
+            $totalRevenue += $row['total'];
+        }
+  
         return $totalRevenue;
     }
-    public static function get_new_customers_count($store_url, $params) {
-        $client = new Client();
-        $response = $client->request('GET', $store_url. '/wp-json/wc/v3/orders', $params);
-        $orders = json_decode($response->getBody(), true);
+    public static function get_new_customers_count($user_id, $date_range = []) {
+        global $connection;
+
+        $query = "SELECT customer_id, id  FROM transactions WHERE user_id = $user_id";
+        if ($date_range != null && !empty($date_range)) {
+            $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+        }
+        $result = $connection->query($query);
+
         $customerOrdersCount = [];
-        if($orders === null) return 0;
-        foreach ($orders as $order) {
-            $customerId = $order['customer_id'] ?? 'guest_' . ($order['id'] ?? uniqid());
+        while ($row = $result->fetch_assoc()) {
+            $customerId = $row['customer_id'] ?? 'guest_' . ($row['id'] ?? uniqid());
             if (!isset($customerOrdersCount[$customerId])) {
                 $customerOrdersCount[$customerId] = 0;
             }
@@ -276,14 +346,21 @@ class Base
         return count($newCustomers);
     }
 
-    public static function get_returning_customers_count($store_url, $params) {
-        $client = new Client();
-        $response = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', $params);
-        $orders = json_decode($response->getBody(), true);
+    public static function get_returning_customers_count($user_id, $date_range = []) {
+        
+
+        global $connection;
+
+        $query = "SELECT customer_id, id  FROM transactions WHERE user_id = $user_id";
+        if ($date_range != null && !empty($date_range)) {
+            $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+        }
+        $result = $connection->query($query);
+
         $customerOrdersCount = [];
 
-        foreach ($orders as $order) {
-            $customerId = $order['customer_id'] ?? 'guest_' . ($order['id'] ?? uniqid());
+        while ($row = $result->fetch_assoc()) {
+            $customerId = $row['customer_id'] ?? 'guest_' . ($row['id'] ?? uniqid());
             if (!isset($customerOrdersCount[$customerId])) {
                 $customerOrdersCount[$customerId] = 0;
             }
@@ -297,27 +374,35 @@ class Base
         return count($returningCustomers);
     }
 
-    public static function calculate_raise_in_orders($store_url, $params)
+    public static function calculate_raise_in_orders($user_id, $params = [])
     {
-        $client = new Client();
-        $response = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', $params);
-        if ($response->getStatusCode() == 200) {
-            $orders = json_decode($response->getBody(), true);
+        // $client = new Client();
+        // $response = $client->request('GET', $store_url . '/wp-json/wc/v3/orders', $params);
+        global $connection;
+
+        $query = "SELECT *  FROM transactions WHERE user_id = $user_id";
+        $result = $connection->query($query);
+
+        $order_count_query = "SELECT COUNT(*) AS orders_count FROM transactions WHERE user_id = $user_id";
+    
+        $order_count_result = $connection->query($order_count_query);
+        $totalOrders = $order_count_result->fetch_assoc();
+
             $totalItems = 0;
             $totalPrice = 0;
-            $totalOrders = count($orders);
-            if($totalOrders === 0) return ['average_items' => 0, 'average_price' => 0];
-            foreach ($orders as $order) {
-                foreach ($order['line_items'] as $line_item) {
+            // $totalOrders = count($orders);
+            if($totalOrders['orders_count'] === 0) return ['average_items' => 0, 'average_price' => 0];
+            while ($order = $result->fetch_assoc()) {
+                $line_items = json_decode($order['line_items'], true);
+                foreach ($line_items as $line_item) {
                     $totalItems += $line_item['quantity'];
                 }
                 $totalPrice += $order['total'];
             }
-            $averageItemsPerOrder = $totalItems / $totalOrders;
-            $averageOrderPrice = $totalPrice / $totalOrders;
+            $averageItemsPerOrder = $totalItems / $totalOrders['orders_count'];
+            $averageOrderPrice = $totalPrice / $totalOrders['orders_count'];
             return ['average_items' => $averageItemsPerOrder, 'average_price' => $averageOrderPrice];
-        }
-        return ['average_items' => 0, 'average_price' => 0];
+
     }
 
 

@@ -13,16 +13,29 @@ class TransactionController
 {
     public function index()
     {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id === null)
+        {
+            if ($is_rest == 'true') {
+                http_response_code(401);
+                echo json_encode(array(
+                    "message" => "User not authenticated",
+                    "status_code" => 401
+                ));
+                exit;
+            }
+            else{
+                header('Location: /authentication/login');
+            }
+        }
 
         $user_level = Authentication::getUserLevelFromToken();
         if ($user_level == ADMIN) {
             header("Location: /admin/index");
             } else {
-        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
-        $configuration = $this->prepare_configuration($is_rest);
-        $fields = ['_fields' => 'id, status, total, shipping_total, date_created, total, billing, meta_data, line_items'];
-        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-        $transactions = Base::wc_get($configuration, "orders", $page, $fields);
+     
+        $transactions = Transaction::get_all_transactions($user_id);
         if($is_rest == "true")
         {
             echo json_encode($transactions, JSON_UNESCAPED_UNICODE);
@@ -43,9 +56,22 @@ class TransactionController
     public function get_by_id($id)
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
-        $configuration = $this->prepare_configuration($is_rest);
-        $fields = ['_fields' => 'id, status, date_created, total, billing, meta_data, line_items'];
-        $transaction = Base::wc_get_by_id($configuration, "orders/{$id}", $fields);
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id === null)
+        {
+            if ($is_rest == 'true') {
+                http_response_code(401);
+                echo json_encode(array(
+                    "message" => "User not authenticated",
+                    "status_code" => 401
+                ));
+                exit;
+            }
+            else{
+                header('Location: /authentication/login');
+            }
+        }
+        $transaction = Transaction::get_transaction_by_id($id);
         
         echo $transaction;
     }

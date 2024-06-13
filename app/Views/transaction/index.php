@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../partials/header.php';
 
-// var_dump($transactions);
+ // var_dump($transactions);
 // $jsontransactionData = json_encode($transactions, JSON_UNESCAPED_UNICODE);
 
 // echo $jsontransactionData;
@@ -251,13 +251,13 @@ require_once __DIR__ . '/../partials/header.php';
             <!-- <tr class="sms_mu_spacing_div"></tr> -->
 
             <?php
+             $utmSource = 'Not Available';
             foreach ($transactions as $item) {
 
               foreach ($item['meta_data'] as $metaItem) {
                 if ($metaItem['key'] === '_wc_order_attribution_utm_source') {
                   $utmSource = $metaItem['value'];
-                  break; // Exit the loop after finding the first match
-                }
+                } 
               }
 
 
