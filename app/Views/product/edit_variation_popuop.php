@@ -1,4 +1,43 @@
+<style>
+      #sms_delete_notification {
+    position: fixed;
+    z-index: 2000;
+    top: 20px;
+    right: 20px;
+    padding: 20px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    display: none;
+  }
+
+  #sms_delete_notification .show {
+    display: block;
+    animation: slideIn 0.5s forwards, fadeOut 2s 1s forwards;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+</style>
 <div class="page-body">
+  <div id="sms_delete_notification"></div>
     <div class="container-xl">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10">
@@ -36,15 +75,52 @@
     </div>
 </div>
 <script>
-    function fun_edit_variation() {
-        let name = document.getElementById('sms_mu_name_variation').value;
-        let price = document.getElementById('sms_mu_price_variation').value;
-        let inventory = document.getElementById('sms_mu_inventory_variation').value;
-        let data = {
-            "name": name,
-            "price": price,
-            "inventory": inventory
-        }
-        console.log(data)
+    
+    function show_sms_delete_Notification(message, isError = false) {
+      const sms_delete_notification = document.getElementById("sms_delete_notification");
+      sms_delete_notification.textContent = message;
+      sms_delete_notification.className = isError ? "error show" : "show";
     }
+
+function fun_edit_variation() {
+    let name = document.getElementById('sms_mu_name_variation').value;
+    let price = document.getElementById('sms_mu_price_variation').value;
+    let inventory = document.getElementById('sms_mu_inventory_variation').value;
+
+    let data = {
+        "name": name,
+        "price": price,
+        "inventory": inventory
+    };
+    
+    // console.log(data); 
+
+    const id = '1';
+    const term_id = '12';
+    const url = `/attributes/${id}/terms/${term_id}`;
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+            show_sms_delete_Notification("Term Edit Successfully");
+            
+          //will call the function to get latest terms again 
+        } else {
+            show_sms_delete_Notification("Failed To Edit Term", true);
+        }
+    })
+    .catch(error => {
+        show_sms_delete_Notification("Error occurred: " + error, true);
+    })
+  
+}
+
+
+   
 </script>

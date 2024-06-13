@@ -316,9 +316,7 @@
                     'description': textareaInp,
                     'stock_quantity': unitInp,
                 };
-
-                console.log(data);
-
+                document.getElementById("edit_regular_btn").disabled = true;
                 return fetch(`/product/${Id}`, {
                     method: 'PUT', // Changed from POST to PUT
                     headers: {
@@ -332,7 +330,6 @@
                     // Form submission succeeded, display success message
                     document.getElementById('sms_editForm_product_success_message').style.display = 'block';
                     document.getElementById('sms_add_editForm_product_error_message').style.display = 'none';
-                    document.getElementById("edit_regular_btn").disabled = true;
 
                     window.location.reload();
                 } else {
