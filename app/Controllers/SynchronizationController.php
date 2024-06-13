@@ -89,6 +89,9 @@ class SynchronizationController
 
     }
 
+
+    
+
     public function prepare_configuration()
     {
         $response = Configuration::getConfiguration("true");

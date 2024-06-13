@@ -47,6 +47,7 @@ class DashboardController
             $stats = Dashboard::get_dashboard_stats($filters);
             $customers_location = Dashboard::get_dashboard_data();
             $top_products = Dashboard::fetchTopSellingProductImages();
+            
             $requests = RequestTracker::getRequestsLastSevenDays();
 
             $dashboard_data = [

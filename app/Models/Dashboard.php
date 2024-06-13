@@ -16,10 +16,12 @@ class Dashboard
             $products = Base::get_number_of_products($user_id, $date_range);
             $new_customers_count = Base::get_new_customers_count($user_id, $date_range);
             $total_transactions = Base::get_total_revenue($user_id, $date_range);
+            $total_orders = Base::get_number_of_orders($user_id, $date_range);
 
             $data = [
                 'new_products' => $products,
                 'new_customers' => $new_customers_count,
+                'total_orders' => $total_orders,
                 'total_transactions' => $total_transactions
             ];
             return $data;
