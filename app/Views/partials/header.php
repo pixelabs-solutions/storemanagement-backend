@@ -1004,7 +1004,7 @@
                   },
                   'customers': {
                      en: 'Customer',
-                     he: 'לקוח'
+                     he: 'לקוחות'
                   },
                   'transactions': {
                      en: 'Transaction',
