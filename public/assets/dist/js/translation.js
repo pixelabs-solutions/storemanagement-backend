@@ -197,6 +197,7 @@ const translations = {
         Complete : "Complete",
         In_Treatment : "In Treatment",
         Cancelled : "Cancelled",
+        changed : "Group status change"
       }
     },
     statististics: {
@@ -558,11 +559,12 @@ const translations = {
             amt: "250 NIS",
             total: "15",
           },
-          card_order: {
+          card_order: {   
             total_cost: "Total cost of order",
-            product: "Products: NIS 10,450",
-            delivery: "Delivery up to 5 business days: NIS 39.9",
+            product: "Products: NIS",
+            delivery: "Delivery up to 5 business days: NIS",
             total: "Order date:",
+            total_cost: "Total Cost : NIS"
           },
           last_btn: "Save changes",
         },
@@ -794,6 +796,7 @@ const translations = {
         Complete : "לְהַשְׁלִים",
         In_Treatment : "בטיפול",
         Cancelled : "מבוטל",
+        changed : "שינוי סטטוס הקבוצה"
       }
       
     },
@@ -1160,6 +1163,8 @@ const translations = {
             product: 'מוצרים: 10,450 ש"ח',
             delivery: 'משלוח עד 5 ימי עסקים: 39.9 ש"ח',
             total: 'תאריך הזמנה:',
+            total_cost: "עלות כוללת  : NIS"
+
           },
           last_btn: "שמירת השינויים",
         },

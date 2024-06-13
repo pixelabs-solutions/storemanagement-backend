@@ -170,7 +170,7 @@
                       <h4 data-i18n="popoups.transction_pop_popuop.order_detail.card_order.product"></h4>
                       <h4 data-i18n="popoups.transction_pop_popuop.order_detail.card_order.delivery"></h4>
                       <h1 class="d-block mb-3 fw-bold text-dark" id="delivery_details"></h1>
-                      <span class="d-block mb-3 fw-bold text-dark" id="total_amount"></span>
+                      <span class="d-block mb-3 fw-bold text-dark" id="total_amount" data-i18n="popoups.transction_pop_popuop.order_detail.card_order.total_cost"></span>
                     </div>
                   </div>
                 </div>

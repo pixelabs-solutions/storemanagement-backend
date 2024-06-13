@@ -70,7 +70,7 @@
                                         <img src="assets/dist/img/revenue.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
                                         <h3 class="mt-3"><?php echo $revenue_stats["orderAverage"]; ?> NIS</h3>
-                                        <strong style="color:#4987D8" >Order average</strong>
+                                        <strong style="color:#4987D8" data-i18n="statististics.cards_in_Revenues.product_tab_in_static.card3_in_Sale.normal_product">Order average</strong>
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +85,7 @@
                                         <img src="assets/dist/img/arrow.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
                                         <h3 class="mt-3"><?php echo $revenue_stats["totalShipments"]; ?> NIS</h3>
-                                        <strong style="color:#4987D8">Shipments</strong>
+                                        <strong style="color:#4987D8" data-i18n="statististics.cards_in_Revenues.product_tab_in_static.card4_in_product.normal_product">Shipments</strong>
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
                                         <img src="assets/dist/img/revenue.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
                                         <h3 class="mt-3"><?php echo $revenue_stats["netIncome"]; ?> NIS</h3>
-                                        <strong style="color:#4987D8">Net Income</strong>
+                                        <strong style="color:#4987D8" data-i18n="statististics.cards_in_Revenues.product_tab_in_static.card5_in_product.normal_product">Net Income</strong>
                                     </div>
                                 </div>
                             </div>
