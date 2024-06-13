@@ -334,14 +334,12 @@ require_once __DIR__ . '/../partials/header.php';
             $prev_page = $current_page > 1 ? $current_page - 1 : 1;
             ?>
             <input type="radio" class="btn-check" name="btn-radio-dropdown" id="btn-radio-dropdown-1" autocomplete="off" onclick="window.location.href='?page=<?php echo $prev_page; ?>'">
-            <label for="btn-radio-dropdown-1" type="button" class="btn">
-
-              Back
+            <label for="btn-radio-dropdown-1" type="button" class="btn fs-2">
+            &#60;
             </label>
             <input type="radio" class="btn-check" name="btn-radio-dropdown" id="btn-radio-dropdown-2" autocomplete="off" onclick="window.location.href='?page=<?php echo $next_page; ?>'">
-            <label for="btn-radio-dropdown-2" type="button" class="btn">
-
-              Next
+            <label for="btn-radio-dropdown-2" type="button" class="btn fs-2">
+            &#62;
             </label>
           </div>
 

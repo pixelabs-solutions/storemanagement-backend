@@ -96,7 +96,7 @@ require_once __DIR__ . '/../partials/header.php';
     display: none;
   }
 
-  #sms_delete_notification.show { 
+  #sms_delete_notification.show {
     display: block;
     animation: slideIn 0.5s forwards, fadeOut 2s 1s forwards;
   }
@@ -121,8 +121,8 @@ require_once __DIR__ . '/../partials/header.php';
     }
   }
 
-/* Add this in the style tag or a separate CSS file */
-#loader {
+  /* Add this in the style tag or a separate CSS file */
+  #loader {
     position: fixed;
     left: 0;
     top: 0;
@@ -137,9 +137,9 @@ require_once __DIR__ . '/../partials/header.php';
     font-family: 'Arial', sans-serif;
     color: #333;
     text-align: center;
-}
+  }
 
-#loader .spinner {
+  #loader .spinner {
     border: 8px solid #f3f3f3;
     border-top: 8px solid #3498db;
     border-radius: 50%;
@@ -147,24 +147,29 @@ require_once __DIR__ . '/../partials/header.php';
     height: 60px;
     animation: spin 2s linear infinite;
     margin-bottom: 20px;
-}
+  }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
 
-#loader h1 {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  #loader h1 {
     font-size: 1.5em;
     margin: 0;
     padding: 0;
-}
+  }
 </style>
 <div class="sms_coupons_m  p-0">
-<div id="loader">
+  <div id="loader">
     <div class="spinner"></div>
     <h1>Loading, please wait...</h1>
-</div>
+  </div>
   <div id="sms_delete_notification"></div>
 
   <div class=" col-12 mt-5">
@@ -236,7 +241,7 @@ require_once __DIR__ . '/../partials/header.php';
                       <div class="d-flex justify-content-center gap-4 w-auto">
 
 
-                        <span class="" id="delete_coupon"  onclick="deleteCouponsParent(<?php echo $item['id']; ?>)" coupon_id="<?php echo $item['id']; ?>">
+                        <span class="" id="delete_coupon" onclick="deleteCouponsParent(<?php echo $item['id']; ?>)" coupon_id="<?php echo $item['id']; ?>">
                           <svg width="24" height="24" viewBox="0 0 28 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M8.45 1.10625C8.7875 0.425 9.48125 0 10.2375 0H17.7625C18.5188 0 19.2125 0.425 19.55 1.10625L20 2H26C27.1063 2 28 2.89375 28 4C28 5.10625 27.1063 6 26 6H2C0.89375 6 0 5.10625 0 4C0 2.89375 0.89375 2 2 2H8L8.45 1.10625ZM2 8H26V28C26 30.2062 24.2062 32 22 32H6C3.79375 32 2 30.2062 2 28V8ZM8 12C7.45 12 7 12.45 7 13V27C7 27.55 7.45 28 8 28C8.55 28 9 27.55 9 27V13C9 12.45 8.55 12 8 12ZM14 12C13.45 12 13 12.45 13 13V27C13 27.55 13.45 28 14 28C14.55 28 15 27.55 15 27V13C15 12.45 14.55 12 14 12ZM20 12C19.45 12 19 12.45 19 13V27C19 27.55 19.45 28 20 28C20.55 28 21 27.55 21 27V13C21 12.45 20.55 12 20 12Z" fill="#A30505" />
                           </svg>
@@ -257,22 +262,20 @@ require_once __DIR__ . '/../partials/header.php';
             </tbody>
           </table>
           <div class="sm-mu-buttons d-flex mb-4 justify-content-end">
-    <?php 
-    $current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-    $next_page = $current_page + 1;
-    $prev_page = $current_page > 1 ? $current_page - 1 : 1;
-    ?>  
-                              <input type="radio" class="btn-check" name="btn-radio-dropdown" id="btn-radio-dropdown-1" autocomplete="off" onclick="window.location.href='?page=<?php echo $prev_page; ?>'">
-                              <label for="btn-radio-dropdown-1" type="button" class="btn">
-                                
-                                Back
-                              </label>
-                              <input type="radio" class="btn-check" name="btn-radio-dropdown" id="btn-radio-dropdown-2" autocomplete="off" onclick="window.location.href='?page=<?php echo $next_page; ?>'">
-                              <label for="btn-radio-dropdown-2" type="button" class="btn">
-
-                              Next
-                              </label>
-</div>
+            <?php
+            $current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+            $next_page = $current_page + 1;
+            $prev_page = $current_page > 1 ? $current_page - 1 : 1;
+            ?>
+            <input type="radio" class="btn-check" name="btn-radio-dropdown" id="btn-radio-dropdown-1" autocomplete="off" onclick="window.location.href='?page=<?php echo $prev_page; ?>'">
+            <label for="btn-radio-dropdown-1" type="button" class="btn fs-2">
+            &#60;
+            </label>
+            <input type="radio" class="btn-check" name="btn-radio-dropdown" id="btn-radio-dropdown-2" autocomplete="off" onclick="window.location.href='?page=<?php echo $next_page; ?>'">
+            <label for="btn-radio-dropdown-2" type="button" class="btn fs-2">
+            &#62;
+            </label>
+          </div>
 
 
         </div>
@@ -370,16 +373,15 @@ require_once __DIR__ . '/../partials/header.php';
                 לִמְחוֹק
               </a>
             </div>
-        </div>
           </div>
-        
+        </div>
+
       </div>
     </div>
   </div>
 </div>
 
 <script>
-
   function deleteCouponsParent(couponId) {
     fetch("/coupons/" + couponId, {
         method: "DELETE",
@@ -531,11 +533,10 @@ require_once __DIR__ . '/../partials/header.php';
   });
 </script>
 <script>
-              window.addEventListener('load', function() {
-        document.getElementById('loader').style.display = 'none';
-    });
-
-        </script>
+  window.addEventListener('load', function() {
+    document.getElementById('loader').style.display = 'none';
+  });
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
 <script>

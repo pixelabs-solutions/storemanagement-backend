@@ -754,8 +754,7 @@
                   </li> -->
 
                   <li class="nav-item" id="">
-                     <button onclick="LogoutDisconecting()" id="sms_mu_filter_button_inventory"
-                        class="rounded-4 border-0 p-2" style="background-color:#4987D870; color:white">
+                     <button onclick="LogoutDisconecting()" data-i18n="header.Disconecting" id="sms_mu_filter_button_inventory" class="rounded-4 border-0 p-2" style="background-color:#4987D870; color:white">
                         Disconnecting from the system
 
                         <svg width="24" height="24" viewBox="0 0 32 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -934,9 +933,8 @@
                      <div class="mt-1 small text-muted">UI Designer</div>
                   </div>
                   </a>
-                  <div id="PopoupLogout" class="dropdown-menu dropdown-menu-end dropdown-menu-arrow dropdown_logout"
-                     bis_skin_checked="1" style="display: none ;">
-                     <a href="#" class="dropdown-item" onclick="LogoutDisconecting()">Logout</a>
+                  <div id="PopoupLogout" class="dropdown-menu dropdown-menu-end dropdown-menu-arrow dropdown_logout" bis_skin_checked="1" style="display: none ;">
+                     <a href="#" class="dropdown-item" onclick="LogoutDisconecting()" data-i18n="header.Logout">Logout</a>
                   </div>
                   <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                         <a href="#" class="dropdown-item">Status</a>

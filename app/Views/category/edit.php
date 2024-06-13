@@ -144,7 +144,7 @@
                     <div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_editForm_success_message" style="display: none;">
                         <!-- Close icon -->
 
-                        <button type="button" class="btn-close" aria-label="Close" onclick="Sms_mu_close_scucess()"></button>
+                        <!-- <button type="button" class="btn-close" aria-label="Close" onclick="Sms_mu_close_scucess()"></button> -->
                         <!-- SVG icon -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -272,6 +272,8 @@ function submit_edit_ctg_form() {
             "image": filteredBase64Strings, // Now containing an array of base64 strings
         };
 
+       
+        
         console.log("Form data:", form_data);
         const apiUrl = `/categories/${id}`;
         fetch(apiUrl, {
@@ -284,7 +286,7 @@ function submit_edit_ctg_form() {
         .then(response => {
             // Show success message
             document.getElementById('sms_editForm_success_message').style.display = 'block';
-            document.getElementById("submit_for_edit").disabled = true;
+            
 
             // Reload window after a delay
             setTimeout(function(){
@@ -323,13 +325,13 @@ function submit_edit_ctg_form() {
 
 
 
-    function Sms_mu_close_scucess() {
-        document.getElementById('sms_editForm_success_message').style.display = 'none';
-    }
+    // function Sms_mu_close_scucess() {
+    //     document.getElementById('sms_editForm_success_message').style.display = 'none';
+    // }
 
-    function Sms_mu_close_error() {
-        document.getElementById('sms_add_editForm_error_message').style.display = 'none';
-    }
+    // function Sms_mu_close_error() {
+    //     document.getElementById('sms_add_editForm_error_message').style.display = 'none';
+    // }
 
 
     function showFileName(input) {
