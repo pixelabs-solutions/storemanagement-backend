@@ -168,12 +168,12 @@ class ProductController
             'name' => $data['name'],
             'type' => $data['type'],
             'description' => $data['description'],
-            'categories' => array_map(function ($category_id) {
+            'categories' => !empty($data['categories']) ? array_map(function ($category_id) {
                 return ['id' => $category_id];
-            }, $data['categories']),
-            'images' => array_map(function ($image_url) {
+            }, $data['categories']) : [],
+            'images' => !empty($image_paths) ? array_map(function ($image_url) {
                 return ['src' => $image_url];
-            }, $image_paths)
+            }, $image_paths) : []
         ];
         // echo json_encode($payload);exit;
         if ($data['type'] === "variable") {
@@ -213,6 +213,8 @@ class ProductController
             $payload['stock_quantity'] = $data['stock_quantity'];
             $payload['regular_price'] = $data['regular_price'];
             $payload['sale_price'] = $data['sale_price'];
+            
+            // echo json_encode($payload);exit;
 
             $response = Base::wc_add($configuration, $this->table_name, json_encode($payload));
             if ($is_rest == 'true') {
@@ -265,25 +267,27 @@ class ProductController
                 $image_paths[] = FileHelper::save_file($image, $filename);
             }
         } else {
-            $image_paths[] = FileHelper::save_file($data['image'], "products/" . $data['name']);
+            $image_paths[] = FileHelper::save_file($data['images'], "products/" . $data['name']);
         }
 
 
         $payload = [
             'name' => $data['name'],
             'type' => $data['type'],
-            'description' => $data['description'],
-            'manage_stock' => true,
-            'stock_quantity' => $data['stock_quantity'],
-            'categories' => array_map(function ($category_id) {
-                return ['id' => $category_id];
-            }, $data['category']),
-            'images' => array_map(function ($image_url) {
-                return ['src' => $image_url];
-            }, $data['images']),
-            'regular_price' => $data['regular_price'],
-            'sale_price' => $data['sale_price']
+            'description' => $data['description']
         ];
+        if(!empty($data['categories'])){
+            $payload['categories'] = array_map(function ($category_id) {
+                return ['id' => $category_id];
+            }, $data['categories']);
+        }
+        
+        if(!empty($data['images']) && !empty($image_paths)){
+            $payload['images'] = array_map(function ($image_url) {
+                return ['src' => $image_url];
+            }, $image_paths);
+        }
+        
 
         if ($data['type'] === "variable") {
             // Construct attributes array
@@ -315,7 +319,7 @@ class ProductController
             $payload['stock_quantity'] = $data['stock_quantity'];
             $payload['regular_price'] = $data['regular_price'];
             $payload['sale_price'] = $data['sale_price'];
-            $response = Base::wc_update($configuration, $this->table_name . "/" . $id, $payload);
+            $response = Base::wc_update($configuration, $this->table_name . "/" . $id, json_encode($payload));
             Synchronize::sync_products();
 
         }
