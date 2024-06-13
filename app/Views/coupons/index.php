@@ -86,6 +86,7 @@ require_once __DIR__ . '/../partials/header.php';
 
   #sms_delete_notification {
     position: fixed;
+    z-index: 2000;
     top: 20px;
     right: 20px;
     padding: 20px 20px;
@@ -95,7 +96,7 @@ require_once __DIR__ . '/../partials/header.php';
     display: none;
   }
 
-  #sms_delete_notification.show {
+  #sms_delete_notification.show { 
     display: block;
     animation: slideIn 0.5s forwards, fadeOut 2s 1s forwards;
   }

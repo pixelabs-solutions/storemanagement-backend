@@ -57,7 +57,7 @@
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         max-width: 400px;
         width: 100%;
-        z-index: 9999;
+        z-index: 2000000;
         text-align: center;
         box-shadow: 100vh 100vh 100vh 300vh #00000059;
     }
@@ -118,12 +118,10 @@
                                 <label for="example-date-input" class="form-label fs-4 fw-bold" data-i18n="popoups.added_new_cupons.expiry_date">Coupon expiration
                                     date</label>
                                 <div class="input-group">
-                                    <input type="date" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA" id="sms_Coupon_expiration" placeholder="Expiry Date">
+                                    <!-- <input type="date" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA" id="sms_Coupon_expiration" placeholder="Expiry Date"> -->
+                                    <input type="date" id="sms_Coupon_expiration" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA" placeholder="Expiry date" min="<?php echo date("Y-m-d"); ?>">
                                 </div>
                             </div>
-
-
-
                             <div class="col-md-6 mb-3">
                                 <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.limit">Usage limit
                                     (leave blank without limit) </label>

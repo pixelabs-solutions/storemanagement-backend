@@ -10,15 +10,15 @@
         <div class="row g-2 align-items-center list_button_statis">
             <!-- Stats header Buttons -->
             <div class="col-auto btn-list">
-                <a href="?query=last_week" class="btn btn-light shadow-none last_week" id="products_last_week" class="nav-link" data-i18n="statististics.tabs_in_select_range.week"> Last Week
+                <a href="?query=last_week" class="btn bg-transparent btn-light shadow-none last_week" id="products_last_week" class="nav-link" data-i18n="statististics.tabs_in_select_range.week"> Last Week
                 </a>
-                <a href="?query=last_month" class="btn btn-light shadow-none last_month " id="products_last_month" class="nav-link" data-i18n="statististics.tabs_in_select_range.month"> Current
+                <a href="?query=last_month" class="btn bg-transparent btn-light shadow-none last_month " id="products_last_month" class="nav-link" data-i18n="statististics.tabs_in_select_range.month"> Current
                     Month </a>
-                <a href="?query=last_year" class="btn btn-light shadow-none last_year" id="products_last_year" data-i18n="statististics.tabs_in_select_range.year"> Last Year </a>
+                <a href="?query=last_year" class="btn bg-transparent btn-light shadow-none last_year" id="products_last_year" data-i18n="statististics.tabs_in_select_range.year"> Last Year </a>
             </div>
             <!-- Date Range Button -->
             <div class="col-auto ms-auto">
-                <a href="#" class="btn btn-pill" data-bs-toggle="modal" data-bs-target="#modal-team" style="background-color:#A8C3E7; border:none;" data-i18n="statististics.tabs_in_select_range.button">
+                <a href="#" class="btn btn-pill" data-bs-toggle="modal" data-bs-target="#modal-team" style="background-color:#EFEFEF; border:none;" data-i18n="statististics.tabs_in_select_range.button">
                     Select a Date Range
                 </a>
             </div>
@@ -97,9 +97,9 @@
             </div>
             <!-- Products on order Card End -->
         </div>
-        <!-- <div id="chart-combination-2"></div> -->
+        <div id="chart-combination-2"></div>
         <!-- Colors Button Start-->
-        <!-- <div class="row g-2 align-items-center ">
+        <div class="row g-2 align-items-center ">
             <div class="col-auto ms-auto btn-list mt-5 mb-5 sms_mu_for_rtl_row_cards">
                 <div class="text-light p-1" style="background-color:#627e0c; border-radius:5px;" data-i18n="statististics.chart_below_btn.firts_btn.text"> New
                     Customer</div>
@@ -112,7 +112,7 @@
                 <div class="text-light p-1" style="background-color:#ac3f4f; border-radius:5px;" data-i18n="statististics.chart_below_btn.five_btn.text"> Revenues
                 </div>
             </div>
-        </div> -->
+        </div>
         <!-- Colors Button End -->
 
         <!-- Icon Box End -->
@@ -206,39 +206,39 @@
 
 
 <script>
-    // // Function to get query parameters from the URL
-    // function getQueryParams() {
-    //     const params = {};
-    //     window.location.search.substring(1).split("&").forEach(param => {
-    //         const [key, value] = param.split("=");
-    //         params[decodeURIComponent(key)] = decodeURIComponent(value);
-    //     });
-    //     return params;
-    // }
+    // Function to get query parameters from the URL
+    function getQueryParams() {
+        const params = {};
+        window.location.search.substring(1).split("&").forEach(param => {
+            const [key, value] = param.split("=");
+            params[decodeURIComponent(key)] = decodeURIComponent(value);
+        });
+        return params;
+    }
 
-    // // Get query parameters
-    // const queryParams = getQueryParams();
+    // Get query parameters
+    const queryParams = getQueryParams();
 
-    // if (queryParams.query === 'last_week') {
-    //     // Add the .filter_tab_active class to the element with the ID 'last_week'
-    //     const elements = document.querySelectorAll('.last_week');
-    //     elements.forEach(element => {
-    //         element.classList.add('filter_tab_active');
-    //     });
-    // } else if (queryParams.query === 'last_month') {
-    //     // Add the .filter_tab_active class to the element with the ID 'current_month'
+    if (queryParams.query === 'last_week') {
+        // Add the .filter_tab_active class to the element with the ID 'last_week'
+        const elements = document.querySelectorAll('.last_week');
+        elements.forEach(element => {
+            element.classList.add('filter_tab_active');
+        });
+    } else if (queryParams.query === 'last_month') {
+        // Add the .filter_tab_active class to the element with the ID 'current_month'
 
-    //     const elements = document.querySelectorAll('.last_month');
-    //     elements.forEach(element => {
-    //         element.classList.add('filter_tab_active');
-    //     });
-    // } else if (queryParams.query === 'last_year') {
-    //     // Add the .filter_tab_active class to the element with the ID 'last_year'
-    //     const elements = document.querySelectorAll('.last_year');
-    //     elements.forEach(element => {
-    //         element.classList.add('filter_tab_active');
-    //     });
-    // }
+        const elements = document.querySelectorAll('.last_month');
+        elements.forEach(element => {
+            element.classList.add('filter_tab_active');
+        });
+    } else if (queryParams.query === 'last_year') {
+        // Add the .filter_tab_active class to the element with the ID 'last_year'
+        const elements = document.querySelectorAll('.last_year');
+        elements.forEach(element => {
+            element.classList.add('filter_tab_active');
+        });
+    }
 </script>
 <script>
             function getQueryParams() {

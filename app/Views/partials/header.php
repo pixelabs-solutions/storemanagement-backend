@@ -11,7 +11,7 @@
    <title>Store Managment System</title>
    <!-- CSS files -->
    <link rel="stylesheet" type="text/css" href="assets/dist/css/tabler.min.css" />
-   <link href="assets/dist/css/tabler-flags.min.css?1695847769" rel="stylesheet"/>
+   <link href="assets/dist/css/tabler-flags.min.css?1695847769" rel="stylesheet" />
    <link href="assets/dist/css/tabler-payments.min.css" rel="stylesheet" />
    <link href="assets/dist/css/tabler-vendors.min.css" rel="stylesheet" />
    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
@@ -109,7 +109,19 @@
       .rtl .avatar {
          margin-left: 10px;
       }
-
+      .sms_header_page_name{
+         font-weight: 400 !important;
+         color: black !important;
+         font-size: 20px;
+      }
+.weight_500{
+   font-weight: 500 !important;
+   color: black !important;
+}
+.weight_400{
+   font-weight: 400 !important;
+   color: black !important;
+}
       .choices__input {
          background-color: transparent !important;
       }
@@ -133,11 +145,12 @@
          padding-left: 14px !important;
 
       }
-      .dropdown_logout{
+
+      .dropdown_logout {
          position: absolute;
-        top: 49px;
-        margin-left: 15px;
-    }
+         top: 49px;
+         margin-left: 15px;
+      }
 
 
       .dropdown-item {
@@ -208,6 +221,9 @@
 
       .rtl td {
          border-radius: 0px !important;
+      }
+      .fw-bold{
+         font-weight: 900 !important;
       }
 
       .rtl .sms_mu_margin {
@@ -452,7 +468,8 @@
       .rtl #support {
          display: none !important;
       }
-      .rtl .header_row_for_hebrew{
+
+      .rtl .header_row_for_hebrew {
          padding-right: 2rem !important;
       }
 
@@ -475,6 +492,7 @@
          border-radius: 5px;
          display: none;
       }
+
 
       #sync_woocommerce{
          border-radius: 100px;
@@ -520,6 +538,24 @@
 }
 
 
+      .fw-bold {
+         font-weight: 700 !important;
+      }
+
+      .sms_mu_chosefile {
+         background-color: #EEEEEE;
+      }
+
+      .sms_a_custom_file_input label {
+         /* display: inline-block; */
+         padding: 12px 16px;
+         border: 1px solid #ced4da;
+         border-radius: 8px;
+         cursor: pointer;
+         width: 100%;
+         background-color: #EAEAEA !important;
+         text-align: center;
+      }
    </style>
 </head>
 
@@ -871,11 +907,11 @@
                      </button> -->
                      <select id="lang-select" style="padding: 5px; font-size: 14px;" class="lang_select">
                         <option value="en">
-                      <span class="flag flag-country-us"> English</span>
-                           
+                           <span class="flag flag-country-us"> English</span>
+
                         </option>
                         <option value="he">
-                        <span class="flag flag-country-il"></span>
+                           <span class="flag flag-country-il"></span>
                            עברית
                         </option>
                      </select>
@@ -892,9 +928,9 @@
                   </div>
                   </a>
                   <div id="PopoupLogout" class="dropdown-menu dropdown-menu-end dropdown-menu-arrow dropdown_logout" bis_skin_checked="1" style="display: none ;">
-                        <a href="#" class="dropdown-item" onclick="LogoutDisconecting()">Logout</a>
-                     </div>
-                     <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                     <a href="#" class="dropdown-item" onclick="LogoutDisconecting()">Logout</a>
+                  </div>
+                  <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                         <a href="#" class="dropdown-item">Status</a>
                         <a href="./profile.html" class="dropdown-item">Profile</a>
                         <a href="#" class="dropdown-item">Feedback</a>
@@ -927,6 +963,8 @@
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
          <!-- <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script> -->
          <script>
+
+            
             // JavaScript for switching language
             function FunLogoutProfile() {
                var div = document.getElementById('PopoupLogout');
@@ -1138,12 +1176,12 @@
             });
             $(document).ready(function() {
 
-var multipleCancelButton = new Choices('#category_in_product_normal_product', {
-   removeItemButton: true,
-});
+               var multipleCancelButton = new Choices('#category_in_product_normal_product', {
+                  removeItemButton: true,
+               });
 
 
-});
+            });
             $(document).ready(function() {
 
                var multipleCancelButton = new Choices('#sms_mu_select_category', {
@@ -1156,12 +1194,12 @@ var multipleCancelButton = new Choices('#category_in_product_normal_product', {
 
             $(document).ready(function() {
 
-var multipleCancelButton = new Choices('#variation_category_select', {
-   removeItemButton: true,
-});
+               var multipleCancelButton = new Choices('#variation_category_select', {
+                  removeItemButton: true,
+               });
 
 
-});
+            });
 
             // $(document).ready(function () {
 
