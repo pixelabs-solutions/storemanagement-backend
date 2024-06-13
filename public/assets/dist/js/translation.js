@@ -14,6 +14,7 @@ const translations = {
       Setting: "Setting",
       Help: "Help and support",
       Disconecting: "Disconnecting from the system ",
+      Logout : "Logout",
     },
     dashboard: {
       tabs: {
@@ -613,6 +614,7 @@ const translations = {
       Setting: "הגדרות",
       Help: "עזרה ותמיכה",
       Disconecting: "ניתוק מהמערכת",
+      Logout : "להתנתק",
     },
     dashboard: {
       tabs: {
