@@ -20,8 +20,7 @@ class AttributesController
             } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
-        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-        $attributes = Base::wc_get($configuration, $this->endpoint, $page);
+        $attributes = Base::wc_get($configuration, $this->endpoint);
         if($is_rest == 'true')
         {
             echo json_encode($attributes);
@@ -101,16 +100,12 @@ class AttributesController
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
-        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-        $attribute_terms = Base::wc_get($configuration, $this->endpoint."/".$id."/"."terms", $page);
-        // include_once __DIR__ . '/../Views/product/index.php';
+        $attribute_terms = Base::wc_get($configuration, $this->endpoint."/".$id."/"."terms");
      
         // Ensure headers are set to return JSON
         header('Content-Type: application/json');
         
-        // Output the JSON encoded attribute terms
         echo json_encode($attribute_terms);
-        //    return json_encode($attribute_terms);
     }
 
     
@@ -142,23 +137,16 @@ class AttributesController
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
-
-        // $result = HttpRequestHelper::validate_request("POST");
-        // if(!$result["is_data_prepared"])
-        // {
-        //     echo $result["message"];
-        //     return;
-        // }
-
-        // $data = $result["data"];
         $name = $_POST['name'];
-        $attribute_id = $_POST['attribute_id'];
+        $attribute_id = $id;
         $data = $_POST['data'];
+        $description = $_POST['description'];
 
         $payload = [
             'name' => $name,
             'attribute_id' => $attribute_id,
-            'data' => $data
+            'data' => $data,
+            'description' => $description
         ];
 
         $response = Attribute::add_term($configuration, $payload);

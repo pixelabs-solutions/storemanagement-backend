@@ -79,10 +79,9 @@ class Attribute
         try
         {
             $endpoint = $store_url."/wp-admin/admin-ajax.php?action=woomanagement_add_attribute&name=".$name."&type=".$type;
+            // echo $endpoint;exit;
             $response = $client->request('POST', $endpoint, [
-                'headers' => [
-                    'Content-Type' => 'application/json',
-                ],
+                
                 'body' => json_encode($payload)
             ]);
 
@@ -107,13 +106,16 @@ class Attribute
         $client = new Client();
         try
         {
-            $endpoint = $store_url."/wp-admin/admin-ajax.php?action=woomanagement_add_term&name=".$payload['name']."&description=&attribute_id=".$payload['attribute_id'];
-            // echo $endpoint;exit;
-            $response = $client->request('POST', $endpoint, [
+            $endpoint = $store_url."/wp-admin/admin-ajax.php?action=woomanagement_add_term&name=".$payload['name']."&description=".$payload['description']."&attribute_id=".$payload['attribute_id'];
+            // echo json_encode($payload);exit;
+            $options = [
                 'multipart' => [
-                    'data' => $payload['data']
-                ]
-            ]);
+                  [
+                    'name' => 'data',
+                    'contents' => $payload['data']
+                  ]
+              ]];
+            $response = $client->request('POST', $endpoint, $options);
 
 
             if ($response->getStatusCode() == 200) 
