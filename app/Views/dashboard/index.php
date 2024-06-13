@@ -288,7 +288,7 @@ require_once __DIR__ . '/../partials/header.php';
                     </div>
                     <div class="row g-2 sms_mu_for_rtl_row_cards mt-2">
                         <div class="col-8">
-                            <h3> 1457 </h3>
+                        <h3> <?php echo $dashboard_data["statistics"]["total_orders"]; ?> </h3>
                         </div>
                         <!-- <div class="col-auto ms-auto">
                             <span style="color:#40A826"> 10 % </span>

@@ -7,6 +7,7 @@ use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Helpers\FileHelper;
 use Pixelabs\StoreManagement\Models\Authentication;
 use Pixelabs\StoreManagement\Models\Category;
+use Pixelabs\StoreManagement\Models\Synchronize;
 
 class CategoryController
 {
@@ -65,6 +66,8 @@ class CategoryController
         
         $configuration = $this->prepare_configuration($is_rest);
         $result = Base::wc_delete_by_id($configuration, $this->endpoint."/".$id);
+        Synchronize::sync_categories();
+
         echo $result;
     }
 
@@ -96,6 +99,8 @@ class CategoryController
         // echo $payload;exit;
 
         $response = Base::wc_add($configuration, $this->endpoint, $payload);
+        Synchronize::sync_categories();
+
         echo $response;
     }
 
@@ -136,6 +141,8 @@ class CategoryController
 
         
         $response = Base::wc_update($configuration, $this->endpoint."/".$id, $payload);
+        Synchronize::sync_categories();
+
         echo $response;
     }
 

@@ -7,6 +7,7 @@ use Pixelabs\StoreManagement\Models\Transaction;
 use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Models\Authentication;
+use Pixelabs\StoreManagement\Models\Synchronize;
 
 
 class TransactionController
@@ -95,6 +96,7 @@ class TransactionController
         ]);
 
         $result = Base::wc_update($configuration, "orders/{$id}", $payload);
+        Synchronize::sync_transactions();
 
         echo $result;
     }

@@ -29,7 +29,9 @@ class Transaction
             if ($response->getStatusCode() == 200) 
             {
                 $data = json_decode($response->getBody(), true);
+                Synchronize::sync_transactions();
                 return json_encode(['message' => 'Bulk Statuses have been updated.', 'status_code' => $response->getStatusCode()]);
+
             } 
             else 
             {
