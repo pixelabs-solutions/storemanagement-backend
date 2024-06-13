@@ -38,6 +38,24 @@ class StatisticsController
     public function products()
     {
 
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id === null)
+        {
+            if ($is_rest == 'true') {
+                http_response_code(401);
+                echo json_encode(array(
+                    "message" => "User not authenticated",
+                    "status_code" => 401
+                ));
+                exit;
+            }
+            else{
+                header('Location: /authentication/login');
+            }
+        }
+
+
         $user_level = Authentication::getUserLevelFromToken();
         if ($user_level == ADMIN) {
             header("Location: /admin/index");
@@ -61,6 +79,22 @@ class StatisticsController
 
     public function orders()
     {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id === null)
+        {
+            if ($is_rest == 'true') {
+                http_response_code(401);
+                echo json_encode(array(
+                    "message" => "User not authenticated",
+                    "status_code" => 401
+                ));
+                exit;
+            }
+            else{
+                header('Location: /authentication/login');
+            }
+        }
 
         $user_level = Authentication::getUserLevelFromToken();
         if ($user_level == ADMIN) {
@@ -86,6 +120,22 @@ class StatisticsController
 
     public function revenue()
     {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id === null)
+        {
+            if ($is_rest == 'true') {
+                http_response_code(401);
+                echo json_encode(array(
+                    "message" => "User not authenticated",
+                    "status_code" => 401
+                ));
+                exit;
+            }
+            else{
+                header('Location: /authentication/login');
+            }
+        }
 
         $user_level = Authentication::getUserLevelFromToken();
         if ($user_level == ADMIN) {
@@ -112,6 +162,22 @@ class StatisticsController
 
     public function overview()
     {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id === null)
+        {
+            if ($is_rest == 'true') {
+                http_response_code(401);
+                echo json_encode(array(
+                    "message" => "User not authenticated",
+                    "status_code" => 401
+                ));
+                exit;
+            }
+            else{
+                header('Location: /authentication/login');
+            }
+        }
 
         $user_level = Authentication::getUserLevelFromToken();
         if ($user_level == ADMIN) {
