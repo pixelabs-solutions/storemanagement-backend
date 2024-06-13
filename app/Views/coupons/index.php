@@ -209,7 +209,8 @@ require_once __DIR__ . '/../partials/header.php';
                 <th class="sms_mu_td" data-i18n="cupons_and_benifit.coupons_th.Discount_amount_in_th">Discount amount</th>
                 <th class="sms_mu_td" data-i18n="cupons_and_benifit.coupons_th.Use_restriction_in_th">Use/restriction</th>
                 <th class="sms_mu_td" data-i18n="cupons_and_benifit.coupons_th.Expiry_Date_in_th">Expiry Date</th>
-                <th class="sms_mu_td" data-i18n="cupons_and_benifit.coupons_th.action_in_th">action</th>
+                <th class="sms_mu_td"></th>
+                <!-- data-i18n="cupons_and_benifit.coupons_th.action_in_th" -->
               </tr>
               <tr class="sms_mu_spacing_div"></tr>
 

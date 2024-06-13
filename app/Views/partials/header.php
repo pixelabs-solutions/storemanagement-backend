@@ -109,19 +109,23 @@
       .rtl .avatar {
          margin-left: 10px;
       }
-      .sms_header_page_name{
+
+      .sms_header_page_name {
          font-weight: 400 !important;
          color: black !important;
          font-size: 20px;
       }
-.weight_500{
-   font-weight: 500 !important;
-   color: black !important;
-}
-.weight_400{
-   font-weight: 400 !important;
-   color: black !important;
-}
+
+      .weight_500 {
+         font-weight: 500 !important;
+         color: black !important;
+      }
+
+      .weight_400 {
+         font-weight: 400 !important;
+         color: black !important;
+      }
+
       .choices__input {
          background-color: transparent !important;
       }
@@ -222,7 +226,8 @@
       .rtl td {
          border-radius: 0px !important;
       }
-      .fw-bold{
+
+      .fw-bold {
          font-weight: 900 !important;
       }
 
@@ -392,10 +397,10 @@
          right: -452px !important;
       }
 
-      .rtl .dropdown-menu-arrow.dropdown-menu-end:before {
+      /* .rtl .dropdown-menu-arrow.dropdown-menu-end:before {
          right: 28.75rem;
          left: auto;
-      }
+      } */
 
       .rtl .sms_mu_header {
          margin-right: 15%;
@@ -715,8 +720,12 @@
 
                   <li class="nav-item" id="">
                      <button onclick="LogoutDisconecting()" id="sms_mu_filter_button_inventory" class="rounded-4 border-0 p-2" style="background-color:#4987D870; color:white">
-                        Disconnecting from the system
-
+                        <span class="Sms_mu_for_Eng m-0">
+                           Disconnecting from the system
+                        </span>
+                        <span class="Sms_mu_for_hebrew m-0">
+                           ניתוק מהמערכת
+                        </span>
                         <svg width="24" height="24" viewBox="0 0 32 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path d="M22 4H26C27.1063 4 28 4.89375 28 6V22C28 23.1063 27.1063 24 26 24H22C20.8937 24 20 24.8937 20 26C20 27.1063 20.8937 28 22 28H26C29.3125 28 32 25.3125 32 22V6C32 2.6875 29.3125 0 26 0H22C20.8937 0 20 0.89375 20 2C20 3.10625 20.8937 4 22 4ZM21.4125 15.4125C22.1938 14.6313 22.1938 13.3625 21.4125 12.5813L13.4125 4.58125C12.6313 3.8 11.3625 3.8 10.5813 4.58125C9.8 5.3625 9.8 6.63125 10.5813 7.4125L15.1687 12H2C0.89375 12 0 12.8938 0 14C0 15.1062 0.89375 16 2 16H15.1687L10.5813 20.5875C9.8 21.3687 9.8 22.6375 10.5813 23.4188C11.3625 24.2 12.6313 24.2 13.4125 23.4188L21.4125 15.4188V15.4125Z" fill="white" />
                         </svg>
@@ -880,7 +889,10 @@
                   </div>
                   </a>
                   <div id="PopoupLogout" class="dropdown-menu dropdown-menu-end dropdown-menu-arrow dropdown_logout" bis_skin_checked="1" style="display: none ;">
-                     <a href="#" class="dropdown-item" onclick="LogoutDisconecting()">Logout</a>
+                     <a href="#" class="dropdown-item" onclick="LogoutDisconecting()">
+                        <span class="Sms_mu_for_Eng">Logout</span>
+                        <span class="Sms_mu_for_hebrew">להתנתק</span>
+                     </a>
                   </div>
                   <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                         <a href="#" class="dropdown-item">Status</a>
@@ -915,8 +927,6 @@
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
          <!-- <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script> -->
          <script>
-
-            
             // JavaScript for switching language
             function FunLogoutProfile() {
                var div = document.getElementById('PopoupLogout');

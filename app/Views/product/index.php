@@ -16,6 +16,9 @@ require_once __DIR__ . '/../partials/header.php';
     svg {
         cursor: pointer;
     }
+  td{
+    /* display: ; */
+  }
     /* label{
         font-weight: 700 !important;
     } */
@@ -281,13 +284,9 @@ require_once __DIR__ . '/../partials/header.php';
     <div class=" col-12 mt-5" style="overflow-y: hidden; overflow-x:hidden;">
         <div class="row col-12 d-flex justify-content-between bg-white p-3 m-0 overflow-hidden" style="border-radius:20px;">
             <div class="col-sm-10 d-flex flex-column flex-md-row gap-2 col-lg-6 m-0 ">
-                <button class="rounded-4 border-0 p-2" data-bs-toggle="modal" data-bs-target="#modal-full-width"
-                    style="background-color:#4987D870; " data-i18n="product_managment.nav.new_product_btn"></button>
-                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870;" data-bs-toggle="modal"
-                    data-bs-target="#modal-Category-large"
-                    data-i18n="product_managment.nav.category_product_btn"></button>
-                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; " data-bs-toggle="modal"
-                    data-bs-target="#modal-large" data-i18n="product_managment.nav.future_product_btn"></button>
+                <button class="rounded-4 border-0 p-2" data-bs-toggle="modal" data-bs-target="#modal-full-width" style="background-color:#4987D870; " data-i18n="product_managment.nav.new_product_btn"></button>
+                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870;" data-bs-toggle="modal" data-bs-target="#modal-Category-large" data-i18n="product_managment.nav.category_product_btn"></button>
+                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; " data-bs-toggle="modal" data-bs-target="#modal-large" data-i18n="product_managment.nav.future_product_btn"></button>
 
             </div>
             <div class="col-lg-2 col-md-6 col-sm-11  mt-3 mt-lg-0">
@@ -438,7 +437,7 @@ require_once __DIR__ . '/../partials/header.php';
                     <div id="popups" class="popup">
                         <div class="popup-content">
                             <h3 class="text-center" data-i18n="product_managment.product_search.filter_catageary_btn">
-                               </h3>
+                            </h3>
                             <span class="close">&times;</span>
                             <div class="mb-3" style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                 <div class="col-md-12 rounded-4 bg-transparent h-100 text-start">
@@ -468,7 +467,7 @@ require_once __DIR__ . '/../partials/header.php';
                     <div id="popups" class="popup">
                         <div class="popup-content">
                             <h3 class="text-center" data-i18n="product_managment.product_search.filter_catageary_btn">
-                               </h3>
+                            </h3>
                             <span class="close">&times;</span>
                             <div class="mb-3" style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                 <div class="col-md-12 rounded-4 bg-transparent h-100 text-start">
@@ -549,8 +548,11 @@ require_once __DIR__ . '/../partials/header.php';
                                     <td>
                                         <img class="sms_product_img" height="100px" width="100px" src="<?php echo $prodimage; ?>" alt="">
                                     </td>
-                                    <td class=""><span style="font-weight:bold">Product name:</span>
-                                        <?php echo $product['name']; ?></td>
+                                    <td class="">
+                                        <span style="font-weight:bold" class="Sms_mu_for_Eng">Product name:</span>
+                                        <span style="font-weight:bold" class="Sms_mu_for_hebrew">שם מוצר:</span>
+                                        <?php echo $product['name']; ?>
+                                    </td>
                                     <!-- <td><span style="font-weight:bold">Category:</span>
                                             <?php
                                             $count = count($product['categories']);
@@ -566,19 +568,31 @@ require_once __DIR__ . '/../partials/header.php';
                                             ?>
 
                                         </td> -->
-                                    <td><span style="font-weight:bold">Category:</span>
-                                        <?php echo implode(', ', array_column($product['categories'], 'name')); ?></td>
-                                    <td><span style="font-weight:bold">Price:</span>
+                                    <td>
+                                        <span style="font-weight:bold" class="Sms_mu_for_Eng">Category:</span>
+                                        <span style="font-weight:bold" class="Sms_mu_for_hebrew">קטגוריה:</span>
+
+                                        <?php echo implode(', ', array_column($product['categories'], 'name')); ?>
+                                    </td>
+                                    <td>
+                                        <span style="font-weight:bold" class="Sms_mu_for_Eng">Price:</span>
+                                        <span style="font-weight:bold" class="Sms_mu_for_hebrew">מחיר:</span>
                                         <?php echo $product['regular_price']; ?>
                                         <?php echo $currency['symbol']; ?>
                                     </td>
-                                    <td><span style="font-weight:bold  ">Stock:</span>
+                                    <td>
+                                        <span style="font-weight:bold  " class="Sms_mu_for_Eng">Stock:</span>
+                                        <span style="font-weight:bold  " class="Sms_mu_for_hebrew">המניה:</span>
                                         <span class="stock_quantity_class">
                                             <?php echo $product['stock_quantity']; ?>
                                         </span>
                                     </td>
-                                    <td><span style="font-weight:bold">Number of views:
-                                        </span>250
+                                    <td>
+                                        <span style="font-weight:bold" class="Sms_mu_for_Eng">Number of views:
+                                        </span>
+                                        <span style="font-weight:bold" class="Sms_mu_for_hebrew">מספר צפיות:
+                                        </span>
+                                        250
                                     </td>
                                     <td>
                                         <span data-bs-toggle="modal" data-bs-target="#edit-regular-modal-full-width" data-bs-productJson="<?php echo htmlspecialchars($product_json); ?>" data-bs-categoriesJson="<?php echo htmlspecialchars($parentCategories_json); ?>">
@@ -596,8 +610,11 @@ require_once __DIR__ . '/../partials/header.php';
                                         <img class="sms_product_img" src="/assets/dist/img/products/bag.png" alt="">
 
                                     </td>
-                                    <td class=""><span style="font-weight:bold">Product name:</span>
-                                        <?php echo $product['name']; ?></td>
+                                    <td class="">
+                                        <span style="font-weight:bold" class="Sms_mu_for_Eng">Product name:</span>
+                                        <span style="font-weight:bold" class="Sms_mu_for_hebrew">שם מוצר:</span>
+                                        <?php echo $product['name']; ?>
+                                    </td>
                                     <!-- <td><span style="font-weight:bold">Category:</span> <?php
                                                                                                 $count = count($product['categories']);
                                                                                                 $const = 0;
@@ -611,18 +628,24 @@ require_once __DIR__ . '/../partials/header.php';
                                                                                                 }
                                                                                                 ?>
                                         </td> -->
-                                    <td><span style="font-weight:bold">Category:</span>
-                                        <?php echo implode(', ', array_column($product['categories'], 'name')); ?></td>
-                                    <td><span style="font-weight:bold">Price:</span>
+                                    <td> <span style="font-weight:bold" class="Sms_mu_for_Eng">Category:</span>
+                                        <span style="font-weight:bold" class="Sms_mu_for_hebrew">קטגוריה:</span>
+                                        <?php echo implode(', ', array_column($product['categories'], 'name')); ?>
+                                    </td>
+                                    <td> <span style="font-weight:bold" class="Sms_mu_for_Eng">Price:</span>
+                                        <span style="font-weight:bold" class="Sms_mu_for_hebrew">מחיר:</span>
                                         <?php echo $product['regular_price']; ?>
                                         <?php echo $currency['symbol']; ?>
                                     </td>
                                     <td><span style="font-weight:bold stock_quantity_class"></span> <span class="stock_quantity_class">
-                                            <strong>Stock:</strong> <?php echo $product['stock_quantity']; ?>
+                                            <span style="font-weight:bold  " class="Sms_mu_for_Eng">Stock:</span>
+                                            <span style="font-weight:bold  " class="Sms_mu_for_hebrew">המניה:</span> <?php echo $product['stock_quantity']; ?>
                                         </span>
 
                                     </td>
-                                    <td><span style="font-weight:bold">Number of views:
+                                    <td> <span style="font-weight:bold" class="Sms_mu_for_Eng">Number of views:
+                                        </span>
+                                        <span style="font-weight:bold" class="Sms_mu_for_hebrew">מספר צפיות:
                                         </span>250
                                     </td>
                                     <td>

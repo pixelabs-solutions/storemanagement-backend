@@ -325,7 +325,6 @@ require_once __DIR__ . '/../partials/header.php';
             }
             ?>
             <!-- <tr class="sms_mu_spacing_div"></tr> -->
-
           </table>
           <div class="sm-mu-buttons d-flex mb-4 justify-content-end">
             <?php

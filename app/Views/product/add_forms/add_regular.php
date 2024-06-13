@@ -66,7 +66,8 @@
         z-index: 9999;
         text-align: center;
         box-shadow: 100vh 100vh 100vh 300vh #00000059;
-}
+    }
+
     .sms_a_add_regular_pop svg {
         fill: green;
         width: 64px;
@@ -107,14 +108,14 @@
                             </label>
                             <div class="-5" style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                                 <div class="col-md-12 rounded-4 bg-transparent h-100 ">
-                                    <select id="category_in_product_normal_product"  multiple style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
-                                    <?php
+                                    <select id="category_in_product_normal_product" multiple style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
+                                        <?php
 
                                         foreach ($categories as $category) {
                                             // Access the "name" property of each category object
-                                            ?>   
+                                        ?>
                                             <option value="<?php echo $category['id'] ?>"><?php echo $category['name']; ?></option>
-                                            <?php
+                                        <?php
                                         }
 
                                         ?>
@@ -163,16 +164,14 @@
                     </div>
                     <!-- normal and sale price  -->
                     <div class="row gx-3">
-                        <div class="col-md-6 mb-3">
-                            <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.term_price">Normal
-                                price</label>
-                            <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_Normal" style="background-color: #EAEAEA" placeholder="Normal Price">
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.saleprice">Sale price
-                                (optional)</label>
-                            <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_sale" style="background-color: #EAEAEA" placeholder="Sale Price">
-                        </div>
+                    <div class="col-md-6 mb-3">
+    <label for="sms_mu_Normal" class="form-label fw-bold">Normal price</label>
+    <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_Normal" style="background-color: #EAEAEA" placeholder="Normal Price" onchange="Sms_mu_function_least()">
+</div>
+<div class="col-md-6 mb-3">
+    <label for="sms_mu_sale" class="form-label fw-bold">Sale price (optional)</label>
+    <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_sale" style="background-color: #EAEAEA" placeholder="Sale Price" onchange="Sms_mu_function_least()">
+</div>
                     </div>
                     <!-- description -->
                     <div>
@@ -187,7 +186,7 @@
                     <div class="col-md-12 mt-3 ">
                         <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.add_new_product_popoup.unit">Units in
                             Stock</label>
-                        <input type="number"  class="form-control rounded-3 p-3 fw-bold" id="sms_mu_unit" style="background-color: #EAEAEA" placeholder="Unit Stock">
+                        <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_mu_unit" style="background-color: #EAEAEA" placeholder="Unit Stock">
                     </div>
                     <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
                         <!-- <div class="text-center mt-2 col-sm-6 col-md-6">
@@ -235,6 +234,28 @@
 </div>
 <!-- input javascript code  -->
 <script>
+    // function Sms_mu_function_least(){
+    //      const MinimumValueInp= document.getElementById('sms_mu_Normal').value;
+    //      document.getElementById('sms_mu_sale').min=MinimumValueInp;
+    // }
+    // Get references to the input elements
+    function Sms_mu_function_least() {
+    // Get the value of 'Normal price' input
+    const normalPrice = parseInt(document.getElementById('sms_mu_Normal').value);
+
+    // Get the current value of 'Sale price' input
+    let salePrice = parseInt(document.getElementById('sms_mu_sale').value);
+
+    // Ensure 'Sale price' is not higher than 'Normal price'
+    if (salePrice > normalPrice) {
+        // Display an error message or handle the situation where the value is not valid
+        alert(`Sale price cannot be higher than Normal price (${normalPrice})`);
+        // Reset 'Sale price' to 'Normal price' or a maximum allowed value
+        salePrice = normalPrice;
+        document.getElementById('sms_mu_sale').value = salePrice;
+    }
+}
+
     function updateFileNames(input, targetElement) {
         try {
             var fileNames = "";
@@ -260,88 +281,86 @@
     handleImageUpload('sms_mu_img', 'sms_mu_img_label');
     handleImageUpload('sms_mu_photo', 'sms_mu_photo_label');
 
-        function fun() {
-            let productName = document.getElementById('sms_product_name').value;
-            let photoInput = document.getElementById('sms_mu_photo');
-            let imgInput = document.getElementById('sms_mu_img');
-            let normalInp = document.getElementById('sms_mu_Normal').value;
-            let saleInp = document.getElementById('sms_mu_sale').value;
-            let textareaInp = document.getElementById('sms_mu_textarea').value;
-            let unitInp = document.getElementById('sms_mu_unit').value;
-            let categorySelect = document.getElementById('category_in_product_normal_product');
-            
-            let selectedCategories = [];
+    function fun() {
+        let productName = document.getElementById('sms_product_name').value;
+        let photoInput = document.getElementById('sms_mu_photo');
+        let imgInput = document.getElementById('sms_mu_img');
+        let normalInp = document.getElementById('sms_mu_Normal').value;
+        let saleInp = document.getElementById('sms_mu_sale').value;
+        let textareaInp = document.getElementById('sms_mu_textarea').value;
+        let unitInp = document.getElementById('sms_mu_unit').value;
+        let categorySelect = document.getElementById('category_in_product_normal_product');
 
-            for (let i = 0; i < categorySelect.length; i++) {
-                if (categorySelect.options[i].selected) {
-                    selectedCategories.push(categorySelect.options[i].value);
-                }
+        let selectedCategories = [];
+
+        for (let i = 0; i < categorySelect.length; i++) {
+            if (categorySelect.options[i].selected) {
+                selectedCategories.push(categorySelect.options[i].value);
             }
-
-            let files = [photoInput.files[0], imgInput.files[0]];
-            let base64Array = [];
-
-            function readFileAsBase64(file) {
-                return new Promise((resolve, reject) => {
-                    let reader = new FileReader();
-                    reader.onload = function(event) {
-                        resolve(event.target.result);
-                    };
-                    reader.onerror = function(error) {
-                        reject(error);
-                    };
-                    reader.readAsDataURL(file);
-                });
-            }
-
-            Promise.all(files.map(file => file ? readFileAsBase64(file) : Promise.resolve(null)))
-                .then(base64Strings => {
-                    let data = {
-                        'name': productName,
-                        'categories': selectedCategories,
-                        'images': base64Strings.filter(base64 => base64 !== null),
-                        'type': 'simple',
-                        'regular_price': normalInp,
-                        'sale_price': saleInp,
-                        'description': textareaInp,
-                        'stock_quantity': unitInp,
-                    };
-
-                    document.getElementById("disable_regular").disabled = true;
-
-
-                    return fetch('/product/add', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data),
-                    });
-                })
-                .then(response => {
-                    if (response.status === 201) {
-                        // Form submission succeeded, display success message
-                        document.getElementById('sms_add_regular_success_message').style.display = 'block';
-                        document.getElementById('sms_add_regular_error_message').style.display = 'none';
-
-                        window.location.reload();
-                    } else {
-                        // Form submission failed, display error message
-                        document.getElementById('sms_add_regular_error_message').style.display = 'block';
-                        document.getElementById('sms_add_regular_success_message').style.display = 'none'; 
-                        document.getElementById("disable_regular").disabled = false;
-
-                    }
-                })
-                .catch(error => {
-                    // Network error occurred, display error message
-                    document.getElementById('sms_add_regular_error_message').style.display = 'block';
-                    console.error('Error submitting form data:', error);
-                });
         }
 
-        
-    </script>
+        let files = [photoInput.files[0], imgInput.files[0]];
+        let base64Array = [];
+
+        function readFileAsBase64(file) {
+            return new Promise((resolve, reject) => {
+                let reader = new FileReader();
+                reader.onload = function(event) {
+                    resolve(event.target.result);
+                };
+                reader.onerror = function(error) {
+                    reject(error);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        Promise.all(files.map(file => file ? readFileAsBase64(file) : Promise.resolve(null)))
+            .then(base64Strings => {
+                let data = {
+                    'name': productName,
+                    'categories': selectedCategories,
+                    'images': base64Strings.filter(base64 => base64 !== null),
+                    'type': 'simple',
+                    'regular_price': normalInp,
+                    'sale_price': saleInp,
+                    'description': textareaInp,
+                    'stock_quantity': unitInp,
+                };
+
+                document.getElementById("disable_regular").disabled = true;
+
+
+                return fetch('/product/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+            })
+            .then(response => {
+                if (response.status === 201) {
+                    // Form submission succeeded, display success message
+                    document.getElementById('sms_add_regular_success_message').style.display = 'block';
+                    document.getElementById('sms_add_regular_error_message').style.display = 'none';
+
+                    window.location.reload();
+                } else {
+                    // Form submission failed, display error message
+                    document.getElementById('sms_add_regular_error_message').style.display = 'block';
+                    document.getElementById('sms_add_regular_success_message').style.display = 'none';
+                    document.getElementById("disable_regular").disabled = false;
+
+                }
+            })
+            .catch(error => {
+                // Network error occurred, display error message
+                document.getElementById('sms_add_regular_error_message').style.display = 'block';
+                console.error('Error submitting form data:', error);
+            });
+    }
+</script>
 </script>
 
 <div class="modal modal-blur fade" id="sms_edit_product_regular_w_delete_complete_modal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
