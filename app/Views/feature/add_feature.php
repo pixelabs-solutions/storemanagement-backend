@@ -33,7 +33,7 @@
         border-radius: 8px;
         cursor: pointer;
         width: 100%;
-        background-color: white !important;
+        /* background-color: white !important; */
         text-align: center;
     }
 
@@ -180,14 +180,14 @@
         <div class="col-12 col-md-12">
             <div class="">
                 <form class="card-body">
-                    <!-- header -->
+                    <!-- header -->     
                     <div class="row gx-3">
                         <div class="col-md-6 mb-3">
-                            <label for="example-text-input" class="form-label" data-i18n="popoups.future_managment.add_new_feature.color_select_atr">The attribute name</label>
+                            <label for="example-text-input" class=" fw-bold form-label" data-i18n="popoups.future_managment.add_new_feature.color_select_atr">The attribute name</label>
                             <input type="text" class="form-control rounded-3 p-3 fw-bold" id="sms_attribute_name" placeholder="Attribute Name">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="" class="form-label" data-i18n="popoups.future_managment.add_new_feature.d_type">Display Type (Color/Image)</label>
+                            <label for="" class="form-label fw-bold" data-i18n="popoups.future_managment.add_new_feature.d_type">Display Type (Color/Image)</label>
                             <div class="h-100">
                                 <select class="form-select form-select-md h-80 bg-transparent" id="sms_attribute_select" style="height: 66%;">
                                     <option value="color">Color</option>
@@ -201,7 +201,7 @@
                     <div class="rounded-4 mt-4" style="background-color: #EAEAEA; display:none">
                         <div class="col-12 col-md-12 rounded-2" id="sms_a_add_feature">
                             <div class="py-3 rounded">
-                                <h3 class="card-title text-black fs-2 fw-bold p-2" style="font-size: 35px;" data-i18n="popoups.future_managment.add_new_feature.hero_heading">
+                                <h3 class=" fw-bold card-title text-black fs-2 fw-bold p-2" style="font-size: 35px;" data-i18n="popoups.future_managment.add_new_feature.hero_heading">
                                     Adding terms to the feature</h3>
                             </div>
                             <!-- <div class="p-2">
@@ -241,14 +241,14 @@
                     </div>
 
                     <div class="py-3 rounded">
-                        <h3 class="card-title text-black fs-2 fw-bold p-2" style="font-size: 35px;" data-i18n="popoups.future_managment.add_new_feature.hero_heading">Adding terms
+                        <h3 class="card-title text-black fs-2 p-2" style="font-size: 35px;" data-i18n="popoups.future_managment.add_new_feature.hero_heading">Adding terms
                             to the feature</h3>
                     </div>
 
                     <div class="row flex-row gap-3">
                         <div class="sms_a_swatches_preview rounded-4 mt-2 " style="background-color: #EAEAEA; padding: 20px;">
                             <div class="d-flex align-items-center mb-3">
-                                <label class="form-check-label fs-2 " data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.card_selection.h1">Selection Field</label>
+                                <label class="form-check-label fs-2" data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.card_selection.h1">Selection Field</label>
                                 <div class="col-auto ms-auto">
                                     <label class="form-colorinput form-colorinput-light">
                                         <input type="checkbox" value="white" class="form-colorinput-input" name="gender" id="checkbox1" onclick="fun_checkbox1()">
@@ -279,9 +279,9 @@
 
                         <div class="sms_a_swatches_preview rounded-4 mt-2 " style="background-color: #EAEAEA; padding: 20px;">
                             <div class="d-flex align-items-center mb-3">
-                                <label class="form-check-label fs-2 " data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.card_Radio_buttons.h1">Radio buttons</label>
+                                <label class="form-check-label fs-2" data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.card_Radio_buttons.h1">Radio buttons</label>
                                 <div class="col-auto ms-auto">
-                                    <label class="form-colorinput form-colorinput-light">
+                                    <label class="form-colorinput form-colorinput-light ">
                                         <input type="checkbox" value="white" class="form-colorinput-input" name="gender" id="checkbox2" onclick="fun_checkbox2()">
                                         <span class="form-colorinput-color bg-white rounded-circle"></span>
                                     </label>

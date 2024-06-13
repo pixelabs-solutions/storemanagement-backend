@@ -94,6 +94,13 @@ require_once __DIR__ . '/../partials/header.php';
     margin: 0;
     padding: 0;
 }
+.rtl .Sms_mu_date_btn{
+ margin-right: auto !important;
+ margin-left: 0 !important;
+}
+.Sms_mu_date_btn{
+ margin-right: 0 !important;
+}
 </style>
 <!-- Map Css End -->
 <!-- Header Start -->
@@ -111,11 +118,11 @@ require_once __DIR__ . '/../partials/header.php';
         </a>
         <a href="?query=current_month" id="current_month" class=" shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.third_tab "> Last Month
         </a>
-        <a href="?query=last_year" id="last_year" class="shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.fourth_tab" style=""> Last Year
+        <a href="?query=last_year" id="last_year" class="shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.fourth_tab"> Last Year
         </a>
     </div>
     <!-- Date Range Button  Start-->
-    <div class="col-auto ms-auto bg-light p-2 text-center" style="border-radius:10px">
+    <div class="col-auto ms-auto bg-light p-2 text-center Sms_mu_date_btn" style="border-radius:10px">
         <a href="#" class="text-dark font-weight-bold" data-bs-toggle="modal" data-bs-target="#modal-team"  data-i18n="statististics.tabs_in_select_range.button">
             Select a Date Range
 
@@ -401,8 +408,8 @@ require_once __DIR__ . '/../partials/header.php';
                 <div class="row pt-4 px-5 pb-0 t sms_mu_margin">
                
                         <div class="col-6  ">
-                            <h4 class="sms_mu_we_en">Revenue graph</h4>
-                            <h4 class=" sms_mu_we_heb">גרף הכנסות</h4>
+                            <h4 class="sms_mu_we_en text-muted">Revenue graph</h4>
+                            <h4 class=" sms_mu_we_heb text-muted">גרף הכנסות</h4>
                         </div>
                         <div class="col-6 text_for_revenue_graph">
                             <h4 class="text-primary sms_mu_we_en ">For All The details</h4>
@@ -434,8 +441,8 @@ require_once __DIR__ . '/../partials/header.php';
                     <!-- Start header -->
                     <div class="row g-2 align-items-center justify-content-between ">
                         <div class="col-auto ">
-                            <h4 class="text-primary sms_mu_we_en">Customer Location</h4>
-                            <h4 class="text-primary sms_mu_we_heb">מיקום_לקוחd</h4>
+                            <h4 class="sms_mu_we_en text-muted">Customer Location</h4>
+                            <h4 class=" sms_mu_we_heb text-muted">מיקום_לקוחd</h4>
                         </div>
                         <div class="col-6 ">
                             <div class="mb-3">
@@ -647,12 +654,22 @@ require_once __DIR__ . '/../partials/header.php';
                                 <!-- <label class="form-label">From Date</label> -->
                                 <label for="startDate" data-i18n="popoups.static_popoup.date_range.start_date">Start
                                     Date</label>
-                                <input id="startDate" name="date_from" class="form-control" type="date" />
+                                <!-- <input id="startDate" name="date_from" class="form-control" type="date" /> -->
+                                <?php
+                                    // Get today's date
+                                    $today = date("Y-m-d");
+                                    ?>
+                                    <input type="date" id="startDate" name="date_from" class="form-control" max="<?php echo $today; ?>">
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <label for="startDate" data-i18n="popoups.static_popoup.date_range.To_date">To
                                     Date</label>
-                                <input id="startDate" name="date_to" class="form-control" type="date" />
+                                <!-- <input id="startDate" name="date_to" class="form-control" type="date" /> -->
+                                <?php
+                                    // Get today's date
+                                    $today = date("Y-m-d");
+                                    ?>
+                                    <input id="startDate" name="date_to" class="form-control" type="date" max="<?php echo $today; ?>">
                             </div>
 
                         </div>
@@ -818,20 +835,27 @@ require_once __DIR__ . '/../partials/header.php';
 
         // Get query parameters
         const queryParams = getQueryParams();
+        const dateIds = ['24_hours', 'last_week', 'current_month', 'last_year'];
 
-        if (queryParams.query === '24_hours') {
-            // Add the .sms_w_date_active class to the element with the ID '24_hours'
-            document.getElementById('24_hours').classList.add('sms_w_date_active');
-        } else if (queryParams.query === 'last_week') {
-            // Add the .sms_w_date_active class to the element with the ID 'last_week'
-            document.getElementById('last_week').classList.add('sms_w_date_active');
-        } else if (queryParams.query === 'current_month') {
-            // Add the .sms_w_date_active class to the element with the ID 'current_month'
-            document.getElementById('current_month').classList.add('sms_w_date_active');
-        } else if (queryParams.query === 'last_year') {
-            // Add the .sms_w_date_active class to the element with the ID 'last_year'
-            document.getElementById('last_year').classList.add('sms_w_date_active');
-        }
+
+        function removeClassFromAll() {
+    dateIds.forEach(id => {
+        document.getElementById(id).classList.remove('sms_w_date_active');
+    });
+}
+removeClassFromAll();
+if (!queryParams.query) {
+    queryParams.query = '24_hours';
+}
+if (queryParams.query === '24_hours') {
+    document.getElementById('24_hours').classList.add('sms_w_date_active');
+} else if (queryParams.query === 'last_week') {
+    document.getElementById('last_week').classList.add('sms_w_date_active');
+} else if (queryParams.query === 'current_month') {
+    document.getElementById('current_month').classList.add('sms_w_date_active');
+} else if (queryParams.query === 'last_year') {
+    document.getElementById('last_year').classList.add('sms_w_date_active');
+}
     </script>
      <script>
               window.addEventListener('load', function() {
