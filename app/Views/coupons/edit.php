@@ -168,7 +168,6 @@
 <script>
 
     function sms_meh_coupon_edit_data() {
-        document.getElementById('Sms_mu_btn_submit').disabled = true;
         var CouponeditData = {
             'code': document.getElementById('coupons_code').value,
             'discount_type': document.getElementById('discount_type').value,
@@ -179,6 +178,10 @@
         };
         let editCouponElement = document.getElementById('edit_coupon');
         let editCouponId = editCouponElement.getAttribute('coupon_id');
+        
+        const EditCouponsubmitButton= document.getElementById("Sms_mu_btn_submit");
+        EditCouponsubmitButton.disabled = true;
+        
         console.log(editCouponId);
         fetch(`/coupons/${editCouponId}`, {
                 method: 'PUT',
