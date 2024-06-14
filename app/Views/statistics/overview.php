@@ -96,7 +96,7 @@ require_once __DIR__ . '/../partials/header.php';
                     data-i18n="statististics.tabs_in_static.tab_overview" >Overview</a>
             </li>
             <li class="nav-item mb-2">
-                <a href="#tabs_product" id="tabs_product" class="nav-link_stats sms_w_item_deactive_stats justify-content-center" data-bs-toggle="tab"
+                <a href="#tabs_product"  class="nav-link_stats sms_w_item_deactive_stats justify-content-center" data-bs-toggle="tab"
                     style=" border-radius:20px; padding: 5px 30px; width:150px;  color:black;text-decoration: none"        data-i18n="statististics.tabs_in_static.tab_Products">Products</a>
             </li>
             <li class="nav-item mb-2">
@@ -144,7 +144,7 @@ require_once __DIR__ . '/../partials/header.php';
 
 
 <script>
-            function getQueryParams() {
+            function OverviewGetQueryParams() {
             const params = {};
             window.location.search.substring(1).split("&").forEach(param => {
                 const [key, value] = param.split("=");
@@ -154,7 +154,7 @@ require_once __DIR__ . '/../partials/header.php';
         }
 
         // Get query parameters
-        var queryParams = getQueryParams();
+        var queryParams = OverviewGetQueryParams();
 
      if (queryParams.query === 'last_week') {
             // Add the .sms_w_date_active class to the element with the ID 'last_week'
@@ -405,92 +405,165 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
         </script>
-<script>
-    // @formatter:off
-    document.addEventListener("DOMContentLoaded", function () {
-        window.ApexCharts && (new ApexCharts(document.getElementById('chart-combination'), {
-            chart: {
-                type: "bar",
-                fontFamily: 'inherit',
-                height: 240,
-                parentHeightOffset: 0,
-                toolbar: {
-                    show: false,
-                },
-                animations: {
-                    enabled: false
-                },
-            },
-            plotOptions: {
-                bar: {
-                    columnWidth: '50%',
-                    gap: '3%',
-                }
-            },
-            dataLabels: {
-                enabled: false,
-            },
-            fill: {
-                opacity: 1,
-            },
-            series: [{
-                name: "New Customer",
-                data: [4000, 1000, 3500, 3500, 4000, 3000, 5000]
-            }, {
-                name: "Returning Customer",
-                data: [3000, 4300, 1900, 2200, 2400, 4300, 2200]
-            }, {
-                name: "Product",
-                data: [3000, 2000, 1600, 1300, 3000, 2500, 2500]
-            }, {
-                name: "Order",
-                data: [2000, 1300, 900, 1500, 2400, 1300, 2200]
-            }, {
-                name: "Revenue",
-                data: [2000, 2500, 500, 3500, 2400, 1300, 2200]
-            }],
-            tooltip: {
-                theme: 'dark'
-            },
-            grid: {
-                padding: {
-                    top: -20,
-                    right: 0,
-                    left: -4,
-                    bottom: -4
-                },
-                strokeDashArray: 4,
-            },
-            xaxis: {
-                labels: {
-                    padding: 0,
-                },
-                tooltip: {
-                    enabled: false
-                },
-                axisBorder: {
-                    show: false,
-                },
-                categories: ['First', 'Crimson', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Sabbath'],
-            },
-            yaxis: {
-                labels: {
-                    padding: 4
-                },
-            },
-            colors: ['#627e0c', '#8b59e4', '#9215a8', '#dc2285', '#ac3f4f'],
-            legend: {
+          <script>
+function OverviewGetQueryParams() {
+    const params = {};
+    window.location.search.substring(1).split("&").forEach(param => {
+        const [key, value] = param.split("=");
+        params[decodeURIComponent(key)] = decodeURIComponent(value);
+    });
+    return params;
+}
+
+// Example of dynamic data update
+async function fetchAndFormatDataOfOverview() {
+    let queryParamsForGraph = OverviewGetQueryParams().query;
+
+    // Default to 'last_week' if no query parameter is provided
+    if (!queryParamsForGraph) {
+        queryParamsForGraph = 'last_week';
+    }
+    console.log('params', queryParamsForGraph);
+
+    const response = await fetch(`http://storemanagement.test/statistics/overview?query=${queryParamsForGraph}&is_rest=true`);
+    const data = await response.json();
+
+    // Prepare the overviewDynamicData object
+    const overviewDynamicData = {
+        netIncome: [],
+        orderAverage: [],
+        totalRevenue: [],
+        totalShipments: [],
+        totalrehearsals: []
+    };
+
+    // Assuming the API response provides a single set of values
+    // Use the same dates for each data point
+    const dates = ['2024-06-10']; // Placeholder date, replace if actual dates are provided
+
+    overviewDynamicData.netIncome.push(data.netIncome || 0);
+    overviewDynamicData.orderAverage.push(data.orderAverage || 0);
+    overviewDynamicData.totalRevenue.push(data.totalRevenue || 0);
+    overviewDynamicData.totalShipments.push(data.totalShipments || 0);
+    overviewDynamicData.totalrehearsals.push(data.totalrehearsals || 0);
+
+    console.log(overviewDynamicData);
+
+    return [overviewDates, overviewDynamicData];
+}
+
+document.addEventListener("DOMContentLoaded", async function () {
+    var [overviewDates, overviewDynamicData] = await fetchAndFormatDataOfOverview();
+
+    // Initialize the chart
+    var chart = new ApexCharts(document.getElementById('chart-combination'), {
+        chart: {
+            type: "bar",
+            fontFamily: 'inherit',
+            height: 240,
+            parentHeightOffset: 0,
+            toolbar: {
                 show: false,
             },
-        })).render();
+            animations: {
+                enabled: false
+            },
+        },
+        plotOptions: {
+            bar: {
+                columnWidth: '50%',
+                gap: '3%',
+            }
+        },
+        dataLabels: {
+            enabled: false,
+        },
+        fill: {
+            opacity: 1,
+        },
+        series: [{
+            name: "Net Income",
+            data: []
+        }, {
+            name: "Order Average",
+            data: []
+        }, {
+            name: "Total Revenue",
+            data: []
+        }, {
+            name: "Total Shipments",
+            data: []
+        }, {
+            name: "Total Rehearsals",
+            data: []
+        }],
+        tooltip: {
+            theme: 'dark'
+        },
+        grid: {
+            padding: {
+                top: -20,
+                right: 0,
+                left: -4,
+                bottom: -4
+            },
+            strokeDashArray: 4,
+        },
+        xaxis: {
+            labels: {
+                padding: 0,
+            },
+            tooltip: {
+                enabled: false
+            },
+            axisBorder: {
+                show: false,
+            },
+            categories: overviewDates,
+        },
+        yaxis: {
+            labels: {
+                padding: 4
+            },
+        },
+        colors: ['#627e0c', '#8b59e4', '#9215a8', '#dc2285', '#ac3f4f'],
+        legend: {
+            show: false,
+        },
     });
+    chart.render();
 
-    // @formatter:on
+    // Function to update the chart with new data
+    function updateChartData(newData) {
+        chart.updateSeries([{
+            name: "Net Income",
+            data: newData.netIncome
+        }, {
+            name: "Order Average",
+            data: newData.orderAverage
+        }, {
+            name: "Total Revenue",
+            data: newData.totalRevenue
+        }, {
+            name: "Total Shipments",
+            data: newData.totalShipments
+        }, {
+            name: "Total Rehearsals",
+            data: newData.totalrehearsals
+        }]);
+    }
+
+    console.log(overviewDynamicData);
+
+    // Call the update function with the dynamic data
+    updateChartData(overviewDynamicData);
+});
 </script>
+
 
 <script>
                         // // Function to get query parameters from the URL
-                        // function getQueryParams() {
+                        // function OverviewGetQueryParams() {
                         //     const params = {};
                         //     window.location.search.substring(1).split("&").forEach(param => {
                         //         const [key, value] = param.split("=");
@@ -500,7 +573,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         // }
 
                         // // Get query parameters
-                        // const queryParams = getQueryParams();
+                        // const queryParams = OverviewGetQueryParams();
 
                         // if (queryParams.query === 'last_week') {
                         //     // Add the .filter_tab_active class to the element with the ID 'last_week'
