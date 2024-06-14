@@ -38,7 +38,7 @@
                                     <div class="text-center">
                                         <img src="assets/dist/img/cart.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3"><?php echo $orders_stats["totalOrders"]; ?></h3>
+                                        <h3 class="mt-3"><?php echo $orders_stats["totalOrders"]['total']; ?></h3>
                                         <strong style="color:#4987D8" data-i18n="statististics.cards_in_orders.card1_in_product.normal_product">Order</strong>
                                     </div>
                                 </div>
@@ -53,7 +53,7 @@
                                     <div class="text-center">
                                         <img src="assets/dist/img/revenue.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3"><?php echo $orders_stats["totalRevenue"]; ?> <?php echo $orders_stats['current_currency']; ?></h3>
+                                        <h3 class="mt-3"><?php echo $orders_stats["totalRevenue"]['total']; ?> <?php echo $currency[0]['symbol']; ?></h3>
                                         <strong style="color:#4987D8" 
                                         
                                         data-i18n="statististics.cards_in_orders.card2_in_normal_product.normal_product_in_card2"
@@ -71,7 +71,7 @@
                                     <div class="text-center">
                                         <img src="assets/dist/img/revenue.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3"><?php echo $orders_stats["orderAverage"]; ?> <?php echo $orders_stats['current_currency']; ?></h3>
+                                        <h3 class="mt-3"><?php echo $orders_stats["orderAverage"]['total']; ?> <?php echo $currency[0]['symbol']; ?></h3>
                                         <strong style="color:#4987D8"  data-i18n="statististics.cards_in_orders.card3_in_Sale.normal_product">Order Average</strong>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                                     <div class="text-center">
                                         <img src="assets/dist/img/cart.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3"><?php echo $orders_stats["averageItems"]; ?></h3>
+                                        <h3 class="mt-3"><?php echo $orders_stats["averageItems"]['total']; ?></h3>
                                         <strong style="color:#4987D8"  data-i18n="statististics.cards_in_orders.card4_in_product.normal_product">Average items</strong>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                     <div class="text-center">
                                         <img src="assets/dist/img/newuser.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3"><?php echo $orders_stats["totalCustomers"]; ?></h3>
+                                        <h3 class="mt-3"><?php echo $orders_stats["totalCustomers"]['total']; ?></h3>
                                         <strong style="color:#4987D8" data-i18n="statististics.cards_in_orders.card5_in_product.normal_product">Customers</strong>
                                     </div>
                                 </div>

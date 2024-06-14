@@ -237,7 +237,7 @@ function updateInputType() {
         })
             .then(response => {
                 console.log(response);
-                if (response.status === 201) {
+                if (response.status === 201 || response.ok) {
                     // Form submission succeeded, display success message
                     document.getElementById('sms_add_coupons_success-message').style.display = 'block';
                     document.getElementById('sms_add_coupons_error-message').style.display = 'none';

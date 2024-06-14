@@ -28,6 +28,7 @@ $router->post('/authentication/register', [AuthenticationController::class, 'reg
 $router->get('/authentication/login', [AuthenticationController::class, 'login']);
 $router->post('/authentication/login', [AuthenticationController::class, 'login_user']);
 $router->get('/authentication/logout', [AuthenticationController::class, 'logout']);
+$router->post('/authentication/change_password', [AuthenticationController::class, 'forgot_password']);
 
 
 

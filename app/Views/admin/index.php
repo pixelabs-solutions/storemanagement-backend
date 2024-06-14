@@ -470,7 +470,7 @@
             <div class="d-flex">
               <label for="statusSelect" class="form-label"></label>
               <button class="btn" id="sign-up-btn">Add User</button>
-              <button class="btn mx-3" id="change-password-btn">Change Password</button>
+              <button class="btn mx-3" id="change-password-btn">Change Admin Password</button>
             </div>
           </div>
 
@@ -606,14 +606,17 @@
     <!-- <button type="button" class="btn-close" aria-label="Close" onclick="sms_add_regular_close_success_message()"></button> -->
     <!-- SVG icon -->
     <button type="button" class="btn-close" aria-label="Close" id="Sms_mu_close_password"></button>
-    <h1>Change Password</h1>
-    <label class="form-label" style="text-align: left !important;">Password</label>
-    <input type="password" name="password" class="form-control">
-    <label class="form-label my-1" style="text-align: left !important;">Confirm Password</label>
-    <input type="password" name="password" class="form-control">
-    <div class="row" style="margin: 0 1px;">
-      <button class="btn btn-info my-3 col-12 text-center justify-content-center ">Change Password</button>
-    </div>
+    <form action="/authentication/change_password" method="POST">
+        <h1>Change Admin Password</h1>
+        <label class="form-label" style="text-align: left !important;">Password</label>
+        <input type="password" name="password" class="form-control">
+        <!-- <label class="form-label my-1" style="text-align: left !important;">Confirm Password</label>
+        <input type="password" name="confirm_password" class="form-control"> -->
+        <div class="row" style="margin: 0 1px;">
+          <button class="btn btn-info my-3 col-12 text-center justify-content-center ">Change Admin Password</button>
+        </div>
+    </form>
+    
   </div>
   <script>
     function FunLogoutProfile() {

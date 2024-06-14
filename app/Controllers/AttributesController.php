@@ -6,6 +6,7 @@ use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Models\Authentication;
 use Pixelabs\StoreManagement\Models\Attribute;
+use Pixelabs\StoreManagement\Models\Synchronize;
 
 class AttributesController
 {
@@ -46,7 +47,9 @@ class AttributesController
         $configuration = $this->prepare_configuration($is_rest);
 
         $result = Base::wc_delete_by_id($configuration, $this->endpoint."/".$id);
-        echo $result;
+        Synchronize::sync_attributes();
+
+        return $result;
     }
 
 
@@ -69,6 +72,8 @@ class AttributesController
         ];
 
         $response = Attribute::add($configuration, $payload);
+        Synchronize::sync_attributes();
+
         echo $response;
     }
 
@@ -90,7 +95,9 @@ class AttributesController
             'type' => $data['type']
         ]);
         $response = Base::wc_update($configuration, $this->endpoint."/".$id, $payload);
-        echo $response;
+        Synchronize::sync_attributes();
+
+        return $response;
     }
 
     
@@ -129,6 +136,7 @@ class AttributesController
         $configuration = $this->prepare_configuration($is_rest);
 
         $result = Base::wc_delete_by_id($configuration, $this->endpoint."/".$id."/"."terms"."/".$term_id);
+
         echo $result;
     }
 
@@ -150,6 +158,7 @@ class AttributesController
         ];
 
         $response = Attribute::add_term($configuration, $payload);
+
         echo $response;
     }
 
