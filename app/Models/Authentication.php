@@ -188,6 +188,23 @@ class Authentication
 
     }
 
+    public static function get_user_by_id($user_id)
+    {
+        global $connection;
+        $query = "SELECT name from users WHERE id = ?";
+        $stmt = $connection->prepare($query);
+        $stmt->bind_param("i", $user_id); // Bind the parameter to the query
+
+        $stmt->execute();
+        $stmt->bind_result($name); // Bind the result to a variable
+
+        if ($stmt->fetch()) {
+            return $name; // Return the fetched name
+        } else {
+            return null; // Return null if no result is found
+        };
+    }
+
     public static function get_meta_by_xcode($xcode)
     {
         global $connection;
@@ -255,6 +272,8 @@ class Authentication
         }
         return $_SESSION['user_id'] ?? null;
     }
+
+
 
     private static function hashPassword($password)
     {
