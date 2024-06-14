@@ -8,6 +8,7 @@ use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Models\Authentication;
 use Pixelabs\StoreManagement\Models\Synchronize;
+use Pixelabs\StoreManagement\Models\Currency;
 
 
 class TransactionController
@@ -37,6 +38,7 @@ class TransactionController
             } else {
      
         $transactions = Transaction::get_all_transactions($user_id);
+        $currency = Currency::get_current_currency($user_id); 
         if($is_rest == "true")
         {
             echo json_encode($transactions, JSON_UNESCAPED_UNICODE);

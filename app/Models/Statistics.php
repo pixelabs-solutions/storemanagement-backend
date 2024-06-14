@@ -2,6 +2,8 @@
 
 namespace Pixelabs\StoreManagement\Models;
 use GuzzleHttp\Client;
+use Pixelabs\StoreManagement\Models\Currency;
+
 use Pixelabs\StoreManagement\Models\Base;
 
 class Statistics
@@ -65,12 +67,14 @@ class Statistics
                     }
                 }
             }
-        
+            $currency = Currency::get_current_currency($user_id); 
+
             return [
                 'totalProducts' => $totalProducts,
                 'normalProducts' => $normalProducts,
                 'saleProducts' => $saleProducts,
                 'numberOfOrders' => $numberOfOrders,
+                'current_currency' => $currency[0]['symbol'],
                 'totalDistinctProductsOnOrder' => count($distinctProductsOnOrder) 
             ];
         } catch (\Exception $e) {
@@ -121,12 +125,14 @@ class Statistics
             $orderAverage = $totalOrders > 0 ? round($totalRevenue / $totalOrders) : 0;
             $averageItems = $totalOrders > 0 ? round($totalItems / $totalOrders) : 0;
             $totalCustomers = count($customers);
-    
+            $currency = Currency::get_current_currency($user_id); 
+
             return [
                 'totalOrders' => $totalOrders,
                 'totalRevenue' => $totalRevenue,
                 'orderAverage' => $orderAverage,
                 'averageItems' => $averageItems,
+                'current_currency' => $currency[0]['symbol'],
                 'totalCustomers' => $totalCustomers
             ];
         } catch (\Exception $e) {
@@ -175,12 +181,15 @@ class Statistics
             $orderAverage = $totalOrders > 0 ? round($totalRevenue / $totalOrders) : 0;
             $totalcuttings = $totalShipments + $totalrehearsals;
             $netIncome = $totalRevenue - $totalcuttings;
-    
+            $currency = Currency::get_current_currency($user_id); 
+
             return [
                 'totalRevenue' => $totalRevenue,
                 'totalrehearsals' => $totalrehearsals,
                 'orderAverage' => $orderAverage,
                 'totalShipments' => $totalShipments,
+                'current_currency' => $currency[0]['symbol'],
+
                 'netIncome' => $netIncome
             ];
         } catch (\Exception $e) {
@@ -202,12 +211,14 @@ class Statistics
             $total_revenue = Base::get_total_revenue($user_id, $date_range);
             $new_customers_count = Base::get_new_customers_count($user_id, $date_range);
             $returning_customers_count = Base::get_returning_customers_count($user_id, $date_range);
+            $currency = Currency::get_current_currency($user_id); 
 
             return [
                 'totalProducts' => $total_products,
                 'totalOrders' => $total_orders,
                 'totalRevenue' => $total_revenue,
                 'newCustomers' => $new_customers_count,
+                'current_currency' => $currency[0]['symbol'],
                 'returningCustomers' => $returning_customers_count
             ];
         }

@@ -52,8 +52,8 @@ class Transaction
         try {
             foreach ($transactions as $transaction) {
                 $stmt = $connection->prepare("
-                    INSERT INTO transactions (id, user_id, status, date_created, customer_id, shipping_total, total, billing, meta_data, line_items)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    INSERT INTO transactions (id, user_id, status, date_created, customer_id, shipping_total, total, city, billing, meta_data, line_items)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ");
                 $id = $transaction['id'];
                 $status = $transaction['status'];
@@ -62,12 +62,13 @@ class Transaction
 
                 $shipping_total = $transaction['shipping_total'];
                 $total = $transaction['total'];
+                $city = $transaction['billing']['city'];
                 $billing = json_encode($transaction['billing']);
                 $meta_data = json_encode($transaction['meta_data']);
                 $line_items = json_encode($transaction['line_items']);
 
                 $stmt->bind_param(
-                    'iissisdsss',
+                    'iissisdssss',
                     $id,
                     $user_id,
                     $status,
@@ -75,6 +76,7 @@ class Transaction
                     $customer_id,
                     $shipping_total,
                     $total,
+                    $city,
                     $billing,
                     $meta_data,
                     $line_items
@@ -94,7 +96,7 @@ class Transaction
         $orders = [];
 
         try {
-            $query = "SELECT * FROM transactions WHERE user_id = ?";
+            $query = "SELECT * FROM transactions WHERE user_id = ? ORDER BY date_created DESC";
             $stmt = $connection->prepare($query);
             $stmt->bind_param('i', $user_id);
             $stmt->execute();
@@ -102,6 +104,7 @@ class Transaction
 
             if ($result) {
                 while ($row = $result->fetch_assoc()) {
+
                     $row['billing'] = json_decode($row['billing'], true);
                     $row['meta_data'] = json_decode($row['meta_data'], true);
                     $row['line_items'] = json_decode($row['line_items'], true);

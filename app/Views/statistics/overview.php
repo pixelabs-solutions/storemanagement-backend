@@ -190,7 +190,7 @@ require_once __DIR__ . '/../partials/header.php';
                                     <div class="text-center">
                                         <img src="assets/dist/img/newuser.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3"><?php echo $overview_stats["newCustomers"]; ?></h3>
+                                        <h3 class="mt-3"><?php echo number_format($overview_stats["newCustomers"]); ?></h3>
                                         <strong style="color:#4987D8"
                                             data-i18n="statististics.cards_in_overview.crad_text_blue_in_card_customer">New
                                             Customer</strong>
@@ -207,7 +207,7 @@ require_once __DIR__ . '/../partials/header.php';
                                     <div class="text-center">
                                         <img src="assets/dist/img/returning.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3"><?php echo $overview_stats["returningCustomers"]; ?></h3>
+                                        <h3 class="mt-3"><?php echo number_format($overview_stats["returningCustomers"]); ?></h3>
                                         <strong style="color:#4987D8"
                                             data-i18n="statististics.cards_in_overview.crad_text_blue_in_card_returing">Returning
                                             Customer</strong>
@@ -224,7 +224,7 @@ require_once __DIR__ . '/../partials/header.php';
                                     <div class="text-center">
                                         <img src="assets/dist/img/cart.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3"><?php echo $overview_stats["totalProducts"]; ?></h3>
+                                        <h3 class="mt-3"><?php echo number_format($overview_stats["totalProducts"]); ?></h3>
                                         <strong style="color:#4987D8"
                                             data-i18n="statististics.cards_in_overview.crad_text_blue_in_card_product">Product</strong>
                                     </div>
@@ -240,7 +240,7 @@ require_once __DIR__ . '/../partials/header.php';
                                     <div class="text-center">
                                         <img src="assets/dist/img/order.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3"><?php echo $overview_stats["totalOrders"]; ?></h3>
+                                        <h3 class="mt-3"><?php echo number_format($overview_stats["totalOrders"]); ?></h3>
                                         <strong style="color:#4987D8"
                                             data-i18n="statististics.cards_in_overview.crad_text_blue_in_card_order">Order</strong>
                                     </div>
@@ -256,7 +256,7 @@ require_once __DIR__ . '/../partials/header.php';
                                     <div class="text-center">
                                         <img src="assets/dist/img/revenue.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3"><?php echo $overview_stats["totalRevenue"]; ?></h3>
+                                        <h3 class="mt-3"><?php echo number_format($overview_stats["totalRevenue"]); ?> <?php echo $orders_stats['current_currency']; ?></h3>
                                         <strong style="color:#4987D8"
                                             data-i18n="statististics.cards_in_overview.crad_text_blue_in_card_revenue">Revenue</strong>
                                     </div>

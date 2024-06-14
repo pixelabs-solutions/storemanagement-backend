@@ -280,7 +280,7 @@ require_once __DIR__ . '/../partials/header.php';
 
                 <td><span class="sms_transaction_w_status"> <?php echo $item['status']; ?> </span></td>
 
-                <td><?php echo "NIS " . $item['total']; ?> </td>
+                <td><?php echo $item['total']; echo " "; echo $currency[0]['symbol']; ?> </td>
 
                 <!-- <td>#1152</td> -->
 

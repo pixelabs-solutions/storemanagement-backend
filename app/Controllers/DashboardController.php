@@ -5,6 +5,7 @@ namespace Pixelabs\StoreManagement\Controllers;
 use Pixelabs\StoreManagement\Models\Dashboard;
 use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Models\Authentication;
+use Pixelabs\StoreManagement\Models\Currency;
 
 use Pixelabs\StoreManagement\Helpers\RequestTracker;
 
@@ -38,26 +39,34 @@ class DashboardController
             RequestTracker::trackRequest();
             $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
             
-            $filters = [
-                'query' => $_GET['query'] ?? null,
-                'date_from' => $_GET['date_from'] ?? null,
-                'date_to' => $_GET['date_to'] ?? null
-            ];
+            if(isset($_GET['query']) || isset($_GET['date_from']) || isset($_GET['date_to'])){
+                $filters = [
+                    'query' => $_GET['query'] ?? null,
+                    'date_from' => $_GET['date_from'] ?? null,
+                    'date_to' => $_GET['date_to'] ?? null
+                ];
+            } else{
+                $filters = [
+                    'query' => '24_hours'
+                ];
+            }
+         
 
             $stats = Dashboard::get_dashboard_stats($filters);
             $customers_location = Dashboard::get_dashboard_data();
             $top_products = Dashboard::fetchTopSellingProductImages();
             
             $requests = RequestTracker::getRequestsLastSevenDays();
-
+            $currency = Currency::get_current_currency($user_id); 
+ 
             $dashboard_data = [
                 'statistics' => $stats,
-                'customers_location' => $customers_location['customers_location'],
-                'latest_orders' => $customers_location['latest_orders'],
+                'customers_location' => $customers_location,
                 'top_products' => $top_products,
+                'current_currency' => $currency,
                 'requests' => $requests
             ];
-
+            var_dump($dashboard_data);
             if ($is_rest == 'true') {
                 echo json_encode($dashboard_data, JSON_UNESCAPED_UNICODE);
             } else {
