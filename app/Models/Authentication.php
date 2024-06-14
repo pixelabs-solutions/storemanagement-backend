@@ -61,13 +61,13 @@ class Authentication
     }
 
 
-    public static function forgot_password($password)
+    public static function forgot_password($password, $user_id)
     {
         global $connection;
-        $user_id = Authentication::getUserIdFromToken();
         $hashedPassword = self::hashPassword($password);
         // Prepare SQL statement to update the user's password
-        $sql = "UPDATE users SET password = ? WHERE user_id = ?";
+
+        $sql = "UPDATE users SET password = ? WHERE id = ?";
 
         // Prepare and bind parameters
         $stmt = $connection->prepare($sql);
@@ -75,14 +75,12 @@ class Authentication
 
         // Execute the statement
         if ($stmt->execute() === TRUE) {
-            echo "Password updated successfully";
             self::logout();
+            header("location: ../authentication/login");
         } else {
             echo "Error updating password: " . $connection->error;
         }
 
-        // Close statement and connection
-        $stmt->close();
 
     }
     public static function login($email, $password)

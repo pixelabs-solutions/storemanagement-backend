@@ -36,8 +36,6 @@ class SynchronizationController
             }
         }
         
-
-        
         $tables = ['products', 'attributes', 'categories', 'currencies', 'transactions', 'customers', 'coupons', 'inventory_settings'];
         
         $user_id = Authentication::getUserIdFromToken();

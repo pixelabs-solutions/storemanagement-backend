@@ -146,7 +146,7 @@
                   <div class="d-flex justify-content-center gap-2 w-auto">
 
 
-                    <span class="" attribute-id = <?php  echo $attribute['id'];   ?> onclick="openModal('sms_feature_managment_w_edit_modal')">
+                    <span class="edit_attribute" attribute-id = <?php  echo $attribute['id'];   ?> onclick="editAttribute(this)">
 
                       <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -155,7 +155,7 @@
                       </svg>
                     </span>
 
-                    <span attribute-id = <?php  echo $attribute['id'];   ?> onclick="openModal('sms_feature_managment_w_delete_modal')">
+                    <span attribute-id = <?php  echo $attribute['id'];   ?> onclick="delete_attribute(<?php  echo $attribute['id'];   ?>)">
 
 
                       <svg width="24" height="24" viewBox="0 0 28 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -172,14 +172,15 @@
                 </td>
                 <td>  <?php echo $attribute['type']; ?></td>
 
-                <!-- <td>atif colors</td>
+       
+
+              </tr>
+                       <!-- <td>atif colors</td>
                 <td>#pink</td>
                 <td><svg width="74" height="54" viewBox="0 0 105 57" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="105" height="57" rx="20" fill="#F51975" />
                   </svg>
                 </td> -->
-
-              </tr>
               <?php 
 }
               ?>
@@ -192,7 +193,10 @@
     </div>
   </div>
 </div>
+<script>
+ 
 
+</script>
 
 
 
@@ -249,14 +253,14 @@
     <div class="modal-content">
       <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
         <div class="py-1 rounded-top text-center col-10 ">
-          <h3 class="card-title m-0 text-black fs-2 fw-bold" data-i18n="popoups.future_managment.edit_variation_in_product_managment.heading">Editing an existing term</h3>
+          <h3 class="card-title m-0 text-black fs-2 fw-bold" data-i18n="popoups.future_managment.edit_variation_in_product_managment.heading">Editing an Attributes</h3>
         </div>
         <button type="button" class="btn-close sms_modal_cancel_btn" data-bs-dismiss="modal"
           aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <?php
-        include ('edit_term.php');
+        include ('edit_feature.php');
         ?>
       </div>
 
@@ -317,6 +321,37 @@
       sms_delete_notification.className = isError ? "error show" : "show";
     }
   }
+
+  function delete_attribute(AttributeID) {
+    // Define the endpoint URL with the attribute ID
+    const url = `/attributes/${AttributeID}`;
+    
+    // Send a DELETE request to the server
+    fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            // If response is ok (status is in the range 200-299), parse the JSON
+            return response;
+        } else {
+            // If response is not ok, throw an error to be caught in the catch block
+            return response.text().then(text => { throw new Error(text); });
+        }
+    })
+    .then(data => {
+        // Handle success response
+        console.log(data);
+        alert('Attribute updated successfully!');
+        location.reload()
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+}
   // Function to open the modal
   function openModal(modalId) {
     // Select the modal using the provided ID

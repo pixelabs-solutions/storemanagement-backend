@@ -697,7 +697,7 @@ require_once __DIR__ . '/../partials/header.php';
                     <span style="font-weight:bold" class="Sms_mu_for_Eng">Price:</span>
                     <span style="font-weight:bold" class="Sms_mu_for_hebrew">מחיר:</span>
                     <?php echo $product['regular_price']; ?>
-                    <?php echo $currency['symbol']; ?>
+                    <?php echo $currency[0]['symbol']; ?>
                 </td>
                 <td>
                     <span style="font-weight:bold" class="Sms_mu_for_Eng">Stock:</span>
@@ -739,7 +739,7 @@ require_once __DIR__ . '/../partials/header.php';
                     <span style="font-weight:bold" class="Sms_mu_for_Eng">Price:</span>
                     <span style="font-weight:bold" class="Sms_mu_for_hebrew">מחיר:</span>
                     <?php echo $product['regular_price']; ?>
-                    <?php echo $currency['symbol']; ?>
+                    <?php echo $currency[0]['symbol']; ?>
                 </td>
                 <td>
                     <span style="font-weight:bold" class="Sms_mu_for_Eng">Stock:</span>
