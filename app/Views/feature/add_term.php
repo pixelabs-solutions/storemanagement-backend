@@ -124,6 +124,7 @@
 
                 <form class="card-body" id="term_form_data">
     <!-- header -->
+     <?php var_dump( $attributes) ?>
     <div class="row gx-3">
         <div class="col-md-6 mb-3">
             <label for="example-text-input" class="form-label fw-bold" data-i18n="popoups.future_managment.add_new_term.name_of_term">The name of the term</label>
@@ -432,6 +433,10 @@ submitButton.disabled = true;
         console.error('Error submitting form data:', error);
     });
 }
+
+
+
+
         function sms_term_close_success_message() {
             document.getElementById('sms_term_success-message').style.display = 'none';
         }

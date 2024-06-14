@@ -114,7 +114,6 @@ class Base
                 ]);
 
                 $result = json_decode($response->getBody(), true);
-                
                 if (empty($result)) 
                 {
                     break;
