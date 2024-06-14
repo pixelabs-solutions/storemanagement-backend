@@ -57,6 +57,7 @@ class AuthenticationController
                 // echo "admin = " .ADMIN;
                 if($user_level === ADMIN)
                 { 
+                   
                     header('Location: /admin/index');
                 }
                 else{
@@ -65,9 +66,9 @@ class AuthenticationController
                 }
             }
             else {
-                header('Location: /authentication/login');
+                $error_message = isset($result['message']) ? $result['message'] : 'Invalid email or password.';
+                header('Location: /authentication/login?error=' . urlencode($error_message));
             }
-
         }
         
     }

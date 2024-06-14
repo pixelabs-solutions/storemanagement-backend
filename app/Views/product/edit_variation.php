@@ -247,7 +247,7 @@
                          <!-- submit button -->
                          <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
                                 <div class="text-center mt-2 col-sm-6 col-md-6">
-                                    <button type="submit" class="btn btn-primary col-12 rounded-4 py-3"
+                                    <button type="submit" id="edit_variation_disbale" class="btn btn-primary col-12 rounded-4 py-3"
                                     onclick="logFormValuesInEdit()"
                                         data-i18n="popoups.future_managment.edit_variation_in_product_managment.update_product_btn">To
                                         update
@@ -493,6 +493,9 @@ function logFormValuesInEdit() {
                 'regular_price': regularPrice,
                 'sale_price': salePrice
             };
+
+            let edit_variation_disbale = document.getElementById('edit_variation_disbale');
+            edit_variation_disbale.disabled = true;
 
             return fetch(`/product/${productID}`, {
                 method: 'PUT',

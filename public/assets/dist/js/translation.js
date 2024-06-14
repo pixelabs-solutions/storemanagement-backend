@@ -14,6 +14,7 @@ const translations = {
       Setting: "Setting",
       Help: "Help and support",
       Disconecting: "Disconnecting from the system ",
+      Logout : "Logout",
     },
     dashboard: {
       tabs: {
@@ -116,7 +117,14 @@ const translations = {
       },
       third_row_with_check_box: {
         stock_alert_out: "Activate out of stock alert",
+        productpage: {
+          productname: "Product name",
+          category: "Category",
+          price: "Price",
+          Stock: "Stock",
+        },
       },
+
 
       fourth_row_with_check_box: {
         email_label: "Email address to receive notifications..",
@@ -193,12 +201,12 @@ const translations = {
         Email_address: "Email Address",
       },
 
-      status_tr:{
-        Complete : "Complete",
-        In_Treatment : "In Treatment",
-        Cancelled : "Cancelled",
-        changed : "Group status change"
-      }
+      status_tr: {
+        Complete: "Complete",
+        In_Treatment: "In Treatment",
+        Cancelled: "Cancelled",
+        changed: "Group status change",
+      },
     },
     statististics: {
       tabs_in_static: {
@@ -323,7 +331,7 @@ const translations = {
         card_tag_p_right: "left",
       },
       card_two_in_objective: {
-        card_title: "Recruit ",
+        card_title: "Recruit",
         card_one_p_left: "New customers",
         card_tag_p_right: "Customers were recruited",
       },
@@ -476,7 +484,7 @@ const translations = {
         },
         add_new_term: {
           heading: "Adding a new term",
-          heading_for_edit: "",
+          heading_for_edit: "Bring In NIS",
           name_of_term: "Name of the term",
           feature: "associated feature",
           error_alert: "Choosing a color for the display of the term",
@@ -559,12 +567,12 @@ const translations = {
             amt: "250 NIS",
             total: "15",
           },
-          card_order: {   
-            total_cost: "Total cost of order",
+          card_order: {
+            total_cost_product: "The total cost of the order",
             product: "Products: NIS",
             delivery: "Delivery up to 5 business days: NIS",
             total: "Order date:",
-            total_cost: "Total Cost : NIS"
+            total_cost: "Total Cost : NIS",
           },
           last_btn: "Save changes",
         },
@@ -613,6 +621,7 @@ const translations = {
       Setting: "הגדרות",
       Help: "עזרה ותמיכה",
       Disconecting: "ניתוק מהמערכת",
+      Logout : "להתנתק",
     },
     dashboard: {
       tabs: {
@@ -715,7 +724,14 @@ const translations = {
       },
       third_row_with_check_box: {
         stock_alert_out: "הפעלת התראת אזל מלאי",
+        productpage: {
+          productname: "",
+          category: "קטגוריה",
+          price: "מחיר",
+          Stock: "המניה",
+        },
       },
+
       fourth_row_with_check_box: {
         email_label: "כתובת אימייל לקבלת התראות.. ",
         data: "כתובת אימייל לקבלת התראות ",
@@ -792,13 +808,12 @@ const translations = {
         Email_address: 'כתובת דוא"ל',
       },
 
-      status_tr:{
-        Complete : "לְהַשְׁלִים",
-        In_Treatment : "בטיפול",
-        Cancelled : "מבוטל",
-        changed : "שינוי סטטוס הקבוצה"
-      }
-      
+      status_tr: {
+        Complete: "לְהַשְׁלִים",
+        In_Treatment: "בטיפול",
+        Cancelled: "מבוטל",
+        changed: "שינוי סטטוס הקבוצה",
+      },
     },
     statististics: {
       tabs_in_static: {
@@ -818,8 +833,8 @@ const translations = {
         num_h1_card_customer_title: "150",
         crad_text_blue_in_card_customer: "לקוחות חדשים",
         crad_text_blue_in_card_returing: "לקוחות קיימים",
-        crad_text_blue_in_card_product: "מוצר",
-        crad_text_blue_in_card_order: "מוצרים",
+        crad_text_blue_in_card_product: " מוצרים",
+        crad_text_blue_in_card_order: " הזמנות",
         crad_text_blue_in_card_revenue: "הכנסות",
       },
       cards_in_product: {
@@ -923,7 +938,7 @@ const translations = {
         card_tag_p_right: "נותרו",
       },
       card_two_in_objective: {
-        card_title: "רקריט",
+        card_title: "לגיס",
         card_one_p_left: "ניו קוסטומר",
         card_tag_p_right: "קוסטומר וירה רקרואיטד",
       },
@@ -1007,7 +1022,7 @@ const translations = {
         },
         popoup_in_catagory: {
           heading: "הוספת קטגוריה חדשה",
-          heading_for_edit: "עריכת קטגוריה",
+          heading_for_edit: "הביאו ₪",
           label_key: "שם הקטגוריה",
           label_parent_ct: "קטגורית הורה",
           label_up_img: "העלאת תמונה",
@@ -1159,12 +1174,11 @@ const translations = {
             total: "15",
           },
           card_order: {
-            total_cost: "עלות כוללת של ההזמנה",
+            total_cost_product: "עלות כוללת של ההזמנה",
             product: 'מוצרים: 10,450 ש"ח',
             delivery: 'משלוח עד 5 ימי עסקים: 39.9 ש"ח',
-            total: 'תאריך הזמנה:',
-            total_cost: "עלות כוללת  : NIS"
-
+            total: "תאריך הזמנה:",
+            total_cost: "עלות כוללת  : NIS",
           },
           last_btn: "שמירת השינויים",
         },
