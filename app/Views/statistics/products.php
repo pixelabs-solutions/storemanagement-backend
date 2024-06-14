@@ -122,9 +122,60 @@
 
 
 <script>
-    // @formatter:off
-    document.addEventListener("DOMContentLoaded", function() {
-        window.ApexCharts && (new ApexCharts(document.getElementById('chart-combination-2'), {
+   function getQueryParams() {
+                            const params = {};
+                            window.location.search.substring(1).split("&").forEach(param => {
+                                const [key, value] = param.split("=");
+                                params[decodeURIComponent(key)] = decodeURIComponent(value);
+                            });
+                            return params;
+                        }
+                
+        // Example of dynamic data update
+        async function fetchAndFormatData() {
+            let queryParamsForGraph = getQueryParams().query;
+
+// Default to 'last_week' if no query parameter is provided
+if (!queryParamsForGraph) {
+    queryParamsForGraph = 'last_week';
+}
+console.log('params', queryParamsForGraph);
+
+const response = await fetch(`http://storemanagement.test/statistics/revenue?query=${queryParamsForGraph}&is_rest=true`);
+const data = await response.json();
+
+    // Prepare the dynamicData object
+    const dynamicData = {
+        newCustomer: [],
+        returningCustomer: [],
+        product: [],
+        order: [],
+        revenue: []
+    };
+
+    // Extract the dates from the data
+    const dates = Object.keys(data.totalProducts.byDate).sort();
+
+    // Iterate over each date and push the values to dynamicData
+    dates.forEach(date => {
+        dynamicData.newCustomer.push(0);  // Placeholder as newCustomer data is not provided
+        dynamicData.returningCustomer.push(0);  // Placeholder as returningCustomer data is not provided
+        dynamicData.product.push(data.totalProducts.byDate[date] || 0);
+        dynamicData.order.push(data.numberOfOrders.byDate[date] || 0);
+        dynamicData.revenue.push(0);  // Placeholder as revenue data is not provided
+    });
+    console.log(dynamicData);
+
+    return [dates,dynamicData];
+}
+
+    document.addEventListener("DOMContentLoaded", async function () {
+
+var [dates,dynamicData] = await fetchAndFormatData();
+
+
+        // Initialize the chart
+        var chart = new ApexCharts(document.getElementById('chart-combination-2'), {
             chart: {
                 type: "bar",
                 fontFamily: 'inherit',
@@ -151,19 +202,19 @@
             },
             series: [{
                 name: "New Customer",
-                data: [4000, 1000, 3500, 3500, 4000, 3000, 5000]
+                data: []
             }, {
                 name: "Returning Customer",
-                data: [3000, 4300, 1900, 2200, 2400, 4300, 2200]
+                data: []
             }, {
                 name: "Product",
-                data: [3000, 2000, 1600, 1300, 3000, 2500, 2500]
+                data: []
             }, {
                 name: "Order",
-                data: [2000, 1300, 900, 1500, 2400, 1300, 2200]
+                data: []
             }, {
                 name: "Revenue",
-                data: [2000, 2500, 500, 3500, 2400, 1300, 2200]
+                data: []
             }],
             tooltip: {
                 theme: 'dark'
@@ -187,7 +238,7 @@
                 axisBorder: {
                     show: false,
                 },
-                categories: ['First', 'Crimson', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Sabbath'],
+                categories: dates,
             },
             yaxis: {
                 labels: {
@@ -198,11 +249,39 @@
             legend: {
                 show: false,
             },
-        })).render();
-    });
+        });
+        chart.render();
 
-    // @formatter:on
+        // Function to update the chart with new data
+        function updateChartData(newData) {
+            chart.updateSeries([{
+                name: "New Customer",
+                data: newData.newCustomer
+            }, {
+                name: "Returning Customer",
+                data: newData.returningCustomer
+            }, {
+                name: "Product",
+                data: newData.product
+            }, {
+                name: "Order",
+                data: newData.order
+            }, {
+                name: "Revenue",
+                data: newData.revenue
+            }]);
+        }
+
+
+
+
+        console.log(dynamicData)
+
+        // Call the update function with the dynamic data
+        updateChartData(dynamicData);
+    });
 </script>
+
 
 
 <script>

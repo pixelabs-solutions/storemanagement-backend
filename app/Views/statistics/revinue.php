@@ -132,203 +132,174 @@
                     <!-- Icon Box End -->
                 </div>
             </div>
-
             <script>
+function getQueryParams() {
+    const params = {};
+    window.location.search.substring(1).split("&").forEach(param => {
+        const [key, value] = param.split("=");
+        params[decodeURIComponent(key)] = decodeURIComponent(value);
+    });
+    return params;
+}
 
-                
-        // Example of dynamic data update
-        async function fetchAndFormatData() {
-            
-    const response = await fetch('http://storemanagement.test/statistics/products?query=last_week&is_rest=true');
+// Example of dynamic data update
+async function fetchAndFormatData() {
+    let queryParamsForGraph = getQueryParams().query;
+
+    // Default to 'last_week' if no query parameter is provided
+    if (!queryParamsForGraph) {
+        queryParamsForGraph = 'last_week';
+    }
+    console.log('params', queryParamsForGraph);
+
+    const response = await fetch(`http://storemanagement.test/statistics/revenue?query=${queryParamsForGraph}&is_rest=true`);
     const data = await response.json();
 
     // Prepare the dynamicData object
     const dynamicData = {
-        newCustomer: [],
-        returningCustomer: [],
-        product: [],
-        order: [],
-        revenue: []
+        netIncome: [],
+        orderAverage: [],
+        totalRevenue: [],
+        totalShipments: [],
+        totalrehearsals: []
     };
 
-    // Extract the dates from the data
-    const dates = Object.keys(data.totalProducts.byDate).sort();
+    // Assuming the API response provides a single set of values
+    // Use the same dates for each data point
+    const dates = ['2024-06-10']; // Placeholder date, replace if actual dates are provided
 
-    // Iterate over each date and push the values to dynamicData
-    dates.forEach(date => {
-        dynamicData.newCustomer.push(0);  // Placeholder as newCustomer data is not provided
-        dynamicData.returningCustomer.push(0);  // Placeholder as returningCustomer data is not provided
-        dynamicData.product.push(data.totalProducts.byDate[date] || 0);
-        dynamicData.order.push(data.numberOfOrders.byDate[date] || 0);
-        dynamicData.revenue.push(0);  // Placeholder as revenue data is not provided
-    });
+    dynamicData.netIncome.push(data.netIncome || 0);
+    dynamicData.orderAverage.push(data.orderAverage || 0);
+    dynamicData.totalRevenue.push(data.totalRevenue || 0);
+    dynamicData.totalShipments.push(data.totalShipments || 0);
+    dynamicData.totalrehearsals.push(data.totalrehearsals || 0);
+
     console.log(dynamicData);
 
-    return [dates,dynamicData];
+    return [dates, dynamicData];
 }
 
-    document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener("DOMContentLoaded", async function () {
+    var [dates, dynamicData] = await fetchAndFormatData();
 
-var [dates,dynamicData] = await fetchAndFormatData();
-
-
-        // Initialize the chart
-        var chart = new ApexCharts(document.getElementById('chart-combination-3'), {
-            chart: {
-                type: "bar",
-                fontFamily: 'inherit',
-                height: 240,
-                parentHeightOffset: 0,
-                toolbar: {
-                    show: false,
-                },
-                animations: {
-                    enabled: false
-                },
-            },
-            plotOptions: {
-                bar: {
-                    columnWidth: '50%',
-                    gap: '3%',
-                }
-            },
-            dataLabels: {
-                enabled: false,
-            },
-            fill: {
-                opacity: 1,
-            },
-            series: [{
-                name: "New Customer",
-                data: []
-            }, {
-                name: "Returning Customer",
-                data: []
-            }, {
-                name: "Product",
-                data: []
-            }, {
-                name: "Order",
-                data: []
-            }, {
-                name: "Revenue",
-                data: []
-            }],
-            tooltip: {
-                theme: 'dark'
-            },
-            grid: {
-                padding: {
-                    top: -20,
-                    right: 0,
-                    left: -4,
-                    bottom: -4
-                },
-                strokeDashArray: 4,
-            },
-            xaxis: {
-                labels: {
-                    padding: 0,
-                },
-                tooltip: {
-                    enabled: false
-                },
-                axisBorder: {
-                    show: false,
-                },
-                categories: dates,
-            },
-            yaxis: {
-                labels: {
-                    padding: 4
-                },
-            },
-            colors: ['#627e0c', '#8b59e4', '#9215a8', '#dc2285', '#ac3f4f'],
-            legend: {
+    // Initialize the chart
+    var chart = new ApexCharts(document.getElementById('chart-combination-3'), {
+        chart: {
+            type: "bar",
+            fontFamily: 'inherit',
+            height: 240,
+            parentHeightOffset: 0,
+            toolbar: {
                 show: false,
             },
-        });
-        chart.render();
-
-        // Function to update the chart with new data
-        function updateChartData(newData) {
-            chart.updateSeries([{
-                name: "New Customer",
-                data: newData.newCustomer
-            }, {
-                name: "Returning Customer",
-                data: newData.returningCustomer
-            }, {
-                name: "Product",
-                data: newData.product
-            }, {
-                name: "Order",
-                data: newData.order
-            }, {
-                name: "Revenue",
-                data: newData.revenue
-            }]);
-        }
-
-
-
-
-        console.log(dynamicData)
-
-        // Call the update function with the dynamic data
-        updateChartData(dynamicData);
+            animations: {
+                enabled: false
+            },
+        },
+        plotOptions: {
+            bar: {
+                columnWidth: '50%',
+                gap: '3%',
+            }
+        },
+        dataLabels: {
+            enabled: false,
+        },
+        fill: {
+            opacity: 1,
+        },
+        series: [{
+            name: "Net Income",
+            data: []
+        }, {
+            name: "Order Average",
+            data: []
+        }, {
+            name: "Total Revenue",
+            data: []
+        }, {
+            name: "Total Shipments",
+            data: []
+        }, {
+            name: "Total Rehearsals",
+            data: []
+        }],
+        tooltip: {
+            theme: 'dark'
+        },
+        grid: {
+            padding: {
+                top: -20,
+                right: 0,
+                left: -4,
+                bottom: -4
+            },
+            strokeDashArray: 4,
+        },
+        xaxis: {
+            labels: {
+                padding: 0,
+            },
+            tooltip: {
+                enabled: false
+            },
+            axisBorder: {
+                show: false,
+            },
+            categories: dates,
+        },
+        yaxis: {
+            labels: {
+                padding: 4
+            },
+        },
+        colors: ['#627e0c', '#8b59e4', '#9215a8', '#dc2285', '#ac3f4f'],
+        legend: {
+            show: false,
+        },
     });
+    chart.render();
+
+    // Function to update the chart with new data
+    function updateChartData(newData) {
+        chart.updateSeries([{
+            name: "Net Income",
+            data: newData.netIncome
+        }, {
+            name: "Order Average",
+            data: newData.orderAverage
+        }, {
+            name: "Total Revenue",
+            data: newData.totalRevenue
+        }, {
+            name: "Total Shipments",
+            data: newData.totalShipments
+        }, {
+            name: "Total Rehearsals",
+            data: newData.totalrehearsals
+        }]);
+    }
+
+    console.log(dynamicData);
+
+    // Call the update function with the dynamic data
+    updateChartData(dynamicData);
+});
 </script>
 
 
 <script>
-                        // // Function to get query parameters from the URL
-                        // function getQueryParams() {
-                        //     const params = {};
-                        //     window.location.search.substring(1).split("&").forEach(param => {
-                        //         const [key, value] = param.split("=");
-                        //         params[decodeURIComponent(key)] = decodeURIComponent(value);
-                        //     });
-                        //     return params;
-                        // }
-
-                        // // Get query parameters
-                        // const queryParams = getQueryParams();
-
-                        // if (queryParams.query === 'last_week') {
-                        //     // Add the .filter_tab_active class to the element with the ID 'last_week'
-                        //     const elements = document.querySelectorAll('.last_week');
-                        //     elements.forEach(element => {
-                        //         element.classList.add('filter_tab_active');
-                        //     });
-                        // }
-                        // else if (queryParams.query === 'last_month') {
-                        //     // Add the .filter_tab_active class to the element with the ID 'current_month'
-
-                        //     const elements = document.querySelectorAll('.last_month');
-                        //     elements.forEach(element => {
-                        //         element.classList.add('filter_tab_active');
-                        //     });
-                        // }
-                        // else if (queryParams.query === 'last_year') {
-                        //     // Add the .filter_tab_active class to the element with the ID 'last_year'
-                        //     const elements = document.querySelectorAll('.last_year');
-                        //     elements.forEach(element => {
-                        //         element.classList.add('filter_tab_active');
-                        //     });
-                        // }
-
-
+                      
                     </script>
 <script>
-            function getQueryParams() {
-            const params = {};
-            window.location.search.substring(1).split("&").forEach(param => {
-                const [key, value] = param.split("=");
-                params[decodeURIComponent(key)] = decodeURIComponent(value);
-            });
-            return params;
-        }
+        //     function getQueryParams() {
+        //     const params = {};
+        //     window.location.search.substring(1).split("&").forEach(param => {
+        //         const [key, value] = param.split("=");
+        //         params[decodeURIComponent(key)] = decodeURIComponent(value);
+        //     });
+        //     return params;
+        // }
 
         // Get query parameters
         var queryParamsRevenue = getQueryParams();
