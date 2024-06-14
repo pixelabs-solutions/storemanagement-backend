@@ -30,7 +30,7 @@
                     <div class="card-body">
                         <div class="text-center">
                             <img src="assets/dist/img/cart.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
-                            <h3 class="mt-3"><?php echo $products_stats["totalProducts"]; ?></h3>
+                            <h3 class="mt-3"><?php echo $products_stats["totalProducts"]['total']; ?></h3>
                             <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card1_in_product.normal_product">Product</strong>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                     <div class="card-body">
                         <div class="text-center">
                             <img src="assets/dist/img/order.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
-                            <h3 class="mt-3"><?php echo $products_stats["normalProducts"]; ?></h3>
+                            <h3 class="mt-3"><?php echo $products_stats["normalProducts"]['total']; ?></h3>
                             <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card2_in_normal_product.normal_product_in_card2">Normal
                                 Products</strong>
                         </div>
@@ -59,7 +59,7 @@
                     <div class="card-body">
                         <div class="text-center">
                             <img src="assets/dist/img/productsonsale.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
-                            <h3 class="mt-3"><?php echo $products_stats["saleProducts"]; ?></h3>
+                            <h3 class="mt-3"><?php echo $products_stats["saleProducts"]['total']; ?></h3>
                             <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card3_in_Sale.normal_product">Product
                                 On Sale</strong>
                         </div>
@@ -74,7 +74,7 @@
                     <div class="card-body">
                         <div class="text-center">
                             <img src="assets/dist/img/cart.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
-                            <h3 class="mt-3"><?php echo $products_stats["numberOfOrders"]; ?></h3>
+                            <h3 class="mt-3"><?php echo $products_stats["numberOfOrders"]['total']; ?></h3>
                             <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card4_in_product.normal_product">Order</strong>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                     <div class="card-body">
                         <div class="text-center">
                             <img src="assets/dist/img/order.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
-                            <h3 class="mt-3"><?php echo $products_stats["totalDistinctProductsOnOrder"]; ?></h3>
+                            <h3 class="mt-3"><?php echo $products_stats["totalDistinctProductsOnOrder"]['total']; ?></h3>
                             <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card5_in_product.normal_product">Products
                                 on order</strong>
                         </div>
