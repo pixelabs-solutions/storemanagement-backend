@@ -116,7 +116,7 @@ require_once __DIR__ . '/../partials/header.php';
         <a href="?query=24_hours" id="24_hours" class="shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.first_tab"> 24 Hours</a>
         <a href="?query=last_week" id="last_week" class=" shadow-none btn border-none outline-none  bg-transparent btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.second_tab"> Last Week
         </a>
-        <a href="?query=current_month" id="current_month" class=" shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.third_tab "> Last Month
+        <a href="?query=current_month" id="current_month" class=" shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.third_tab "> Current Month
         </a>
         <a href="?query=last_year" id="last_year" class="shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date" data-i18n="dashboard.tabs.fourth_tab"> Last Year
         </a>
@@ -131,30 +131,30 @@ require_once __DIR__ . '/../partials/header.php';
 
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Function to get query parameter by name
-            function getQueryParam(name) {
-                const urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get(name);
-            }
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     // Function to get query parameter by name
+        //     function getQueryParam(name) {
+        //         const urlParams = new URLSearchParams(window.location.search);
+        //         return urlParams.get(name);
+        //     }
 
-            // Get the start and end dates from the URL
-            let dateFrom = getQueryParam('date_from');
-            let dateTo = getQueryParam('date_to');
+        //     // Get the start and end dates from the URL
+        //     let dateFrom = getQueryParam('date_from');
+        //     let dateTo = getQueryParam('date_to');
 
-            // Only show the dates if both are present
-            if (dateFrom && dateTo) {
-                // Replace - with /
-                dateFrom = dateFrom.replace(/-/g, '/');
-                dateTo = dateTo.replace(/-/g, '/');
+        //     // Only show the dates if both are present
+        //     if (dateFrom && dateTo) {
+        //         // Replace - with /
+        //         dateFrom = dateFrom.replace(/-/g, '/');
+        //         dateTo = dateTo.replace(/-/g, '/');
 
-                // Store the dates in the element with ID date_stored_element
-                const dateStoredElement = document.getElementById('date_stored_element');
-                if (dateStoredElement) {
-                    dateStoredElement.innerHTML = ` ${dateFrom}-${dateTo}`;
-                }
-            }
-        });
+        //         // Store the dates in the element with ID date_stored_element
+        //         const dateStoredElement = document.getElementById('date_stored_element');
+        //         if (dateStoredElement) {
+        //             dateStoredElement.innerHTML = ` ${dateFrom}-${dateTo}`;
+        //         }
+        //     }
+        // });
     </script>
 
     <!-- Date Range Button End -->
@@ -201,7 +201,7 @@ require_once __DIR__ . '/../partials/header.php';
                     </div>
                     <div class="row g-2  sms_mu_for_rtl_row_cards mt-2">
                         <div class=" col-8 ">
-                            <h3> <?php echo $dashboard_data["statistics"]["new_products"]; ?> </h3>
+                            <h3> <?php echo number_format($dashboard_data["statistics"]["new_products"]); ?> </h3>
                         </div>
                         <!-- <div class="col-auto ms-auto">
                             <svg width="40" height="40" viewBox="0 0 58 58" fill="none"
@@ -288,7 +288,7 @@ require_once __DIR__ . '/../partials/header.php';
                     </div>
                     <div class="row g-2 sms_mu_for_rtl_row_cards mt-2">
                         <div class="col-8">
-                            <h3> 1457 </h3>
+                        <h3> <?php echo number_format($dashboard_data["statistics"]["total_orders"]); ?> </h3>
                         </div>
                         <!-- <div class="col-auto ms-auto">
                             <span style="color:#40A826"> 10 % </span>
@@ -335,7 +335,7 @@ require_once __DIR__ . '/../partials/header.php';
                     </div>
                     <div class="row g-2 sms_mu_for_rtl_row_cards mt-2">
                         <div class="col-8">
-                            <h3> <?php echo $dashboard_data["statistics"]["new_customers"]; ?> </h3>
+                            <h3> <?php echo number_format($dashboard_data["statistics"]["new_customers"]); ?> </h3>
                         </div>
                         <!-- <div class="col-auto ms-auto">
                             <span style="color:#B50E0E"> 10% </span>
@@ -383,7 +383,7 @@ require_once __DIR__ . '/../partials/header.php';
                     </div>
                     <div class="row g-2 sms_mu_for_rtl_row_cards mt-2">
                         <div class="col-8">
-                            <h3> <?php echo $dashboard_data["statistics"]["total_transactions"]; ?></h3>
+                            <h3> <?php echo number_format($dashboard_data["statistics"]["total_transactions"]); ?> <?php echo $dashboard_data["current_currency"][0]["symbol"]; ?></h3>
                         </div>
                         <!-- <div class="col-auto ms-auto">
                             <span style="color:#40A826"> 10 % </span>
@@ -447,7 +447,7 @@ require_once __DIR__ . '/../partials/header.php';
                         <div class="col-6 ">
                             <div class="mb-3">
                                 <select type="text" class="form-select dropdown-tom-select-style with-input" placeholder="Filter by city" name="city" multiple id="select_city">
-                                    <?php foreach ($dashboard_data["customers_location"] as $statist) : ?>
+                                    <?php foreach ($dashboard_data["customers_location"]['cities_data'] as $statist) : ?>
                                         <?php $city_value = $statist['city']; ?>
                                         <option value="<?php echo $city_value; ?>"><?php echo $city_value; ?></option>
                                     <?php endforeach; ?>
@@ -491,7 +491,7 @@ require_once __DIR__ . '/../partials/header.php';
                         <!-- Filter City Data Start  -->
                         <div class="col-lg-4 col-md-3 col-sm-12">
                             <!-- City name with progress bar start -->
-                            <?php foreach ($dashboard_data["customers_location"] as $statist) : ?>
+                            <?php if(empty($dashboard_data["customers_location"]['cities_data'])){echo "No Orders Data Found";} else { foreach ($dashboard_data["customers_location"]['cities_data'] as $statist) : ?>
                                 <?php $city_name = $statist['city']; ?>
                                 <?php $city_value = $statist['percentage_of_customers']; ?>
                                 <div class="row g-2 city-row" data-city="<?php echo $city_name; ?>">
@@ -504,10 +504,11 @@ require_once __DIR__ . '/../partials/header.php';
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-4">
                                         <br>
-                                        <h4><?php echo $city_value; ?></h4>
+                                        <h4><?php $number = str_replace('%', '', $city_value);
+                                          echo round($number, 2); ?>%</h4>
                                     </div>
                                 </div>
-                            <?php endforeach; ?>
+                            <?php endforeach; }?>
                             <!-- City name with progress bar end -->
                         </div>
                         <!-- Filter City Data End -->
@@ -595,8 +596,13 @@ require_once __DIR__ . '/../partials/header.php';
                     <!-- End Header -->
                     <!-- Table Start -->
                     <div class="card-table table-responsive">
-                        <table class="table table-vcenter">
+                    <?php if(empty($dashboard_data["customers_location"]['latest_orders'])){
+                                    echo "No Orders Data Found";
+                                } else{
+                                    ?>
+<table class="table table-vcenter">
                             <thead>
+                             
                                 <tr>
                                     <th data-i18n="dashboard.last_table_tr_first.td_one">order no</th>
                                     <th data-i18n="dashboard.last_table_tr_first.td_two">client</th>
@@ -605,11 +611,12 @@ require_once __DIR__ . '/../partials/header.php';
                                 </tr>
                             </thead>
                             <?php
-                            $latest_orders = array_reverse($dashboard_data["latest_orders"]); // Reverse the array to get the latest orders first
+                            // $latest_orders = array_reverse($dashboard_data["latest_orders"]); // Reverse the array to get the latest orders first
+                            
 
                             $count = 0; // Counter variable
 
-                            foreach ($latest_orders as $statist) :
+                            foreach ($dashboard_data["customers_location"]['latest_orders'] as $statist) :
                                 $order_id = $statist['order_id'];
                                 $order_sum = $statist['sum'];
                                 $order_date = $statist['date'];
@@ -620,7 +627,7 @@ require_once __DIR__ . '/../partials/header.php';
                                     <td class="text-muted"><?php echo $order_id; ?></td>
                                     <td class="text-muted"><?php echo $order_client; ?></td>
                                     <td class="text-muted"><?php echo $order_date; ?></td>
-                                    <td><?php echo $order_sum; ?></td>
+                                    <td><?php echo $order_sum; ?> <?php echo $dashboard_data["current_currency"][0]["symbol"]; ?></td>
                                 </tr>
 
                             <?php
@@ -630,6 +637,11 @@ require_once __DIR__ . '/../partials/header.php';
                             endforeach;
                             ?>
                         </table>
+
+                                    <?php
+                                } ?>
+
+                        
                         <!-- <button class="sms_ma_index_to_order_button">click</button> -->
                     </div>
                     <!-- Table End -->
@@ -688,7 +700,7 @@ require_once __DIR__ . '/../partials/header.php';
             attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        var allCities = <?php echo json_encode(array_column($dashboard_data["customers_location"], 'city')); ?>;
+        var allCities = <?php echo json_encode(array_column($dashboard_data["customers_location"]['cities_data'], 'city')); ?>;
         var cityCoordinates = {};
         var markers = [];
 
@@ -843,11 +855,13 @@ require_once __DIR__ . '/../partials/header.php';
         document.getElementById(id).classList.remove('sms_w_date_active');
     });
 }
+console.log(queryParams);
 removeClassFromAll();
-if (!queryParams.query) {
-    queryParams.query = '24_hours';
+if (!queryParams.query && !queryParams.date_from) {
+    document.getElementById('24_hours').classList.add('sms_w_date_active');
 }
-if (queryParams.query === '24_hours') {
+
+else if (queryParams.query === '24_hours') {
     document.getElementById('24_hours').classList.add('sms_w_date_active');
 } else if (queryParams.query === 'last_week') {
     document.getElementById('last_week').classList.add('sms_w_date_active');

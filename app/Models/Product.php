@@ -66,30 +66,30 @@ class Product
         }
     }
 
-    public static function get_product_by_id($configuration, $id)
-    {
-        $consumer_key = $configuration["consumer_key"];
-        $consumer_secret = $configuration["consumer_secret"];
-        $store_url = $configuration["store_url"];
-        $client = new Client();
-        try 
-        {
-            $response = $client->request('GET', $store_url . '/wp-json/wc/v3/products/'.$id, [
-                'auth' => [$consumer_key, $consumer_secret]
-            ]);
+    // public static function get_product_by_id($configuration, $id)
+    // {
+    //     $consumer_key = $configuration["consumer_key"];
+    //     $consumer_secret = $configuration["consumer_secret"];
+    //     $store_url = $configuration["store_url"];
+    //     $client = new Client();
+    //     try 
+    //     {
+    //         $response = $client->request('GET', $store_url . '/wp-json/wc/v3/products/'.$id, [
+    //             'auth' => [$consumer_key, $consumer_secret]
+    //         ]);
         
-            $product = json_decode($response->getBody(), true);
-            // if($product['status'] !== 'publish')
-            // {
-            //     return null;
-            // }
-            return $product;
-        } 
-        catch (RequestException $e) 
-        {
-            echo $e->getMessage();
-        }
-    }
+    //         $product = json_decode($response->getBody(), true);
+    //         // if($product['status'] !== 'publish')
+    //         // {
+    //         //     return null;
+    //         // }
+    //         return $product;
+    //     } 
+    //     catch (RequestException $e) 
+    //     {
+    //         echo $e->getMessage();
+    //     }
+    // }
 
 
     // public static function get_variation_by_id($configuration, $id, $var_id)
@@ -249,5 +249,134 @@ class Product
         }
 
         return $total_products;
+    }
+
+    public static function store_products($products, $user_id)
+    {
+        global $connection;
+        try {
+            foreach ($products as $product) {
+                $stmt = $connection->prepare("
+                    INSERT INTO products (id, user_id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations, date_created)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ");
+                $id = $product['id'];
+                $name = $product['name'];
+                $images = json_encode($product['images']);
+                $categories = json_encode($product['categories']);
+                $attributes = json_encode($product['attributes']);
+                $variations = json_encode($product['variations']);
+                $regular_price = $product['regular_price'] ?: null;
+                $sale_price = $product['sale_price'] ?: null;
+                $stock_quantity = $product['stock_quantity'];
+                $description = $product['description'];
+                $type = $product['type'];
+                $date_created = $product['date_created'];
+
+                $stmt->bind_param(
+                    'iissssdisssss',
+                    $id,
+                    $user_id,
+                    $name,
+                    $images,
+                    $categories,
+                    $regular_price,
+                    $sale_price,
+                    $stock_quantity,
+                    $description,
+                    $type,
+                    $attributes,
+                    $variations, 
+                    $date_created
+                );
+
+                $stmt->execute();
+                $stmt->close();
+            }
+            
+        } catch (\mysqli_sql_exception $e) {
+            echo "store_products() Database error: " . $e->getMessage() . "\n";
+        }
+    }
+
+    public static function get_all_products($user_id)
+    {
+        global $connection;
+        $products = [];
+
+        try {
+            $query = "SELECT * FROM products WHERE user_id = $user_id";
+            $result = $connection->query($query);
+
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    $row['images'] = json_decode($row['images'], true);
+                    $row['categories'] = json_decode($row['categories'], true);
+                    $row['attributes'] = json_decode($row['attributes'], true);
+                    $row['variations'] = json_decode($row['variations'], true);
+                    $products[] = $row;
+                }
+                $result->free();
+            } else {
+                echo "Error executing query: " . $connection->error . "\n";
+            }
+        } catch (\mysqli_sql_exception $e) {
+            echo "Database error: " . $e->getMessage() . "\n";
+        }
+
+        return $products;
+    }
+
+    public static function get_product_by_id($product_id)
+    {
+        global $connection;
+        $product = null; // Initialize a variable to hold the product data
+
+        try {
+            // Prepare the SQL statement
+            $stmt = $connection->prepare("SELECT * FROM products WHERE id = ?");
+            if ($stmt === false) {
+                throw new \mysqli_sql_exception("Unable to prepare statement: " . $connection->error);
+            }
+
+            // Bind the parameter to the statement
+            $stmt->bind_param("i", $product_id);
+
+            // Execute the statement
+            if ($stmt->execute()) {
+                // Get the result set from the executed statement
+                $result = $stmt->get_result();
+                if ($result->num_rows > 0) {
+                    // Fetch the product record
+                    $row = $result->fetch_assoc();
+                    $row['images'] = json_decode($row['images'], true);
+                    $row['categories'] = json_decode($row['categories'], true);
+                    $row['attributes'] = json_decode($row['attributes'], true);
+                    $row['variations'] = json_decode($row['variations'], true);
+                    $product = $row;
+                } else {
+                    echo "No product found with the given ID.\n";
+                }
+                $result->free();
+            } else {
+                echo "Error executing query: " . $stmt->error . "\n";
+            }
+            $stmt->close();
+        } catch (\mysqli_sql_exception $e) {
+            echo "Database error: " . $e->getMessage() . "\n";
+        }
+
+        return $product;
+    }
+    public static function delete_all_products()
+    {
+        global $connection;
+        try{
+            $query = "DELETE FROM products";
+            $connection->query($query);
+        }
+        catch (\mysqli_sql_exception $e) {
+            echo "Database error: " . $e->getMessage() . "\n";
+        }
     }
 }

@@ -10,28 +10,42 @@ use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Helpers\FileHelper;
 use Pixelabs\StoreManagement\Models\Authentication;
-
+use Pixelabs\StoreManagement\Models\Category;
+use Pixelabs\StoreManagement\Models\Attribute;
+use Pixelabs\StoreManagement\Models\Currency;
+use Pixelabs\StoreManagement\Models\Synchronize;
 
 class ProductController
 {
     private $table_name = 'products';
     public function index()
     {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id === null)
+        {
+            if ($is_rest == 'true') {
+                http_response_code(401);
+                echo json_encode(array(
+                    "message" => "User not authenticated",
+                    "status_code" => 401
+                ));
+                exit;
+            }
+            else{
+                header('Location: /authentication/login');
+            }
+        }
+        
+
 
         $user_level = Authentication::getUserLevelFromToken();
         if ($user_level == ADMIN) {
             header("Location: /admin/index");
             } else {
-        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
-        $configuration = $this->prepare_configuration($is_rest);
-
-        $product_fields =
-            [
-                '_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations'
-            ];
-        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        
         // $products = Base::wc_get($configuration, $this->table_name, $page, $product_fields);
-        $products = Product::get_products($configuration, $this->table_name, $product_fields);
+        $products = Product::get_all_products($user_id);
         if (isset($_GET['category']) && $_GET['category'] !== "") {
             $category = $_GET['category'];
             $filteredProducts = [];
@@ -62,10 +76,9 @@ class ProductController
             }
             $products = $filteredProducts;
         }
-        $category_fields = ['_fields' => 'id, name, parent, image, count'];
-        $categories = Base::wc_get($configuration, 'products/categories', $page, $category_fields);
-        $attributes = Base::wc_get($configuration, 'products/attributes', $page);
-        $currency = Base::wc_get($configuration, 'data/currencies/current', $page);
+        $categories = Category::get_all_categories($user_id);
+        $attributes = Attribute::get_all_attributes($user_id);
+        $currency = Currency::get_current_currency($user_id);
 
         $number_of_products = count($products);
         if ($is_rest == 'true') {
@@ -86,14 +99,10 @@ class ProductController
     public function product_by_id($id)
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
-        $configuration = $this->prepare_configuration($is_rest);
-        $product_fields =
-            [
-                '_fields' => 'id, name, images, categories, regular_price, sale_price, stock_quantity, description, type, attributes, variations'
-            ];
-        $product = Base::wc_get_by_id($configuration, $this->table_name . "/" . $id, $product_fields);
 
-        echo $product;
+        $product = Product::get_product_by_id($id);
+
+        echo json_encode($product);
     }
 
 
@@ -128,6 +137,8 @@ class ProductController
         $configuration = $this->prepare_configuration($is_rest);
 
         $result = Base::wc_delete_by_id($configuration, $this->table_name . "/" . $id);
+        Synchronize::sync_products();
+
         echo $result;
     }
 
@@ -157,12 +168,12 @@ class ProductController
             'name' => $data['name'],
             'type' => $data['type'],
             'description' => $data['description'],
-            'categories' => array_map(function ($category_id) {
+            'categories' => !empty($data['categories']) ? array_map(function ($category_id) {
                 return ['id' => $category_id];
-            }, $data['categories']),
-            'images' => array_map(function ($image_url) {
+            }, $data['categories']) : [],
+            'images' => !empty($image_paths) ? array_map(function ($image_url) {
                 return ['src' => $image_url];
-            }, $image_paths)
+            }, $image_paths) : []
         ];
         // echo json_encode($payload);exit;
         if ($data['type'] === "variable") {
@@ -195,16 +206,23 @@ class ProductController
             foreach ($payload['variations'] as $variation) {
                 Product::createProductVariation($configuration, $product_id, $variation);
             }
+            Synchronize::sync_products();
+
         } else {
             $payload['manage_stock'] = true;
             $payload['stock_quantity'] = $data['stock_quantity'];
             $payload['regular_price'] = $data['regular_price'];
             $payload['sale_price'] = $data['sale_price'];
+            
+            // echo json_encode($payload);exit;
 
             $response = Base::wc_add($configuration, $this->table_name, json_encode($payload));
             if ($is_rest == 'true') {
                 echo $response;
             }
+
+            Synchronize::sync_products();
+
         }
     }
 
@@ -249,25 +267,27 @@ class ProductController
                 $image_paths[] = FileHelper::save_file($image, $filename);
             }
         } else {
-            $image_paths[] = FileHelper::save_file($data['image'], "products/" . $data['name']);
+            $image_paths[] = FileHelper::save_file($data['images'], "products/" . $data['name']);
         }
 
 
         $payload = [
             'name' => $data['name'],
             'type' => $data['type'],
-            'description' => $data['description'],
-            'manage_stock' => true,
-            'stock_quantity' => $data['stock_quantity'],
-            'categories' => array_map(function ($category_id) {
-                return ['id' => $category_id];
-            }, $data['category']),
-            'images' => array_map(function ($image_url) {
-                return ['src' => $image_url];
-            }, $data['images']),
-            'regular_price' => $data['regular_price'],
-            'sale_price' => $data['sale_price']
+            'description' => $data['description']
         ];
+        if(!empty($data['categories'])){
+            $payload['categories'] = array_map(function ($category_id) {
+                return ['id' => $category_id];
+            }, $data['categories']);
+        }
+        
+        if(!empty($data['images']) && !empty($image_paths)){
+            $payload['images'] = array_map(function ($image_url) {
+                return ['src' => $image_url];
+            }, $image_paths);
+        }
+        
 
         if ($data['type'] === "variable") {
             // Construct attributes array
@@ -291,12 +311,17 @@ class ProductController
             foreach ($payload['variations'] as $variation) {
                 Product::createProductVariation($configuration, $id, $variation); // Update variations
             }
+
+            Synchronize::sync_products();
+
         } else {
             $payload['manage_stock'] = true;
             $payload['stock_quantity'] = $data['stock_quantity'];
             $payload['regular_price'] = $data['regular_price'];
             $payload['sale_price'] = $data['sale_price'];
-            $response = Base::wc_update($configuration, $this->table_name . "/" . $id, $payload);
+            $response = Base::wc_update($configuration, $this->table_name . "/" . $id, json_encode($payload));
+            Synchronize::sync_products();
+
         }
         if ($is_rest == 'true') {
             echo $response;
@@ -472,6 +497,8 @@ class ProductController
         $payload = ['create' => $products];
         // // echo json_encode($payload, JSON_PRETTY_PRINT);
         $response = Base::wc_batch($configuration, $this->table_name . "/batch", json_encode($payload));
+        Synchronize::sync_products();
+
         echo $response;
 
         // Replace Base::wc_add and $configuration with your actual implementation details

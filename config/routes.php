@@ -17,6 +17,7 @@ use Pixelabs\StoreManagement\Controllers\ConfigurationController;
 use Pixelabs\StoreManagement\Controllers\CategoryController;
 use Pixelabs\StoreManagement\Controllers\AttributesController;
 use Pixelabs\StoreManagement\Controllers\AdminController;
+use Pixelabs\StoreManagement\Controllers\SynchronizationController;
 
 // Define routes
 
@@ -114,4 +115,9 @@ $router->get('/attributes/{id}/terms/{term_id}', [AttributesController::class, '
 $router->delete('/attributes/{id}/terms/{term_id}', [AttributesController::class, 'term_delete']);
 $router->post('/attributes/{id}/terms/add', [AttributesController::class, 'term_add']);
 $router->put('/attributes/{id}/terms/{term_id}', [AttributesController::class, 'term_update']);
+
+
+
+//Synchronization
+$router->get('/sync', [SynchronizationController::class, 'sync_data']);
 

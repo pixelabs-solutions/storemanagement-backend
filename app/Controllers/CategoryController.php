@@ -6,22 +6,39 @@ use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Helpers\FileHelper;
 use Pixelabs\StoreManagement\Models\Authentication;
+use Pixelabs\StoreManagement\Models\Category;
+use Pixelabs\StoreManagement\Models\Synchronize;
 
 class CategoryController
 {
     private $endpoint = 'products/categories';
     public function index()
     {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id === null)
+        {
+            if ($is_rest == 'true') {
+                http_response_code(401);
+                echo json_encode(array(
+                    "message" => "User not authenticated",
+                    "status_code" => 401
+                ));
+                exit;
+            }
+            else{
+                header('Location: /authentication/login');
+            }
+        }
         $user_level = Authentication::getUserLevelFromToken();
         if ($user_level == ADMIN) {
             include_once __DIR__ . '/../Views/admin/index.php';
         } else {
-
-        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
-        $configuration = $this->prepare_configuration($is_rest);
-        $fields = ['_fields' => 'id, name, parent, image, count'];
-        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-        $categories = Base::wc_get($configuration, $this->endpoint, $page, $fields);
+        // $configuration = $this->prepare_configuration($is_rest);
+        // $fields = ['_fields' => 'id, name, parent, image, count'];
+        // $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        // $categories = Base::wc_get($configuration, $this->endpoint, $page, $fields);
+        $categories = Category::get_all_categories($user_id);
         if($is_rest == "true")
         {
             echo json_encode($categories, JSON_UNESCAPED_UNICODE);
@@ -49,6 +66,8 @@ class CategoryController
         
         $configuration = $this->prepare_configuration($is_rest);
         $result = Base::wc_delete_by_id($configuration, $this->endpoint."/".$id);
+        Synchronize::sync_categories();
+
         echo $result;
     }
 
@@ -80,6 +99,8 @@ class CategoryController
         // echo $payload;exit;
 
         $response = Base::wc_add($configuration, $this->endpoint, $payload);
+        Synchronize::sync_categories();
+
         echo $response;
     }
 
@@ -120,6 +141,8 @@ class CategoryController
 
         
         $response = Base::wc_update($configuration, $this->endpoint."/".$id, $payload);
+        Synchronize::sync_categories();
+
         echo $response;
     }
 

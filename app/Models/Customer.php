@@ -6,7 +6,7 @@ use GuzzleHttp\Exception\RequestException;
 
 class Customer
 {
-    public static function get_customers($configuration)
+    public static function get_customers($configuration, $user_id)
     {
         $consumer_key = $configuration["consumer_key"];
         $consumer_secret = $configuration["consumer_secret"];
@@ -16,14 +16,15 @@ class Customer
 
         try 
         {
-            $response = $client->request('GET', $store_url . '/wp-json/wc/v3/customers', [
-                'auth' => [$consumer_key, $consumer_secret],
-                'query' => [
-                    'per_page' => 100
-                ]
-            ]);
+            // $response = $client->request('GET', $store_url . '/wp-json/wc/v3/customers', [
+            //     'auth' => [$consumer_key, $consumer_secret],
+            //     'query' => [
+            //         'per_page' => 100
+            //     ]
+            // ]);
         
-            $customers = json_decode($response->getBody(), true);
+            // $customers = json_decode($response->getBody(), true);
+            $customers = self::get_all_customers($user_id);
             foreach ($customers as $customer) {
                 $customerId = $customer['id'];
                 $totalAmount = 0;
@@ -32,11 +33,14 @@ class Customer
                 $averageOrderCost = 0;
     
                 try {
-                    $ordersResponse = $client->request('GET', $store_url. '/wp-json/wc/v3/orders', [
-                        'auth' => [$consumer_key, $consumer_secret],
-                        'query' => ['customer' => $customerId]
-                    ]);
-                    $orders = json_decode($ordersResponse->getBody(), true);
+
+                    $orders = Transaction::get_all_transactions($user_id);
+
+                    // $ordersResponse = $client->request('GET', $store_url. '/wp-json/wc/v3/orders', [
+                    //     'auth' => [$consumer_key, $consumer_secret],
+                    //     'query' => ['customer' => $customerId]
+                    // ]);
+                    // $orders = json_decode($ordersResponse->getBody(), true);
 
                     $orderCount = count($orders);
                     
@@ -74,4 +78,65 @@ class Customer
         }
         return ['message' => 'fetch', 'status_code' => 200, 'data' => $customerData];
     }
+
+
+
+    public static function store_customers($customers, $user_id)
+    {
+        global $connection;
+        try {
+            foreach ($customers as $customer) {
+                $stmt = $connection->prepare("
+                    INSERT INTO customers (id, user_id, first_name, last_name, email)
+                    VALUES (?, ?, ?, ?, ?)
+                ");
+                $id = $customer['id'];
+                $first_name = $customer['first_name'];
+                $last_name = $customer['last_name'];
+                $email = $customer['email'];
+
+                $stmt->bind_param(
+                    'iisss',
+                    $id,
+                    $user_id,
+                    $first_name,
+                    $last_name,
+                    $email
+                );
+
+                $stmt->execute();
+                $stmt->close();
+            }
+            
+        } catch (\mysqli_sql_exception $e) {
+            echo "store_customers() Database error: " . $e->getMessage() . "\n";
+        }
+    }
+
+    public static function get_all_customers($user_id)
+    {
+        global $connection;
+        $customers = [];
+
+        try {
+            $query = "SELECT * FROM customers WHERE user_id = $user_id";
+            $result = $connection->query($query);
+
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    $customers[] = $row;
+                }
+                $result->free();
+            } else {
+                echo "Error executing query: " . $connection->error . "\n";
+            }
+        } catch (\mysqli_sql_exception $e) {
+            echo "Database error: " . $e->getMessage() . "\n";
+        }
+
+        return $customers;
+    }
+
+
+
 }

@@ -9,6 +9,24 @@ class StatisticsController
 {
     public function index()
     {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id === null)
+        {
+            if ($is_rest == 'true') {
+                http_response_code(401);
+                echo json_encode(array(
+                    "message" => "User not authenticated",
+                    "status_code" => 401
+                ));
+                exit;
+            }
+            else{
+                header('Location: /authentication/login');
+            }
+        }
+        
+        
         $user_level = Authentication::getUserLevelFromToken();
         if ($user_level == ADMIN) {
             header("Location: /admin/index");
@@ -20,19 +38,36 @@ class StatisticsController
     public function products()
     {
 
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id === null)
+        {
+            if ($is_rest == 'true') {
+                http_response_code(401);
+                echo json_encode(array(
+                    "message" => "User not authenticated",
+                    "status_code" => 401
+                ));
+                exit;
+            }
+            else{
+                header('Location: /authentication/login');
+            }
+        }
+
+
         $user_level = Authentication::getUserLevelFromToken();
         if ($user_level == ADMIN) {
             header("Location: /admin/index");
             } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
-        $configuration = $this->prepare_configuration($is_rest);
 
         $filters = [
             'query' => $_GET['query'] ?? null,
             'date_from' => $_GET['date_from'] ?? null,
             'date_to' => $_GET['date_to'] ?? null
         ];
-        $products_stats = Statistics::get_products_stats($configuration, $filters);
+        $products_stats = Statistics::get_products_stats($filters);
         if($is_rest == 'true'){
             echo json_encode($products_stats);
         }
@@ -44,13 +79,28 @@ class StatisticsController
 
     public function orders()
     {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id === null)
+        {
+            if ($is_rest == 'true') {
+                http_response_code(401);
+                echo json_encode(array(
+                    "message" => "User not authenticated",
+                    "status_code" => 401
+                ));
+                exit;
+            }
+            else{
+                header('Location: /authentication/login');
+            }
+        }
 
         $user_level = Authentication::getUserLevelFromToken();
         if ($user_level == ADMIN) {
             header("Location: /admin/index");
             } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
-        $configuration = $this->prepare_configuration($is_rest);
 
         $filters = [
             'query' => $_GET['query'] ?? null,
@@ -58,7 +108,7 @@ class StatisticsController
             'date_to' => $_GET['date_to'] ?? null
         ];
 
-        $orders_stats = Statistics::get_orders_stats($configuration, $filters);
+        $orders_stats = Statistics::get_orders_stats($filters);
         if($is_rest == 'true'){
             echo json_encode($orders_stats);
         }
@@ -70,13 +120,28 @@ class StatisticsController
 
     public function revenue()
     {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id === null)
+        {
+            if ($is_rest == 'true') {
+                http_response_code(401);
+                echo json_encode(array(
+                    "message" => "User not authenticated",
+                    "status_code" => 401
+                ));
+                exit;
+            }
+            else{
+                header('Location: /authentication/login');
+            }
+        }
 
         $user_level = Authentication::getUserLevelFromToken();
         if ($user_level == ADMIN) {
             header("Location: /admin/index");
             } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
-        $configuration = $this->prepare_configuration($is_rest);
 
         $filters = [
             'query' => $_GET['query'] ?? null,
@@ -84,7 +149,7 @@ class StatisticsController
             'date_to' => $_GET['date_to'] ?? null
         ];
 
-        $revenue_stats = Statistics::get_revenue_stats($configuration, $filters);
+        $revenue_stats = Statistics::get_revenue_stats($filters);
         if($is_rest == 'true'){
             echo json_encode($revenue_stats);
         }
@@ -97,24 +162,40 @@ class StatisticsController
 
     public function overview()
     {
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id === null)
+        {
+            if ($is_rest == 'true') {
+                http_response_code(401);
+                echo json_encode(array(
+                    "message" => "User not authenticated",
+                    "status_code" => 401
+                ));
+                exit;
+            }
+            else{
+                header('Location: /authentication/login');
+            }
+        }
 
         $user_level = Authentication::getUserLevelFromToken();
         if ($user_level == ADMIN) {
             header("Location: /admin/index");
             } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
-        $configuration = $this->prepare_configuration($is_rest);
 
         $filters = [
-            'query' => $_GET['query'] ?? null,
-            'date_from' => $_GET['date_from'] ?? null,
-            'date_to' => $_GET['date_to'] ?? null
+            'query' => isset($_GET['query']) ? $_GET['query'] : null,
+            'date_from' => isset($_GET['date_from']) ? $_GET['date_from'] : null,
+            'date_to' => isset($_GET['date_to']) ? $_GET['date_to'] : null
         ];
+        // echo json_encode($filters);exit;
 
-        $overview_stats = Statistics::get_overview_stats($configuration, $filters);
-        $orders_stats = Statistics::get_orders_stats($configuration, $filters);
-        $revenue_stats = Statistics::get_revenue_stats($configuration, $filters);
-        $products_stats = Statistics::get_products_stats($configuration, $filters);
+        $overview_stats = Statistics::get_overview_stats($filters);
+        $orders_stats = Statistics::get_orders_stats($filters);
+        $revenue_stats = Statistics::get_revenue_stats($filters);
+        $products_stats = Statistics::get_products_stats($filters);
 
         if($is_rest == 'true'){
             echo json_encode($overview_stats);

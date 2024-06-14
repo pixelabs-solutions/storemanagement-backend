@@ -11,6 +11,24 @@ class CustomerController
     public function index()
     {
 
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id === null)
+        {
+            if ($is_rest == 'true') {
+                http_response_code(401);
+                echo json_encode(array(
+                    "message" => "User not authenticated",
+                    "status_code" => 401
+                ));
+                exit;
+            }
+            else{
+                header('Location: /authentication/login');
+            }
+        }
+
+
         $user_level = Authentication::getUserLevelFromToken();
         if ($user_level == ADMIN) {
             header("Location: /admin/index");
@@ -18,7 +36,9 @@ class CustomerController
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
         
-        $customers = Customer::get_customers($configuration);
+        $customers = Customer::get_customers($configuration, $user_id);
+        // $customers = Customer::get_all_customers($user_id);
+
         if($is_rest == "true")
         {
             echo json_encode($customers, JSON_UNESCAPED_UNICODE);

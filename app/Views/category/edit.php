@@ -284,7 +284,8 @@ function submit_edit_ctg_form() {
             body: JSON.stringify(form_data)
         })
         .then(response => {
-            // Show success message
+            if (response.ok) {
+                    // Show success message
             document.getElementById('sms_editForm_success_message').style.display = 'block';
             
 
@@ -293,6 +294,13 @@ function submit_edit_ctg_form() {
                 location.reload();
             }, 2000); // Reload after 2 seconds (adjust as needed)
             // ... (rest of the code for handling response remains the same)
+            }
+            else{
+                  // Show error message
+            document.getElementById('sms_add_editForm_error_message').style.display = 'block';
+            document.getElementById("submit_for_edit").disabled = false;
+            }
+        
         })
         .catch(error => {
           

@@ -12,7 +12,7 @@
             <div class="col-auto btn-list">
                 <a href="?query=last_week" class="btn bg-transparent btn-light shadow-none last_week" id="products_last_week" class="nav-link" data-i18n="statististics.tabs_in_select_range.week"> Last Week
                 </a>
-                <a href="?query=last_month" class="btn bg-transparent btn-light shadow-none last_month " id="products_last_month" class="nav-link" data-i18n="statististics.tabs_in_select_range.month"> Current
+                <a href="?query=current_month" class="btn bg-transparent btn-light shadow-none last_month " id="products_last_month" class="nav-link" data-i18n="statististics.tabs_in_select_range.month"> Current
                     Month </a>
                 <a href="?query=last_year" class="btn bg-transparent btn-light shadow-none last_year" id="products_last_year" data-i18n="statististics.tabs_in_select_range.year"> Last Year </a>
             </div>
@@ -30,7 +30,7 @@
                     <div class="card-body">
                         <div class="text-center">
                             <img src="assets/dist/img/cart.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
-                            <h3 class="mt-3"><?php echo $products_stats["totalProducts"]; ?></h3>
+                            <h3 class="mt-3"><?php echo number_format($products_stats["totalProducts"]); ?></h3>
                             <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card1_in_product.normal_product">Product</strong>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                     <div class="card-body">
                         <div class="text-center">
                             <img src="assets/dist/img/order.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
-                            <h3 class="mt-3"><?php echo $products_stats["normalProducts"]; ?></h3>
+                            <h3 class="mt-3"><?php echo number_format($products_stats["normalProducts"]); ?></h3>
                             <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card2_in_normal_product.normal_product_in_card2">Normal
                                 Products</strong>
                         </div>
@@ -59,7 +59,7 @@
                     <div class="card-body">
                         <div class="text-center">
                             <img src="assets/dist/img/productsonsale.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
-                            <h3 class="mt-3"><?php echo $products_stats["saleProducts"]; ?></h3>
+                            <h3 class="mt-3"><?php echo number_format($products_stats["saleProducts"]); ?></h3>
                             <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card3_in_Sale.normal_product">Product
                                 On Sale</strong>
                         </div>
@@ -74,7 +74,7 @@
                     <div class="card-body">
                         <div class="text-center">
                             <img src="assets/dist/img/cart.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
-                            <h3 class="mt-3"><?php echo $products_stats["numberOfOrders"]; ?></h3>
+                            <h3 class="mt-3"><?php echo number_format($products_stats["numberOfOrders"]); ?></h3>
                             <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card4_in_product.normal_product">Order</strong>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                     <div class="card-body">
                         <div class="text-center">
                             <img src="assets/dist/img/order.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
-                            <h3 class="mt-3"><?php echo $products_stats["totalDistinctProductsOnOrder"]; ?></h3>
+                            <h3 class="mt-3"><?php echo number_format($products_stats["totalDistinctProductsOnOrder"]); ?></h3>
                             <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card5_in_product.normal_product">Products
                                 on order</strong>
                         </div>
@@ -206,39 +206,39 @@
 
 
 <script>
-    // Function to get query parameters from the URL
-    function getQueryParams() {
-        const params = {};
-        window.location.search.substring(1).split("&").forEach(param => {
-            const [key, value] = param.split("=");
-            params[decodeURIComponent(key)] = decodeURIComponent(value);
-        });
-        return params;
-    }
+    // // Function to get query parameters from the URL
+    // function getQueryParams() {
+    //     const params = {};
+    //     window.location.search.substring(1).split("&").forEach(param => {
+    //         const [key, value] = param.split("=");
+    //         params[decodeURIComponent(key)] = decodeURIComponent(value);
+    //     });
+    //     return params;
+    // }
 
-    // Get query parameters
-    const queryParams = getQueryParams();
+    // // Get query parameters
+    // const queryParams = getQueryParams();
 
-    if (queryParams.query === 'last_week') {
-        // Add the .filter_tab_active class to the element with the ID 'last_week'
-        const elements = document.querySelectorAll('.last_week');
-        elements.forEach(element => {
-            element.classList.add('filter_tab_active');
-        });
-    } else if (queryParams.query === 'last_month') {
-        // Add the .filter_tab_active class to the element with the ID 'current_month'
+    // if (queryParams.query === 'last_week') {
+    //     // Add the .filter_tab_active class to the element with the ID 'last_week'
+    //     const elements = document.querySelectorAll('.last_week');
+    //     elements.forEach(element => {
+    //         element.classList.add('filter_tab_active');
+    //     });
+    // } else if (queryParams.query === 'last_month') {
+    //     // Add the .filter_tab_active class to the element with the ID 'current_month'
 
-        const elements = document.querySelectorAll('.last_month');
-        elements.forEach(element => {
-            element.classList.add('filter_tab_active');
-        });
-    } else if (queryParams.query === 'last_year') {
-        // Add the .filter_tab_active class to the element with the ID 'last_year'
-        const elements = document.querySelectorAll('.last_year');
-        elements.forEach(element => {
-            element.classList.add('filter_tab_active');
-        });
-    }
+    //     const elements = document.querySelectorAll('.last_month');
+    //     elements.forEach(element => {
+    //         element.classList.add('filter_tab_active');
+    //     });
+    // } else if (queryParams.query === 'last_year') {
+    //     // Add the .filter_tab_active class to the element with the ID 'last_year'
+    //     const elements = document.querySelectorAll('.last_year');
+    //     elements.forEach(element => {
+    //         element.classList.add('filter_tab_active');
+    //     });
+    // }
 </script>
 <script>
             function getQueryParams() {
@@ -262,7 +262,7 @@
 
             
 
-        } else if (queryParamsProducts.query === 'last_month') {
+        } else if (queryParamsProducts.query === 'current_month') {
             // Add the .sms_w_date_active class to the element with the ID 'current_month'
             document.getElementById('overview_last_month').classList.add('stats_filters_active');
             document.getElementById('products_last_month').classList.add('stats_filters_active');

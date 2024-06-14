@@ -41,7 +41,7 @@ class Database
     private function tablesExist()
     {
         //List all tables in array
-        $tables = ['users', 'user_meta', 'user_configurations', 'goals', 'categories', 'products', 'inventory_settings', 'coupons', 'customers', 'transactions', 'request_tracking'];
+        $tables = ['users', 'user_meta', 'user_configurations', 'goals', 'categories', 'products', 'inventory_settings', 'coupons', 'customers', 'transactions', 'request_tracking', 'currencies', 'attributes'];
         $tableNameList = "'" . implode("', '", $tables) . "'"; // Create a string for the SQL query
         $query = "SELECT COUNT(*) AS count FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE() AND table_name IN ($tableNameList)";
         $result = $this->connection->query($query);
@@ -155,82 +155,101 @@ class Database
         ";
         $this->connection->query($goalTable);
 
-        $categoriesTable = "CREATE TABLE IF NOT EXISTS categories
-        (
-            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(55),
-            parent_category_id INT,
-            image VARCHAR(255)
-        )";
+        $categoriesTable = "CREATE TABLE IF NOT EXISTS `categories` (
+            `user_id` int(11) NOT NULL,
+            `id` int(11) NOT NULL,
+            `name` varchar(255) NOT NULL,
+            `parent` int(11) DEFAULT NULL,
+            `image` text DEFAULT NULL,
+            `count` int(11) DEFAULT NULL
+            )";
         $this->connection->query($categoriesTable);
 
-        $productsTable = "CREATE TABLE IF NOT EXISTS products
-        (
-            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(255),
-            units_in_stock INT(6),
-            description VARCHAR(255),
-            thumbnail VARCHAR(255),
-            sale_price FLOAT,
-            normal_price FLOAT,
-            photo_gallery TEXT,
-            category_id INT,
-            product_type ENUM('normal', 'variation') NOT NULL DEFAULT 'normal'
-        )";
+        $productsTable = "CREATE TABLE IF NOT EXISTS `products` (
+             `user_id` int(11) NOT NULL,
+            `id` int(11) NOT NULL,
+            `name` varchar(255) NOT NULL,
+            `images` text DEFAULT NULL,
+            `categories` text DEFAULT NULL,
+            `regular_price` decimal(10,2) DEFAULT NULL,
+            `sale_price` decimal(10,2) DEFAULT NULL,
+            `stock_quantity` int(11) DEFAULT NULL,
+            `description` text DEFAULT NULL,
+            `type` varchar(50) DEFAULT NULL,
+            `attributes` text DEFAULT NULL,
+            `variations` text DEFAULT NULL,
+            `date_created` DATETIME
+            )";
         $this->connection->query($productsTable);
 
+        $currencies = "CREATE TABLE IF NOT EXISTS currencies (
+            `user_id` int(11) NOT NULL,
+            `code` varchar(255) NOT NULL,
+            `name` varchar(255) NOT NULL,
+            `symbol` varchar(255) NOT NULL
+        )";
+        $this->connection->query($currencies);
 
         $inventorySettingsTable = "CREATE TABLE IF NOT EXISTS inventory_settings
         (
-            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            user_id INT NOT NULL UNIQUE,
-            is_inventory_management_enabled BOOLEAN,
-            is_out_of_stock_alert_enabled BOOLEAN,
-            is_low_stock_alert_enabled BOOLEAN,
-            email VARCHAR(255),
-            out_of_stock_threshold INT(6),
-            low_stock_threshold INT(6)
+            `user_id` int(11) NOT NULL,            
+            `id` VARCHAR(255) NOT NULL,
+            `value` VARCHAR(255) NOT NULL
         )";
         $this->connection->query($inventorySettingsTable);
 
         $couponsTable = "CREATE TABLE IF NOT EXISTS coupons
         (
-            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            coupon_code VARCHAR(255) NOT NULL,
-            coupon_type VARCHAR(255),
-            discount_type VARCHAR(255), 
-            discount_amount FLOAT,
-            expiry_date DATE 
+            `id` int(11) NOT NULL,
+            `user_id` int(11) NOT NULL,            
+            `code` VARCHAR(255) NOT NULL,
+            `discount_type` VARCHAR(255),
+            `amount` int(11) NOT NULL,
+            `usage_limit` int(11) NOT NULL,
+            `usage_count` int(11) NOT NULL,
+            `date_expires` DATE 
         )";
         $this->connection->query($couponsTable);
 
         $customersTable = "CREATE TABLE IF NOT EXISTS customers
         (
-            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(55) NOT NULL,
-            email VARCHAR(55) NOT NULL
+            `id` int(11) NOT NULL,
+            `user_id` int(11) NOT NULL,
+            `first_name` VARCHAR(55) NOT NULL,
+            `last_name` VARCHAR(55) NOT NULL,
+            `email` VARCHAR(55) NOT NULL
         )";
         $this->connection->query($customersTable);
 
-        $transactionsTable = "CREATE TABLE IF NOT EXISTS transactions
-        (
-            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            customer_id INT NOT NULL,
-            product_id INT NOT NULL,
-            status VARCHAR(55),
-            order_date DATE,
-            sum FLOAT,
-            source VARCHAR(55),
-            shipping_address VARCHAR(255)
+        $transactionsTable = "CREATE TABLE IF NOT EXISTS transactions (
+            id INT PRIMARY KEY,
+            user_id int(11) NOT NULL,
+            status VARCHAR(255),
+            date_created DATETIME,
+            shipping_total DECIMAL(10, 2),
+            customer_id int(11) NOT NULL,
+            total DECIMAL(10, 2),
+            billing TEXT,
+            city varchar(50) DEFAULT NULL,
+            meta_data TEXT,
+            line_items TEXT
         )";
         $this->connection->query($transactionsTable);
 
-        $requestTrackingTable = "CREATE TABLE `request_tracking` (
+        $requestTrackingTable = "CREATE TABLE IF NOT EXISTS `request_tracking` (
             `id` int(11) NOT NULL,
             `ip_address` varchar(45) NOT NULL,
             `request_date` date NOT NULL,
             `is_mobile` tinyint(1) NOT NULL DEFAULT 0
         )";
         $this->connection->query($requestTrackingTable);
+
+        $localAttributes = "CREATE TABLE IF NOT EXISTS `attributes` (
+            `user_id` int(11) NOT NULL,
+            `id` int(11) NOT NULL,
+            `name` varchar(45) NOT NULL,
+            `type` varchar(45) NOT NULL
+        )";
+        $this->connection->query($localAttributes);
     }
 }

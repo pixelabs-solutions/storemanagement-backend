@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../partials/header.php';
 
-//  var_dump($products);
+//  var_dump($currency);
 //  foreach($products as $product){
 //     if($product['type'] == "variable"){
 //         var_dump($product);
@@ -285,9 +285,12 @@ require_once __DIR__ . '/../partials/header.php';
         <div class="row col-12 d-flex justify-content-between bg-white p-3 m-0 overflow-hidden"
             style="border-radius:20px;">
             <div class="col-sm-10 d-flex flex-column flex-md-row gap-2 col-lg-6 m-0 ">
-                <button class="rounded-4 border-0 p-2" data-bs-toggle="modal" data-bs-target="#modal-full-width" style="background-color:#4987D870; " data-i18n="product_managment.nav.new_product_btn"></button>
-                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870;" data-bs-toggle="modal" data-bs-target="#modal-Category-large" data-i18n="product_managment.nav.category_product_btn"></button>
-                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; " data-bs-toggle="modal" data-bs-target="#modal-large" data-i18n="product_managment.nav.future_product_btn"></button>
+
+                <button class="rounded-4 border-0 p-2" data-bs-toggle="modal" data-bs-target="#modal-full-width" style="background-color:#4987D870; " data-i18n="product_managment.nav.new_product_btn">Add a new
+                    product +</button>
+                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870;" data-bs-toggle="modal" data-bs-target="#modal-Category-large" data-i18n="product_managment.nav.category_product_btn">Category management</button>
+                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; " data-bs-toggle="modal" data-bs-target="#modal-large" data-i18n="product_managment.nav.future_product_btn">Feature
+                    management</button>
 
             </div>
             <div class="col-lg-2 col-md-6 col-sm-11  mt-3 mt-lg-0">
@@ -558,22 +561,110 @@ require_once __DIR__ . '/../partials/header.php';
                 style="height: 400px; overflow-y:scroll">
                 <div class="sms_mu_main_bg_white position-relative  ">
 
-                <table class="sms_mu_table_product rounded-4" id='sms_products_m_products_table'>
-    <?php
-    $i = 0;
-    foreach ($categories as $category) {
-        $parentCategories_array[$i]['id'] = $category['id'];
-        $parentCategories_array[$i]['name'] = $category['name'];
-        if ($category['parent'] != 0) {
-            $parentCategories_array[$i]['parent'] = $category['parent'];
-        } else {
-            $parentCategories_array[$i]['parent'] = "-";
-        }
-        if (isset($category['image']['src'])) {
-            $parentCategories_array[$i]['src'] = $category['image']['src'];
-        } else {
-            $parentCategories_array[$i]['src'] = "https://placehold.co/400x400?text=No%20Image%20Found";
-        }
+                    <table class="sms_mu_table_product rounded-4" id='sms_products_m_products_table'>
+                        <?php
+                        $i = 0;
+                        foreach ($categories as $category) {
+                            $parentCategories_array[$i]['id'] = $category['id'];
+                            $parentCategories_array[$i]['name'] = $category['name'];
+                            if ($category['parent'] != 0) {
+                                $parentCategories_array[$i]['parent'] = $category['parent'];
+                            } else {
+                                $parentCategories_array[$i]['parent'] = "-";
+                            }
+                            if (isset($category['image']['src'])) {
+                                $parentCategories_array[$i]['src'] = $category['image']['src'];
+                            } else {
+                                $parentCategories_array[$i]['src'] = "https://placehold.co/400x400?text=No%20Image%20Found";
+                            }
+
+                            $parentCategories_json = json_encode($parentCategories_array);
+                            $i++;
+                        } ?>
+                        <?php foreach ($products as $product) {
+                            $product_json = json_encode($product);
+                            if ($product['type'] == 'simple') {
+                                if (isset($product['images'][0]['src'])) {
+                                    $prodimage = $product['images'][0]['src'];
+                                } else {
+                                    $prodimage = "https://placehold.co/400x400?text=No%20Image%20Found";
+                                }
+                        ?>
+                                <tr class="sms_mu_tr_product category_row" data-name="<?php echo $product['name']; ?>" data-categories="<?php echo implode(',', array_column($product['categories'], 'name')); ?>">
+                                    <td>
+                                        <img class="sms_product_img" height="100px" width="100px" src="<?php echo $prodimage; ?>" alt="">
+                                    </td>
+                                    <td class=""><span style="font-weight:bold">Product name:</span>
+                                        <?php echo $product['name']; ?></td>
+                                    <!-- <td><span style="font-weight:bold">Category:</span>
+                                            <?php
+                                            $count = count($product['categories']);
+                                            $const = 0;
+                                            foreach ($product['categories'] as $key => $category) {
+                                                echo $category['name'];
+                                                // Check if it's not the last element and there are more than 1 elements
+                                                if ($const < $count - 1 && $count > 1) {
+                                                    echo ', ';
+                                                }
+                                                $const++;
+                                            }
+                                            ?>
+
+                                        </td> -->
+                                    <td><span style="font-weight:bold">Category:</span>
+                                        <?php echo implode(', ', array_column($product['categories'], 'name')); ?></td>
+                                    <td><span style="font-weight:bold">Price:</span>
+                                        <?php echo $product['regular_price']; ?>
+                                        <?php echo $currency[0]['symbol']; ?>
+                                    </td>
+                                    <td><span style="font-weight:bold  ">Stock:</span>
+                                        <span class="stock_quantity_class">
+                                            <?php echo $product['stock_quantity']; ?>
+                                        </span>
+                                    </td>
+                                    <td><span style="font-weight:bold">Number of views:
+                                        </span>250
+                                    </td>
+                                    <td>
+                                        <span data-bs-toggle="modal" data-bs-target="#edit-regular-modal-full-width" data-bs-productJson="<?php echo htmlspecialchars($product_json); ?>" data-bs-categoriesJson="<?php echo htmlspecialchars($parentCategories_json); ?>">
+                                            <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M29.475 1.35627C28.1063 -0.0124756 25.8937 -0.0124756 24.525 1.35627L22.6437 3.23127L28.7625 9.35003L30.6437 7.46877C32.0125 6.10002 32.0125 3.88752 30.6437 2.51877L29.475 1.35627ZM10.775 15.1063C10.3937 15.4875 10.1 15.9563 9.93125 16.475L8.08125 22.025C7.9 22.5625 8.04375 23.1563 8.44375 23.5625C8.84375 23.9688 9.4375 24.1063 9.98125 23.925L15.5312 22.075C16.0438 21.9063 16.5125 21.6125 16.9 21.2313L27.3563 10.7688L21.2313 4.64377L10.775 15.1063ZM6 4.00002C2.6875 4.00002 0 6.68752 0 10V26C0 29.3125 2.6875 32 6 32H22C25.3125 32 28 29.3125 28 26V20C28 18.8938 27.1063 18 26 18C24.8937 18 24 18.8938 24 20V26C24 27.1063 23.1063 28 22 28H6C4.89375 28 4 27.1063 4 26V10C4 8.89377 4.89375 8.00002 6 8.00002H12C13.1062 8.00002 14 7.10627 14 6.00002C14 4.89377 13.1062 4.00002 12 4.00002H6Z" fill="black" />
+                                            </svg>
+                                        </span>
+
+                                    </td>
+                                </tr>
+                            <?php }
+                            if ($product['type'] == 'variable') { ?>
+                                <tr class="sms_mu_tr_product category_row" data-name="<?php echo $product['name']; ?>" data-categories="<?php echo implode(',', array_column($product['categories'], 'name')); ?>">
+                                    <td>
+                                        <img class="sms_product_img" src="/assets/dist/img/products/bag.png" alt="">
+
+                                    </td>
+                                    <td class=""><span style="font-weight:bold">Product name:</span>
+                                        <?php echo $product['name']; ?></td>
+                                    <!-- <td><span style="font-weight:bold">Category:</span> <?php
+                                                                                                $count = count($product['categories']);
+                                                                                                $const = 0;
+                                                                                                foreach ($product['categories'] as $key => $category) {
+                                                                                                    echo $category['name'];
+                                                                                                    // Check if it's not the last element and there are more than 1 elements
+                                                                                                    if ($const < $count - 1 && $count > 1) {
+                                                                                                        echo ', ';
+                                                                                                    }
+                                                                                                    $const++;
+                                                                                                }
+                                                                                                ?>
+                                        </td> -->
+                                    <td><span style="font-weight:bold">Category:</span>
+                                        <?php echo implode(', ', array_column($product['categories'], 'name')); ?></td>
+                                    <td><span style="font-weight:bold">Price:</span>
+                                        <?php echo $product['regular_price']; ?>
+                                        <?php echo $currency[0]['symbol']; ?>
+                                    </td>
+                                    <td><span style="font-weight:bold stock_quantity_class"></span> <span class="stock_quantity_class">
+                                            <strong>Stock:</strong> <?php echo $product['stock_quantity']; ?>
+                                        </span>
 
         $parentCategories_json = json_encode($parentCategories_array);
         $i++;
