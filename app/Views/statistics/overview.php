@@ -96,7 +96,7 @@ require_once __DIR__ . '/../partials/header.php';
                     data-i18n="statististics.tabs_in_static.tab_overview" >Overview</a>
             </li>
             <li class="nav-item mb-2">
-                <a href="#tabs_product" id="tabs_product" class="nav-link_stats sms_w_item_deactive_stats justify-content-center" data-bs-toggle="tab"
+                <a href="#tabs_product"  class="nav-link_stats sms_w_item_deactive_stats justify-content-center" data-bs-toggle="tab"
                     style=" border-radius:20px; padding: 5px 30px; width:150px;  color:black;text-decoration: none"        data-i18n="statististics.tabs_in_static.tab_Products">Products</a>
             </li>
             <li class="nav-item mb-2">
@@ -144,7 +144,7 @@ require_once __DIR__ . '/../partials/header.php';
 
 
 <script>
-            function getQueryParams() {
+            function OverviewGetQueryParams() {
             const params = {};
             window.location.search.substring(1).split("&").forEach(param => {
                 const [key, value] = param.split("=");
@@ -154,7 +154,7 @@ require_once __DIR__ . '/../partials/header.php';
         }
 
         // Get query parameters
-        var queryParams = getQueryParams();
+        var queryParams = OverviewGetQueryParams();
 
      if (queryParams.query === 'last_week') {
             // Add the .sms_w_date_active class to the element with the ID 'last_week'
@@ -405,8 +405,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
         </script>
-          <!-- <script>
-function getQueryParams() {
+          <script>
+function OverviewGetQueryParams() {
     const params = {};
     window.location.search.substring(1).split("&").forEach(param => {
         const [key, value] = param.split("=");
@@ -416,8 +416,8 @@ function getQueryParams() {
 }
 
 // Example of dynamic data update
-async function fetchAndFormatData() {
-    let queryParamsForGraph = getQueryParams().query;
+async function fetchAndFormatDataOfOverview() {
+    let queryParamsForGraph = OverviewGetQueryParams().query;
 
     // Default to 'last_week' if no query parameter is provided
     if (!queryParamsForGraph) {
@@ -428,8 +428,8 @@ async function fetchAndFormatData() {
     const response = await fetch(`http://storemanagement.test/statistics/overview?query=${queryParamsForGraph}&is_rest=true`);
     const data = await response.json();
 
-    // Prepare the dynamicData object
-    const dynamicData = {
+    // Prepare the overviewDynamicData object
+    const overviewDynamicData = {
         netIncome: [],
         orderAverage: [],
         totalRevenue: [],
@@ -441,19 +441,19 @@ async function fetchAndFormatData() {
     // Use the same dates for each data point
     const dates = ['2024-06-10']; // Placeholder date, replace if actual dates are provided
 
-    dynamicData.netIncome.push(data.netIncome || 0);
-    dynamicData.orderAverage.push(data.orderAverage || 0);
-    dynamicData.totalRevenue.push(data.totalRevenue || 0);
-    dynamicData.totalShipments.push(data.totalShipments || 0);
-    dynamicData.totalrehearsals.push(data.totalrehearsals || 0);
+    overviewDynamicData.netIncome.push(data.netIncome || 0);
+    overviewDynamicData.orderAverage.push(data.orderAverage || 0);
+    overviewDynamicData.totalRevenue.push(data.totalRevenue || 0);
+    overviewDynamicData.totalShipments.push(data.totalShipments || 0);
+    overviewDynamicData.totalrehearsals.push(data.totalrehearsals || 0);
 
-    console.log(dynamicData);
+    console.log(overviewDynamicData);
 
-    return [dates, dynamicData];
+    return [overviewDates, overviewDynamicData];
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
-    var [dates, dynamicData] = await fetchAndFormatData();
+    var [overviewDates, overviewDynamicData] = await fetchAndFormatDataOfOverview();
 
     // Initialize the chart
     var chart = new ApexCharts(document.getElementById('chart-combination'), {
@@ -519,7 +519,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             axisBorder: {
                 show: false,
             },
-            categories: dates,
+            categories: overviewDates,
         },
         yaxis: {
             labels: {
@@ -553,17 +553,17 @@ document.addEventListener("DOMContentLoaded", async function () {
         }]);
     }
 
-    console.log(dynamicData);
+    console.log(overviewDynamicData);
 
     // Call the update function with the dynamic data
-    updateChartData(dynamicData);
+    updateChartData(overviewDynamicData);
 });
-</script> -->
+</script>
 
 
 <script>
                         // // Function to get query parameters from the URL
-                        // function getQueryParams() {
+                        // function OverviewGetQueryParams() {
                         //     const params = {};
                         //     window.location.search.substring(1).split("&").forEach(param => {
                         //         const [key, value] = param.split("=");
@@ -573,7 +573,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                         // }
 
                         // // Get query parameters
-                        // const queryParams = getQueryParams();
+                        // const queryParams = OverviewGetQueryParams();
 
                         // if (queryParams.query === 'last_week') {
                         //     // Add the .filter_tab_active class to the element with the ID 'last_week'

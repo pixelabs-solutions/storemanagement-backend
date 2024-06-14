@@ -143,7 +143,7 @@ function getQueryParams() {
 }
 
 // Example of dynamic data update
-async function fetchAndFormatData() {
+async function fetchAndFormatDataOfRevenue() {
     let queryParamsForGraph = getQueryParams().query;
 
     // Default to 'last_week' if no query parameter is provided
@@ -157,30 +157,35 @@ async function fetchAndFormatData() {
 
     // Prepare the dynamicData object
     const dynamicData = {
-        netIncome: [],
-        orderAverage: [],
         totalRevenue: [],
+        totalRehearsals: [],
+        orderAverage: [],
         totalShipments: [],
-        totalrehearsals: []
+        netIncome: [],
+        numberOfOrders: [],
+        totalDistinctProductsOnOrder: []
     };
 
-    // Assuming the API response provides a single set of values
-    // Use the same dates for each data point
-    const dates = ['2024-06-10']; // Placeholder date, replace if actual dates are provided
+    // Extract the dates from the data
+    const dates = Object.keys(data.totalRevenue.byDate).sort();
 
-    dynamicData.netIncome.push(data.netIncome || 0);
-    dynamicData.orderAverage.push(data.orderAverage || 0);
-    dynamicData.totalRevenue.push(data.totalRevenue || 0);
-    dynamicData.totalShipments.push(data.totalShipments || 0);
-    dynamicData.totalrehearsals.push(data.totalrehearsals || 0);
-
+    // Iterate over each date and push the values to dynamicData
+    dates.forEach(date => {
+        dynamicData.totalRevenue.push(data.totalRevenue.byDate[date] || 0);
+        dynamicData.totalRehearsals.push(data.totalRehearsals.byDate[date] || 0);
+        dynamicData.orderAverage.push(data.orderAverage.byDate[date] || 0);
+        dynamicData.totalShipments.push(data.totalShipments.byDate[date] || 0);
+        dynamicData.netIncome.push(data.netIncome.byDate[date] || 0);
+        dynamicData.numberOfOrders.push(data.numberOfOrders.byDate[date] || 0);
+        dynamicData.totalDistinctProductsOnOrder.push(data.totalDistinctProductsOnOrder.byDate[date] || 0);
+    });
     console.log(dynamicData);
 
     return [dates, dynamicData];
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
-    var [dates, dynamicData] = await fetchAndFormatData();
+    var [dates, dynamicData] = await fetchAndFormatDataOfRevenue();
 
     // Initialize the chart
     var chart = new ApexCharts(document.getElementById('chart-combination-3'), {
@@ -209,19 +214,25 @@ document.addEventListener("DOMContentLoaded", async function () {
             opacity: 1,
         },
         series: [{
-            name: "Net Income",
+            name: "Total Revenue",
+            data: []
+        }, {
+            name: "Total Rehearsals",
             data: []
         }, {
             name: "Order Average",
             data: []
         }, {
-            name: "Total Revenue",
-            data: []
-        }, {
             name: "Total Shipments",
             data: []
         }, {
-            name: "Total Rehearsals",
+            name: "Net Income",
+            data: []
+        }, {
+            name: "Number of Orders",
+            data: []
+        }, {
+            name: "Total Distinct Products On Order",
             data: []
         }],
         tooltip: {
@@ -253,7 +264,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 padding: 4
             },
         },
-        colors: ['#627e0c', '#8b59e4', '#9215a8', '#dc2285', '#ac3f4f'],
+        colors: ['#627e0c', '#8b59e4', '#9215a8', '#dc2285', '#ac3f4f', '#7bc043', '#041f60'],
         legend: {
             show: false,
         },
@@ -263,20 +274,26 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Function to update the chart with new data
     function updateChartData(newData) {
         chart.updateSeries([{
-            name: "Net Income",
-            data: newData.netIncome
+            name: "Total Revenue",
+            data: newData.totalRevenue
+        }, {
+            name: "Total Rehearsals",
+            data: newData.totalRehearsals
         }, {
             name: "Order Average",
             data: newData.orderAverage
         }, {
-            name: "Total Revenue",
-            data: newData.totalRevenue
-        }, {
             name: "Total Shipments",
             data: newData.totalShipments
         }, {
-            name: "Total Rehearsals",
-            data: newData.totalrehearsals
+            name: "Net Income",
+            data: newData.netIncome
+        }, {
+            name: "Number of Orders",
+            data: newData.numberOfOrders
+        }, {
+            name: "Total Distinct Products On Order",
+            data: newData.totalDistinctProductsOnOrder
         }]);
     }
 

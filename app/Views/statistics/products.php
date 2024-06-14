@@ -132,7 +132,7 @@
                         }
                 
         // Example of dynamic data update
-        async function fetchAndFormatData() {
+        async function fetchAndFormatDataOfProducts() {
             let queryParamsForGraph = getQueryParams().query;
 
 // Default to 'last_week' if no query parameter is provided
@@ -141,7 +141,7 @@ if (!queryParamsForGraph) {
 }
 console.log('params', queryParamsForGraph);
 
-const response = await fetch(`http://storemanagement.test/statistics/revenue?query=${queryParamsForGraph}&is_rest=true`);
+const response = await fetch(`http://storemanagement.test/statistics/products?query=${queryParamsForGraph}&is_rest=true`);
 const data = await response.json();
 
     // Prepare the dynamicData object
@@ -171,7 +171,7 @@ const data = await response.json();
 
     document.addEventListener("DOMContentLoaded", async function () {
 
-var [dates,dynamicData] = await fetchAndFormatData();
+var [dates,dynamicData] = await fetchAndFormatDataOfProducts();
 
 
         // Initialize the chart
