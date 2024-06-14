@@ -408,59 +408,113 @@ class Statistics
         }
     }
 
-
     public static function get_revenue_stats($filters = []) {
         global $connection;
-        $date_range = $filters ? self::getDateRange($filters) : [];
+        $date_range = self::getDateRange($filters);
         try {
-            $user_id = Authentication::getUserIdFromToken();    
-            
-            $order_total_query = "SELECT COUNT(*) AS transaction_count FROM transactions WHERE user_id = $user_id";
-            if ($date_range != null && !empty($date_range)) {
-                $order_total_query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
-            }
-            $order_total_result = $connection->query($order_total_query);
-            $order_total_row = $order_total_result->fetch_assoc();
-
-            $totalOrders = $order_total_row['transaction_count'];
-
-            // $totalOrders = count($orders);
-
-
-            $query = "SELECT *  FROM transactions WHERE user_id = $user_id";
-            if ($date_range != null && !empty($date_range)) {
-                $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
-            }
-            $result = $connection->query($query);
-
-            $totalRevenue = 0;
-            $totalShipments = 0;
-            $totalrehearsals = 0;
-            while ($order = $result->fetch_assoc()) {
-                $totalRevenue += $order['total'];
-                $totalShipments += $order['shipping_total']; 
-
-                if($order['status'] == "cancelled"){
-                    $totalrehearsals += $order['total'];
+            $user_id = Authentication::getUserIdFromToken();
+    
+            // Initialize months array based on date range
+            $months = [];
+            if (!empty($date_range)) {
+                if ($filters['query'] == 'last_week') {
+                    $groupBy = 'DAY';
+                    $period = new \DatePeriod(
+                        new \DateTime($date_range['after']),
+                        new \DateInterval('P1D'),
+                        (new \DateTime($date_range['before']))->modify('+1 day')
+                    );
+                    foreach ($period as $date) {
+                        $formattedDate = $date->format('Y-m-d');
+                        $months[$formattedDate] = 0;
+                    }
+                } elseif ($filters['query'] == 'current_month') {
+                    $groupBy = 'WEEK';
+                    $start = new \DateTime($date_range['after']);
+                    $end = new \DateTime($date_range['before']);
+                    $end = $end->modify('+1 day');
+                    $interval = new \DateInterval('P1W');
+                    $period = new \DatePeriod($start, $interval, $end);
+                    $weekNumber = 1;
+                    foreach ($period as $date) {
+                        $periodKey = self::ordinal($weekNumber) . ' week of ' . $date->format('F');
+                        $months[$periodKey] = 0;
+                        $weekNumber++;
+                    }
+                } elseif ($filters['query'] == 'last_year') {
+                    $groupBy = 'MONTH';
+                    $start = new \DateTime($date_range['after']);
+                    $end = new \DateTime($date_range['before']);
+                    $interval = new \DateInterval('P1M');
+                    $period = new \DatePeriod($start, $interval, $end);
+                    foreach ($period as $date) {
+                        $month = $date->format('Y-m');
+                        $months[$month] = 0;
+                    }
+                } elseif (!empty($filters['date_from']) && !empty($filters['date_to'])) {
+                    $groupBy = 'DAY';
+                    $period = new \DatePeriod(
+                        new \DateTime($date_range['after']),
+                        new \DateInterval('P1D'),
+                        (new \DateTime($date_range['before']))->modify('+1 day')
+                    );
+                    foreach ($period as $date) {
+                        $formattedDate = $date->format('Y-m-d');
+                        $months[$formattedDate] = 0;
+                    }
                 }
             }
     
-            $orderAverage = $totalOrders > 0 ? round($totalRevenue / $totalOrders) : 0;
-            $totalcuttings = $totalShipments + $totalrehearsals;
-            $netIncome = $totalRevenue - $totalcuttings;
-    
-            return [
-                'totalRevenue' => $totalRevenue,
-                'totalrehearsals' => $totalrehearsals,
-                'orderAverage' => $orderAverage,
-                'totalShipments' => $totalShipments,
-                'netIncome' => $netIncome
+            // Initialize response structure
+            $response = [
+                'totalRevenue' => ['total' => 0, 'byDate' => $months],
+                'totalRehearsals' => ['total' => 0, 'byDate' => $months],
+                'orderAverage' => ['total' => 0, 'byDate' => $months],
+                'totalShipments' => ['total' => 0, 'byDate' => $months],
+                'netIncome' => ['total' => 0, 'byDate' => $months],
+                'numberOfOrders' => ['total' => 0, 'byDate' => $months],
+                'totalDistinctProductsOnOrder' => ['total' => 0, 'byDate' => $months]
             ];
+    
+            // SQL query to get revenue and group by the specified period
+            $query = "SELECT DATE_FORMAT(date_created, '%Y-%m-%d') as day, DATE_FORMAT(date_created, '%Y-%m') as month, WEEK(date_created, 3) as week, SUM(total) as total_revenue FROM transactions WHERE user_id = $user_id";
+            if (!empty($date_range)) {
+                $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+            }
+            $query .= " GROUP BY ";
+            if ($groupBy == 'DAY') {
+                $query .= "day";
+            } elseif ($groupBy == 'WEEK') {
+                $query .= "week";
+            } elseif ($groupBy == 'MONTH') {
+                $query .= "month";
+            }
+            $result = $connection->query($query);
+            
+            while ($row = $result->fetch_assoc()) {
+                if ($groupBy == 'DAY') {
+                    $periodKey = $row['day'];
+                } elseif ($groupBy == 'WEEK') {
+                    $week = $row['week'] - intval((new \DateTime($date_range['after']))->format('W')) + 1;
+                    $periodKey = self::ordinal($week) . ' week of ' . (new \DateTime($row['day']))->format('F');
+                } elseif ($groupBy == 'MONTH') {
+                    $periodKey = $row['month'];
+                }
+                if (isset($response['totalRevenue']['byDate'][$periodKey])) {
+                    $response['totalRevenue']['byDate'][$periodKey] += floatval($row['total_revenue']);
+                    $response['totalRevenue']['total'] += floatval($row['total_revenue']);
+                }
+            }
+    
+    
+            return $response;
         } catch (\Exception $e) {
-            echo 'Error fetching orders: ' . $e->getMessage();
+            echo 'Error: ' . $e->getMessage();
             return [];
         }
     }
+    
+    
     
     
     public static function get_overview_stats($filters = [])
