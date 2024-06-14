@@ -634,7 +634,7 @@ require_once __DIR__ . '/../partials/header.php';
 
                                     </td>
                                 </tr>
-                            <?php }
+                            <?php }}
                             if ($product['type'] == 'variable') { ?>
                                 <tr class="sms_mu_tr_product category_row" data-name="<?php echo $product['name']; ?>" data-categories="<?php echo implode(',', array_column($product['categories'], 'name')); ?>">
                                     <td>
@@ -665,7 +665,7 @@ require_once __DIR__ . '/../partials/header.php';
                                     <td><span style="font-weight:bold stock_quantity_class"></span> <span class="stock_quantity_class">
                                             <strong>Stock:</strong> <?php echo $product['stock_quantity']; ?>
                                         </span>
-
+<?php 
         $parentCategories_json = json_encode($parentCategories_array);
         $i++;
     }
