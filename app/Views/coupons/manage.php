@@ -88,56 +88,72 @@
                         <!-- header -->
                         <div class="row gx-3 ">
                             <div class="col-md-4 mb-3">
-                                <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.cupon_code">The coupon
+                                <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold"
+                                    data-i18n="popoups.added_new_cupons.cupon_code">The coupon
                                     code</label>
-                                <input type="text" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA" placeholder="Coupon Code" id='sms_The_coupon_code'>
+                                <input type="text" class="form-control rounded-3 p-3 fw-bold"
+                                    style="background-color: #EAEAEA" placeholder="Coupon Code"
+                                    id='sms_The_coupon_code'>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="example-select fs-3 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.discount_type">Discount type
-                                    (amount/percentage)
-                                </label>
-                                <div style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
-                                    <div class="col-md-12 rounded-4 bg-transparent h-100 ">
-                                        <select id="sms_w_parent_ctg" class="form-select form-select-md" style="width: 100%; padding-right: 20px; border: none; background: transparent; height:100%;">
+                                <label for="example-select" class="form-label fs-3 fw-bold"
+                                    data-i18n="popoups.added_new_cupons.discount_type">Discount type
+                                    (amount/percentage)</label>
+                                <div
+                                    style="background-color: #eaeaea; position: relative; border-radius: 12px; height: 55px;">
+                                    <div class="col-md-12 rounded-4 bg-transparent h-100">
+                                        <select id="sms_w_parent_ctg" class="form-select form-select-md"
+                                            style="width: 100%; padding-right: 20px; border: none; background: transparent; height: 100%;"
+                                            onchange="updateInputType()">
                                             <option value="percent">percentage</option>
                                             <option value="fixed_cart">amount</option>
                                         </select>
-
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.amounth_discount">The amount
-                                    of the discount </label>
-                                <input type="number" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA" placeholder="Amounth of Discount" id="sms_amount_of_the_discount">
+                                <label for="sms_amount_of_the_discount" class="form-label fs-2 fw-bold"
+                                    data-i18n="popoups.added_new_cupons.amounth_discount">The amount of the
+                                    discount</label>
+                                <input type="number" class="form-control rounded-3 p-3 fw-bold"
+                                    style="background-color: #EAEAEA" placeholder="Amount of Discount"
+                                    id="sms_amount_of_the_discount">
                             </div>
                         </div>
                         <!-- Adding terms to the feature -->
                         <div class="row gx-3 ">
                             <div class="col-md-6 mb-3">
-                                <label for="example-date-input" class="form-label fs-4 fw-bold" data-i18n="popoups.added_new_cupons.expiry_date">Coupon expiration
+                                <label for="example-date-input" class="form-label fs-4 fw-bold"
+                                    data-i18n="popoups.added_new_cupons.expiry_date">Coupon expiration
                                     date</label>
                                 <div class="input-group">
                                     <!-- <input type="date" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA" id="sms_Coupon_expiration" placeholder="Expiry Date"> -->
-                                    <input type="date" id="sms_Coupon_expiration" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA" placeholder="Expiry date" min="<?php echo date("Y-m-d"); ?>">
+                                    <input type="date" id="sms_Coupon_expiration"
+                                        class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA"
+                                        placeholder="Expiry date" min="<?php echo date("Y-m-d"); ?>">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.limit">Usage limit
+                                <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold"
+                                    data-i18n="popoups.added_new_cupons.limit">Usage limit
                                     (leave blank without limit) </label>
-                                <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_Usage_limit" style="background-color: #EAEAEA" placeholder="Usage Limit">
+                                <input type="number" class="form-control rounded-3 p-3 fw-bold" id="sms_Usage_limit"
+                                    style="background-color: #EAEAEA" placeholder="Usage Limit">
                             </div>
 
                         </div>
 
                 </div>
                 </form>
-                <div class="modal-body text-center py-4 sms_manage_pop" id="sms_add_coupons_success-message" style="display: none;">
+                <div class="modal-body text-center py-4 sms_manage_pop" id="sms_add_coupons_success-message"
+                    style="display: none;">
                     <!-- Close icon -->
 
-                    <button type="button" class="btn-close" aria-label="Close" onclick="sms_add_coupons_close_success_message()"></button>
+                    <!-- <button type="button" class="btn-close" aria-label="Close" onclick="sms_add_coupons_close_success_message()"></button> -->
                     <!-- SVG icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
                         <path d="M9 12l2 2l4 -4"></path>
@@ -145,11 +161,15 @@
                     <h3>Success</h3>
                     <div class="text-muted">Your coupon data has been submitted successfully.</div>
                 </div>
-                <div class="modal-body text-center py-4 sms_manage_pop" id="sms_add_coupons_error-message" style="display: none;">
+                <div class="modal-body text-center py-4 sms_manage_pop" id="sms_add_coupons_error-message"
+                    style="display: none;">
                     <!-- Close icon -->
-                    <button type="button" class="btn-close" aria-label="Close" onclick="sms_add_coupous_close_error_message()"></button>
+                    <button type="button" class="btn-close" aria-label="Close"
+                        onclick="sms_add_coupous_close_error_message()"></button>
                     <!-- SVG icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <line x1="12" y1="5" x2="12" y2="19"></line>
                         <line x1="12" y1="5" x2="12.01" y2="19"></line>
@@ -160,7 +180,9 @@
                     <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
                 </div>
                 <div class="text-center mt-5  ">
-                    <button type="button" id="sms_mu_manage_submit" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="sms_meh_couponmanage_data()" data-i18n="popoups.added_new_cupons.last_btn_cat">
+                    <button type="button" id="sms_mu_manage_submit"
+                        class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="sms_meh_couponmanage_data()"
+                        data-i18n="popoups.added_new_cupons.last_btn_cat">
                         To add the category click here +</button>
                 </div>
             </div>
@@ -168,6 +190,33 @@
     </div>
 </div>
 <script>
+
+function updateInputType() {
+        var select = document.getElementById("sms_w_parent_ctg");
+        var input = document.getElementById("sms_amount_of_the_discount");
+
+        if (select.value === "percent") {
+            input.value = 100; // Set default value to 100 when "percentage" is selected
+            
+
+            input.setAttribute("max", 100); // Set maximum allowed value to 100 for percentage
+            input.removeAttribute("min"); // Remove minimum attribute
+        } else if (select.value === "fixed_cart") {
+            input.setAttribute("min", 0); // Set minimum allowed value to 0 for amount
+            input.removeAttribute(0); // Remove maximum attribute
+        }
+    }
+
+    // Event listener to validate input when typing (for real-time feedback)
+    document.getElementById("sms_amount_of_the_discount").addEventListener("input", function() {
+        var select = document.getElementById("sms_w_parent_ctg");
+        var input = document.getElementById("sms_amount_of_the_discount");
+
+        if (select.value === "percent" && input.value > 100) {
+            input.value = 100; // Reset the value to 100 if it exceeds when "percentage" is selected
+        }
+    });
+
     function sms_meh_couponmanage_data() {
         document.getElementById('sms_mu_manage_submit').disabled = true;
         var Coupon_manage_Data = {
@@ -178,13 +227,14 @@
             'usage_limit': document.getElementById('sms_Usage_limit').value,
         };
 
+
         fetch('/coupons/add', {
-                method: 'POST',
-                body: JSON.stringify(Coupon_manage_Data),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
+            method: 'POST',
+            body: JSON.stringify(Coupon_manage_Data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => {
                 console.log(response);
                 if (response.status === 201) {

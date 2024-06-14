@@ -10,7 +10,7 @@
                     <!-- Header Start -->
 
                     <!-- Header End -->
-                    <div class="row g-2 align-items-center list_button_statis">
+                    <div class="row g-2 align-items-center list_button_statis justify-content-between">
                         <!-- Stats header Buttons -->
                         <div class="col-auto btn-list">
                             <a href="?query=last_week" class="btn bg-transparent btn-light shadow-none last_week" id="revenue_last_week"
@@ -23,7 +23,7 @@
                                 data-i18n="statististics.tabs_in_select_range.year"> Last Year </a>
                         </div>
                         <!-- Date Range Button -->
-                        <div class="col-auto ms-auto">
+                        <div class="col-2">
                             <a href="#" class="btn btn-pill" data-bs-toggle="modal" data-bs-target="#modal-team"
                             style="background-color:#EFEFEF; border:none;"data-i18n="statististics.tabs_in_select_range.button">
                                 Select a Date Range

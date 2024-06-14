@@ -32,6 +32,12 @@
       }
     }
 
+    .btn-close {
+      position: absolute;
+      right: 2%;
+      top: 3%;
+    }
+
     .dropdown_logout {
       position: absolute;
       top: 49px;
@@ -51,6 +57,22 @@
     .overflow_div {
       height: 100vh;
       overflow: scroll;
+    }
+
+    .sms_a_add_regular_pop {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      z-index: 9999;
+      text-align: center;
+      box-shadow: 100vh 100vh 100vh 300vh #00000059;
     }
 
     .Sms_mu_popoup_admin {
@@ -448,6 +470,7 @@
             <div class="d-flex">
               <label for="statusSelect" class="form-label"></label>
               <button class="btn" id="sign-up-btn">Add User</button>
+              <button class="btn mx-3" id="change-password-btn">Change Password</button>
             </div>
           </div>
 
@@ -467,11 +490,11 @@
                   <th></th>
                 </tr>
 
-            <?php
-            //  var_dump($customer_data);
-            foreach ($customer_data['data'] as $customer) {
-              ?>
-              <tr class="sms_mu_spacing_div"></tr>
+                <?php
+                //  var_dump($customer_data);
+                foreach ($customer_data['data'] as $customer) {
+                ?>
+                  <tr class="sms_mu_spacing_div"></tr>
 
                   <tr class="sms_mu_tr">
                     <td><?php echo $customer['name']; ?></td>
@@ -484,28 +507,28 @@
                           }
                         } ?></td>
 
-                <td><?php foreach ($customer_data['business_name'] as $business_name) {
-                  if ($business_name['user_id'] == $customer['id']) {
-                    echo $business_name['meta_value'];
-                  }
-                } ?>
-                
-              </td>
-<td><?php  
+                    <td><?php foreach ($customer_data['business_name'] as $business_name) {
+                          if ($business_name['user_id'] == $customer['id']) {
+                            echo $business_name['meta_value'];
+                          }
+                        } ?>
 
-// Create a DateTime object
-$datetime = new DateTime($customer['created_at']);
+                    </td>
+                    <td><?php
 
-// Format the DateTime object to get only the date part
-$dateOnly = $datetime->format('Y-m-d');
-echo $dateOnly;
-?></td>
-             <td><?php foreach ($customer_data['users_configuration_status'] as $users_configuration_status) {
-              // echo json_encode($customer['id']); 
-                  if ($customer['id'] == $users_configuration_status['user_id']) {
-                    echo "API Connected";
-                  } 
-                } ?></td>
+                        // Create a DateTime object
+                        $datetime = new DateTime($customer['created_at']);
+
+                        // Format the DateTime object to get only the date part
+                        $dateOnly = $datetime->format('Y-m-d');
+                        echo $dateOnly;
+                        ?></td>
+                    <td><?php foreach ($customer_data['users_configuration_status'] as $users_configuration_status) {
+                          // echo json_encode($customer['id']); 
+                          if ($customer['id'] == $users_configuration_status['user_id']) {
+                            echo "API Connected";
+                          }
+                        } ?></td>
 
                     <?php foreach ($customer_data['users_x_code'] as $users_x_code) {
                       if ($users_x_code['user_id'] == $customer['id']) {
@@ -576,6 +599,22 @@ echo $dateOnly;
       </div>
     </div>
   </div>
+
+  <!-- /// modal password  -->
+  <div class="modal-body text-center py-4  sms_a_add_regular_pop" id="Sms_mu_change_password" style="display: none;">
+    <!-- Close icon -->
+    <!-- <button type="button" class="btn-close" aria-label="Close" onclick="sms_add_regular_close_success_message()"></button> -->
+    <!-- SVG icon -->
+    <button type="button" class="btn-close" aria-label="Close" id="Sms_mu_close_password"></button>
+    <h1>Change Password</h1>
+    <label class="form-label" style="text-align: left !important;">Password</label>
+    <input type="password" name="password" class="form-control">
+    <label class="form-label my-1" style="text-align: left !important;">Confirm Password</label>
+    <input type="password" name="password" class="form-control">
+    <div class="row" style="margin: 0 1px;">
+      <button class="btn btn-info my-3 col-12 text-center justify-content-center ">Change Password</button>
+    </div>
+  </div>
   <script>
     function FunLogoutProfile() {
       var div = document.getElementById('PopoupLogout');
@@ -592,6 +631,12 @@ echo $dateOnly;
     });
     document.getElementById('sign_up_btn_close').addEventListener('click', function() {
       document.getElementById('edit-modal-full-width').style.display = "none"
+    });
+    document.getElementById('change-password-btn').addEventListener('click', function() {
+      document.getElementById('Sms_mu_change_password').style.display = "block"
+    });
+    document.getElementById('Sms_mu_close_password').addEventListener('click', function() {
+      document.getElementById('Sms_mu_change_password').style.display = "none"
     });
 
     function LogoutDisconecting() {

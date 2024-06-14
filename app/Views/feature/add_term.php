@@ -94,7 +94,7 @@
         z-index: 9999;
         text-align: center;
         box-shadow: 100vh 100vh 100vh 300vh #00000059;
-}
+    }
 
     .sms_term_pop svg {
         fill: green;
@@ -117,12 +117,13 @@
 
 <body> -->
 
-    <div class="container-xl">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-12">
-                <div class="card">
+<div class="container-xl">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-12">
+            <div class="card">
 
                 <form class="card-body" id="term_form_data">
+
     <!-- header -->
      <?php var_dump( $attributes) ?>
     <div class="row gx-3">
@@ -180,57 +181,91 @@
                         <h3>Success</h3>
                         <div class="text-muted">Your Term data has been submitted successfully.</div>
                     </div>
-                    <div class="modal-body text-center py-4 sms_term_pop" id="sms_term_error-message"
-                        style="display: none;">
-                        <!-- Close icon -->
-                        <button type="button" class="btn-close" aria-label="Close"
-                            onclick="sms_term_close_error_message()"></button>
-                        <!-- SVG icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24"
-                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="12" y1="5" x2="12.01" y2="19"></line>
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="12" y1="5" x2="12.01" y2="19"></line>
-                        </svg>
-                        <h3>Error</h3>
-                        <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
+                    <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
+                        <div class="text-center mt-2 col-sm-6 col-md-6">
+                            <button type="button" onclick="sms_a_add_new_term_input()"
+                                class="btn btn-primary col-12 col-md-12 rounded-2 py-3"
+                                data-i18n="popoups.future_managment.add_new_term.term_end_btn">To add another term click
+                                here +</button>
+                        </div>
+                        <div class="text-center mt-2 col-sm-6 col-md-6">
+                            <button type="button" onclick="submit_add_term()" id="term_disable"
+                                class="btn btn-info col-12 col-md-12 rounded-2 py-3"
+                                data-i18n="popoups.future_managment.add_new_term.term_end_submit_btn">This is submit
+                                button</button>
+                        </div>
                     </div>
+                </form>
+
+                <div class="modal-body text-center py-4 sms_term_pop" id="sms_term_success-message"
+                    style="display: none;">
+                    <!-- Close icon -->
+
+                    <!-- <button type="button" class="btn-close" aria-label="Close"
+                            onclick="sms_term_close_success_message()"></button> -->
+
+                    <!-- SVG icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                        <path d="M9 12l2 2l4 -4"></path>
+                    </svg>
+                    <h3>Success</h3>
+                    <div class="text-muted">Your Term data has been submitted successfully.</div>
+                </div>
+                <div class="modal-body text-center py-4 sms_term_pop" id="sms_term_error-message"
+                    style="display: none;">
+                    <!-- Close icon -->
+                    <button type="button" class="btn-close" aria-label="Close"
+                        onclick="sms_term_close_error_message()"></button>
+                    <!-- SVG icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="12" y1="5" x2="12.01" y2="19"></line>
+                    </svg>
+                    <h3>Error</h3>
+                    <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
-    <!-- input javascript code  -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <!-- <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script> -->
-    <script>
-        $(".chosen-select").chosen({
-            no_results_text: "Oops, nothing found!"
-        })
-    </script>
-    <script>
-        var inputCount = 0;
+<!-- input javascript code  -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!-- <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script> -->
+<script>
+    $(".chosen-select").chosen({
+        no_results_text: "Oops, nothing found!"
+    })
+</script>
+<script>
+    var inputCount = 0;
 
-        document.getElementById('sms_feature_select').addEventListener('change', function() {
-    var selectedOption = this.options[this.selectedIndex];
-    var dataContent = selectedOption.getAttribute('data-content');
-    updateDynamicInputContainer(dataContent);
-});
+    document.getElementById('sms_feature_select').addEventListener('change', function () {
+        var selectedOption = this.options[this.selectedIndex];
+        var dataContent = selectedOption.getAttribute('data-content');
+        updateDynamicInputContainer(dataContent);
+    });
 
-function updateDynamicInputContainer(contentType) {
-    var container = document.getElementById('sms_a_add_new_term');
-    container.innerHTML = ''; // Clear the container first
-    
-    // Create a base input structure
-    var baseInput = document.createElement('div');
-    baseInput.classList.add('col-md-12', 'mb-3', 'p-0');
+    function updateDynamicInputContainer(contentType) {
+        var container = document.getElementById('sms_a_add_new_term');
+        container.innerHTML = ''; // Clear the container first
 
-    if (contentType === 'size') {
-         baseInput.innerHTML = `
+        // Create a base input structure
+        var baseInput = document.createElement('div');
+        baseInput.classList.add('col-md-12', 'mb-3', 'p-0');
+
+        if (contentType === 'size') {
+            baseInput.innerHTML = `
         <div class="gx-3">
             <div class="col-md-6 mb-3">
                 <label class="form-label fw-bold">The name of the term</label>
@@ -238,12 +273,12 @@ function updateDynamicInputContainer(contentType) {
             </div>
         </div>
     `;
-    }
-   
+        }
 
-    // Add specific content based on contentType
-    else if (contentType === 'color') {
-        baseInput.innerHTML += `
+
+        // Add specific content based on contentType
+        else if (contentType === 'color') {
+            baseInput.innerHTML += `
             <div class="rounded">
                 <h3 class="card-title text-black fs-4 fw-bold" style="font-size: 35px;">Choosing a color for the display of the term</h3>
             </div>
@@ -252,9 +287,9 @@ function updateDynamicInputContainer(contentType) {
                 <input type="color" name="data" class="form-control p-0 form-control-color" value="#206bc4" title="Choose your color">
             </div>
         `;
-    } else if (contentType === 'image') {
-        var uniqueId = 'sms_term_image' + (document.querySelectorAll('[id^="sms_term_image"]').length + 1);
-        baseInput.innerHTML += `
+        } else if (contentType === 'image') {
+            var uniqueId = 'sms_term_image' + (document.querySelectorAll('[id^="sms_term_image"]').length + 1);
+            baseInput.innerHTML += `
             <div class="rounded">
                 <label class="form-label mt-4 fs-3 p-0 fw-bold">Selecting an image to display the term</label>
                 <div class="sms_a_add_term_input">
@@ -268,22 +303,22 @@ function updateDynamicInputContainer(contentType) {
                 </div>
             </div>
         `;
+        }
+
+        container.appendChild(baseInput);
     }
 
-    container.appendChild(baseInput);
-}
+    function sms_a_add_new_term_input() {
+        var selectedOption = document.getElementById('sms_feature_select').options[document.getElementById('sms_feature_select').selectedIndex];
+        var dataContent = selectedOption.getAttribute('data-content');
+        inputCount += 1;
+        var container = document.getElementById('sms_a_add_new_term');
+        var newInput = document.createElement('div');
+        var uniqueId = 'sms_term_image' + inputCount; // Generate unique ID
+        newInput.classList.add('col-md-12', 'mb-3', 'p-0');
 
-function sms_a_add_new_term_input() {
-    var selectedOption = document.getElementById('sms_feature_select').options[document.getElementById('sms_feature_select').selectedIndex];
-    var dataContent = selectedOption.getAttribute('data-content');
-    inputCount += 1;
-    var container = document.getElementById('sms_a_add_new_term');
-    var newInput = document.createElement('div');
-    var uniqueId = 'sms_term_image' + inputCount; // Generate unique ID
-    newInput.classList.add('col-md-12', 'mb-3', 'p-0');
-    
-    if (dataContent === 'color') {
-        newInput.innerHTML = `
+        if (dataContent === 'color') {
+            newInput.innerHTML = `
             <div class="gx-3">
                 <div class="col-md-6 mb-3">
                     <label for="${inputCount}" class="form-label fw-bold">The name of the term</label>
@@ -298,8 +333,8 @@ function sms_a_add_new_term_input() {
                 </div>
             </div>
         `;
-    } else if (dataContent === 'image') {
-        newInput.innerHTML = `
+        } else if (dataContent === 'image') {
+            newInput.innerHTML = `
             <div class="gx-3">
                 <div class="col-md-6 mb-3">
                     <label for="${inputCount}" class="form-label fw-bold">The name of the term</label>
@@ -317,8 +352,8 @@ function sms_a_add_new_term_input() {
                 </div>
             </div>
         `;
-    } else if (dataContent === 'size') {
-        newInput.innerHTML = `
+        } else if (dataContent === 'size') {
+            newInput.innerHTML = `
             <div class="gx-3">
                 <div class="col-md-6 mb-3">
                     <label for="${inputCount}" class="form-label fw-bold">The name of the term</label>
@@ -326,81 +361,12 @@ function sms_a_add_new_term_input() {
                 </div>
             </div>
         `;
-    }
-    
-    container.appendChild(newInput);
-}
-
-// Function to display file name
-        function sms_a_add_term_showFileName(input) {
-            var label = input.nextElementSibling;
-            var fileName = input.files[0].name;
-            label.innerHTML = '<i class="bi bi-image text-black"></i> ' + fileName;
         }
 
-        // // Add one input field when the page loads
-        // document.addEventListener("DOMContentLoaded", function (event) {
-        //     sms_a_add_new_term_input();
-        // });
+        container.appendChild(newInput);
+    }
 
-        // function submit_add_term() {
-        //     // Get the values of the existing inputs
-        //     let name = document.getElementById('sms_term_name').value.trim();
-        //     let type = document.getElementById('sms_feature_select').value.trim();
-        //     let colorInput = document.getElementById('sms_term_color').value.trim();
-
-        //     // Create JSON object to store form data
-        //     let jsonData = {
-        //         data: name,
-        //         content: colorInput,
-        //         // colorInput: ,
-        //         // dynamicTerms: []  // Prepare an array to store dynamic term data
-        //     };
-
-        //     // Get the values of dynamically added inputs
-        //     let dynamicnames = document.querySelectorAll('[id^="sms_term_names"]');
-        //     let dynamicTermColors = document.querySelectorAll('[id^="sms_term_colors"]');
-        //     let dynamicTermImages = document.querySelectorAll('[id^="sms_term_image"]');
-
-        //     // Loop through dynamic data and populate jsonData.dynamicTerms
-        //     dynamicnames.forEach((input, index) => {
-        //         let name = input.value.trim();
-        //         if (name !== '') {
-        //             let color = dynamicTermColors[index].value.trim(); // Assuming corresponding color exists
-        //             let imageSrc = dynamicTermImages[index].getAttribute('src'); // Get the image source URL
-        //             jsonData.dynamicTerms.push({ name: name, color: color, image: imageSrc });
-        //         }
-        //     });
-
-        //     // Convert JSON data to string
-        //     let jsonString = JSON.stringify(jsonData);
-
-        //     // Send JSON data with fetch API
-        //     fetch('/attributes/{id}/terms/add', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: jsonString
-        //     })
-        //         .then(response => {
-        //             if (response.status === 201) {
-        //                 // Form submission succeeded, display success message
-        //                 document.getElementById('sms_term_success-message').style.display = 'block';
-        //                 document.getElementById('sms_term_error-message').style.display = 'none';
-        //                 window.location.reload();
-        //             } else {
-        //                 // Form submission failed, display error message
-        //                 document.getElementById('sms_term_error-message').style.display = 'block';
-        //                 document.getElementById('sms_term_success-message').style.display = 'none'; // Hide success message if it was displayed before
-        //             }
-        //         })
-        //         .catch(error => {
-        //             // Network error occurred, display error message
-        //             document.getElementById('sms_term_error-message').style.display = 'block';
-        //             console.error('Error submitting form data:', error);
-        //         });
-        // }
+    
         function submit_add_term() {
     // Get the form element
     let form = document.getElementById('term_form_data');
@@ -441,7 +407,113 @@ submitButton.disabled = true;
             document.getElementById('sms_term_success-message').style.display = 'none';
         }
 
-        function sms_term_close_error_message() {
-            document.getElementById('sms_term_error-message').style.display = 'none';
-        }
-    </script>
+    // Function to display file name
+    function sms_a_add_term_showFileName(input) {
+        var label = input.nextElementSibling;
+        var fileName = input.files[0].name;
+        label.innerHTML = '<i class="bi bi-image text-black"></i> ' + fileName;
+    }
+
+    // // Add one input field when the page loads
+    // document.addEventListener("DOMContentLoaded", function (event) {
+    //     sms_a_add_new_term_input();
+    // });
+
+    // function submit_add_term() {
+    //     // Get the values of the existing inputs
+    //     let name = document.getElementById('sms_term_name').value.trim();
+    //     let type = document.getElementById('sms_feature_select').value.trim();
+    //     let colorInput = document.getElementById('sms_term_color').value.trim();
+
+    //     // Create JSON object to store form data
+    //     let jsonData = {
+    //         data: name,
+    //         content: colorInput,
+    //         // colorInput: ,
+    //         // dynamicTerms: []  // Prepare an array to store dynamic term data
+    //     };
+
+    //     // Get the values of dynamically added inputs
+    //     let dynamicnames = document.querySelectorAll('[id^="sms_term_names"]');
+    //     let dynamicTermColors = document.querySelectorAll('[id^="sms_term_colors"]');
+    //     let dynamicTermImages = document.querySelectorAll('[id^="sms_term_image"]');
+
+    //     // Loop through dynamic data and populate jsonData.dynamicTerms
+    //     dynamicnames.forEach((input, index) => {
+    //         let name = input.value.trim();
+    //         if (name !== '') {
+    //             let color = dynamicTermColors[index].value.trim(); // Assuming corresponding color exists
+    //             let imageSrc = dynamicTermImages[index].getAttribute('src'); // Get the image source URL
+    //             jsonData.dynamicTerms.push({ name: name, color: color, image: imageSrc });
+    //         }
+    //     });
+
+    //     // Convert JSON data to string
+    //     let jsonString = JSON.stringify(jsonData);
+
+    //     // Send JSON data with fetch API
+    //     fetch('/attributes/{id}/terms/add', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: jsonString
+    //     })
+    //         .then(response => {
+    //             if (response.status === 201) {
+    //                 // Form submission succeeded, display success message
+    //                 document.getElementById('sms_term_success-message').style.display = 'block';
+    //                 document.getElementById('sms_term_error-message').style.display = 'none';
+    //                 window.location.reload();
+    //             } else {
+    //                 // Form submission failed, display error message
+    //                 document.getElementById('sms_term_error-message').style.display = 'block';
+    //                 document.getElementById('sms_term_success-message').style.display = 'none'; // Hide success message if it was displayed before
+    //             }
+    //         })
+    //         .catch(error => {
+    //             // Network error occurred, display error message
+    //             document.getElementById('sms_term_error-message').style.display = 'block';
+    //             console.error('Error submitting form data:', error);
+    //         });
+    // }
+    function submit_add_term() {
+        // Get the form element
+        let form = document.getElementById('term_form_data');
+        // Create FormData object from the form
+        let formData = new FormData(form);
+        console.log('form data ', formData)
+
+        const submitButton = document.getElementById("term_disable");
+        submitButton.disabled = true;
+        // Send form data with fetch API
+        fetch(`/attributes/${formData.get('sms_feature_select')}/terms/add`, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Form submission succeeded, display success message
+                    document.getElementById('sms_term_success-message').style.display = 'block';
+                    document.getElementById('sms_term_error-message').style.display = 'none';
+                    window.location.reload();
+                } else {
+                    // Form submission failed, display error message
+                    document.getElementById('sms_term_error-message').style.display = 'block';
+                    document.getElementById('sms_term_success-message').style.display = 'none'; // Hide success message if it was displayed before
+                }
+            })
+            .catch(error => {
+                // Network error occurred, display error message
+                document.getElementById('sms_term_error-message').style.display = 'block';
+                console.error('Error submitting form data:', error);
+            });
+    }
+    function sms_term_close_success_message() {
+        document.getElementById('sms_term_success-message').style.display = 'none';
+    }
+
+    function sms_term_close_error_message() {
+        document.getElementById('sms_term_error-message').style.display = 'none';
+    }
+</script>
