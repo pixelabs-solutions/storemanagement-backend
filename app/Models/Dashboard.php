@@ -32,44 +32,59 @@ class Dashboard
     }
 
 
-    public static function get_dashboard_data()
+    public static function get_dashboard_data($filters = [])
     {
         global $connection;
+        $date_range = $filters ? self::getDateRange($filters) : [];
+
         $user_id = Authentication::getUserIdFromToken();
         $cities = [];
         $total_customers = 0;
         $latestOrders = [];
         // $client = new Client();
         try {
+            $date_after = $date_range['after'];
+            $date_before = $date_range['before'];
+            // echo json_encode($date_before);
 
             $query = "SELECT 
-                city, 
-                total_sum,
-                overall_total_sum,
-                (total_sum / overall_total_sum) * 100 AS percentage
-            FROM 
-                (SELECT 
-                    city, 
-                    SUM(total) AS total_sum, 
-                    (SELECT SUM(total_sum) 
-                    FROM (SELECT SUM(total) AS total_sum
-                        FROM transactions 
-                        WHERE user_id = $user_id 
-                        GROUP BY city) AS subquery) AS overall_total_sum
-                FROM 
-                    transactions 
-                WHERE 
-                    user_id = $user_id 
-                GROUP BY 
-                    city
-                ORDER BY 
-                    total_sum DESC
-                LIMIT 5) AS top_cities;";
-            $result = $connection->query($query);
+        city, 
+        total_sum,
+        overall_total_sum,
+        (total_sum / overall_total_sum) * 100 AS percentage
+    FROM 
+        (SELECT 
+            city, 
+            SUM(total) AS total_sum, 
+            (SELECT SUM(total_sum) 
+                FROM (SELECT SUM(total) AS total_sum
+                    FROM transactions 
+                    WHERE user_id = ? AND
+                    date_created <= ? AND
+                    date_created >= ?
+                    GROUP BY city) AS subquery) AS overall_total_sum
+        FROM 
+            transactions 
+        WHERE 
+            user_id = ? AND
+            date_created <= ? AND
+            date_created >= ?
+        GROUP BY 
+            city
+        ORDER BY 
+            total_sum DESC
+        LIMIT 5) AS top_cities;";
+
+            $stmt = $connection->prepare($query);
+            $stmt->bind_param("ississ", $user_id, $date_before, $date_after, $user_id, $date_before, $date_after);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
             $customerOrdersCount = [];
             $overall_total_sum = 0;
             // if($orders === null) return 0;
+            $formattedCities = [];
+            $latestOrders = [];
             while ($order = $result->fetch_assoc()) {
                 $formattedCities[] = [
                     'city' => $order['city'],
@@ -124,8 +139,14 @@ class Dashboard
             //     ];
             // }
 
-            $query = "SELECT * from transactions WHERE user_id = $user_id ORDER BY date_created DESC LIMIT 4";
-            $result = $connection->query($query);
+            // var_dump($formattedCities);
+            $query = "SELECT * from transactions WHERE user_id = ? AND date_created <= ? AND date_created >= ? ORDER BY date_created DESC LIMIT 4";
+            $stmt = $connection->prepare($query);
+            $stmt->bind_param("iss", $user_id, $date_before, $date_after);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            // $result = $connection->query($query);
             while ($order = $result->fetch_assoc()) {
                 $billing_information = json_decode($order['billing'], true);
 

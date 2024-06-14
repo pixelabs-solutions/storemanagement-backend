@@ -491,7 +491,7 @@ require_once __DIR__ . '/../partials/header.php';
                         <!-- Filter City Data Start  -->
                         <div class="col-lg-4 col-md-3 col-sm-12">
                             <!-- City name with progress bar start -->
-                            <?php foreach ($dashboard_data["customers_location"]['cities_data'] as $statist) : ?>
+                            <?php if(empty($dashboard_data["customers_location"]['cities_data'])){echo "No Orders Data Found";} else { foreach ($dashboard_data["customers_location"]['cities_data'] as $statist) : ?>
                                 <?php $city_name = $statist['city']; ?>
                                 <?php $city_value = $statist['percentage_of_customers']; ?>
                                 <div class="row g-2 city-row" data-city="<?php echo $city_name; ?>">
@@ -504,10 +504,11 @@ require_once __DIR__ . '/../partials/header.php';
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-4">
                                         <br>
-                                        <h4><?php echo $city_value; ?></h4>
+                                        <h4><?php $number = str_replace('%', '', $city_value);
+                                          echo round($number, 2); ?>%</h4>
                                     </div>
                                 </div>
-                            <?php endforeach; ?>
+                            <?php endforeach; }?>
                             <!-- City name with progress bar end -->
                         </div>
                         <!-- Filter City Data End -->
@@ -595,8 +596,13 @@ require_once __DIR__ . '/../partials/header.php';
                     <!-- End Header -->
                     <!-- Table Start -->
                     <div class="card-table table-responsive">
-                        <table class="table table-vcenter">
+                    <?php if(empty($dashboard_data["customers_location"]['latest_orders'])){
+                                    echo "No Orders Data Found";
+                                } else{
+                                    ?>
+<table class="table table-vcenter">
                             <thead>
+                             
                                 <tr>
                                     <th data-i18n="dashboard.last_table_tr_first.td_one">order no</th>
                                     <th data-i18n="dashboard.last_table_tr_first.td_two">client</th>
@@ -631,6 +637,11 @@ require_once __DIR__ . '/../partials/header.php';
                             endforeach;
                             ?>
                         </table>
+
+                                    <?php
+                                } ?>
+
+                        
                         <!-- <button class="sms_ma_index_to_order_button">click</button> -->
                     </div>
                     <!-- Table End -->
@@ -844,10 +855,12 @@ require_once __DIR__ . '/../partials/header.php';
         document.getElementById(id).classList.remove('sms_w_date_active');
     });
 }
+console.log(queryParams);
 removeClassFromAll();
-if (!queryParams.query) {
+if (!queryParams.query && !queryParams.date_from) {
     document.getElementById('24_hours').classList.add('sms_w_date_active');
 }
+
 else if (queryParams.query === '24_hours') {
     document.getElementById('24_hours').classList.add('sms_w_date_active');
 } else if (queryParams.query === 'last_week') {

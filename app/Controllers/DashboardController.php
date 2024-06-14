@@ -53,7 +53,7 @@ class DashboardController
          
 
             $stats = Dashboard::get_dashboard_stats($filters);
-            $customers_location = Dashboard::get_dashboard_data();
+            $customers_location = Dashboard::get_dashboard_data($filters);
             $top_products = Dashboard::fetchTopSellingProductImages();
             
             $requests = RequestTracker::getRequestsLastSevenDays();
@@ -66,7 +66,7 @@ class DashboardController
                 'current_currency' => $currency,
                 'requests' => $requests
             ];
-            var_dump($dashboard_data);
+            // var_dump($dashboard_data);
             if ($is_rest == 'true') {
                 echo json_encode($dashboard_data, JSON_UNESCAPED_UNICODE);
             } else {
