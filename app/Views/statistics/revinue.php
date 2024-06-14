@@ -39,8 +39,8 @@
                                     <div class="text-center">
                                         <img src="assets/dist/img/revenue.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3"><?php echo number_format($revenue_stats["totalRevenue"]); ?> <?php echo $orders_stats['current_currency']; ?></h3>
-                                        <strong style="color:#4987D8" data-i18n="statististics.cards_in_Revenues.product_tab_in_static.card1_in_product.normal_product">Revenues</strong>
+                                            <h3 class="mt-3"><?php echo $revenue_stats["totalRevenue"]; ?> <?php echo $currency[0]['symbol']; ?></h3>
+                                            <strong style="color:#4987D8" data-i18n="statististics.cards_in_Revenues.product_tab_in_static.card1_in_product.normal_product">Revenues</strong>
                                     </div>
                                 </div>
                             </div>
@@ -54,8 +54,8 @@
                                     <div class="text-center">
                                         <img src="assets/dist/img/cart.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3"><?php echo number_format($revenue_stats["totalrehearsals"]); ?> <?php echo $orders_stats['current_currency']; ?></h3>
-                                        <strong style="color:#4987D8" data-i18n="statististics.cards_in_Revenues.product_tab_in_static.card2_in_normal_product.normal_product_in_card2">Rehearsals</strong>
+                                            <h3 class="mt-3"><?php echo $revenue_stats["totalrehearsals"]; ?> <?php echo $currency[0]['symbol']; ?></h3>
+                                            <strong style="color:#4987D8" data-i18n="statististics.cards_in_Revenues.product_tab_in_static.card2_in_normal_product.normal_product_in_card2">Rehearsals</strong>
                                     </div>
                                 </div>
                             </div>
@@ -69,8 +69,8 @@
                                     <div class="text-center">
                                         <img src="assets/dist/img/revenue.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3"><?php echo number_format($revenue_stats["orderAverage"]); ?> <?php echo $orders_stats['current_currency']; ?></h3>
-                                        <strong style="color:#4987D8" data-i18n="statististics.cards_in_Revenues.product_tab_in_static.card3_in_Sale.normal_product">Order average</strong>
+                                            <h3 class="mt-3"><?php echo $revenue_stats["orderAverage"]; ?> <?php echo $currency[0]['symbol']; ?></h3>
+                                            <strong style="color:#4987D8" data-i18n="statististics.cards_in_Revenues.product_tab_in_static.card3_in_Sale.normal_product">Order average</strong>
                                     </div>
                                 </div>
                             </div>
@@ -84,8 +84,8 @@
                                     <div class="text-center">
                                         <img src="assets/dist/img/arrow.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3"><?php echo number_format($revenue_stats["totalShipments"]); ?> <?php echo $orders_stats['current_currency']; ?></h3>
-                                        <strong style="color:#4987D8" data-i18n="statististics.cards_in_Revenues.product_tab_in_static.card4_in_product.normal_product">Shipments</strong>
+                                            <h3 class="mt-3"><?php echo $revenue_stats["totalShipments"]; ?> <?php echo $currency[0]['symbol']; ?></h3>
+                                            <strong style="color:#4987D8" data-i18n="statististics.cards_in_Revenues.product_tab_in_static.card4_in_product.normal_product">Shipments</strong>
                                     </div>
                                 </div>
                             </div>
@@ -99,8 +99,8 @@
                                     <div class="text-center">
                                         <img src="assets/dist/img/revenue.png" height="50px;" width="50px;"
                                             style="background-color:white; padding:10px; border-radius:10px;">
-                                        <h3 class="mt-3"><?php echo number_format($revenue_stats["netIncome"]); ?> <?php echo $orders_stats['current_currency']; ?></h3>
-                                        <strong style="color:#4987D8" data-i18n="statististics.cards_in_Revenues.product_tab_in_static.card5_in_product.normal_product">Net Income</strong>
+                                            <h3 class="mt-3"><?php echo $revenue_stats["netIncome"]; ?> <?php echo $currency[0]['symbol']; ?></h3>
+                                            <strong style="color:#4987D8" data-i18n="statististics.cards_in_Revenues.product_tab_in_static.card5_in_product.normal_product">Net Income</strong>
                                     </div>
                                 </div>
                             </div>

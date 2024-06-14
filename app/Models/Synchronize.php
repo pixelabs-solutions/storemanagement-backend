@@ -121,6 +121,31 @@ class Synchronize{
  
     }
 
+
+    public static function sync_attributes(){
+        $tables = ['attributes'];
+        
+        $user_id = Authentication::getUserIdFromToken();
+
+        if($user_id === null)
+        {
+            http_response_code(401);
+            echo json_encode(array(
+                "message" => "User not authenticated",
+                "status_code" => 401
+            ));
+            exit;
+        }
+        Base::truncate_table($tables, $user_id);
+        $configuration = self::prepare_configuration();
+        $attribute_fields = ['_fields' => 'id, name, type'];
+        $attributes = Base::wc_get($configuration, "products/attributes", $attribute_fields);
+        Attribute::store_attributes($attributes, $user_id);
+        echo "done";
+        header("refresh: 1"); 
+
+    }
+
     public static function prepare_configuration()
     {
         $response = Configuration::getConfiguration("true");

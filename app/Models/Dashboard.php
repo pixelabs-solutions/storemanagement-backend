@@ -10,7 +10,9 @@ class Dashboard
     public static function get_dashboard_stats($filters = [])
     {
         $user_id = Authentication::getUserIdFromToken();
+
         $date_range = $filters ? self::getDateRange($filters) : [];
+       
         try {
 
             $products = Base::get_number_of_products($user_id, $date_range);
@@ -221,14 +223,13 @@ class Dashboard
 
     public static function getDateRange($filters)
     {
-
         if (
             isset($filters['date_from']) && $filters['date_from'] !== "" &&
             isset($filters['date_to']) && $filters['date_to'] !== ""
         ) {
             return [
-                'after' => (new \DateTime($filters['date_from']))->format('Y-m-d') . 'T00:00:00',
-                'before' => (new \DateTime($filters['date_to']))->format('Y-m-d') . 'T23:59:59'
+                'after' => (new \DateTime($filters['date_from']))->format('Y-m-d') . ' T00:00:00',
+                'before' => (new \DateTime($filters['date_to']))->format('Y-m-d') . ' T23:59:59'
             ];
         }
 
@@ -257,10 +258,46 @@ class Dashboard
             }
 
             return [
-                'after' => $start->format('Y-m-d') . 'T00:00:00',
-                'before' => $end->format('Y-m-d') . 'T23:59:59'
+                'after' => $start->format('Y-m-d') . ' T00:00:00',
+                'before' => $end->format('Y-m-d') . ' T23:59:59'
             ];
         }
+
+        if (isset($filters['historic_query'])) {
+            $start = new \DateTime();
+            $end = new \DateTime();
+            switch ($filters['historic_query']) {
+                case 'last_week':
+                    $start->modify('last monday -14 days');
+                    $end->modify('last monday -7 days');
+                    break;
+                case 'current_month':
+                    $start->modify('first day of last month');
+                    $end->modify('last day of last month');
+                    break;
+                case 'last_year':
+                    $start = new \DateTime('now');
+                    $start->modify('-2 years');
+                    $start->setDate($start->format('Y'), 1, 1); // Sets to January 1 of the same year
+
+                    $end = new \DateTime('now');
+                    $end->modify('-2 years');
+                    $end->setDate($end->format('Y'), 12, 31); // Sets to December 31 of the same year
+                    break;
+                case '24_hours':
+                    $start->modify('-48 hours');
+                    $end->modify('-24 hours');
+                    break;
+                default:
+                    return null;
+            }
+
+            return [
+                'after' => $start->format('Y-m-d') . ' T00:00:00',
+                'before' => $end->format('Y-m-d') . ' T23:59:59'
+            ];
+        }
+
         return null;
     }
 }
