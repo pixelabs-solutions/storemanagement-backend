@@ -124,7 +124,7 @@
 
                 <form class="card-body" id="term_form_data">
     <!-- header -->
-     <?php var_dump( $attributes) ?>
+     <?php //var_dump( $attributes) ?>
     <div class="row gx-3">
         <div class="col-md-6 mb-3">
             <label for="example-text-input" class="form-label fw-bold" data-i18n="popoups.future_managment.add_new_term.name_of_term">The name of the term</label>
@@ -134,8 +134,9 @@
             <label for="example-select" class="form-label fw-bold" data-i18n="popoups.future_managment.add_new_term.feature">Associated feature</label>
             <div class="sms_mu_bg_div rounded-2">
                 <select class="form-select form-select-md h-100 bg-transparent" name="attribute_id" id="sms_feature_select">
+                    <option value="">Select</option>
                     <?php foreach ($attributes as $attribute) { ?>
-                        <option id="<?php echo $attribute['id']; ?>" value="<?php echo $attribute['id']; ?>" data-content="color"><?php echo $attribute['name']; ?></option>
+                        <option id="<?php echo $attribute['id']; ?>" value="<?php echo $attribute['id']; ?>" data-content="<?php echo $attribute['type']; ?>"><?php echo $attribute['name']; ?></option>
                     <?php } ?>
                 </select>
             </div>

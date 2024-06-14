@@ -72,6 +72,20 @@ class AuthenticationController
         
     }
 
+
+    // public function forgot_password()
+    // {
+    //     $password = isset($_POST['change_password']) ? $_POST['change_password'] : null;
+    //     $user_id = Authentication::getUserIdFromToken();
+
+    //     $response = Authentication::forgot_password($password, $user_id);
+    //     if(isset($_GET['is_rest']) && $_GET['is_rest'] === "true")
+    //     {
+    //         echo $response;
+    //         exit;
+    //     }
+    // }
+
     public function logout()
     {
         $result = Authentication::logout();

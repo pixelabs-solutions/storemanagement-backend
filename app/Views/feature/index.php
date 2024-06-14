@@ -1,5 +1,5 @@
 <?php
-        var_dump($attributes);
+        // var_dump($attributes);
 
 ?>
 <style>
@@ -95,7 +95,7 @@
                     <path d="M21 21l-6 -6" />
                   </svg>
                 </span>
-                <input type="text" id="sms_feature_m_search_input" value="" class="form-control border-0 " placeholder="Category term"
+                <input type="text" id="sms_feature_m_search_input" value="" class="form-control border-0 " placeholder="Search Attribute"
                   aria-label="Search in website">
               </div>
             </form>
@@ -123,23 +123,30 @@
             <thead>
               <tr class="sms_mu_th sms_w_table_head_feature">
                 <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_action">action</th>
-                <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_type">display type</th>
-                <th class=".sms_mu_th" data-i18n="popoups.future_managment.th_in_feture.th_product">product</th>
-                <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_term">associated feature</th>
+                <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_type">Name</th>
+                <th class=".sms_mu_th" data-i18n="popoups.future_managment.th_in_feture.th_product">Display Type</th>
+                <!-- <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_term">associated feature</th>
                 <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_name_term">the name of the term </th>
-                <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_color">Image/color</th>
+                <th class="sms_mu_td" data-i18n="popoups.future_managment.th_in_feture.th_color">Image/color</th> -->
 
               </tr>
               <tr class="sms_mu_spacing_div"></tr>
 
             </thead>
             <tbody>
+              <?php
+
+              foreach($attributes as $attribute){
+
+             
+
+              ?>
               <tr class="sms_mu_tr">
                 <td>
                   <div class="d-flex justify-content-center gap-2 w-auto">
 
 
-                    <span class="" onclick="openModal('sms_feature_managment_w_edit_modal')">
+                    <span class="" attribute-id = <?php  echo $attribute['id'];   ?> onclick="openModal('sms_feature_managment_w_edit_modal')">
 
                       <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -148,7 +155,7 @@
                       </svg>
                     </span>
 
-                    <span onclick="openModal('sms_feature_managment_w_delete_modal')">
+                    <span attribute-id = <?php  echo $attribute['id'];   ?> onclick="openModal('sms_feature_managment_w_delete_modal')">
 
 
                       <svg width="24" height="24" viewBox="0 0 28 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -161,17 +168,21 @@
 
                 </td>
                 <td class="sms_mu_td">
-                  selection field
+                  <?php echo $attribute['name']; ?>
                 </td>
-                <td>15</td>
-                <td>atif colors</td>
+                <td>  <?php echo $attribute['type']; ?></td>
+
+                <!-- <td>atif colors</td>
                 <td>#pink</td>
                 <td><svg width="74" height="54" viewBox="0 0 105 57" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="105" height="57" rx="20" fill="#F51975" />
                   </svg>
-                </td>
+                </td> -->
 
               </tr>
+              <?php 
+}
+              ?>
               <tr class="sms_mu_spacing_div"></tr>
 
             </tbody>

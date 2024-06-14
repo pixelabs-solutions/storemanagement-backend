@@ -4,6 +4,7 @@ namespace Pixelabs\StoreManagement\Controllers;
 use Pixelabs\StoreManagement\Models\Statistics;
 use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Models\Authentication;
+use Pixelabs\StoreManagement\Models\Currency;
 
 class StatisticsController
 {
@@ -25,7 +26,7 @@ class StatisticsController
                 header('Location: /authentication/login');
             }
         }
-        
+
         
         $user_level = Authentication::getUserLevelFromToken();
         if ($user_level == ADMIN) {
@@ -62,11 +63,25 @@ class StatisticsController
             } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
 
-        $filters = [
-            'query' => $_GET['query'] ?? null,
+        // $filters = [
+        //     'query' => $_GET['query'] ?? null,
+        //     'date_from' => $_GET['date_from'] ?? null,
+        //     'date_to' => $_GET['date_to'] ?? null
+        // ];
+
+        if(isset($_GET['query']) || isset($_GET['date_from']) || isset($_GET['date_to'])){
+            $filters = [
+           'query' => $_GET['query'] ?? null,
             'date_from' => $_GET['date_from'] ?? null,
             'date_to' => $_GET['date_to'] ?? null
-        ];
+            ];
+        } else{
+            $filters = [
+                'query' => 'last_week'
+            ];
+        }
+        $currency = Currency::get_current_currency($user_id); 
+
         $products_stats = Statistics::get_products_stats($filters);
         if($is_rest == 'true'){
             echo json_encode($products_stats);
@@ -102,11 +117,17 @@ class StatisticsController
             } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
 
-        $filters = [
-            'query' => $_GET['query'] ?? null,
+        if(isset($_GET['query']) || isset($_GET['date_from']) || isset($_GET['date_to'])){
+            $filters = [
+           'query' => $_GET['query'] ?? null,
             'date_from' => $_GET['date_from'] ?? null,
             'date_to' => $_GET['date_to'] ?? null
-        ];
+            ];
+        } else{
+            $filters = [
+                'query' => 'last_week'
+            ];
+        }
 
         $orders_stats = Statistics::get_orders_stats($filters);
         if($is_rest == 'true'){
@@ -143,11 +164,17 @@ class StatisticsController
             } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
 
-        $filters = [
-            'query' => $_GET['query'] ?? null,
+        if(isset($_GET['query']) || isset($_GET['date_from']) || isset($_GET['date_to'])){
+            $filters = [
+           'query' => $_GET['query'] ?? null,
             'date_from' => $_GET['date_from'] ?? null,
             'date_to' => $_GET['date_to'] ?? null
-        ];
+            ];
+        } else{
+            $filters = [
+                'query' => 'last_week'
+            ];
+        }
 
         $revenue_stats = Statistics::get_revenue_stats($filters);
         if($is_rest == 'true'){
@@ -185,17 +212,24 @@ class StatisticsController
             } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
 
-        $filters = [
-            'query' => isset($_GET['query']) ? $_GET['query'] : null,
-            'date_from' => isset($_GET['date_from']) ? $_GET['date_from'] : null,
-            'date_to' => isset($_GET['date_to']) ? $_GET['date_to'] : null
-        ];
+        if(isset($_GET['query']) || isset($_GET['date_from']) || isset($_GET['date_to'])){
+            $filters = [
+           'query' => $_GET['query'] ?? null,
+            'date_from' => $_GET['date_from'] ?? null,
+            'date_to' => $_GET['date_to'] ?? null
+            ];
+        } else{
+            $filters = [
+                'query' => 'last_week'
+            ];
+        }
         // echo json_encode($filters);exit;
 
         $overview_stats = Statistics::get_overview_stats($filters);
         $orders_stats = Statistics::get_orders_stats($filters);
         $revenue_stats = Statistics::get_revenue_stats($filters);
         $products_stats = Statistics::get_products_stats($filters);
+        $currency = Currency::get_current_currency($user_id); 
 
         if($is_rest == 'true'){
             echo json_encode($overview_stats);
