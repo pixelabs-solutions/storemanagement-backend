@@ -405,8 +405,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
         </script>
-          <script>
-function OverviewGetQueryParams() {
+     <script>
+function getQueryParams() {
     const params = {};
     window.location.search.substring(1).split("&").forEach(param => {
         const [key, value] = param.split("=");
@@ -417,7 +417,7 @@ function OverviewGetQueryParams() {
 
 // Example of dynamic data update
 async function fetchAndFormatDataOfOverview() {
-    let queryParamsForGraph = OverviewGetQueryParams().query;
+    let queryParamsForGraph = getQueryParams().query;
 
     // Default to 'last_week' if no query parameter is provided
     if (!queryParamsForGraph) {
@@ -428,32 +428,33 @@ async function fetchAndFormatDataOfOverview() {
     const response = await fetch(`http://storemanagement.test/statistics/overview?query=${queryParamsForGraph}&is_rest=true`);
     const data = await response.json();
 
-    // Prepare the overviewDynamicData object
-    const overviewDynamicData = {
-        netIncome: [],
-        orderAverage: [],
+    // Prepare the dynamicData object
+    const dynamicData = {
+        totalProducts: [],
+        totalOrders: [],
         totalRevenue: [],
-        totalShipments: [],
-        totalrehearsals: []
+        newCustomers: [],
+        returningCustomers: []
     };
 
-    // Assuming the API response provides a single set of values
-    // Use the same dates for each data point
-    const dates = ['2024-06-10']; // Placeholder date, replace if actual dates are provided
+    // Extract the dates from the data
+    const dates = Object.keys(data.totalProducts.byDate).sort();
 
-    overviewDynamicData.netIncome.push(data.netIncome || 0);
-    overviewDynamicData.orderAverage.push(data.orderAverage || 0);
-    overviewDynamicData.totalRevenue.push(data.totalRevenue || 0);
-    overviewDynamicData.totalShipments.push(data.totalShipments || 0);
-    overviewDynamicData.totalrehearsals.push(data.totalrehearsals || 0);
+    // Iterate over each date and push the values to dynamicData
+    dates.forEach(date => {
+        dynamicData.totalProducts.push(data.totalProducts.byDate[date] || 0);
+        dynamicData.totalOrders.push(data.totalOrders.byDate[date] || 0);
+        dynamicData.totalRevenue.push(data.totalRevenue.byDate[date] || 0);
+        dynamicData.newCustomers.push(data.newCustomers.byDate[date] || 0);
+        dynamicData.returningCustomers.push(data.returningCustomers.byDate[date] || 0);
+    });
+    console.log(dynamicData);
 
-    console.log(overviewDynamicData);
-
-    return [overviewDates, overviewDynamicData];
+    return [dates, dynamicData];
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
-    var [overviewDates, overviewDynamicData] = await fetchAndFormatDataOfOverview();
+    var [dates, dynamicData] = await fetchAndFormatDataOfOverview();
 
     // Initialize the chart
     var chart = new ApexCharts(document.getElementById('chart-combination'), {
@@ -482,20 +483,20 @@ document.addEventListener("DOMContentLoaded", async function () {
             opacity: 1,
         },
         series: [{
-            name: "Net Income",
-            data: []
+            name: "Total Products",
+            data: dynamicData.totalProducts
         }, {
-            name: "Order Average",
-            data: []
+            name: "Total Orders",
+            data: dynamicData.totalOrders
         }, {
             name: "Total Revenue",
-            data: []
+            data: dynamicData.totalRevenue
         }, {
-            name: "Total Shipments",
-            data: []
+            name: "New Customers",
+            data: dynamicData.newCustomers
         }, {
-            name: "Total Rehearsals",
-            data: []
+            name: "Returning Customers",
+            data: dynamicData.returningCustomers
         }],
         tooltip: {
             theme: 'dark'
@@ -519,7 +520,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             axisBorder: {
                 show: false,
             },
-            categories: overviewDates,
+            categories: dates,
         },
         yaxis: {
             labels: {
@@ -533,30 +534,30 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
     chart.render();
 
+    console.log(dynamicData);
+
     // Function to update the chart with new data
     function updateChartData(newData) {
         chart.updateSeries([{
-            name: "Net Income",
-            data: newData.netIncome
+            name: "Total Products",
+            data: newData.totalProducts
         }, {
-            name: "Order Average",
-            data: newData.orderAverage
+            name: "Total Orders",
+            data: newData.totalOrders
         }, {
             name: "Total Revenue",
             data: newData.totalRevenue
         }, {
-            name: "Total Shipments",
-            data: newData.totalShipments
+            name: "New Customers",
+            data: newData.newCustomers
         }, {
-            name: "Total Rehearsals",
-            data: newData.totalrehearsals
+            name: "Returning Customers",
+            data: newData.returningCustomers
         }]);
     }
 
-    console.log(overviewDynamicData);
-
     // Call the update function with the dynamic data
-    updateChartData(overviewDynamicData);
+    updateChartData(dynamicData);
 });
 </script>
 
