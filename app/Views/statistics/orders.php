@@ -230,7 +230,7 @@
             series: [
 
                 {
-                    name: "Total Customers",
+                    name: "Customers",
                     data: dynamicData.totalCustomers
                 }, {
                     name: "Average Items",
@@ -241,11 +241,11 @@
                     data: dynamicData.orderAverage
                 },
                 {
-                    name: "Total Revenue",
+                    name: "Revenue",
                     data: dynamicData.totalRevenue
                 },
                 {
-                    name: "Total Orders",
+                    name: "Orders",
                     data: dynamicData.totalOrders
                 },],
             tooltip: {

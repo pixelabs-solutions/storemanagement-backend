@@ -238,7 +238,7 @@
                     data: []
                 },
                 {
-                    name: "Total Shipments",
+                    name: "Shipments",
                     data: []
                 },
                 {
@@ -246,11 +246,11 @@
                     data: []
                 },
                 {
-                    name: "Total Rehearsals",
+                    name: "Rehearsals",
                     data: []
                 },
                 {
-                    name: "Total Revenue",
+                    name: "Revenue",
                     data: []
                 }, {
                     name: "Number of Orders",

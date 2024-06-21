@@ -232,16 +232,16 @@
                     data: dynamicData.totalDistinctProductsOnOrder
                 },
                 {
-                    name: "Number of Orders",
+                    name: "Orders",
                     data: dynamicData.numberOfOrders
                 }, {
-                    name: "Sale Products",
+                    name: "Products On Sale",
                     data: dynamicData.saleProducts
                 }, {
                     name: "Normal Products",
                     data: dynamicData.normalProducts
                 }, {
-                    name: "Total Products",
+                    name: "Products",
                     data: dynamicData.totalProducts
                 }],
             tooltip: {

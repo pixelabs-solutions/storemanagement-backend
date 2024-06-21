@@ -523,13 +523,13 @@ require_once __DIR__ . '/../partials/header.php';
                     data: dynamicData.returningCustomers
                 },
                 {
-                    name: "Total Products",
+                    name: "Product",
                     data: dynamicData.totalProducts
                 }, {
-                    name: "Total Orders",
+                    name: "Order",
                     data: dynamicData.totalOrders
                 }, {
-                    name: "Total Revenue",
+                    name: "Revenue",
                     data: dynamicData.totalRevenue
                 },],
             tooltip: {
