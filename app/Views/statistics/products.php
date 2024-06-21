@@ -10,28 +10,38 @@
         <div class="row g-2 align-items-center list_button_statis justify-content-between">
             <!-- Stats header Buttons -->
             <div class="col-auto btn-list">
-                <a href="?query=last_week" class="btn bg-transparent btn-light shadow-none last_week" id="products_last_week" class="nav-link" data-i18n="statististics.tabs_in_select_range.week"> Last Week
+                <a href="?query=last_week" class="btn bg-transparent btn-light shadow-none last_week"
+                    id="products_last_week" class="nav-link" data-i18n="statististics.tabs_in_select_range.week"> Last
+                    Week
                 </a>
-                <a href="?query=current_month" class="btn bg-transparent btn-light shadow-none last_month " id="products_last_month" class="nav-link" data-i18n="statististics.tabs_in_select_range.month"> Current
+                <a href="?query=current_month" class="btn bg-transparent btn-light shadow-none last_month "
+                    id="products_last_month" class="nav-link" data-i18n="statististics.tabs_in_select_range.month">
+                    Current
                     Month </a>
-                <a href="?query=last_year" class="btn bg-transparent btn-light shadow-none last_year" id="products_last_year" data-i18n="statististics.tabs_in_select_range.year"> Last Year </a>
+                <a href="?query=last_year" class="btn bg-transparent btn-light shadow-none last_year"
+                    id="products_last_year" data-i18n="statististics.tabs_in_select_range.year"> Last Year </a>
             </div>
             <!-- Date Range Button -->
             <div class="col-2">
-                <a href="#" class="btn btn-pill" data-bs-toggle="modal" data-bs-target="#modal-team" style="background-color:#EFEFEF; border:none;" data-i18n="statististics.tabs_in_select_range.button">
+                <a href="#" class="btn btn-pill" data-bs-toggle="modal" data-bs-target="#modal-team"
+                    style="background-color:#EFEFEF; border:none;"
+                    data-i18n="statististics.tabs_in_select_range.button">
                     Select a Date Range
                 </a>
             </div>
         </div>
-        <div class="row mt-5 mb-5 d-flex flex-md-row flex-wrap flex-column justify-content-between tab-pane active show" id="row_1">
+        <div class="row mt-5 mb-5 d-flex flex-md-row flex-wrap flex-column justify-content-between tab-pane active show"
+            id="row_1">
             <!-- Product Card Start -->
             <div class="sms_statistics_ma_kpi_card mb-2">
                 <div class=" align-items-center" style="background-color:#F2F2F2; border-radius:20px;">
                     <div class="card-body">
                         <div class="text-center">
-                            <img src="assets/dist/img/cart.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
-                            <h3 class="mt-3"><?php echo $products_stats["totalProducts"]; ?></h3>
-                            <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card1_in_product.normal_product">Product</strong>
+                            <img src="assets/dist/img/cart.png" height="50px;" width="50px;"
+                                style="background-color:white; padding:10px; border-radius:10px;">
+                            <h3 class="mt-3"><?php echo $products_stats["totalProducts"]['total']; ?></h3>
+                            <strong style="color:#4987D8"
+                                data-i18n="statististics.cards_in_product.product_tab_in_static.card1_in_product.normal_product">Product</strong>
                         </div>
                     </div>
                 </div>
@@ -43,9 +53,11 @@
                 <div class=" align-items-center" style="background-color:#F2F2F2; border-radius:20px;">
                     <div class="card-body">
                         <div class="text-center">
-                            <img src="assets/dist/img/order.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
-                            <h3 class="mt-3"><?php echo $products_stats["normalProducts"]; ?></h3>
-                            <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card2_in_normal_product.normal_product_in_card2">Normal
+                            <img src="assets/dist/img/order.png" height="50px;" width="50px;"
+                                style="background-color:white; padding:10px; border-radius:10px;">
+                            <h3 class="mt-3"><?php echo $products_stats["normalProducts"]['total']; ?></h3>
+                            <strong style="color:#4987D8"
+                                data-i18n="statististics.cards_in_product.product_tab_in_static.card2_in_normal_product.normal_product_in_card2">Normal
                                 Products</strong>
                         </div>
                     </div>
@@ -58,9 +70,11 @@
                 <div class=" align-items-center" style="background-color:#F2F2F2; border-radius:20px;">
                     <div class="card-body">
                         <div class="text-center">
-                            <img src="assets/dist/img/productsonsale.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
-                            <h3 class="mt-3"><?php echo $products_stats["saleProducts"]; ?></h3>
-                            <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card3_in_Sale.normal_product">Product
+                            <img src="assets/dist/img/productsonsale.png" height="50px;" width="50px;"
+                                style="background-color:white; padding:10px; border-radius:10px;">
+                            <h3 class="mt-3"><?php echo $products_stats["saleProducts"]['total']; ?></h3>
+                            <strong style="color:#4987D8"
+                                data-i18n="statististics.cards_in_product.product_tab_in_static.card3_in_Sale.normal_product">Product
                                 On Sale</strong>
                         </div>
                     </div>
@@ -73,9 +87,11 @@
                 <div class=" align-items-center" style="background-color:#F2F2F2; border-radius:20px;">
                     <div class="card-body">
                         <div class="text-center">
-                            <img src="assets/dist/img/cart.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
-                            <h3 class="mt-3"><?php echo $products_stats["numberOfOrders"]; ?></h3>
-                            <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card4_in_product.normal_product">Order</strong>
+                            <img src="assets/dist/img/cart.png" height="50px;" width="50px;"
+                                style="background-color:white; padding:10px; border-radius:10px;">
+                            <h3 class="mt-3"><?php echo $products_stats["numberOfOrders"]['total']; ?></h3>
+                            <strong style="color:#4987D8"
+                                data-i18n="statististics.cards_in_product.product_tab_in_static.card4_in_product.normal_product">Order</strong>
                         </div>
                     </div>
                 </div>
@@ -87,9 +103,12 @@
                 <div class=" align-items-center" style="background-color:#F2F2F2; border-radius:20px;">
                     <div class="card-body">
                         <div class="text-center">
-                            <img src="assets/dist/img/order.png" height="50px;" width="50px;" style="background-color:white; padding:10px; border-radius:10px;">
-                            <h3 class="mt-3"><?php echo $products_stats["totalDistinctProductsOnOrder"]; ?></h3>
-                            <strong style="color:#4987D8" data-i18n="statististics.cards_in_product.product_tab_in_static.card5_in_product.normal_product">Products
+                            <img src="assets/dist/img/order.png" height="50px;" width="50px;"
+                                style="background-color:white; padding:10px; border-radius:10px;">
+                            <h3 class="mt-3"><?php echo $products_stats["totalDistinctProductsOnOrder"]['total']; ?>
+                            </h3>
+                            <strong style="color:#4987D8"
+                                data-i18n="statististics.cards_in_product.product_tab_in_static.card5_in_product.normal_product">Products
                                 on order</strong>
                         </div>
                     </div>
@@ -101,15 +120,19 @@
         <!-- Colors Button Start-->
         <div class="row g-2 align-items-center ">
             <div class="col-auto ms-auto btn-list mt-5 mb-5 sms_mu_for_rtl_row_cards">
-                <div class="text-light p-1" style="background-color:#627e0c; border-radius:5px;" data-i18n="statististics.chart_below_btn.firts_btn.text"> New
-                    Customer</div>
-                <div class="text-light p-1" style="background-color:#8b59e4; border-radius:5px;" data-i18n="statististics.chart_below_btn.second_btn.text"> Customer
+                <div class="text-light p-1" style="background-color:#627e0c; border-radius:5px;"
+                    data-i18n="statististics.chart_below_btn.firts_btn.text"> Daily Average</div>
+                <div class="text-light p-1" style="background-color:#8b59e4; border-radius:5px;"
+                    data-i18n="statististics.chart_below_btn.second_btn.text"> Orders
                 </div>
-                <div class="text-light p-1" style="background-color:#9215a8; border-radius:5px;" data-i18n="statististics.chart_below_btn.third_btn.text"> Product
+                <div class="text-light p-1" style="background-color:#9215a8; border-radius:5px;"
+                    data-i18n="statististics.chart_below_btn.third_btn.text"> Product On Sale
                 </div>
-                <div class="text-light p-1" style="background-color:#dc2285; border-radius:5px;" data-i18n="statististics.chart_below_btn.fourth_btn.text"> Order
+                <div class="text-light p-1" style="background-color:#dc2285; border-radius:5px;"
+                    data-i18n="statististics.chart_below_btn.fourth_btn.text"> Normal Product
                 </div>
-                <div class="text-light p-1" style="background-color:#ac3f4f; border-radius:5px;" data-i18n="statististics.chart_below_btn.five_btn.text"> Revenues
+                <div class="text-light p-1" style="background-color:#ac3f4f; border-radius:5px;"
+                    data-i18n="statististics.chart_below_btn.five_btn.text"> Products
                 </div>
             </div>
         </div>
@@ -120,11 +143,59 @@
 </div>
 
 
-
 <script>
-    // @formatter:off
-    document.addEventListener("DOMContentLoaded", function() {
-        window.ApexCharts && (new ApexCharts(document.getElementById('chart-combination-2'), {
+    function getQueryParams() {
+        const params = {};
+        window.location.search.substring(1).split("&").forEach(param => {
+            const [key, value] = param.split("=");
+            params[decodeURIComponent(key)] = decodeURIComponent(value);
+        });
+        return params;
+    }
+
+    // Example of dynamic data update
+    async function fetchAndFormatDataOfProducts() {
+        let queryParamsForGraph = getQueryParams().query;
+
+        // Default to 'last_week' if no query parameter is provided
+        if (!queryParamsForGraph) {
+            queryParamsForGraph = 'last_week';
+        }
+        console.log('params', queryParamsForGraph);
+
+        const response = await fetch(`/statistics/products?query=${queryParamsForGraph}&is_rest=true`);
+        const data = await response.json();
+
+        // Prepare the dynamicData object
+        const dynamicData = {
+            totalProducts: [],
+            normalProducts: [],
+            saleProducts: [],
+            numberOfOrders: [],
+            totalDistinctProductsOnOrder: []
+        };
+
+        // Extract the dates from the data
+        const dates = Object.keys(data.totalProducts.byDate).sort();
+
+        // Iterate over each date and push the values to dynamicData
+        dates.forEach(date => {
+            dynamicData.totalProducts.push(data.totalProducts.byDate[date] || 0);
+            dynamicData.normalProducts.push(data.normalProducts.byDate[date] || 0);
+            dynamicData.saleProducts.push(data.saleProducts.byDate[date] || 0);
+            dynamicData.numberOfOrders.push(data.numberOfOrders.byDate[date] || 0);
+            dynamicData.totalDistinctProductsOnOrder.push(data.totalDistinctProductsOnOrder.byDate[date] || 0);
+        });
+        console.log(dynamicData);
+
+        return [dates, dynamicData];
+    }
+
+    document.addEventListener("DOMContentLoaded", async function () {
+        var [dates, dynamicData] = await fetchAndFormatDataOfProducts();
+
+        // Initialize the chart
+        var chart = new ApexCharts(document.getElementById('chart-combination-2'), {
             chart: {
                 type: "bar",
                 fontFamily: 'inherit',
@@ -139,9 +210,14 @@
             },
             plotOptions: {
                 bar: {
-                    columnWidth: '50%',
-                    gap: '3%',
+                    columnWidth: '70%',
+                    gap: '2%',
                 }
+
+            },
+            stroke: {
+                colors: ["transparent"],
+                width: 5
             },
             dataLabels: {
                 enabled: false,
@@ -149,22 +225,25 @@
             fill: {
                 opacity: 1,
             },
-            series: [{
-                name: "New Customer",
-                data: [4000, 1000, 3500, 3500, 4000, 3000, 5000]
-            }, {
-                name: "Returning Customer",
-                data: [3000, 4300, 1900, 2200, 2400, 4300, 2200]
-            }, {
-                name: "Product",
-                data: [3000, 2000, 1600, 1300, 3000, 2500, 2500]
-            }, {
-                name: "Order",
-                data: [2000, 1300, 900, 1500, 2400, 1300, 2200]
-            }, {
-                name: "Revenue",
-                data: [2000, 2500, 500, 3500, 2400, 1300, 2200]
-            }],
+
+            series: [
+                {
+                    name: "Distinct Products on Order",
+                    data: dynamicData.totalDistinctProductsOnOrder
+                },
+                {
+                    name: "Orders",
+                    data: dynamicData.numberOfOrders
+                }, {
+                    name: "Products On Sale",
+                    data: dynamicData.saleProducts
+                }, {
+                    name: "Normal Products",
+                    data: dynamicData.normalProducts
+                }, {
+                    name: "Products",
+                    data: dynamicData.totalProducts
+                }],
             tooltip: {
                 theme: 'dark'
             },
@@ -187,7 +266,7 @@
                 axisBorder: {
                     show: false,
                 },
-                categories: ['First', 'Crimson', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Sabbath'],
+                categories: dates,
             },
             yaxis: {
                 labels: {
@@ -198,10 +277,9 @@
             legend: {
                 show: false,
             },
-        })).render();
+        });
+        chart.render();
     });
-
-    // @formatter:on
 </script>
 
 
@@ -239,43 +317,4 @@
     //         element.classList.add('filter_tab_active');
     //     });
     // }
-</script>
-<script>
-            function getQueryParams() {
-            const params = {};
-            window.location.search.substring(1).split("&").forEach(param => {
-                const [key, value] = param.split("=");
-                params[decodeURIComponent(key)] = decodeURIComponent(value);
-            });
-            return params;
-        }
-
-        // Get query parameters
-        var queryParamsProducts = getQueryParams();
-
-     if (queryParamsProducts.query === 'last_week') {
-            // Add the .sms_w_date_active class to the element with the ID 'last_week'
-            document.getElementById('overview_last_week').classList.add('stats_filters_active');
-            document.getElementById('products_last_week').classList.add('stats_filters_active');
-            document.getElementById('orders_last_week').classList.add('stats_filters_active');
-            document.getElementById('revenue_last_week').classList.add('stats_filters_active');
-
-            
-
-        } else if (queryParamsProducts.query === 'current_month') {
-            // Add the .sms_w_date_active class to the element with the ID 'current_month'
-            document.getElementById('overview_last_month').classList.add('stats_filters_active');
-            document.getElementById('products_last_month').classList.add('stats_filters_active');
-            document.getElementById('orders_last_month').classList.add('stats_filters_active');
-            document.getElementById('revenue_last_month').classList.add('stats_filters_active');
-
-
-        } else if (queryParamsProducts.query === 'last_year') {
-            // Add the .sms_w_date_active class to the element with the ID 'last_year'
-            document.getElementById('overview_last_year').classList.add('stats_filters_active');
-            document.getElementById('products_last_year').classList.add('stats_filters_active');
-            document.getElementById('orders_last_year').classList.add('stats_filters_active');
-            document.getElementById('revenue_last_year').classList.add('stats_filters_active');
-
-        }
 </script>

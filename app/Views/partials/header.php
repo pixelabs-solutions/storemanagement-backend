@@ -769,14 +769,18 @@ use Pixelabs\StoreManagement\Models\Authentication;
                   →</button> -->
 
                <div class="navbar-nav flex-row order-md-last">
-               <div class=" d-flex align-items-center">
-                  <p class="m-0"><strong>Date & Time of last Sync: </strong><?php $user_id = Authentication::getUserIdFromToken();
-                     $last_sync_datetime = Authentication::get_user_meta($user_id, 'last_sync_datetime');
-                     while ($row = $last_sync_datetime->fetch_assoc()) {
-                        echo $row['meta_value'];
-                    }
-                     ?></p>
-                  <button class="btn m-2" id="sync_woocommerce">SYNC</button>
+                  <div class=" d-flex align-items-center">
+                     <p class="m-0"><strong>Date & Time of last Sync: </strong><?php $user_id = Authentication::getUserIdFromToken();
+                        $last_sync_datetime = Authentication::get_user_meta($user_id, 'last_sync_datetime');
+                        while ($row = $last_sync_datetime->fetch_assoc()) {
+                           echo $row['meta_value'];
+                        }
+                        ?>
+                     </p>
+                     <button class="btn btn-pill btn-info m-2 pt-1 pb-1 " id="sync_woocommerce">
+                        <!-- <div class="spinner-border spinner-border-sm text-light" role="status"></div> &ensp; -->
+                         Sync
+                     </button>
                </div>
                   <div class=" d-flex align-items-center">
                      <a href="?theme=dark" class="nav-link px-0 hide-theme-dark d-none" title="Enable dark mode" data-bs-toggle="tooltip" data-bs-placement="bottom">
