@@ -141,7 +141,7 @@ async function fetchAndFormatDataOfProducts() {
     }
     console.log('params', queryParamsForGraph);
 
-    const response = await fetch(`http://storemanagement.test/statistics/products?query=${queryParamsForGraph}&is_rest=true`);
+    const response = await fetch(`/statistics/products?query=${queryParamsForGraph}&is_rest=true`);
     const data = await response.json();
 
     // Prepare the dynamicData object
