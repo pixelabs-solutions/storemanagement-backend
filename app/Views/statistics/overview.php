@@ -31,8 +31,8 @@ require_once __DIR__ . '/../partials/header.php';
     }
 
     .stats_filters_active {
-        background: #A8C3E7;
-        border-radius: 100px;
+        background: #A8C3E7 !important;
+        border-radius: 100px !important;
     }
 
     .stats_filters_active:hover {
@@ -162,45 +162,7 @@ require_once __DIR__ . '/../partials/header.php';
                     </div>
 
 
-                    <script>
-                        function OverviewGetQueryParams() {
-                            const params = {};
-                            window.location.search.substring(1).split("&").forEach(param => {
-                                const [key, value] = param.split("=");
-                                params[decodeURIComponent(key)] = decodeURIComponent(value);
-                            });
-                            return params;
-                        }
-
-                        // Get query parameters
-                        var queryParams = OverviewGetQueryParams();
-
-                        if (queryParams.query === 'last_week') {
-                            // Add the .sms_w_date_active class to the element with the ID 'last_week'
-                            document.getElementById('overview_last_week').classList.add('stats_filters_active');
-                            document.getElementById('products_last_week').classList.add('stats_filters_active');
-                            document.getElementById('orders_last_week').classList.add('stats_filters_active');
-                            document.getElementById('revenue_last_week').classList.add('stats_filters_active');
-
-
-
-                        } else if (queryParams.query === 'current_month') {
-                            // Add the .sms_w_date_active class to the element with the ID 'current_month'
-                            document.getElementById('overview_last_month').classList.add('stats_filters_active');
-                            document.getElementById('products_last_month').classList.add('stats_filters_active');
-                            document.getElementById('orders_last_month').classList.add('stats_filters_active');
-                            document.getElementById('revenue_last_month').classList.add('stats_filters_active');
-
-
-                        } else if (queryParams.query === 'last_year') {
-                            // Add the .sms_w_date_active class to the element with the ID 'last_year'
-                            document.getElementById('overview_last_year').classList.add('stats_filters_active');
-                            document.getElementById('products_last_year').classList.add('stats_filters_active');
-                            document.getElementById('orders_last_year').classList.add('stats_filters_active');
-                            document.getElementById('revenue_last_year').classList.add('stats_filters_active');
-
-                        }
-                    </script>
+    
                     <div class="row mt-5 mb-5 d-flex flex-md-row flex-wrap flex-column justify-content-between tab-pane active show sms_mu_for_rtl_row_cards"
                         id="row_1">
                         <!-- New Customer Card Start -->
@@ -570,48 +532,51 @@ require_once __DIR__ . '/../partials/header.php';
     });
 </script>
 
-
-
 <script>
-    // // Function to get query parameters from the URL
-    // function OverviewGetQueryParams() {
-    //     const params = {};
-    //     window.location.search.substring(1).split("&").forEach(param => {
-    //         const [key, value] = param.split("=");
-    //         params[decodeURIComponent(key)] = decodeURIComponent(value);
-    //     });
-    //     return params;
-    // }
+                        function OverviewGetQueryParams() {
+                            const params = {};
+                            window.location.search.substring(1).split("&").forEach(param => {
+                                const [key, value] = param.split("=");
+                                params[decodeURIComponent(key)] = decodeURIComponent(value);
+                            });
+                            return params;
+                        }
 
-    // // Get query parameters
-    // const queryParams = OverviewGetQueryParams();
+                        // Get query parameters
+                        var queryParams = OverviewGetQueryParams();
 
-    // if (queryParams.query === 'last_week') {
-    //     // Add the .filter_tab_active class to the element with the ID 'last_week'
-    //     const elements = document.querySelectorAll('.last_week');
-    //     elements.forEach(element => {
-    //         element.classList.add('filter_tab_active');
-    //     });
-    // }
-    // else if (queryParams.query === 'last_month') {
-    //     // Add the .filter_tab_active class to the element with the ID 'current_month'
-
-    //     const elements = document.querySelectorAll('.last_month');
-    //     elements.forEach(element => {
-    //         element.classList.add('filter_tab_active');
-    //     });
-    // }
-    // else if (queryParams.query === 'last_year') {
-    //     // Add the .filter_tab_active class to the element with the ID 'last_year'
-    //     const elements = document.querySelectorAll('.last_year');
-    //     elements.forEach(element => {
-    //         element.classList.add('filter_tab_active');
-    //     });
-    // }
+                        if (queryParams.query === 'last_week') {
+                           console.log( 'abc',document.getElementById('products_last_week'))
+                            // Add the .sms_w_date_active class to the element with the ID 'last_week'
+                            document.getElementById('overview_last_week').classList.add('stats_filters_active');
+                            document.getElementById('products_last_week').classList.add('stats_filters_active');
+                            document.getElementById('orders_last_week').classList.add('stats_filters_active');
+                            document.getElementById('revenue_last_week').classList.add('stats_filters_active');
 
 
-</script>
 
+                        } else if (queryParams.query === 'current_month') {
+                            // Add the .sms_w_date_active class to the element with the ID 'current_month'
+                            document.getElementById('overview_last_month').classList.add('stats_filters_active');
+                            document.getElementById('products_last_month').classList.add('stats_filters_active');
+                            document.getElementById('orders_last_month').classList.add('stats_filters_active');
+                            document.getElementById('revenue_last_month').classList.add('stats_filters_active');
+
+
+                        } else if (queryParams.query === 'last_year') {
+                            // Add the .sms_w_date_active class to the element with the ID 'last_year'
+                            document.getElementById('overview_last_year').classList.add('stats_filters_active');
+                            document.getElementById('products_last_year').classList.add('stats_filters_active');
+                            document.getElementById('orders_last_year').classList.add('stats_filters_active');
+                            document.getElementById('revenue_last_year').classList.add('stats_filters_active');
+
+                        } else{
+                            document.getElementById('overview_last_week').classList.add('stats_filters_active');
+                            document.getElementById('products_last_week').classList.add('stats_filters_active');
+                            document.getElementById('orders_last_week').classList.add('stats_filters_active');
+                            document.getElementById('revenue_last_week').classList.add('stats_filters_active');
+                        }
+                    </script>
 
 
 <?php

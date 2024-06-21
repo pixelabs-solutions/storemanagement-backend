@@ -14,14 +14,14 @@
             <!-- Stats header Buttons -->
             <div class="col-auto btn-list">
                 <a href="?query=last_week" class="btn bg-transparent btn-light shadow-none last_week"
-                    id="revenue_last_week" class="nav-link" data-i18n="statististics.tabs_in_select_range.week"> Last
+                    id="revenue_last_week" class="nav-link_stats sms_w_active_item_stats" data-i18n="statististics.tabs_in_select_range.week"> Last
                     Week
                 </a>
                 <a href="?query=current_month" class="btn bg-transparent btn-light shadow-none last_month "
-                    id="revenue_last_month" class="nav-link" data-i18n="statististics.tabs_in_select_range.month">
+                    id="revenue_last_month" class="nav-link_stats sms_w_item_deactive_stats" data-i18n="statististics.tabs_in_select_range.month">
                     Current
                     Month </a>
-                <a href="?query=last_year" class="btn bg-transparent btn-light shadow-none last_year"
+                <a href="?query=last_year" class=" nav-link_stats  sms_w_item_deactive_stats btn bg-transparent btn-light shadow-none last_year"
                     id="revenue_last_year" data-i18n="statististics.tabs_in_select_range.year"> Last Year </a>
             </div>
             <!-- Date Range Button -->
@@ -342,32 +342,5 @@
     //     return params;
     // }
 
-    // Get query parameters
-    var queryParamsRevenue = getQueryParams();
 
-    if (queryParamsRevenue.query === 'last_week') {
-        // Add the .sms_w_date_active class to the element with the ID 'last_week'
-        document.getElementById('overview_last_week').classList.add('stats_filters_active');
-        document.getElementById('products_last_week').classList.add('stats_filters_active');
-        document.getElementById('orders_last_week').classList.add('stats_filters_active');
-        document.getElementById('revenue_last_week').classList.add('stats_filters_active');
-
-
-
-    } else if (queryParamsRevenue.query === 'current_month') {
-        // Add the .sms_w_date_active class to the element with the ID 'current_month'
-        document.getElementById('overview_last_month').classList.add('stats_filters_active');
-        document.getElementById('products_last_month').classList.add('stats_filters_active');
-        document.getElementById('orders_last_month').classList.add('stats_filters_active');
-        document.getElementById('revenue_last_month').classList.add('stats_filters_active');
-
-
-    } else if (queryParamsRevenue.query === 'last_year') {
-        // Add the .sms_w_date_active class to the element with the ID 'last_year'
-        document.getElementById('overview_last_year').classList.add('stats_filters_active');
-        document.getElementById('products_last_year').classList.add('stats_filters_active');
-        document.getElementById('orders_last_year').classList.add('stats_filters_active');
-        document.getElementById('revenue_last_year').classList.add('stats_filters_active');
-
-    }
 </script>
