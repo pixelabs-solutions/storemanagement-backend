@@ -188,12 +188,12 @@ const translations = {
         search_text: "Order Search",
       },
       transaction_th: {
-        order_no: "order no",
-        customer_name: "Customer's name",
+        order_no: "Order No",
+        customer_name: "Customer's Name",
         status: "Status",
         order_date: "Order Date",
-        sum: "sum",
-        source: "source",
+        sum: "Sum",
+        source: "Source",
       },
       transaction_tr: {
         customer_name: "Client's Name",
