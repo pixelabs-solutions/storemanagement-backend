@@ -164,13 +164,21 @@
               <div class="col-md-4 rounded-4 bg-white mt-6 sms_order_popup_a">
                 <div class="row">
                   <div class="col-md-12 text-end px-4 py-2">
-                    <h3 data-i18n="popoups.transction_pop_popuop.order_detail.card_order.total_cost_product">a</h3>
+                    <h3 data-i18n="popoups.transction_pop_popuop.order_detail.card_order.total_cost_product"></h3>
                     <!-- <h4 class="fs-2 fw-bold text-dark text-start"></h4> -->
                     <div class="text-end">
-                      <h4 data-i18n="popoups.transction_pop_popuop.order_detail.card_order.product"></h4>
+                      <!-- <h4 data-i18n="popoups.transction_pop_popuop.order_detail.card_order.product"></h4>
                       <h4 data-i18n="popoups.transction_pop_popuop.order_detail.card_order.delivery"></h4>
                       <h1 class="d-block mb-3 fw-bold text-dark" id="delivery_details"></h1>
-                      <span class="d-block mb-3 fw-bold text-dark" id="total_amount" data-i18n="popoups.transction_pop_popuop.order_detail.card_order.total_cost"></span>
+                      <span class="d-block mb-3 fw-bold text-dark" id="total_amount" data-i18n="popoups.transction_pop_popuop.order_detail.card_order.total_cost"></span> 
+                      -->
+
+
+                      <h4>Products: <span id="products_cost"></span> <?php echo $currency[0]['symbol']; ?></h4>
+                      <!-- <h4 id="delivery_cost"></h4> -->
+                      <h4 class="d-block mb-3 fw-bold text-dark">Shipping: <span id="delivery_cost"></span> <?php echo $currency[0]['symbol']; ?></h4>
+                      <h4 class="d-block mb-3 fw-bold text-dark"><span id="total_amount"></span> <?php echo $currency[0]['symbol']; ?></h4>
+                      
                     </div>
                   </div>
                 </div>
@@ -272,6 +280,7 @@
     document.getElementById("customer_billing_phone").innerHTML = transactions.billing.phone;
     document.getElementById("customer_billing_email").innerHTML = transactions.billing.email;
     document.getElementById("customer_billing_address").innerHTML = transactions.billing.city + transactions.billing.address_1;
+    document.getElementById("delivery_cost").innerHTML = transactions.shipping_total;
 
     // Using split method
     const datetimeStr = transactions.date_created;
@@ -279,7 +288,7 @@
     document.getElementById("order_date").innerHTML = dateStr;
     subTotal = transactions.total - transactions.shipping_total;
     // console.log(transactions.shipping_total);
-    document.getElementById("total_amount").innerHTML = "Total Cost : NIS " + transactions.total;
+    document.getElementById("total_amount").innerHTML = "Total Cost: " + transactions.total;
 
 
     const tableBody = document.getElementById('orderTable').querySelector('tbody');
@@ -287,9 +296,10 @@
     const orderProductsArray = transactions.line_items;
     // Clear existing rows if necessary
     tableBody.innerHTML = '';
-
+    var ProductsPrice = 0;
     // Loop through each item and create a row
     orderProductsArray.forEach(item => {
+      ProductsPrice = ProductsPrice + parseFloat(item.total);
       const row = document.createElement('tr');
       row.className = 'mt-2 rounded-4';
       row.style.backgroundColor = '#EAEAEA';
@@ -304,6 +314,7 @@
       tableBody.appendChild(row);
     });
 
+    document.getElementById("products_cost").innerHTML = ProductsPrice;
 
 
     // Extract shipping details from transaction data

@@ -201,10 +201,10 @@ require_once __DIR__ . '/../partials/header.php';
                         </div>
                     </div>
                     <div class="row g-2  sms_mu_for_rtl_row_cards mt-2">
-                        <div class=" col-8 ">
+                        <div class=" col-7 ">
                             <h3> <?php echo number_format($dashboard_data["statistics"]["new_products"]); ?> </h3>
                         </div>
-                        <div class="col-auto ms-auto">
+                        <div class=" col-5">
                         <span style="color:#40A826;"><?php echo $dashboard_data["percentage_changes"]["new_products"]; ?></span>
 
                         <?php if (strpos($dashboard_data["percentage_changes"]["new_products"], '-') !== false): ?>
@@ -407,7 +407,7 @@ require_once __DIR__ . '/../partials/header.php';
                 <div class="card-body">
                     <div class="row g-2 sms_mu_for_rtl_row_cards">
                         <div class="col-8 ">
-                            <h3 class="text-muted" data-i18n="dashboard.card_transaction.card_title"> Total Transiction
+                            <h3 class="text-muted" data-i18n="dashboard.card_transaction.card_title"> Total Transaction
                             </h3>
                         </div>
                         <div class="col-auto ms-auto">

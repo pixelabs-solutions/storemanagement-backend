@@ -158,6 +158,7 @@ class AttributesController
         ];
 
         $response = Attribute::add_term($configuration, $payload);
+        Synchronize::sync_attributes();
 
         echo $response;
     }
