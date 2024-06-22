@@ -376,7 +376,7 @@ const translations = {
       add_new_type: {
         heading: "Choose the type of product",
         variation: "A product with variations",
-        new_product: "normal product",
+        new_product: "Normal Product",
       },
       add_new_product_popoup: {
         adding_new_product: "Adding a new product and variations",
