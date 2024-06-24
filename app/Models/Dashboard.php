@@ -10,7 +10,9 @@ class Dashboard
     public static function get_dashboard_stats($filters = [])
     {
         $user_id = Authentication::getUserIdFromToken();
+
         $date_range = $filters ? self::getDateRange($filters) : [];
+       
         try {
 
             $products = Base::get_number_of_products($user_id, $date_range);
@@ -32,70 +34,138 @@ class Dashboard
     }
 
 
-    public static function get_dashboard_data()
+    public static function get_dashboard_data($filters = [])
     {
         global $connection;
+        $date_range = $filters ? self::getDateRange($filters) : [];
+
         $user_id = Authentication::getUserIdFromToken();
         $cities = [];
         $total_customers = 0;
         $latestOrders = [];
         // $client = new Client();
         try {
-            
-            $query = "SELECT * FROM transactions WHERE user_id = $user_id";
-            $result = $connection->query($query);
+            $date_after = $date_range['after'];
+            $date_before = $date_range['before'];
+            // echo json_encode($date_before);
+
+            $query = "SELECT 
+        city, 
+        total_sum,
+        overall_total_sum,
+        (total_sum / overall_total_sum) * 100 AS percentage
+    FROM 
+        (SELECT 
+            city, 
+            SUM(total) AS total_sum, 
+            (SELECT SUM(total_sum) 
+                FROM (SELECT SUM(total) AS total_sum
+                    FROM transactions 
+                    WHERE user_id = ? AND
+                    date_created <= ? AND
+                    date_created >= ?
+                    GROUP BY city) AS subquery) AS overall_total_sum
+        FROM 
+            transactions 
+        WHERE 
+            user_id = ? AND
+            date_created <= ? AND
+            date_created >= ?
+        GROUP BY 
+            city
+        ORDER BY 
+            total_sum DESC
+        LIMIT 5) AS top_cities;";
+
+            $stmt = $connection->prepare($query);
+            $stmt->bind_param("ississ", $user_id, $date_before, $date_after, $user_id, $date_before, $date_after);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
             $customerOrdersCount = [];
+            $overall_total_sum = 0;
             // if($orders === null) return 0;
+            $formattedCities = [];
+            $latestOrders = [];
+            while ($order = $result->fetch_assoc()) {
+                $formattedCities[] = [
+                    'city' => $order['city'],
+                    'percentage_of_customers' => $order['percentage'] . '%'
+                ];
+                //    var_dump($overall_total_sum);
+
+                // $billing_information = json_decode($order['billing'], true);
+
+                // $city = $order['city'] ?? '';
+                // $city = trim($city);
+                // if (empty($city)) {
+                //     $city = 'Unknown City';
+                // }
+                // if (!isset($cities[$city])) {
+                //     $cities[$city] = ['customer_ids' => []];
+                // }
+                // if (!array_key_exists($order['customer_id'], $cities[$city]['customer_ids'])) {
+                //     $cities[$city]['customer_ids'][$order['customer_id']] = true;
+                //     $total_customers++;
+                // }
+
+                // $client_name = $billing_information['first_name'] . ' ' . $billing_information['last_name'];
+                // // echo $order;
+                // $latestOrders[] = [
+                //     'order_id' => $order['id'],
+                //     'sum' => $order['total'],
+                //     'date' => $order['date_created'],
+                //     'client' => $client_name
+                // ];
+                // if (count($latestOrders) > 3) {
+                //     array_shift($latestOrders);
+                // }
+
+            }
+
+            // $cityData = [];
+            // foreach ($cities as $city => $data) {
+            //     $customer_count = count($data['customer_ids']);
+            //     $percentage = $total_customers > 0 ? ($customer_count / $total_customers * 100) : 0;
+            //     $cityData[$city] = $percentage;
+            // }
+            // arsort($cityData);
+            // $topCities = array_slice($cityData, 0, 5, true);
+
+            // // Prepare output format
+            // $formattedCities = [];
+            // foreach ($topCities as $city => $percentage) {
+            //     $formattedCities[] = [
+            //         'city' => $city,
+            //         'percentage_of_customers' => number_format($percentage, 2) . '%'
+            //     ];
+            // }
+
+            // var_dump($formattedCities);
+            $query = "SELECT * from transactions WHERE user_id = ? AND date_created <= ? AND date_created >= ? ORDER BY date_created DESC LIMIT 4";
+            $stmt = $connection->prepare($query);
+            $stmt->bind_param("iss", $user_id, $date_before, $date_after);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            // $result = $connection->query($query);
             while ($order = $result->fetch_assoc()) {
                 $billing_information = json_decode($order['billing'], true);
 
-                $city = $billing_information['city'] ?? '';
-                $city = trim($city);
-                if (empty($city)) {
-                    $city = 'Unknown City';
-                }
-                if (!isset($cities[$city])) {
-                    $cities[$city] = ['customer_ids' => []];
-                }
-                if (!array_key_exists($order['customer_id'], $cities[$city]['customer_ids'])) {
-                    $cities[$city]['customer_ids'][$order['customer_id']] = true;
-                    $total_customers++;
-                }
-
                 $client_name = $billing_information['first_name'] . ' ' . $billing_information['last_name'];
-                // echo $order;
+
                 $latestOrders[] = [
                     'order_id' => $order['id'],
                     'sum' => $order['total'],
                     'date' => $order['date_created'],
                     'client' => $client_name
                 ];
-                if (count($latestOrders) > 3) {
-                    array_shift($latestOrders);
-                }
 
             }
+            // var_dump($latestOrders);
 
-            $cityData = [];
-            foreach ($cities as $city => $data) {
-                $customer_count = count($data['customer_ids']);
-                $percentage = $total_customers > 0 ? ($customer_count / $total_customers * 100) : 0;
-                $cityData[$city] = $percentage;
-            }
-            arsort($cityData);
-            $topCities = array_slice($cityData, 0, 5, true);
-
-            // Prepare output format
-            $formattedCities = [];
-            foreach ($topCities as $city => $percentage) {
-                $formattedCities[] = [
-                    'city' => $city,
-                    'percentage_of_customers' => number_format($percentage, 2) . '%'
-                ];
-            }
             return [
-                'customers_location' => $formattedCities,
+                'cities_data' => $formattedCities,
                 'latest_orders' => $latestOrders
             ];
         } catch (\GuzzleHttp\Exception\RequestException $e) {
@@ -110,15 +180,14 @@ class Dashboard
         $user_id = Authentication::getUserIdFromToken();
         $productSales = [];
 
-        try 
-        {
+        try {
             $query = "SELECT * FROM transactions WHERE user_id = $user_id";
             $result = $connection->query($query);
 
             $customerOrdersCount = [];
             while ($order = $result->fetch_assoc()) {
 
-                $order_lineitem_array = json_decode($order['line_items'] , true); 
+                $order_lineitem_array = json_decode($order['line_items'], true);
                 foreach ($order_lineitem_array as $item) {
                     $productId = $item['product_id'];
                     if (!isset($productSales[$productId])) {
@@ -133,8 +202,7 @@ class Dashboard
             $topProductIds = array_slice(array_keys($productSales), 0, 3);
 
             $topProducts = [];
-            foreach ($topProductIds as $productId) 
-            {
+            foreach ($topProductIds as $productId) {
 
                 $prod_query = "SELECT * FROM products WHERE user_id = $user_id AND id = $productId";
                 $prod_result = $connection->query($prod_query);
@@ -155,14 +223,13 @@ class Dashboard
 
     public static function getDateRange($filters)
     {
-
         if (
             isset($filters['date_from']) && $filters['date_from'] !== "" &&
             isset($filters['date_to']) && $filters['date_to'] !== ""
         ) {
             return [
-                'after' => (new \DateTime($filters['date_from']))->format('Y-m-d') . 'T00:00:00',
-                'before' => (new \DateTime($filters['date_to']))->format('Y-m-d') . 'T23:59:59'
+                'after' => (new \DateTime($filters['date_from']))->format('Y-m-d') . ' T00:00:00',
+                'before' => (new \DateTime($filters['date_to']))->format('Y-m-d') . ' T23:59:59'
             ];
         }
 
@@ -191,10 +258,46 @@ class Dashboard
             }
 
             return [
-                'after' => $start->format('Y-m-d') . 'T00:00:00',
-                'before' => $end->format('Y-m-d') . 'T23:59:59'
+                'after' => $start->format('Y-m-d') . ' T00:00:00',
+                'before' => $end->format('Y-m-d') . ' T23:59:59'
             ];
         }
+
+        if (isset($filters['historic_query'])) {
+            $start = new \DateTime();
+            $end = new \DateTime();
+            switch ($filters['historic_query']) {
+                case 'last_week':
+                    $start->modify('last monday -14 days');
+                    $end->modify('last monday -7 days');
+                    break;
+                case 'current_month':
+                    $start->modify('first day of last month');
+                    $end->modify('last day of last month');
+                    break;
+                case 'last_year':
+                    $start = new \DateTime('now');
+                    $start->modify('-2 years');
+                    $start->setDate($start->format('Y'), 1, 1); // Sets to January 1 of the same year
+
+                    $end = new \DateTime('now');
+                    $end->modify('-2 years');
+                    $end->setDate($end->format('Y'), 12, 31); // Sets to December 31 of the same year
+                    break;
+                case '24_hours':
+                    $start->modify('-48 hours');
+                    $end->modify('-24 hours');
+                    break;
+                default:
+                    return null;
+            }
+
+            return [
+                'after' => $start->format('Y-m-d') . ' T00:00:00',
+                'before' => $end->format('Y-m-d') . ' T23:59:59'
+            ];
+        }
+
         return null;
     }
 }

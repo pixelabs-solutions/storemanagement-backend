@@ -12,7 +12,7 @@
     <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" /> -->
 
     <?php
-var_dump($attributes);
+// var_dump($attributes);
 ?>
 <style>
     @import url('https://rsms.me/inter/inter.css');

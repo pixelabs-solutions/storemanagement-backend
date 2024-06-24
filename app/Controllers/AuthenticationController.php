@@ -57,6 +57,7 @@ class AuthenticationController
                 // echo "admin = " .ADMIN;
                 if($user_level === ADMIN)
                 { 
+                   
                     header('Location: /admin/index');
                 }
                 else{
@@ -65,11 +66,24 @@ class AuthenticationController
                 }
             }
             else {
-                header('Location: /authentication/login');
+                $error_message = isset($result['message']) ? $result['message'] : 'Invalid email or password.';
+                header('Location: /authentication/login?error=' . urlencode($error_message));
             }
-
         }
         
+    }
+
+
+    public function forgot_password()
+    {
+        $password = isset($_POST['password']) ? $_POST['password'] : null;
+        $user_id = Authentication::getUserIdFromToken();
+        $response = Authentication::forgot_password($password, $user_id);
+        if(isset($_GET['is_rest']) && $_GET['is_rest'] === "true")
+        { 
+            echo $response;
+            exit;
+        }
     }
 
     public function logout()

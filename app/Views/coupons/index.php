@@ -229,9 +229,9 @@ require_once __DIR__ . '/../partials/header.php';
                     <td class="t_oravg_m">
                       <?php echo $item['code']; ?>
                     </td>
-                    <td> <?php echo $item['discount_type']; ?></td>
+                    <td> <?php echo $item['discount_type']; ?> </td>
 
-                    <td><?php echo $item['amount']; ?></td>
+                    <td><?php echo $item['amount']; ?> <?php if($item['discount_type'] == "percent") {echo "%";} else{echo CURRENT_CURRENCY;}?></td>
 
                     <td><?php echo $item['usage_count'] . "/" . $item['usage_limit']; ?></td>
 

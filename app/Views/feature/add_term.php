@@ -123,7 +123,9 @@
             <div class="card">
 
                 <form class="card-body" id="term_form_data">
+
                     <!-- header -->
+                    <?php //var_dump( $attributes) ?>
                     <div class="row gx-3">
                         <div class="col-md-6 mb-3">
                             <label for="example-text-input" class="form-label fw-bold"
@@ -138,9 +140,11 @@
                             <div class="sms_mu_bg_div rounded-2">
                                 <select class="form-select form-select-md h-100 bg-transparent" name="attribute_id"
                                     id="sms_feature_select">
+                                    <option value="">Select</option>
                                     <?php foreach ($attributes as $attribute) { ?>
                                         <option id="<?php echo $attribute['id']; ?>" value="<?php echo $attribute['id']; ?>"
-                                            data-content="color"><?php echo $attribute['name']; ?></option>
+                                            data-content="<?php echo $attribute['type']; ?>">
+                                            <?php echo $attribute['name']; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -174,6 +178,8 @@
                         </div>
                     </div>
                 </form>
+
+
 
                 <div class="modal-body text-center py-4 sms_term_pop" id="sms_term_success-message"
                     style="display: none;">
@@ -242,7 +248,7 @@
         var baseInput = document.createElement('div');
         baseInput.classList.add('col-md-12', 'mb-3', 'p-0');
 
-        if (contentType === 'size') {
+        if (contentType === 'select') {
             baseInput.innerHTML = `
         <div class="gx-3">
             <div class="col-md-6 mb-3">
@@ -330,7 +336,7 @@
                 </div>
             </div>
         `;
-        } else if (dataContent === 'size') {
+        } else if (dataContent === 'select') {
             newInput.innerHTML = `
             <div class="gx-3">
                 <div class="col-md-6 mb-3">
@@ -342,6 +348,47 @@
         }
 
         container.appendChild(newInput);
+    }
+
+
+    function submit_add_term() {
+        // Get the form element
+        let form = document.getElementById('term_form_data');
+        // Create FormData object from the form
+        let formData = new FormData(form);
+        console.log('form data ', formData)
+
+        const submitButton = document.getElementById("term_disable");
+        submitButton.disabled = true;
+        // Send form data with fetch API
+        fetch(`/attributes/${formData.get('sms_feature_select')}/terms/add`, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Form submission succeeded, display success message
+                    document.getElementById('sms_term_success-message').style.display = 'block';
+                    document.getElementById('sms_term_error-message').style.display = 'none';
+                    window.location.reload();
+                } else {
+                    // Form submission failed, display error message
+                    document.getElementById('sms_term_error-message').style.display = 'block';
+                    document.getElementById('sms_term_success-message').style.display = 'none'; // Hide success message if it was displayed before
+                }
+            })
+            .catch(error => {
+                // Network error occurred, display error message
+                document.getElementById('sms_term_error-message').style.display = 'block';
+                console.error('Error submitting form data:', error);
+            });
+    }
+
+
+
+
+    function sms_term_close_success_message() {
+        document.getElementById('sms_term_success-message').style.display = 'none';
     }
 
     // Function to display file name

@@ -217,7 +217,7 @@
 <!-- input javascript code  -->
 <script>
     function function_of_Edit() {
-
+        console.log('clicked');
         const selectElement = document.getElementById("sms_mu_parent_ctg").value;
         const imageInput = document.getElementById('sms_mu_img_add_ctg');
         // document.getElementById("disable_for_submit").disabled = true;
@@ -226,6 +226,7 @@
             console.error("Please select an image to edit the category.");
             return; // Early exit if no image selected
         }
+
 
         // Function to convert image to base64
         function readFileAsBase64(file) {

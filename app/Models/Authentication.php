@@ -60,6 +60,29 @@ class Authentication
         return $randomCode;
     }
 
+
+    public static function forgot_password($password, $user_id)
+    {
+        global $connection;
+        $hashedPassword = self::hashPassword($password);
+        // Prepare SQL statement to update the user's password
+
+        $sql = "UPDATE users SET password = ? WHERE id = ?";
+
+        // Prepare and bind parameters
+        $stmt = $connection->prepare($sql);
+        $stmt->bind_param("si", $hashedPassword, $user_id);
+
+        // Execute the statement
+        if ($stmt->execute() === TRUE) {
+            self::logout();
+            header("location: ../authentication/login");
+        } else {
+            echo "Error updating password: " . $connection->error;
+        }
+
+
+    }
     public static function login($email, $password)
     {
         global $connection;
