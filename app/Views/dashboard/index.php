@@ -130,14 +130,11 @@ require_once __DIR__ . '/../partials/header.php';
             class=" shadow-none btn border-none outline-none  bg-transparent btn-light tab-pane sms_w_date"
             data-i18n="dashboard.tabs.second_tab"> Last Week
         </a>
-        <a href="?query=last_week" id="last_week"
-            class=" shadow-none btn border-none outline-none  bg-transparent btn-light tab-pane sms_w_date"
-            data-i18n="dashboard.tabs.second_tab"> Last Week
-        </a>
         <a href="?query=current_month" id="current_month"
-            class=" shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date"
-            data-i18n="dashboard.tabs.third_tab "> 
+               class=" shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date"
+            data-i18n="dashboard.tabs.third_tab"> Last Week
         </a>
+   
         <a href="?query=last_year" id="last_year"
             class="shadow-none  outline-none bg-transparent btn btn-light tab-pane sms_w_date"
             data-i18n="dashboard.tabs.fourth_tab"> Last Year

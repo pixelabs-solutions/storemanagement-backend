@@ -202,7 +202,7 @@
                         <div class="col-12 col-md-12 rounded-2" id="sms_a_add_feature">
                             <div class="py-3 rounded">
                                 <h3 class=" fw-bold card-title text-black fs-2 fw-bold p-2" style="font-size: 35px;" data-i18n="popoups.future_managment.add_new_feature.hero_heading">
-                                    Adding terms to the feature</h3>
+                                Settings look reasonable</h3>
                             </div>
                             <!-- <div class="p-2">
                                         <div class="col-md-12 mb-3">

@@ -165,15 +165,13 @@
                 </form>
                 <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
                     <div class="text-center mt-2 col-sm-6 col-md-6 Sms_mu_for_Eng">
-                        <button onclick="fun_Np()" class="  btn btn-primary col-12 rounded-4 py-3" id="edit_regular_btn">To update
-                            the product →</button>
+                        <button onclick="fun_Np()" class="  btn btn-primary col-12 rounded-4 py-3" id="edit_regular_btn">Update</button>
                     </div>
                     <div class="text-center mt-2 col-sm-6 col-md-6 Sms_mu_for_hebrew">
                         <button onclick="fun_Np()" class="btn btn-primary col-12 rounded-4 py-3" id="edit_regular_btn">לעדכון המוצר ←</button>
                     </div>
                     <div class="text-center mt-2 col-sm-6 col-md-6  Sms_mu_for_Eng">
-                        <button type="button" class=" btn btn-danger col-12 rounded-4 py-3" onclick="openModal('sms_edit_product_regular_w_delete_complete_modal')">Deletion of
-                            the product</button>
+                        <button type="button" class=" btn btn-danger col-12 rounded-4 py-3" onclick="openModal('sms_edit_product_regular_w_delete_complete_modal')">Delete</button>
                     </div>
                     <div class="text-center mt-2 col-sm-6 col-md-6 Sms_mu_for_hebrew">
                         <button type="button" class="btn btn-danger col-12 rounded-4 py-3 " onclick="openModal('sms_edit_product_regular_w_delete_complete_modal')">מחיקת המוצר</button>

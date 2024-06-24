@@ -70,9 +70,7 @@
         </form>
         <div class="text-center mt-2 p-2  ">
           <button type="submit" id="sms_button_disabless" class="btn btn-primary col-12 col-md-12 rounded-4 py-3"
-            data-i18n="inventtory_setting.fourth_row_with_check_box.quantity" onclick="fun_edit_variation()">To update
-            the term click here
-            +</button>
+            data-i18n="inventtory_setting.sixth_row_with_check_box.update_btn" onclick="fun_edit_variation()">Update</button>
         </div>
       </div>
     </div>
