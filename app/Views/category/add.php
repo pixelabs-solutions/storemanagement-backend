@@ -168,8 +168,8 @@
                             <div class="text-center mt-2 p-2  ">
                                 <button type="button" onclick="function_of_Edit()" id="disable_for_submit"
                                     class="btn btn-primary col-12 col-md-12 rounded-4 py-3"
-                                    data-i18n="popoups.add_new_catageory.popoup_in_catagory.catageory_btn">To add the
-                                    category click here +</button>
+                                    data-i18n="popoups.add_new_catageory.popoup_in_catagory.catageory_btn">Add 
+                                    category</button>
                             </div>
 
                         </div>

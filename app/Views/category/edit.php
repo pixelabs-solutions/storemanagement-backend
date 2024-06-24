@@ -239,7 +239,7 @@ function submit_edit_ctg_form() {
         document.getElementById('sms_editForm_success_message').style.display = 'block';
         // Reload window after a delay
         setTimeout(function(){
-            location.reload();
+            location.reload(); 
         }, 2000); // Reload after 2 seconds (adjust as needed)
         return;
     }

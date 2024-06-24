@@ -27,8 +27,7 @@
     <div class="text-center mt-2 p-2  ">
         <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3"
             onclick="submit_edit_feature_Data()" id="feature_disbale"
-            data-i18n="popoups.future_managment.add_new_feature.add_new_term_feature.last_btn_feature">To update the
-            feature click here +</button>
+            data-i18n="popoups.future_managment.edit_variation_in_product_managment.normal_product">Update+</button>
     </div>
 </form>
 

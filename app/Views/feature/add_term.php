@@ -152,11 +152,7 @@
                         <!-- Adding terms to the feature -->
                         <div class="rounded-4">
                             <div class="col-12 col-md-12 rounded-2" id="sms_a_add_new_term">
-                                <div class="rounded">
-                                    <label class="card-title text-black my-0 fw-bold"
-                                        data-i18n="popoups.future_managment.add_new_term.error_alert">Choosing a color
-                                        for the display of the term</label>
-                                </div>
+                          
                                 <div class="p-2" id="dynamic_input_container">
                                     <!-- Dynamic input fields will be added here -->
                                 </div>
@@ -248,21 +244,22 @@
         var baseInput = document.createElement('div');
         baseInput.classList.add('col-md-12', 'mb-3', 'p-0');
 
-        if (contentType === 'size') {
-            baseInput.innerHTML = `
-        <div class="gx-3">
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">The name of the term</label>
-                <input type="text" class="form-control rounded-3 p-3" name="name" style="background-color: #EAEAEA" placeholder="Name Of Term">
-            </div>
-        </div>
-    `;
-        }
+    //     if (contentType === 'select') {
+    //         baseInput.innerHTML = `
+    //     <div class="gx-3">
+    //         <div class="col-md-6 mb-3">
+    //             <label class="form-label fw-bold">The name of the term</label>
+    //             <input type="text" class="form-control rounded-3 p-3" name="name" style="background-color: #EAEAEA" placeholder="Name Of Term">
+    //         </div>
+    //     </div>
+    // `;
+    //     }
 
 
         // Add specific content based on contentType
-        else if (contentType === 'color') {
+         if (contentType === 'color') {
             baseInput.innerHTML += `
+
             <div class="rounded">
                 <h3 class="card-title text-black fs-4 fw-bold" style="font-size: 35px;">Choosing a color for the display of the term</h3>
             </div>
@@ -336,7 +333,7 @@
                 </div>
             </div>
         `;
-        } else if (dataContent === 'size') {
+        } else if (dataContent === 'select') {
             newInput.innerHTML = `
             <div class="gx-3">
                 <div class="col-md-6 mb-3">
