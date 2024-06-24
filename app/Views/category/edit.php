@@ -236,7 +236,7 @@ function submit_edit_ctg_form() {
         console.log("No images selected for update.");
         // Submit the form without image data (optional: display a message)
         // Show success message
-        document.getElementById('sms_editForm_success_message').style.display = 'block';
+        // document.getElementById('sms_editForm_success_message').style.display = 'block';
         // Reload window after a delay
         setTimeout(function(){
             location.reload(); 

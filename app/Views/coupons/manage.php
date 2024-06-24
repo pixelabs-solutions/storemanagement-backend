@@ -183,7 +183,7 @@
                     <button type="button" id="sms_mu_manage_submit"
                         class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="sms_meh_couponmanage_data()"
                         data-i18n="popoups.added_new_cupons.last_btn_cat">
-                        To add the category click here +</button>
+                        Add Coupon</button>
                 </div>
             </div>
         </div>

@@ -138,7 +138,7 @@ const translations = {
         email_placeholder_P: "Threshold quantity for low stocks",
       },
       sixth_row_with_check_box: {
-        update_btn: "Updating and saving inventory settings →",
+        update_btn: "Update",
       },
     },
     cupons_and_benifit: {
@@ -397,7 +397,7 @@ const translations = {
         select_term: "Select Term Attribute",
         unit: "unit in stock",
         term_inventory: "Term inventory",
-        adding_btn_variation: "Adding an additional term to + variations",
+        adding_btn_variation: "Add Product",
       },
       add_new_catageory: {
         catageory_search: "Category search",
@@ -421,6 +421,7 @@ const translations = {
           label_parent_ct: "Parent category",
           label_up_img: "Uploading a picture",
           select_img_text: " Selecting an image",
+          catageory_btn: "Add Category",
           catageory_btn2: "Update Category",
         },
         edit_catageory: {},
@@ -450,7 +451,7 @@ const translations = {
           heading_for_edit: "",
           color_select_atr: "Attribute Name",
           d_type: "Display Type (Color/Image)",
-          hero_heading: "Adding terms to the feature",
+          hero_heading: "Settings look reasonable",
           name_of_term: "Name of the term",
           select_img_uplode: "Selecting an image",
           select_color: "Color change",
@@ -520,8 +521,8 @@ const translations = {
           btn_addiotainal_term: "Add additional term",
           text_area_text: "A brief description of the product",
           select_area_text: "Select an attribute for product variations",
-          update_product_btn: "To update the Product",
-          delete_product_btn: "Deletion the Product",
+          update_product_btn: "Update",
+          delete_product_btn: "Product",
           edit_term: {
             heading: "Edit Term",
             label_term: "Name of term",
@@ -539,7 +540,7 @@ const translations = {
         amounth_discount: "Amount of Discount",
         expiry_date: "Coupon expiration date",
         limit: "Usage limit (leave blank without limit)",
-        last_btn_cat: "Add category",
+        last_btn_cat: "Add Coupon",
         last_btn_coupon: "Update",
       },
       transction_pop_popuop: {
@@ -1029,6 +1030,7 @@ const translations = {
           label_parent_ct: "קטגורית הורה",
           label_up_img: "העלאת תמונה",
           select_img_text: "בחירת תמונה",
+          catageory_btn: "הוסף קטגוריה",
           catageory_btn: "להוספת הקטגוריה לחצו כאן +",
         },
         edit_catageory: {},

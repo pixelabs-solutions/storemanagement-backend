@@ -321,8 +321,7 @@
                         <div class="text-center mt-4 ">
                             <button type="button" id="product_variation" onclick="sms_add_variations_submit()"
                                 class=" btn btn-primary col-12 col-md-12 fs-3 rounded-3 py-3 border-0 fw-bold"
-                                data-i18n="popoups.add_new_product_popoup.adding_btn_variation">To
-                                add the product click here +</button>
+                                data-i18n="popoups.add_new_product_popoup.adding_btn_variation">Add Product</button>
                         </div>
                 </div>
                 </form>

@@ -228,7 +228,7 @@
 
             </div>
             <button class="btn Sms_mu_for_hebrew btn-primary col-12 rounded-4 py-3" id="disable_regular" onclick="fun()">להוספת המוצר לחץ כאן +</button>
-            <button class="btn btn-primary col-12 rounded-4 py-3 Sms_mu_for_Eng" id="disable_regular" onclick="fun()">To add the product click here +</button>
+            <button class="btn btn-primary col-12 rounded-4 py-3 Sms_mu_for_Eng" id="disable_regular" onclick="fun()">Add Product</button>
         </div>
     </div>
 </div>
