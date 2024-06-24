@@ -142,8 +142,7 @@
                                 <div class="text-center mt-5  ">
                                     <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3"
                                         onclick="sms_meh_coupon_edit_data()" id="Sms_mu_btn_submit"
-                                        data-i18n="popoups.added_new_cupons.last_btn_coupon">To update the coupon
-                                        click here ←</button>
+                                        data-i18n="popoups.added_new_cupons.last_btn_coupon">Update</button>
                                 </div>
                         </div>
                     </form>

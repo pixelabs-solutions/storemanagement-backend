@@ -540,7 +540,7 @@ const translations = {
         amounth_discount: "Amount of Discount",
         expiry_date: "Coupon expiration date",
         limit: "Usage limit (leave blank without limit)",
-        last_btn_cat: "Add category",
+        last_btn_cat: "Add Coupon",
         last_btn_coupon: "Update",
       },
       transction_pop_popuop: {
