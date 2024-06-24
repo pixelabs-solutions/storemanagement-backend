@@ -200,19 +200,22 @@
       </h1>
       <div class=" col-6 ">
         <div class="nav-item dropdown">
-          <a href="#" class="nav-link  d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu" style="float: right;">
+          <a href="#" class="nav-link  d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu"
+            style="float: right;">
             <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
             <div class="d-none d-xl-block ps-2">
               <div>
-                <?php 
-              $user_id = Pixelabs\StoreManagement\Models\Authentication::getUserIdFromToken(); 
-              $data = Pixelabs\StoreManagement\Models\Authentication::get_user_by_id($user_id);
-              echo $data;
-              ?></div>
+                <?php
+                $user_id = Pixelabs\StoreManagement\Models\Authentication::getUserIdFromToken();
+                $data = Pixelabs\StoreManagement\Models\Authentication::get_user_by_id($user_id);
+                echo $data;
+                ?>
+              </div>
             </div>
           </a>
           <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow mt-5">
-            <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#changepassword">Change Password</a>
+            <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#changepassword">Change
+              Password</a>
             <p class="dropdown-item" onclick="LogoutDisconecting()">logout</p>
           </div>
         </div>
@@ -242,18 +245,19 @@
                  Change Password
                 </a>
               </span> -->
-              <p href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#RegisterForm" >
-                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+              <!-- <p href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#RegisterForm" >
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M12 5l0 14" />
                   <path d="M5 12l14 0" />
                 </svg>
                 Add New User
-              </p>
-              <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#RegisterForm">
+              </p> -->
+              <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
+                data-bs-target="#RegisterForm">
                 <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                  stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M12 5l0 14" />
                   <path d="M5 12l14 0" />
@@ -263,7 +267,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-12">
+      <!-- <div class="col-lg-3 col-md-3 col-sm-12">
         <div class="card pt-2 h-100" style="border-radius:20px;">
           <div class="card-body">
             <div class="row g-2 sms_mu_for_rtl_row_cards">
@@ -310,8 +314,8 @@
            </div>
           </div>
         </div>
-      </div>
-    </div>  -->
+      </div> -->
+    </div>
     <div class="sms_transaction_w  p-0">
       <div id="notification" class="notification"></div>
       <div class=" col-12 mt-5">
@@ -352,98 +356,109 @@
                   <th class="sms_mu_td" data-i18n="transction_page.transaction_th.status">Phone</th>
                   <th class="sms_mu_td" data-i18n="transction_page.transaction_th.order_date">Business Name</th>
                   <th class="sms_mu_td" data-i18n="transction_page.transaction_th.order_date">Registered Since</th>
+                  <th class="sms_mu_td" data-i18n="transction_page.transaction_th.sum">Connection Status</th>
                   <th class="sms_mu_td" data-i18n="transction_page.transaction_th.sum">X Code</th>
-                  <th class="sms_mu_td" data-i18n="transction_page.transaction_th.sum">Actions</th>
                   <th></th>
                 </tr>
 
-          <?php
-          
-          //  var_dump($customer_data);
-          foreach ($customer_data['data'] as $customer) {
-          ?>
-            <tr class="sms_mu_spacing_div"></tr>
+                <?php
 
-            <tr class="sms_mu_tr">
-              <td><?php echo $customer['name']; ?></td>
+                //  var_dump($customer_data);
+                foreach ($customer_data['data'] as $customer) {
+                  ?>
+                  <tr class="sms_mu_spacing_div"></tr>
 
-              <td><?php echo $customer['email']; ?></td>
+                  <tr class="sms_mu_tr">
+                    <td><?php echo $customer['name']; ?></td>
 
-              <td><?php foreach ($customer_data['users_phone'] as $customer_phone) {
-                    if ($customer_phone['user_id'] == $customer['id']) {
-                      echo $customer_phone['meta_value'];
-                    }
-                  } ?></td>
+                    <td><?php echo $customer['email']; ?></td>
 
-              <td><?php foreach ($customer_data['business_name'] as $business_name) {
-                    if ($business_name['user_id'] == $customer['id']) {
-                      echo $business_name['meta_value'];
-                    }
-                  } ?>
+                    <td><?php foreach ($customer_data['users_phone'] as $customer_phone) {
+                      if ($customer_phone['user_id'] == $customer['id']) {
+                        echo $customer_phone['meta_value'];
+                      }
+                    } ?></td>
 
-              </td>
-              <td><?php
+                    <td><?php foreach ($customer_data['business_name'] as $business_name) {
+                      if ($business_name['user_id'] == $customer['id']) {
+                        echo $business_name['meta_value'];
+                      }
+                    } ?>
 
-                  // Create a DateTime object
-                  $datetime = new DateTime($customer['created_at']);
+                    </td>
+                    <td><?php
 
-                  // Format the DateTime object to get only the date part
-                  $dateOnly = $datetime->format('Y-m-d');
-                  echo $dateOnly;
-                  ?></td>
-              <td><?php foreach ($customer_data['users_configuration_status'] as $users_configuration_status) {
-                    // echo json_encode($customer['id']); 
-                    if ($customer['id'] == $users_configuration_status['user_id']) {
-                      echo "API Connected";
-                    }
-                  } ?></td>
+                    // Create a DateTime object
+                    $datetime = new DateTime($customer['created_at']);
 
-              <?php foreach ($customer_data['users_x_code'] as $users_x_code) {
-                if ($users_x_code['user_id'] == $customer['id']) {
-                  $user_x_code = $users_x_code['meta_value'];
+                    // Format the DateTime object to get only the date part
+                    $dateOnly = $datetime->format('Y-m-d');
+                    echo $dateOnly;
+                    ?></td>
+                    <td><?php foreach ($customer_data['users_configuration_status'] as $users_configuration_status) {
+                      // echo json_encode($customer['id']); 
+                      if ($customer['id'] == $users_configuration_status['user_id']) {
+                        echo "API Connected";
+                      }
+                    } ?></td>
+
+                    <?php foreach ($customer_data['users_x_code'] as $users_x_code) {
+                      if ($users_x_code['user_id'] == $customer['id']) {
+                        $user_x_code = $users_x_code['meta_value'];
+                      }
+                    } ?>
+
+
+                    <td>
+                      <svg fill="none" id="<?php echo $user_x_code; ?>" onclick="copyId(this.id)" height="24"
+                        viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <clipPath id="clip0_17_17330">
+                          <path d="m0 0h24v24h-24z" />
+                        </clipPath>
+                        <g clip-path="url(#clip0_17_17330)">
+                          <path
+                            d="m15 1h-11c-1.1 0-2 .9-2 2v13c0 .55.45 1 1 1s1-.45 1-1v-12c0-.55.45-1 1-1h10c.55 0 1-.45 1-1s-.45-1-1-1zm4 4h-11c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-14c0-1.1-.9-2-2-2zm-1 16h-9c-.55 0-1-.45-1-1v-12c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1z"
+                            fill="#000" />
+                        </g>
+                      </svg>
+
+
+
+                    </td>
+                    <td>
+
+                        <svg width="28" height="32" viewBox="0 0 28 32" type="submit" onclick="deleteUser(<?php echo $customer['id']; ?>)" name="delete_user" fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M8.45 1.10625C8.7875 0.425 9.48125 0 10.2375 0H17.7625C18.5188 0 19.2125 0.425 19.55 1.10625L20 2H26C27.1063 2 28 2.89375 28 4C28 5.10625 27.1063 6 26 6H2C0.89375 6 0 5.10625 0 4C0 2.89375 0.89375 2 2 2H8L8.45 1.10625ZM2 8H26V28C26 30.2062 24.2062 32 22 32H6C3.79375 32 2 30.2062 2 28V8ZM8 12C7.45 12 7 12.45 7 13V27C7 27.55 7.45 28 8 28C8.55 28 9 27.55 9 27V13C9 12.45 8.55 12 8 12ZM14 12C13.45 12 13 12.45 13 13V27C13 27.55 13.45 28 14 28C14.55 28 15 27.55 15 27V13C15 12.45 14.55 12 14 12ZM20 12C19.45 12 19 12.45 19 13V27C19 27.55 19.45 28 20 28C20.55 28 21 27.55 21 27V13C21 12.45 20.55 12 20 12Z"
+                            fill="#A30505" />
+                        </svg>
+
+
+                    </td>
+                  </tr>
+                  <!-- <tr class="sms_mu_spacing_div"></tr> -->
+
+                  <?php
                 }
-              } ?>
 
-
-              <td>
-
-                <svg fill="none" id="<?php echo $user_x_code; ?>" onclick="copyId(this.id)" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                  <clipPath id="clip0_17_17330">
-                    <path d="m0 0h24v24h-24z" />
-                  </clipPath>
-                  <g clip-path="url(#clip0_17_17330)">
-                    <path d="m15 1h-11c-1.1 0-2 .9-2 2v13c0 .55.45 1 1 1s1-.45 1-1v-12c0-.55.45-1 1-1h10c.55 0 1-.45 1-1s-.45-1-1-1zm4 4h-11c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2v-14c0-1.1-.9-2-2-2zm-1 16h-9c-.55 0-1-.45-1-1v-12c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1z" fill="#000" />
-                  </g>
-                </svg>
-
-
-              </td>
-              <td>
-
-                <svg width="28" height="32" viewBox="0 0 28 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8.45 1.10625C8.7875 0.425 9.48125 0 10.2375 0H17.7625C18.5188 0 19.2125 0.425 19.55 1.10625L20 2H26C27.1063 2 28 2.89375 28 4C28 5.10625 27.1063 6 26 6H2C0.89375 6 0 5.10625 0 4C0 2.89375 0.89375 2 2 2H8L8.45 1.10625ZM2 8H26V28C26 30.2062 24.2062 32 22 32H6C3.79375 32 2 30.2062 2 28V8ZM8 12C7.45 12 7 12.45 7 13V27C7 27.55 7.45 28 8 28C8.55 28 9 27.55 9 27V13C9 12.45 8.55 12 8 12ZM14 12C13.45 12 13 12.45 13 13V27C13 27.55 13.45 28 14 28C14.55 28 15 27.55 15 27V13C15 12.45 14.55 12 14 12ZM20 12C19.45 12 19 12.45 19 13V27C19 27.55 19.45 28 20 28C20.55 28 21 27.55 21 27V13C21 12.45 20.55 12 20 12Z" fill="#A30505" />
-                </svg>
-
-
-
-              </td>
-            </tr>
-            <!-- <tr class="sms_mu_spacing_div"></tr> -->
-
-          <?php
-          }
-          ?>
-        </table>
+                ?>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  </div>
-  </div>
   </div>
 
   <div>
 
     <script>
+      // function deleteUser(CustomerID) {
+      //   console.log(CustomerID);
+      // }
+
       function copyId(id) {
         // Create a temporary input element
         var tempInput = document.createElement("input");
@@ -463,8 +478,9 @@
     </script>
     <div id="edit-modal-full-width" class="Sms_mu_popoup_admin">
       <div class="overflow_div">
-        <?php include('signup.php'); ?>
-        <button type="button" id="sign_up_btn_close" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+        <?php include ('signup.php'); ?>
+        <button type="button" id="sign_up_btn_close" class="btn-close position-absolute top-0 end-0 m-3"
+          data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
     </div>
   </div>
@@ -476,16 +492,16 @@
     <!-- SVG icon -->
     <button type="button" class="btn-close" aria-label="Close" id="Sms_mu_close_password"></button>
     <form action="/authentication/change_password" method="POST">
-        <h1>Change Admin Password</h1>
-        <label class="form-label" style="text-align: left !important;">Password</label>
-        <input type="password" name="password" class="form-control">
-        <!-- <label class="form-label my-1" style="text-align: left !important;">Confirm Password</label>
+      <h1>Change Admin Password</h1>
+      <label class="form-label" style="text-align: left !important;">Password</label>
+      <input type="password" name="password" class="form-control">
+      <!-- <label class="form-label my-1" style="text-align: left !important;">Confirm Password</label>
         <input type="password" name="confirm_password" class="form-control"> -->
-        <div class="row" style="margin: 0 1px;">
-          <button class="btn btn-info my-3 col-12 text-center justify-content-center ">Change Admin Password</button>
-        </div>
+      <div class="row" style="margin: 0 1px;">
+        <button class="btn btn-info my-3 col-12 text-center justify-content-center ">Change Admin Password</button>
+      </div>
     </form>
-    
+
   </div>
   <script>
     function FunLogoutProfile() {
@@ -498,27 +514,27 @@
         console.log("Display set to none");
       }
     }
-    document.getElementById('sign-up-btn').addEventListener('click', function() {
+    document.getElementById('sign-up-btn').addEventListener('click', function () {
       document.getElementById('edit-modal-full-width').style.display = "block"
     });
-    document.getElementById('sign_up_btn_close').addEventListener('click', function() {
+    document.getElementById('sign_up_btn_close').addEventListener('click', function () {
       document.getElementById('edit-modal-full-width').style.display = "none"
     });
-    document.getElementById('change-password-btn').addEventListener('click', function() {
+    document.getElementById('change-password-btn').addEventListener('click', function () {
       document.getElementById('Sms_mu_change_password').style.display = "block"
     });
-    document.getElementById('Sms_mu_close_password').addEventListener('click', function() {
+    document.getElementById('Sms_mu_close_password').addEventListener('click', function () {
       document.getElementById('Sms_mu_change_password').style.display = "none"
     });
 
     function LogoutDisconecting() {
       fetch('/authentication/logout', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          credentials: 'same-origin' // Include cookies in the request
-        })
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'same-origin' // Include cookies in the request
+      })
         .then(response => {
           if (response.ok) {
             // Handle successful logout, e.g., redirect to login page

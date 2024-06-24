@@ -90,6 +90,38 @@ class Transaction
         }
     }
 
+
+    public static function get_all_transactions_by_customer_id($user_id, $customerId){
+        global $connection;
+        $orders = [];
+
+        try {
+            $query = "SELECT * FROM transactions WHERE user_id = ? AND customer_id = ? ORDER BY date_created DESC";
+            $stmt = $connection->prepare($query);
+            $stmt->bind_param('ii', $user_id, $customerId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+
+                    $row['billing'] = json_decode($row['billing'], true);
+                    $row['meta_data'] = json_decode($row['meta_data'], true);
+                    $row['line_items'] = json_decode($row['line_items'], true);
+                    $orders[] = $row;
+                }
+                $result->free();
+            } else {
+                echo "Error executing query: " . $stmt->error . "\n";
+            }
+
+            $stmt->close();
+        } catch (\mysqli_sql_exception $e) {
+            echo "Database error: " . $e->getMessage() . "\n";
+        }
+
+        return $orders;
+    }
     public static function get_all_transactions($user_id)
     {
         global $connection;

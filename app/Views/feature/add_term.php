@@ -132,7 +132,7 @@
                                 data-i18n="popoups.future_managment.add_new_term.name_of_term">The name of the
                                 term</label>
                             <input type="text" class="form-control rounded-3 p-3" id="sms_term_name"
-                                style="background-color: #EAEAEA" placeholder="Name Of Term" name="name[]">
+                                style="background-color: #EAEAEA" placeholder="Name Of Term" name="name">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="example-select" class="form-label fw-bold"
@@ -144,7 +144,8 @@
                                     <?php foreach ($attributes as $attribute) { ?>
                                         <option id="<?php echo $attribute['id']; ?>" value="<?php echo $attribute['id']; ?>"
                                             data-content="<?php echo $attribute['type']; ?>">
-                                            <?php echo $attribute['name']; ?></option>
+                                            <?php echo $attribute['name']; ?>
+                                        </option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -152,20 +153,20 @@
                         <!-- Adding terms to the feature -->
                         <div class="rounded-4">
                             <div class="col-12 col-md-12 rounded-2" id="sms_a_add_new_term">
-                          
+
                                 <div class="p-2" id="dynamic_input_container">
                                     <!-- Dynamic input fields will be added here -->
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
-                        <div class="text-center mt-2 col-sm-6 col-md-6">
+                    <div class="d-flex justify-content-start flex-column flex-sm-row gap-3 p-2">
+                        <!-- <div class="text-center mt-2 col-sm-6 col-md-6">
                             <button type="button" onclick="sms_a_add_new_term_input()"
                                 class="btn btn-primary col-12 col-md-12 rounded-2 py-3"
                                 data-i18n="popoups.future_managment.add_new_term.term_end_btn">To add another term click
                                 here +</button>
-                        </div>
+                        </div> -->
                         <div class="text-center mt-2 col-sm-6 col-md-6">
                             <button type="button" onclick="submit_add_term()" id="term_disable"
                                 class="btn btn-info col-12 col-md-12 rounded-2 py-3"
@@ -244,20 +245,20 @@
         var baseInput = document.createElement('div');
         baseInput.classList.add('col-md-12', 'mb-3', 'p-0');
 
-    //     if (contentType === 'select') {
-    //         baseInput.innerHTML = `
-    //     <div class="gx-3">
-    //         <div class="col-md-6 mb-3">
-    //             <label class="form-label fw-bold">The name of the term</label>
-    //             <input type="text" class="form-control rounded-3 p-3" name="name" style="background-color: #EAEAEA" placeholder="Name Of Term">
-    //         </div>
-    //     </div>
-    // `;
-    //     }
+        //     if (contentType === 'select') {
+        //         baseInput.innerHTML = `
+        //     <div class="gx-3">
+        //         <div class="col-md-6 mb-3">
+        //             <label class="form-label fw-bold">The name of the term</label>
+        //             <input type="text" class="form-control rounded-3 p-3" name="name" style="background-color: #EAEAEA" placeholder="Name Of Term">
+        //         </div>
+        //     </div>
+        // `;
+        //     }
 
 
         // Add specific content based on contentType
-         if (contentType === 'color') {
+        if (contentType === 'color') {
             baseInput.innerHTML += `
 
             <div class="rounded">
@@ -353,12 +354,12 @@
         let form = document.getElementById('term_form_data');
         // Create FormData object from the form
         let formData = new FormData(form);
-        console.log('form data ', formData)
-
+        console.log('form data ', formData);
+        const AttributeID = document.getElementById('sms_feature_select').value;
         const submitButton = document.getElementById("term_disable");
         submitButton.disabled = true;
         // Send form data with fetch API
-        fetch(`/attributes/${formData.get('sms_feature_select')}/terms/add`, {
+        fetch(`/attributes/${AttributeID}/terms/add`, {
             method: 'POST',
             body: formData
         })
@@ -369,6 +370,7 @@
                     document.getElementById('sms_term_error-message').style.display = 'none';
                     window.location.reload();
                 } else {
+                    submitButton.disabled = false;
                     // Form submission failed, display error message
                     document.getElementById('sms_term_error-message').style.display = 'block';
                     document.getElementById('sms_term_success-message').style.display = 'none'; // Hide success message if it was displayed before
@@ -458,38 +460,38 @@
     //             console.error('Error submitting form data:', error);
     //         });
     // }
-    function submit_add_term() {
-        // Get the form element
-        let form = document.getElementById('term_form_data');
-        // Create FormData object from the form
-        let formData = new FormData(form);
-        console.log('form data ', formData)
+    // function submit_add_term() {
+    //     // Get the form element
+    //     let form = document.getElementById('term_form_data');
+    //     // Create FormData object from the form
+    //     let formData = new FormData(form);
+    //     console.log('form data ', formData)
 
-        const submitButton = document.getElementById("term_disable");
-        submitButton.disabled = true;
-        // Send form data with fetch API
-        fetch(`/attributes/${formData.get('sms_feature_select')}/terms/add`, {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => {
-                if (response.ok) {
-                    // Form submission succeeded, display success message
-                    document.getElementById('sms_term_success-message').style.display = 'block';
-                    document.getElementById('sms_term_error-message').style.display = 'none';
-                    window.location.reload();
-                } else {
-                    // Form submission failed, display error message
-                    document.getElementById('sms_term_error-message').style.display = 'block';
-                    document.getElementById('sms_term_success-message').style.display = 'none'; // Hide success message if it was displayed before
-                }
-            })
-            .catch(error => {
-                // Network error occurred, display error message
-                document.getElementById('sms_term_error-message').style.display = 'block';
-                console.error('Error submitting form data:', error);
-            });
-    }
+    //     const submitButton = document.getElementById("term_disable");
+    //     submitButton.disabled = true;
+    //     // Send form data with fetch API
+    //     fetch(`/attributes/${formData.get('sms_feature_select')}/terms/add`, {
+    //         method: 'POST',
+    //         body: formData
+    //     })
+    //         .then(response => {
+    //             if (response.ok) {
+    //                 // Form submission succeeded, display success message
+    //                 document.getElementById('sms_term_success-message').style.display = 'block';
+    //                 document.getElementById('sms_term_error-message').style.display = 'none';
+    //                 window.location.reload();
+    //             } else {
+    //                 // Form submission failed, display error message
+    //                 document.getElementById('sms_term_error-message').style.display = 'block';
+    //                 document.getElementById('sms_term_success-message').style.display = 'none'; // Hide success message if it was displayed before
+    //             }
+    //         })
+    //         .catch(error => {
+    //             // Network error occurred, display error message
+    //             document.getElementById('sms_term_error-message').style.display = 'block';
+    //             console.error('Error submitting form data:', error);
+    //         });
+    // }
     function sms_term_close_success_message() {
         document.getElementById('sms_term_success-message').style.display = 'none';
     }
