@@ -116,28 +116,28 @@ class CategoryController
             return;
         }
 
+
         $data = $result["data"];
 
-        $file_path = '';
-        if(isset($data['image'])) {
-            $data = $result["data"];
-            $image = "";
-            if($data["image"] !== ""){
-                $image = $data["image"];
-                $file_path = FileHelper::save_file($image, "categories/".$data['name']);
-            }
+        // $file_path = '';
+        // if(isset($data['image'])) {
+        //     $data = $result["data"];
+        //     $image = "";
+        //     if($data["image"] !== ""){
+        //         $image = $data["image"];
+        //         $file_path = FileHelper::save_file($image, "categories/".$data['name']);
+        //     }
             
-        }
-        $payload = [
+        // }
+        $payload = json_encode([
             'name' => $data['name'], 
             'parent' => $data['parent']
-        ];
-        if($file_path !== "") {
-            $payload['image'] = [
-                'src' => $file_path
-            ];
-        }
-        $payload = json_encode($payload);
+        ]);
+        // if($file_path !== "") {
+        //     $payload['image'] = [
+        //         'src' => $file_path
+        //     ];
+        // }
 
         
         $response = Base::wc_update($configuration, $this->endpoint."/".$id, $payload);

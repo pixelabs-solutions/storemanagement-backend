@@ -278,10 +278,10 @@ function submit_edit_ctg_form() {
         const apiUrl = `/categories/${id}`;
         fetch(apiUrl, {
             method: 'PUT',
+            body: JSON.stringify(form_data),
             headers: {
                 'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(form_data)
+            }
         })
         .then(response => {
             if (response.ok) {

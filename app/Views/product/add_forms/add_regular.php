@@ -340,7 +340,7 @@
                 });
             })
             .then(response => {
-                if (response.status === 201) {
+                if (response.status === 201  || response.ok) {
                     // Form submission succeeded, display success message
                     document.getElementById('sms_add_regular_success_message').style.display = 'block';
                     document.getElementById('sms_add_regular_error_message').style.display = 'none';
