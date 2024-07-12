@@ -350,6 +350,13 @@
 
 
     function submit_add_term() {
+
+                    // Show the loading indicator
+    document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
+    document.getElementById('modal-large').style.overflow = 'hidden';
+
+
         // Get the form element
         let form = document.getElementById('term_form_data');
         // Create FormData object from the form
@@ -365,12 +372,17 @@
         })
             .then(response => {
                 if (response.ok) {
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
+
                     // Form submission succeeded, display success message
                     document.getElementById('sms_term_success-message').style.display = 'block';
                     document.getElementById('sms_term_error-message').style.display = 'none';
                     window.location.reload();
                 } else {
                     submitButton.disabled = false;
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     // Form submission failed, display error message
                     document.getElementById('sms_term_error-message').style.display = 'block';
                     document.getElementById('sms_term_success-message').style.display = 'none'; // Hide success message if it was displayed before

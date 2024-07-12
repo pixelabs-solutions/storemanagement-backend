@@ -136,6 +136,8 @@
                                             (leave blank without limit) </label>
                                         <input type="number" class="form-control rounded-3 p-3 fw-bold" id="usage_limit"
                                             style="background-color: #EAEAEA" placeholder="Limit Usage">
+
+                                            <input type="hidden" id="coupons_id_edit">
                                     </div>
 
                                 </div>
@@ -194,15 +196,16 @@
             'amount': document.getElementById('discount_amount').value,
             'date_expires': document.getElementById('expiration_date').value,
             'usage_limit': document.getElementById('usage_limit').value,
-
         };
-        let editCouponElement = document.getElementById('edit_coupon');
-        let editCouponId = editCouponElement.getAttribute('coupon_id');
-
+        let editCouponElement = document.getElementById('coupons_id_edit');
+        let editCouponId = editCouponElement.value;
+// console.log(editCouponId);
         const EditCouponsubmitButton = document.getElementById("Sms_mu_btn_submit");
         EditCouponsubmitButton.disabled = true;
-
-        console.log(editCouponId);
+        
+        document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
+        // console.log(editCouponId);
         fetch(`/coupons/${editCouponId}`, {
             method: 'PUT',
             body: JSON.stringify(CouponeditData),
@@ -213,15 +216,21 @@
             .then(response => {
                 if (response.status === 200) {
                     // Form submission succeeded, display success message
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     document.getElementById('sms_edit_success-message').style.display = 'block';
                     window.location.reload();
                 } else {
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     // Form submission failed, display error message
                     document.getElementById('sms_edit_error-message').style.display = 'block';
                     document.getElementById('sms_edit_success-message').style.display = 'none'; // Hide success message if it was displayed before
                 }
             })
             .catch(error => {
+                document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                 // Network error occurred, display error message
                 document.getElementById('sms_edit_error-message').style.display = 'block';
                 document.getElementById('Sms_mu_btn_submit').disabled = false;
@@ -239,7 +248,8 @@
         button.addEventListener("click", function () {
             // Get the closest table row (tr) element
             const row = this.closest("tr");
-
+            const couponId = this.getAttribute("coupon_id");
+// console.log(couponId);
             // Create an empty object to store data
             const rowData = {};
 
@@ -254,7 +264,7 @@
                 rowData[dataKey] = cellValue;
             });
 
-            console.log("Row Data:", rowData);
+            // console.log("Row Data:", rowData);
             var usageLimit = rowData[3].split('/')[1]; // This will extract "15" from "0/15"
             document.getElementById('coupons_code').value = rowData[0];
             var rawValue = rowData[2];
@@ -262,7 +272,9 @@
             document.getElementById('discount_amount').value = cleanedValue; 
             document.getElementById('usage_limit').value = usageLimit;
             document.getElementById('expiration_date').value = rowData[4];
+            document.getElementById('coupons_id_edit').value = couponId;
 
+            
 
             const discountTypeSelect = document.getElementById("discount_type");
 

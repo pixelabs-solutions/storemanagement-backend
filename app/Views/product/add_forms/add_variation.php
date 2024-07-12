@@ -372,7 +372,7 @@
     })
 
     function sms_add_variations_submit() {
-    console.log("hello");
+    // console.log("hello");
 
     // Log all the form values
     var formData = {
@@ -466,7 +466,7 @@
 
             let product_variation =document.getAnimations('product_variation');
             product_variation.disabled = true;
-            console.log(formData);
+            // console.log(formData);
             document.getElementById("product_variation").disabled = true;
             return fetch('product/add', {
                 method: 'POST',
@@ -545,7 +545,7 @@ function fun_save_changes() {
                     // Create a new div for the selected option
                     let newDiv = document.createElement('div');
                     newDiv.classList.add('selected-option');
-console.log(option)
+// console.log(option)
                     // Customize the content of the div
                     newDiv.innerHTML = `  
                     <label class="form-label fw-bold mt-5" data-attribute-selection="${option.value}">Select ${option.value} Attribute</label>
@@ -600,7 +600,7 @@ console.log(option)
                         removeItemButton: true
                     });
 
-                    console.log('Select box options:', selectBox.innerHTML);
+                    // console.log('Select box options:', selectBox.innerHTML);
                 })
                 .catch(error => {
                     console.error('Error fetching terms:', error);
@@ -696,7 +696,7 @@ function generate_variations() {
     ];
 
     const combinations = getCombinations(arrays);
-    console.log(combinations);
+    // console.log(combinations);
 </script>
 
 <!-- input javascript code  -->

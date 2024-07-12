@@ -255,7 +255,12 @@
 
                 // Disable the button before making the request
                 AddsubmitButton.disabled = true;
+                document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+                document.body.style.overflow = "hidden";
+                document.getElementById('sms_category_w_add_modal').style.overflow = 'hidden';
+                document.getElementById('modal-Category-large').style.overflow = 'hidden';
 
+    
                 fetch('/categories/add', {
                     method: 'POST',
                     headers: {
@@ -266,6 +271,8 @@
                     .then(response => {
 
                         if (response.ok) {
+                            document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                             // Form submission succeeded, display success message
                             document.getElementById('sms_addForm_category_success_message').style.display = 'block';
                             document.getElementById('sms_addForm_category_error_message').style.display = 'none';
@@ -273,6 +280,8 @@
 
                             window.location.reload();
                         } else {
+                            document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                             // Form submission failed, display error message
                             document.getElementById('sms_addForm_category_error_message').style.display = 'block';
                             document.getElementById('sms_addForm_category_success_message').style.display = 'none';

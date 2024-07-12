@@ -591,8 +591,8 @@ require_once __DIR__ . '/../partials/header.php';
                         <?php foreach ($products as $product) {
                             $product_json = json_encode($product);
                             if ($product['type'] == 'simple') {
-                                if (isset($product['images'][0]['src'])) {
-                                    $prodimage = $product['images'][0]['src'];
+                                if (isset($product['images'][0]['woocommerce_thumbnail'])) {
+                                    $prodimage = $product['images'][0]['woocommerce_thumbnail'];
                                 } else {
                                     $prodimage = "https://placehold.co/400x400?text=No%20Image%20Found";
                                 }
@@ -600,7 +600,7 @@ require_once __DIR__ . '/../partials/header.php';
                                 <tr class="sms_mu_tr_product category_row" data-name="<?php echo $product['name']; ?>"
                                     data-categories="<?php echo implode(',', array_column($product['categories'], 'name')); ?>">
                                     <td>
-                                        <img class="sms_product_img" height="100px" width="100px"
+                                        <img class="sms_product_img" loading="lazy" height="100px" width="100px"
                                             src="<?php echo $prodimage; ?>" alt="">
                                     </td>
                                     <td class=""><span style="font-weight:bold">Product name:</span>
@@ -654,7 +654,7 @@ require_once __DIR__ . '/../partials/header.php';
                             <tr class="sms_mu_tr_product category_row" data-name="<?php echo $product['name']; ?>"
                                 data-categories="<?php echo implode(',', array_column($product['categories'], 'name')); ?>">
                                 <td>
-                                    <img class="sms_product_img" src="/assets/dist/img/products/bag.png" alt="">
+                                    <img class="sms_product_img" loading="lazy" src="/assets/dist/img/products/bag.png" alt="">
 
                                 </td>
                                 <td class=""><span style="font-weight:bold">Product name:</span>
@@ -690,8 +690,8 @@ require_once __DIR__ . '/../partials/header.php';
                                 <?php foreach ($products as $product) {
                                     $product_json = json_encode($product);
                                     if ($product['type'] == 'simple') {
-                                        if (isset($product['images'][0]['src'])) {
-                                            $prodimage = $product['images'][0]['src'];
+                                        if (isset($product['images'][0]['woocommerce_thumbnail'])) {
+                                            $prodimage = $product['images'][0]['woocommerce_thumbnail'];
                                         } else {
                                             $prodimage = "https://placehold.co/400x400?text=No%20Image%20Found";
                                         }
@@ -699,7 +699,7 @@ require_once __DIR__ . '/../partials/header.php';
                                 <tr class="sms_mu_tr_product category_row" data-name="<?php echo $product['name']; ?>"
                                     data-categories="<?php echo implode(',', array_column($product['categories'], 'name')); ?>">
                                     <td>
-                                        <img class="sms_product_img" height="100px" width="100px"
+                                        <img class="sms_product_img" loading="lazy" height="100px" width="100px"
                                             src="<?php echo $prodimage; ?>" alt="" loading="lazy">
                                     </td>
                                     <td class="">
@@ -748,7 +748,7 @@ require_once __DIR__ . '/../partials/header.php';
                                 <tr class="sms_mu_tr_product category_row" data-name="<?php echo $product['name']; ?>"
                                     data-categories="<?php echo implode(',', array_column($product['categories'], 'name')); ?>">
                                     <td>
-                                        <img class="sms_product_img" src="/assets/dist/img/products/bag.png" alt=""
+                                        <img class="sms_product_img" loading="lazy" src="/assets/dist/img/products/bag.png" alt=""
                                             loading="lazy">
                                     </td>
                                     <td class="">
@@ -1314,6 +1314,8 @@ require_once __DIR__ . '/../partials/header.php';
                 }
 
                 formData.append('csv_file', fileInput.files[0]);
+                document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+                document.body.style.overflow = "hidden";
 
                 fetch('/products/import', {
                     method: 'POST',
@@ -1328,13 +1330,19 @@ require_once __DIR__ . '/../partials/header.php';
                     .then(data => {
                         console.log('POST request successful');
                         console.log(data);
+                        document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                         document.getElementById('sms_delete_notification').innerHTML = '<div class="alert alert-success" role="alert">File uploaded successfully!</div>';
                         setTimeout(() => {
+                            document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                             document.getElementById('sms_delete_notification').style.display = "block"
                             location.reload();
                         }, 500);
                     })
                     .catch(error => {
+                        document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                         console.error('There was a problem with your fetch operation:', error);
                         document.getElementById('sms_delete_notification').innerHTML = '<div class="alert alert-danger" role="alert">There was an error uploading the file. Please try again.</div>';
                     });
@@ -1343,6 +1351,9 @@ require_once __DIR__ . '/../partials/header.php';
             // Function to handle export
             // Function to handle export
             function exportData() {
+                document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+                document.body.style.overflow = "hidden";
+
                 // Fetch API endpoint for export
                 fetch('/products/export')
                     .then(response => {
@@ -1360,10 +1371,14 @@ require_once __DIR__ . '/../partials/header.php';
                         a.click();
                         document.body.removeChild(a);
                         window.URL.revokeObjectURL(url);
+                        document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                         document.getElementById('sms_delete_notification').innerHTML = '<div class="alert alert-success" role="alert">Data exported successfully!</div>';
                     })
                     .catch(error => {
                         console.error('Error:', error);
+                        document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                         document.getElementById('sms_delete_notification').innerHTML = '<div class="alert alert-danger" role="alert">There was an error exporting the data. Please try again.</div>';
                     });
             }

@@ -216,6 +216,13 @@
     });
 
     function fun_etid_term() {
+
+                   // Show the loading indicator
+    document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
+    document.getElementById('modal-large').style.overflow = 'hidden';
+
+
         let data_form_exsist = {
             'nameOfTerm': document.getElementById('e_name_term').value,
             'select_value': document.getElementById('sms_mu_select_name_term').value,
@@ -231,6 +238,8 @@
         })
             .then(response => {
                 if (response.status === 200) {
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     // Form submission succeeded, display success message
                     document.getElementById('sms_editForm_success_message').style.display = 'block';
                     document.getElementById('sms_add_editForm_error_message').style.display = 'none';
@@ -238,6 +247,10 @@
 
                     window.location.reload();
                 } else {
+
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
+
                     // Form submission failed, display error message
                     document.getElementById('sms_add_editForm_error_message').style.display = 'block';
                     document.getElementById('sms_editForm_success_message').style.display = 'none';
@@ -246,6 +259,8 @@
                 }
             })
             .catch(error => {
+                document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                 document.getElementById('sms_add_editForm_error_message').style.display = 'block';
                 console.error('Error submitting form data:', error);
             });

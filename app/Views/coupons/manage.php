@@ -227,6 +227,8 @@ function updateInputType() {
             'usage_limit': document.getElementById('sms_Usage_limit').value,
         };
 
+        document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
 
         fetch('/coupons/add', {
             method: 'POST',
@@ -239,11 +241,15 @@ function updateInputType() {
                 console.log(response);
                 if (response.status === 201 || response.ok) {
                     // Form submission succeeded, display success message
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     document.getElementById('sms_add_coupons_success-message').style.display = 'block';
                     document.getElementById('sms_add_coupons_error-message').style.display = 'none';
 
                     window.location.reload();
                 } else {
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     // Form submission failed, display error message
                     document.getElementById('sms_add_coupons_error-message').style.display = 'block';
                     document.getElementById('sms_add_coupons_error-message').style.display = 'block';
@@ -251,6 +257,8 @@ function updateInputType() {
                 }
             })
             .catch(error => {
+                document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                 // Network error occurred, display error message
                 document.getElementById('sms_add_coupons_error-message').style.display = 'block';
                 document.getElementById('sms_mu_manage_submit').disabled = false;

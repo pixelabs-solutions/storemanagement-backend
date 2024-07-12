@@ -347,7 +347,8 @@
     var data = {
       status: selectedStatus
     };
-
+    document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
     // Make fetch request
     fetch('/transactions/update_status/' + transactions.id, {
         method: 'PUT',
@@ -407,7 +408,8 @@
         id: id,
         status: selectedStatus
       };
-
+      document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+      document.body.style.overflow = "hidden";
       // Make fetch request
       fetch(`/transactions/update_status/${id}`, {
           method: 'PUT',

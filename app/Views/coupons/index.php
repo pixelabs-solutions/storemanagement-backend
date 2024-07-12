@@ -384,6 +384,9 @@ require_once __DIR__ . '/../partials/header.php';
 
 <script>
   function deleteCouponsParent(couponId) {
+    document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
+    
     fetch("/coupons/" + couponId, {
         method: "DELETE",
         headers: {

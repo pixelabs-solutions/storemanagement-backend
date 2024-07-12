@@ -560,7 +560,8 @@ require_once __DIR__ . '/../partials/header.php';
         id: selectedIds,
         status: selectedStatus
       };
-
+      document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+      document.body.style.overflow = "hidden";
       // Make fetch request
       fetch('/transactions/update_bulk_status', {
           method: 'POST',

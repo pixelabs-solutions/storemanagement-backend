@@ -615,6 +615,13 @@
     //         });
     // }
     function submit_add_feature_Data() {
+
+            // Show the loading indicator
+    document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
+    document.getElementById('modal-large').style.overflow = 'hidden';
+
+
         const name = document.getElementById('sms_attribute_name').value;
         const type = document.getElementById('sms_attribute_select').value;
 
@@ -666,13 +673,17 @@
             .then(response => {
                 if (response.ok) {
                     // Form submission succeeded, display success message
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     document.getElementById('sms_feature_success_message').style.display = 'block';
                     document.getElementById('sms_feature_error_message').style.display = 'none';
                     document.getElementById("feature_disbale").disabled = true;
 
-                    window.location.reload();
+                  window.location.reload();
                 } else {
                     // Form submission failed, display error message
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     document.getElementById('sms_feature_error_message').style.display = 'block';
                     document.getElementById('sms_feature_success_message').style.display = 'none'; 
                     document.getElementById("feature_disbale").disabled = false;

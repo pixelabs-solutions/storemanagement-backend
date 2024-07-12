@@ -504,6 +504,9 @@
             console.log('Product ID:', productIdValue);
             
 
+            document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
+    
         console.log("Deleting Product with ID: " + productIdValue);
         fetch("/product/" + productIdValue, {
             method: "DELETE",

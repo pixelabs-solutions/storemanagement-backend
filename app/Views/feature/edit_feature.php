@@ -61,6 +61,13 @@
 <script>
 
 function submit_edit_feature_Data() {
+
+               // Show the loading indicator
+               document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
+    document.getElementById('modal-large').style.overflow = 'hidden';
+
+    
     // Get form data
     const attributeName = document.getElementById('sms_edit_attribute_name').value;
     const attributeType = document.getElementById('sms_edit_attribute_select').value;

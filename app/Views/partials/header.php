@@ -520,6 +520,61 @@ use Pixelabs\StoreManagement\Models\Authentication;
          background-color: #EAEAEA !important;
          text-align: center;
       }
+
+
+      
+  /* Style for the loader, customize as needed */
+  .ajaxloader {
+    border: 16px solid #f3f3f3;
+    /* Light grey */
+    border-top: 16px solid #3498db;
+    /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Style to center the loader */
+  #ajaxloadingIndicator {
+    display: flex;
+    
+    align-items: center;
+    justify-content: center;
+    position: -webkit-sticky; /* Safari */
+  position: fixed;
+  top: 50%;    
+    left: 50%;
+    height: 300vh;
+    width: 100vw;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    /* Ensure it's on top */
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4.5px);
+    -webkit-backdrop-filter: blur(4.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  /* Disable scrolling */
+  .no-scroll {
+    overflow: hidden !important;
+  }
+
+
    </style>
 </head>
 
@@ -1221,7 +1276,7 @@ use Pixelabs\StoreManagement\Models\Authentication;
 
             syncButton.addEventListener('click', function() {
                 // Show the loader
-                loader.style.display = 'block';
+                loader.style.display = 'flex';
 
                 // Create a new XMLHttpRequest
                 var xhr = new XMLHttpRequest();
@@ -1256,3 +1311,7 @@ use Pixelabs\StoreManagement\Models\Authentication;
             });
         });
     </script>
+
+<div id="ajaxloadingIndicator" style="display: none;">
+  <div class="ajaxloader"></div>
+</div>
