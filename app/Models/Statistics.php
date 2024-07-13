@@ -408,88 +408,375 @@ class Statistics
         }
     }
 
-
     public static function get_revenue_stats($filters = []) {
         global $connection;
-        $date_range = $filters ? self::getDateRange($filters) : [];
+        $date_range = self::getDateRange($filters);
         try {
-            $user_id = Authentication::getUserIdFromToken();    
-            
-            $order_total_query = "SELECT COUNT(*) AS transaction_count FROM transactions WHERE user_id = $user_id";
-            if ($date_range != null && !empty($date_range)) {
-                $order_total_query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
-            }
-            $order_total_result = $connection->query($order_total_query);
-            $order_total_row = $order_total_result->fetch_assoc();
-
-            $totalOrders = $order_total_row['transaction_count'];
-
-            // $totalOrders = count($orders);
-
-
-            $query = "SELECT *  FROM transactions WHERE user_id = $user_id";
-            if ($date_range != null && !empty($date_range)) {
-                $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
-            }
-            $result = $connection->query($query);
-
-            $totalRevenue = 0;
-            $totalShipments = 0;
-            $totalrehearsals = 0;
-            while ($order = $result->fetch_assoc()) {
-                $totalRevenue += $order['total'];
-                $totalShipments += $order['shipping_total']; 
-
-                if($order['status'] == "cancelled"){
-                    $totalrehearsals += $order['total'];
+            $user_id = Authentication::getUserIdFromToken();
+    
+            // Initialize months array based on date range
+            $months = [];
+            if (!empty($date_range)) {
+                if ($filters['query'] == 'last_week') {
+                    $groupBy = 'DAY';
+                    $period = new \DatePeriod(
+                        new \DateTime($date_range['after']),
+                        new \DateInterval('P1D'),
+                        (new \DateTime($date_range['before']))->modify('+1 day')
+                    );
+                    foreach ($period as $date) {
+                        $formattedDate = $date->format('Y-m-d');
+                        $months[$formattedDate] = 0;
+                    }
+                } elseif ($filters['query'] == 'current_month') {
+                    $groupBy = 'WEEK';
+                    $start = new \DateTime($date_range['after']);
+                    $end = new \DateTime($date_range['before']);
+                    $end = $end->modify('+1 day');
+                    $interval = new \DateInterval('P1W');
+                    $period = new \DatePeriod($start, $interval, $end);
+                    $weekNumber = 1;
+                    foreach ($period as $date) {
+                        $periodKey = self::ordinal($weekNumber) . ' week of ' . $date->format('F');
+                        $months[$periodKey] = 0;
+                        $weekNumber++;
+                    }
+                } elseif ($filters['query'] == 'last_year') {
+                    $groupBy = 'MONTH';
+                    $start = new \DateTime($date_range['after']);
+                    $end = new \DateTime($date_range['before']);
+                    $interval = new \DateInterval('P1M');
+                    $period = new \DatePeriod($start, $interval, $end);
+                    foreach ($period as $date) {
+                        $month = $date->format('Y-m');
+                        $months[$month] = 0;
+                    }
+                } elseif (!empty($filters['date_from']) && !empty($filters['date_to'])) {
+                    $groupBy = 'DAY';
+                    $period = new \DatePeriod(
+                        new \DateTime($date_range['after']),
+                        new \DateInterval('P1D'),
+                        (new \DateTime($date_range['before']))->modify('+1 day')
+                    );
+                    foreach ($period as $date) {
+                        $formattedDate = $date->format('Y-m-d');
+                        $months[$formattedDate] = 0;
+                    }
                 }
             }
     
-            $orderAverage = $totalOrders > 0 ? round($totalRevenue / $totalOrders) : 0;
-            $totalcuttings = $totalShipments + $totalrehearsals;
-            $netIncome = $totalRevenue - $totalcuttings;
-    
-            return [
-                'totalRevenue' => $totalRevenue,
-                'totalrehearsals' => $totalrehearsals,
-                'orderAverage' => $orderAverage,
-                'totalShipments' => $totalShipments,
-                'netIncome' => $netIncome
+            // Initialize response structure
+            $response = [
+                'totalRevenue' => ['total' => 0, 'byDate' => $months],
+                'totalRehearsals' => ['total' => 0, 'byDate' => $months],
+                'orderAverage' => ['total' => 0, 'byDate' => $months],
+                'totalShipments' => ['total' => 0, 'byDate' => $months],
+                'netIncome' => ['total' => 0, 'byDate' => $months],
+                'numberOfOrders' => ['total' => 0, 'byDate' => $months],
+                'totalDistinctProductsOnOrder' => ['total' => 0, 'byDate' => $months]
             ];
+    
+            // SQL query to get revenue and group by the specified period
+            $query = "SELECT DATE_FORMAT(date_created, '%Y-%m-%d') as day, DATE_FORMAT(date_created, '%Y-%m') as month, WEEK(date_created, 3) as week, SUM(total) as total_revenue FROM transactions WHERE user_id = $user_id";
+            if (!empty($date_range)) {
+                $query .= " AND date_created >= '" . $date_range['after'] . "' AND date_created <= '" . $date_range['before'] . "'";
+            }
+            $query .= " GROUP BY ";
+            if ($groupBy == 'DAY') {
+                $query .= "day";
+            } elseif ($groupBy == 'WEEK') {
+                $query .= "week";
+            } elseif ($groupBy == 'MONTH') {
+                $query .= "month";
+            }
+            $result = $connection->query($query);
+            
+            while ($row = $result->fetch_assoc()) {
+                if ($groupBy == 'DAY') {
+                    $periodKey = $row['day'];
+                } elseif ($groupBy == 'WEEK') {
+                    $week = $row['week'] - intval((new \DateTime($date_range['after']))->format('W')) + 1;
+                    $periodKey = self::ordinal($week) . ' week of ' . (new \DateTime($row['day']))->format('F');
+                } elseif ($groupBy == 'MONTH') {
+                    $periodKey = $row['month'];
+                }
+                if (isset($response['totalRevenue']['byDate'][$periodKey])) {
+                    $response['totalRevenue']['byDate'][$periodKey] += floatval($row['total_revenue']);
+                    $response['totalRevenue']['total'] += floatval($row['total_revenue']);
+                }
+            }
+    
+    
+            return $response;
         } catch (\Exception $e) {
-            echo 'Error fetching orders: ' . $e->getMessage();
+            echo 'Error: ' . $e->getMessage();
             return [];
         }
     }
     
     
+    
+    
+    // public static function get_overview_stats($filters = [])
+    // {
+    //     $date_range = $filters ? self::getDateRange($filters) : [];
+
+    //     echo json_encode($date_range);
+    //     try
+    //     {
+    //         $user_id = Authentication::getUserIdFromToken();
+
+    //         $total_products = Base::get_number_of_products($user_id, $date_range);
+    //         $total_orders = Base::get_number_of_orders($user_id, $date_range);
+    //         $total_revenue = Base::get_total_revenue($user_id, $date_range);
+    //         $new_customers_count = Base::get_new_customers_count($user_id, $date_range);
+    //         $returning_customers_count = Base::get_returning_customers_count($user_id, $date_range);
+
+    //         return [
+    //             'totalProducts' => $total_products,
+    //             'totalOrders' => $total_orders,
+    //             'totalRevenue' => $total_revenue,
+    //             'newCustomers' => $new_customers_count,
+    //             'returningCustomers' => $returning_customers_count
+    //         ];
+
+
+    //     }
+    //     catch (\Exception $e) 
+    //     {
+    //         echo 'Error fetching orders: ' . $e->getMessage();
+    //         return [];
+    //     }
+    // }
+
     public static function get_overview_stats($filters = [])
     {
         $date_range = $filters ? self::getDateRange($filters) : [];
-        try
-        {
-            $user_id = Authentication::getUserIdFromToken();
-
-            $total_products = Base::get_number_of_products($user_id, $date_range);
-            $total_orders = Base::get_number_of_orders($user_id, $date_range);
-            $total_revenue = Base::get_total_revenue($user_id, $date_range);
-            $new_customers_count = Base::get_new_customers_count($user_id, $date_range);
-            $returning_customers_count = Base::get_returning_customers_count($user_id, $date_range);
-
-            return [
-                'totalProducts' => $total_products,
-                'totalOrders' => $total_orders,
-                'totalRevenue' => $total_revenue,
-                'newCustomers' => $new_customers_count,
-                'returningCustomers' => $returning_customers_count
+    
+        // Check if $filters["query"] is "last_week"
+        if (isset($filters["query"]) && $filters["query"] === "last_week") {
+            $date_range = self::getDateRange($filters);
+    
+            // Initialize result arrays
+            $result = [
+                'totalProducts' => ['total' => 0, 'byDate' => []],
+                'totalOrders' => ['total' => 0, 'byDate' => []],
+                'totalRevenue' => ['total' => 0, 'byDate' => []],
+                'newCustomers' => ['total' => 0, 'byDate' => []],
+                'returningCustomers' => ['total' => 0, 'byDate' => []]
             ];
+    
+            // Get user ID from token
+            $user_id = Authentication::getUserIdFromToken();
+    
+            // Get data for each metric by date
+            $dates = self::generateDateRangeArray($date_range['after'], $date_range['before']);
+            foreach ($dates as $date) {
+                $day_start = $date->format('Y-m-d') . 'T00:00:00';
+                $day_end = $date->format('Y-m-d') . 'T23:59:59';
+    
+                // Calculate metrics for each date
+                $result['totalProducts']['byDate'][$date->format('Y-m-d')] = Base::get_number_of_products($user_id, ['after' => $day_start, 'before' => $day_end]);
+                $result['totalOrders']['byDate'][$date->format('Y-m-d')] = Base::get_number_of_orders($user_id, ['after' => $day_start, 'before' => $day_end]);
+                $result['totalRevenue']['byDate'][$date->format('Y-m-d')] = Base::get_total_revenue($user_id, ['after' => $day_start, 'before' => $day_end]);
+                $result['newCustomers']['byDate'][$date->format('Y-m-d')] = Base::get_new_customers_count($user_id, ['after' => $day_start, 'before' => $day_end]);
+                $result['returningCustomers']['byDate'][$date->format('Y-m-d')] = Base::get_returning_customers_count($user_id, ['after' => $day_start, 'before' => $day_end]);
+            }
+    
+            // Calculate totals
+            foreach (array_keys($result) as $metric) {
+                $result[$metric]['total'] = array_sum($result[$metric]['byDate']);
+            }
+    
+            return $result;
+        } elseif (isset($filters["query"]) && $filters["query"] === "current_month") {
+            try {
+                $user_id = Authentication::getUserIdFromToken();
+                
+                // Get the current month and year
+                $current_month = date('m');
+                $current_year = date('Y');
+                
+                // Get the number of weeks in the current month
+                $num_weeks = intval(date('t', strtotime("$current_year-$current_month-01")) / 7) + 1;
+                
+                // Initialize result array
+                $result = [
+                    'totalProducts' => ['total' => 0, 'byDate' => []],
+                    'totalOrders' => ['total' => 0, 'byDate' => []],
+                    'totalRevenue' => ['total' => 0, 'byDate' => []],
+                    'newCustomers' => ['total' => 0, 'byDate' => []],
+                    'returningCustomers' => ['total' => 0, 'byDate' => []]
+                ];
+                
+                // Iterate over each week of the current month
+                for ($week = 1; $week <= $num_weeks; $week++) {
+                    // Determine the date range for each week
+                    $start_date = date("Y-m-d", strtotime("first day of $current_year-$current_month"));
+                    $end_date = date("Y-m-d", strtotime("last day of $current_year-$current_month"));
+                    
+                    // Adjust start and end dates for each week
+                    $week_start = date("Y-m-d", strtotime("$start_date + " . (($week - 1) * 7) . " days"));
+                    $week_end = date("Y-m-d", strtotime("$start_date + " . (($week * 7) - 1) . " days"));
+                    
+                    // Calculate metrics for the current week
+                    $result['totalProducts']['byDate']["${week}th week of " . date('F', strtotime("$current_year-$current_month-01"))] = Base::get_number_of_products($user_id, ['after' => $week_start, 'before' => $week_end]);
+                    $result['totalOrders']['byDate']["${week}th week of " . date('F', strtotime("$current_year-$current_month-01"))] = Base::get_number_of_orders($user_id, ['after' => $week_start, 'before' => $week_end]);
+                    $result['totalRevenue']['byDate']["${week}th week of " . date('F', strtotime("$current_year-$current_month-01"))] = Base::get_total_revenue($user_id, ['after' => $week_start, 'before' => $week_end]);
+                    $result['newCustomers']['byDate']["${week}th week of " . date('F', strtotime("$current_year-$current_month-01"))] = Base::get_new_customers_count($user_id, ['after' => $week_start, 'before' => $week_end]);
+                    $result['returningCustomers']['byDate']["${week}th week of " . date('F', strtotime("$current_year-$current_month-01"))] = Base::get_returning_customers_count($user_id, ['after' => $week_start, 'before' => $week_end]);
+                    
+                    // Accumulate totals for the month
+                    $result['totalProducts']['total'] += $result['totalProducts']['byDate']["${week}th week of " . date('F', strtotime("$current_year-$current_month-01"))];
+                    $result['totalOrders']['total'] += $result['totalOrders']['byDate']["${week}th week of " . date('F', strtotime("$current_year-$current_month-01"))];
+                    $result['totalRevenue']['total'] += $result['totalRevenue']['byDate']["${week}th week of " . date('F', strtotime("$current_year-$current_month-01"))];
+                    $result['newCustomers']['total'] += $result['newCustomers']['byDate']["${week}th week of " . date('F', strtotime("$current_year-$current_month-01"))];
+                    $result['returningCustomers']['total'] += $result['returningCustomers']['byDate']["${week}th week of " . date('F', strtotime("$current_year-$current_month-01"))];
+                }
+                
+                return $result;
+                
+            } catch (\Exception $e) {
+                echo 'Error fetching data: ' . $e->getMessage();
+                return [];
+            }
+        } elseif (isset($filters["query"]) && $filters["query"] === "last_year") {
+            try {
+                $user_id = Authentication::getUserIdFromToken();
+                
+                // Get the previous year
+                $prev_year = date('Y') - 1;
+                
+                // Initialize result array
+                $result = [
+                    'totalProducts' => ['total' => 0, 'byDate' => []],
+                    'totalOrders' => ['total' => 0, 'byDate' => []],
+                    'totalRevenue' => ['total' => 0, 'byDate' => []],
+                    'newCustomers' => ['total' => 0, 'byDate' => []],
+                    'returningCustomers' => ['total' => 0, 'byDate' => []]
+                ];
+                
+                // Iterate over each month of the previous year
+                for ($month = 1; $month <= 12; $month++) {
+                    // Determine the date range for each month
+                    $start_date = date("Y-m-01", strtotime("$prev_year-$month-01"));
+                    $end_date = date("Y-m-t", strtotime("$prev_year-$month-01"));
+                    
+                    // Calculate metrics for the current month
+                    $result['totalProducts']['byDate']["$prev_year-" . str_pad($month, 2, '0', STR_PAD_LEFT)] = Base::get_number_of_products($user_id, ['after' => $start_date, 'before' => $end_date]);
+                    $result['totalOrders']['byDate']["$prev_year-" . str_pad($month, 2, '0', STR_PAD_LEFT)] = Base::get_number_of_orders($user_id, ['after' => $start_date, 'before' => $end_date]);
+                    $result['totalRevenue']['byDate']["$prev_year-" . str_pad($month, 2, '0', STR_PAD_LEFT)] = Base::get_total_revenue($user_id, ['after' => $start_date, 'before' => $end_date]);
+                    $result['newCustomers']['byDate']["$prev_year-" . str_pad($month, 2, '0', STR_PAD_LEFT)] = Base::get_new_customers_count($user_id, ['after' => $start_date, 'before' => $end_date]);
+                    $result['returningCustomers']['byDate']["$prev_year-" . str_pad($month, 2, '0', STR_PAD_LEFT)] = Base::get_returning_customers_count($user_id, ['after' => $start_date, 'before' => $end_date]);
+                    
+                    // Accumulate totals for the year
+                    $result['totalProducts']['total'] += $result['totalProducts']['byDate']["$prev_year-" . str_pad($month, 2, '0', STR_PAD_LEFT)];
+                    $result['totalOrders']['total'] += $result['totalOrders']['byDate']["$prev_year-" . str_pad($month, 2, '0', STR_PAD_LEFT)];
+                    $result['totalRevenue']['total'] += $result['totalRevenue']['byDate']["$prev_year-" . str_pad($month, 2, '0', STR_PAD_LEFT)];
+                    $result['newCustomers']['total'] += $result['newCustomers']['byDate']["$prev_year-" . str_pad($month, 2, '0', STR_PAD_LEFT)];
+                    $result['returningCustomers']['total'] += $result['returningCustomers']['byDate']["$prev_year-" . str_pad($month, 2, '0', STR_PAD_LEFT)];
+                }
+                
+                return $result;
+                
+            } catch (\Exception $e) {
+                echo 'Error fetching data: ' . $e->getMessage();
+                return [];
+            }
+        } else if(isset($_GET["date_from"])) {
+            try {
+                $user_id = Authentication::getUserIdFromToken();
+                
+                // Initialize result array
+                $result = [
+                    'totalProducts' => ['total' => 0, 'byDate' => []],
+                    'totalOrders' => ['total' => 0, 'byDate' => []],
+                    'totalRevenue' => ['total' => 0, 'byDate' => []],
+                    'newCustomers' => ['total' => 0, 'byDate' => []],
+                    'returningCustomers' => ['total' => 0, 'byDate' => []]
+                ];
+                
+                // Determine the date range based on $filters or $_GET['date_from']
+                // $date_range = $filters ? self::getDateRange($filters) : [];
+                $dates = self::generateDateRangeArray($date_range['after'], $date_range['before']);
+                
+                // Iterate over each date in the range
+                foreach ($dates as $date) {
+                    $day_start = $date->format('Y-m-d') . 'T00:00:00';
+                $day_end = $date->format('Y-m-d') . 'T23:59:59';
+    
+                // Calculate metrics for each date
+                $result['totalProducts']['byDate'][$date->format('Y-m-d')] = Base::get_number_of_products($user_id, ['after' => $day_start, 'before' => $day_end]);
+                $result['totalOrders']['byDate'][$date->format('Y-m-d')] = Base::get_number_of_orders($user_id, ['after' => $day_start, 'before' => $day_end]);
+                $result['totalRevenue']['byDate'][$date->format('Y-m-d')] = Base::get_total_revenue($user_id, ['after' => $day_start, 'before' => $day_end]);
+                $result['newCustomers']['byDate'][$date->format('Y-m-d')] = Base::get_new_customers_count($user_id, ['after' => $day_start, 'before' => $day_end]);
+                $result['returningCustomers']['byDate'][$date->format('Y-m-d')] = Base::get_returning_customers_count($user_id, ['after' => $day_start, 'before' => $day_end]);
+                }
+                
+                foreach (array_keys($result) as $metric) {
+                    $result[$metric]['total'] = array_sum($result[$metric]['byDate']);
+                }
+                return $result;
+                
+            } catch (\Exception $e) {
+                echo 'Error fetching data: ' . $e->getMessage();
+                return [];
+            }
         }
-        catch (\Exception $e) 
-        {
-            echo 'Error fetching orders: ' . $e->getMessage();
-            return [];
+            else {
+            // Handle the default behavior without date-specific breakdown
+            try {
+                $user_id = Authentication::getUserIdFromToken();
+    
+                $total_products = Base::get_number_of_products($user_id, $date_range);
+                $total_orders = Base::get_number_of_orders($user_id, $date_range);
+                $total_revenue = Base::get_total_revenue($user_id, $date_range);
+                $new_customers_count = Base::get_new_customers_count($user_id, $date_range);
+                $returning_customers_count = Base::get_returning_customers_count($user_id, $date_range);
+    
+                // Transforming into byDate format
+                $by_date_format = [];
+                foreach ($date_range as $date) {
+                    $day_start = $date['after'];
+                    $day_end = $date['before'];
+    
+                    $by_date_format[$day_start] = [
+                        'totalProducts' => Base::get_number_of_products($user_id, ['after' => $day_start, 'before' => $day_end]),
+                        'totalOrders' => Base::get_number_of_orders($user_id, ['after' => $day_start, 'before' => $day_end]),
+                        'totalRevenue' => Base::get_total_revenue($user_id, ['after' => $day_start, 'before' => $day_end]),
+                        'newCustomers' => Base::get_new_customers_count($user_id, ['after' => $day_start, 'before' => $day_end]),
+                        'returningCustomers' => Base::get_returning_customers_count($user_id, ['after' => $day_start, 'before' => $day_end]),
+                    ];
+                }
+    
+                return $by_date_format;
+    
+            } catch (\Exception $e) {
+                echo 'Error fetching orders: ' . $e->getMessage();
+                return [];
+            }
         }
     }
+    
+
+    public static function generateDateRangeArray($start_date, $end_date)
+{
+    $start = new \DateTime($start_date);
+    $end = new \DateTime($end_date);
+
+    // Since we want to include end_date as well, add 1 day to end date
+    $end->modify('+1 day');
+
+    $interval = new \DateInterval('P1D'); // 1 day interval
+    $date_range = new \DatePeriod($start, $interval, $end);
+
+    $dates = [];
+    foreach ($date_range as $date) {
+        $dates[] = clone $date; // Clone the date to avoid reference issues
+    }
+
+    return $dates;
+}
 
 
     public static function getDateRange($filters) {

@@ -60,6 +60,29 @@ class Authentication
         return $randomCode;
     }
 
+
+    public static function forgot_password($password, $user_id)
+    {
+        global $connection;
+        $hashedPassword = self::hashPassword($password);
+        // Prepare SQL statement to update the user's password
+
+        $sql = "UPDATE users SET password = ? WHERE id = ?";
+
+        // Prepare and bind parameters
+        $stmt = $connection->prepare($sql);
+        $stmt->bind_param("si", $hashedPassword, $user_id);
+
+        // Execute the statement
+        if ($stmt->execute() === TRUE) {
+            self::logout();
+            header("location: ../authentication/login");
+        } else {
+            echo "Error updating password: " . $connection->error;
+        }
+
+
+    }
     public static function login($email, $password)
     {
         global $connection;
@@ -188,6 +211,23 @@ class Authentication
 
     }
 
+    public static function get_user_by_id($user_id)
+    {
+        global $connection;
+        $query = "SELECT name from users WHERE id = ?";
+        $stmt = $connection->prepare($query);
+        $stmt->bind_param("i", $user_id); // Bind the parameter to the query
+
+        $stmt->execute();
+        $stmt->bind_result($name); // Bind the result to a variable
+
+        if ($stmt->fetch()) {
+            return $name; // Return the fetched name
+        } else {
+            return null; // Return null if no result is found
+        };
+    }
+
     public static function get_meta_by_xcode($xcode)
     {
         global $connection;
@@ -255,6 +295,8 @@ class Authentication
         }
         return $_SESSION['user_id'] ?? null;
     }
+
+
 
     private static function hashPassword($password)
     {

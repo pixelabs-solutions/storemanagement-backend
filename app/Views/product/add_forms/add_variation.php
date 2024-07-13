@@ -12,7 +12,7 @@
     <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" /> -->
 
     <?php
-var_dump($attributes);
+// var_dump($attributes);
 ?>
 <style>
     @import url('https://rsms.me/inter/inter.css');
@@ -321,8 +321,7 @@ var_dump($attributes);
                         <div class="text-center mt-4 ">
                             <button type="button" id="product_variation" onclick="sms_add_variations_submit()"
                                 class=" btn btn-primary col-12 col-md-12 fs-3 rounded-3 py-3 border-0 fw-bold"
-                                data-i18n="popoups.add_new_product_popoup.adding_btn_variation">To
-                                add the product click here +</button>
+                                data-i18n="popoups.add_new_product_popoup.adding_btn_variation">Add Product</button>
                         </div>
                 </div>
                 </form>
@@ -373,7 +372,7 @@ var_dump($attributes);
     })
 
     function sms_add_variations_submit() {
-    console.log("hello");
+    // console.log("hello");
 
     // Log all the form values
     var formData = {
@@ -467,8 +466,12 @@ var_dump($attributes);
 
             let product_variation =document.getAnimations('product_variation');
             product_variation.disabled = true;
-            console.log(formData);
+            // console.log(formData);
             document.getElementById("product_variation").disabled = true;
+            
+                document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
+    
             return fetch('product/add', {
                 method: 'POST',
                 headers: {
@@ -479,6 +482,8 @@ var_dump($attributes);
         })
         .then(response => {
             if (response.status === 200) {
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                 // Form submission succeeded, display success message
                 document.getElementById('sms_add_variations_success_message').style.display = 'block';
                 document.getElementById('sms_add_variations_error_message').style.display = 'none';
@@ -486,6 +491,8 @@ var_dump($attributes);
 
                 window.location.reload();
             } else {
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                 // Form submission failed, display error message
                 document.getElementById('sms_add_variations_error_message').style.display = 'block';
                 document.getElementById('sms_add_variations_success_message').style.display = 'none'; 
@@ -494,6 +501,8 @@ var_dump($attributes);
             }
         })
         .catch(error => {
+                document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
             // Network error occurred, display error message
             document.getElementById('sms_add_variations_error_message').style.display = 'block';
             console.error('Error submitting form data:', error);
@@ -546,7 +555,7 @@ function fun_save_changes() {
                     // Create a new div for the selected option
                     let newDiv = document.createElement('div');
                     newDiv.classList.add('selected-option');
-console.log(option)
+// console.log(option)
                     // Customize the content of the div
                     newDiv.innerHTML = `  
                     <label class="form-label fw-bold mt-5" data-attribute-selection="${option.value}">Select ${option.value} Attribute</label>
@@ -601,7 +610,7 @@ console.log(option)
                         removeItemButton: true
                     });
 
-                    console.log('Select box options:', selectBox.innerHTML);
+                    // console.log('Select box options:', selectBox.innerHTML);
                 })
                 .catch(error => {
                     console.error('Error fetching terms:', error);
@@ -697,7 +706,7 @@ function generate_variations() {
     ];
 
     const combinations = getCombinations(arrays);
-    console.log(combinations);
+    // console.log(combinations);
 </script>
 
 <!-- input javascript code  -->

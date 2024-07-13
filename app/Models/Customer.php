@@ -8,10 +8,10 @@ class Customer
 {
     public static function get_customers($configuration, $user_id)
     {
-        $consumer_key = $configuration["consumer_key"];
-        $consumer_secret = $configuration["consumer_secret"];
-        $store_url = $configuration["store_url"];
-        $client = new Client();
+        // $consumer_key = $configuration["consumer_key"];
+        // $consumer_secret = $configuration["consumer_secret"];
+        // $store_url = $configuration["store_url"];
+        // $client = new Client();
         $customerData = [];
 
         try 
@@ -34,7 +34,7 @@ class Customer
     
                 try {
 
-                    $orders = Transaction::get_all_transactions($user_id);
+                    $orders = Transaction::get_all_transactions_by_customer_id($user_id, $customerId);
 
                     // $ordersResponse = $client->request('GET', $store_url. '/wp-json/wc/v3/orders', [
                     //     'auth' => [$consumer_key, $consumer_secret],

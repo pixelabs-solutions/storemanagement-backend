@@ -7,7 +7,6 @@ $customers = $customers['data'];
 
 //  echo $transactions;
 
-
 ?>
 <!-- <style>
   @media only screen and (max-width:1000px) {
@@ -291,9 +290,9 @@ $customers = $customers['data'];
                 <td><?php echo $item['email']; ?></td>
                 <td><?php echo $item['number_of_orders']; ?></td>
                 <td>
-                  NIS <?php echo $item['total_amount']; ?>
+                  <?php echo $item['total_amount']; ?> <?php echo CURRENT_CURRENCY; ?> 
                 </td>
-                <td><?php echo $item['average_order_cost']; ?> NIS</td>
+                <td><?php echo $item['average_order_cost']; ?> <?php echo CURRENT_CURRENCY; ?></td>
               </tr>
 
 

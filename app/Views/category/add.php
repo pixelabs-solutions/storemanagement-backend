@@ -168,8 +168,8 @@
                             <div class="text-center mt-2 p-2  ">
                                 <button type="button" onclick="function_of_Edit()" id="disable_for_submit"
                                     class="btn btn-primary col-12 col-md-12 rounded-4 py-3"
-                                    data-i18n="popoups.add_new_catageory.popoup_in_catagory.catageory_btn">To add the
-                                    category click here +</button>
+                                    data-i18n="popoups.add_new_catageory.popoup_in_catagory.catageory_btn">Add 
+                                    category</button>
                             </div>
 
                         </div>
@@ -217,7 +217,7 @@
 <!-- input javascript code  -->
 <script>
     function function_of_Edit() {
-
+        console.log('clicked');
         const selectElement = document.getElementById("sms_mu_parent_ctg").value;
         const imageInput = document.getElementById('sms_mu_img_add_ctg');
         // document.getElementById("disable_for_submit").disabled = true;
@@ -226,6 +226,7 @@
             console.error("Please select an image to edit the category.");
             return; // Early exit if no image selected
         }
+
 
         // Function to convert image to base64
         function readFileAsBase64(file) {
@@ -254,7 +255,12 @@
 
                 // Disable the button before making the request
                 AddsubmitButton.disabled = true;
+                document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+                document.body.style.overflow = "hidden";
+                document.getElementById('sms_category_w_add_modal').style.overflow = 'hidden';
+                document.getElementById('modal-Category-large').style.overflow = 'hidden';
 
+    
                 fetch('/categories/add', {
                     method: 'POST',
                     headers: {
@@ -265,6 +271,8 @@
                     .then(response => {
 
                         if (response.ok) {
+                            document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                             // Form submission succeeded, display success message
                             document.getElementById('sms_addForm_category_success_message').style.display = 'block';
                             document.getElementById('sms_addForm_category_error_message').style.display = 'none';
@@ -272,6 +280,8 @@
 
                             window.location.reload();
                         } else {
+                            document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                             // Form submission failed, display error message
                             document.getElementById('sms_addForm_category_error_message').style.display = 'block';
                             document.getElementById('sms_addForm_category_success_message').style.display = 'none';

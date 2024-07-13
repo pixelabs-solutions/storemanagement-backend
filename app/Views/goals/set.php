@@ -186,6 +186,10 @@ if ($goals_data['status'] == "add") {
 </div>
 <script>
     function sms_meh_update_goal_data() {
+        document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
+
+
         //    let sales_revenue': document.getElementById('sms_target_sales_revenue').value;
         var data = {
             'sales_revenue_target': document.getElementById('sms_target_sales_revenue').value,
@@ -215,17 +219,27 @@ if ($goals_data['status'] == "add") {
             })
             .then(response => {
                 if (response.status === 200) {
+
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     // Form submission succeeded, display success message
                     document.getElementById('sms_goal_success_message').style.display = 'block';
                     document.getElementById('sms_goal_error_message').style.display = 'none';
                     window.location.reload();
                 } else {
+
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
+
                     // Form submission failed, display error message
                     document.getElementById('sms_goal_error_message').style.display = 'block';
                     document.getElementById('sms_goal_success_message').style.display = 'none'; // Hide success message if it was displayed before
                 }
             })
             .catch(error => {
+
+                document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                 // Network error occurred, display error message
                 document.getElementById('sms_goal_error_message').style.display = 'block';
                 console.error('Error submitting form data:', error);
@@ -233,10 +247,16 @@ if ($goals_data['status'] == "add") {
     }
 
     function sms_goal_close_success_message() {
+
+        document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
         document.getElementById('sms_goal_success_message').style.display = 'none';
     }
 
     function sms_goal_close_error_message() {
+
+        document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
         document.getElementById('sms_goal_error_message').style.display = 'none';
     }
 </script>

@@ -1,5 +1,5 @@
 <style>
-   .sms_mu_table {
+  .sms_mu_table {
     border-collapse: separate;
     /* table-layout: fixed; */
     width: 100%;
@@ -154,10 +154,18 @@
               ?>
               <tr class="sms_mu_tr" id="category_<?php echo $category['id']; ?>">
                 <td class="t_oravg_m">
-                <img src="<?php echo $category['image']['src']; ?>" alt="" height="30px" width="30px">
+                  <img src="<?php echo $category['image']['src']; ?>" loading="lazy" alt="" height="30px" width="30px">
                 </td>
                 <td class="category-name"><?php echo $category['name']; ?></td>
-                <td parent-id="<?php echo $parentCategoryID; ?>"><?php echo $parentCategoryName; ?></td>
+                <?php
+                if ($parentCategoryName == "-") { ?>
+                  <td parent-id="0">-</td>
+
+                <?php } else  { ?>
+                  <td parent-id="<?php echo $parentCategoryID; ?>"><?php echo $parentCategoryName; ?></td>
+                  <?php
+                }
+                ?>
                 <td><?php echo $category['count']; ?></td>
                 <td>
                   <div class="d-flex justify-content-center gap-2 w-auto">
@@ -282,78 +290,83 @@
 
 
   // for delete and cancel 
-// Function to handle category deletion
-// Function to handle category deletion
-function deleteCategoryFromElement() {
+  // Function to handle category deletion
+  // Function to handle category deletion
+  function deleteCategoryFromElement() {
     // Get the element with the class del_category_btn
     var delCategoryBtn = document.querySelector('.del_category_btn');
-    
+
     // Get the value of the ctg_id attribute
     var categoryId = delCategoryBtn.getAttribute('ctg_id');
-    
+
     // Call deleteCategory function with the obtained categoryId
     deleteCategory(categoryId);
-}
-function deleteCategory(categoryId) {
+  }
+  function deleteCategory(categoryId) {
+    document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
+                document.getElementById('modal-Category-large').style.overflow = 'hidden';
 
     console.log("Deleting category with ID: " + categoryId);
     fetch("/categories/" + categoryId, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json"
-        }
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
     })
-    .then(response => {
+      .then(response => {
         if (response.ok) {
-            show_sms_delete_Notification("Category deleted successfully");
-            window.location.reload(); // Reload the page after successful deletion
-        } else {
-            show_sms_delete_Notification("Failed to delete Category", true);
-        }
-    })
-    .catch(error => {
-        show_sms_delete_Notification("Error occurred: " + error, true);
-    });
-}
 
-// Function to show delete notification
-function show_sms_delete_Notification(message, isError = false) {
+          show_sms_delete_Notification("Category deleted successfully");
+          window.location.reload(); // Reload the page after successful deletion
+        } else {
+          show_sms_delete_Notification("Failed to delete Category", true);
+        }
+      })
+      .catch(error => {
+
+        show_sms_delete_Notification("Error occurred: " + error, true);
+      });
+  }
+
+  // Function to show delete notification
+  function show_sms_delete_Notification(message, isError = false) {
     const sms_delete_notification = document.getElementById("sms_delete_notification_ctg");
     sms_delete_notification.textContent = message;
     sms_delete_notification.className = isError ? "error show" : "show";
-    setTimeout(function() {
-        sms_delete_notification.className = "hide";
+    setTimeout(function () {
+      sms_delete_notification.className = "hide";
     }, 3000);
-}
+  }
 
-// Function to close delete confirmation modal
-function closeModalDelete() {
+  // Function to close delete confirmation modal
+  function closeModalDelete() {
     $('#sms_category_w_delete_modal').modal('hide');
-}
+  }
 
-// Event listener for cancel button in delete confirmation modal
-document.getElementById('sms_mu_Cancel').addEventListener('click', closeModalDelete);
+  // Event listener for cancel button in delete confirmation modal
+  document.getElementById('sms_mu_Cancel').addEventListener('click', closeModalDelete);
 
-// Event listener for delete icons
-// Event listener for delete icons
-var deleteIcons = document.getElementsByClassName('deleteIcon');
+  // Event listener for delete icons
+  // Event listener for delete icons
+  var deleteIcons = document.getElementsByClassName('deleteIcon');
 
-for (var i = 0; i < deleteIcons.length; i++) {
-    deleteIcons[i].addEventListener('click', function() {
-        var categoryId = this.getAttribute('categoryid');
-        console.log("Category ID to be deleted: " + categoryId); // Log the category ID
-        openModalDelete(categoryId);
+  for (var i = 0; i < deleteIcons.length; i++) {
+    deleteIcons[i].addEventListener('click', function () {
+      var categoryId = this.getAttribute('categoryid');
+      console.log("Category ID to be deleted: " + categoryId); // Log the category ID
+      openModalDelete(categoryId);
     });
-}
+  }
 
-// Function to open delete confirmation modal
-function openModalDelete(categoryId) {
+  // Function to open delete confirmation modal
+  function openModalDelete(categoryId) {
     window.selectedCategoryId = categoryId;
     var delCategoryBtn = document.querySelector('.del_category_btn');
-// Set the ctg_id attribute with the value "categoryid"
-delCategoryBtn.setAttribute('ctg_id', categoryId);
+    // Set the ctg_id attribute with the value "categoryid"
+    delCategoryBtn.setAttribute('ctg_id', categoryId);
     $('#sms_category_w_delete_modal').modal('show');
-}
+  }
 
 
 

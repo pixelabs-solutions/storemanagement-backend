@@ -1,122 +1,130 @@
-
-    <style>
-  .sms_select_produc_card{
-    height: 200px !important;; 
-    width:450px !important; 
-    text-align:center;  
+<style>
+  .sms_select_produc_card {
+    height: 200px !important;
+    ;
+    width: 450px !important;
+    text-align: center;
     border-radius: 20px !important;
     cursor: pointer;
   }
+
   @media screen and (max-width: 775px) {
-        .sms_select_produc_card {
-          width: 100% !important;
-        }
-        }
+    .sms_select_produc_card {
+      width: 100% !important;
+    }
+  }
 </style>
-<div class="sms_customers_m container p-0 col-12" >
+<div class="sms_customers_m container p-0 col-12">
   <div class="card border-0">
-  <div class="card-body-rounded ">
-    <div class="d-flex flex-column ">
+    <div class="card-body-rounded ">
+      <div class="d-flex flex-column ">
         <h1 class="text-center" data-i18n="popoups.add_new_type.heading">Choose the type of product</h1>
         <div class="d-flex justify-content-center gap-4 flex-md-row flex-column">
-            <span onclick="openModal('sms_product_variation_modal')"  class="card  w-md-25 d-flex justify-content-center align-items-center sms_select_produc_card" style=" background-color:#4987D8; " >
+          <span onclick="openModal('sms_product_variation_modal')"
+            class="card  w-md-25 d-flex justify-content-center align-items-center sms_select_produc_card"
+            style=" background-color:#4987D8; ">
             <div>
-           <h2  data-i18n="popoups.add_new_type.variation" class="fw-bold"> A product with variations</h2>
+              <h2 data-i18n="popoups.add_new_type.variation" class="fw-bold"> A product with variations</h2>
             </div>
-            </span>
-            <span  onclick="openModal('sms_product_regular_modal')"  class="card  w-md-25  d-flex justify-content-center align-items-center sms_select_produc_card" style=" background-color:#afcaee; " >
-        
-            <div >
-           <h2  data-i18n="popoups.add_new_type.new_product" class="fw-bold"> normal product</h2>
+          </span>
+          <span onclick="openModal('sms_product_regular_modal')"
+            class="card  w-md-25  d-flex justify-content-center align-items-center sms_select_produc_card"
+            style=" background-color:#afcaee; ">
+
+            <div>
+              <h2 data-i18n="popoups.add_new_type.new_product" class="fw-bold"> Normal Product</h2>
             </div>
-        </span>
-         
+          </span>
+
         </div>
+      </div>
     </div>
-  </div>
   </div>
 </div>
 
 
 <!-- add veriation product modal  -->
 <div class="modal modal-blur fade" id="sms_product_variation_modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-        <div class="modal-content">
-        <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
         <div class="py-1 rounded-top text-center">
-          <h3 class="card-title m-0 text-black fs-2 fw-bold Sms_mu_for_Eng fw-bold">Adding a new product and variations </h3>
+          <h3 class="card-title m-0 text-black fs-2 fw-bold Sms_mu_for_Eng fw-bold">Adding a new product and variations
+          </h3>
         </div>
         <div class="py-1 rounded-top text-center Sms_mu_for_hebrew">
           <h3 class="card-title m-0 text-black fs-2 fw-bold"> הוספת מוצר חדש וגרסאות </h3>
         </div>
-        <button type="button" class="btn-close sms_modal_cancel_btn" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close sms_modal_cancel_btn" data-bs-dismiss="modal"
+          aria-label="Close"></button>
       </div>
-            <div class="modal-body" style="height: 570px; overflow-y:auto">
-                <?php
-                include ('add_forms/add_variation.php');
-                ?>
-            </div>
+      <div class="modal-body" style="height: 570px; overflow-y:auto">
+        <?php
+        include ('add_forms/add_variation.php');
+        ?>
+      </div>
 
-        </div>
     </div>
+  </div>
 </div>
 
 
 
 <!-- add regular product modal  -->
 <div class="modal modal-blur fade" id="sms_product_regular_modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-        <div class="modal-content">
-        <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header col-12 justify-content-center" style="background-color: #4987D870">
         <div class="py-1 rounded-top text-center Sms_mu_for_Eng ">
           <h3 class="card-title m-0 text-black fs-2 f-bold ">Adding a new regular product</h3>
         </div>
         <div class="py-1 rounded-top text-center Sms_mu_for_hebrew ">
           <h3 class="card-title m-0 text-black fs-2 f-bold ">הוספת מוצר רגיל חדש</h3>
         </div>
-        <button type="button" class="btn-close sms_modal_cancel_btn" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close sms_modal_cancel_btn" data-bs-dismiss="modal"
+          aria-label="Close"></button>
       </div>
-            <div class="modal-body">
-                <?php
-                include ('add_forms/add_regular.php');
-                ?>
-            </div>
+      <div class="modal-body">
+        <?php
+        include ('add_forms/add_regular.php');
+        ?>
+      </div>
 
-        </div>
     </div>
+  </div>
 </div>
 
 <script>
 
-// Function to open the modal
-function openModal(modalId) {
-  // Select the modal using the provided ID
-  var modal = document.getElementById(modalId);
+  // Function to open the modal
+  function openModal(modalId) {
+    // Select the modal using the provided ID
+    var modal = document.getElementById(modalId);
 
-  // Show the modal
-  modal.style.display = 'block';
-  modal.classList.add('show');
-  modal.setAttribute('aria-modal', 'true');
-  modal.setAttribute('aria-hidden', 'false');
+    // Show the modal
+    modal.style.display = 'block';
+    modal.classList.add('show');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-hidden', 'false');
 
-  // Hide the modal when the cancel button or close button is clicked
-  var cancelButton = modal.querySelector('.sms_modal_cancel_btn');
-  cancelButton.addEventListener('click', closeModal);
+    // Hide the modal when the cancel button or close button is clicked
+    var cancelButton = modal.querySelector('.sms_modal_cancel_btn');
+    cancelButton.addEventListener('click', closeModal);
 
-  // Hide the modal when outside the modal is clicked
-  modal.addEventListener('click', function (e) {
-    if (e.target === modal) {
-      closeModal();
+    // Hide the modal when outside the modal is clicked
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Function to close the modal
+    function closeModal() {
+      modal.style.display = 'none';
+      modal.classList.remove('show');
+      modal.setAttribute('aria-modal', 'false');
+      modal.setAttribute('aria-hidden', 'true');
     }
-  });
-
-  // Function to close the modal
-  function closeModal() {
-    modal.style.display = 'none';
-    modal.classList.remove('show');
-    modal.setAttribute('aria-modal', 'false');
-    modal.setAttribute('aria-hidden', 'true');
   }
-}
 
 </script>

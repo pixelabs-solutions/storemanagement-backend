@@ -183,7 +183,7 @@
                     <button type="button" id="sms_mu_manage_submit"
                         class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="sms_meh_couponmanage_data()"
                         data-i18n="popoups.added_new_cupons.last_btn_cat">
-                        To add the category click here +</button>
+                        Add Coupon</button>
                 </div>
             </div>
         </div>
@@ -227,6 +227,8 @@ function updateInputType() {
             'usage_limit': document.getElementById('sms_Usage_limit').value,
         };
 
+        document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
 
         fetch('/coupons/add', {
             method: 'POST',
@@ -237,13 +239,17 @@ function updateInputType() {
         })
             .then(response => {
                 console.log(response);
-                if (response.status === 201) {
+                if (response.status === 201 || response.ok) {
                     // Form submission succeeded, display success message
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     document.getElementById('sms_add_coupons_success-message').style.display = 'block';
                     document.getElementById('sms_add_coupons_error-message').style.display = 'none';
 
                     window.location.reload();
                 } else {
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     // Form submission failed, display error message
                     document.getElementById('sms_add_coupons_error-message').style.display = 'block';
                     document.getElementById('sms_add_coupons_error-message').style.display = 'block';
@@ -251,6 +257,8 @@ function updateInputType() {
                 }
             })
             .catch(error => {
+                document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                 // Network error occurred, display error message
                 document.getElementById('sms_add_coupons_error-message').style.display = 'block';
                 document.getElementById('sms_mu_manage_submit').disabled = false;

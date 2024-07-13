@@ -81,60 +81,79 @@
                                 <!-- header -->
                                 <div class="row gx-3 ">
                                     <div class="col-md-4 mb-3">
-                                        <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.cupon_code">The
+                                        <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold"
+                                            data-i18n="popoups.added_new_cupons.cupon_code">The
                                             coupon
                                             code</label>
-                                        <input type="text" class="form-control rounded-3 p-3 fw-bold" id="coupons_code" style="background-color: #EAEAEA" placeholder="Coupon Code">
+                                        <input type="text" class="form-control rounded-3 p-3 fw-bold" id="coupons_code"
+                                            style="background-color: #EAEAEA" placeholder="Coupon Code">
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="example-select fs-3 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.discount_type">Discount
+                                        <label for="example-select fs-3 fw-bold" class="form-label fw-bold"
+                                            data-i18n="popoups.added_new_cupons.discount_type">Discount
                                             type
                                             (amount/percentage)
                                         </label>
                                         <div>
-                                            <select style="background-color:#EAEAEA" id="discount_type" class="form-control p-3">
+                                            <select style="background-color:#EAEAEA" id="discount_type"
+                                                class="form-control p-3">
                                                 <option value="fixed_cart">Amount</option>
                                                 <option value="percent">Percentage</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.amounth_discount">The
+                                        <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold"
+                                            data-i18n="popoups.added_new_cupons.amounth_discount">The
                                             amount
                                             of the discount </label>
-                                        <input type="text" class="form-control rounded-3 p-3 fw-bold" id="discount_amount" style="background-color: #EAEAEA" placeholder=" Amounth of Discount">
+                                        <input type="text" class="form-control rounded-3 p-3 fw-bold"
+                                            id="discount_amount" style="background-color: #EAEAEA"
+                                            placeholder=" Amounth of Discount">
                                     </div>
                                 </div>
                                 <!-- Adding terms to the feature -->
                                 <div class="row gx-3 ">
                                     <div class="col-md-6 mb-3">
-                                        <label for="example-date-input" class="form-label fs-4 fw-bold" data-i18n="popoups.added_new_cupons.expiry_date">Coupon
+                                        <label for="example-date-input" class="form-label fs-4 fw-bold"
+                                            data-i18n="popoups.added_new_cupons.expiry_date">Coupon
                                             expiration
                                             date</label>
                                         <div class="input-group">
                                             <!-- <input type="date" class="form-control rounded-3 p-3 fw-bold" id="expiration_date" style="background-color: #EAEAEA" placeholder="Expiry date"> -->
-                                            <input type="date" id="expiration_date" class="form-control rounded-3 p-3 fw-bold" style="background-color: #EAEAEA"   placeholder="Expiry date" min="<?php echo date("Y-m-d"); ?>">
+                                            <input type="date" id="expiration_date"
+                                                class="form-control rounded-3 p-3 fw-bold"
+                                                style="background-color: #EAEAEA" placeholder="Expiry date"
+                                                min="<?php echo date("Y-m-d"); ?>">
                                         </div>
                                     </div>
 
 
                                     <div class="col-md-6 mb-3">
-                                        <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold" data-i18n="popoups.added_new_cupons.limit">Usage
+                                        <label for="example-text-input fs-2 fw-bold" class="form-label fw-bold"
+                                            data-i18n="popoups.added_new_cupons.limit">Usage
                                             limit
                                             (leave blank without limit) </label>
-                                        <input type="number" class="form-control rounded-3 p-3 fw-bold" id="usage_limit" style="background-color: #EAEAEA" placeholder="Limit Usage">
+                                        <input type="number" class="form-control rounded-3 p-3 fw-bold" id="usage_limit"
+                                            style="background-color: #EAEAEA" placeholder="Limit Usage">
+
+                                            <input type="hidden" id="coupons_id_edit">
                                     </div>
 
                                 </div>
                                 <div class="text-center mt-5  ">
-                                    <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3" onclick="sms_meh_coupon_edit_data()" id="Sms_mu_btn_submit" data-i18n="popoups.added_new_cupons.last_btn_coupon">To update the coupon
-                                        click here ←</button>
+                                    <button type="button" class="btn btn-primary col-12 col-md-12 rounded-4 py-3"
+                                        onclick="sms_meh_coupon_edit_data()" id="Sms_mu_btn_submit"
+                                        data-i18n="popoups.added_new_cupons.last_btn_coupon">Update</button>
                                 </div>
                         </div>
                     </form>
-                    <div class="modal-body text-center py-4 sms_a_edit_pop" id="sms_edit_success-message" style="display: none;">
+                    <div class="modal-body text-center py-4 sms_a_edit_pop" id="sms_edit_success-message"
+                        style="display: none;">
                         <!-- SVG icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24"
+                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
                             <path d="M9 12l2 2l4 -4"></path>
@@ -142,9 +161,12 @@
                         <h3>Success</h3>
                         <div class="text-muted">Your coupon data has been updated successfully.</div>
                     </div>
-                    <div class="modal-body text-center py-4 sms_a_edit_pop" id="sms_edit_error-message" style="display: none;">
+                    <div class="modal-body text-center py-4 sms_a_edit_pop" id="sms_edit_error-message"
+                        style="display: none;">
                         <!-- SVG icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-red icon-lg" width="24"
+                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <line x1="12" y1="5" x2="12" y2="19"></line>
                             <line x1="12" y1="5" x2="12.01" y2="19"></line>
@@ -174,34 +196,41 @@
             'amount': document.getElementById('discount_amount').value,
             'date_expires': document.getElementById('expiration_date').value,
             'usage_limit': document.getElementById('usage_limit').value,
-
         };
-        let editCouponElement = document.getElementById('edit_coupon');
-        let editCouponId = editCouponElement.getAttribute('coupon_id');
-        
-        const EditCouponsubmitButton= document.getElementById("Sms_mu_btn_submit");
+        let editCouponElement = document.getElementById('coupons_id_edit');
+        let editCouponId = editCouponElement.value;
+// console.log(editCouponId);
+        const EditCouponsubmitButton = document.getElementById("Sms_mu_btn_submit");
         EditCouponsubmitButton.disabled = true;
         
-        console.log(editCouponId);
+        document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
+        // console.log(editCouponId);
         fetch(`/coupons/${editCouponId}`, {
-                method: 'PUT',
-                body: JSON.stringify(CouponeditData),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
+            method: 'PUT',
+            body: JSON.stringify(CouponeditData),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => {
                 if (response.status === 200) {
                     // Form submission succeeded, display success message
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     document.getElementById('sms_edit_success-message').style.display = 'block';
                     window.location.reload();
                 } else {
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     // Form submission failed, display error message
                     document.getElementById('sms_edit_error-message').style.display = 'block';
                     document.getElementById('sms_edit_success-message').style.display = 'none'; // Hide success message if it was displayed before
                 }
             })
             .catch(error => {
+                document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                 // Network error occurred, display error message
                 document.getElementById('sms_edit_error-message').style.display = 'block';
                 document.getElementById('Sms_mu_btn_submit').disabled = false;
@@ -216,10 +245,11 @@
     const buttons = document.querySelectorAll(".get-row-data-edit-coupon");
 
     buttons.forEach(button => {
-        button.addEventListener("click", function() {
+        button.addEventListener("click", function () {
             // Get the closest table row (tr) element
             const row = this.closest("tr");
-
+            const couponId = this.getAttribute("coupon_id");
+// console.log(couponId);
             // Create an empty object to store data
             const rowData = {};
 
@@ -234,13 +264,17 @@
                 rowData[dataKey] = cellValue;
             });
 
-            console.log("Row Data:", rowData);
+            // console.log("Row Data:", rowData);
             var usageLimit = rowData[3].split('/')[1]; // This will extract "15" from "0/15"
             document.getElementById('coupons_code').value = rowData[0];
-            document.getElementById('discount_amount').value = rowData[2];
+            var rawValue = rowData[2];
+            var cleanedValue = rawValue.replace(/[^\d]/g, '');
+            document.getElementById('discount_amount').value = cleanedValue; 
             document.getElementById('usage_limit').value = usageLimit;
             document.getElementById('expiration_date').value = rowData[4];
+            document.getElementById('coupons_id_edit').value = couponId;
 
+            
 
             const discountTypeSelect = document.getElementById("discount_type");
 
