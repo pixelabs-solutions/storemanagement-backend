@@ -567,6 +567,9 @@ function logFormValuesInEdit() {
                 var productId = productData.id;
                 let newTablebody = document.getElementById('variations_data_table_rows');
                 newTablebody.innerHTML = " ";
+                
+                    document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
                 fetch(`/product/${productId}/variations`)
                     .then(response => {
                         if (!response.ok) {

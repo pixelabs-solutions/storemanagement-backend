@@ -354,6 +354,8 @@
                     'stock_quantity': unitInp,
                 };
                 document.getElementById("edit_regular_btn").disabled = true;
+                    document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
                 return fetch(`/product/${Id}`, {
                     method: 'PUT', // Changed from POST to PUT
                     headers: {
@@ -364,12 +366,16 @@
             })
             .then(response => {
                 if (response.ok) {
+                        document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     // Form submission succeeded, display success message
                     document.getElementById('sms_editForm_product_success_message').style.display = 'block';
                     document.getElementById('sms_add_editForm_product_error_message').style.display = 'none';
 
                     window.location.reload();
                 } else {
+                        document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     // Form submission failed, display error message
                     document.getElementById('sms_add_editForm_product_error_message').style.display = 'block';
                     document.getElementById('sms_editForm_product_success_message').style.display = 'none';
@@ -378,6 +384,8 @@
                 }
             })
             .catch(error => {
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                 // Network error occurred, display error message
                 document.getElementById('sms_add_editForm_product_error_message').style.display = 'block';
                 console.error('Error submitting form data:', error);

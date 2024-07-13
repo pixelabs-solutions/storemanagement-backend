@@ -100,6 +100,10 @@
 
     const id = '1';
     const term_id = '12';
+    
+    document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
+
     const url = `/attributes/${id}/terms/${term_id}`;
 
     fetch(url, {

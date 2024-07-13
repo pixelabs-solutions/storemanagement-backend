@@ -7,7 +7,7 @@ use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Models\Authentication;
 use Pixelabs\StoreManagement\Models\Currency;
 
-use Pixelabs\StoreManagement\Helpers\RequestTracker;
+// use Pixelabs\StoreManagement\Helpers\RequestTracker;
 
 class DashboardController
 {
@@ -36,7 +36,7 @@ class DashboardController
         if ($user_level == ADMIN) {
             header("Location: /admin/index");
         } else {
-            RequestTracker::trackRequest();
+            // RequestTracker::trackRequest();
             $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
             
             if (isset($_GET['query']) || isset($_GET['date_from']) || isset($_GET['date_to'])) {
@@ -80,7 +80,7 @@ class DashboardController
             $customers_location = Dashboard::get_dashboard_data($filters);
             $top_products = Dashboard::fetchTopSellingProductImages();
             
-            $requests = RequestTracker::getRequestsLastSevenDays();
+            // $requests = RequestTracker::getRequestsLastSevenDays();
             $currency = Currency::get_current_currency($user_id); 
  
             $dashboard_data = [
@@ -88,7 +88,7 @@ class DashboardController
                 'customers_location' => $customers_location,
                 'top_products' => $top_products,
                 'current_currency' => $currency,
-                'requests' => $requests,
+                // 'requests' => $requests,
                 "percentage_changes" =>  $percentage_changes 
             ];
             if ($is_rest == 'true') {

@@ -468,6 +468,10 @@
             product_variation.disabled = true;
             // console.log(formData);
             document.getElementById("product_variation").disabled = true;
+            
+                document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
+    
             return fetch('product/add', {
                 method: 'POST',
                 headers: {
@@ -478,6 +482,8 @@
         })
         .then(response => {
             if (response.status === 200) {
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                 // Form submission succeeded, display success message
                 document.getElementById('sms_add_variations_success_message').style.display = 'block';
                 document.getElementById('sms_add_variations_error_message').style.display = 'none';
@@ -485,6 +491,8 @@
 
                 window.location.reload();
             } else {
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                 // Form submission failed, display error message
                 document.getElementById('sms_add_variations_error_message').style.display = 'block';
                 document.getElementById('sms_add_variations_success_message').style.display = 'none'; 
@@ -493,6 +501,8 @@
             }
         })
         .catch(error => {
+                document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
             // Network error occurred, display error message
             document.getElementById('sms_add_variations_error_message').style.display = 'block';
             console.error('Error submitting form data:', error);

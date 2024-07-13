@@ -288,17 +288,44 @@ require_once __DIR__ . '/../partials/header.php';
             style="border-radius:20px;">
             <div class="col-sm-10 d-flex flex-column flex-md-row gap-2 col-lg-6 m-0 ">
 
-                <button class="rounded-4 border-0 p-2" data-bs-toggle="modal" data-bs-target="#modal-full-width"
-                    style="background-color:#4987D870; " data-i18n="product_managment.nav.new_product_btn">Add a new
-                    product +</button>
-                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870;" data-bs-toggle="modal"
-                    data-bs-target="#modal-Category-large"
-                    data-i18n="product_managment.nav.category_product_btn">Category management</button>
-                <button class="rounded-4 border-0 p-2" style="background-color:#4987D870; " data-bs-toggle="modal"
-                    data-bs-target="#modal-large" data-i18n="product_managment.nav.future_product_btn">Feature
-                    management</button>
+            <button class="rounded-4 border-0 p-2" data-bs-toggle="modal" data-bs-target="#modal-full-width"
+        style="background-color:#4987D870;" data-i18n="product_managment.nav.new_product_btn">Add a new product +</button>
+<button class="rounded-4 border-0 p-2" style="background-color:#4987D870;" data-bs-toggle="modal"
+        data-bs-target="#modal-Category-large" data-i18n="product_managment.nav.category_product_btn">Category management</button>
+<button class="rounded-4 border-0 p-2" style="background-color:#4987D870;" data-bs-toggle="modal"
+        data-bs-target="#modal-large" data-i18n="product_managment.nav.future_product_btn">Feature management</button>
 
             </div>
+
+            <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+        const modals = [
+            { button: '[data-bs-target="#modal-full-width"]', modalId: 'modal-full-width', storageKey: 'modalFullWidthOpen' },
+            { button: '[data-bs-target="#modal-Category-large"]', modalId: 'modal-Category-large', storageKey: 'modalCategoryOpen' },
+            { button: '[data-bs-target="#modal-large"]', modalId: 'modal-large', storageKey: 'modalFeatureOpen' }
+        ];
+
+        modals.forEach(({ button, modalId, storageKey }) => {
+            const modalButton = document.querySelector(button);
+            const modal = new bootstrap.Modal(document.getElementById(modalId));
+
+            modalButton.addEventListener('click', () => {
+                localStorage.setItem(storageKey, 'true');
+            });
+
+            document.getElementById(modalId).addEventListener('hidden.bs.modal', () => {
+                localStorage.removeItem(storageKey);
+            });
+
+            // Check localStorage to see if the modal should be open
+            if (localStorage.getItem(storageKey) === 'true') {
+                modal.show();
+            }
+        });
+    });
+   
+</script>
+
             <div class="col-lg-2 col-md-6 col-sm-11  mt-3 mt-lg-0">
                 <button id="importExportBtn"
                     class="rounded-4 border-0 d-flex align-items-center justify-content-end w-md-auto p-2"

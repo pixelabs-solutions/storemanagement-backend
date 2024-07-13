@@ -339,7 +339,7 @@
         for (let i = 0; i < photoInput.files.length; i++) {
             files.push(photoInput.files[i]);
         }
-        console.log(files); return '';
+        console.log(files); 
 
         let base64Array = [];
 
@@ -371,7 +371,8 @@
 
                 document.getElementById("disable_regular").disabled = true;
 
-
+   document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
                 return fetch('/product/add', {
                     method: 'POST',
                     headers: {
@@ -382,12 +383,16 @@
             })
             .then(response => {
                 if (response.status === 201 || response.ok) {
+                        document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     // Form submission succeeded, display success message
                     document.getElementById('sms_add_regular_success_message').style.display = 'block';
                     document.getElementById('sms_add_regular_error_message').style.display = 'none';
 
                     window.location.reload();
                 } else {
+                        document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     // Form submission failed, display error message
                     document.getElementById('sms_add_regular_error_message').style.display = 'block';
                     document.getElementById('sms_add_regular_success_message').style.display = 'none';
@@ -396,6 +401,8 @@
                 }
             })
             .catch(error => {
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                 // Network error occurred, display error message
                 document.getElementById('sms_add_regular_error_message').style.display = 'block';
                 console.error('Error submitting form data:', error);
