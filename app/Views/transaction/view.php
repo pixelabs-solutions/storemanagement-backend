@@ -118,10 +118,10 @@
                 <div class="col-md-7 rounded-4 ">
                   <h1 class="fs-3 fw-bold" data-i18n="popoups.transction_pop_popuop.order_detail.client_info">Customer details and shipping address</h1>
                   <div class="">
-                    <span class="d-block mb-3 fw-bold ">Client's name: <span class="fw-normal " id="client_first_name"></span>
+                    <span class="d-block mb-3 fw-bold "><span data-i18n="transction_page.transaction_tr.customer_name">Client's Name:</span>&nbsp; : &nbsp;<span class="fw-normal " id="client_first_name"></span>
                       <span class="fw-normal" id="client_last_name"></span></span>
-                    <span class="d-block mb-3 fw-bold">Phone number: <span class="fs-4 fw-normal " id="customer_billing_phone"></span></span>
-                    <span class="d-block mb-3 fw-bold ">Email address: <span class="fw-normal " id="customer_billing_email"></span></span>
+                    <span class="d-block mb-3 fw-bold"><span data-i18n="transction_page.transaction_tr.Phone_Number">Phone Number:</span>&nbsp;: &nbsp;<span class="fs-4 fw-normal " id="customer_billing_phone"></span></span>
+                    <span class="d-block mb-3 fw-bold "><span data-i18n="transction_page.transaction_tr.Email_address">Email Address:</span>&nbsp;:&nbsp; <span class="fw-normal " id="customer_billing_email"></span></span>
                   </div>
                 </div>
                 <div class="col-md-5 col-sm-12 mt-md-4">
@@ -138,9 +138,9 @@
             <div class="col-md-4 justify-content-center mt-3 ">
               <label for="statusSelect" class="form-label fs-3 fw-bold" data-i18n="popoups.transction_pop_popuop.order_detail.order_status">Change order status</label>
               <select class="form-select form-select-lg h-80" id="sms_mu_order_status" style="background-color:#f5f5f5;">
-                <option value="completed">Complete</option>
-                <option value="pending">In Treatment</option>
-                <option value="cancelled">Cancelled</option>
+                <option value="completed" data-i18n="transction_page.status_tr.Complete">Complete</option>
+                <option value="pending" data-i18n="transction_page.status_tr.In_Treatment">In Treatment</option>
+                <option value="cancelled" data-i18n="transction_page.status_tr.Cancelled">Cancelled</option>
 
               </select>
             </div>
@@ -157,20 +157,28 @@
               </div>
               <div class="d-flex flex-end col-6 justify-content-end">
                 <h4 class="mb-3 fs-3 fw-bold" data-i18n="popoups.transction_pop_popuop.order_detail.card_order.total">Order date:
-                </h4>
+                </h4> &nbsp;
                 <p class="mb-3" id="order_date"></p>
               </div>
             </div>
               <div class="col-md-4 rounded-4 bg-white mt-6 sms_order_popup_a">
                 <div class="row">
                   <div class="col-md-12 text-end px-4 py-2">
-                    <h3 data-i18n="popoups.transction_pop_popuop.order_detail.card_order.total_cost">a</h3>
+                    <h3 data-i18n="popoups.transction_pop_popuop.order_detail.card_order.total_cost_product"></h3>
                     <!-- <h4 class="fs-2 fw-bold text-dark text-start"></h4> -->
                     <div class="text-end">
-                      <h4 data-i18n="popoups.transction_pop_popuop.order_detail.card_order.product"></h4>
+                      <!-- <h4 data-i18n="popoups.transction_pop_popuop.order_detail.card_order.product"></h4>
                       <h4 data-i18n="popoups.transction_pop_popuop.order_detail.card_order.delivery"></h4>
                       <h1 class="d-block mb-3 fw-bold text-dark" id="delivery_details"></h1>
-                      <span class="d-block mb-3 fw-bold text-dark" id="total_amount"></span>
+                      <span class="d-block mb-3 fw-bold text-dark" id="total_amount" data-i18n="popoups.transction_pop_popuop.order_detail.card_order.total_cost"></span> 
+                      -->
+
+
+                      <h4>Products: <span id="products_cost"></span> <?php echo $currency[0]['symbol']; ?></h4>
+                      <!-- <h4 id="delivery_cost"></h4> -->
+                      <h4 class="d-block mb-3 fw-bold text-dark">Shipping: <span id="delivery_cost"></span> <?php echo $currency[0]['symbol']; ?></h4>
+                      <h4 class="d-block mb-3 fw-bold text-dark"><span id="total_amount"></span> <?php echo $currency[0]['symbol']; ?></h4>
+                      
                     </div>
                   </div>
                 </div>
@@ -185,9 +193,9 @@
                           <th class="sms_order_popups_a" style="background-color: rgba(73, 135, 216, 0.44);" data-i18n="popoups.transction_pop_popuop.order_detail.th.cst">
                             Cost</th>
                           <th class="sms_order_popups_a" style="background-color: rgba(73, 135, 216, 0.44);" data-i18n="popoups.transction_pop_popuop.order_detail.th.amt">
-                            >Amount</th>
+                            Amount</th>
                           <th class="sms_order_popups_a" style="background-color: rgba(73, 135, 216, 0.44);" data-i18n="popoups.transction_pop_popuop.order_detail.th.total">
-                            >Total</th>
+                            Total</th>
                         </tr>
                       </thead>
                       <tbody id="orderTable">
@@ -272,6 +280,7 @@
     document.getElementById("customer_billing_phone").innerHTML = transactions.billing.phone;
     document.getElementById("customer_billing_email").innerHTML = transactions.billing.email;
     document.getElementById("customer_billing_address").innerHTML = transactions.billing.city + transactions.billing.address_1;
+    document.getElementById("delivery_cost").innerHTML = transactions.shipping_total;
 
     // Using split method
     const datetimeStr = transactions.date_created;
@@ -279,7 +288,7 @@
     document.getElementById("order_date").innerHTML = dateStr;
     subTotal = transactions.total - transactions.shipping_total;
     // console.log(transactions.shipping_total);
-    document.getElementById("total_amount").innerHTML = "Total Cost: NIS " + transactions.total;
+    document.getElementById("total_amount").innerHTML = "Total Cost: " + transactions.total;
 
 
     const tableBody = document.getElementById('orderTable').querySelector('tbody');
@@ -287,9 +296,10 @@
     const orderProductsArray = transactions.line_items;
     // Clear existing rows if necessary
     tableBody.innerHTML = '';
-
+    var ProductsPrice = 0;
     // Loop through each item and create a row
     orderProductsArray.forEach(item => {
+      ProductsPrice = ProductsPrice + parseFloat(item.total);
       const row = document.createElement('tr');
       row.className = 'mt-2 rounded-4';
       row.style.backgroundColor = '#EAEAEA';
@@ -304,6 +314,7 @@
       tableBody.appendChild(row);
     });
 
+    document.getElementById("products_cost").innerHTML = ProductsPrice;
 
 
     // Extract shipping details from transaction data
@@ -336,7 +347,8 @@
     var data = {
       status: selectedStatus
     };
-
+    document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
     // Make fetch request
     fetch('/transactions/update_status/' + transactions.id, {
         method: 'PUT',
@@ -396,7 +408,8 @@
         id: id,
         status: selectedStatus
       };
-
+      document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+      document.body.style.overflow = "hidden";
       // Make fetch request
       fetch(`/transactions/update_status/${id}`, {
           method: 'PUT',

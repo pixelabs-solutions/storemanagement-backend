@@ -7,6 +7,7 @@ use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Helpers\RequestTracker;
 use Pixelabs\StoreManagement\Models\Authentication;
 use Pixelabs\StoreManagement\Models\Coupon;
+use Pixelabs\StoreManagement\Models\Synchronize;
 
 class CouponsController
 {
@@ -76,6 +77,8 @@ class CouponsController
             'usage_limit' => $data['usage_limit']
         ]);
         $response = Base::wc_add($configuration, $this->endpoint, $payload);
+        Synchronize::sync_coupons();
+
         echo $response;
     }
 
@@ -97,6 +100,8 @@ class CouponsController
 
 
         $result = Base::wc_delete_by_id($configuration, $this->endpoint."/".$id);
+        Synchronize::sync_coupons();
+
         echo $result;
     }
 
@@ -121,6 +126,8 @@ class CouponsController
             'usage_limit' => $data['usage_limit']
         ]);
         $response = Base::wc_update($configuration, $this->endpoint."/".$id, $payload);
+        Synchronize::sync_coupons();
+
         echo $response;
     }
 

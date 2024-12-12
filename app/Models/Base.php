@@ -114,7 +114,6 @@ class Base
                 ]);
 
                 $result = json_decode($response->getBody(), true);
-                
                 if (empty($result)) 
                 {
                     break;
@@ -244,7 +243,6 @@ class Base
         $consumer_key = $configurations["consumer_key"];
         $consumer_secret = $configurations["consumer_secret"];
         $store_url = $configurations["store_url"];
-
         $client = new Client();
         try
         {

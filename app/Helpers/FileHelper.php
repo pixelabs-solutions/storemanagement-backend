@@ -6,6 +6,7 @@ class FileHelper
 {
     public static function save_file($base64, $file_name)
     {
+        $file_name = str_replace(' ', '', $file_name);
         if($base64 === null || $base64 === "") return "";
         if (preg_match('/^data:image\/(\w+);base64,/', $base64, $type)) {
             $extension = $type[1];
@@ -25,7 +26,7 @@ class FileHelper
         }
         file_put_contents($file_path, $binary_data);
         
-        $url = "https://woo-management.com/". "public/uploads/" .$filepathURI;
+        $url = $_SERVER['HTTP_HOST']."/". "public/uploads/" .$filepathURI;
         return $url;
     }
 }

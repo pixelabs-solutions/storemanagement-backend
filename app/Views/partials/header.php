@@ -1,5 +1,9 @@
-<!doctype html>
 
+
+<!doctype html>
+<?php
+use Pixelabs\StoreManagement\Models\Authentication;
+?>
 
 
 <html lang="en">
@@ -11,7 +15,7 @@
    <title>Store Managment System</title>
    <!-- CSS files -->
    <link rel="stylesheet" type="text/css" href="assets/dist/css/tabler.min.css" />
-   <link href="assets/dist/css/tabler-flags.min.css?1695847769" rel="stylesheet"/>
+   <link href="assets/dist/css/tabler-flags.min.css?1695847769" rel="stylesheet" />
    <link href="assets/dist/css/tabler-payments.min.css" rel="stylesheet" />
    <link href="assets/dist/css/tabler-vendors.min.css" rel="stylesheet" />
    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
@@ -110,6 +114,22 @@
          margin-left: 10px;
       }
 
+      .sms_header_page_name {
+         font-weight: 400 !important;
+         color: black !important;
+         font-size: 20px;
+      }
+
+      .weight_500 {
+         font-weight: 500 !important;
+         color: black !important;
+      }
+
+      .weight_400 {
+         font-weight: 400 !important;
+         color: black !important;
+      }
+
       .choices__input {
          background-color: transparent !important;
       }
@@ -133,11 +153,22 @@
          padding-left: 14px !important;
 
       }
-      .dropdown_logout{
+
+      .abc .dropdown_logout {
          position: absolute;
-        top: 49px;
-        margin-left: 15px;
-    }
+         top: 49px;
+         /* margin-right: 15px; */
+         right: 2%;
+         /* left: 0; */
+      }
+
+      .rtl .dropdown_logout {
+         position: absolute;
+         top: 49px;
+         /* margin-right: 15px; */
+         left: 2%;
+         /* right: 0; */
+      }
 
 
       .dropdown-item {
@@ -177,6 +208,18 @@
          background-color: #4987D8;
       }
 
+      .rtl .sms_e_active_item {
+         border-right: 4px solid #4987D8 !important;
+         border-left: 4px solid transparent !important;
+         background-color: #F1F4FF;
+      }
+
+      .rtl .dropdown-menu-column .sms_e_active_item {
+         border-right: 4px solid transparent !important;
+         color: white !important;
+         background-color: #4987D8;
+      }
+
       .rtl {
          direction: rtl;
       }
@@ -208,6 +251,10 @@
 
       .rtl td {
          border-radius: 0px !important;
+      }
+
+      .fw-bold {
+         font-weight: 900 !important;
       }
 
       .rtl .sms_mu_margin {
@@ -343,11 +390,11 @@
       }
 
       .abc .Sms_mu_for_Eng {
-         display: block;
+         display: block !important;
       }
 
       .abc .Sms_mu_for_hebrew {
-         display: none;
+         display: none !important;
       }
 
       .my_div {
@@ -364,11 +411,11 @@
       }
 
       .rtl .Sms_mu_for_Eng {
-         display: none;
+         display: none !important;
       }
 
       .rtl .Sms_mu_for_hebrew {
-         display: block;
+         display: block !important;
       }
 
       .rtl .sms_mu_show {
@@ -376,83 +423,17 @@
          right: -452px !important;
       }
 
-      .rtl .dropdown-menu-arrow.dropdown-menu-end:before {
+      /* .rtl .dropdown-menu-arrow.dropdown-menu-end:before {
          right: 28.75rem;
          left: auto;
-      }
+      } */
 
       .rtl .sms_mu_header {
          margin-right: 15%;
       }
 
-      .abc #sms_mu_desktop_heb,
-      .abc #sms_mu_desktop_heb1,
-      .abc #sms_mu_desktop_heb2,
-      .abc #sms_mu_desktop_heb3,
-      .abc #sms_mu_desktop_heb4,
-      .abc #sms_mu_desktop_heb5,
-      .abc #sms_mu_desktop_heb6,
-      .abc #sms_mu_desktop_heb_set,
-      .abc #sms_mu_desktop_heb_sp,
-      .abc #sms_mu_desktop_heb_btn,
-      .abc #product-heb,
-      .abc #inventory-heb,
-      .abc #coupons-heb,
-      .abc #support {
-         display: none !important;
-      }
 
-      .abc #sms_mu_desktop_eng,
-      .abc #sms_mu_desktop_eng1,
-      .abc #sms_mu_desktop_eng2,
-      .abc #sms_mu_desktop_eng3,
-      .abc #sms_mu_desktop_eng4,
-      .abc #sms_mu_desktop_eng5,
-      .abc #sms_mu_desktop_eng6,
-      .abc #sms_mu_desktop_eng_set,
-      .abc #sms_mu_desktop_eng_sp,
-      .abc #sms_mu_desktop_eng_btn,
-      .abc #product,
-      .abc #inventory,
-      .abc #coupons,
-      .abc #support {
-         display: block !important;
-      }
-
-      .rtl #sms_mu_desktop_heb,
-      .rtl #sms_mu_desktop_heb1,
-      .rtl #sms_mu_desktop_heb2,
-      .rtl #sms_mu_desktop_heb3,
-      .rtl #sms_mu_desktop_heb4,
-      .rtl #sms_mu_desktop_heb5,
-      .rtl #sms_mu_desktop_heb6,
-      .rtl #sms_mu_desktop_heb_set,
-      .rtl #sms_mu_desktop_heb_sp,
-      .rtl #sms_mu_desktop_heb_btn,
-      .rtl #product-heb,
-      .rtl #inventory-heb,
-      .rtl #coupons-heb,
-      .rtl #support {
-         display: block !important;
-      }
-
-      .rtl #sms_mu_desktop_eng,
-      .rtl #sms_mu_desktop_eng1,
-      .rtl #sms_mu_desktop_eng2,
-      .rtl #sms_mu_desktop_eng3,
-      .rtl #sms_mu_desktop_eng4,
-      .rtl #sms_mu_desktop_eng5,
-      .rtl #sms_mu_desktop_eng6,
-      .rtl #sms_mu_desktop_eng_set,
-      .rtl #sms_mu_desktop_eng_sp,
-      .rtl #sms_mu_desktop_eng_btn,
-      .rtl #product,
-      .rtl #inventory,
-      .rtl #coupons,
-      .rtl #support {
-         display: none !important;
-      }
-      .rtl .header_row_for_hebrew{
+      .rtl .header_row_for_hebrew {
          padding-right: 2rem !important;
       }
 
@@ -475,6 +456,125 @@
          border-radius: 5px;
          display: none;
       }
+
+
+      #sync_woocommerce{
+         border-radius: 100px;
+      }
+
+
+      #loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    text-align: center;
+}
+
+#loader .spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loader h1 {
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
+
+      .fw-bold {
+         font-weight: 700 !important;
+      }
+
+      .sms_mu_chosefile {
+         background-color: #EEEEEE;
+      }
+
+      .sms_a_custom_file_input label {
+         /* display: inline-block; */
+         padding: 12px 16px;
+         border: 1px solid #ced4da;
+         border-radius: 8px;
+         cursor: pointer;
+         width: 100%;
+         background-color: #EAEAEA !important;
+         text-align: center;
+      }
+
+
+      
+  /* Style for the loader, customize as needed */
+  .ajaxloader {
+    border: 16px solid #f3f3f3;
+    /* Light grey */
+    border-top: 16px solid #3498db;
+    /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Style to center the loader */
+  #ajaxloadingIndicator {
+    display: flex;
+    
+    align-items: center;
+    justify-content: center;
+    position: -webkit-sticky; /* Safari */
+  position: fixed;
+  top: 50%;    
+    left: 50%;
+    height: 300vh;
+    width: 100vw;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    /* Ensure it's on top */
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4.5px);
+    -webkit-backdrop-filter: blur(4.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  /* Disable scrolling */
+  .no-scroll {
+    overflow: hidden !important;
+  }
+
+
    </style>
 </head>
 
@@ -511,10 +611,10 @@
                               </defs>
                            </svg>
                         </span>
-                        <span class="nav-link-title" id="sms_mu_desktop_eng">
+                        <span class="nav-link-title Sms_mu_for_Eng">
                            Desktop
                         </span>
-                        <span class="nav-link-title" id="sms_mu_desktop_heb">
+                        <span class="nav-link-title Sms_mu_for_hebrew">
                            שולחן עבודה
                         </span>
                      </a>
@@ -535,23 +635,38 @@
                               </defs>
                            </svg>
                         </span>
-                        <span class="nav-link-title" id="sms_mu_desktop_eng1">
+                        <span class="nav-link-title Sms_mu_for_Eng">
                            Product
                         </span>
-                        <span class="nav-link-title" id="sms_mu_desktop_heb1">
+                        <span class="nav-link-title Sms_mu_for_hebrew">
                            מוצר
                         </span>
                      </a>
-                     <div class="dropdown-menu  " id="dropdown-menu">
+                     <div class="dropdown-menu" id="dropdown-menu">
                         <div class="dropdown-menu-columns">
                            <div class="dropdown-menu-column">
-                              <a href="/product" class="dropdown-item " id="product">Product Management</a>
-                              <a href="/product" class="dropdown-item " id="product-heb">ניהול מוצר</a>
-                              <a href="/inventory" class="dropdown-item" id="inventory">Inventory
-                                 settings </a>
-                              <a href="/inventory" class="dropdown-item" id="inventory-heb">הגדרות מלאי</a>
-                              <a href="/coupons" class="dropdown-item" id="coupons">Coupons and benefits</a>
-                              <a href="/coupons" class="dropdown-item" id="coupons-heb">קופונים והטבות</a>
+                              <a href="/product" class="dropdown-item" id="product">
+                                 <span class="Sms_mu_for_Eng">Product Management</span>
+                                 <span class="Sms_mu_for_hebrew">
+                                    ניהול מוצר
+                                 </span>
+                              </a>
+                              <a href="/inventory" class="dropdown-item" id="inventory">
+                                 <span class="Sms_mu_for_Eng">Inventory settings</span>
+                                 <span class="Sms_mu_for_hebrew">
+                                    הגדרות מלאי
+                                 </span>
+                              </a>
+                              <a href="/coupons" class="dropdown-item" id="coupons">
+                                 <span class="Sms_mu_for_Eng">Coupons and benefits</span>
+                                 <span class="Sms_mu_for_hebrew">
+                                    קופונים והטבות
+                                 </span>
+                              </a>
+                              <!-- <a href="/inventory" class="dropdown-item" id="product"> </a>
+                              <a  class="dropdown-item Sms_mu_for_hebrew"></a>
+                              <a href="/coupons" class="dropdown-item Sms_mu_for_Eng" id="product"></a>
+                              <aclass="dropdown-item Sms_mu_for_hebrew" id="product"></a> -->
                            </div>
                         </div>
                      </div>
@@ -565,10 +680,10 @@
                            </svg>
 
                         </span>
-                        <span class="nav-link-title" id="sms_mu_desktop_eng2">
+                        <span class="nav-link-title Sms_mu_for_Eng">
                            Customer
                         </span>
-                        <span class="nav-link-title" id="sms_mu_desktop_heb2">
+                        <span class="nav-link-title Sms_mu_for_hebrew">
                            צרכן
                         </span>
                      </a>
@@ -581,10 +696,10 @@
                            </svg>
 
                         </span>
-                        <span class="nav-link-title" id="sms_mu_desktop_eng3">
+                        <span class="nav-link-title Sms_mu_for_Eng">
                            Transaction
                         </span>
-                        <span class="nav-link-title" id="sms_mu_desktop_heb3">
+                        <span class="nav-link-title Sms_mu_for_hebrew">
                            עִסקָה
                         </span>
                      </a>
@@ -597,10 +712,10 @@
                            </svg>
 
                         </span>
-                        <span class="nav-link-title" id="sms_mu_desktop_eng4">
+                        <span class="nav-link-title Sms_mu_for_Eng">
                            Statictis
                         </span>
-                        <span class="nav-link-title" id="sms_mu_desktop_heb4">
+                        <span class="nav-link-title Sms_mu_for_hebrew">
                            סטָטִיסטִיקָה
                         </span>
                      </a>
@@ -612,10 +727,10 @@
                               <path d="M0 7.255C0 3.25 3.25 0 7.255 0C9.18 0 11.025 0.765 12.385 2.125L16 5.735L19.61 2.125C20.975 0.765 22.82 0 24.745 0C28.75 0 32 3.25 32 7.255V8.74C32 12.75 28.75 16 24.745 16C22.82 16 20.975 15.235 19.615 13.875L16 10.265L12.39 13.875C11.025 15.235 9.18 16 7.255 16C3.25 16 0 12.75 0 8.745V7.255ZM13.735 8L10.125 4.39C9.365 3.63 8.33 3.2 7.255 3.2C5.015 3.2 3.2 5.015 3.2 7.255V8.74C3.2 10.98 5.015 12.795 7.255 12.795C8.33 12.795 9.365 12.37 10.125 11.605L13.735 8ZM18.26 8L21.87 11.61C22.63 12.37 23.665 12.8 24.74 12.8C26.98 12.8 28.795 10.985 28.795 8.745V7.255C28.795 5.015 26.98 3.2 24.74 3.2C23.665 3.2 22.63 3.625 21.87 4.39L18.265 8H18.26Z" fill="#4987D8" />
                            </svg>
                         </span>
-                        <span class="nav-link-title" id="sms_mu_desktop_eng5">
+                        <span class="nav-link-title Sms_mu_for_Eng">
                            Objectives
                         </span>
-                        <span class="nav-link-title" id="sms_mu_desktop_heb5">
+                        <span class="nav-link-title Sms_mu_for_hebrew">
                            יעדים
                         </span>
                      </a>
@@ -679,11 +794,19 @@
 
                   <li class="nav-item" id="">
                      <button onclick="LogoutDisconecting()" id="sms_mu_filter_button_inventory" class="rounded-4 border-0 p-2" style="background-color:#4987D870; color:white">
-                        Disconnecting from the system
-
+                        <span class="Sms_mu_for_Eng m-0">
+                           Disconnecting from the system 
+                           <svg width="24" height="24" viewBox="0 0 32 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <path d="M22 4H26C27.1063 4 28 4.89375 28 6V22C28 23.1063 27.1063 24 26 24H22C20.8937 24 20 24.8937 20 26C20 27.1063 20.8937 28 22 28H26C29.3125 28 32 25.3125 32 22V6C32 2.6875 29.3125 0 26 0H22C20.8937 0 20 0.89375 20 2C20 3.10625 20.8937 4 22 4ZM21.4125 15.4125C22.1938 14.6313 22.1938 13.3625 21.4125 12.5813L13.4125 4.58125C12.6313 3.8 11.3625 3.8 10.5813 4.58125C9.8 5.3625 9.8 6.63125 10.5813 7.4125L15.1687 12H2C0.89375 12 0 12.8938 0 14C0 15.1062 0.89375 16 2 16H15.1687L10.5813 20.5875C9.8 21.3687 9.8 22.6375 10.5813 23.4188C11.3625 24.2 12.6313 24.2 13.4125 23.4188L21.4125 15.4188V15.4125Z" fill="white" />
+                        </svg>
+                        </span>
+                        <span class="Sms_mu_for_hebrew m-0">
                         <svg width="24" height="24" viewBox="0 0 32 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path d="M22 4H26C27.1063 4 28 4.89375 28 6V22C28 23.1063 27.1063 24 26 24H22C20.8937 24 20 24.8937 20 26C20 27.1063 20.8937 28 22 28H26C29.3125 28 32 25.3125 32 22V6C32 2.6875 29.3125 0 26 0H22C20.8937 0 20 0.89375 20 2C20 3.10625 20.8937 4 22 4ZM21.4125 15.4125C22.1938 14.6313 22.1938 13.3625 21.4125 12.5813L13.4125 4.58125C12.6313 3.8 11.3625 3.8 10.5813 4.58125C9.8 5.3625 9.8 6.63125 10.5813 7.4125L15.1687 12H2C0.89375 12 0 12.8938 0 14C0 15.1062 0.89375 16 2 16H15.1687L10.5813 20.5875C9.8 21.3687 9.8 22.6375 10.5813 23.4188C11.3625 24.2 12.6313 24.2 13.4125 23.4188L21.4125 15.4188V15.4125Z" fill="white" />
                         </svg>
+                        ניתוק מהמערכת 
+                     </span>
+                        
 
                      </button>
                   </li>
@@ -705,6 +828,19 @@
                   →</button> -->
 
                <div class="navbar-nav flex-row order-md-last">
+                  <div class=" d-flex align-items-center">
+                     <p class="m-0"><strong>Date & Time of last Sync: </strong><?php $user_id = Authentication::getUserIdFromToken();
+                        $last_sync_datetime = Authentication::get_user_meta($user_id, 'last_sync_datetime');
+                        while ($row = $last_sync_datetime->fetch_assoc()) {
+                           echo $row['meta_value'];
+                        }
+                        ?>
+                     </p>
+                     <button class="btn btn-pill btn-info m-2 pt-1 pb-1 " id="sync_woocommerce">
+                        <!-- <div class="spinner-border spinner-border-sm text-light" role="status"></div> &ensp; -->
+                         Sync
+                     </button>
+               </div>
                   <div class=" d-flex align-items-center">
                      <a href="?theme=dark" class="nav-link px-0 hide-theme-dark d-none" title="Enable dark mode" data-bs-toggle="tooltip" data-bs-placement="bottom">
                         <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
@@ -823,11 +959,11 @@
                      </button> -->
                      <select id="lang-select" style="padding: 5px; font-size: 14px;" class="lang_select">
                         <option value="en">
-                      <span class="flag flag-country-us"> English</span>
-                           
+                           <span class="flag flag-country-us"> English</span>
+
                         </option>
                         <option value="he">
-                        <span class="flag flag-country-il"></span>
+                           <span class="flag flag-country-il"></span>
                            עברית
                         </option>
                      </select>
@@ -844,9 +980,12 @@
                   </div>
                   </a>
                   <div id="PopoupLogout" class="dropdown-menu dropdown-menu-end dropdown-menu-arrow dropdown_logout" bis_skin_checked="1" style="display: none ;">
-                        <a href="#" class="dropdown-item" onclick="LogoutDisconecting()">Logout</a>
-                     </div>
-                     <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                     <a href="#" class="dropdown-item" onclick="LogoutDisconecting()">
+                        <span class="Sms_mu_for_Eng">Logout</span>
+                        <span class="Sms_mu_for_hebrew">להתנתק</span>
+                     </a>
+                  </div>
+                  <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                         <a href="#" class="dropdown-item">Status</a>
                         <a href="./profile.html" class="dropdown-item">Profile</a>
                         <a href="#" class="dropdown-item">Feedback</a>
@@ -986,7 +1125,7 @@
                   },
                   'customers': {
                      en: 'Customer',
-                     he: 'לקוח'
+                     he: 'לקוחות'
                   },
                   'transactions': {
                      en: 'Transaction',
@@ -1090,12 +1229,12 @@
             });
             $(document).ready(function() {
 
-var multipleCancelButton = new Choices('#category_in_product_normal_product', {
-   removeItemButton: true,
-});
+               var multipleCancelButton = new Choices('#category_in_product_normal_product', {
+                  removeItemButton: true,
+               });
 
 
-});
+            });
             $(document).ready(function() {
 
                var multipleCancelButton = new Choices('#sms_mu_select_category', {
@@ -1108,12 +1247,12 @@ var multipleCancelButton = new Choices('#category_in_product_normal_product', {
 
             $(document).ready(function() {
 
-var multipleCancelButton = new Choices('#variation_category_select', {
-   removeItemButton: true,
-});
+               var multipleCancelButton = new Choices('#variation_category_select', {
+                  removeItemButton: true,
+               });
 
 
-});
+            });
 
             // $(document).ready(function () {
 
@@ -1127,3 +1266,52 @@ var multipleCancelButton = new Choices('#variation_category_select', {
 
             // });
          </script>
+
+
+
+<script>
+                document.addEventListener('DOMContentLoaded', function() {
+            var syncButton = document.getElementById('sync_woocommerce');
+            var loader = document.getElementById('loader');
+
+            syncButton.addEventListener('click', function() {
+                // Show the loader
+                loader.style.display = 'flex';
+
+                // Create a new XMLHttpRequest
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'sync', true);
+
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        // Hide the loader
+                        loader.style.display = 'none';
+
+                        if (xhr.status === 200) {
+                            // Handle the response
+                            if (xhr.responseText === 'done') {
+                                alert('Sync completed successfully!');
+                                // Reload the page after the alert
+                                location.reload();
+                            } else {
+                                alert('Sync failed.');
+                                // Reload the page after the alert
+                                location.reload();
+                            }
+                        } else {
+                            alert('An error occurred while syncing.');
+                            // Reload the page after the alert
+                            location.reload();
+                        }
+                    }
+                };
+
+                // Send the request
+                xhr.send();
+            });
+        });
+    </script>
+
+<div id="ajaxloadingIndicator" style="display: none;">
+  <div class="ajaxloader"></div>
+</div>

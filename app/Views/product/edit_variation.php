@@ -139,13 +139,13 @@
                         <!-- Upload a product image  -->
                         <div class="row gx-3">
                             <div class="col-md-6 mb-4">
-                                <label class="form-label"
-                                    data-i18n="popoups.future_managment.edit_variation_in_product_managment.image_upload">Upload
+                                <label class="form-label fw-bold"
+                                    data-i18n="popoups.future_managment.edit_variation_in_product_managment.image_upload" >Upload
                                     a product image </label>
                                 <div class="sms_a_add_product_variations">
                                     <input type="file" id="sms_a_edit_product_variation_single_images" accept="image/*"
                                         onchange="sms_a_edit_product_variation_single()">
-                                    <label for="sms_a_edit_product_variation_single_images"><i
+                                    <label for="sms_a_edit_product_variation_single_images sms_mu_chosefile"><i
                                             class="bi bi-image text-black"></i>
                                         <svg width="20" height="20" viewBox="0 0 32 26" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -161,13 +161,13 @@
                             </div>
                             <!-- Upload a photo gallery -->
                             <div class="col-md-6 mb-3">
-                                <label class="form-label"
+                                <label class="form-label fw-bold"
                                     data-i18n="popoups.future_managment.edit_variation_in_product_managment.gallery_upload">Upload
                                     a photo gallery</label>
                                 <div class="sms_a_add_product_variations">
                                     <input type="file" id="sms_a_edit_product_variation_multiple_image" accept="image/*"
                                         onchange="sms_a_edit_product_variation_multiple_images()" multiple>
-                                    <label for="sms_a_edit_product_variation_multiple_image"><i
+                                    <label for="sms_a_edit_product_variation_multiple_image" class="sms_mu_chosefile"><i
                                             class="bi bi-image text-black"></i>
                                         <svg width="20" height="20" viewBox="0 0 32 26" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -247,18 +247,14 @@
                          <!-- submit button -->
                          <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
                                 <div class="text-center mt-2 col-sm-6 col-md-6">
-                                    <button type="submit" class="btn btn-primary col-12 rounded-4 py-3"
+                                    <button type="submit" id="edit_variation_disbale" class="btn btn-primary col-12 rounded-4 py-3"
                                     onclick="logFormValuesInEdit()"
-                                        data-i18n="popoups.future_managment.edit_variation_in_product_managment.update_product_btn">To
-                                        update
-                                        the product →</button>
+                                        data-i18n="popoups.future_managment.edit_variation_in_product_managment.update_product_btn">Update</button>
                                 </div>
                                 <div class="text-center mt-2 col-sm-6 col-md-6">
                                     <button type="button" class="btn btn-danger col-12 rounded-4 py-3 "
                                         data-i18n="popoups.future_managment.edit_variation_in_product_managment.delete_product_btn"
-                                        onclick="openModal('sms_edit_product_variation_w_delete_complete_modal')">Deletion
-                                        of
-                                        the product</button>
+                                        onclick="openModal('sms_edit_product_variation_w_delete_complete_modal')">Delete</button>
                                 </div>
                             </div>
                 </div>
@@ -494,6 +490,9 @@ function logFormValuesInEdit() {
                 'sale_price': salePrice
             };
 
+            let edit_variation_disbale = document.getElementById('edit_variation_disbale');
+            edit_variation_disbale.disabled = true;
+
             return fetch(`/product/${productID}`, {
                 method: 'PUT',
                 headers: {
@@ -568,6 +567,9 @@ function logFormValuesInEdit() {
                 var productId = productData.id;
                 let newTablebody = document.getElementById('variations_data_table_rows');
                 newTablebody.innerHTML = " ";
+                
+                    document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
                 fetch(`/product/${productId}/variations`)
                     .then(response => {
                         if (!response.ok) {

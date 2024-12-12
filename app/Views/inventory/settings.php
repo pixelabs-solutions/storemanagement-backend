@@ -247,6 +247,10 @@ $woocommerce_notify_no_stock_ischecked = ($woocommerce_notify_no_stock_value ===
         // console.log(formData);
 
         // Make fetch request
+
+        document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+
+
         fetch('/inventory/update', {
             method: 'PUT',
             headers: {

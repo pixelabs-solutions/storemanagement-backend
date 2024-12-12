@@ -16,4 +16,11 @@ class AdminController{
         }
     }
   
+    public function delete_user($customer_id){
+        $user_level = Authentication::getUserLevelFromToken();
+        if($user_level == ADMIN)
+        {
+            $delete_customer =  Authentication::delete_customer($customer_id);
+        }
+    }
 }

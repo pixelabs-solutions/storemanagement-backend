@@ -173,10 +173,10 @@ if ($goals_data['status'] == "add") {
                 <line x1="12" y1="5" x2="12.01" y2="19"></line>
             </svg>
             <h3>Error</h3>
-            <div class="text-muted">An error occurred while submitting data. Please try again later.</div>
+            <div class="text-muted">An error occurred while updated data. Please try again later.</div>
         </div>
         <div class="row mt-2 justify-content-end">
-            <input type="button" value="update" onclick="sms_meh_update_goal_data()" class="p-2 px-4 sms_mu_file125_popoup_last_btn w-auto h-5 d-flex align-items-center rounded-3 border-0   mt-5  text-center">
+            <button type="submit" data-i18n="popoups.objective_popoup.update_btn_last" onclick="sms_meh_update_goal_data()" class="p-2 px-4 sms_mu_file125_popoup_last_btn w-auto h-5 d-flex align-items-center rounded-3 border-0   mt-5  text-center">Update</button>
             <!-- <div type
                         ">
                             <p class=" m-0"> Updating goals and objectives </p>
@@ -186,6 +186,10 @@ if ($goals_data['status'] == "add") {
 </div>
 <script>
     function sms_meh_update_goal_data() {
+        document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
+
+
         //    let sales_revenue': document.getElementById('sms_target_sales_revenue').value;
         var data = {
             'sales_revenue_target': document.getElementById('sms_target_sales_revenue').value,
@@ -215,17 +219,27 @@ if ($goals_data['status'] == "add") {
             })
             .then(response => {
                 if (response.status === 200) {
+
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     // Form submission succeeded, display success message
                     document.getElementById('sms_goal_success_message').style.display = 'block';
                     document.getElementById('sms_goal_error_message').style.display = 'none';
                     window.location.reload();
                 } else {
+
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
+
                     // Form submission failed, display error message
                     document.getElementById('sms_goal_error_message').style.display = 'block';
                     document.getElementById('sms_goal_success_message').style.display = 'none'; // Hide success message if it was displayed before
                 }
             })
             .catch(error => {
+
+                document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                 // Network error occurred, display error message
                 document.getElementById('sms_goal_error_message').style.display = 'block';
                 console.error('Error submitting form data:', error);
@@ -233,10 +247,16 @@ if ($goals_data['status'] == "add") {
     }
 
     function sms_goal_close_success_message() {
+
+        document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
         document.getElementById('sms_goal_success_message').style.display = 'none';
     }
 
     function sms_goal_close_error_message() {
+
+        document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
         document.getElementById('sms_goal_error_message').style.display = 'none';
     }
 </script>

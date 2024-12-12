@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../partials/header.php';
 
- // var_dump($transactions);
+// echo json_encode($transactions);
 // $jsontransactionData = json_encode($transactions, JSON_UNESCAPED_UNICODE);
 
 // echo $jsontransactionData;
@@ -222,10 +222,10 @@ require_once __DIR__ . '/../partials/header.php';
         <div class="d-flex">
           <label for="statusSelect" class="form-label"></label>
           <select class="sms_m_form_select form-select dropdown-tom-select-style" id="sms_m_form_select">
-            <option value="Group status change" disabled selected>Group status change</option>
-            <option value="completed">Completed</option>
-            <option value="cancelled">Cancelled</option>
-            <option value="pending">In Treatment</option>
+            <option value="Group status change"  data-i18n="transction_page.status_tr.changed" disabled selected>Group status change</option>
+            <option value="completed" data-i18n="transction_page.status_tr.Complete">Completed</option>
+            <option value="cancelled" data-i18n="transction_page.status_tr.Cancelled">Cancelled</option>
+            <option value="pending" data-i18n="transction_page.status_tr.In_Treatment">In Treatment</option>
           </select>
         </div>
         <!-- <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -280,7 +280,7 @@ require_once __DIR__ . '/../partials/header.php';
 
                 <td><span class="sms_transaction_w_status"> <?php echo $item['status']; ?> </span></td>
 
-                <td><?php echo "NIS " . $item['total']; ?> </td>
+                <td><?php echo $item['total']; echo " "; echo $currency[0]['symbol']; ?> </td>
 
                 <!-- <td>#1152</td> -->
 
@@ -325,7 +325,6 @@ require_once __DIR__ . '/../partials/header.php';
             }
             ?>
             <!-- <tr class="sms_mu_spacing_div"></tr> -->
-
           </table>
           <div class="sm-mu-buttons d-flex mb-4 justify-content-end">
             <?php
@@ -334,14 +333,12 @@ require_once __DIR__ . '/../partials/header.php';
             $prev_page = $current_page > 1 ? $current_page - 1 : 1;
             ?>
             <input type="radio" class="btn-check" name="btn-radio-dropdown" id="btn-radio-dropdown-1" autocomplete="off" onclick="window.location.href='?page=<?php echo $prev_page; ?>'">
-            <label for="btn-radio-dropdown-1" type="button" class="btn">
-
-              Back
+            <label for="btn-radio-dropdown-1" type="button" class="btn fs-2">
+            &#60;
             </label>
             <input type="radio" class="btn-check" name="btn-radio-dropdown" id="btn-radio-dropdown-2" autocomplete="off" onclick="window.location.href='?page=<?php echo $next_page; ?>'">
-            <label for="btn-radio-dropdown-2" type="button" class="btn">
-
-              Next
+            <label for="btn-radio-dropdown-2" type="button" class="btn fs-2">
+            &#62;
             </label>
           </div>
 
@@ -563,7 +560,8 @@ require_once __DIR__ . '/../partials/header.php';
         id: selectedIds,
         status: selectedStatus
       };
-
+      document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+      document.body.style.overflow = "hidden";
       // Make fetch request
       fetch('/transactions/update_bulk_status', {
           method: 'POST',

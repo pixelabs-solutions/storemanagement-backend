@@ -8,6 +8,7 @@ use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Models\Authentication;
 use Pixelabs\StoreManagement\Models\Inventory;
+use Pixelabs\StoreManagement\Models\Synchronize;
 
 
 class InventoryController
@@ -132,6 +133,7 @@ class InventoryController
             ]
         );
         $result = Base::wc_update($configuration, "settings/products/batch", $payload);
+        Synchronize::sync_inventory_settings();
 
         echo $result;
     }

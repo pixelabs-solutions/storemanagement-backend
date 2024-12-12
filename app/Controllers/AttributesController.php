@@ -6,6 +6,7 @@ use Pixelabs\StoreManagement\Helpers\HttpRequestHelper;
 use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Models\Authentication;
 use Pixelabs\StoreManagement\Models\Attribute;
+use Pixelabs\StoreManagement\Models\Synchronize;
 
 class AttributesController
 {
@@ -20,8 +21,7 @@ class AttributesController
             } else {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
-        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-        $attributes = Base::wc_get($configuration, $this->endpoint, $page);
+        $attributes = Base::wc_get($configuration, $this->endpoint);
         if($is_rest == 'true')
         {
             echo json_encode($attributes);
@@ -47,7 +47,9 @@ class AttributesController
         $configuration = $this->prepare_configuration($is_rest);
 
         $result = Base::wc_delete_by_id($configuration, $this->endpoint."/".$id);
-        echo $result;
+        Synchronize::sync_attributes();
+
+        return $result;
     }
 
 
@@ -70,6 +72,8 @@ class AttributesController
         ];
 
         $response = Attribute::add($configuration, $payload);
+        Synchronize::sync_attributes();
+
         echo $response;
     }
 
@@ -91,7 +95,9 @@ class AttributesController
             'type' => $data['type']
         ]);
         $response = Base::wc_update($configuration, $this->endpoint."/".$id, $payload);
-        echo $response;
+        Synchronize::sync_attributes();
+
+        return $response;
     }
 
     
@@ -101,16 +107,12 @@ class AttributesController
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
 
-        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-        $attribute_terms = Base::wc_get($configuration, $this->endpoint."/".$id."/"."terms", $page);
-        // include_once __DIR__ . '/../Views/product/index.php';
+        $attribute_terms = Base::wc_get($configuration, $this->endpoint."/".$id."/"."terms");
      
         // Ensure headers are set to return JSON
         header('Content-Type: application/json');
         
-        // Output the JSON encoded attribute terms
         echo json_encode($attribute_terms);
-        //    return json_encode($attribute_terms);
     }
 
     
@@ -134,6 +136,7 @@ class AttributesController
         $configuration = $this->prepare_configuration($is_rest);
 
         $result = Base::wc_delete_by_id($configuration, $this->endpoint."/".$id."/"."terms"."/".$term_id);
+
         echo $result;
     }
 
@@ -142,20 +145,21 @@ class AttributesController
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
         $configuration = $this->prepare_configuration($is_rest);
+        $name = $_POST['name'];
+        $attribute_id = $id;
+        $data = $_POST['data'];
+        $description = $_POST['description'];
 
-        $result = HttpRequestHelper::validate_request("POST");
-        if(!$result["is_data_prepared"])
-        {
-            echo $result["message"];
-            return;
-        }
+        $payload = [
+            'name' => $name,
+            'attribute_id' => $attribute_id,
+            'data' => $data,
+            'description' => $description
+        ];
 
-        $data = $result["data"];
-        $payload = json_encode([
-            'data' => $data['data']
-        ]);
+        $response = Attribute::add_term($configuration, $payload);
+        Synchronize::sync_attributes();
 
-        $response = Attribute::add_term($configuration, $payload, $id, $data['name']);
         echo $response;
     }
 

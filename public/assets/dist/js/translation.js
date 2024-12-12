@@ -14,12 +14,13 @@ const translations = {
       Setting: "Setting",
       Help: "Help and support",
       Disconecting: "Disconnecting from the system ",
+      Logout : "Logout",
     },
     dashboard: {
       tabs: {
         first_tab: "24 Hours",
         second_tab: "Last Week",
-        third_tab: "Last Month",
+        third_tab: "Current Month",
         fourth_tab: "Last Year",
         filter_btn: "Filter by dates ",
       },
@@ -116,7 +117,14 @@ const translations = {
       },
       third_row_with_check_box: {
         stock_alert_out: "Activate out of stock alert",
+        productpage: {
+          productname: "Product name",
+          category: "Category",
+          price: "Price",
+          Stock: "Stock",
+        },
       },
+
 
       fourth_row_with_check_box: {
         email_label: "Email address to receive notifications..",
@@ -130,7 +138,7 @@ const translations = {
         email_placeholder_P: "Threshold quantity for low stocks",
       },
       sixth_row_with_check_box: {
-        update_btn: "Updating and saving inventory settings →",
+        update_btn: "Update",
       },
     },
     cupons_and_benifit: {
@@ -180,20 +188,24 @@ const translations = {
         search_text: "Order Search",
       },
       transaction_th: {
-        order_no: "order no",
-        customer_name: "Customer's name",
+        order_no: "Order No",
+        customer_name: "Customer's Name",
         status: "Status",
         order_date: "Order Date",
-        sum: "sum",
-        source: "source",
+        sum: "Sum",
+        source: "Source",
       },
       transaction_tr: {
-        order_no: "#1152",
-        customer_name: "mubashir Malka",
-        status: "completed",
-        order_date: "24/07/2024",
-        sum: "NIS 1,370",
-        source: "Google Organic",
+        customer_name: "Client's Name",
+        Phone_Number: "Phone Number",
+        Email_address: "Email Address",
+      },
+
+      status_tr: {
+        Complete: "Complete",
+        In_Treatment: "In Treatment",
+        Cancelled: "Cancelled",
+        changed: "Group status change",
       },
     },
     statististics: {
@@ -315,11 +327,12 @@ const translations = {
       },
       card_one_in_objective: {
         card_title: "in sales",
+        card_title_bring: "Bring in",
         card_one_p_left: "NIS",
         card_tag_p_right: "left",
       },
       card_two_in_objective: {
-        card_title: "Recruit ",
+        card_title: "Recruit",
         card_one_p_left: "New customers",
         card_tag_p_right: "Customers were recruited",
       },
@@ -364,7 +377,7 @@ const translations = {
       add_new_type: {
         heading: "Choose the type of product",
         variation: "A product with variations",
-        new_product: "normal product",
+        new_product: "Normal Product",
       },
       add_new_product_popoup: {
         adding_new_product: "Adding a new product and variations",
@@ -384,7 +397,7 @@ const translations = {
         select_term: "Select Term Attribute",
         unit: "unit in stock",
         term_inventory: "Term inventory",
-        adding_btn_variation: "Adding an additional term to + variations",
+        adding_btn_variation: "Add Product",
       },
       add_new_catageory: {
         catageory_search: "Category search",
@@ -408,14 +421,15 @@ const translations = {
           label_parent_ct: "Parent category",
           label_up_img: "Uploading a picture",
           select_img_text: " Selecting an image",
-          catageory_btn2: "To Update the Category click here +",
+          catageory_btn: "Add Category",
+          catageory_btn2: "Update Category",
         },
         edit_catageory: {},
       },
       future_managment: {
         feature_search: "Category term",
-        feature_btn: "Added a new feature +",
-        term_btn: "Added a new term +",
+        feature_btn: "Add new feature",
+        term_btn: "Add new term",
         th_in_feture: {
           th_action: "action",
           th_type: "display type",
@@ -433,15 +447,15 @@ const translations = {
           th_color: "",
         },
         add_new_feature: {
-          heading: "Added a new feature",
+          heading: "Add new feature",
           heading_for_edit: "",
           color_select_atr: "Attribute Name",
           d_type: "Display Type (Color/Image)",
-          hero_heading: "Adding terms to the feature",
+          hero_heading: "Settings look reasonable",
           name_of_term: "Name of the term",
           select_img_uplode: "Selecting an image",
           select_color: "Color change",
-          term_end_btn: "To add another term click here +",
+          term_end_btn: "Add another term",
           add_new_term_feature: {
             card_selection: {
               h1: "Selection Field",
@@ -467,12 +481,12 @@ const translations = {
                 S: "xl",
               },
             },
-            last_btn_feature: "To add fetaure click here+",
+            last_btn_feature: "Add fetaure",
           },
         },
         add_new_term: {
-          heading: "Adding a new term",
-          heading_for_edit: "",
+          heading: "Add a new term",
+          heading_for_edit: "Bring In NIS",
           name_of_term: "Name of the term",
           feature: "associated feature",
           error_alert: "Choosing a color for the display of the term",
@@ -480,12 +494,12 @@ const translations = {
           d_term: "Selecting an image to display the term",
           select_img_uplode: "Selecting an image",
           select_color: "Color change",
-          term_end_btn: "To add another term click here +",
-          term_end_submit_btn: "this is the submit button",
+          term_end_btn: "Add another term",
+          term_end_submit_btn: "Submit",
         },
         edit_variation_in_product_managment: {
-          heading: "Editing a product with variations",
-          normal_product: "",
+          heading: "Edit variations",
+          normal_product: "Update",
           product_name_input: "Product Name",
           catageory_managment: "Category",
           image_upload: "Upload a product image",
@@ -504,30 +518,30 @@ const translations = {
             tr_price: "250 NIS",
             tr_inventory: "15",
           },
-          btn_addiotainal_term: "Adding an additional term to + variations",
+          btn_addiotainal_term: "Add additional term",
           text_area_text: "A brief description of the product",
           select_area_text: "Select an attribute for product variations",
-          update_product_btn: "To update the Product",
-          delete_product_btn: "Deletion the Product",
+          update_product_btn: "Update",
+          delete_product_btn: "Product",
           edit_term: {
             heading: "Edit Term",
             label_term: "Name of term",
             label_feature: "Associated feature",
             color_label: "Color change",
-            last_btn: "To update term click here+",
+            last_btn: "Update",
           },
         },
       },
       added_new_cupons: {
-        heading: "Added a new coupon",
+        heading: "Add coupon",
         heading_edit: "Editing an existing coupon",
         discount_type: "Discount type (amount/percentage)",
         cupon_code: "Coupon code",
         amounth_discount: "Amount of Discount",
         expiry_date: "Coupon expiration date",
         limit: "Usage limit (leave blank without limit)",
-        last_btn_cat: "To add the category click here+",
-        last_btn_coupon: "To update the coupon click here+",
+        last_btn_cat: "Add Coupon",
+        last_btn_coupon: "Update",
       },
       transction_pop_popuop: {
         order_detail: {
@@ -556,10 +570,11 @@ const translations = {
             total: "15",
           },
           card_order: {
-            total_cost: "Total cost of order",
-            product: "Products: NIS 10,450",
-            delivery: "Delivery up to 5 business days: NIS 39.9",
+            total_cost_product: "The total cost of the order",
+            product: "Products: NIS",
+            delivery: "Delivery up to 5 business days: NIS",
             total: "Order date:",
+            total_cost: "Total Cost : NIS",
           },
           last_btn: "Save changes",
         },
@@ -584,7 +599,7 @@ const translations = {
         target_increase_view_page:
           "Target to increase the average number of items per order (%)",
         goal_view_page: "Goal of raising the average income from the order",
-        update_btn_last: "update",
+        update_btn_last: "Update",
       },
       delete_popoup: {
         text: "Are you sure you want to delete the category?",
@@ -608,6 +623,7 @@ const translations = {
       Setting: "הגדרות",
       Help: "עזרה ותמיכה",
       Disconecting: "ניתוק מהמערכת",
+      Logout : "להתנתק",
     },
     dashboard: {
       tabs: {
@@ -710,7 +726,14 @@ const translations = {
       },
       third_row_with_check_box: {
         stock_alert_out: "הפעלת התראת אזל מלאי",
+        productpage: {
+          productname: "",
+          category: "קטגוריה",
+          price: "מחיר",
+          Stock: "המניה",
+        },
       },
+
       fourth_row_with_check_box: {
         email_label: "כתובת אימייל לקבלת התראות.. ",
         data: "כתובת אימייל לקבלת התראות ",
@@ -782,12 +805,16 @@ const translations = {
         source: "מקור",
       },
       transaction_tr: {
-        order_no: "#1152",
-        customer_name: "מובשר מלכא",
-        status: "הושלם",
-        order_date: "24/07/2024",
-        sum: '1,370 ש"ח',
-        source: "אורגני Google",
+        customer_name: "שם הלקוח",
+        Phone_Number: "מספר טלפון",
+        Email_address: 'כתובת דוא"ל',
+      },
+
+      status_tr: {
+        Complete: "לְהַשְׁלִים",
+        In_Treatment: "בטיפול",
+        Cancelled: "מבוטל",
+        changed: "שינוי סטטוס הקבוצה",
       },
     },
     statististics: {
@@ -808,8 +835,8 @@ const translations = {
         num_h1_card_customer_title: "150",
         crad_text_blue_in_card_customer: "לקוחות חדשים",
         crad_text_blue_in_card_returing: "לקוחות קיימים",
-        crad_text_blue_in_card_product: "מוצר",
-        crad_text_blue_in_card_order: "מוצרים",
+        crad_text_blue_in_card_product: " מוצרים",
+        crad_text_blue_in_card_order: " הזמנות",
         crad_text_blue_in_card_revenue: "הכנסות",
       },
       cards_in_product: {
@@ -909,11 +936,12 @@ const translations = {
       },
       card_one_in_objective: {
         card_title: "במכירות",
+        card_title_bring: "מכירות",
         card_one_p_left: ' ש"ח',
         card_tag_p_right: "נותרו",
       },
       card_two_in_objective: {
-        card_title: "רקריט",
+        card_title: "לגיס",
         card_one_p_left: "ניו קוסטומר",
         card_tag_p_right: "קוסטומר וירה רקרואיטד",
       },
@@ -997,11 +1025,12 @@ const translations = {
         },
         popoup_in_catagory: {
           heading: "הוספת קטגוריה חדשה",
-          heading_for_edit: "עריכת קטגוריה",
+          heading_for_edit: "הביאו ₪",
           label_key: "שם הקטגוריה",
           label_parent_ct: "קטגורית הורה",
           label_up_img: "העלאת תמונה",
           select_img_text: "בחירת תמונה",
+          catageory_btn: "הוסף קטגוריה",
           catageory_btn: "להוספת הקטגוריה לחצו כאן +",
         },
         edit_catageory: {},
@@ -1079,7 +1108,7 @@ const translations = {
         },
         edit_variation_in_product_managment: {
           heading: "עריכת מוצר עם שינויים",
-          normal_product: "",
+          normal_product: "עדכון",
           product_name_input: "שם המוצר",
           catageory_managment: "קטגוריה",
           image_upload: "העלאת תמונת מוצר",
@@ -1149,10 +1178,11 @@ const translations = {
             total: "15",
           },
           card_order: {
-            total_cost: "עלות כוללת של ההזמנה",
+            total_cost_product: "עלות כוללת של ההזמנה",
             product: 'מוצרים: 10,450 ש"ח',
             delivery: 'משלוח עד 5 ימי עסקים: 39.9 ש"ח',
-            total: 'תאריך הזמנה:',
+            total: "תאריך הזמנה:",
+            total_cost: "עלות כוללת  : NIS",
           },
           last_btn: "שמירת השינויים",
         },

@@ -230,6 +230,7 @@ class Database
             customer_id int(11) NOT NULL,
             total DECIMAL(10, 2),
             billing TEXT,
+            city varchar(50) DEFAULT NULL,
             meta_data TEXT,
             line_items TEXT
         )";

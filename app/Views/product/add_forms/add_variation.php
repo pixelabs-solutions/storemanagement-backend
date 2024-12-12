@@ -12,7 +12,7 @@
     <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" /> -->
 
     <?php
-var_dump($attributes);
+// var_dump($attributes);
 ?>
 <style>
     @import url('https://rsms.me/inter/inter.css');
@@ -154,7 +154,7 @@ var_dump($attributes);
                                             foreach ($categories as $category) {
                                                 // Access the "name" property of each category object
                                                 ?>
-                                                <option value="<?php echo $category['id'] ?>">
+                                                <option value="<?php echo $category['id'] ?>" name="<?php echo $category['name']; ?>">
                                                     <?php echo $category['name']; ?>
                                                 </option>
                                                 <?php
@@ -281,7 +281,7 @@ var_dump($attributes);
                                     <?php
                                     foreach ($attributes as $attribute) {
                                         ?>
-                                        <option value="<?php echo $attribute['id']; ?>"><?php echo $attribute['name']; ?>
+                                        <option value="<?php echo $attribute['id']; ?>" name="<?php echo $attribute['name']; ?>"><?php echo $attribute['name']; ?>
                                         </option>
                                         <?php
                                     }
@@ -321,8 +321,7 @@ var_dump($attributes);
                         <div class="text-center mt-4 ">
                             <button type="button" id="product_variation" onclick="sms_add_variations_submit()"
                                 class=" btn btn-primary col-12 col-md-12 fs-3 rounded-3 py-3 border-0 fw-bold"
-                                data-i18n="popoups.add_new_product_popoup.adding_btn_variation">To
-                                add the product click here +</button>
+                                data-i18n="popoups.add_new_product_popoup.adding_btn_variation">Add Product</button>
                         </div>
                 </div>
                 </form>
@@ -330,8 +329,8 @@ var_dump($attributes);
                     style="display: none;">
                     <!-- Close icon -->
 
-                    <button type="button" class="btn-close" aria-label="Close"
-                        onclick="sms_add_variations_close_success_message()"></button>
+                    <!-- <button type="button" class="btn-close" aria-label="Close"
+                        onclick="sms_add_variations_close_success_message()"></button> -->
                     <!-- SVG icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24"
                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -373,7 +372,7 @@ var_dump($attributes);
     })
 
     function sms_add_variations_submit() {
-    console.log("hello");
+    // console.log("hello");
 
     // Log all the form values
     var formData = {
@@ -465,8 +464,14 @@ var_dump($attributes);
         .then(base64Strings => {
             formData.images = base64Strings.filter(base64 => base64 !== null);
 
-            console.log(formData);
-
+            let product_variation =document.getAnimations('product_variation');
+            product_variation.disabled = true;
+            // console.log(formData);
+            document.getElementById("product_variation").disabled = true;
+            
+                document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
+    
             return fetch('product/add', {
                 method: 'POST',
                 headers: {
@@ -477,13 +482,17 @@ var_dump($attributes);
         })
         .then(response => {
             if (response.status === 200) {
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                 // Form submission succeeded, display success message
                 document.getElementById('sms_add_variations_success_message').style.display = 'block';
                 document.getElementById('sms_add_variations_error_message').style.display = 'none';
-                document.getElementById("product_variation").disabled = true;
+ 
 
                 window.location.reload();
             } else {
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                 // Form submission failed, display error message
                 document.getElementById('sms_add_variations_error_message').style.display = 'block';
                 document.getElementById('sms_add_variations_success_message').style.display = 'none'; 
@@ -492,6 +501,8 @@ var_dump($attributes);
             }
         })
         .catch(error => {
+                document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
             // Network error occurred, display error message
             document.getElementById('sms_add_variations_error_message').style.display = 'block';
             console.error('Error submitting form data:', error);
@@ -544,10 +555,10 @@ function fun_save_changes() {
                     // Create a new div for the selected option
                     let newDiv = document.createElement('div');
                     newDiv.classList.add('selected-option');
-
+// console.log(option)
                     // Customize the content of the div
                     newDiv.innerHTML = `  
-                    <label class="form-label fw-bold mt-5">Select ${option.value} Attribute</label>
+                    <label class="form-label fw-bold mt-5" data-attribute-selection="${option.value}">Select ${option.value} Attribute</label>
                     <div style="background-color: #eaeaea; position: relative; border-radius:12px; height:55px;">
                         <div class="col-md-12 rounded-4 bg-transparent h-100 ">
                             <select class='select_box${i}' id='sMS_MU_SET${i}' data-attribute-name='${option.value}' multiple
@@ -564,9 +575,22 @@ function fun_save_changes() {
                         </div>
                     </div>`;
 
+                    var addItem = true;
+                    let AllSelectors = document.querySelectorAll('label[data-attribute-selection]');
+                    AllSelectors.forEach((selector)=>{
+                        // console.log(selector.getAttribute('data-attribute-selection'));
+
+                        if(selector.getAttribute('data-attribute-selection') == option.value){
+                            addItem = false;
+                        }
+                    })
+
+                    if(addItem) {
+
                     // Append the newDiv to the parent div
                     parentDiv.appendChild(newDiv);
 
+                    }
                     // Find the select box inside the new div
                     const selectBox = newDiv.querySelector(`.select_box${i}`);
 
@@ -586,7 +610,7 @@ function fun_save_changes() {
                         removeItemButton: true
                     });
 
-                    console.log('Select box options:', selectBox.innerHTML);
+                    // console.log('Select box options:', selectBox.innerHTML);
                 })
                 .catch(error => {
                     console.error('Error fetching terms:', error);
@@ -682,7 +706,7 @@ function generate_variations() {
     ];
 
     const combinations = getCombinations(arrays);
-    console.log(combinations);
+    // console.log(combinations);
 </script>
 
 <!-- input javascript code  -->

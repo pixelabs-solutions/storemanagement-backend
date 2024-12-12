@@ -13,6 +13,7 @@ use Pixelabs\StoreManagement\Models\Authentication;
 use Pixelabs\StoreManagement\Models\Category;
 use Pixelabs\StoreManagement\Models\Attribute;
 use Pixelabs\StoreManagement\Models\Currency;
+use Pixelabs\StoreManagement\Models\Synchronize;
 
 class ProductController
 {
@@ -136,6 +137,8 @@ class ProductController
         $configuration = $this->prepare_configuration($is_rest);
 
         $result = Base::wc_delete_by_id($configuration, $this->table_name . "/" . $id);
+        Synchronize::sync_products();
+
         echo $result;
     }
 
@@ -165,12 +168,12 @@ class ProductController
             'name' => $data['name'],
             'type' => $data['type'],
             'description' => $data['description'],
-            'categories' => array_map(function ($category_id) {
+            'categories' => !empty($data['categories']) ? array_map(function ($category_id) {
                 return ['id' => $category_id];
-            }, $data['categories']),
-            'images' => array_map(function ($image_url) {
+            }, $data['categories']) : [],
+            'images' => !empty($image_paths) ? array_map(function ($image_url) {
                 return ['src' => $image_url];
-            }, $image_paths)
+            }, $image_paths) : []
         ];
         // echo json_encode($payload);exit;
         if ($data['type'] === "variable") {
@@ -203,16 +206,23 @@ class ProductController
             foreach ($payload['variations'] as $variation) {
                 Product::createProductVariation($configuration, $product_id, $variation);
             }
+            Synchronize::sync_products();
+
         } else {
             $payload['manage_stock'] = true;
             $payload['stock_quantity'] = $data['stock_quantity'];
             $payload['regular_price'] = $data['regular_price'];
             $payload['sale_price'] = $data['sale_price'];
+            
+            // echo json_encode($payload);exit;
 
             $response = Base::wc_add($configuration, $this->table_name, json_encode($payload));
             if ($is_rest == 'true') {
                 echo $response;
             }
+
+            Synchronize::sync_products();
+
         }
     }
 
@@ -257,25 +267,27 @@ class ProductController
                 $image_paths[] = FileHelper::save_file($image, $filename);
             }
         } else {
-            $image_paths[] = FileHelper::save_file($data['image'], "products/" . $data['name']);
+            $image_paths[] = FileHelper::save_file($data['images'], "products/" . $data['name']);
         }
 
 
         $payload = [
             'name' => $data['name'],
             'type' => $data['type'],
-            'description' => $data['description'],
-            'manage_stock' => true,
-            'stock_quantity' => $data['stock_quantity'],
-            'categories' => array_map(function ($category_id) {
-                return ['id' => $category_id];
-            }, $data['category']),
-            'images' => array_map(function ($image_url) {
-                return ['src' => $image_url];
-            }, $data['images']),
-            'regular_price' => $data['regular_price'],
-            'sale_price' => $data['sale_price']
+            'description' => $data['description']
         ];
+        if(!empty($data['categories'])){
+            $payload['categories'] = array_map(function ($category_id) {
+                return ['id' => $category_id];
+            }, $data['categories']);
+        }
+        
+        if(!empty($data['images']) && !empty($image_paths)){
+            $payload['images'] = array_map(function ($image_url) {
+                return ['src' => $image_url];
+            }, $image_paths);
+        }
+        
 
         if ($data['type'] === "variable") {
             // Construct attributes array
@@ -299,12 +311,17 @@ class ProductController
             foreach ($payload['variations'] as $variation) {
                 Product::createProductVariation($configuration, $id, $variation); // Update variations
             }
+
+            Synchronize::sync_products();
+
         } else {
             $payload['manage_stock'] = true;
             $payload['stock_quantity'] = $data['stock_quantity'];
             $payload['regular_price'] = $data['regular_price'];
             $payload['sale_price'] = $data['sale_price'];
-            $response = Base::wc_update($configuration, $this->table_name . "/" . $id, $payload);
+            $response = Base::wc_update($configuration, $this->table_name . "/" . $id, json_encode($payload));
+            Synchronize::sync_products();
+
         }
         if ($is_rest == 'true') {
             echo $response;
@@ -480,6 +497,8 @@ class ProductController
         $payload = ['create' => $products];
         // // echo json_encode($payload, JSON_PRETTY_PRINT);
         $response = Base::wc_batch($configuration, $this->table_name . "/batch", json_encode($payload));
+        Synchronize::sync_products();
+
         echo $response;
 
         // Replace Base::wc_add and $configuration with your actual implementation details

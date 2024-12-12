@@ -18,6 +18,24 @@ class SynchronizationController
 {
     public function sync_data()
     {
+
+        $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+        $user_id = Authentication::getUserIdFromToken();
+        if($user_id === null)
+        {
+            if ($is_rest == 'true') {
+                http_response_code(401);
+                echo json_encode(array(
+                    "message" => "User not authenticated",
+                    "status_code" => 401
+                ));
+                exit;
+            }
+            else{
+                header('Location: /authentication/login');
+            }
+        }
+        
         $tables = ['products', 'attributes', 'categories', 'currencies', 'transactions', 'customers', 'coupons', 'inventory_settings'];
         
         $user_id = Authentication::getUserIdFromToken();
@@ -65,9 +83,15 @@ class SynchronizationController
         $inventory_settings = Base::wc_get($configuration, "settings/products");
         Inventory::store_inventory_settings($inventory_settings, $user_id);
 
+        $current_date_time = date('Y-m-d H:i:s');
+        Authentication::update_user_meta($user_id, "last_sync_datetime", $current_date_time);
+
         echo "done";
 
     }
+
+
+    
 
     public function prepare_configuration()
     {

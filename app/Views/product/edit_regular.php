@@ -33,7 +33,7 @@
         border-radius: 8px;
         cursor: pointer;
         width: 100%;
-        background-color: #EAEAEA;
+        background-color: #EAEAEA !important;
         text-align: center;
     }
 
@@ -111,7 +111,8 @@
 
                         <div class="row gx-3">
                             <div class="col-md-6 mb-4">
-                                <label class="form-label" data-i18n="popoups.add_new_product_popoup.image_upload">Upload
+                                <label class="form-label fw-bold"
+                                    data-i18n="popoups.add_new_product_popoup.image_upload">Upload
                                     a product image </label>
                                 <div class="sms_a_custom_file_input">
                                     <input type="file" id="sms_mu_Ip_two" accept="image/*"
@@ -131,7 +132,7 @@
                             </div>
                             <!-- Upload a photo gallery -->
                             <div class="col-md-6 mb-3">
-                                <label class="form-label"
+                                <label class="form-label fw-bold"
                                     data-i18n="popoups.add_new_product_popoup.gallery_upload">Upload a photo
                                     gallery</label>
                                 <div class="sms_a_custom_file_input">
@@ -194,8 +195,7 @@
                 <div class="d-flex justify-content-center flex-column flex-sm-row gap-3 p-2">
                     <div class="text-center mt-2 col-sm-6 col-md-6 Sms_mu_for_Eng">
                         <button onclick="fun_Np()" class="  btn btn-primary col-12 rounded-4 py-3"
-                            id="edit_regular_btn">To update
-                            the product →</button>
+                            id="edit_regular_btn">Update</button>
                     </div>
                     <div class="text-center mt-2 col-sm-6 col-md-6 Sms_mu_for_hebrew">
                         <button onclick="fun_Np()" class="btn btn-primary col-12 rounded-4 py-3"
@@ -203,12 +203,11 @@
                     </div>
                     <div class="text-center mt-2 col-sm-6 col-md-6  Sms_mu_for_Eng">
                         <button type="button" class=" btn btn-danger col-12 rounded-4 py-3"
-                            onclick="openModal('sms_edit_product_regular_w_delete_complete_modal')">Deletion of
-                            the product</button>
+                            onclick="deleteRegular(this)">Delete</button>
                     </div>
                     <div class="text-center mt-2 col-sm-6 col-md-6 Sms_mu_for_hebrew">
                         <button type="button" class="btn btn-danger col-12 rounded-4 py-3 "
-                            onclick="openModal('sms_edit_product_regular_w_delete_complete_modal')">מחיקת המוצר</button>
+                            onclick="deleteRegular(this)">מחיקת המוצר</button>
                     </div>
                 </div>
             </div>
@@ -217,7 +216,7 @@
 </div>
 <div class="modal-body text-center py-4 sms_a_add_regular_pop" id="sms_editForm_product_success_message"
     style="display: none;">
-    <button type="button" class="btn-close" aria-label="Close" onclick="Sms_mu_scucess_product()"></button>
+    <!-- <button type="button" class="btn-close" aria-label="Close" onclick="Sms_mu_scucess_product()"></button> -->
     <!-- SVG icon -->
     <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24"
         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -354,9 +353,9 @@
                     'description': textareaInp,
                     'stock_quantity': unitInp,
                 };
-
-                console.log(data);
-
+                document.getElementById("edit_regular_btn").disabled = true;
+                    document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
                 return fetch(`/product/${Id}`, {
                     method: 'PUT', // Changed from POST to PUT
                     headers: {
@@ -367,13 +366,16 @@
             })
             .then(response => {
                 if (response.ok) {
+                        document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     // Form submission succeeded, display success message
                     document.getElementById('sms_editForm_product_success_message').style.display = 'block';
                     document.getElementById('sms_add_editForm_product_error_message').style.display = 'none';
-                    document.getElementById("edit_regular_btn").disabled = true;
 
                     window.location.reload();
                 } else {
+                        document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                     // Form submission failed, display error message
                     document.getElementById('sms_add_editForm_product_error_message').style.display = 'block';
                     document.getElementById('sms_editForm_product_success_message').style.display = 'none';
@@ -382,6 +384,8 @@
                 }
             })
             .catch(error => {
+                    document.getElementById('ajaxloadingIndicator').style.display = 'none';
+
                 // Network error occurred, display error message
                 document.getElementById('sms_add_editForm_product_error_message').style.display = 'block';
                 console.error('Error submitting form data:', error);
@@ -498,11 +502,45 @@
 
 
 <script>
+
+    function deleteRegular(button) {
+
+        // Find the nearest element with id 'product_id'
+        const nearestProductIdElement = button.closest('.row').querySelector('#product_id');
+
+            const productIdValue = nearestProductIdElement.value;
+            console.log('Product ID:', productIdValue);
+            
+
+            document.getElementById('ajaxloadingIndicator').style.display = 'flex';
+    document.body.style.overflow = "hidden";
+    
+        console.log("Deleting Product with ID: " + productIdValue);
+        fetch("/product/" + productIdValue, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    show_sms_delete_Notification("Product deleted successfully");
+                    window.location.reload(); // Reload the page after successful deletion
+                } else {
+                    show_sms_delete_Notification("Failed to delete Product", true);
+                }
+            })
+            .catch(error => {
+                show_sms_delete_Notification("Error occurred: " + error, true);
+            });
+    }
+
+
     // Function to open the modal
-    function openModal(modalId) {
+    function openDeleteModal(modalId) {
         // Select the modal using the provided ID
         var modal = document.getElementById(modalId);
-
+        console.log(modalId);
         // Show the modal
         modal.style.display = 'block';
         modal.classList.add('show');

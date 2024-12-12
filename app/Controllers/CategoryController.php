@@ -7,6 +7,7 @@ use Pixelabs\StoreManagement\Models\Configuration;
 use Pixelabs\StoreManagement\Helpers\FileHelper;
 use Pixelabs\StoreManagement\Models\Authentication;
 use Pixelabs\StoreManagement\Models\Category;
+use Pixelabs\StoreManagement\Models\Synchronize;
 
 class CategoryController
 {
@@ -65,6 +66,8 @@ class CategoryController
         
         $configuration = $this->prepare_configuration($is_rest);
         $result = Base::wc_delete_by_id($configuration, $this->endpoint."/".$id);
+        Synchronize::sync_categories();
+
         echo $result;
     }
 
@@ -96,9 +99,51 @@ class CategoryController
         // echo $payload;exit;
 
         $response = Base::wc_add($configuration, $this->endpoint, $payload);
+        Synchronize::sync_categories();
+
         echo $response;
     }
+    // public function update($id)
+    // {
+    //     $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
+    //     $configuration = $this->prepare_configuration($is_rest);
 
+    //     $result = HttpRequestHelper::validate_request("PUT");
+    //     if(!$result["is_data_prepared"])
+    //     {
+    //         echo $result["message"];
+    //         return;
+    //     }
+
+    //     $data = $result["data"];
+
+    //     $file_path = '';
+    //     if(isset($data['image'])) {
+    //         $data = $result["data"];
+    //         $image = "";
+    //         if($data["image"] !== ""){
+    //             $image = $data["image"];
+    //             $file_path = FileHelper::save_file($image, "categories/".$data['name']);
+    //         }
+            
+    //     }
+    //     $payload = [
+    //         'name' => $data['name'], 
+    //         'parent' => $data['parent']
+    //     ];
+    //     if($file_path !== "") {
+    //         $payload['image'] = [
+    //             'src' => $file_path
+    //         ];
+    //     }
+    //     $payload = json_encode($payload);
+
+        
+    //     $response = Base::wc_update($configuration, $this->endpoint."/".$id, $payload);
+    //     Synchronize::sync_categories();
+
+    //     echo $response;
+    // }
     public function update($id)
     {
         $is_rest = isset($_GET['is_rest']) ? 'true' : 'false';
@@ -111,31 +156,33 @@ class CategoryController
             return;
         }
 
+
         $data = $result["data"];
 
-        $file_path = '';
-        if(isset($data['image'])) {
-            $data = $result["data"];
-            $image = "";
-            if($data["image"] !== ""){
-                $image = $data["image"];
-                $file_path = FileHelper::save_file($image, "categories/".$data['name']);
-            }
+        // $file_path = '';
+        // if(isset($data['image'])) {
+        //     $data = $result["data"];
+        //     $image = "";
+        //     if($data["image"] !== ""){
+        //         $image = $data["image"];
+        //         $file_path = FileHelper::save_file($image, "categories/".$data['name']);
+        //     }
             
-        }
-        $payload = [
+        // }
+        $payload = json_encode([
             'name' => $data['name'], 
             'parent' => $data['parent']
-        ];
-        if($file_path !== "") {
-            $payload['image'] = [
-                'src' => $file_path
-            ];
-        }
-        $payload = json_encode($payload);
+        ]);
+        // if($file_path !== "") {
+        //     $payload['image'] = [
+        //         'src' => $file_path
+        //     ];
+        // }
 
         
         $response = Base::wc_update($configuration, $this->endpoint."/".$id, $payload);
+        Synchronize::sync_categories();
+
         echo $response;
     }
 
